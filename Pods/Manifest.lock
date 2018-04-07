@@ -1,0 +1,19 @@
+PODS:
+  - ModernAVPlayer (0.9.0)
+  - SwiftLint (0.25.0)
+
+DEPENDENCIES:
+  - ModernAVPlayer (from `.`)
+  - SwiftLint (= 0.25.0)
+
+EXTERNAL SOURCES:
+  ModernAVPlayer:
+    :path: .
+
+SPEC CHECKSUMS:
+  ModernAVPlayer: 9f9bdc74a622e4f2d7a6cfda942bbac3dead46f1
+  SwiftLint: e14651157288e9e01d6e1a71db7014fb5744a8ea
+
+PODFILE CHECKSUM: 4caf0890003d4f8dbfed1b556b0dce3829511df2
+
+COCOAPODS: 1.4.0

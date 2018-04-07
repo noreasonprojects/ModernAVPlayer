@@ -1,4 +1,4 @@
-platform :ios, '9.0'
+platform :ios, '10.0'
 use_frameworks!
 
 target 'ModernAVPlayer_Example' do
@@ -7,6 +7,9 @@ target 'ModernAVPlayer_Example' do
 
   target 'ModernAVPlayer_Tests' do
     inherit! :search_paths
+
+	pod 'Quick', '1.2.0'
+	pod 'Nimble', '7.0.3'
 
   end
 end

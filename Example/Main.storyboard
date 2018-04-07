@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+            <string>HelveticaNeue-Bold</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="RxAudioPlayerSM" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="yda-Pn-Lut">
+                                <rect key="frame" x="10" y="40" width="355" height="162"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="Od9-ZL-As6" userLabel="Stack LiveLoading">
+                                        <rect key="frame" x="0.0" y="0.0" width="355" height="80"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hgg-3y-CVQ" customClass="LoadButton" customModule="RxAudioPlayerSM" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="121" height="80"/>
+                                                <color key="backgroundColor" red="0.82745098039999998" green="0.8980392157" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="80" id="Ez6-ap-jij"/>
+                                                </constraints>
+                                                <state key="normal">
+                                                    <attributedString key="attributedTitle">
+                                                        <fragment content="Play Live Stream">
+                                                            <attributes>
+                                                                <font key="NSFont" metaFont="system" size="15"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                </state>
+                                                <connections>
+                                                    <action selector="loadMedia:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qap-gn-VN8"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cd3-I9-rLQ" customClass="LoadButton" customModule="RxAudioPlayerSM" customModuleProvider="target">
+                                                <rect key="frame" x="123" y="0.0" width="123.5" height="80"/>
+                                                <color key="backgroundColor" red="0.82745098039999998" green="0.8980392157" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <state key="normal">
+                                                    <attributedString key="attributedTitle">
+                                                        <fragment content="Play Remote Clip">
+                                                            <attributes>
+                                                                <font key="NSFont" metaFont="system" size="15"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                </state>
+                                                <connections>
+                                                    <action selector="loadMedia:" destination="BYZ-38-t0r" eventType="touchUpInside" id="m4N-ma-o6e"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cNo-VJ-OYz" customClass="LoadButton" customModule="RxAudioPlayerSM" customModuleProvider="target">
+                                                <rect key="frame" x="248.5" y="0.0" width="106.5" height="80"/>
+                                                <color key="backgroundColor" red="0.82745098039999998" green="0.8980392157" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <state key="normal">
+                                                    <attributedString key="attributedTitle">
+                                                        <fragment content="Play Local Clip">
+                                                            <attributes>
+                                                                <font key="NSFont" metaFont="system" size="15"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                </state>
+                                                <connections>
+                                                    <action selector="loadMedia:" destination="BYZ-38-t0r" eventType="touchUpInside" id="v2U-So-eoK"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="Cd3-I9-rLQ" firstAttribute="height" secondItem="hgg-3y-CVQ" secondAttribute="height" id="bBG-qL-GK3"/>
+                                            <constraint firstItem="cNo-VJ-OYz" firstAttribute="height" secondItem="hgg-3y-CVQ" secondAttribute="height" id="jXe-Q1-dgu"/>
+                                        </constraints>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="OIm-As-RFf" userLabel="Stack Loading">
+                                        <rect key="frame" x="0.0" y="82" width="355" height="80"/>
+                                        <subviews>
+                                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="U99-ZH-C73" userLabel="Load Live Media" customClass="LoadButton" customModule="RxAudioPlayerSM" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="121" height="80"/>
+                                                <color key="backgroundColor" red="0.6191481419" green="1" blue="0.76628168949999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                <state key="normal">
+                                                    <attributedString key="attributedTitle">
+                                                        <fragment content="Load Live Stream">
+                                                            <attributes>
+                                                                <font key="NSFont" metaFont="system" size="15"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                </state>
+                                                <connections>
+                                                    <action selector="loadMedia:" destination="BYZ-38-t0r" eventType="touchUpInside" id="x4e-OZ-U7i"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tzn-Eq-bbA" userLabel="Load short Aod" customClass="LoadButton" customModule="RxAudioPlayerSM" customModuleProvider="target">
+                                                <rect key="frame" x="123" y="0.0" width="123" height="80"/>
+                                                <color key="backgroundColor" red="0.6191481419" green="1" blue="0.76628168949999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                <state key="normal">
+                                                    <attributedString key="attributedTitle">
+                                                        <fragment content="Load Remote Clip">
+                                                            <attributes>
+                                                                <font key="NSFont" metaFont="system" size="15"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                </state>
+                                                <connections>
+                                                    <action selector="loadMedia:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Cfh-5G-mgA"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8x4-uI-Bz7" userLabel="Load long aod" customClass="LoadButton" customModule="RxAudioPlayerSM" customModuleProvider="target">
+                                                <rect key="frame" x="248" y="0.0" width="107" height="80"/>
+                                                <color key="backgroundColor" red="0.6191481419" green="1" blue="0.76628168949999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                <state key="normal">
+                                                    <attributedString key="attributedTitle">
+                                                        <fragment content="Load Local Clip">
+                                                            <attributes>
+                                                                <font key="NSFont" metaFont="system" size="15"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                </state>
+                                                <connections>
+                                                    <action selector="loadMedia:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ju3-rp-1Ea"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="8x4-uI-Bz7" firstAttribute="height" secondItem="hgg-3y-CVQ" secondAttribute="height" id="2P0-y8-Z20"/>
+                                    <constraint firstItem="Od9-ZL-As6" firstAttribute="leading" secondItem="yda-Pn-Lut" secondAttribute="leading" id="9bm-ey-AXt"/>
+                                    <constraint firstAttribute="bottom" secondItem="OIm-As-RFf" secondAttribute="bottom" id="Adz-Fx-qfI"/>
+                                    <constraint firstItem="Tzn-Eq-bbA" firstAttribute="height" secondItem="hgg-3y-CVQ" secondAttribute="height" id="GuB-zW-J3m"/>
+                                    <constraint firstAttribute="trailing" secondItem="Od9-ZL-As6" secondAttribute="trailing" id="I1r-9W-PCL"/>
+                                    <constraint firstItem="U99-ZH-C73" firstAttribute="height" secondItem="hgg-3y-CVQ" secondAttribute="height" id="OHR-7f-TGT"/>
+                                    <constraint firstItem="OIm-As-RFf" firstAttribute="leading" secondItem="yda-Pn-Lut" secondAttribute="leading" id="ju9-gz-G3M"/>
+                                    <constraint firstAttribute="trailing" secondItem="OIm-As-RFf" secondAttribute="trailing" id="rF8-A4-hwA"/>
+                                    <constraint firstItem="Od9-ZL-As6" firstAttribute="top" secondItem="yda-Pn-Lut" secondAttribute="top" id="sal-sq-LeR"/>
+                                </constraints>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="jRa-DP-PJB">
+                                <rect key="frame" x="98" y="262" width="179.5" height="30"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="default state" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zzn-sM-nLM" userLabel="StateValue">
+                                        <rect key="frame" x="0.0" y="0.0" width="149.5" height="30"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="25"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="hOt-Ep-6tZ">
+                                        <rect key="frame" x="159.5" y="5" width="20" height="20"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="DLZ-YT-GWw" userLabel="Stack Commands">
+                                <rect key="frame" x="43.5" y="332" width="287" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="led-B8-Uyc" userLabel="SeekBackward">
+                                        <rect key="frame" x="0.0" y="0.0" width="43" height="30"/>
+                                        <state key="normal" title="Seek-"/>
+                                        <connections>
+                                            <action selector="fixSeeking:" destination="BYZ-38-t0r" eventType="touchUpInside" id="twv-Ba-LU2"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fqp-f4-dhf">
+                                        <rect key="frame" x="61" y="0.0" width="43" height="30"/>
+                                        <state key="normal" title="Pause"/>
+                                        <connections>
+                                            <action selector="pause:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OT5-N3-q6I"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nco-0m-d6w">
+                                        <rect key="frame" x="122" y="0.0" width="43" height="30"/>
+                                        <state key="normal" title="Stop"/>
+                                        <connections>
+                                            <action selector="stop:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NDR-Fk-hZx"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dgm-io-PwR">
+                                        <rect key="frame" x="183" y="0.0" width="43" height="30"/>
+                                        <state key="normal" title="Play"/>
+                                        <connections>
+                                            <action selector="play:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XvB-EF-aQQ"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="srz-kc-exn" userLabel="SeekForward">
+                                        <rect key="frame" x="244" y="0.0" width="43" height="30"/>
+                                        <state key="normal" title="Seek+"/>
+                                        <connections>
+                                            <action selector="fixSeeking:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Uxp-1T-XNj"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KVE-RP-I9x">
+                                <rect key="frame" x="41.5" y="422" width="291" height="31"/>
+                            </slider>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="occ-dY-JEv" userLabel="SliderLabels">
+                                <rect key="frame" x="43.5" y="458" width="287" height="21"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="current time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZvH-SF-VsK" userLabel="CurrentTime">
+                                        <rect key="frame" x="0.0" y="0.0" width="143.5" height="21"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="duration" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KRz-I4-0Ph" userLabel="Duration">
+                                        <rect key="frame" x="143.5" y="0.0" width="143.5" height="21"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DebugMsg" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HC6-AH-Aas" userLabel="DebugMessage">
+                                <rect key="frame" x="146" y="539" width="83" height="19.5"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
+                                <color key="textColor" red="1" green="0.27549239646099244" blue="0.20477252612872443" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CurrentItem" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sdS-SJ-5qq" userLabel="CurrentItem">
+                                <rect key="frame" x="10" y="636" width="355" height="11"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="9"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="HC6-AH-Aas" firstAttribute="top" secondItem="occ-dY-JEv" secondAttribute="bottom" constant="60" id="Bn9-Yg-Lha"/>
+                            <constraint firstItem="occ-dY-JEv" firstAttribute="top" secondItem="KVE-RP-I9x" secondAttribute="bottom" constant="6" id="CZP-q9-4jW"/>
+                            <constraint firstItem="KVE-RP-I9x" firstAttribute="leading" secondItem="DLZ-YT-GWw" secondAttribute="leading" id="EUL-Ld-jtn"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="yda-Pn-Lut" secondAttribute="trailing" constant="10" id="Hom-ug-JoT"/>
+                            <constraint firstItem="jRa-DP-PJB" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="LIJ-Re-9qV"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="sdS-SJ-5qq" secondAttribute="trailing" constant="10" id="Lgy-aZ-2y8"/>
+                            <constraint firstItem="yda-Pn-Lut" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="MHB-O1-RRH"/>
+                            <constraint firstItem="yda-Pn-Lut" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="O5a-7y-4hT"/>
+                            <constraint firstItem="sdS-SJ-5qq" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="WBd-XN-90z"/>
+                            <constraint firstItem="DLZ-YT-GWw" firstAttribute="top" secondItem="jRa-DP-PJB" secondAttribute="bottom" constant="40" id="XYz-bY-5rx"/>
+                            <constraint firstItem="DLZ-YT-GWw" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fTb-45-u2p"/>
+                            <constraint firstItem="HC6-AH-Aas" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="qxW-mJ-01q"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="sdS-SJ-5qq" secondAttribute="bottom" constant="20" id="s1J-Mq-5zt"/>
+                            <constraint firstItem="occ-dY-JEv" firstAttribute="leading" secondItem="KVE-RP-I9x" secondAttribute="leading" id="uMz-4n-kl4"/>
+                            <constraint firstItem="KVE-RP-I9x" firstAttribute="top" secondItem="DLZ-YT-GWw" secondAttribute="bottom" constant="60" id="ueW-Zg-vID"/>
+                            <constraint firstItem="KVE-RP-I9x" firstAttribute="trailing" secondItem="DLZ-YT-GWw" secondAttribute="trailing" id="vhn-CO-LYc"/>
+                            <constraint firstItem="occ-dY-JEv" firstAttribute="trailing" secondItem="KVE-RP-I9x" secondAttribute="trailing" id="w1r-FY-sk0"/>
+                            <constraint firstItem="jRa-DP-PJB" firstAttribute="top" secondItem="yda-Pn-Lut" secondAttribute="bottom" constant="60" id="wsn-J3-pkf"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="currentItemLabel" destination="sdS-SJ-5qq" id="WlV-v2-HOR"/>
+                        <outlet property="debugMessage" destination="HC6-AH-Aas" id="h5S-3b-Xho"/>
+                        <outlet property="durationLabel" destination="KRz-I4-0Ph" id="tmC-JR-VaH"/>
+                        <outlet property="indicatorView" destination="hOt-Ep-6tZ" id="aey-8w-ecu"/>
+                        <outlet property="playerStateLabel" destination="Zzn-sM-nLM" id="sKb-zj-tM4"/>
+                        <outlet property="positionSlider" destination="KVE-RP-I9x" id="tjO-w4-AWQ"/>
+                        <outlet property="timingLabel" destination="ZvH-SF-VsK" id="8YV-dI-kd9"/>
+                        <outletCollection property="fixedSeekButtons" destination="led-B8-Uyc" collectionClass="NSMutableArray" id="HCs-DQ-pDP"/>
+                        <outletCollection property="fixedSeekButtons" destination="srz-kc-exn" collectionClass="NSMutableArray" id="M1h-RM-fr8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+</document>

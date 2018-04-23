@@ -1,4 +1,5 @@
 # ModernAVPlayer
+[![Build Status](https://travis-ci.org/noreasonprojects/ModernAVPlayer.svg?branch=develop)](https://travis-ci.org/noreasonprojects/ModernAVPlayer)
 
 ``ModernAVPlayer`` is an audio persistence ``AVPlayer`` wrapper
 

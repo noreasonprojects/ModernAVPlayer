@@ -15,70 +15,52 @@ public final class BufferingState: NSObject, PlayerState {
 
     // MARK: - Private vars
 
-    private var rateTimerObserver: Timer?
-    private let timeOutBuffering: TimeInterval
-    private let rateObserverTimeInterval: TimeInterval
-    private var remainingTime: TimeInterval = 0
+    private var observingRateService: ObservingRateServiceProtocol
 
     // MARK: - Init
 
-    public init(context: PlayerContext) {
+    public init(context: PlayerContext, observingRateService: ObservingRateServiceProtocol? = nil) {
         LoggerInHouse.instance.log(message: "Init", event: .debug)
         self.context = context
-        timeOutBuffering = context.config.timeoutBuffering
-        rateObserverTimeInterval = context.config.playerRateObserving
+        
+        guard let item = context.player.currentItem else { fatalError("item should exist") }
+        self.observingRateService = observingRateService ?? ObservingRateService(config: context.config, item: item)
+
+        self.observingRateService.onTimeout = { [context] in
+            guard let url = (context.player.currentItem?.asset as? AVURLAsset)?.url else { return }
+            context.changeState(state: FailedState(context: context,
+                                                   urlToReload: url,
+                                                   shouldPlaying: true,
+                                                   error: .buffering))
+        }
+
+        self.observingRateService.onPlaying = { [context] in
+            context.changeState(state: PlayingState(context: context))
+        }
+        
         super.init()
     }
     
     deinit {
         LoggerInHouse.instance.log(message: "Deinit", event: .debug)
-        rateTimerObserver?.invalidate()
-    }
-
-    // MARK: - Observations
-
-    /*
-     Get rate from timebase item is clearly more accurate than player rate
-     */
-    private func observingRate() {
-        remainingTime = timeOutBuffering
-        rateTimerObserver = Timer.scheduledTimer(withTimeInterval: rateObserverTimeInterval, repeats: true) { [unowned self] _ in
-            //swiftlint:disable:next operator_usage_whitespace
-            self.remainingTime -=  self.rateObserverTimeInterval
-            guard let timebase = self.context.player.currentItem?.timebase else { return }
-
-            let rate = CMTimebaseGetRate(timebase)
-            LoggerInHouse.instance.log(message: "Item rate: \(rate)", event: .info)
-
-            if rate != 0 {
-                self.context.changeState(state: PlayingState(context: self.context))
-            } else if self.remainingTime <= 0 {
-                    //swiftlint:disable:next force_cast force_unwrapping
-                    let url = (self.context.player.currentItem!.asset as! AVURLAsset).url
-                    self.context.changeState(state: FailedState(context: self.context,
-                                                                urlToReload: url,
-                                                                shouldPlaying: true,
-                                                                error: .buffering))
-            } else {
-                LoggerInHouse.instance.log(message: "Remaining time: \(self.remainingTime)", event: .info)
-            }
-        }
     }
     
     // MARK: - Player Commands
 
     func playCommand() {
-        context.audioSessionType.active { [unowned self] completed in
+        context.audioSessionType.active { [weak self] completed in
             if completed {
-                if self.rateTimerObserver == nil { DispatchQueue.main.sync { self.observingRate() } }
-                self.context.player.play()
+                self?.observingRateService.start()
+                self?.context.player.play()
             } else {
-                //swiftlint:disable:next force_cast force_unwrapping
-                let url = (self.context.player.currentItem!.asset as! AVURLAsset).url
-                self.context.changeState(state: FailedState(context: self.context,
-                                                            urlToReload: url,
-                                                            shouldPlaying: true,
-                                                            error: .activeAudioSessionFailed))
+                guard
+                    let strongSelf = self,
+                    let url = (strongSelf.context.player.currentItem?.asset as? AVURLAsset)?.url
+                    else { fatalError("player current item is missing") }
+                strongSelf.context.changeState(state: FailedState(context: strongSelf.context,
+                                                                  urlToReload: url,
+                                                                  shouldPlaying: true,
+                                                                  error: .activeAudioSessionFailed))
             }
         }
     }
@@ -107,8 +89,6 @@ public final class BufferingState: NSObject, PlayerState {
     }
 
     public func seek(position: Double) {
-        rateTimerObserver?.invalidate()
-        rateTimerObserver = nil
         seekCommand(position: position)
     }
 

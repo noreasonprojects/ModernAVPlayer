@@ -23,12 +23,9 @@ final class LoadingMediaStateSpecs: QuickSpec {
     override func spec() {
         
         beforeEach {
-            self.item = MockPlayerItem.createOnUsingAsset(url: "foo")
-            self.player = MockCustomPlayer(playerItem: self.item)
-            self.player.overrideCurrentItem = self.item
+            self.player = MockCustomPlayer.createOnUsingAsset(url: "foo")
             self.tested.player = self.player
             self.state = LoadingMediaState(context: self.tested, media: self.playerMedia, shouldPlaying: true)
-
            self.tested.state = self.state
         }
 
@@ -123,7 +120,7 @@ final class LoadingMediaStateSpecs: QuickSpec {
                 self.state.stop()
 
                 // ASSERT
-                let asset = self.item.asset as? MockAVAsset
+                let asset = self.player.overrideCurrentItem?.asset as? MockAVAsset
                 expect(asset?.cancelLoadingCallCount).to(equal(1))
             }
         }

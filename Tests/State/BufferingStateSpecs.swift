@@ -8,19 +8,23 @@
 
 import Foundation
 import Quick
-import ModernAVPlayer
+@testable import ModernAVPlayer
 import Nimble
 
 final class BufferingStateSpecs: QuickSpec {
 
     private var bufferingState: BufferingState!
     private var mockPlayer = MockCustomPlayer()
+    private var mockRateService: MockObservingRateService!
     private var playerMedia = ConcretePlayerMedia(url: URL(string: "x")!, type: .clip)
-    private lazy var tested = ConcretePlayerContext(player: self.mockPlayer)
+    private lazy var tested = ConcretePlayerContext(player: self.mockPlayer, audioSessionType: MockAudioSession.self)
 
     override func spec() {
         beforeEach {
-            self.bufferingState = BufferingState(context: self.tested)
+            let item = MockPlayerItem.createOne(url: "HELLO")
+            self.mockPlayer.overrideCurrentItem = item
+            self.mockRateService = MockObservingRateService(config: self.tested.config, item: item)
+            self.bufferingState = BufferingState(context: self.tested, observingRateService: self.mockRateService)
             self.tested.state = self.bufferingState
         }
 
@@ -43,6 +47,70 @@ final class BufferingStateSpecs: QuickSpec {
 
                 // ASSERT
                 expect(self.tested.state).to(beIdenticalTo(self.bufferingState.self))
+            }
+        }
+        
+        context("playCommand") {
+            context("when active session has failed") {
+                it("should not update state context") {
+                    
+                    // ARRANGE
+                    let item = MockPlayerItem.createOne(url: "hello")
+                    self.mockPlayer.overrideCurrentItem = item
+                    
+                    // ACT
+                    self.bufferingState.playCommand()
+                    MockAudioSession.activeLastCompletion?(false)
+                    
+                    // ASSERT
+                    expect(self.tested.state).to(beAnInstanceOf(FailedState.self))
+                }
+            }
+            context("when active session has succeed") {
+                it("should launch player play command") {
+                    
+                    // ACT
+                    self.bufferingState.playCommand()
+                    MockAudioSession.activeLastCompletion?(true)
+                    
+                    // ASSERT
+                    expect(self.mockPlayer.playCallCount).to(equal(1))
+                }
+                it("should start observingRateService") {
+                    
+                    // ACT
+                    self.bufferingState.playCommand()
+                    MockAudioSession.activeLastCompletion?(true)
+                    
+                    // ASSERT
+                    expect(self.mockRateService.startCallCount).to(equal(1))
+                }
+                context("when observingRateService timeouted") {
+                    it("should update context state to Failed") {
+
+                        // ACT
+                        self.bufferingState.playCommand()
+                        MockAudioSession.activeLastCompletion?(true)
+                        self.mockRateService.onTimeout?()
+
+                        // ASSERT
+                        expect(self.tested.state).to(beAnInstanceOf(FailedState.self))
+                    }
+                }
+                
+                context("when observingRateService detects player playing") {
+                    it("should update context state to Playing") {
+                        
+                        // ACT
+                        self.bufferingState.playCommand()
+                        MockAudioSession.activeLastCompletion?(true)
+                        self.mockRateService.onPlaying?()
+                        
+                        // ASSERT
+                        expect(self.tested.state).to(beAnInstanceOf(PlayingState.self))
+                    }
+                }
+
             }
         }
 

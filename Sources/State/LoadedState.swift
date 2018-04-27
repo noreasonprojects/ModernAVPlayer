@@ -18,14 +18,12 @@ public struct LoadedState: PlayerState {
 
     // MARK: - Init
 
-    public init(context: PlayerContext) {
+    public init(context: PlayerContext, media: PlayerMedia? = nil) {
         LoggerInHouse.instance.log(message: "Init", event: .debug)
         self.context = context
         self.context.currentTime = 0
-    }
-
-    public init(context: PlayerContext, media: PlayerMedia) {
-        self.init(context: context)
+        
+        guard let media = media else { return }
         
         updateRemoteCommandCenter(mediaType: media.type)
         context.nowPlaying.update(media: media, duration: context.player.currentItem?.duration.seconds)

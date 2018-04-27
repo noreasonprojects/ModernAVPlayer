@@ -3,9 +3,10 @@
 //  RxAudioPlayerSMTests
 //
 //  Created by raphael ankierman on 28/02/2018.
-//  Copyright © 2018 raphael ankierman. All rights reserved.
+//  Copyright © 2018 RadioFrance. All rights reserved.
 //
 
+import AVFoundation
 import Foundation
 import Quick
 import ModernAVPlayer
@@ -15,22 +16,36 @@ final class PlayingStateSpecs: QuickSpec {
 
     var media: PlayerMedia!
     var playingState: PlayingState!
-    let tested = ConcretePlayerContext()
+    var itemPlaybackObservingService: MockItemPlaybackObservingService!
+    var mockPlayer: MockCustomPlayer!
+    var tested: ConcretePlayerContext!
 
     override func spec() {
 
         beforeEach {
+            self.mockPlayer = MockCustomPlayer.createOne(url: "foo")
             self.media = ConcretePlayerMedia(url: URL(string: "foo")!, type: .clip)
-            self.playingState = PlayingState(context: self.tested)
+            self.itemPlaybackObservingService = MockItemPlaybackObservingService()
+            self.tested = ConcretePlayerContext(player: self.mockPlayer)
+            self.playingState = PlayingState(context: self.tested, itemPlaybackObservingService: self.itemPlaybackObservingService)
             self.tested.state = self.playingState
         }
 
+        context("init") {
+            it("should set itemPlaybackObservingService callbacks") {
+                
+                // ASSERT
+                expect(self.itemPlaybackObservingService.onPlaybackStalled).toNot(beNil())
+                expect(self.itemPlaybackObservingService.onPlayToEndTime).toNot(beNil())
+            }
+        }
+        
         context("loadMedia") {
             it("should update state context to LoadingMedia") {
-
+                
                 // ACT
                 self.playingState.loadMedia(media: self.media, shouldPlaying: false)
-
+                
                 // ASSERT
                 expect(self.tested.state).to(beAnInstanceOf(LoadingMediaState.self))
             }
@@ -80,6 +95,62 @@ final class PlayingStateSpecs: QuickSpec {
 
                 // ASSERT
                 expect(self.tested.state).to(beAnInstanceOf(BufferingState.self))
+            }
+        }
+        
+        context("observing item onPlaybackStalled") {
+            it("should update state context to Failed") {
+
+                // ACT
+                self.itemPlaybackObservingService.onPlaybackStalled?()
+                
+                // ASSERT
+                expect(self.tested.state).to(beAnInstanceOf(FailedState.self))
+            }
+        }
+        
+        context("observing item onPlayToEndTime") {
+            context("currentTime is greater than duration") {
+                it("should update state context to Stopped") {
+                    
+                    // ARRANGE
+                    self.mockPlayer.overrideCurrentTime = CMTime(seconds: 10, preferredTimescale: 1)
+                    self.tested.itemDuration = 1
+
+                    // ACT
+                    self.itemPlaybackObservingService.onPlayToEndTime?()
+                    
+                    // ASSERT
+                    expect(self.tested.state).to(beAnInstanceOf(StoppedState.self))
+                }
+            }
+            context("currentTime is equal duration") {
+                it("should update state context to Stopped") {
+                    
+                    // ARRANGE
+                    self.mockPlayer.overrideCurrentTime = CMTime(seconds: 10, preferredTimescale: 1)
+                    self.tested.itemDuration = 10
+                    
+                    // ACT
+                    self.itemPlaybackObservingService.onPlayToEndTime?()
+                    
+                    // ASSERT
+                    expect(self.tested.state).to(beAnInstanceOf(StoppedState.self))
+                }
+            }
+            context("currentTime is less than duration") {
+                it("should update state context to Failed") {
+                    
+                    // ARRANGE
+                    self.mockPlayer.overrideCurrentTime = CMTime(seconds: 1, preferredTimescale: 1)
+                    self.tested.itemDuration = 10
+                    
+                    // ACT
+                    self.itemPlaybackObservingService.onPlayToEndTime?()
+                    
+                    // ASSERT
+                    expect(self.tested.state).to(beAnInstanceOf(FailedState.self))
+                }
             }
         }
     }

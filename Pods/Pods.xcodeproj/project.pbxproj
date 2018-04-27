@@ -37,6 +37,7 @@
 		42EAAE8CFB95F2352FCE036F263263E1 /* CwlCatchException.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13801553192E3EEE3D2B54CF494CB5B7 /* CwlCatchException.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		45D49A5B2093630700F63ACF /* LoggerInHouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D49A5A2093630700F63ACF /* LoggerInHouse.swift */; };
 		45D49A5D2093653500F63ACF /* ObservingRateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D49A5C2093653500F63ACF /* ObservingRateService.swift */; };
+		45D49A6120936C8F00F63ACF /* ItemPlaybackObservingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D49A6020936C8F00F63ACF /* ItemPlaybackObservingService.swift */; };
 		45F183320C688F9978649F30ABE21D09 /* MatchError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D15446C65CDB1473D10D244094DD4C /* MatchError.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		4739E1F56EAF44AF0E6F75DE78F3D583 /* AudioSessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F84021A5CEDCE9B0C5D840CD260DF8 /* AudioSessionService.swift */; };
 		479C43CF07D47C6609E0EF82EAD9B260 /* InitState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA744C704DDAEE362EC349E866AB23C /* InitState.swift */; };
@@ -216,6 +217,7 @@
 		45CBFC78ACD288D66318E5A45D9A64AC /* PostNotification.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PostNotification.swift; path = Sources/Nimble/Matchers/PostNotification.swift; sourceTree = "<group>"; };
 		45D49A5A2093630700F63ACF /* LoggerInHouse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggerInHouse.swift; sourceTree = "<group>"; };
 		45D49A5C2093653500F63ACF /* ObservingRateService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservingRateService.swift; sourceTree = "<group>"; };
+		45D49A6020936C8F00F63ACF /* ItemPlaybackObservingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemPlaybackObservingService.swift; sourceTree = "<group>"; };
 		46524379D3AD640FD4916702672C99E5 /* CurrentTestCaseTracker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CurrentTestCaseTracker.h; path = Sources/NimbleObjectiveC/CurrentTestCaseTracker.h; sourceTree = "<group>"; };
 		47E2DF97693EBA96A63A87CBFB215774 /* ConcretePlayerContext.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConcretePlayerContext.swift; path = Sources/ConcretePlayerContext.swift; sourceTree = "<group>"; };
 		49BAD0C1588A041E7BCEBB769B513FDD /* BeginWith.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BeginWith.swift; path = Sources/Nimble/Matchers/BeginWith.swift; sourceTree = "<group>"; };
@@ -666,6 +668,7 @@
 		B63A754ED34D5C3214FCF2755A470D4E /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				45D49A6020936C8F00F63ACF /* ItemPlaybackObservingService.swift */,
 				45D49A5C2093653500F63ACF /* ObservingRateService.swift */,
 				45D49A5A2093630700F63ACF /* LoggerInHouse.swift */,
 				69F84021A5CEDCE9B0C5D840CD260DF8 /* AudioSessionService.swift */,
@@ -1023,6 +1026,7 @@
 				E42130AE363861CB5B70DB230BCBA767 /* SetupCommandCenter.swift in Sources */,
 				66F0D7271F62B8A7E9653E38BE2A4269 /* StoppedState.swift in Sources */,
 				45D49A5D2093653500F63ACF /* ObservingRateService.swift in Sources */,
+				45D49A6120936C8F00F63ACF /* ItemPlaybackObservingService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

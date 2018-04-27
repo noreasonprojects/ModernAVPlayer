@@ -23,7 +23,7 @@ public final class FailedState: PlayerState {
     // MARK: - Init
     
     public init(context: PlayerContext, urlToReload: URL, shouldPlaying: Bool, error: CustomError) {
-        print("~~~ Failed state: \(error.localizedDescription)")
+        LoggerInHouse.instance.log(message: "Init", event: .debug)
         self.context = context
         self.urlToReload = urlToReload
         self.reachability = ReachabilityService(url: context.config.urlNetworkTesting,
@@ -35,14 +35,14 @@ public final class FailedState: PlayerState {
     }
 
     deinit {
-        print("------- Deinit \(self.description)")
+        LoggerInHouse.instance.log(message: "Deinit", event: .debug)
     }
     
     // MARK: - Reachability
 
     private func setIsReachableCallBack(shouldPlaying: Bool) {
         reachability.isReachable = { [unowned self] isReachable in
-            print("### Network | seem to be \(isReachable)")
+            LoggerInHouse.instance.log(message: "Network | seem to be \(isReachable)", event: .info)
             guard isReachable else { return }
 
             let lastKnownPosition = self.isDurationItemFinite() ? self.context.player.currentTime() : nil
@@ -72,13 +72,13 @@ public final class FailedState: PlayerState {
     public func play() {
         let debug = "Unable to play, reload a media first"
         context.debugMessage = debug
-        print("~~~ Failed state |" + debug)
+        LoggerInHouse.instance.log(message: "Unable to play, reload a media first", event: .warning)
     }
 
     public func seek(position: Double) {
         let debug = "Unable to seek, load a media first"
         context.debugMessage = debug
-        print("~~~ Failed state |" + debug)
+        LoggerInHouse.instance.log(message: "Unable to seek, load a media first", event: .warning)
     }
 
     public func stop() {

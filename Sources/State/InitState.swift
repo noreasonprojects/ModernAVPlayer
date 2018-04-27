@@ -18,11 +18,11 @@ public struct InitState: PlayerState {
     // MARK: - Init
 
     public init(context: PlayerContext) {
-        print("~~~ Init state")
+        LoggerInHouse.instance.log(message: "Init", event: .debug)
         self.context = context
         context.player.automaticallyWaitsToMinimizeStalling = false
     }
-
+    
     // MARK: - Shared actions
 
     public func loadMedia(media: PlayerMedia, shouldPlaying: Bool) {
@@ -37,13 +37,13 @@ public struct InitState: PlayerState {
     public func play() {
         let debug = "Load item before playing"
         context.debugMessage = debug
-        print("~~~ Init state |" + debug)
+        LoggerInHouse.instance.log(message: debug, event: .warning)
     }
     
     public func seek(position: Double) {
         let debug = "Unable to seek, load a media first"
         context.debugMessage = debug
-        print("~~~ Init state |" + debug)
+        LoggerInHouse.instance.log(message: debug, event: .warning)
     }
     
     public func stop() {

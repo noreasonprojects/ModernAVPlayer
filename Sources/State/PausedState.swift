@@ -15,7 +15,7 @@ public struct PausedState: PlayerState {
     // MARK: Init
     
     public init(context: PlayerContext) {
-        print("~~~ Paused state")
+        LoggerInHouse.instance.log(message: "Init", event: .debug)
         self.context = context
         self.context.player.pause()
     }
@@ -30,7 +30,7 @@ public struct PausedState: PlayerState {
     public func pause() {
         let debug = "Already paused"
         context.debugMessage = debug
-        print("~~~ Paused state |" + debug)
+        LoggerInHouse.instance.log(message: debug, event: .warning)
     }
 
     public func play() {
@@ -41,7 +41,7 @@ public struct PausedState: PlayerState {
         } else {
             let debug = "Please load item before playing"
             context.debugMessage = debug
-            print("~~~ Paused state |" + debug)
+            LoggerInHouse.instance.log(message: debug, event: .warning)
         }
     }
 

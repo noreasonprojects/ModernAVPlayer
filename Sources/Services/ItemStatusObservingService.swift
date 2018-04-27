@@ -15,7 +15,7 @@ final class ItemStatusObservingService: NSObject {
     var itemStatusCallback: ((AVPlayerItemStatus) -> Void)?
     
     init(item: AVPlayerItem) {
-        print("~~~ IemStatusObservingService")
+        LoggerInHouse.instance.log(message: "Init", event: .debug)
         self.item = item
         super.init()
         
@@ -23,7 +23,7 @@ final class ItemStatusObservingService: NSObject {
     }
     
     deinit {
-        print("------- Deinit IemStatusObservingService")
+        LoggerInHouse.instance.log(message: "Deinit", event: .debug)
         item.removeObserver(self, forKeyPath: #keyPath(AVPlayerItem.status))
     }
     

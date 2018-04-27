@@ -30,13 +30,13 @@ public struct SetupCommandCenter {
         remote.nextTrackCommand.isEnabled = false
 
         remote.playCommand.addTarget { [context] _ -> MPRemoteCommandHandlerStatus in
-            print("∫∫∫ Remote command: play")
+            LoggerInHouse.instance.log(message: "Remote command: play", event: .info)
             context.play()
             return .success
         }
         
         remote.pauseCommand.addTarget { [context] _ -> MPRemoteCommandHandlerStatus in
-            print("∫∫∫ Remote command: pause")
+            LoggerInHouse.instance.log(message: "Remote command: pause", event: .info)
             context.pause()
             return .success
         }
@@ -46,7 +46,7 @@ public struct SetupCommandCenter {
                 else { return .commandFailed }
 
             let position = e.positionTime
-            print("∫∫∫ Remote command: seek to \(position)")
+            LoggerInHouse.instance.log(message: "Remote command: seek to \(position)", event: .info)
             self.context.seek(position: position)
             return .success
         }

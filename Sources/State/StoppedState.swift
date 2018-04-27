@@ -18,7 +18,8 @@ public struct StoppedState: PlayerState {
     // MARK: - Init
 
     public init(context: PlayerContext) {
-        print("~~~ Stopped state")
+        LoggerInHouse.instance.log(message: "Init", event: .debug)
+        
         self.context = context
         self.context.player.pause()
         self.context.player.seek(to: kCMTimeZero)
@@ -44,7 +45,7 @@ public struct StoppedState: PlayerState {
         } else {
             let debug = "Please load item before playing"
             context.debugMessage = debug
-            print("~~~ Stopped state |" + debug)
+            LoggerInHouse.instance.log(message: debug, event: .warning)
         }
     }
 
@@ -58,6 +59,6 @@ public struct StoppedState: PlayerState {
     public func stop() {
         let debug = "Already stopped"
         context.debugMessage = debug
-        print("~~~ Stopped state |" + debug)
+        LoggerInHouse.instance.log(message: debug, event: .warning)
     }
 }

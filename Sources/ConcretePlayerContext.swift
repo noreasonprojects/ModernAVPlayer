@@ -18,7 +18,7 @@ public protocol PlayerContextDelegate: class {
 }
 
 public final class ConcretePlayerContext: NSObject, PlayerContext {
-
+    
     // MARK: - Vars
 
     public weak var delegate: PlayerContextDelegate?
@@ -45,18 +45,22 @@ public final class ConcretePlayerContext: NSObject, PlayerContext {
     public var debugMessage: String? {
         didSet { delegate?.playerContext(self, debugMessage: debugMessage) }
     }
+    
+    public let audioSessionType: AudioSession.Type
 
     // MARK: - LifeCycle
 
     public init(player: AVPlayer = AVPlayer(),
                 config: ContextConfiguration = PlayerContextConfiguration(),
-                nowPlaying: NowPlaying = NowPlayingService()) {
+                nowPlaying: NowPlaying = NowPlayingService(),
+                audioSessionType: AudioSession.Type = AudioSessionService.self) {
         self.player = player
         self.config = config
         self.nowPlaying = nowPlaying
+        self.audioSessionType = audioSessionType
         super.init()
 
-        AudioSessionService.setCategory(config.audioSessionCategory)
+        audioSessionType.setCategory(config.audioSessionCategory)
         state = InitState(context: self)
     }
 

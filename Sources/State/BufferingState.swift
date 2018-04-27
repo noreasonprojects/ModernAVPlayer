@@ -19,7 +19,6 @@ public final class BufferingState: NSObject, PlayerState {
     private let timeOutBuffering: TimeInterval
     private let rateObserverTimeInterval: TimeInterval
     private var remainingTime: TimeInterval = 0
-    private var lastPosition: Double
 
     // MARK: - Init
 
@@ -28,7 +27,6 @@ public final class BufferingState: NSObject, PlayerState {
         self.context = context
         timeOutBuffering = context.config.timeoutBuffering
         rateObserverTimeInterval = context.config.playerRateObserving
-        lastPosition = context.player.currentTime().seconds
         super.init()
     }
     
@@ -69,7 +67,7 @@ public final class BufferingState: NSObject, PlayerState {
     // MARK: - Player Commands
 
     func playCommand() {
-        AudioSessionService.active { [unowned self] completed in
+        context.audioSessionType.active { [unowned self] completed in
             if completed {
                 if self.rateTimerObserver == nil { DispatchQueue.main.sync { self.observingRate() } }
                 self.context.player.play()
@@ -85,7 +83,6 @@ public final class BufferingState: NSObject, PlayerState {
     }
 
     func seekCommand(position: Double) {
-        lastPosition = position
         context.currentItem?.cancelPendingSeeks()
         let time = CMTime(seconds: position, preferredTimescale: context.config.preferedTimeScale)
         context.player.seek(to: time) { _ in self.playCommand() }

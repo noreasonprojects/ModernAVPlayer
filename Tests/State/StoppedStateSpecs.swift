@@ -16,8 +16,8 @@ final class StoppedStateSpecs: QuickSpec {
     
     var tested: StoppedState!
     var media: PlayerMedia!
-    let mockPlayer = MockCutomPlayer()
-    lazy var playerContext = ConcretePlayerContext(player: self.mockPlayer)
+    let mockPlayer = MockCustomPlayer()
+    lazy var playerContext = ConcretePlayerContext(player: self.mockPlayer, audioSessionType: MockAudioSession.self)
 
     override func spec() {
 
@@ -49,19 +49,26 @@ final class StoppedStateSpecs: QuickSpec {
         }
 
         context("play") {
-//            context("when player status is readyToPlay") {
-//                it("should update state context to Buffering") {
-//
-//                    // ARRANGE
-//                    self.mockPlayer.overrideStatus = .readyToPlay
-//
-//                    // ACT
-//                    self.tested.play()
-//
-//                    // ASSERT
-//                    expect(self.playerContext.state).to(beAnInstanceOf(BufferingState.self))
-//                }
-//            }
+            context("when player status is readyToPlay") {
+                beforeEach {
+                    // ARRANGE
+                    let item = MockPlayerItem.createOne(url: "hello")
+                    item.overrideStatus = .readyToPlay
+                    self.mockPlayer.overrideCurrentItem = item
+                    MockAudioSession.resetCallsCount()
+
+                    // ACT
+                    self.tested.play()
+                }
+                it("should update state context to Buffering") {
+                    // ASSERT
+                    expect(self.playerContext.state).to(beAnInstanceOf(BufferingState.self))
+                }
+                it("should launch play command on buffering state") {
+                    // ASSERT
+                    expect(MockAudioSession.activeCallCount).to(equal(1))
+                }
+            }
 
             context("when item status is not readyToPlay") {
                 it("should not update state context") {
@@ -103,18 +110,42 @@ final class StoppedStateSpecs: QuickSpec {
         }
 
         context("seek to 42") {
-            it("should not update state context") {
-
+            beforeEach {
+                
                 // ARRANGE
                 let position = CMTime(seconds: 42, preferredTimescale: 1)
-
+                
                 // ACT
                 self.tested.seek(position: position.seconds)
+            }
+            it("should forward seek to player") {
 
                 // ASSERT
-//                expect(self.mockPlayer.seekCallCount).to(equal(1))
-//                expect(self.mockPlayer.lastSeekParam?.seconds).to(equal(position.seconds))
-
+                expect(self.mockPlayer.seekCompletionCallCount).to(equal(1))
+                expect(self.mockPlayer.lastSeekCompletionParam?.seconds).to(equal(42))
+            }
+            it("should not update state context") {
+                
+                // ASSERT
+                expect(self.playerContext.state).to(beAnInstanceOf(StoppedState.self))
+            }
+            
+            it("should update context current time if completed") {
+                
+                // ACT
+                self.mockPlayer.lastCompletionParam?(true)
+                
+                // ASSERT
+                expect(self.playerContext.currentTime).to(equal(42))
+            }
+            
+            it("should not update context current time if cancelled") {
+                
+                // ACT
+                self.mockPlayer.lastCompletionParam?(false)
+                
+                // ASSERT
+                expect(self.playerContext.currentTime).to(equal(0))
             }
         }
     }

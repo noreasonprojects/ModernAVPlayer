@@ -3,7 +3,7 @@
 //  RxAudioPlayerSMTests
 //
 //  Created by raphael ankierman on 28/02/2018.
-//  Copyright © 2018 RadioFrance. All rights reserved.
+//  Copyright © 2018 raphael ankierman. All rights reserved.
 //
 
 import AVFoundation

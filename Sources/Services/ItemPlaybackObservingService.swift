@@ -44,7 +44,7 @@ public final class ItemPlaybackObservingService: ItemPlaybackObservingServicePro
     
     @objc
     private func itemPlayToEndTime() {
-        itemPlayToEndTime()
+        onPlayToEndTime?()
     }
     
     @objc

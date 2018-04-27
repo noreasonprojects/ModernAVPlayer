@@ -26,7 +26,7 @@ public final class LoadingMediaState: PlayerState {
     // MARK: - Init
     
     public init(context: PlayerContext, itemUrl: URL, shouldPlaying: Bool, lastPosition: CMTime?) {
-        print("~~~ LoadingMedia state")
+        LoggerInHouse.instance.log(message: "Init", event: .debug)
         self.context = context
         self.shouldPlaying = shouldPlaying
         self.media = nil
@@ -38,7 +38,7 @@ public final class LoadingMediaState: PlayerState {
     }
 
     public init(context: PlayerContext, media: PlayerMedia, shouldPlaying: Bool) {
-        print("~~~ LoadingMedia state")
+        LoggerInHouse.instance.log(message: "Init", event: .debug)
         self.context = context
         self.shouldPlaying = shouldPlaying
         self.media = media
@@ -50,7 +50,7 @@ public final class LoadingMediaState: PlayerState {
     }
 
     deinit {
-        print("------- Deinit \(self.description)")
+        LoggerInHouse.instance.log(message: "Deinit", event: .debug)
     }
 
     // MARK: - Shared actions
@@ -67,13 +67,13 @@ public final class LoadingMediaState: PlayerState {
     public func play() {
         let debug = "Please wait to be loaded"
         context.debugMessage = debug
-        print("~~~ LoadingMedia state |" + debug)
+        LoggerInHouse.instance.log(message: debug, event: .warning)
     }
 
     public func seek(position: Double) {
         let debug = "Unable to seek, wait the media to be loaded"
         context.debugMessage = debug
-        print("~~~ LoadingMedia state |" + debug)
+        LoggerInHouse.instance.log(message: debug, event: .warning)
     }
 
     public func stop() {
@@ -121,7 +121,7 @@ public final class LoadingMediaState: PlayerState {
             if let token = context.bgToken { UIApplication.shared.endBackgroundTask(token) }
             context.bgToken = nil
         }
-        print("∆∆∆ startBgTask create: \(String(describing: context.bgToken))")
+        LoggerInHouse.instance.log(message: "StartBgTask create: \(String(describing: context.bgToken))", event: .info)
     }
 
     private func moveToNextState(with status: AVPlayerItemStatus) {

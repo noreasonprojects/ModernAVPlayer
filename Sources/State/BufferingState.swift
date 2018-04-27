@@ -23,7 +23,7 @@ public final class BufferingState: NSObject, PlayerState {
     // MARK: - Init
 
     public init(context: PlayerContext) {
-        print("~~~ Buffering state")
+        LoggerInHouse.instance.log(message: "Init", event: .debug)
         self.context = context
         timeOutBuffering = context.config.timeoutBuffering
         rateObserverTimeInterval = context.config.playerRateObserving
@@ -31,7 +31,7 @@ public final class BufferingState: NSObject, PlayerState {
     }
     
     deinit {
-        print("------- Deinit \(self.description)")
+        LoggerInHouse.instance.log(message: "Deinit", event: .debug)
         rateTimerObserver?.invalidate()
     }
 
@@ -48,7 +48,8 @@ public final class BufferingState: NSObject, PlayerState {
             guard let timebase = self.context.player.currentItem?.timebase else { return }
 
             let rate = CMTimebaseGetRate(timebase)
-            print("& item rate: \(rate)")
+            LoggerInHouse.instance.log(message: "Item rate: \(rate)", event: .info)
+
             if rate != 0 {
                 self.context.changeState(state: PlayingState(context: self.context))
             } else if self.remainingTime <= 0 {
@@ -59,7 +60,7 @@ public final class BufferingState: NSObject, PlayerState {
                                                                 shouldPlaying: true,
                                                                 error: .buffering))
             } else {
-                print("& remaining time: \(self.remainingTime)")
+                LoggerInHouse.instance.log(message: "Remaining time: \(self.remainingTime)", event: .info)
             }
         }
     }
@@ -102,7 +103,7 @@ public final class BufferingState: NSObject, PlayerState {
     public func play() {
         let debug = "Already trying to play"
         context.debugMessage = debug
-        print("~~~ Buffering state |" + debug)
+        LoggerInHouse.instance.log(message: "Already trying to play", event: .warning)
     }
 
     public func seek(position: Double) {

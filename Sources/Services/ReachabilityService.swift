@@ -29,6 +29,7 @@ final class ReachabilityService {
     // MARK: - Init
 
     init(url: URL, timeoutURLSession: TimeInterval, tiNetworkTesting: TimeInterval, networkIteration: UInt) {
+        LoggerInHouse.instance.log(message: "Init", event: .debug)
         self.url = url
         self.timeoutURLSession = timeoutURLSession
         self.tiNetworkTesting = tiNetworkTesting
@@ -36,7 +37,7 @@ final class ReachabilityService {
     }
 
     deinit {
-        print("------- Deinit ∫∫∫∫∫ ReachabilityService ∫∫∫∫∫∫∫∫")
+        LoggerInHouse.instance.log(message: "Deinit", event: .debug)
         networkTask?.cancel()
         timer?.invalidate()
     }

@@ -20,10 +20,10 @@ public struct AudioSessionService: AudioSession {
         DispatchQueue.global(qos: .userInitiated).async {
             do {
                 try AVAudioSession.sharedInstance().setActive(true)
-                print("ΩΩΩ Active audio session")
+                LoggerInHouse.instance.log(message: "Active audio session", event: .info)
                 completion(true)
             } catch {
-                print("ΩΩΩ Failed to active audio session: \(error.localizedDescription)")
+                LoggerInHouse.instance.log(message: "Active audio session: \(error.localizedDescription)", event: .error)
                 completion(false)
             }
         }
@@ -32,9 +32,9 @@ public struct AudioSessionService: AudioSession {
     static public func setCategory(_ category: String) {
         do {
             try AVAudioSession.sharedInstance().setCategory(category)
-            print("ΩΩΩ Set audio session category to: \(category)")
+            LoggerInHouse.instance.log(message: "Set audio session category to: \(category)", event: .info)
         } catch let error {
-            print("ΩΩΩ Failed to set \(category) category: \(error.localizedDescription)")
+            LoggerInHouse.instance.log(message: "Set \(category) category: \(error.localizedDescription)", event: .error)
         }
     }
 

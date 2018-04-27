@@ -25,10 +25,13 @@ public protocol ContextConfiguration {
     var urlNetworkTesting: URL { get }
     var tiNetworkTesting: TimeInterval { get }
     var networkIteration: UInt { get }
+    
+    // Logger
+    var loggerLevelFilter: LoggerInHouse.LogEvent { get }
 }
 
 public struct PlayerContextConfiguration: ContextConfiguration {
-
+    
     // Buffering State
     public let timeoutBuffering: TimeInterval = 3
     public let playerRateObserving: TimeInterval = 0.3
@@ -45,6 +48,8 @@ public struct PlayerContextConfiguration: ContextConfiguration {
     public let tiNetworkTesting: TimeInterval = 3
     public let networkIteration: UInt = 10
 
+    public var loggerLevelFilter: LoggerInHouse.LogEvent = .debug
+    
     public init() {
         periodicPlayingTime = CMTime(seconds: 1, preferredTimescale: preferedTimeScale)
     }

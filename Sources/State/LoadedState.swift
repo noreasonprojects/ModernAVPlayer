@@ -19,7 +19,7 @@ public struct LoadedState: PlayerState {
     // MARK: - Init
 
     public init(context: PlayerContext) {
-        print("~~~ Loaded state")
+        LoggerInHouse.instance.log(message: "Init", event: .debug)
         self.context = context
         self.context.currentTime = 0
     }

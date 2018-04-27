@@ -17,7 +17,7 @@ public final class PlayingState: PlayerState {
     // MARK: - Init
 
     public init(context: PlayerContext) {
-        print("~~~ Playing state")
+        LoggerInHouse.instance.log(message: "Init", event: .debug)
         self.context = context
         stopBgTask(context: context)
         setTimerObserver()
@@ -25,7 +25,7 @@ public final class PlayingState: PlayerState {
     }
 
     deinit {
-        print("------- Deinit \(self.description)")
+        LoggerInHouse.instance.log(message: "Deinit", event: .debug)
         if let to = timerObserver { context.player.removeTimeObserver(to) }
         NotificationCenter.default.removeObserver(self,
                                                   name: NSNotification.Name.AVPlayerItemPlaybackStalled,
@@ -47,13 +47,13 @@ public final class PlayingState: PlayerState {
             }
             context.bgToken = nil
         }
-        print("∆∆∆ startBgTask create: \(String(describing: context.bgToken))")
+        LoggerInHouse.instance.log(message: "StartBgTask create: \(String(describing: context.bgToken))", event: .info)
     }
 
     private func stopBgTask(context: PlayerContext) {
         guard let token = context.bgToken else { return }
 
-        print("∆∆∆ stopBgTask: \(token)")
+        LoggerInHouse.instance.log(message: "StopBgTask: \(token)", event: .info)
         UIApplication.shared.endBackgroundTask(token)
         context.bgToken = nil
     }
@@ -72,7 +72,7 @@ public final class PlayingState: PlayerState {
     public func play() {
         let debug = "Already playing"
         context.debugMessage = debug
-        print("~~~ Playing state |" + debug)
+        LoggerInHouse.instance.log(message: debug, event: .warning)
     }
 
     public func seek(position: Double) {
@@ -132,6 +132,6 @@ public final class PlayingState: PlayerState {
 
     @objc
     private func itemFailedToPlayToEndTime() {
-        print("¬¬¬ AVPlayerItemFailedToPlayToEndTime called")
+        LoggerInHouse.instance.log(message: "AVPlayerItemFailedToPlayToEndTime called", event: .warning)
     }
 }

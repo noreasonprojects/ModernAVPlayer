@@ -60,12 +60,18 @@ public final class ConcretePlayerContext: NSObject, PlayerContext {
         self.audioSessionType = audioSessionType
         super.init()
 
+        setupLogger()
+        LoggerInHouse.instance.log(message: "Init", event: .debug)
         audioSessionType.setCategory(config.audioSessionCategory)
         state = InitState(context: self)
     }
 
     deinit {
-        print("concretePlayerContext deinit")
+        LoggerInHouse.instance.log(message: "Deinit", event: .debug)
+    }
+    
+    private func setupLogger() {
+        LoggerInHouse.instance.levelFilter = config.loggerLevelFilter
     }
 
     // MARK: - Public functions

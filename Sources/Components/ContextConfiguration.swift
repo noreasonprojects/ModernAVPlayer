@@ -48,7 +48,7 @@ public struct PlayerContextConfiguration: ContextConfiguration {
     public let tiNetworkTesting: TimeInterval = 3
     public let networkIteration: UInt = 10
 
-    public var loggerLevelFilter: LoggerInHouse.LogEvent = .debug
+    public var loggerLevelFilter: LoggerInHouse.LogEvent = .verbose
     
     public init() {
         periodicPlayingTime = CMTime(seconds: 1, preferredTimescale: preferedTimeScale)

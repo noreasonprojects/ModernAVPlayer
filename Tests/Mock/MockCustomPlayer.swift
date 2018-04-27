@@ -62,8 +62,17 @@ final class MockCustomPlayer: AVPlayer {
         addObserverCallCount += 1
         addObserverLastKeyPathParam = keyPath
     }
-
-    override func removeObserver(_ observer: NSObject, forKeyPath keyPath: String) {
-        
+    
+    static func createOne(url: String) -> MockCustomPlayer {
+        let player = MockCustomPlayer()
+        player.overrideCurrentItem = MockPlayerItem.createOne(url: url)
+        return player
     }
+    
+    static func createOnUsingAsset(url: String) -> MockCustomPlayer {
+        let player = MockCustomPlayer()
+        player.overrideCurrentItem = MockPlayerItem.createOnUsingAsset(url: url)
+        return player
+    }
+
 }

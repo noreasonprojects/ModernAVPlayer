@@ -9,14 +9,14 @@
 import AVFoundation
 import Foundation
 
-protocol AudioSession {
+public protocol AudioSession {
     static func active(completion: @escaping (Bool) -> Void)
     static func setCategory(_ category: String)
 }
 
-struct AudioSessionService: AudioSession {
+public struct AudioSessionService: AudioSession {
 
-    static func active(completion: @escaping (Bool) -> Void) {
+    static public func active(completion: @escaping (Bool) -> Void) {
         DispatchQueue.global(qos: .userInitiated).async {
             do {
                 try AVAudioSession.sharedInstance().setActive(true)
@@ -29,7 +29,7 @@ struct AudioSessionService: AudioSession {
         }
     }
 
-    static func setCategory(_ category: String) {
+    static public func setCategory(_ category: String) {
         do {
             try AVAudioSession.sharedInstance().setCategory(category)
             print("ΩΩΩ Set audio session category to: \(category)")

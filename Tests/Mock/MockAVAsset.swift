@@ -9,7 +9,7 @@
 import AVFoundation
 import Foundation
 
-final class MockAVAsset: AVAsset {
+final class MockAVAsset: AVURLAsset {
     
     var cancelLoadingCallCount = 0
     override func cancelLoading() {

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		45D49A5920935F8800F63ACF /* MockAudioSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D49A5720935EEB00F63ACF /* MockAudioSession.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
@@ -43,6 +44,7 @@
 /* Begin PBXFileReference section */
 		05C29EE3AE856D902F8DD65C /* Pods_ModernAVPlayer_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ModernAVPlayer_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		28D8BFE828C5572A0312B9F9 /* Pods-ModernAVPlayer_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ModernAVPlayer_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ModernAVPlayer_Tests/Pods-ModernAVPlayer_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		45D49A5720935EEB00F63ACF /* MockAudioSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockAudioSession.swift; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* ModernAVPlayer_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ModernAVPlayer_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 		E152D516207A459500E0347C /* Mock */ = {
 			isa = PBXGroup;
 			children = (
+				45D49A5720935EEB00F63ACF /* MockAudioSession.swift */,
 				E152D517207A459500E0347C /* MockPlayerState.swift */,
 				E152D518207A459500E0347C /* MockAVAsset.swift */,
 				E152D519207A459500E0347C /* MockPlayerItem.swift */,
@@ -464,6 +467,7 @@
 				E152D522207A45A100E0347C /* MockCustomPlayer.swift in Sources */,
 				E152D533207A472500E0347C /* InitStateSpecs.swift in Sources */,
 				E1050F76207A44B100A7F540 /* ContextSpecs.swift in Sources */,
+				45D49A5920935F8800F63ACF /* MockAudioSession.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

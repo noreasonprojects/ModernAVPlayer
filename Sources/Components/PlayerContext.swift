@@ -26,4 +26,6 @@ public protocol PlayerContext: class {
     func stop()
     func loadMedia(media: PlayerMedia, shouldPlaying: Bool)
     func changeState(state: PlayerState)
+    
+    var audioSessionType: AudioSession.Type { get }
 }

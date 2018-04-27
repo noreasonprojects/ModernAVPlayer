@@ -15,9 +15,9 @@ import Nimble
 final class PausedStateSpecs: QuickSpec {
     
     var tested: PausedState!
-    var mockPlayer = MockCutomPlayer()
+    var mockPlayer = MockCustomPlayer()
     var media: PlayerMedia!
-    lazy var playerContext = ConcretePlayerContext(player: self.mockPlayer)
+    lazy var playerContext = ConcretePlayerContext(player: self.mockPlayer, audioSessionType: MockAudioSession.self)
 
     override func spec() {
 
@@ -47,21 +47,21 @@ final class PausedStateSpecs: QuickSpec {
         }
 
         context("play") {
-//            context("when item status is readyToPlay") {
-//                it("should update state context to Buffering") {
-//
-//                    // ARRANGE
-//                    let item = MockPlayerItem.createOne(url: "foo")
-//                    item.overrideStatus = .readyToPlay
-//                    self.mockPlayer.overrideCurrentItem = item
-//
-//                    // ACT
-//                    self.tested.play()
-//
-//                    // ASSERT
-//                    expect(self.playerContext.state).to(beAnInstanceOf(BufferingState.self))
-//                }
-//            }
+            context("when item status is readyToPlay") {
+                it("should update state context to Buffering") {
+
+                    // ARRANGE
+                    let item = MockPlayerItem.createOne(url: "foo")
+                    item.overrideStatus = .readyToPlay
+                    self.mockPlayer.overrideCurrentItem = item
+
+                    // ACT
+                    self.tested.play()
+
+                    // ASSERT
+                    expect(self.playerContext.state).to(beAnInstanceOf(BufferingState.self))
+                }
+            }
 
             context("when item status is not readyToPlay") {
                 it("should not update state context") {
@@ -103,19 +103,41 @@ final class PausedStateSpecs: QuickSpec {
         }
 
         context("seek to 42") {
-            it("should not update state context") {
-
+            beforeEach {
+                
                 // ARRANGE
                 let position = CMTime(seconds: 42, preferredTimescale: 1)
-
+                self.playerContext.currentTime = 0
+                
                 // ACT
                 self.tested.seek(position: position.seconds)
+            }
+            it("should not update state context") {
 
                 // ASSERT
-                expect(self.mockPlayer.seekCallCount).to(equal(1))
-//                expect(self.mockPlayer.lastSeekParam?.seconds).to(equal(position.seconds))
+                expect(self.mockPlayer.seekCompletionCallCount).to(equal(1))
+                expect(self.mockPlayer.lastSeekCompletionParam?.seconds).to(equal(42))
 
             }
+            
+            it("should update context current time if completed") {
+                
+                // ACT
+                self.mockPlayer.lastCompletionParam?(true)
+                
+                // ASSERT
+                expect(self.playerContext.currentTime).to(equal(42))
+            }
+            
+            it("should not update context current time if cancelled") {
+                
+                // ACT
+                self.mockPlayer.lastCompletionParam?(false)
+                
+                // ASSERT
+                expect(self.playerContext.currentTime).to(equal(0))
+            }
+            
         }
     }
 }

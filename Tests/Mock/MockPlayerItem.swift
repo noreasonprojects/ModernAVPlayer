@@ -11,9 +11,9 @@ import Foundation
 
 final class MockPlayerItem: AVPlayerItem {
 
-    var overrideStatus: AVPlayerItemStatus!
+    var overrideStatus: AVPlayerItemStatus?
     override var status: AVPlayerItemStatus {
-        return overrideStatus
+        return overrideStatus ?? AVPlayerItemStatus.unknown
     }
 }
 

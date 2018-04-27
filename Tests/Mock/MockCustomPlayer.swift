@@ -11,7 +11,7 @@ import Foundation
 import Quick
 import Nimble
 
-final class MockCutomPlayer: AVPlayer {
+final class MockCustomPlayer: AVPlayer {
 
     var overrideCurrentItem: AVPlayerItem?
     override var currentItem: AVPlayerItem? {
@@ -38,6 +38,15 @@ final class MockCutomPlayer: AVPlayer {
     override func seek(to time: CMTime) {
         seekCallCount += 1
         lastSeekParam = time
+    }
+    
+    var seekCompletionCallCount = 0
+    var lastSeekCompletionParam: CMTime?
+    var lastCompletionParam: ((Bool) -> Void)?
+    override func seek(to time: CMTime, completionHandler: @escaping (Bool) -> Void) {
+        seekCompletionCallCount += 1
+        lastSeekCompletionParam = time
+        lastCompletionParam = completionHandler
     }
     
     var replaceCurrentItemCallCount = 0

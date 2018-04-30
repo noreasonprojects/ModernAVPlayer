@@ -13,29 +13,25 @@ import MediaPlayer
 public final class PlayingState: PlayerState {
     public unowned var context: PlayerContext
     private var timerObserver: Any?
+    private var itemPlaybackObservingService: ItemPlaybackObservingServiceProtocol
+    
+    // MARK: - Lifecycle
 
-    // MARK: - Init
-
-    public init(context: PlayerContext) {
+    public init(context: PlayerContext,
+                itemPlaybackObservingService: ItemPlaybackObservingServiceProtocol = ItemPlaybackObservingService()) {
         LoggerInHouse.instance.log(message: "Init", event: .debug)
         self.context = context
+        self.itemPlaybackObservingService = itemPlaybackObservingService
         stopBgTask(context: context)
         setTimerObserver()
-        observeItemNotifications()
+        
+        self.itemPlaybackObservingService.onPlaybackStalled = { [weak self] in self?.playbackStalled() }
+        self.itemPlaybackObservingService.onPlayToEndTime = { [weak self] in self?.playToEndTime() }
     }
 
     deinit {
         LoggerInHouse.instance.log(message: "Deinit", event: .debug)
         if let to = timerObserver { context.player.removeTimeObserver(to) }
-        NotificationCenter.default.removeObserver(self,
-                                                  name: NSNotification.Name.AVPlayerItemPlaybackStalled,
-                                                  object: nil)
-        NotificationCenter.default.removeObserver(self,
-                                                  name: NSNotification.Name.AVPlayerItemDidPlayToEndTime,
-                                                  object: nil)
-        NotificationCenter.default.removeObserver(self,
-                                                  name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime,
-                                                  object: nil)
     }
 
     // MARK: - Background task
@@ -89,26 +85,15 @@ public final class PlayingState: PlayerState {
 
     private func setTimerObserver() {
         timerObserver = context.player.addPeriodicTimeObserver(forInterval: context.config.periodicPlayingTime,
-                                                               queue: nil) { [unowned self] time in
-            self.context.currentTime = time.seconds
-            self.context.nowPlaying.overrideInfoCenter(for: MPNowPlayingInfoPropertyElapsedPlaybackTime,
-                                                       value: time.seconds)
+                                                               queue: nil) { [context] time in
+            context.currentTime = time.seconds
+            context.nowPlaying.overrideInfoCenter(for: MPNowPlayingInfoPropertyElapsedPlaybackTime,
+                                                  value: time.seconds)
         }
     }
-
-    private func observeItemNotifications() {
-        NotificationCenter.default.addObserver(self, selector: #selector(PlayingState.itemPlaybackStalled),
-                                               name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(PlayingState.itemPlayToEndTime),
-                                               name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(PlayingState.itemFailedToPlayToEndTime),
-                                               name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: nil)
-    }
-
-    @objc
-    private func itemPlaybackStalled() {
-        guard
-            let url = (context.player.currentItem?.asset as? AVURLAsset)?.url
+    
+    private func playbackStalled() {
+        guard let url = (context.player.currentItem?.asset as? AVURLAsset)?.url
             else { assertionFailure(); return }
 
         startBgTask(context: context)
@@ -117,21 +102,14 @@ public final class PlayingState: PlayerState {
                                                shouldPlaying: true,
                                                error: .itemPlaybackStalled))
     }
-
-    @objc
-    private func itemPlayToEndTime() {
+    
+    private func playToEndTime() {
         guard let duration = context.itemDuration
             else { assertionFailure(); return }
-
+        
         let roundedCurrentTime = context.player.currentTime().seconds.rounded(.up)
         guard roundedCurrentTime >= duration
-            else { itemPlaybackStalled(); return }
-
+            else { self.playbackStalled(); return }
         context.changeState(state: StoppedState(context: context))
-    }
-
-    @objc
-    private func itemFailedToPlayToEndTime() {
-        LoggerInHouse.instance.log(message: "AVPlayerItemFailedToPlayToEndTime called", event: .warning)
     }
 }

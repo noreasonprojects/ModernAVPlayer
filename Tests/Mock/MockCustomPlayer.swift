@@ -23,6 +23,11 @@ final class MockCustomPlayer: AVPlayer {
         return overrideStatus
     }
     
+    var overrideCurrentTime: CMTime?
+    override func currentTime() -> CMTime {
+        return overrideCurrentTime ?? CMTime(seconds: 0, preferredTimescale: 1)
+    }
+    
     var pauseCallCount = 0
     override func pause() {
         pauseCallCount += 1

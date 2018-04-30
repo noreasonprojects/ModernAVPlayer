@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		45494C7B209378B3005C3DE2 /* ItemPlaybackObservingServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45494C7A209378B2005C3DE2 /* ItemPlaybackObservingServiceTests.swift */; };
 		45D49A5920935F8800F63ACF /* MockAudioSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D49A5720935EEB00F63ACF /* MockAudioSession.swift */; };
 		45D49A5F2093656100F63ACF /* MockObservingRateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D49A5E2093656100F63ACF /* MockObservingRateService.swift */; };
+		45D49A6320936CC100F63ACF /* MockItemPlaybackObservingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D49A6220936CC100F63ACF /* MockItemPlaybackObservingService.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
@@ -45,8 +47,10 @@
 /* Begin PBXFileReference section */
 		05C29EE3AE856D902F8DD65C /* Pods_ModernAVPlayer_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ModernAVPlayer_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		28D8BFE828C5572A0312B9F9 /* Pods-ModernAVPlayer_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ModernAVPlayer_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ModernAVPlayer_Tests/Pods-ModernAVPlayer_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		45494C7A209378B2005C3DE2 /* ItemPlaybackObservingServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemPlaybackObservingServiceTests.swift; sourceTree = "<group>"; };
 		45D49A5720935EEB00F63ACF /* MockAudioSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockAudioSession.swift; sourceTree = "<group>"; };
 		45D49A5E2093656100F63ACF /* MockObservingRateService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockObservingRateService.swift; sourceTree = "<group>"; };
+		45D49A6220936CC100F63ACF /* MockItemPlaybackObservingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockItemPlaybackObservingService.swift; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* ModernAVPlayer_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ModernAVPlayer_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -96,6 +100,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		45494C7720937892005C3DE2 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				45494C7A209378B2005C3DE2 /* ItemPlaybackObservingServiceTests.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
@@ -144,6 +156,7 @@
 			children = (
 				E1050F75207A44B100A7F540 /* ContextSpecs.swift */,
 				E152D516207A459500E0347C /* Mock */,
+				45494C7720937892005C3DE2 /* Services */,
 				E152D523207A472500E0347C /* State */,
 				607FACE91AFB9204008FA782 /* Supporting Files */,
 			);
@@ -189,6 +202,7 @@
 		E152D516207A459500E0347C /* Mock */ = {
 			isa = PBXGroup;
 			children = (
+				45D49A6220936CC100F63ACF /* MockItemPlaybackObservingService.swift */,
 				45D49A5E2093656100F63ACF /* MockObservingRateService.swift */,
 				45D49A5720935EEB00F63ACF /* MockAudioSession.swift */,
 				E152D517207A459500E0347C /* MockPlayerState.swift */,
@@ -458,6 +472,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E152D51F207A45A100E0347C /* MockPlayerState.swift in Sources */,
+				45D49A6320936CC100F63ACF /* MockItemPlaybackObservingService.swift in Sources */,
 				E152D530207A472500E0347C /* PlayingStateSpecs.swift in Sources */,
 				E152D521207A45A100E0347C /* MockPlayerItem.swift in Sources */,
 				E152D52D207A472500E0347C /* PausedStateSpecs.swift in Sources */,
@@ -468,6 +483,7 @@
 				E152D52F207A472500E0347C /* LoadedStateSpecs.swift in Sources */,
 				E152D520207A45A100E0347C /* MockAVAsset.swift in Sources */,
 				E152D531207A472500E0347C /* BufferingStateSpecs.swift in Sources */,
+				45494C7B209378B3005C3DE2 /* ItemPlaybackObservingServiceTests.swift in Sources */,
 				E152D522207A45A100E0347C /* MockCustomPlayer.swift in Sources */,
 				E152D533207A472500E0347C /* InitStateSpecs.swift in Sources */,
 				E1050F76207A44B100A7F540 /* ContextSpecs.swift in Sources */,

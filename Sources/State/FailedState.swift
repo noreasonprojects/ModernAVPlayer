@@ -18,18 +18,19 @@ public final class FailedState: PlayerState {
     // MARK: - Private vars
 
     private let urlToReload: URL
-    private let reachability: ReachabilityService
+    private var reachability: ReachabilityServiceProtocol
     
     // MARK: - Init
     
-    public init(context: PlayerContext, urlToReload: URL, shouldPlaying: Bool, error: CustomError) {
+    public init(context: PlayerContext,
+                urlToReload: URL,
+                shouldPlaying: Bool,
+                error: CustomError,
+                reachabilityService: ReachabilityServiceProtocol? = nil) {
         LoggerInHouse.instance.log(message: "Init", event: .debug)
         self.context = context
         self.urlToReload = urlToReload
-        self.reachability = ReachabilityService(url: context.config.urlNetworkTesting,
-                                                timeoutURLSession: context.config.timeoutURLSession,
-                                                tiNetworkTesting: context.config.tiNetworkTesting,
-                                                networkIteration: context.config.networkIteration)
+        self.reachability = reachabilityService ?? ReachabilityService(config: context.config)
         setIsReachableCallBack(shouldPlaying: shouldPlaying)
         reachability.start()
     }

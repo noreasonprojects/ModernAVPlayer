@@ -59,7 +59,6 @@ final class ReachabilityServiceTests: QuickSpec {
         }
         
         describe("start service") {
-            
             it("should fire timer ") {
                 
                 // ACT
@@ -75,11 +74,8 @@ final class ReachabilityServiceTests: QuickSpec {
                     // ACT
                     self.tested.start()
                     let maxIterationAvailable = self.config.networkIteration
-                    var iteration = 0
-                    
-                    while iteration < maxIterationAvailable {
+                    (0..<maxIterationAvailable).forEach { _ in
                         self.mockTimerFactory.lastCompletion?()
-                        iteration += 1
                     }
                     
                     // ASSERT

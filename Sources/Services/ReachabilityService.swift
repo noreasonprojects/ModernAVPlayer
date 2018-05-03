@@ -24,7 +24,7 @@ public final class ReachabilityService: ReachabilityServiceProtocol {
     private var timer: TimerProtocol?
     private var tiNetworkTesting: TimeInterval
     private var networkTask: URLSessionDataTaskProtocol?
-    private var dataTaskFactory: URLSessionDataTaskFactoryProtocol
+    private let dataTaskFactory: URLSessionDataTaskFactoryProtocol
     private let timerFactory: TimerFactoryProtocol
 
     public var isReachable: ((Bool) -> Void)?

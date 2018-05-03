@@ -42,11 +42,26 @@ final class RouteAudioServiceTests: QuickSpec {
                 }
             }
             
-            context("invalid audio route changed reason") {
+            context("missing notification userinfo") {
                 it("should not update route changed") {
                     
                     // ARRANGE
-                    let info: [String: Any] = [AVAudioSessionRouteChangeReasonKey: 42]
+                    var notif = Notification(name: NSNotification.Name.AVAudioSessionRouteChange)
+                    notif.userInfo = nil
+                    
+                    // ACT
+                    NotificationCenter.default.post(notif)
+                    
+                    // ASSERT
+                    expect(self.routeChangedReason).to(beNil())
+                }
+            }
+            
+            context("invalid userinfo parameter") {
+                it("should not update route changed") {
+                    
+                    // ARRANGE
+                    let info: [String: String] = [AVAudioSessionRouteChangeReasonKey: "42"]
                     var notif = Notification(name: NSNotification.Name.AVAudioSessionRouteChange)
                     notif.userInfo = info
                     
@@ -57,6 +72,7 @@ final class RouteAudioServiceTests: QuickSpec {
                     expect(self.routeChangedReason).to(beNil())
                 }
             }
+
         }
     }
 }

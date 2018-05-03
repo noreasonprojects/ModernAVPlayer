@@ -17,15 +17,17 @@ public final class ItemPlaybackObservingService: ItemPlaybackObservingServicePro
     public var onPlayToEndTime: (() -> Void)?
     
     public init() {
-            NotificationCenter.default.addObserver(self, selector: #selector(ItemPlaybackObservingService.itemPlaybackStalled),
-                                                   name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: nil)
-            NotificationCenter.default.addObserver(self, selector: #selector(ItemPlaybackObservingService.itemPlayToEndTime),
-                                                   name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
-            NotificationCenter.default.addObserver(self, selector: #selector(ItemPlaybackObservingService.itemFailedToPlayToEndTime),
-                                                   name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: nil)
+        LoggerInHouse.instance.log(message: "Init", event: .debug)
+        NotificationCenter.default.addObserver(self, selector: #selector(ItemPlaybackObservingService.itemPlaybackStalled),
+                                               name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ItemPlaybackObservingService.itemPlayToEndTime),
+                                               name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ItemPlaybackObservingService.itemFailedToPlayToEndTime),
+                                               name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: nil)
     }
     
     deinit {
+        LoggerInHouse.instance.log(message: "Deinit", event: .debug)
         NotificationCenter.default.removeObserver(self,
                                                   name: NSNotification.Name.AVPlayerItemPlaybackStalled,
                                                   object: nil)

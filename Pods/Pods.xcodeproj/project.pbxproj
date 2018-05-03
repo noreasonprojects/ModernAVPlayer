@@ -130,6 +130,8 @@
 		D8C089853F5CFE08867AC41267400B1A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5D8173434FE00016739EAFDEFEA9313 /* Foundation.framework */; };
 		D9E62C41794D0B5D2CD68CA92C4BA836 /* mach_excServer.c in Sources */ = {isa = PBXBuildFile; fileRef = CE31CE7D8BD558E76797984F435D8C70 /* mach_excServer.c */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		DF026F6F406A4FB6CEA63B0A4B9E27DD /* AllPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F24AC07B43494547D3A11F865DD8BE4 /* AllPass.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
+		E1683B1A2099F3AC0041B0F8 /* TimerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1683B192099F3AC0041B0F8 /* TimerFactory.swift */; };
+		E1683B1E2099F5410041B0F8 /* URLSessionDataTaskFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1683B1D2099F5410041B0F8 /* URLSessionDataTaskFactory.swift */; };
 		E42130AE363861CB5B70DB230BCBA767 /* SetupCommandCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC751AE33B1390DEF33637280E75483 /* SetupCommandCenter.swift */; };
 		E9749F5110C1094FF698D5A8A7745209 /* ModernAVPlayer-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C580536D817E35A9C5EF95A354CFDC4D /* ModernAVPlayer-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EAAA05EBBC34225C0DB45797712E24A1 /* AsyncMatcherWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E0AA94CE0CAA49E486E888D98FE9E4 /* AsyncMatcherWrapper.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
@@ -326,6 +328,8 @@
 		DC8C0EB79EA71026266990B73441EC3C /* Pods-ModernAVPlayer_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ModernAVPlayer_Example-frameworks.sh"; sourceTree = "<group>"; };
 		DE4116E3C2565643F5E19784F9988AEE /* ToSucceed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ToSucceed.swift; path = Sources/Nimble/Matchers/ToSucceed.swift; sourceTree = "<group>"; };
 		DF1A286E22B74223EDAF748AA84E9B55 /* XCTestObservationCenter+Register.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "XCTestObservationCenter+Register.m"; path = "Sources/NimbleObjectiveC/XCTestObservationCenter+Register.m"; sourceTree = "<group>"; };
+		E1683B192099F3AC0041B0F8 /* TimerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerFactory.swift; sourceTree = "<group>"; };
+		E1683B1D2099F5410041B0F8 /* URLSessionDataTaskFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionDataTaskFactory.swift; sourceTree = "<group>"; };
 		E2A87D5E255A265D2589774D14E68CF1 /* Example.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Example.swift; path = Sources/Quick/Example.swift; sourceTree = "<group>"; };
 		E4E708E405F17F36516793443E2C60C2 /* Pods_ModernAVPlayer_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ModernAVPlayer_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5D8173434FE00016739EAFDEFEA9313 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
@@ -455,6 +459,8 @@
 				68E1B29DB3F5BCBD6CA1A62DFAD5F63D /* PlayerMedia.swift */,
 				816E39A1903BC9667F6C1A25F6B0C6D6 /* PlayerState.swift */,
 				FDC751AE33B1390DEF33637280E75483 /* SetupCommandCenter.swift */,
+				E1683B192099F3AC0041B0F8 /* TimerFactory.swift */,
+				E1683B1D2099F5410041B0F8 /* URLSessionDataTaskFactory.swift */,
 			);
 			name = Components;
 			path = Sources/Components;
@@ -1013,6 +1019,7 @@
 				F1DB92C43075D3EA1430119F67473A16 /* ItemStatusObservingService.swift in Sources */,
 				211454B85C2F96D2AC2ACCE09B84E000 /* LoadedState.swift in Sources */,
 				89FB6CE5415FCA51A881909914B88EAF /* LoadingMediaState.swift in Sources */,
+				E1683B1A2099F3AC0041B0F8 /* TimerFactory.swift in Sources */,
 				B2099594C2B1B9493982F9CDFCACB057 /* MediaType.swift in Sources */,
 				F8A42A158690683E7C60F8FC101922AF /* ModernAVPlayer-dummy.m in Sources */,
 				060732EAF9E903F9A0EA6482894AFD04 /* NowPlayingService.swift in Sources */,
@@ -1026,6 +1033,7 @@
 				E42130AE363861CB5B70DB230BCBA767 /* SetupCommandCenter.swift in Sources */,
 				66F0D7271F62B8A7E9653E38BE2A4269 /* StoppedState.swift in Sources */,
 				45D49A5D2093653500F63ACF /* ObservingRateService.swift in Sources */,
+				E1683B1E2099F5410041B0F8 /* URLSessionDataTaskFactory.swift in Sources */,
 				45D49A6120936C8F00F63ACF /* ItemPlaybackObservingService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

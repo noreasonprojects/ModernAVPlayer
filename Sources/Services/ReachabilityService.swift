@@ -8,32 +8,40 @@
 
 import Foundation
 
-final class ReachabilityService {
+public protocol ReachabilityServiceProtocol {
+    var isReachable: ((Bool) -> Void)? { get set }
+    
+    func start()
+}
+
+public final class ReachabilityService: ReachabilityServiceProtocol {
 
     // MARK: - Private vars
 
     private let url: URL
     private var networkIteration: UInt
     private let timeoutURLSession: TimeInterval
-    private var timer: Timer?
+    private var timer: TimerProtocol?
     private var tiNetworkTesting: TimeInterval
-    private var networkTask: URLSessionTask?
-    private var session: URLSession {
-        let config = URLSessionConfiguration.ephemeral
-        config.timeoutIntervalForRequest = timeoutURLSession
-        return URLSession(configuration: config)
-    }
+    private var networkTask: URLSessionDataTaskProtocol?
+    private let dataTaskFactory: URLSessionDataTaskFactoryProtocol
+    private let timerFactory: TimerFactoryProtocol
 
-    var isReachable: ((Bool) -> Void)?
+    public var isReachable: ((Bool) -> Void)?
 
     // MARK: - Init
 
-    init(url: URL, timeoutURLSession: TimeInterval, tiNetworkTesting: TimeInterval, networkIteration: UInt) {
+    init(config: ContextConfiguration,
+         dataTaskFactory: URLSessionDataTaskFactoryProtocol = URLSessionDataTaskFactory(),
+         timerFactory: TimerFactoryProtocol = TimerFactory()) {
         LoggerInHouse.instance.log(message: "Init", event: .debug)
-        self.url = url
-        self.timeoutURLSession = timeoutURLSession
-        self.tiNetworkTesting = tiNetworkTesting
-        self.networkIteration = networkIteration
+        
+        self.dataTaskFactory = dataTaskFactory
+        self.timerFactory = timerFactory
+        self.url = config.urlNetworkTesting
+        self.timeoutURLSession = config.timeoutURLSession
+        self.tiNetworkTesting = config.tiNetworkTesting
+        self.networkIteration = config.networkIteration
     }
 
     deinit {
@@ -44,8 +52,8 @@ final class ReachabilityService {
 
     // MARK: - Session & Task
 
-    func start() {
-        timer = Timer.scheduledTimer(withTimeInterval: tiNetworkTesting, repeats: true) { [weak self] _ in
+    public func start() {
+        timer = timerFactory.getTimer(timeInterval: tiNetworkTesting, repeats: true) { [weak self] in
             self?.setNetworkTask()
             self?.networkTask?.resume()
 
@@ -61,7 +69,7 @@ final class ReachabilityService {
 
     private func setNetworkTask() {
         networkTask?.cancel()
-        networkTask = session.dataTask(with: url) { [weak self] _, response, error in
+        networkTask = dataTaskFactory.getDataTask(with: url, timeout: timeoutURLSession) { [weak self] _, response, error in
             guard
                 error == nil,
                 let r = response as? HTTPURLResponse,

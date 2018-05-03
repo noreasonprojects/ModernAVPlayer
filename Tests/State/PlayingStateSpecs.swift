@@ -19,15 +19,19 @@ final class PlayingStateSpecs: QuickSpec {
     var itemPlaybackObservingService: MockItemPlaybackObservingService!
     var mockPlayer: MockCustomPlayer!
     var tested: ConcretePlayerContext!
+    var routeAudioService: RouteAudioService!
 
     override func spec() {
 
         beforeEach {
+            self.routeAudioService = RouteAudioService()
             self.mockPlayer = MockCustomPlayer.createOne(url: "foo")
             self.media = ConcretePlayerMedia(url: URL(string: "foo")!, type: .clip)
             self.itemPlaybackObservingService = MockItemPlaybackObservingService()
             self.tested = ConcretePlayerContext(player: self.mockPlayer)
-            self.playingState = PlayingState(context: self.tested, itemPlaybackObservingService: self.itemPlaybackObservingService)
+            self.playingState = PlayingState(context: self.tested,
+                                             itemPlaybackObservingService: self.itemPlaybackObservingService,
+                                             routeAudioService: self.routeAudioService)
             self.tested.state = self.playingState
         }
 
@@ -124,6 +128,7 @@ final class PlayingStateSpecs: QuickSpec {
                     expect(self.tested.state).to(beAnInstanceOf(StoppedState.self))
                 }
             }
+            
             context("currentTime is equal duration") {
                 it("should update state context to Stopped") {
                     
@@ -138,6 +143,7 @@ final class PlayingStateSpecs: QuickSpec {
                     expect(self.tested.state).to(beAnInstanceOf(StoppedState.self))
                 }
             }
+            
             context("currentTime is less than duration") {
                 it("should update state context to Failed") {
                     
@@ -150,6 +156,72 @@ final class PlayingStateSpecs: QuickSpec {
                     
                     // ASSERT
                     expect(self.tested.state).to(beAnInstanceOf(FailedState.self))
+                }
+            }
+        }
+        
+        describe("route audio session changed") {
+            context("new category set") {
+                it("should pause the player") {
+                    
+                    // ARRANGE
+                    let info: [String: UInt] = [AVAudioSessionRouteChangeReasonKey: AVAudioSessionRouteChangeReason.categoryChange.rawValue]
+                    var notif = Notification(name: NSNotification.Name.AVAudioSessionRouteChange)
+                    notif.userInfo = info
+                    
+                    // ACT
+                    NotificationCenter.default.post(notif)
+                    
+                    // ASSERT
+                    expect(self.tested.state).to(beAnInstanceOf(PausedState.self))
+                }
+            }
+            
+            context("device is unplugged") {
+                it("should pause the player") {
+                    
+                    // ARRANGE
+                    let info: [String: UInt] = [AVAudioSessionRouteChangeReasonKey: AVAudioSessionRouteChangeReason.oldDeviceUnavailable.rawValue]
+                    var notif = Notification(name: NSNotification.Name.AVAudioSessionRouteChange)
+                    notif.userInfo = info
+                    
+                    // ACT
+                    NotificationCenter.default.post(notif)
+                    
+                    // ASSERT
+                    expect(self.tested.state).to(beAnInstanceOf(PausedState.self))
+                }
+            }
+            
+            context("unknown reason") {
+                it("should pause the player") {
+                    
+                    // ARRANGE
+                    let info: [String: UInt] = [AVAudioSessionRouteChangeReasonKey: AVAudioSessionRouteChangeReason.unknown.rawValue]
+                    var notif = Notification(name: NSNotification.Name.AVAudioSessionRouteChange)
+                    notif.userInfo = info
+                    
+                    // ACT
+                    NotificationCenter.default.post(notif)
+                    
+                    // ASSERT
+                    expect(self.tested.state).to(beAnInstanceOf(PausedState.self))
+                }
+            }
+            
+            context("device is plugged") {
+                it("should stay in playing mode") {
+                    
+                    // ARRANGE
+                    let info: [String: UInt] = [AVAudioSessionRouteChangeReasonKey: AVAudioSessionRouteChangeReason.newDeviceAvailable.rawValue]
+                    var notif = Notification(name: NSNotification.Name.AVAudioSessionRouteChange)
+                    notif.userInfo = info
+                    
+                    // ACT
+                    NotificationCenter.default.post(notif)
+                    
+                    // ASSERT
+                    expect(self.tested.state).to(beIdenticalTo(self.playingState))
                 }
             }
         }

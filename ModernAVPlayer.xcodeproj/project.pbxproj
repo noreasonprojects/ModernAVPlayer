@@ -36,6 +36,7 @@
 		E16368B42097610900E69DAB /* MockDataTaskFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16368B32097610900E69DAB /* MockDataTaskFactory.swift */; };
 		E16368B62097654E00E69DAB /* MockTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16368B52097654E00E69DAB /* MockTimer.swift */; };
 		E1683B1C2099F48D0041B0F8 /* MockURLSessionDataTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1683B1B2099F48D0041B0F8 /* MockURLSessionDataTask.swift */; };
+		E1A4C32E209B06F1000580F5 /* RouteAudioServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A4C32D209B06F1000580F5 /* RouteAudioServiceTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +86,7 @@
 		E16368B32097610900E69DAB /* MockDataTaskFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDataTaskFactory.swift; sourceTree = "<group>"; };
 		E16368B52097654E00E69DAB /* MockTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTimer.swift; sourceTree = "<group>"; };
 		E1683B1B2099F48D0041B0F8 /* MockURLSessionDataTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLSessionDataTask.swift; sourceTree = "<group>"; };
+		E1A4C32D209B06F1000580F5 /* RouteAudioServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteAudioServiceTests.swift; sourceTree = "<group>"; };
 		FB1C104CD10D29DEB562AF28 /* Pods-ModernAVPlayer_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ModernAVPlayer_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ModernAVPlayer_Tests/Pods-ModernAVPlayer_Tests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -113,6 +115,7 @@
 			children = (
 				45494C7A209378B2005C3DE2 /* ItemPlaybackObservingServiceTests.swift */,
 				E16368B12097572E00E69DAB /* ReachabilityServiceTests.swift */,
+				E1A4C32D209B06F1000580F5 /* RouteAudioServiceTests.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -504,6 +507,7 @@
 				E152D520207A45A100E0347C /* MockAVAsset.swift in Sources */,
 				E152D531207A472500E0347C /* BufferingStateSpecs.swift in Sources */,
 				45494C7B209378B3005C3DE2 /* ItemPlaybackObservingServiceTests.swift in Sources */,
+				E1A4C32E209B06F1000580F5 /* RouteAudioServiceTests.swift in Sources */,
 				E152D522207A45A100E0347C /* MockCustomPlayer.swift in Sources */,
 				E152D533207A472500E0347C /* InitStateSpecs.swift in Sources */,
 				E16368B42097610900E69DAB /* MockDataTaskFactory.swift in Sources */,

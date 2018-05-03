@@ -14,19 +14,24 @@ public final class PlayingState: PlayerState {
     public unowned var context: PlayerContext
     private var timerObserver: Any?
     private var itemPlaybackObservingService: ItemPlaybackObservingServiceProtocol
+    private var routeAudioService: RouteAudioService
     
     // MARK: - Lifecycle
 
     public init(context: PlayerContext,
-                itemPlaybackObservingService: ItemPlaybackObservingServiceProtocol = ItemPlaybackObservingService()) {
+                itemPlaybackObservingService: ItemPlaybackObservingServiceProtocol = ItemPlaybackObservingService(),
+                routeAudioService: RouteAudioService = RouteAudioService()) {
+        
         LoggerInHouse.instance.log(message: "Init", event: .debug)
         self.context = context
         self.itemPlaybackObservingService = itemPlaybackObservingService
+        self.routeAudioService = routeAudioService
         stopBgTask(context: context)
         setTimerObserver()
         
         self.itemPlaybackObservingService.onPlaybackStalled = { [weak self] in self?.playbackStalled() }
         self.itemPlaybackObservingService.onPlayToEndTime = { [weak self] in self?.playToEndTime() }
+        self.routeAudioService.onRouteChanged = { [weak self] in self?.routeAudioChanged(reason: $0) }
     }
 
     deinit {
@@ -111,5 +116,14 @@ public final class PlayingState: PlayerState {
         guard roundedCurrentTime >= duration
             else { self.playbackStalled(); return }
         context.changeState(state: StoppedState(context: context))
+    }
+    
+    private func routeAudioChanged(reason: AVAudioSessionRouteChangeReason) {
+        switch reason {
+        case .oldDeviceUnavailable, .categoryChange, .unknown:
+            context.changeState(state: PausedState(context: context))
+        case .newDeviceAvailable, .wakeFromSleep, .override, .noSuitableRouteForCategory, .routeConfigurationChange:
+            break
+        }
     }
 }

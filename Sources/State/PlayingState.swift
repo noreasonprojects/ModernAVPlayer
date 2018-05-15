@@ -15,23 +15,27 @@ public final class PlayingState: PlayerState {
     private var timerObserver: Any?
     private var itemPlaybackObservingService: ItemPlaybackObservingServiceProtocol
     private var routeAudioService: RouteAudioService
+    private var interruptionAudioService: InterruptionAudioService
     
     // MARK: - Lifecycle
 
     public init(context: PlayerContext,
                 itemPlaybackObservingService: ItemPlaybackObservingServiceProtocol = ItemPlaybackObservingService(),
-                routeAudioService: RouteAudioService = RouteAudioService()) {
+                routeAudioService: RouteAudioService = RouteAudioService(),
+                interruptionAudioService: InterruptionAudioService = InterruptionAudioService()) {
         
         LoggerInHouse.instance.log(message: "Init", event: .debug)
         self.context = context
         self.itemPlaybackObservingService = itemPlaybackObservingService
         self.routeAudioService = routeAudioService
+        self.interruptionAudioService = interruptionAudioService
         stopBgTask(context: context)
         setTimerObserver()
         
         self.itemPlaybackObservingService.onPlaybackStalled = { [weak self] in self?.playbackStalled() }
         self.itemPlaybackObservingService.onPlayToEndTime = { [weak self] in self?.playToEndTime() }
         self.routeAudioService.onRouteChanged = { [weak self] in self?.routeAudioChanged(reason: $0) }
+        setupInterruptionCallback()
     }
 
     deinit {
@@ -124,6 +128,13 @@ public final class PlayingState: PlayerState {
             context.changeState(state: PausedState(context: context))
         case .newDeviceAvailable, .wakeFromSleep, .override, .noSuitableRouteForCategory, .routeConfigurationChange:
             break
+        }
+    }
+    
+    private func setupInterruptionCallback() {
+        interruptionAudioService.onInterruption = { [weak self] interruptionType in
+            guard interruptionType == .began else { return }
+            self?.pause()
         }
     }
 }

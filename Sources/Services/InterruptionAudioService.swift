@@ -8,7 +8,7 @@
 import AVFoundation
 import Foundation
 
-final class InterruptionAudioService {
+public final class InterruptionAudioService {
     
     private let notificationName = Notification.Name.AVAudioSessionInterruption
     public var onInterruption: ((AVAudioSessionInterruptionType) -> Void)?

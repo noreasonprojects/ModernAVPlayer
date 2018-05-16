@@ -23,7 +23,7 @@ PlayerContextDelegate {
     }
     
     public static func registerKnownImplementations() {
-        self.register { RxPlayerContextDelegateProxy(playerContext: $0) }
+        register { RxPlayerContextDelegateProxy(playerContext: $0) }
     }
     
     // MARK: - Proxy Subjects
@@ -59,10 +59,10 @@ PlayerContextDelegate {
     // MARK: - Deinit
     
     deinit {
-        self.stateSubject.on(.completed)
-        self.currentTimeSubject.on(.completed)
-        self.itemDurationSubject.on(.completed)
-        self.debugMessageSubject.on(.completed)
-        self.currentItemUrlSubject.on(.completed)
+        stateSubject.on(.completed)
+        currentTimeSubject.on(.completed)
+        itemDurationSubject.on(.completed)
+        debugMessageSubject.on(.completed)
+        currentItemUrlSubject.on(.completed)
     }
 }

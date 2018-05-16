@@ -12,7 +12,6 @@ public enum CustomError: Error {
     case itemFailedWhenLoading
     case itemPlaybackStalled
     case buffering
-    case activeAudioSessionFailed
 }
 
 extension CustomError: LocalizedError {
@@ -24,8 +23,6 @@ extension CustomError: LocalizedError {
             return "item playback stalled"
         case .buffering:
             return "buffering failed"
-        case .activeAudioSessionFailed:
-            return "active audio session failed"
         }
     }
 }

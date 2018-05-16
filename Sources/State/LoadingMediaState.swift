@@ -22,35 +22,57 @@ public final class LoadingMediaState: PlayerState {
     private let url: URL?
     private let lastKnownPosition: CMTime?
     private var itemStatusObserving: ItemStatusObservingService?
+    private var interruptionAudioService: InterruptionAudioService
 
     // MARK: - Init
     
-    public init(context: PlayerContext, itemUrl: URL, shouldPlaying: Bool, lastPosition: CMTime?) {
+    public init(context: PlayerContext,
+                itemUrl: URL,
+                shouldPlaying: Bool,
+                lastPosition: CMTime?,
+                interruptionAudioService: InterruptionAudioService = InterruptionAudioService()) {
         LoggerInHouse.instance.log(message: "Init", event: .debug)
         self.context = context
         self.shouldPlaying = shouldPlaying
         self.media = nil
         self.url = itemUrl
         self.lastKnownPosition = lastPosition
+        self.interruptionAudioService = interruptionAudioService
 
+        context.audioSessionType.active { _ in }
+        
+        setupInterruptionCallback()
         startBgTask(context: context)
         createReplaceItem(url: itemUrl)
     }
 
-    public init(context: PlayerContext, media: PlayerMedia, shouldPlaying: Bool) {
+    public init(context: PlayerContext,
+                media: PlayerMedia,
+                shouldPlaying: Bool,
+                interruptionAudioService: InterruptionAudioService = InterruptionAudioService()) {
         LoggerInHouse.instance.log(message: "Init", event: .debug)
         self.context = context
         self.shouldPlaying = shouldPlaying
         self.media = media
         self.url = nil
         self.lastKnownPosition = nil
-
+        self.interruptionAudioService = interruptionAudioService
+        
+        context.audioSessionType.active { _ in }
+        
+        setupInterruptionCallback()
         startBgTask(context: context)
         createReplaceItem(url: media.url)
     }
 
     deinit {
         LoggerInHouse.instance.log(message: "Deinit", event: .debug)
+    }
+    
+    private func setupInterruptionCallback() {
+        interruptionAudioService.onInterruption = { [weak self] _ in
+            self?.pause()
+        }
     }
 
     // MARK: - Shared actions

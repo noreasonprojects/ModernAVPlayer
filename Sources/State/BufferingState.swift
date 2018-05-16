@@ -48,21 +48,8 @@ public final class BufferingState: NSObject, PlayerState {
     // MARK: - Player Commands
 
     func playCommand() {
-        context.audioSessionType.active { [weak self] completed in
-            if completed {
-                self?.observingRateService.start()
-                self?.context.player.play()
-            } else {
-                guard
-                    let strongSelf = self,
-                    let url = (strongSelf.context.player.currentItem?.asset as? AVURLAsset)?.url
-                    else { fatalError("player current item is missing") }
-                strongSelf.context.changeState(state: FailedState(context: strongSelf.context,
-                                                                  urlToReload: url,
-                                                                  shouldPlaying: true,
-                                                                  error: .activeAudioSessionFailed))
-            }
-        }
+        observingRateService.start()
+        context.player.play()
     }
 
     func seekCommand(position: Double) {

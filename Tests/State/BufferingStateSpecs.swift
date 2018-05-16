@@ -51,66 +51,44 @@ final class BufferingStateSpecs: QuickSpec {
         }
         
         context("playCommand") {
-            context("when active session has failed") {
-                it("should not update state context") {
-                    
-                    // ARRANGE
-                    let item = MockPlayerItem.createOne(url: "hello")
-                    self.mockPlayer.overrideCurrentItem = item
+            it("should launch player play command") {
+                
+                // ACT
+                self.bufferingState.playCommand()
+                
+                // ASSERT
+                expect(self.mockPlayer.playCallCount).to(equal(1))
+            }
+            it("should start observingRateService") {
+                
+                // ACT
+                self.bufferingState.playCommand()
+                
+                // ASSERT
+                expect(self.mockRateService.startCallCount).to(equal(1))
+            }
+            context("when observingRateService timeouted") {
+                it("should update context state to Failed") {
                     
                     // ACT
                     self.bufferingState.playCommand()
-                    MockAudioSession.activeLastCompletion?(false)
+                    self.mockRateService.onTimeout?()
                     
                     // ASSERT
                     expect(self.tested.state).to(beAnInstanceOf(FailedState.self))
                 }
             }
-            context("when active session has succeed") {
-                it("should launch player play command") {
+            
+            context("when observingRateService detects player playing") {
+                it("should update context state to Playing") {
                     
                     // ACT
                     self.bufferingState.playCommand()
-                    MockAudioSession.activeLastCompletion?(true)
+                    self.mockRateService.onPlaying?()
                     
                     // ASSERT
-                    expect(self.mockPlayer.playCallCount).to(equal(1))
+                    expect(self.tested.state).to(beAnInstanceOf(PlayingState.self))
                 }
-                it("should start observingRateService") {
-                    
-                    // ACT
-                    self.bufferingState.playCommand()
-                    MockAudioSession.activeLastCompletion?(true)
-                    
-                    // ASSERT
-                    expect(self.mockRateService.startCallCount).to(equal(1))
-                }
-                context("when observingRateService timeouted") {
-                    it("should update context state to Failed") {
-
-                        // ACT
-                        self.bufferingState.playCommand()
-                        MockAudioSession.activeLastCompletion?(true)
-                        self.mockRateService.onTimeout?()
-
-                        // ASSERT
-                        expect(self.tested.state).to(beAnInstanceOf(FailedState.self))
-                    }
-                }
-                
-                context("when observingRateService detects player playing") {
-                    it("should update context state to Playing") {
-                        
-                        // ACT
-                        self.bufferingState.playCommand()
-                        MockAudioSession.activeLastCompletion?(true)
-                        self.mockRateService.onPlaying?()
-                        
-                        // ASSERT
-                        expect(self.tested.state).to(beAnInstanceOf(PlayingState.self))
-                    }
-                }
-
             }
         }
 

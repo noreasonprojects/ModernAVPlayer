@@ -116,8 +116,8 @@
 		432D74B61C0AA6EA41AE2001039226D4 /* Platform.Darwin.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3160EBB80E2F60D07A7E99E0C62A95 /* Platform.Darwin.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		4421B0F73EDE42467457515B5B95EDC8 /* _RXObjCRuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = FE5134512ABBB2F29F89F441E2121A2B /* _RXObjCRuntime.m */; };
 		44312AE3B3A03065F87BE60B8FAF1818 /* RxTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2300BCBD63A5D44E6115F81415CC21CD /* RxTarget.swift */; };
-		4538CB3020AC33A10072E634 /* PlayerContextDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4538CB2E20AC33A10072E634 /* PlayerContextDelegateProxy.swift */; };
-		4538CB3120AC33A10072E634 /* ConcretePlayerContext+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4538CB2F20AC33A10072E634 /* ConcretePlayerContext+Rx.swift */; };
+		4538CB3620AC84940072E634 /* PlayerContextDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4538CB3420AC84940072E634 /* PlayerContextDelegateProxy.swift */; };
+		4538CB3720AC84940072E634 /* ConcretePlayerContext+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4538CB3520AC84940072E634 /* ConcretePlayerContext+Rx.swift */; };
 		45F183320C688F9978649F30ABE21D09 /* MatchError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E88095E18A6D57C37E1D9F8DCB03E5 /* MatchError.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		48A562F851D4CE471D4650724B36EFC8 /* ControlEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071C9566DCF5910EB9856BDB84251C65 /* ControlEvent.swift */; };
 		48C4B8286669B1A6CF416C58DF405736 /* HooksPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370493815E0BAD0086303DE7860ABCA9 /* HooksPhase.swift */; };
@@ -603,8 +603,8 @@
 		433D6F464DF5553729C2E50AE1507E33 /* RxSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RxSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		435A62BD15436900F4212821F617315A /* Errors.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Errors.swift; path = RxSwift/Errors.swift; sourceTree = "<group>"; };
 		447FAE7EBF6DCB4E7AFFE194846238A1 /* UIRefreshControl+Rx.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIRefreshControl+Rx.swift"; path = "RxCocoa/iOS/UIRefreshControl+Rx.swift"; sourceTree = "<group>"; };
-		4538CB2E20AC33A10072E634 /* PlayerContextDelegateProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerContextDelegateProxy.swift; path = ../Sources/RxModernAVPlayer/PlayerContextDelegateProxy.swift; sourceTree = "<group>"; };
-		4538CB2F20AC33A10072E634 /* ConcretePlayerContext+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "ConcretePlayerContext+Rx.swift"; path = "../Sources/RxModernAVPlayer/ConcretePlayerContext+Rx.swift"; sourceTree = "<group>"; };
+		4538CB3420AC84940072E634 /* PlayerContextDelegateProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerContextDelegateProxy.swift; sourceTree = "<group>"; };
+		4538CB3520AC84940072E634 /* ConcretePlayerContext+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ConcretePlayerContext+Rx.swift"; sourceTree = "<group>"; };
 		456908800366EE12014F20EA043FA34A /* NimbleEnvironment.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NimbleEnvironment.swift; path = Sources/Nimble/Adapters/NimbleEnvironment.swift; sourceTree = "<group>"; };
 		45D603090094A2AA235EEFE15222CBF3 /* CwlBadInstructionException.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CwlBadInstructionException.swift; path = Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPreconditionTesting/CwlBadInstructionException.swift; sourceTree = "<group>"; };
 		4707964455AE3150EB866D27A1ED2730 /* SatisfyAnyOf.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SatisfyAnyOf.swift; path = Sources/Nimble/Matchers/SatisfyAnyOf.swift; sourceTree = "<group>"; };
@@ -737,7 +737,7 @@
 		92FEC2C5D82C259B541D394DF7EE1F32 /* BeCloseTo.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BeCloseTo.swift; path = Sources/Nimble/Matchers/BeCloseTo.swift; sourceTree = "<group>"; };
 		930B5F9891D208DFC6E4EB53FF95C45F /* Bag+Rx.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Bag+Rx.swift"; path = "RxSwift/Extensions/Bag+Rx.swift"; sourceTree = "<group>"; };
 		935DF8BD405F0F3B314F5DA2522477D7 /* Platform.Darwin.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Platform.Darwin.swift; path = Platform/Platform.Darwin.swift; sourceTree = "<group>"; };
-		936EAC3ECCEF99E0A7C72E75F52411EC /* ConcretePlayerContext.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConcretePlayerContext.swift; path = Sources/Core/ConcretePlayerContext.swift; sourceTree = "<group>"; };
+		936EAC3ECCEF99E0A7C72E75F52411EC /* ConcretePlayerContext.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ConcretePlayerContext.swift; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		94BF3E54F54D51BC23C862C0EC4BC30E /* ObserverBase.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ObserverBase.swift; path = RxSwift/Observers/ObserverBase.swift; sourceTree = "<group>"; };
 		952FA7B50EAE8D4E745D0F9BF003E502 /* SchedulerType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SchedulerType.swift; path = RxSwift/SchedulerType.swift; sourceTree = "<group>"; };
@@ -1101,8 +1101,7 @@
 				9D47C3ACB454C2AE3FE1BF0F78AE9C28 /* ReachabilityService.swift */,
 				8AF2B78D8855FA4B6A3356BE18871BC9 /* RouteAudioService.swift */,
 			);
-			name = Services;
-			path = Sources/Core/Services;
+			path = Services;
 			sourceTree = "<group>";
 		};
 		28EEFF5661ABF9FF26EE34B8A68F23F8 /* Components */ = {
@@ -1118,8 +1117,7 @@
 				74575116E26BD32C2759881A1693AB11 /* TimerFactory.swift */,
 				E96B37D36D9EAABC7AF9BCB4A056F250 /* URLSessionDataTaskFactory.swift */,
 			);
-			name = Components;
-			path = Sources/Core/Components;
+			path = Components;
 			sourceTree = "<group>";
 		};
 		29ED7ABDEDA809F24AA87020069FA46D /* SwiftLint */ = {
@@ -1155,11 +1153,11 @@
 		4538CB3220AC33A90072E634 /* RxModernAVPlayer */ = {
 			isa = PBXGroup;
 			children = (
-				4538CB2F20AC33A10072E634 /* ConcretePlayerContext+Rx.swift */,
-				4538CB2E20AC33A10072E634 /* PlayerContextDelegateProxy.swift */,
+				4538CB3520AC84940072E634 /* ConcretePlayerContext+Rx.swift */,
+				4538CB3420AC84940072E634 /* PlayerContextDelegateProxy.swift */,
 			);
 			name = RxModernAVPlayer;
-			path = "New Group";
+			path = Sources/RxModernAVPlayer;
 			sourceTree = "<group>";
 		};
 		4BD3F180853701469E70BCAB8D933A73 /* ModernAVPlayer */ = {
@@ -1488,6 +1486,7 @@
 				AF792691B1E3CBAFF8EF98CD61CA169C /* State */,
 			);
 			name = Core;
+			path = Sources/Core;
 			sourceTree = "<group>";
 		};
 		76A5EF3C692678CF8D896C39827A325A /* Pods-ModernAVPlayer_Example */ = {
@@ -1560,8 +1559,7 @@
 				9619B7C2CEF397C3B58A212ACE8E6A11 /* PlayingState.swift */,
 				10206AFCF637439C9FB7E63062FEC353 /* StoppedState.swift */,
 			);
-			name = State;
-			path = Sources/Core/State;
+			path = State;
 			sourceTree = "<group>";
 		};
 		C82D2A8D59149FA57483637E06A4E842 /* iOS */ = {
@@ -2305,8 +2303,8 @@
 				D24C1EAAD66DDAF62A43715E37EEDBC5 /* ModernAVPlayer-dummy.m in Sources */,
 				3E1104B4100CBAE8B9202F90A5ADD7F9 /* NowPlayingService.swift in Sources */,
 				D1C038ED7101B6EDC51929D230902560 /* ObservingRateService.swift in Sources */,
-				4538CB3120AC33A10072E634 /* ConcretePlayerContext+Rx.swift in Sources */,
-				4538CB3020AC33A10072E634 /* PlayerContextDelegateProxy.swift in Sources */,
+				4538CB3720AC84940072E634 /* ConcretePlayerContext+Rx.swift in Sources */,
+				4538CB3620AC84940072E634 /* PlayerContextDelegateProxy.swift in Sources */,
 				B99BFB8B0D355E9C56119062B9DFA3CB /* PausedState.swift in Sources */,
 				8787DBC48FFBC864DB59331A8C4BBA70 /* PlayerContext.swift in Sources */,
 				C767EB9D352FA8825E8B32E07CAEA375 /* PlayerMedia.swift in Sources */,

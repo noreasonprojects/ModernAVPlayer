@@ -10,7 +10,7 @@
 import RxCocoa
 import RxSwift
 
-extension Reactive where Base: ConcretePlayerContext {
+public extension Reactive where Base: ConcretePlayerContext {
 
     var delegate: DelegateProxy<ConcretePlayerContext, PlayerContextDelegate> {
         return RxPlayerContextDelegateProxy.proxy(for: base)

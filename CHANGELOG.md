@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 	* Add Logger
 	* Manage audio route changes
 	* Enable audio background mode
+	* Add RxModernAVPlayer Pod Subspec
 * Fixes:
 	* Fix commented unit tests
 	* Separate rate observing service

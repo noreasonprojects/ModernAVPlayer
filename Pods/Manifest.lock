@@ -1,13 +1,23 @@
 PODS:
-  - ModernAVPlayer (0.9.0)
+  - ModernAVPlayer/Core (0.9.0)
+  - ModernAVPlayer/RxSwift (0.9.0):
+    - ModernAVPlayer/Core
+    - RxCocoa (~> 4.0)
+    - RxSwift (~> 4.0)
   - Nimble (7.0.3)
   - Quick (1.2.0)
+  - RxCocoa (4.1.2):
+    - RxSwift (~> 4.0)
+  - RxSwift (4.1.2)
   - SwiftLint (0.25.0)
 
 DEPENDENCIES:
-  - ModernAVPlayer (from `.`)
+  - ModernAVPlayer/Core (from `.`)
+  - ModernAVPlayer/RxSwift (from `.`)
   - Nimble (= 7.0.3)
   - Quick (= 1.2.0)
+  - RxCocoa (~> 4.0)
+  - RxSwift (~> 4.0)
   - SwiftLint (= 0.25.0)
 
 EXTERNAL SOURCES:
@@ -15,11 +25,13 @@ EXTERNAL SOURCES:
     :path: .
 
 SPEC CHECKSUMS:
-  ModernAVPlayer: 20b901f31e084922945700b6a726e990ad338c7f
+  ModernAVPlayer: 20b76a3961ec05d5ba8c2232353fa7acc7c4136c
   Nimble: 7f5a9c447a33002645a071bddafbfb24ea70e0ac
   Quick: 58d203b1c5e27fff7229c4c1ae445ad7069a7a08
+  RxCocoa: d88ba0f1f6abf040011a9eb4b539324fc426843a
+  RxSwift: e49536837d9901277638493ea537394d4b55f570
   SwiftLint: e14651157288e9e01d6e1a71db7014fb5744a8ea
 
-PODFILE CHECKSUM: dd6a4bc49252f3b0ebbc19b95bbb55d8f73af19d
+PODFILE CHECKSUM: 69d7d2aa260eebfcb1203dca9a775cae98687c59
 
 COCOAPODS: 1.4.0

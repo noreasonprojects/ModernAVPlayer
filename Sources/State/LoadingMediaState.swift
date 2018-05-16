@@ -39,7 +39,7 @@ public final class LoadingMediaState: PlayerState {
         self.lastKnownPosition = lastPosition
         self.interruptionAudioService = interruptionAudioService
 
-        context.audioSessionType.active { _ in }
+        context.audioSessionType.activate()
         
         setupInterruptionCallback()
         startBgTask(context: context)
@@ -58,7 +58,7 @@ public final class LoadingMediaState: PlayerState {
         self.lastKnownPosition = nil
         self.interruptionAudioService = interruptionAudioService
         
-        context.audioSessionType.active { _ in }
+        context.audioSessionType.activate()
         
         setupInterruptionCallback()
         startBgTask(context: context)

@@ -46,7 +46,7 @@ final class LoadingMediaStateSpecs: QuickSpec {
             }
             
            it("should active audio session") {
-                expect(MockAudioSession.activeCallCount).to(equal(1))
+                expect(MockAudioSession.activateCallCount).to(equal(1))
             }
         }
         

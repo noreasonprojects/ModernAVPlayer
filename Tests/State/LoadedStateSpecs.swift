@@ -65,7 +65,6 @@ final class LoadedStateSpecs: QuickSpec {
                 
                 // ACT
                 self.loadedState.play()
-                MockAudioSession.activeLastCompletion?(true)
                 
                 // ASSERT
                 guard let player = self.tested.player as? MockCustomPlayer

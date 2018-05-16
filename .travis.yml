@@ -6,5 +6,5 @@ install:
 
 script:
   - set -eo pipefail
-  - Pods/SwiftLint/swiftlint
+  - Pods/SwiftLint/swiftlint --strict
   - xcodebuild test -workspace ModernAVPlayer.xcworkspace -scheme ModernAVPlayer-Example -destination "platform=iOS Simulator,name=iPhone 7" | xcpretty -f `xcpretty-travis-formatter`

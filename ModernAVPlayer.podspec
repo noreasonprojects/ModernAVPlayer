@@ -9,8 +9,20 @@ ModernAVPlayer is an ongoing project that aims to create a more usable audio vid
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'raphael ankierman' => 'raphrel@gmail.com' }
   s.source           = { :git => 'https://github.com/raphrel/ModernAVPlayer.git', :tag => s.version.to_s }
+  s.default_subspec  = 'Core'
 
   s.ios.deployment_target = '10.0'
   s.swift_version = '4.0'
-  s.source_files = 'Sources/**/*'
+
+  s.subspec 'Core' do |core|
+    core.source_files = 'Sources/Core/**/*'
+  end
+
+  s.subspec 'RxSwift' do |ss|
+    ss.dependency 'ModernAVPlayer/Core'
+    ss.dependency "RxSwift", "~> 4.0"
+    ss.dependency "RxCocoa", "~> 4.0"
+    ss.source_files = 'Sources/RxModernAVPlayer/**/*'
+  end
+
 end

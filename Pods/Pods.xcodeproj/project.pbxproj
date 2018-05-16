@@ -35,8 +35,6 @@
 		3E04D23B2995705A6106D41F3E3E4E33 /* ExpectationMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8281D14B3039A8B628B9C06DA9CAAF5 /* ExpectationMessage.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		41C783192F7ECD485C8C6384D30CBF11 /* CwlDarwinDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB42395F16349C1BE2F394E21D08D87 /* CwlDarwinDefinitions.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		42EAAE8CFB95F2352FCE036F263263E1 /* CwlCatchException.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13801553192E3EEE3D2B54CF494CB5B7 /* CwlCatchException.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
-		4518F62B20AC8EEE0082873C /* ConcretePlayerContext+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4518F62A20AC8EEE0082873C /* ConcretePlayerContext+Rx.swift */; };
-		4518F62D20AC8F1B0082873C /* PlayerContextDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4518F62C20AC8F1B0082873C /* PlayerContextDelegateProxy.swift */; };
 		45D49A5B2093630700F63ACF /* LoggerInHouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D49A5A2093630700F63ACF /* LoggerInHouse.swift */; };
 		45D49A5D2093653500F63ACF /* ObservingRateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D49A5C2093653500F63ACF /* ObservingRateService.swift */; };
 		45D49A6120936C8F00F63ACF /* ItemPlaybackObservingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D49A6020936C8F00F63ACF /* ItemPlaybackObservingService.swift */; };
@@ -220,8 +218,8 @@
 		422CF13F0E38A18AB13DC2B4581080C3 /* Nimble.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Nimble.modulemap; sourceTree = "<group>"; };
 		4262609B5198835C85CED9DAD193180D /* Nimble-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Nimble-dummy.m"; sourceTree = "<group>"; };
 		4393FC33BD900B91C770D535601D30DF /* Quick-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Quick-umbrella.h"; sourceTree = "<group>"; };
-		4518F62A20AC8EEE0082873C /* ConcretePlayerContext+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ConcretePlayerContext+Rx.swift"; path = "../Sources/ConcretePlayerContext+Rx.swift"; sourceTree = "<group>"; };
-		4518F62C20AC8F1B0082873C /* PlayerContextDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlayerContextDelegateProxy.swift; path = ../Sources/PlayerContextDelegateProxy.swift; sourceTree = "<group>"; };
+		4518F62A20AC8EEE0082873C /* ConcretePlayerContext+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ConcretePlayerContext+Rx.swift"; path = "../Sources/RxModernAVPlayer/ConcretePlayerContext+Rx.swift"; sourceTree = "<group>"; };
+		4518F62C20AC8F1B0082873C /* PlayerContextDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlayerContextDelegateProxy.swift; path = ../Sources/RxModernAVPlayer/PlayerContextDelegateProxy.swift; sourceTree = "<group>"; };
 		45CBFC78ACD288D66318E5A45D9A64AC /* PostNotification.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PostNotification.swift; path = Sources/Nimble/Matchers/PostNotification.swift; sourceTree = "<group>"; };
 		45D49A5A2093630700F63ACF /* LoggerInHouse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggerInHouse.swift; sourceTree = "<group>"; };
 		45D49A5C2093653500F63ACF /* ObservingRateService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservingRateService.swift; sourceTree = "<group>"; };
@@ -1050,10 +1048,8 @@
 				E1683B1A2099F3AC0041B0F8 /* TimerFactory.swift in Sources */,
 				B2099594C2B1B9493982F9CDFCACB057 /* MediaType.swift in Sources */,
 				F8A42A158690683E7C60F8FC101922AF /* ModernAVPlayer-dummy.m in Sources */,
-				4518F62D20AC8F1B0082873C /* PlayerContextDelegateProxy.swift in Sources */,
 				060732EAF9E903F9A0EA6482894AFD04 /* NowPlayingService.swift in Sources */,
 				E1272946209B5FEE007583DB /* InterruptionAudioService.swift in Sources */,
-				4518F62B20AC8EEE0082873C /* ConcretePlayerContext+Rx.swift in Sources */,
 				24D888BDB28FBDECBA0D0B5298C502E3 /* PausedState.swift in Sources */,
 				8FC1D3675D2DFE218FAFA61E5388AB54 /* PlayerContext.swift in Sources */,
 				0B4A6BE1E2507EB874766E0CB4835099 /* PlayerMedia.swift in Sources */,

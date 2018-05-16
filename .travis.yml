@@ -2,9 +2,11 @@ language: objective-c
 osx_image: xcode9.3
 
 install:
+  - bundle install
   - gem install xcpretty-travis-formatter
 
 script:
   - set -eo pipefail
+  - bundle exec pod lib lint --allow-warnings
   - Pods/SwiftLint/swiftlint --strict
   - xcodebuild test -workspace ModernAVPlayer.xcworkspace -scheme ModernAVPlayer-Example -destination "platform=iOS Simulator,name=iPhone 7" | xcpretty -f `xcpretty-travis-formatter`

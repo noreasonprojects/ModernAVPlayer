@@ -10,21 +10,20 @@ import AVFoundation
 import Foundation
 
 public protocol AudioSession {
-    static func active(completion: @escaping (Bool) -> Void)
+    static func activate()
     static func setCategory(_ category: String)
 }
 
 public struct AudioSessionService: AudioSession {
 
-    static public func active(completion: @escaping (Bool) -> Void) {
+    static public func activate() {
         DispatchQueue.global(qos: .userInitiated).async {
             do {
                 try AVAudioSession.sharedInstance().setActive(true)
                 LoggerInHouse.instance.log(message: "Active audio session", event: .info)
-                completion(true)
+
             } catch {
                 LoggerInHouse.instance.log(message: "Active audio session: \(error.localizedDescription)", event: .error)
-                completion(false)
             }
         }
     }

@@ -11,15 +11,13 @@ import Foundation
 
 final class MockAudioSession: AudioSession {
     static func resetCallsCount() {
-        activeCallCount = 0
+        activateCallCount = 0
         setCategoryCallCount = 0
     }
     
-    static var activeCallCount = 0
-    static var activeLastCompletion: ((Bool) -> Void)?
-    static func active(completion: @escaping (Bool) -> Void) {
-        activeCallCount += 1
-        activeLastCompletion = completion
+    static var activateCallCount = 0
+    static func activate() {
+        activateCallCount += 1
     }
     
     static var setCategoryCallCount = 0

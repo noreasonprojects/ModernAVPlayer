@@ -11,13 +11,21 @@ import Foundation
 
 public struct PausedState: PlayerState {
     public unowned var context: PlayerContext
+    private var interruptionAudioService: InterruptionAudioService
 
     // MARK: Init
     
-    public init(context: PlayerContext) {
+    public init(context: PlayerContext, interruptionAudioService: InterruptionAudioService = InterruptionAudioService()) {
         LoggerInHouse.instance.log(message: "Init", event: .debug)
         self.context = context
         self.context.player.pause()
+        self.interruptionAudioService = interruptionAudioService
+        
+        setupInterruptionCallback()
+    }
+    
+    private func setupInterruptionCallback() {
+        interruptionAudioService.onInterruptionEnded = { self.play() }
     }
     
     // MARK: - Shared actions

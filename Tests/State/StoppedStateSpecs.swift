@@ -16,12 +16,14 @@ final class StoppedStateSpecs: QuickSpec {
     
     var tested: StoppedState!
     var media: PlayerMedia!
-    let mockPlayer = MockCustomPlayer()
-    lazy var playerContext = ConcretePlayerContext(player: self.mockPlayer, audioSessionType: MockAudioSession.self)
+    var mockPlayer: MockCustomPlayer!
+    var playerContext: ConcretePlayerContext!
 
     override func spec() {
 
         beforeEach {
+            self.mockPlayer = MockCustomPlayer()
+            self.playerContext = ConcretePlayerContext(player: self.mockPlayer, audioSessionType: MockAudioSession.self)
             self.media = ConcretePlayerMedia(url: URL(string: "foo")!, type: .clip)
             self.tested = StoppedState(context: self.playerContext)
             self.playerContext.state = self.tested
@@ -55,7 +57,6 @@ final class StoppedStateSpecs: QuickSpec {
                     let item = MockPlayerItem.createOne(url: "hello")
                     item.overrideStatus = .readyToPlay
                     self.mockPlayer.overrideCurrentItem = item
-                    MockAudioSession.resetCallsCount()
 
                     // ACT
                     self.tested.play()
@@ -66,7 +67,7 @@ final class StoppedStateSpecs: QuickSpec {
                 }
                 it("should launch play command on buffering state") {
                     // ASSERT
-                    expect(MockAudioSession.activeCallCount).to(equal(1))
+                    expect(self.mockPlayer.playCallCount).to(equal(1))
                 }
             }
 

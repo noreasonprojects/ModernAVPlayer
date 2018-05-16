@@ -130,6 +130,7 @@
 		D8C089853F5CFE08867AC41267400B1A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5D8173434FE00016739EAFDEFEA9313 /* Foundation.framework */; };
 		D9E62C41794D0B5D2CD68CA92C4BA836 /* mach_excServer.c in Sources */ = {isa = PBXBuildFile; fileRef = CE31CE7D8BD558E76797984F435D8C70 /* mach_excServer.c */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		DF026F6F406A4FB6CEA63B0A4B9E27DD /* AllPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F24AC07B43494547D3A11F865DD8BE4 /* AllPass.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
+		E1272946209B5FEE007583DB /* InterruptionAudioService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1272945209B5FEE007583DB /* InterruptionAudioService.swift */; };
 		E1683B1A2099F3AC0041B0F8 /* TimerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1683B192099F3AC0041B0F8 /* TimerFactory.swift */; };
 		E1683B1E2099F5410041B0F8 /* URLSessionDataTaskFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1683B1D2099F5410041B0F8 /* URLSessionDataTaskFactory.swift */; };
 		E1A4C330209B074A000580F5 /* RouteAudioService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A4C32F209B074A000580F5 /* RouteAudioService.swift */; };
@@ -329,6 +330,7 @@
 		DC8C0EB79EA71026266990B73441EC3C /* Pods-ModernAVPlayer_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ModernAVPlayer_Example-frameworks.sh"; sourceTree = "<group>"; };
 		DE4116E3C2565643F5E19784F9988AEE /* ToSucceed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ToSucceed.swift; path = Sources/Nimble/Matchers/ToSucceed.swift; sourceTree = "<group>"; };
 		DF1A286E22B74223EDAF748AA84E9B55 /* XCTestObservationCenter+Register.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "XCTestObservationCenter+Register.m"; path = "Sources/NimbleObjectiveC/XCTestObservationCenter+Register.m"; sourceTree = "<group>"; };
+		E1272945209B5FEE007583DB /* InterruptionAudioService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterruptionAudioService.swift; sourceTree = "<group>"; };
 		E1683B192099F3AC0041B0F8 /* TimerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerFactory.swift; sourceTree = "<group>"; };
 		E1683B1D2099F5410041B0F8 /* URLSessionDataTaskFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionDataTaskFactory.swift; sourceTree = "<group>"; };
 		E1A4C32F209B074A000580F5 /* RouteAudioService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteAudioService.swift; sourceTree = "<group>"; };
@@ -684,6 +686,7 @@
 				BAFD4EB955BA251A06DDD62036501C6C /* NowPlayingService.swift */,
 				00BB0065BA8B3E36AA6590D8835AC95A /* ReachabilityService.swift */,
 				E1A4C32F209B074A000580F5 /* RouteAudioService.swift */,
+				E1272945209B5FEE007583DB /* InterruptionAudioService.swift */,
 			);
 			name = Services;
 			path = Sources/Services;
@@ -1027,6 +1030,7 @@
 				B2099594C2B1B9493982F9CDFCACB057 /* MediaType.swift in Sources */,
 				F8A42A158690683E7C60F8FC101922AF /* ModernAVPlayer-dummy.m in Sources */,
 				060732EAF9E903F9A0EA6482894AFD04 /* NowPlayingService.swift in Sources */,
+				E1272946209B5FEE007583DB /* InterruptionAudioService.swift in Sources */,
 				24D888BDB28FBDECBA0D0B5298C502E3 /* PausedState.swift in Sources */,
 				8FC1D3675D2DFE218FAFA61E5388AB54 /* PlayerContext.swift in Sources */,
 				0B4A6BE1E2507EB874766E0CB4835099 /* PlayerMedia.swift in Sources */,

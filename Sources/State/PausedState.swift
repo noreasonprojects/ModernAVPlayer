@@ -25,10 +25,7 @@ public struct PausedState: PlayerState {
     }
     
     private func setupInterruptionCallback() {
-        interruptionAudioService.onInterruption = {
-            guard $0 == .ended else { return }
-            self.play()
-        }
+        interruptionAudioService.onInterruptionEnded = { self.play() }
     }
     
     // MARK: - Shared actions

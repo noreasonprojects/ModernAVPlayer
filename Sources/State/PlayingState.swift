@@ -132,9 +132,6 @@ public final class PlayingState: PlayerState {
     }
     
     private func setupInterruptionCallback() {
-        interruptionAudioService.onInterruption = { [weak self] interruptionType in
-            guard interruptionType == .began else { return }
-            self?.pause()
-        }
+        interruptionAudioService.onInterruptionBegan = { [weak self] in self?.pause() }
     }
 }

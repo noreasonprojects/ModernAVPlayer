@@ -22,15 +22,33 @@ final class InterruptionAudioServiceTests: QuickSpec {
         beforeEach {
             self.interruptionType = nil
             self.tested = InterruptionAudioService()
-            self.tested.onInterruption = { [weak self] in self?.interruptionType = $0 }
+            self.tested.onInterruptionBegan = { [weak self] in self?.interruptionType = .began }
+            self.tested.onInterruptionEnded = { [weak self] in self?.interruptionType = .ended }
         }
         
         describe("init") {
-            context("valid interruption occured") {
+            context("valid began interruption occured") {
                 it("should register to interruption notification") {
                     
                     // ARRANGE
                     let interruptionType = AVAudioSessionInterruptionType.began
+                    let info: [String: UInt] = [AVAudioSessionInterruptionTypeKey: interruptionType.rawValue]
+                    var notif = Notification(name: NSNotification.Name.AVAudioSessionInterruption)
+                    notif.userInfo = info
+                    
+                    // ACT
+                    NotificationCenter.default.post(notif)
+                    
+                    // ASSERT
+                    expect(self.interruptionType).to(equal(interruptionType))
+                }
+            }
+            
+            context("valid ended interruption occured") {
+                it("should register to interruption notification") {
+                    
+                    // ARRANGE
+                    let interruptionType = AVAudioSessionInterruptionType.ended
                     let info: [String: UInt] = [AVAudioSessionInterruptionTypeKey: interruptionType.rawValue]
                     var notif = Notification(name: NSNotification.Name.AVAudioSessionInterruption)
                     notif.userInfo = info

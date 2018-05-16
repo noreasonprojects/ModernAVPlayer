@@ -70,9 +70,7 @@ public final class LoadingMediaState: PlayerState {
     }
     
     private func setupInterruptionCallback() {
-        interruptionAudioService.onInterruption = { [weak self] _ in
-            self?.pause()
-        }
+        interruptionAudioService.onInterruptionBegan = { [weak self] in self?.pause() }
     }
 
     // MARK: - Shared actions

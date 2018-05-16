@@ -11,7 +11,8 @@ import Foundation
 public final class InterruptionAudioService {
     
     private let notificationName = Notification.Name.AVAudioSessionInterruption
-    public var onInterruption: ((AVAudioSessionInterruptionType) -> Void)?
+    public var onInterruptionBegan: (() -> Void)?
+    public var onInterruptionEnded: (() -> Void)?
     
     public init() {
         LoggerInHouse.instance.log(message: "Init", event: .debug)
@@ -35,7 +36,11 @@ public final class InterruptionAudioService {
             let rawInterruptionType = userInfo[AVAudioSessionInterruptionTypeKey] as? UInt,
             let interruptionType = AVAudioSessionInterruptionType(rawValue: rawInterruptionType)
             else { return }
-        
-        onInterruption?(interruptionType)
+        switch interruptionType {
+        case .began:
+            onInterruptionBegan?()
+        case .ended:
+            onInterruptionEnded?()
+        }
     }
 }

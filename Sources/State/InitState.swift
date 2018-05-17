@@ -20,7 +20,10 @@ public struct InitState: PlayerState {
     public init(context: PlayerContext) {
         LoggerInHouse.instance.log(message: "Init", event: .debug)
         self.context = context
-        context.player.automaticallyWaitsToMinimizeStalling = false
+        
+        if #available(iOS 10.0, *) {
+            context.player.automaticallyWaitsToMinimizeStalling = false
+        }
     }
     
     // MARK: - Shared actions

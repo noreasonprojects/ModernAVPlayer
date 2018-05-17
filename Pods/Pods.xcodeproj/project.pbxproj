@@ -218,8 +218,8 @@
 		422CF13F0E38A18AB13DC2B4581080C3 /* Nimble.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Nimble.modulemap; sourceTree = "<group>"; };
 		4262609B5198835C85CED9DAD193180D /* Nimble-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Nimble-dummy.m"; sourceTree = "<group>"; };
 		4393FC33BD900B91C770D535601D30DF /* Quick-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Quick-umbrella.h"; sourceTree = "<group>"; };
-		4518F62A20AC8EEE0082873C /* ConcretePlayerContext+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ConcretePlayerContext+Rx.swift"; path = "../Sources/RxModernAVPlayer/ConcretePlayerContext+Rx.swift"; sourceTree = "<group>"; };
-		4518F62C20AC8F1B0082873C /* PlayerContextDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlayerContextDelegateProxy.swift; path = ../Sources/RxModernAVPlayer/PlayerContextDelegateProxy.swift; sourceTree = "<group>"; };
+		4518F62A20AC8EEE0082873C /* ConcretePlayerContext+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConcretePlayerContext+Rx.swift"; sourceTree = "<group>"; };
+		4518F62C20AC8F1B0082873C /* PlayerContextDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerContextDelegateProxy.swift; sourceTree = "<group>"; };
 		45CBFC78ACD288D66318E5A45D9A64AC /* PostNotification.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PostNotification.swift; path = Sources/Nimble/Matchers/PostNotification.swift; sourceTree = "<group>"; };
 		45D49A5A2093630700F63ACF /* LoggerInHouse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggerInHouse.swift; sourceTree = "<group>"; };
 		45D49A5C2093653500F63ACF /* ObservingRateService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservingRateService.swift; sourceTree = "<group>"; };
@@ -436,7 +436,7 @@
 				4518F62C20AC8F1B0082873C /* PlayerContextDelegateProxy.swift */,
 			);
 			name = RxModernAVPlayer;
-			path = Core;
+			path = Sources/RxModernAVPlayer;
 			sourceTree = "<group>";
 		};
 		4538CB3920AC8D170072E634 /* Core */ = {

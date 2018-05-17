@@ -55,14 +55,4 @@ public class RxPlayerContextDelegateProxy: DelegateProxy<ConcretePlayerContext, 
     public func playerContext(_ context: ConcretePlayerContext, currentItemUrl: URL?) {
         currentItemUrlSubject.onNext(currentItemUrl)
     }
-    
-    // MARK: - Deinit
-    
-    deinit {
-        stateSubject.on(.completed)
-        currentTimeSubject.on(.completed)
-        itemDurationSubject.on(.completed)
-        debugMessageSubject.on(.completed)
-        currentItemUrlSubject.on(.completed)
-    }
 }

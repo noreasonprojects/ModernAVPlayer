@@ -1,4 +1,4 @@
-platform :ios, '10.0'
+platform :ios, '9.1'
 use_frameworks!
 
 target 'ModernAVPlayer_Example' do

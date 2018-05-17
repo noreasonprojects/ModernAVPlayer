@@ -258,7 +258,6 @@
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
 				C70881C3F1705EDD12CD4BD9 /* [CP] Embed Pods Frameworks */,
-				6F2A9CE930F4B1D550BDBB33 /* [CP] Copy Pods Resources */,
 				E1459933207922F6001479E2 /* SwiftLint */,
 			);
 			buildRules = (
@@ -279,7 +278,6 @@
 				607FACE21AFB9204008FA782 /* Frameworks */,
 				607FACE31AFB9204008FA782 /* Resources */,
 				2FE3D090A8A8EDFC0093797A /* [CP] Embed Pods Frameworks */,
-				D2BD8937750EF033BAC2F9BB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -398,21 +396,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ModernAVPlayer_Tests/Pods-ModernAVPlayer_Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		6F2A9CE930F4B1D550BDBB33 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ModernAVPlayer_Example/Pods-ModernAVPlayer_Example-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		8A8AD8ED6850E535248D8646 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -447,21 +430,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ModernAVPlayer_Example/Pods-ModernAVPlayer_Example-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D2BD8937750EF033BAC2F9BB /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ModernAVPlayer_Tests/Pods-ModernAVPlayer_Tests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E1459933207922F6001479E2 /* SwiftLint */ = {
@@ -589,7 +557,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -637,7 +605,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

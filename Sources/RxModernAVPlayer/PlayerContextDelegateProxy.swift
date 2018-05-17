@@ -14,7 +14,7 @@ extension ConcretePlayerContext: HasDelegate {
 
 public class RxPlayerContextDelegateProxy: DelegateProxy<ConcretePlayerContext, PlayerContextDelegate>,
     DelegateProxyType,
-PlayerContextDelegate {
+    PlayerContextDelegate {
     
     // MARK: - Initialization
     

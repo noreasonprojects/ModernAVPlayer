@@ -16,10 +16,10 @@ extension Timer: TimerProtocol { }
 
 final class TimerAdapter: TimerProtocol {
     
-    let block: (() -> Void)?
-    let repeats: Bool
-    let timeInterval: TimeInterval
-    lazy var innerTimer: TimerProtocol = {
+    private let block: (() -> Void)?
+    private let repeats: Bool
+    private let timeInterval: TimeInterval
+    private lazy var innerTimer: TimerProtocol = {
         Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(executeBlock), userInfo: nil, repeats: repeats)
     }()
     

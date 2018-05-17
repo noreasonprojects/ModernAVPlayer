@@ -28,11 +28,11 @@ public class RxPlayerContextDelegateProxy: DelegateProxy<ConcretePlayerContext, 
     
     // MARK: - Proxy Subjects
     
-    internal lazy var stateSubject = PublishSubject<ModernAVPlayer.PlayerState>()
-    internal lazy var currentTimeSubject = PublishSubject<Double?>()
-    internal lazy var itemDurationSubject = PublishSubject<Double?>()
-    internal lazy var debugMessageSubject = PublishSubject<String?>()
-    internal lazy var currentItemUrlSubject = PublishSubject<URL?>()
+    lazy var stateSubject = PublishSubject<ModernAVPlayer.PlayerState>()
+    lazy var currentTimeSubject = PublishSubject<Double?>()
+    lazy var itemDurationSubject = PublishSubject<Double?>()
+    lazy var debugMessageSubject = PublishSubject<String?>()
+    lazy var currentItemUrlSubject = PublishSubject<URL?>()
     
     // MARK: - PlayerContextDelegate
     

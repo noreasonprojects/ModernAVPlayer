@@ -1,5 +1,7 @@
 PODS:
-  - ModernAVPlayer (0.9.0)
+  - ModernAVPlayer (0.9.0):
+    - ModernAVPlayer/Core (= 0.9.0)
+  - ModernAVPlayer/Core (0.9.0)
   - Nimble (7.0.3)
   - Quick (1.2.0)
   - SwiftLint (0.25.0)
@@ -10,16 +12,22 @@ DEPENDENCIES:
   - Quick (= 1.2.0)
   - SwiftLint (= 0.25.0)
 
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Nimble
+    - Quick
+    - SwiftLint
+
 EXTERNAL SOURCES:
   ModernAVPlayer:
-    :path: .
+    :path: "."
 
 SPEC CHECKSUMS:
-  ModernAVPlayer: 20b901f31e084922945700b6a726e990ad338c7f
+  ModernAVPlayer: 54e281b06d8c06c99147dd0d68b6f16ed7027a1a
   Nimble: 7f5a9c447a33002645a071bddafbfb24ea70e0ac
   Quick: 58d203b1c5e27fff7229c4c1ae445ad7069a7a08
   SwiftLint: e14651157288e9e01d6e1a71db7014fb5744a8ea
 
-PODFILE CHECKSUM: dd6a4bc49252f3b0ebbc19b95bbb55d8f73af19d
+PODFILE CHECKSUM: 5c7f147522ccff9d9ff746514e989faa1583f3a4
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.2

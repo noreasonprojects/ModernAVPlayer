@@ -218,12 +218,14 @@
 		422CF13F0E38A18AB13DC2B4581080C3 /* Nimble.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Nimble.modulemap; sourceTree = "<group>"; };
 		4262609B5198835C85CED9DAD193180D /* Nimble-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Nimble-dummy.m"; sourceTree = "<group>"; };
 		4393FC33BD900B91C770D535601D30DF /* Quick-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Quick-umbrella.h"; sourceTree = "<group>"; };
+		4518F62A20AC8EEE0082873C /* ConcretePlayerContext+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConcretePlayerContext+Rx.swift"; sourceTree = "<group>"; };
+		4518F62C20AC8F1B0082873C /* PlayerContextDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerContextDelegateProxy.swift; sourceTree = "<group>"; };
 		45CBFC78ACD288D66318E5A45D9A64AC /* PostNotification.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PostNotification.swift; path = Sources/Nimble/Matchers/PostNotification.swift; sourceTree = "<group>"; };
 		45D49A5A2093630700F63ACF /* LoggerInHouse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggerInHouse.swift; sourceTree = "<group>"; };
 		45D49A5C2093653500F63ACF /* ObservingRateService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservingRateService.swift; sourceTree = "<group>"; };
 		45D49A6020936C8F00F63ACF /* ItemPlaybackObservingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemPlaybackObservingService.swift; sourceTree = "<group>"; };
 		46524379D3AD640FD4916702672C99E5 /* CurrentTestCaseTracker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CurrentTestCaseTracker.h; path = Sources/NimbleObjectiveC/CurrentTestCaseTracker.h; sourceTree = "<group>"; };
-		47E2DF97693EBA96A63A87CBFB215774 /* ConcretePlayerContext.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConcretePlayerContext.swift; path = Sources/ConcretePlayerContext.swift; sourceTree = "<group>"; };
+		47E2DF97693EBA96A63A87CBFB215774 /* ConcretePlayerContext.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ConcretePlayerContext.swift; sourceTree = "<group>"; };
 		49BAD0C1588A041E7BCEBB769B513FDD /* BeginWith.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BeginWith.swift; path = Sources/Nimble/Matchers/BeginWith.swift; sourceTree = "<group>"; };
 		4AC5167B5F30016ED8E9BF5542306036 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4C9BE31A9B718EB57E45A539993C0848 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -427,6 +429,28 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
+		4518F62920AC8DC00082873C /* RxModernAVPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				4518F62A20AC8EEE0082873C /* ConcretePlayerContext+Rx.swift */,
+				4518F62C20AC8F1B0082873C /* PlayerContextDelegateProxy.swift */,
+			);
+			name = RxModernAVPlayer;
+			path = Sources/RxModernAVPlayer;
+			sourceTree = "<group>";
+		};
+		4538CB3920AC8D170072E634 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				47E2DF97693EBA96A63A87CBFB215774 /* ConcretePlayerContext.swift */,
+				72F087F0CC2835B878FADE809F12E825 /* Components */,
+				B63A754ED34D5C3214FCF2755A470D4E /* Services */,
+				6C27A7BB9242A75606075FEBB8B35022 /* State */,
+			);
+			name = Core;
+			path = Sources/Core;
+			sourceTree = "<group>";
+		};
 		4CF1822D9AE932351B24995953853030 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -449,8 +473,7 @@
 				9CC38CD09643044C9967C59B0A64CAA2 /* PlayingState.swift */,
 				CCE7393089184F2B6B7315F9BAFE5F59 /* StoppedState.swift */,
 			);
-			name = State;
-			path = Sources/State;
+			path = State;
 			sourceTree = "<group>";
 		};
 		72F087F0CC2835B878FADE809F12E825 /* Components */ = {
@@ -466,8 +489,7 @@
 				E1683B192099F3AC0041B0F8 /* TimerFactory.swift */,
 				E1683B1D2099F5410041B0F8 /* URLSessionDataTaskFactory.swift */,
 			);
-			name = Components;
-			path = Sources/Components;
+			path = Components;
 			sourceTree = "<group>";
 		};
 		76A5EF3C692678CF8D896C39827A325A /* Pods-ModernAVPlayer_Example */ = {
@@ -688,18 +710,15 @@
 				E1A4C32F209B074A000580F5 /* RouteAudioService.swift */,
 				E1272945209B5FEE007583DB /* InterruptionAudioService.swift */,
 			);
-			name = Services;
-			path = Sources/Services;
+			path = Services;
 			sourceTree = "<group>";
 		};
 		C94ED7F30168C1BEA9043AE3E7F5102B /* ModernAVPlayer */ = {
 			isa = PBXGroup;
 			children = (
-				47E2DF97693EBA96A63A87CBFB215774 /* ConcretePlayerContext.swift */,
-				72F087F0CC2835B878FADE809F12E825 /* Components */,
+				4538CB3920AC8D170072E634 /* Core */,
+				4518F62920AC8DC00082873C /* RxModernAVPlayer */,
 				FDAB4F982F6C45BDCC82A096605CD588 /* Pod */,
-				B63A754ED34D5C3214FCF2755A470D4E /* Services */,
-				6C27A7BB9242A75606075FEBB8B35022 /* State */,
 				91BABBC049891B04BE6D785857B3556B /* Support Files */,
 			);
 			name = ModernAVPlayer;

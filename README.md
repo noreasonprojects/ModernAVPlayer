@@ -79,6 +79,18 @@ player.loadMedia(media: media, shouldPlaying: shouldPlaying)
 | Stopped  | O | O | O | X | O
 | Failed  | O | X | O | O | X
 
+### RxSwift
+
+Instead of using delegate pattern, you can use rx to bind player attributes.
+> Setup
+Use ``pod 'ModernAVPlayer/RxSwift'`` in the Podfile
+> Usage
+```swift
+let context = ConcretePlayerContext(config: PlayerContextConfiguration())
+let state = context.rx.state
+```
+`state` is now an `observable<PlayerState>`
+
 ## Communication
 
 - If you **found a bug**, open an issue.

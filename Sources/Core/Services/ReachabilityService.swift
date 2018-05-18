@@ -10,24 +10,36 @@ import Foundation
 
 public protocol ReachabilityServiceProtocol {
     var isReachable: ((Bool) -> Void)? { get set }
+    var isTimedOut: (() -> Void)? { get set }
     
     func start()
 }
 
 public final class ReachabilityService: ReachabilityServiceProtocol {
 
-    // MARK: - Private vars
-
-    private let url: URL
+    // MARK: - Input
+    
+    private let dataTaskFactory: URLSessionDataTaskFactoryProtocol
     private var networkIteration: UInt
     private let timeoutURLSession: TimeInterval
-    private var timer: TimerProtocol?
-    private var tiNetworkTesting: TimeInterval
-    private var networkTask: URLSessionDataTaskProtocol?
-    private let dataTaskFactory: URLSessionDataTaskFactoryProtocol
     private let timerFactory: TimerFactoryProtocol
-
+    private let tiNetworkTesting: TimeInterval
+    private let url: URL
+    
+    // MARK: - Output
+    
     public var isReachable: ((Bool) -> Void)?
+    public var isTimedOut: (() -> Void)?
+    
+    // MARK: - Variables
+
+    private var timer: TimerProtocol? {
+        didSet { timer?.fire() }
+    }
+    private var networkTask: URLSessionDataTaskProtocol? {
+        willSet { networkTask?.cancel() }
+        didSet { networkTask?.resume() }
+    }
 
     // MARK: - Init
 
@@ -54,21 +66,19 @@ public final class ReachabilityService: ReachabilityServiceProtocol {
 
     public func start() {
         timer = timerFactory.getTimer(timeInterval: tiNetworkTesting, repeats: true) { [weak self] in
-            self?.setNetworkTask()
-            self?.networkTask?.resume()
-
             guard let strongSelf = self else { return }
-
+            
+            strongSelf.setNetworkTask()
             strongSelf.networkIteration -= 1
-            if strongSelf.networkIteration == 0 {
-                strongSelf.timer?.invalidate()
-            }
+            
+            guard strongSelf.networkIteration == 0 else { return }
+            
+            strongSelf.timer?.invalidate()
+            strongSelf.isTimedOut?()
         }
-        timer?.fire()
     }
 
     private func setNetworkTask() {
-        networkTask?.cancel()
         networkTask = dataTaskFactory.getDataTask(with: url, timeout: timeoutURLSession) { [weak self] _, response, error in
             guard
                 error == nil,

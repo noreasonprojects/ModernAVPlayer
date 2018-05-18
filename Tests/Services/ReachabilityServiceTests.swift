@@ -17,17 +17,21 @@ final class ReachabilityServiceTests: QuickSpec {
     var tested: ReachabilityServiceProtocol!
     var config: ContextConfiguration!
     var isReachable: Bool?
+    var isTimedOut: Bool?
     var mockTimerFactory: MockTimerFactory!
     var dataTaskFactory: MockDataTaskFactory!
     
     override func spec() {
         
         beforeEach {
+            self.isReachable = nil
+            self.isTimedOut = nil
             self.dataTaskFactory = MockDataTaskFactory()
             self.mockTimerFactory = MockTimerFactory()
             self.config = PlayerContextConfiguration()
             self.tested = ReachabilityService(config: self.config, dataTaskFactory: self.dataTaskFactory, timerFactory: self.mockTimerFactory)
             self.tested.isReachable = { [weak self] reachableStatus in self?.isReachable = reachableStatus }
+            self.tested.isTimedOut = { [weak self] in self?.isTimedOut = true }
         }
         
         describe("deinit service") {
@@ -69,6 +73,19 @@ final class ReachabilityServiceTests: QuickSpec {
             }
             
             context("max network iteration reach") {
+                it("should call isTimedOut callback") {
+                    
+                    // ACT
+                    self.tested.start()
+                    let maxIterationAvailable = self.config.networkIteration
+                    (0..<maxIterationAvailable).forEach { _ in
+                        self.mockTimerFactory.lastCompletion?()
+                    }
+                    
+                    // ASSERT
+                    expect(self.isTimedOut).to(beTrue())
+                }
+                
                 it("should invalidate timer") {
                     
                     // ACT

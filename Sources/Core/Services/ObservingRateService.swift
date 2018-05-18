@@ -46,29 +46,32 @@ final class ObservingRateService: ObservingRateServiceProtocol {
     var onTimeout: (() -> Void)?
     
     func start() {
+        LoggerInHouse.instance.log(message: "Item: \(item)", event: .verbose)
         remainingTime = config.timeoutBuffering
         timer?.invalidate()
-        
-        LoggerInHouse.instance.log(message: "Item: \(item)", event: .verbose)
-        
         DispatchQueue.main.async {
-            self.timer = Timer.scheduledTimer(withTimeInterval: self.timeInterval, repeats: true) { [weak self] _ in
-                guard
-                    let strongSelf = self,
-                    let timebase = strongSelf.item.timebase
-                else { return }
-
-                //swiftlint:disable next operator_usage_whitespace Raph' style
-                strongSelf.remainingTime -=  strongSelf.timeInterval
-                let rate = CMTimebaseGetRate(timebase)
-                if rate != 0 {
-                    self?.onPlaying?()
-                } else if strongSelf.remainingTime <= 0 {
-                    self?.onTimeout?()
-                } else {
-                    LoggerInHouse.instance.log(message: "Remaining time: \(strongSelf.remainingTime)", event: .verbose)
-                }
-            }
+            self.timer = Timer.scheduledTimer(timeInterval: self.timeInterval,
+                                              target: self,
+                                              selector: #selector(self.blockTimer),
+                                              userInfo: nil,
+                                              repeats: true)
+        }
+    }
+    
+    @objc
+    func blockTimer() {
+        guard let timebase = item.timebase else { return }
+        
+        remainingTime -= timeInterval
+        let rate = CMTimebaseGetRate(timebase)
+        if rate != 0 {
+            timer?.invalidate()
+            onPlaying?()
+        } else if remainingTime <= 0 {
+            timer?.invalidate()
+            onTimeout?()
+        } else {
+            LoggerInHouse.instance.log(message: "Remaining time: \(remainingTime)", event: .verbose)
         }
     }
 }

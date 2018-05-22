@@ -9,7 +9,7 @@
 import Foundation
 
 public protocol ReachabilityServiceProtocol {
-    var isReachable: ((Bool) -> Void)? { get set }
+    var isReachable: (() -> Void)? { get set }
     var isTimedOut: (() -> Void)? { get set }
     
     func start()
@@ -28,7 +28,7 @@ public final class ReachabilityService: ReachabilityServiceProtocol {
     
     // MARK: - Output
     
-    public var isReachable: ((Bool) -> Void)?
+    public var isReachable: (() -> Void)?
     public var isTimedOut: (() -> Void)?
     
     // MARK: - Variables
@@ -84,10 +84,10 @@ public final class ReachabilityService: ReachabilityServiceProtocol {
                 error == nil,
                 let r = response as? HTTPURLResponse,
                 r.statusCode >= 200 && r.statusCode < 300
-                else { self?.isReachable?(false); return }
+                else { LoggerInHouse.instance.log(message: "Unreachable network", event: .info); return }
             
             self?.timer?.invalidate()
-            self?.isReachable?(true)
+            self?.isReachable?()
         }
     }
 }

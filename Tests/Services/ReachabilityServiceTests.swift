@@ -30,7 +30,7 @@ final class ReachabilityServiceTests: QuickSpec {
             self.mockTimerFactory = MockTimerFactory()
             self.config = PlayerContextConfiguration()
             self.tested = ReachabilityService(config: self.config, dataTaskFactory: self.dataTaskFactory, timerFactory: self.mockTimerFactory)
-            self.tested.isReachable = { [weak self] reachableStatus in self?.isReachable = reachableStatus }
+            self.tested.isReachable = { [weak self] in self?.isReachable = true }
             self.tested.isTimedOut = { [weak self] in self?.isTimedOut = true }
         }
         
@@ -142,7 +142,7 @@ final class ReachabilityServiceTests: QuickSpec {
                     // ASSERT
                     expect(self.mockTimerFactory.timer.invalidate_CallCount).to(equal(1))
                 }
-                it("should set isReachable to true") {
+                it("should set isReachable") {
                     
                     // ACT
                     self.tested.start()
@@ -152,20 +152,6 @@ final class ReachabilityServiceTests: QuickSpec {
                     
                     // ASSERT
                     expect(self.isReachable).to(beTrue())
-                }
-            }
-            
-            context("request failed") {
-                it("should set isReachable to false") {
-                    
-                    // ACT
-                    self.tested.start()
-                    self.mockTimerFactory.lastCompletion?()
-                    let httpResponse = HTTPURLResponse(url: URL(string: "foo")!, statusCode: 404, httpVersion: nil, headerFields: nil)
-                    self.dataTaskFactory.lastCompletionHandler?(nil, httpResponse, nil)
-                    
-                    // ASSERT
-                    expect(self.isReachable).to(beFalse())
                 }
             }
         }

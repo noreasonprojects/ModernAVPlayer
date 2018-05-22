@@ -43,9 +43,8 @@ public final class WaitingNetworkState: PlayerState {
             self?.context.changeState(state: failedState)
         }
         
-        reachability.isReachable = { [weak self] isReachable in
-            LoggerInHouse.instance.log(message: "Network | seem to be \(isReachable)", event: .info)
-            guard let strongSelf = self, isReachable else { return }
+        reachability.isReachable = { [weak self] in
+            guard let strongSelf = self else { return }
             
             let lastKnownPosition = strongSelf.isDurationItemFinite() ? strongSelf.context.player.currentTime() : nil
             let state = LoadingMediaState(context: strongSelf.context,

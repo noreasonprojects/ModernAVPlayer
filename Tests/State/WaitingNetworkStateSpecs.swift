@@ -51,7 +51,7 @@ final class WaitingNetworkStateSpecs: QuickSpec {
             it("should setup isReachable callback") {
                 
                 // ACT
-                self.mockReachability.isReachable?(true)
+                self.mockReachability.isReachable?()
                 
                 // ASSERT
                 expect(self.tested.state).to(beAnInstanceOf(LoadingMediaState.self))

@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 	* Manage audio interruptions in playing and loading state
 	* Add RxModernAVPlayer Pod Subspec
 	* Revert iOS 9 compatibility
+	* Add waiting step state
 
 * Fixes:
 	* Fix commented unit tests

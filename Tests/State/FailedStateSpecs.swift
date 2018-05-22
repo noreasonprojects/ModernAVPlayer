@@ -23,7 +23,7 @@ final class FailedStateSpecs: QuickSpec {
     override func spec() {
         beforeEach {
             self.url = URL(string: "foo")!
-            self.state = FailedState(context: self.tested, urlToReload: self.url, shouldPlaying: false, error: CustomError.itemFailedWhenLoading)
+            self.state = FailedState(context: self.tested, error: CustomError.itemFailedWhenLoading)
             self.tested.state = self.state
         }
         

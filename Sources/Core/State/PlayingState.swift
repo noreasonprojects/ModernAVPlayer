@@ -106,10 +106,10 @@ public final class PlayingState: PlayerState {
             else { assertionFailure(); return }
 
         startBgTask(context: context)
-        context.changeState(state: FailedState(context: context,
-                                               urlToReload: url,
-                                               shouldPlaying: true,
-                                               error: .itemPlaybackStalled))
+        context.changeState(state: WaitingNetworkState(context: context,
+                                                       urlToReload: url,
+                                                       shouldPlaying: true,
+                                                       error: .itemPlaybackStalled))
     }
     
     private func playToEndTime() {

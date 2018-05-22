@@ -11,52 +11,19 @@ import Foundation
 
 public final class FailedState: PlayerState {
 
-    // MARK: - Vars
+    // MARK: - Input
 
     public unowned var context: PlayerContext
 
-    // MARK: - Private vars
-
-    private let urlToReload: URL
-    private var reachability: ReachabilityServiceProtocol
-    
     // MARK: - Init
     
-    public init(context: PlayerContext,
-                urlToReload: URL,
-                shouldPlaying: Bool,
-                error: CustomError,
-                reachabilityService: ReachabilityServiceProtocol? = nil) {
-        LoggerInHouse.instance.log(message: "Init", event: .debug)
+    public init(context: PlayerContext, error: CustomError) {
+        LoggerInHouse.instance.log(message: "Init reason:\(error.localizedDescription)", event: .debug)
         self.context = context
-        self.urlToReload = urlToReload
-        self.reachability = reachabilityService ?? ReachabilityService(config: context.config)
-        setIsReachableCallBack(shouldPlaying: shouldPlaying)
-        reachability.start()
     }
 
     deinit {
         LoggerInHouse.instance.log(message: "Deinit", event: .debug)
-    }
-    
-    // MARK: - Reachability
-
-    private func setIsReachableCallBack(shouldPlaying: Bool) {
-        reachability.isReachable = { [unowned self] isReachable in
-            LoggerInHouse.instance.log(message: "Network | seem to be \(isReachable)", event: .info)
-            guard isReachable else { return }
-
-            let lastKnownPosition = self.isDurationItemFinite() ? self.context.player.currentTime() : nil
-            let state = LoadingMediaState(context: self.context,
-                                          itemUrl: self.urlToReload,
-                                          shouldPlaying: shouldPlaying,
-                                          lastPosition: lastKnownPosition)
-            self.context.changeState(state: state)
-        }
-    }
-
-    private func isDurationItemFinite() -> Bool {
-        return context.itemDuration?.isFinite ?? false
     }
 
     // MARK: - Shared actions

@@ -17,7 +17,7 @@
   },
   "default_subspecs": "Core",
   "platforms": {
-    "ios": "9.1"
+    "ios": "9.0"
   },
   "swift_version": "4.0",
   "subspecs": [

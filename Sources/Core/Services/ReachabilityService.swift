@@ -17,16 +17,16 @@ public protocol ReachabilityServiceProtocol {
 
 public final class ReachabilityService: ReachabilityServiceProtocol {
 
-    // MARK: - Input
+    // MARK: - Inputs
     
     private let dataTaskFactory: URLSessionDataTaskFactoryProtocol
-    private var networkIteration: UInt
+    private var remainingNetworkIteration: UInt
     private let timeoutURLSession: TimeInterval
     private let timerFactory: TimerFactoryProtocol
     private let tiNetworkTesting: TimeInterval
     private let url: URL
     
-    // MARK: - Output
+    // MARK: - Outputs
     
     public var isReachable: (() -> Void)?
     public var isTimedOut: (() -> Void)?
@@ -53,13 +53,12 @@ public final class ReachabilityService: ReachabilityServiceProtocol {
         self.url = config.urlNetworkTesting
         self.timeoutURLSession = config.timeoutURLSession
         self.tiNetworkTesting = config.tiNetworkTesting
-        self.networkIteration = config.networkIteration
+        self.remainingNetworkIteration = config.networkIteration
     }
 
     deinit {
         LoggerInHouse.instance.log(message: "Deinit", event: .debug)
-        networkTask?.cancel()
-        timer?.invalidate()
+        cancelTasks()
     }
 
     // MARK: - Session & Task
@@ -68,12 +67,14 @@ public final class ReachabilityService: ReachabilityServiceProtocol {
         timer = timerFactory.getTimer(timeInterval: tiNetworkTesting, repeats: true) { [weak self] in
             guard let strongSelf = self else { return }
             
-            strongSelf.setNetworkTask()
-            strongSelf.networkIteration -= 1
+            guard strongSelf.remainingNetworkIteration == 0
+                else {
+                    strongSelf.remainingNetworkIteration -= 1
+                    strongSelf.setNetworkTask()
+                    return
+            }
             
-            guard strongSelf.networkIteration == 0 else { return }
-            
-            strongSelf.timer?.invalidate()
+            strongSelf.cancelTasks()
             strongSelf.isTimedOut?()
         }
     }
@@ -89,5 +90,10 @@ public final class ReachabilityService: ReachabilityServiceProtocol {
             self?.timer?.invalidate()
             self?.isReachable?()
         }
+    }
+    
+    private func cancelTasks() {
+        networkTask?.cancel()
+        timer?.invalidate()
     }
 }

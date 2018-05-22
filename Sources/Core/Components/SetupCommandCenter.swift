@@ -23,7 +23,9 @@ public struct SetupCommandCenter {
         remote.playCommand.isEnabled = true
         remote.pauseCommand.isEnabled = true
         remote.togglePlayPauseCommand.isEnabled = true
-        remote.changePlaybackPositionCommand.isEnabled = true
+        if #available(iOS 9.1, *) {
+            remote.changePlaybackPositionCommand.isEnabled = true
+        }
 
         remote.stopCommand.isEnabled = false
         remote.previousTrackCommand.isEnabled = false
@@ -41,14 +43,16 @@ public struct SetupCommandCenter {
             return .success
         }
 
-        remote.changePlaybackPositionCommand.addTarget { event -> MPRemoteCommandHandlerStatus in
-            guard let e = event as? MPChangePlaybackPositionCommandEvent
-                else { return .commandFailed }
-
-            let position = e.positionTime
-            LoggerInHouse.instance.log(message: "Remote command: seek to \(position)", event: .info)
-            self.context.seek(position: position)
-            return .success
+        if #available(iOS 9.1, *) {
+            remote.changePlaybackPositionCommand.addTarget { event -> MPRemoteCommandHandlerStatus in
+                guard let e = event as? MPChangePlaybackPositionCommandEvent
+                    else { return .commandFailed }
+                
+                let position = e.positionTime
+                LoggerInHouse.instance.log(message: "Remote command: seek to \(position)", event: .info)
+                self.context.seek(position: position)
+                return .success
+            }
         }
     }
 }

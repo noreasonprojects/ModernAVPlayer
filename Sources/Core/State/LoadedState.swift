@@ -25,12 +25,15 @@ public struct LoadedState: PlayerState {
         
         guard let media = media else { return }
         
-        updateRemoteCommandCenter(mediaType: media.type)
+        if #available(iOS 9.1, *) {
+            updateRemoteCommandCenter(mediaType: media.type)
+        }
         context.nowPlaying.update(media: media, duration: context.player.currentItem?.duration.seconds)
     }
 
     // MARK: - Command Center
 
+    @available(iOS 9.1, *)
     private func updateRemoteCommandCenter(mediaType: MediaType) {
         let remote = MPRemoteCommandCenter.shared()
         remote.changePlaybackPositionCommand.isEnabled = mediaType == .clip

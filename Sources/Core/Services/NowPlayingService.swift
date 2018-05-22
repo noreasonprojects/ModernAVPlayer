@@ -43,7 +43,7 @@ public final class NowPlayingService: NowPlaying {
         task = session.dataTask(with: url) { [weak self] data, _, _ in
             guard let imageData = data, let image = UIImage(data: imageData) else { return }
 
-            let artwork = MPMediaItemArtwork(boundsSize: image.size) { _ in return image }
+            let artwork = MPMediaItemArtwork(image: image)
             self?.overrideInfoCenter(for: MPMediaItemPropertyArtwork, value: artwork)
         }
         task?.resume()
@@ -61,7 +61,7 @@ public final class NowPlayingService: NowPlaying {
         }
 
         if let imageName = media.localPlaceHolderImageName, let image = UIImage(named: imageName) {
-            let artwork = MPMediaItemArtwork(boundsSize: image.size) { _ in return image }
+            let artwork = MPMediaItemArtwork(image: image)
             infos[MPMediaItemPropertyArtwork] = artwork
         }
 

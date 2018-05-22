@@ -34,22 +34,23 @@ public final class FailedState: PlayerState {
     }
 
     public func pause() {
-        context.changeState(state: PausedState(context: context))
+        sendDebugMessage("Unable to pause, load a media first")
     }
 
     public func play() {
-        let debug = "Unable to play, reload a media first"
-        context.debugMessage = debug
-        LoggerInHouse.instance.log(message: "Unable to play, reload a media first", event: .warning)
+        sendDebugMessage("Unable to play, load a media first")
     }
 
     public func seek(position: Double) {
-        let debug = "Unable to seek, load a media first"
-        context.debugMessage = debug
-        LoggerInHouse.instance.log(message: "Unable to seek, load a media first", event: .warning)
+        sendDebugMessage("Unable to seek, load a media first")
     }
 
     public func stop() {
-        context.changeState(state: StoppedState(context: context))
+        sendDebugMessage("Unable to stop, load a media first")
+    }
+    
+    private func sendDebugMessage(_ debugMessage: String) {
+        context.debugMessage = debugMessage
+        LoggerInHouse.instance.log(message: debugMessage, event: .warning)
     }
 }

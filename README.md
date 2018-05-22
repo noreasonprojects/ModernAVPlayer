@@ -77,7 +77,8 @@ player.loadMedia(media: media, shouldPlaying: shouldPlaying)
 | Playing  | O | X | O | O | O
 | Paused  | O | O | X | O | O
 | Stopped  | O | O | O | X | O
-| Failed  | O | X | O | O | X
+| WaitingNetwork  | O | X | O | O | X
+| Failed  | O | X | X | X | X
 
 ### RxSwift
 

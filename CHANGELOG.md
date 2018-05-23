@@ -11,6 +11,8 @@ All notable changes to this project will be documented in this file.
 	* Add RxModernAVPlayer Pod Subspec
 	* Revert iOS 9 compatibility
 	* Add waiting step state
+	* Bypass waiting state when loading failed
+	* Check edge cases when loading
 
 * Fixes:
 	* Fix commented unit tests

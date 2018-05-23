@@ -38,17 +38,21 @@ final class WaitingNetworkStateSpecs: QuickSpec {
                 // ASSERT
                 expect(self.mockReachability.start_callCount).to(equal(1))
             }
-            
-            it("should setup isTimedOut callback") {
-            
+        }
+        
+        context("service has timed out") {
+            it("should update state context to Failed") {
+                
                 // ACT
                 self.mockReachability.isTimedOut?()
                 
                 // ASSERT
                 expect(self.tested.state).to(beAnInstanceOf(FailedState.self))
             }
-            
-            it("should setup isReachable callback") {
+        }
+        
+        context("service is reachable") {
+            it("should update state context to LoadingMedia") {
                 
                 // ACT
                 self.mockReachability.isReachable?()

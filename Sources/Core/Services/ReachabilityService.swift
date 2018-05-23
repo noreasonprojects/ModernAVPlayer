@@ -67,15 +67,14 @@ public final class ReachabilityService: ReachabilityServiceProtocol {
         timer = timerFactory.getTimer(timeInterval: tiNetworkTesting, repeats: true) { [weak self] in
             guard let strongSelf = self else { return }
             
-            guard strongSelf.remainingNetworkIteration == 0
+            guard strongSelf.remainingNetworkIteration > 0
                 else {
-                    strongSelf.remainingNetworkIteration -= 1
-                    strongSelf.setNetworkTask()
+                    strongSelf.cancelTasks()
+                    strongSelf.isTimedOut?()
                     return
             }
-            
-            strongSelf.cancelTasks()
-            strongSelf.isTimedOut?()
+            strongSelf.remainingNetworkIteration -= 1
+            strongSelf.setNetworkTask()
         }
     }
 

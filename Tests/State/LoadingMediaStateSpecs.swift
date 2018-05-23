@@ -48,7 +48,7 @@ final class LoadingMediaStateSpecs: QuickSpec {
             it("should not update state context") {
                 
                 // ACT
-                //self.state.loadMedia()
+                self.state.loadMedia(media: self.playerMedia, shouldPlaying: true)
                 
                 // ASSERT
                 expect(self.tested.state).to(beIdenticalTo(self.state))

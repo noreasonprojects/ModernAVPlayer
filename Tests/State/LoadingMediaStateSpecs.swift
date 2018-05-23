@@ -31,17 +31,11 @@ final class LoadingMediaStateSpecs: QuickSpec {
         }
 
         context("init") {
-            it("should pause the player") {
-
-                // ASSERT
-                expect(self.player.pauseCallCount).to(equal(1))
-            }
-
             it("should replace current item") {
                 
                 // ASSERT
                 let newItemUrl = (self.player.replaceCurrentItemCallCountLastParam?.asset as? AVURLAsset)?.url
-                expect(self.player.replaceCurrentItemCallCount).to(equal(1))
+                expect(self.player.replaceCurrentItemCallCount).to(equal(2))
                 expect(newItemUrl).to(equal(URL(string: "x")!))
             }
             
@@ -90,7 +84,7 @@ final class LoadingMediaStateSpecs: QuickSpec {
                 self.state.pause()
 
                 // ASSERT
-                expect(self.player.replaceCurrentItemCallCount).to(equal(2))
+                expect(self.player.replaceCurrentItemCallCount).to(equal(3))
                 expect(self.player.replaceCurrentItemCallCountLastParam).to(beNil())
             }
         }
@@ -113,7 +107,7 @@ final class LoadingMediaStateSpecs: QuickSpec {
                 self.state.stop()
 
                 // ASSERT
-                expect(self.player.replaceCurrentItemCallCount).to(equal(2))
+                expect(self.player.replaceCurrentItemCallCount).to(equal(3))
                 expect(self.player.replaceCurrentItemCallCountLastParam).to(beNil())
             }
         }

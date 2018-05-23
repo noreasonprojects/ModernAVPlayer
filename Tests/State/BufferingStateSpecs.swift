@@ -75,7 +75,7 @@ final class BufferingStateSpecs: QuickSpec {
                     self.mockRateService.onTimeout?()
                     
                     // ASSERT
-                    expect(self.tested.state).to(beAnInstanceOf(FailedState.self))
+                    expect(self.tested.state).to(beAnInstanceOf(WaitingNetworkState.self))
                 }
             }
             

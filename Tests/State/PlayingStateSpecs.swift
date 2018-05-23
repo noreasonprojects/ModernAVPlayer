@@ -109,7 +109,7 @@ final class PlayingStateSpecs: QuickSpec {
                 self.itemPlaybackObservingService.onPlaybackStalled?()
                 
                 // ASSERT
-                expect(self.tested.state).to(beAnInstanceOf(FailedState.self))
+                expect(self.tested.state).to(beAnInstanceOf(WaitingNetworkState.self))
             }
         }
         
@@ -155,7 +155,7 @@ final class PlayingStateSpecs: QuickSpec {
                     self.itemPlaybackObservingService.onPlayToEndTime?()
                     
                     // ASSERT
-                    expect(self.tested.state).to(beAnInstanceOf(FailedState.self))
+                    expect(self.tested.state).to(beAnInstanceOf(WaitingNetworkState.self))
                 }
             }
         }

@@ -27,11 +27,14 @@ public final class BufferingState: NSObject, PlayerState {
         self.observingRateService = observingRateService ?? ObservingRateService(config: context.config, item: item)
 
         self.observingRateService.onTimeout = { [context] in
-            guard let url = (context.player.currentItem?.asset as? AVURLAsset)?.url else { return }
-            context.changeState(state: FailedState(context: context,
+            guard let url = (context.player.currentItem?.asset as? AVURLAsset)?.url
+                else { return }
+            
+            let waitingState = WaitingNetworkState(context: context,
                                                    urlToReload: url,
                                                    shouldPlaying: true,
-                                                   error: .buffering))
+                                                   error: .buffering)
+            context.changeState(state: waitingState)
         }
 
         self.observingRateService.onPlaying = { [context] in

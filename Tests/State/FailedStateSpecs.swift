@@ -23,7 +23,7 @@ final class FailedStateSpecs: QuickSpec {
     override func spec() {
         beforeEach {
             self.url = URL(string: "foo")!
-            self.state = FailedState(context: self.tested, urlToReload: self.url, shouldPlaying: false, error: CustomError.itemFailedWhenLoading)
+            self.state = FailedState(context: self.tested, error: CustomError.itemFailedWhenLoading)
             self.tested.state = self.state
         }
         
@@ -39,24 +39,46 @@ final class FailedStateSpecs: QuickSpec {
         }
 
         context("stop") {
-            it("should update state context to Stopped") {
+            it("should not update state context") {
 
                 // ACT
                 self.state.stop()
 
                 // ASSERT
-                expect(self.tested.state).to(beAnInstanceOf(StoppedState.self))
+                expect(self.tested.state).to(beIdenticalTo(self.state))
             }
         }
 
         context("pause") {
-            it("should update state context to Paused") {
+            it("should not update state context") {
 
                 // ACT
                 self.state.pause()
 
                 // ASSERT
-                expect(self.tested.state).to(beAnInstanceOf(PausedState.self))
+                expect(self.tested.state).to(beIdenticalTo(self.state))
+            }
+        }
+        
+        context("play") {
+            it("should not update state context") {
+                
+                // ACT
+                self.state.play()
+                
+                // ASSERT
+                expect(self.tested.state).to(beIdenticalTo(self.state))
+            }
+        }
+        
+        context("seek") {
+            it("should not update state context") {
+                
+                // ACT
+                self.state.seek(position: 0)
+                
+                // ASSERT
+                expect(self.tested.state).to(beIdenticalTo(self.state))
             }
         }
     }

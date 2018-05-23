@@ -150,10 +150,11 @@ public final class LoadingMediaState: PlayerState {
             assertionFailure()
         case .failed:
             guard let url = media?.url ?? url else { assertionFailure(); return }
-            context.changeState(state: FailedState(context: context,
+            let waitingState = WaitingNetworkState(context: context,
                                                    urlToReload: url,
                                                    shouldPlaying: shouldPlaying,
-                                                   error: .itemFailedWhenLoading))
+                                                   error: .itemFailedWhenLoading)
+            context.changeState(state: waitingState)
         case .readyToPlay:
             context.itemDuration = context.player.currentItem?.duration.seconds
             guard let position = lastKnownPosition else { moveToLoadedState(); return }

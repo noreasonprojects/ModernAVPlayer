@@ -9,25 +9,37 @@
 import Foundation
 
 public protocol ReachabilityServiceProtocol {
-    var isReachable: ((Bool) -> Void)? { get set }
+    var isReachable: (() -> Void)? { get set }
+    var isTimedOut: (() -> Void)? { get set }
     
     func start()
 }
 
 public final class ReachabilityService: ReachabilityServiceProtocol {
 
-    // MARK: - Private vars
-
-    private let url: URL
-    private var networkIteration: UInt
-    private let timeoutURLSession: TimeInterval
-    private var timer: TimerProtocol?
-    private var tiNetworkTesting: TimeInterval
-    private var networkTask: URLSessionDataTaskProtocol?
+    // MARK: - Inputs
+    
     private let dataTaskFactory: URLSessionDataTaskFactoryProtocol
+    private var remainingNetworkIteration: UInt
+    private let timeoutURLSession: TimeInterval
     private let timerFactory: TimerFactoryProtocol
+    private let tiNetworkTesting: TimeInterval
+    private let url: URL
+    
+    // MARK: - Outputs
+    
+    public var isReachable: (() -> Void)?
+    public var isTimedOut: (() -> Void)?
+    
+    // MARK: - Variables
 
-    public var isReachable: ((Bool) -> Void)?
+    private var timer: TimerProtocol? {
+        didSet { timer?.fire() }
+    }
+    private var networkTask: URLSessionDataTaskProtocol? {
+        willSet { networkTask?.cancel() }
+        didSet { networkTask?.resume() }
+    }
 
     // MARK: - Init
 
@@ -41,43 +53,46 @@ public final class ReachabilityService: ReachabilityServiceProtocol {
         self.url = config.urlNetworkTesting
         self.timeoutURLSession = config.timeoutURLSession
         self.tiNetworkTesting = config.tiNetworkTesting
-        self.networkIteration = config.networkIteration
+        self.remainingNetworkIteration = config.networkIteration
     }
 
     deinit {
         LoggerInHouse.instance.log(message: "Deinit", event: .debug)
-        networkTask?.cancel()
-        timer?.invalidate()
+        cancelTasks()
     }
 
     // MARK: - Session & Task
 
     public func start() {
         timer = timerFactory.getTimer(timeInterval: tiNetworkTesting, repeats: true) { [weak self] in
-            self?.setNetworkTask()
-            self?.networkTask?.resume()
-
             guard let strongSelf = self else { return }
-
-            strongSelf.networkIteration -= 1
-            if strongSelf.networkIteration == 0 {
-                strongSelf.timer?.invalidate()
+            
+            guard strongSelf.remainingNetworkIteration > 0
+                else {
+                    strongSelf.cancelTasks()
+                    strongSelf.isTimedOut?()
+                    return
             }
+            strongSelf.remainingNetworkIteration -= 1
+            strongSelf.setNetworkTask()
         }
-        timer?.fire()
     }
 
     private func setNetworkTask() {
-        networkTask?.cancel()
         networkTask = dataTaskFactory.getDataTask(with: url, timeout: timeoutURLSession) { [weak self] _, response, error in
             guard
                 error == nil,
                 let r = response as? HTTPURLResponse,
                 r.statusCode >= 200 && r.statusCode < 300
-                else { self?.isReachable?(false); return }
+                else { LoggerInHouse.instance.log(message: "Unreachable network", event: .info); return }
             
             self?.timer?.invalidate()
-            self?.isReachable?(true)
+            self?.isReachable?()
         }
+    }
+    
+    private func cancelTasks() {
+        networkTask?.cancel()
+        timer?.invalidate()
     }
 }

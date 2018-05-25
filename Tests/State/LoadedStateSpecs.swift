@@ -9,6 +9,7 @@
 import Foundation
 import Quick
 import Nimble
+@testable
 import ModernAVPlayer
 
 final class LoadedStateSpecs: QuickSpec {

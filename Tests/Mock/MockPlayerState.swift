@@ -7,14 +7,17 @@
 //
 
 import Foundation
+@testable
 import ModernAVPlayer
 import AVFoundation
 
 final class MockPlayerState: PlayerState {
+    var type: ModernAVPlayerState
     var context: PlayerContext
 
-    init(context: PlayerContext) {
+    init(context: PlayerContext, state: ModernAVPlayerState = .initialization) {
         self.context = context
+        self.type = state
     }
     
     var loadMedialCallCount = 0

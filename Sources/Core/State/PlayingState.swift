@@ -10,8 +10,15 @@ import AVFoundation
 import Foundation
 import MediaPlayer
 
-public final class PlayingState: PlayerState {
-    public unowned var context: PlayerContext
+final class PlayingState: PlayerState {
+    
+    // MARK: - Input
+    
+    unowned var context: PlayerContext
+    
+    // MARK: - Variables
+    
+    var type: ModernAVPlayerState = .playing
     private var timerObserver: Any?
     private var itemPlaybackObservingService: ItemPlaybackObservingServiceProtocol
     private var routeAudioService: RouteAudioService
@@ -19,10 +26,10 @@ public final class PlayingState: PlayerState {
     
     // MARK: - Lifecycle
 
-    public init(context: PlayerContext,
-                itemPlaybackObservingService: ItemPlaybackObservingServiceProtocol = ItemPlaybackObservingService(),
-                routeAudioService: RouteAudioService = RouteAudioService(),
-                interruptionAudioService: InterruptionAudioService = InterruptionAudioService()) {
+    init(context: PlayerContext,
+         itemPlaybackObservingService: ItemPlaybackObservingServiceProtocol = ItemPlaybackObservingService(),
+         routeAudioService: RouteAudioService = RouteAudioService(),
+         interruptionAudioService: InterruptionAudioService = InterruptionAudioService()) {
         
         LoggerInHouse.instance.log(message: "Init", event: .debug)
         self.context = context
@@ -65,28 +72,28 @@ public final class PlayingState: PlayerState {
 
     // MARK: - Shared actions
 
-    public func loadMedia(media: PlayerMedia, shouldPlaying: Bool) {
+    func loadMedia(media: PlayerMedia, shouldPlaying: Bool) {
         let state = LoadingMediaState(context: context, media: media, shouldPlaying: shouldPlaying)
         context.changeState(state: state)
     }
 
-    public func pause() {
+    func pause() {
         context.changeState(state: PausedState(context: context))
     }
 
-    public func play() {
+    func play() {
         let debug = "Already playing"
         context.debugMessage = debug
         LoggerInHouse.instance.log(message: debug, event: .warning)
     }
 
-    public func seek(position: Double) {
+    func seek(position: Double) {
         let state = BufferingState(context: context)
         context.changeState(state: state)
         state.seekCommand(position: position)
     }
 
-    public func stop() {
+    func stop() {
         context.changeState(state: StoppedState(context: context))
     }
 

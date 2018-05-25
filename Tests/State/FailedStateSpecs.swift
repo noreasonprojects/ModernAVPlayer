@@ -8,6 +8,7 @@
 
 import Foundation
 import Quick
+@testable
 import ModernAVPlayer
 import Nimble
 

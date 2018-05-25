@@ -10,6 +10,7 @@ import AVFoundation
 import Foundation
 import Quick
 import Nimble
+@testable
 import ModernAVPlayer
 
 final class LoadingMediaStateSpecs: QuickSpec {
@@ -17,7 +18,7 @@ final class LoadingMediaStateSpecs: QuickSpec {
     var state: LoadingMediaState!
     var item: AVPlayerItem!
     var player: MockCustomPlayer!
-    let tested = ConcretePlayerContext(audioSessionType: MockAudioSession.self)
+    var tested: ConcretePlayerContext!
     var playerMedia = ConcretePlayerMedia(url: URL(string: "x")!, type: .clip)
     
     override func spec() {
@@ -25,7 +26,7 @@ final class LoadingMediaStateSpecs: QuickSpec {
         beforeEach {
             MockAudioSession.resetCallsCount()
             self.player = MockCustomPlayer.createOnUsingAsset(url: "foo")
-            self.tested.player = self.player
+            self.tested = ConcretePlayerContext(player: self.player, audioSessionType: MockAudioSession.self)
             self.state = LoadingMediaState(context: self.tested, media: self.playerMedia, shouldPlaying: true)
             self.tested.state = self.state
         }

@@ -9,7 +9,7 @@
 import AVFoundation
 import UIKit
 
-public protocol PlayerContext: class {
+protocol PlayerContext: class {
     var player: AVPlayer { get }
     var config: ContextConfiguration { get }
     var currentItem: AVPlayerItem? { get set }

@@ -99,12 +99,12 @@ final class ViewController: UIViewController {
         ]
     }
 
-    private var state: PlayerState? {
+    private var state: ModernAVPlayerState? {
         didSet {
             DispatchQueue.main.async {
                 self.playerStateLabel.text = self.state?.description
 
-                if let s = self.state, s is PlayingState, self.isSliderSeeking {
+                if let s = self.state, s == .playing, self.isSliderSeeking {
                     self.isSliderSeeking = false
                 }
                 if self.isPlayerWorking() {
@@ -123,7 +123,6 @@ final class ViewController: UIViewController {
         super.viewDidLoad()
 
         context.delegate = self
-        playerStateLabel.text = context.state.description
         positionSlider.value = 0
         positionSlider.addTarget(self, action: #selector(ViewController.sliderSeeking(_:)), for: .valueChanged)
         debugMessage.text = nil
@@ -141,7 +140,7 @@ final class ViewController: UIViewController {
         isSliderSeeking = true
         let limitedSliderValue = min(sender.value, 0.99)
         let position = Double(limitedSliderValue) * duration
-        context.state.seek(position: position)
+        context.seek(position: position)
     }
 
     private func setSliderValue(currentTime: Double) {
@@ -160,7 +159,7 @@ final class ViewController: UIViewController {
     }
 
     private func isPlayerWorking() -> Bool {
-        return state is BufferingState || state is LoadingMediaState
+        return state == .buffering || state == .loading || state == .waitingNetwork
     }
 
     private func setDebugMessage(_ msg: String?) {
@@ -175,7 +174,7 @@ final class ViewController: UIViewController {
 // MARK: - PLayerContextDelegate
 
 extension ViewController: PlayerContextDelegate {
-    func playerContext(_ context: ConcretePlayerContext, state: PlayerState) {
+    func playerContext(_ context: ConcretePlayerContext, state: ModernAVPlayerState) {
         self.state = state
     }
 

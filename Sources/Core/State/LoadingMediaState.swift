@@ -9,14 +9,15 @@
 import AVFoundation
 import UIKit
 
-public final class LoadingMediaState: PlayerState {
+final class LoadingMediaState: PlayerState {
     
-    // MARK: - Var
+    // MARK: - Input
     
-    public unowned let context: PlayerContext
+    unowned let context: PlayerContext
     
-    // MARK: - Private vars
+    // MARK: - Variables
     
+    var type: ModernAVPlayerState = .loading
     private let shouldPlaying: Bool
     private let media: PlayerMedia?
     private let url: URL?
@@ -26,11 +27,11 @@ public final class LoadingMediaState: PlayerState {
 
     // MARK: - Init
     
-    public init(context: PlayerContext,
-                itemUrl: URL,
-                shouldPlaying: Bool,
-                lastPosition: CMTime?,
-                interruptionAudioService: InterruptionAudioService = InterruptionAudioService()) {
+    init(context: PlayerContext,
+         itemUrl: URL,
+         shouldPlaying: Bool,
+         lastPosition: CMTime?,
+         interruptionAudioService: InterruptionAudioService = InterruptionAudioService()) {
         LoggerInHouse.instance.log(message: "Init", event: .debug)
         self.context = context
         self.shouldPlaying = shouldPlaying
@@ -46,10 +47,10 @@ public final class LoadingMediaState: PlayerState {
         createReplaceItem(url: itemUrl)
     }
 
-    public init(context: PlayerContext,
-                media: PlayerMedia,
-                shouldPlaying: Bool,
-                interruptionAudioService: InterruptionAudioService = InterruptionAudioService()) {
+    init(context: PlayerContext,
+         media: PlayerMedia,
+         shouldPlaying: Bool,
+         interruptionAudioService: InterruptionAudioService = InterruptionAudioService()) {
         LoggerInHouse.instance.log(message: "Init", event: .debug)
         self.context = context
         self.shouldPlaying = shouldPlaying
@@ -75,28 +76,28 @@ public final class LoadingMediaState: PlayerState {
 
     // MARK: - Shared actions
 
-    public func loadMedia(media: PlayerMedia, shouldPlaying: Bool) {
+    func loadMedia(media: PlayerMedia, shouldPlaying: Bool) {
         createReplaceItem(url: media.url)
     }
 
-    public func pause() {
+    func pause() {
         cancelMediaLoading()
         context.changeState(state: PausedState(context: context))
     }
 
-    public func play() {
+    func play() {
         let debug = "Please wait to be loaded"
         context.debugMessage = debug
         LoggerInHouse.instance.log(message: debug, event: .warning)
     }
 
-    public func seek(position: Double) {
+    func seek(position: Double) {
         let debug = "Unable to seek, wait the media to be loaded"
         context.debugMessage = debug
         LoggerInHouse.instance.log(message: debug, event: .warning)
     }
 
-    public func stop() {
+    func stop() {
         cancelMediaLoading()
         context.changeState(state: StoppedState(context: context))
     }

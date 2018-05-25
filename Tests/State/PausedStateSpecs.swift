@@ -9,6 +9,7 @@
 import AVFoundation
 import Foundation
 import Quick
+@testable
 import ModernAVPlayer
 import Nimble
 

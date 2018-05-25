@@ -9,17 +9,20 @@
 import AVFoundation
 import Foundation
 
-public final class BufferingState: NSObject, PlayerState {
+final class BufferingState: NSObject, PlayerState {
     
-    public unowned var context: PlayerContext
-
-    // MARK: - Private vars
-
+    // MARK: - Inputs
+    
+    unowned var context: PlayerContext
     private var observingRateService: ObservingRateServiceProtocol
+    
+    // MARK: - Variable
+
+    var type: ModernAVPlayerState = .buffering
 
     // MARK: - Init
 
-    public init(context: PlayerContext, observingRateService: ObservingRateServiceProtocol? = nil) {
+    init(context: PlayerContext, observingRateService: ObservingRateServiceProtocol? = nil) {
         LoggerInHouse.instance.log(message: "Init", event: .debug)
         self.context = context
         
@@ -63,26 +66,26 @@ public final class BufferingState: NSObject, PlayerState {
 
     // MARK: - Shared actions
 
-    public func loadMedia(media: PlayerMedia, shouldPlaying: Bool) {
+    func loadMedia(media: PlayerMedia, shouldPlaying: Bool) {
         let state = LoadingMediaState(context: context, media: media, shouldPlaying: shouldPlaying)
         context.changeState(state: state)
     }
 
-    public func pause() {
+    func pause() {
         context.changeState(state: PausedState(context: context))
     }
 
-    public func play() {
+    func play() {
         let debug = "Already trying to play"
         context.debugMessage = debug
         LoggerInHouse.instance.log(message: "Already trying to play", event: .warning)
     }
 
-    public func seek(position: Double) {
+    func seek(position: Double) {
         seekCommand(position: position)
     }
 
-    public func stop() {
+    func stop() {
         context.changeState(state: StoppedState(context: context))
     }
 }

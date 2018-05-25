@@ -14,7 +14,7 @@ public extension Reactive where Base: ConcretePlayerContext {
         return RxPlayerContextDelegateProxy.proxy(for: base)
     }
     
-    var state: Observable<ModernAVPlayer.PlayerState> {
+    var state: Observable<ModernAVPlayer.ModernAVPlayerState> {
         return RxPlayerContextDelegateProxy.proxy(for: base).stateSubject.asObservable()
     }
     

@@ -9,15 +9,19 @@
 import AVFoundation
 import Foundation
 
-public struct StoppedState: PlayerState {
+struct StoppedState: PlayerState {
 
-    // MARK: - Vars
+    // MARK: - Input
 
-    public unowned var context: PlayerContext
+    unowned var context: PlayerContext
+    
+    // MARK: - Variable
+    
+    var type: ModernAVPlayerState = .stopped
 
     // MARK: - Init
 
-    public init(context: PlayerContext) {
+    init(context: PlayerContext) {
         LoggerInHouse.instance.log(message: "Init", event: .debug)
         
         self.context = context
@@ -28,16 +32,16 @@ public struct StoppedState: PlayerState {
 
     // MARK: - Shared actions
 
-    public func loadMedia(media: PlayerMedia, shouldPlaying: Bool) {
+    func loadMedia(media: PlayerMedia, shouldPlaying: Bool) {
         let state = LoadingMediaState(context: context, media: media, shouldPlaying: shouldPlaying)
         context.changeState(state: state)
     }
 
-    public func pause() {
+    func pause() {
         context.changeState(state: PausedState(context: context))
     }
 
-    public func play() {
+    func play() {
         if context.player.currentItem?.status == .readyToPlay {
             let state = BufferingState(context: context)
             context.changeState(state: state)
@@ -49,14 +53,14 @@ public struct StoppedState: PlayerState {
         }
     }
 
-    public func seek(position: Double) {
+    func seek(position: Double) {
         let time = CMTime(seconds: position, preferredTimescale: context.config.preferedTimeScale)
         context.player.seek(to: time) { [context] completed in
             if completed { context.currentTime = position }
         }
     }
 
-    public func stop() {
+    func stop() {
         let debug = "Already stopped"
         context.debugMessage = debug
         LoggerInHouse.instance.log(message: debug, event: .warning)

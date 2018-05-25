@@ -10,7 +10,7 @@ import AVFoundation
 import UIKit
 
 public protocol PlayerContextDelegate: class {
-    func playerContext(_ context: ConcretePlayerContext, state: PlayerState)
+    func playerContext(_ context: ConcretePlayerContext, state: ModernAVPlayerState)
     func playerContext(_ context: ConcretePlayerContext, currentTime: Double?)
     func playerContext(_ context: ConcretePlayerContext, itemDuration: Double?)
     func playerContext(_ context: ConcretePlayerContext, debugMessage: String?)
@@ -19,34 +19,38 @@ public protocol PlayerContextDelegate: class {
 
 public final class ConcretePlayerContext: NSObject, PlayerContext {
     
-    // MARK: - Vars
+    // MARK: - Output
 
     public weak var delegate: PlayerContextDelegate?
 
-    public var player: AVPlayer
-    public let config: ContextConfiguration
-    public let nowPlaying: NowPlaying
-    public var bgToken: UIBackgroundTaskIdentifier?
-    public var currentItem: AVPlayerItem? {
+    // MARK: - Inputs
+    
+    let player: AVPlayer
+    let config: ContextConfiguration
+    let nowPlaying: NowPlaying
+    let audioSessionType: AudioSession.Type
+    
+    // MARK: - Variables
+    
+    var bgToken: UIBackgroundTaskIdentifier?
+    var currentItem: AVPlayerItem? {
         didSet {
             let url = (currentItem?.asset as? AVURLAsset)?.url
             delegate?.playerContext(self, currentItemUrl: url)
         }
     }
-    public var currentTime: Double? {
+    var currentTime: Double? {
         didSet { delegate?.playerContext(self, currentTime: currentTime) }
     }
-    public var itemDuration: Double? {
+    var itemDuration: Double? {
         didSet { delegate?.playerContext(self, itemDuration: itemDuration) }
     }
-    public var state: PlayerState! {
-        didSet { delegate?.playerContext(self, state: state) }
+    var state: PlayerState! {
+        didSet { delegate?.playerContext(self, state: state.type) }
     }
-    public var debugMessage: String? {
+    var debugMessage: String? {
         didSet { delegate?.playerContext(self, debugMessage: debugMessage) }
     }
-    
-    public let audioSessionType: AudioSession.Type
 
     // MARK: - LifeCycle
 
@@ -73,13 +77,13 @@ public final class ConcretePlayerContext: NSObject, PlayerContext {
     private func setupLogger() {
         LoggerInHouse.instance.levelFilter = config.loggerLevelFilter
     }
-
-    // MARK: - Public functions
-
-    public func changeState(state: PlayerState) {
+    
+    func changeState(state: PlayerState) {
         self.state = state
     }
     
+    // MARK: - Public functions
+
     public func pause() {
         state.pause()
     }

@@ -8,14 +8,14 @@
 
 import Foundation
 
-public protocol ReachabilityServiceProtocol {
+protocol ReachabilityServiceProtocol {
     var isReachable: (() -> Void)? { get set }
     var isTimedOut: (() -> Void)? { get set }
     
     func start()
 }
 
-public final class ReachabilityService: ReachabilityServiceProtocol {
+final class ReachabilityService: ReachabilityServiceProtocol {
 
     // MARK: - Inputs
     
@@ -28,8 +28,8 @@ public final class ReachabilityService: ReachabilityServiceProtocol {
     
     // MARK: - Outputs
     
-    public var isReachable: (() -> Void)?
-    public var isTimedOut: (() -> Void)?
+    var isReachable: (() -> Void)?
+    var isTimedOut: (() -> Void)?
     
     // MARK: - Variables
 
@@ -63,7 +63,7 @@ public final class ReachabilityService: ReachabilityServiceProtocol {
 
     // MARK: - Session & Task
 
-    public func start() {
+    func start() {
         timer = timerFactory.getTimer(timeInterval: tiNetworkTesting, repeats: true) { [weak self] in
             guard let strongSelf = self else { return }
             

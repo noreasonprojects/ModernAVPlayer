@@ -10,15 +10,19 @@ import AVFoundation
 import Foundation
 import MediaPlayer
 
-public struct LoadedState: PlayerState {
+struct LoadedState: PlayerState {
 
-    // MARK: - Vars
+    // MARK: - Input
 
-    public unowned var context: PlayerContext
+    unowned var context: PlayerContext
+    
+    // MARK: - Variable
+    
+    var type: ModernAVPlayerState = .loaded
 
     // MARK: - Init
 
-    public init(context: PlayerContext, media: PlayerMedia? = nil) {
+    init(context: PlayerContext, media: PlayerMedia? = nil) {
         LoggerInHouse.instance.log(message: "Init", event: .debug)
         self.context = context
         self.context.currentTime = 0
@@ -41,29 +45,29 @@ public struct LoadedState: PlayerState {
 
     // MARK: - Shared actions
     
-    public func loadMedia(media: PlayerMedia, shouldPlaying: Bool) {
+    func loadMedia(media: PlayerMedia, shouldPlaying: Bool) {
         let state = LoadingMediaState(context: context, media: media, shouldPlaying: shouldPlaying)
         context.changeState(state: state)
     }
 
-    public func pause() {
+    func pause() {
         context.changeState(state: PausedState(context: context))
     }
 
-    public func play() {
+    func play() {
         let state = BufferingState(context: context)
         context.changeState(state: state)
         state.playCommand()
     }
 
-    public func seek(position: Double) {
+    func seek(position: Double) {
         let time = CMTime(seconds: position, preferredTimescale: context.config.preferedTimeScale)
         context.player.seek(to: time) { [context] completed in
             if completed { context.currentTime = position }
         }
     }
 
-    public func stop() {
+    func stop() {
         context.changeState(state: StoppedState(context: context))
     }
 }

@@ -9,18 +9,13 @@
 import AVFoundation
 import Foundation
 
-public protocol PlayerState {
+protocol PlayerState {
     var context: PlayerContext { get }
+    var type: ModernAVPlayerState { get }
     
     func loadMedia(media: PlayerMedia, shouldPlaying: Bool)
     func pause()
     func play()
     func seek(position: Double)
     func stop()
-}
-
-public extension PlayerState {
-    var description: String {
-        return String(describing: Self.self)
-    }
 }

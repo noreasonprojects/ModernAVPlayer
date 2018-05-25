@@ -8,12 +8,19 @@
 import AVFoundation
 import Foundation
 
-public final class RouteAudioService {
+final class RouteAudioService {
  
-    private let notificationName = NSNotification.Name.AVAudioSessionRouteChange
-    public var onRouteChanged: ((AVAudioSessionRouteChangeReason) -> Void)?
+    // MARK: - Output
     
-    public init() {
+    var onRouteChanged: ((AVAudioSessionRouteChangeReason) -> Void)?
+    
+    // MARK: - Variable
+    
+    private let notificationName = NSNotification.Name.AVAudioSessionRouteChange
+    
+    // MARK: - Init
+    
+    init() {
         LoggerInHouse.instance.log(message: "Init", event: .debug)
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(audioRouteChanged),

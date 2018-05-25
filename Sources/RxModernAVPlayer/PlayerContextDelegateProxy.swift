@@ -28,7 +28,7 @@ public class RxPlayerContextDelegateProxy: DelegateProxy<ConcretePlayerContext, 
     
     // MARK: - Proxy Subjects
     
-    lazy var stateSubject = PublishSubject<ModernAVPlayer.PlayerState>()
+    lazy var stateSubject = PublishSubject<ModernAVPlayer.ModernAVPlayerState>()
     lazy var currentTimeSubject = PublishSubject<Double?>()
     lazy var itemDurationSubject = PublishSubject<Double?>()
     lazy var debugMessageSubject = PublishSubject<String?>()
@@ -36,7 +36,7 @@ public class RxPlayerContextDelegateProxy: DelegateProxy<ConcretePlayerContext, 
     
     // MARK: - PlayerContextDelegate
     
-    public func playerContext(_ context: ConcretePlayerContext, state: ModernAVPlayer.PlayerState) {
+    public func playerContext(_ context: ConcretePlayerContext, state: ModernAVPlayer.ModernAVPlayerState) {
         stateSubject.onNext(state)
     }
     

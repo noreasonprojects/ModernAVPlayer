@@ -7,7 +7,7 @@
 
 import AVFoundation
 
-public protocol ObservingRateServiceProtocol {
+protocol ObservingRateServiceProtocol {
     var onPlaying: (() -> Void)? { get set }
     var onTimeout: (() -> Void)? { get set }
 

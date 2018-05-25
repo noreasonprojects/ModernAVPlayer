@@ -10,6 +10,7 @@ import Foundation
 import Nimble
 import Quick
 import AVFoundation
+@testable
 import ModernAVPlayer
 
 final class ContextSpecs: QuickSpec {

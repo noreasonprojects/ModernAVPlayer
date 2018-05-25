@@ -8,20 +8,24 @@
 import AVFoundation
 import Foundation
 
-public final class WaitingNetworkState: PlayerState {
+final class WaitingNetworkState: PlayerState {
     
     // MARK: - Inputs
     
-    public unowned var context: PlayerContext
+    unowned var context: PlayerContext
     private var reachability: ReachabilityServiceProtocol
+    
+    // MARK: - Variable
+    
+    var type: ModernAVPlayerState = .waitingNetwork
     
     // MARK: - Init
     
-    public init(context: PlayerContext,
-                urlToReload: URL,
-                shouldPlaying: Bool,
-                error: CustomError,
-                reachabilityService: ReachabilityServiceProtocol? = nil) {
+    init(context: PlayerContext,
+         urlToReload: URL,
+         shouldPlaying: Bool,
+         error: CustomError,
+         reachabilityService: ReachabilityServiceProtocol? = nil) {
         LoggerInHouse.instance.log(message: "Init", event: .debug)
         self.context = context
         self.reachability = reachabilityService ?? ReachabilityService(config: context.config)
@@ -61,28 +65,28 @@ public final class WaitingNetworkState: PlayerState {
     
     // MARK: - Shared actions
     
-    public func loadMedia(media: PlayerMedia, shouldPlaying: Bool) {
+    func loadMedia(media: PlayerMedia, shouldPlaying: Bool) {
         let state = LoadingMediaState(context: context, media: media, shouldPlaying: shouldPlaying)
         context.changeState(state: state)
     }
     
-    public func pause() {
+    func pause() {
         context.changeState(state: PausedState(context: context))
     }
     
-    public func play() {
+    func play() {
         let debug = "Unable to play, reload a media first"
         context.debugMessage = debug
         LoggerInHouse.instance.log(message: "Unable to play, reload a media first", event: .warning)
     }
     
-    public func seek(position: Double) {
+    func seek(position: Double) {
         let debug = "Unable to seek, load a media first"
         context.debugMessage = debug
         LoggerInHouse.instance.log(message: "Unable to seek, load a media first", event: .warning)
     }
     
-    public func stop() {
+    func stop() {
         context.changeState(state: StoppedState(context: context))
     }
 }

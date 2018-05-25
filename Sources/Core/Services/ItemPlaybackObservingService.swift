@@ -7,16 +7,21 @@
 
 import Foundation
 
-public protocol ItemPlaybackObservingServiceProtocol {
+protocol ItemPlaybackObservingServiceProtocol {
     var onPlaybackStalled: (() -> Void)? { get set }
     var onPlayToEndTime: (() -> Void)? { get set }
 }
 
-public final class ItemPlaybackObservingService: ItemPlaybackObservingServiceProtocol {
-    public var onPlaybackStalled: (() -> Void)?
-    public var onPlayToEndTime: (() -> Void)?
+final class ItemPlaybackObservingService: ItemPlaybackObservingServiceProtocol {
     
-    public init() {
+    // MARK: - Outputs
+    
+    var onPlaybackStalled: (() -> Void)?
+    var onPlayToEndTime: (() -> Void)?
+    
+    // MARK: - Init
+    
+    init() {
         LoggerInHouse.instance.log(message: "Init", event: .debug)
         NotificationCenter.default.addObserver(self, selector: #selector(ItemPlaybackObservingService.itemPlaybackStalled),
                                                name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: nil)

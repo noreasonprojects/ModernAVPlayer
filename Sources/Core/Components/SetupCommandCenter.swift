@@ -13,7 +13,7 @@ public struct SetupCommandCenter {
     let context: PlayerContext
     let remote: MPRemoteCommandCenter
     
-    public init(context: PlayerContext, remote: MPRemoteCommandCenter = MPRemoteCommandCenter.shared()) {
+    public init(context: ConcretePlayerContext, remote: MPRemoteCommandCenter = MPRemoteCommandCenter.shared()) {
         self.context = context
         self.remote = remote
         defaultSetup()

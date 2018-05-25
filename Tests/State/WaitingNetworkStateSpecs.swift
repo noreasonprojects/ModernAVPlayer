@@ -51,7 +51,7 @@ final class WaitingNetworkStateSpecs: QuickSpec {
             }
         }
         
-        context("service is reachable") {
+        context("service is reachable ") {
             it("should update state context to LoadingMedia") {
                 
                 // ACT

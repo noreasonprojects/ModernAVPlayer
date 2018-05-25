@@ -116,22 +116,23 @@ public final class LoadingMediaState: PlayerState {
     }
 
     private func createReplaceItem(url: URL) {
-        let item = createItem(with: url)
-        startObservingItemStatus(item: item)
-        context.currentItem = item
         /*
+         It seems to be a good idea to reset player current item
          Loading clip media from playing state, play automatically the new clip media
          Ensure player will play only when we ask
+         Also some side effect when coming from failed state
          */
-        context.player.pause()
+        context.player.replaceCurrentItem(with: nil)
+        
+        let item = createItem(with: url)
+        
+        startObservingItemStatus(item: item)
+        context.currentItem = item
         context.player.replaceCurrentItem(with: item)
     }
     
     private func startObservingItemStatus(item: AVPlayerItem) {
-        itemStatusObserving = ItemStatusObservingService(item: item)
-        guard let iso = itemStatusObserving else { assertionFailure(); return }
-        
-        iso.itemStatusCallback = { [unowned self] status in
+        itemStatusObserving = ItemStatusObservingService(item: item) { [unowned self] status in
             self.moveToNextState(with: status)
         }
     }
@@ -149,12 +150,7 @@ public final class LoadingMediaState: PlayerState {
         case .unknown:
             assertionFailure()
         case .failed:
-            guard let url = media?.url ?? url else { assertionFailure(); return }
-            let waitingState = WaitingNetworkState(context: context,
-                                                   urlToReload: url,
-                                                   shouldPlaying: shouldPlaying,
-                                                   error: .itemFailedWhenLoading)
-            context.changeState(state: waitingState)
+            context.changeState(state: FailedState(context: context, error: .itemFailedWhenLoading))
         case .readyToPlay:
             context.itemDuration = context.player.currentItem?.duration.seconds
             guard let position = lastKnownPosition else { moveToLoadedState(); return }

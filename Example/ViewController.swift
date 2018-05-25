@@ -21,7 +21,7 @@ final class ViewController: UIViewController {
     @IBOutlet weak private var indicatorView: UIActivityIndicatorView!
     @IBOutlet weak private var debugMessage: UILabel!
     @IBOutlet weak private var currentItemLabel: UILabel!
-
+    
     // MARK: - Actions
 
     @IBAction func pause(_ sender: UIButton) {
@@ -52,6 +52,18 @@ final class ViewController: UIViewController {
         loadMedia(media, shouldPlaying: sender.tag < 3)
     }
 
+    @IBAction func loadInvalidFormat(_ sender: UIButton) {
+        let url = URL(fileURLWithPath: Bundle.main.path(forResource: "noreason", ofType: "txt")!)
+        let media = ConcretePlayerMedia(url: url, type: .clip)
+        loadMedia(media, shouldPlaying: true)
+    }
+    
+    @IBAction func loadInvalidRemoteUrl(_ sender: UIButton) {
+        let url = URL(string: "foo://noreason")!
+        let media = ConcretePlayerMedia(url: url, type: .clip)
+        loadMedia(media, shouldPlaying: true)
+    }
+    
     // MARK: - Private vars
 
     private let config = PlayerContextConfiguration()

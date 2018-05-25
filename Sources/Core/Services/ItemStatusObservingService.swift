@@ -11,12 +11,17 @@ import Foundation
 
 final class ItemStatusObservingService: NSObject {
     
-    var item: AVPlayerItem
-    var itemStatusCallback: ((AVPlayerItemStatus) -> Void)?
+    // MARK: - Inputs
     
-    init(item: AVPlayerItem) {
+    private let item: AVPlayerItem
+    private let itemStatusCallback: (AVPlayerItemStatus) -> Void
+    
+    // MARK: - Init
+    
+    init(item: AVPlayerItem, callback: @escaping (AVPlayerItemStatus) -> Void) {
         LoggerInHouse.instance.log(message: "Init", event: .debug)
         self.item = item
+        self.itemStatusCallback = callback
         super.init()
         
         item.addObserver(self, forKeyPath: #keyPath(AVPlayerItem.status), options: [.new], context: nil)
@@ -26,6 +31,8 @@ final class ItemStatusObservingService: NSObject {
         LoggerInHouse.instance.log(message: "Deinit", event: .debug)
         item.removeObserver(self, forKeyPath: #keyPath(AVPlayerItem.status))
     }
+
+    // MARK: - Service
     
     /*
      Fetch only nil values when observe with the new kvo block observe.
@@ -42,6 +49,6 @@ final class ItemStatusObservingService: NSObject {
             let status = AVPlayerItemStatus(rawValue: rawStatus)
             else { return }
         
-        itemStatusCallback?(status)
+        itemStatusCallback(status)
     }
 }

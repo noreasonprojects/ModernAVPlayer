@@ -5,8 +5,8 @@
 
 ## Requirements
 
-- iOS 10.0+
-- Xcode 9.2+
+- iOS 9.0+
+- Xcode 9.3+
 - Swift 4.0+
 
 ## Installation
@@ -25,7 +25,7 @@ To integrate ``ModernAVPlayer`` into your Xcode project using CocoaPods, specify
 
 ```ruby
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '10.0'
+platform :ios, '9.0'
 use_frameworks!
 
 target '<Your Target Name>' do
@@ -56,7 +56,7 @@ $ pod install
 
 > Create a media
 ```swift
-let media = ConcretePlayerMedia(url: liveUrl, type: .stream, isLive: true)
+let media = PlayerMedia(url: liveUrl, type: .stream, isLive: true)
 ```
 > Instanciate the wrapper
 ```swift
@@ -64,7 +64,7 @@ let player = ModernAVPlayer()
 ```
 > Load and play the media
 ```swift
-player.loadMedia(media: media, shouldPlaying: shouldPlaying)
+player.loadMedia(media: media, shouldPlaying: true)
 ```
 
 ### Available Commands
@@ -87,10 +87,9 @@ Instead of using delegate pattern, you can use rx to bind player attributes.
 Use ``pod 'ModernAVPlayer/RxSwift'`` in the Podfile
 > Usage
 ```swift
-let context = ConcretePlayerContext(config: PlayerContextConfiguration())
-let state = context.rx.state
+let player = ModernAVPlayer()
+let state: Observable<ModernAVPlayer.State> = player.rx.state
 ```
-`state` is now an `observable<PlayerState>`
 
 ## Communication
 

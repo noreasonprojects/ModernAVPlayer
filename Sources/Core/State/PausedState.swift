@@ -18,7 +18,7 @@ struct PausedState: PlayerState {
     
     // MARK: - Variable
     
-    var type: ModernAVPlayerState = .paused
+    var type: ModernAVPlayer.State = .paused
 
     // MARK: Init
     

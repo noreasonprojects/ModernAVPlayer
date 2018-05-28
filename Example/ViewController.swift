@@ -25,11 +25,11 @@ final class ViewController: UIViewController {
     // MARK: - Actions
 
     @IBAction func pause(_ sender: UIButton) {
-        context.pause()
+        player.pause()
     }
 
     @IBAction func play(_ sender: UIButton) {
-        context.play()
+        player.play()
     }
 
     @IBAction func fixSeeking(_ sender: UIButton) {
@@ -40,11 +40,11 @@ final class ViewController: UIViewController {
             else { setDebugMessage("Seek unavailable for live audio"); return }
 
         let seektime = (sender.tag == 0) ? currentTimeInDouble - 10 : currentTimeInDouble + 10
-        context.seek(position: seektime)
+        player.seek(position: seektime)
     }
 
     @IBAction func stop(_ sender: UIButton) {
-        context.stop()
+        player.stop()
     }
 
     @IBAction func loadMedia(_ sender: UIButton) {
@@ -66,8 +66,7 @@ final class ViewController: UIViewController {
     
     // MARK: - Private vars
 
-    private let config = PlayerContextConfiguration()
-    private lazy var context = ConcretePlayerContext(config: config)
+    private let player = ModernAVPlayer(config: PlayerContextConfiguration())
     private var commandCenter: SetupCommandCenter?
     private var itemDuration: Double? {
         didSet {
@@ -99,7 +98,7 @@ final class ViewController: UIViewController {
         ]
     }
 
-    private var state: ModernAVPlayerState? {
+    private var state: ModernAVPlayer.State? {
         didSet {
             DispatchQueue.main.async {
                 self.playerStateLabel.text = self.state?.description
@@ -122,11 +121,11 @@ final class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        context.delegate = self
+        player.delegate = self
         positionSlider.value = 0
         positionSlider.addTarget(self, action: #selector(ViewController.sliderSeeking(_:)), for: .valueChanged)
         debugMessage.text = nil
-        commandCenter = SetupCommandCenter(context: context)
+        commandCenter = SetupCommandCenter(player: player)
     }
 
     // MARK: - Slider events
@@ -140,7 +139,7 @@ final class ViewController: UIViewController {
         isSliderSeeking = true
         let limitedSliderValue = min(sender.value, 0.99)
         let position = Double(limitedSliderValue) * duration
-        context.seek(position: position)
+        player.seek(position: position)
     }
 
     private func setSliderValue(currentTime: Double) {
@@ -155,7 +154,7 @@ final class ViewController: UIViewController {
     // MARK: - Player utils
 
     private func loadMedia(_ media: PlayerMedia, shouldPlaying: Bool) {
-        context.loadMedia(media: media, shouldPlaying: shouldPlaying)
+        player.loadMedia(media: media, shouldPlaying: shouldPlaying)
     }
 
     private func isPlayerWorking() -> Bool {
@@ -173,24 +172,24 @@ final class ViewController: UIViewController {
 
 // MARK: - PLayerContextDelegate
 
-extension ViewController: PlayerContextDelegate {
-    func playerContext(_ context: ConcretePlayerContext, state: ModernAVPlayerState) {
+extension ViewController: ModernAVPlayerDelegate {
+    func modernAVPlayer(state: ModernAVPlayer.State) {
         self.state = state
     }
 
-    func playerContext(_ context: ConcretePlayerContext, currentTime: Double?) {
+    func modernAVPlayer(currentTime: Double?) {
         self.currentTime = currentTime
     }
 
-    func playerContext(_ context: ConcretePlayerContext, itemDuration: Double?) {
+    func modernAVPlayer(itemDuration: Double?) {
         self.itemDuration = itemDuration
     }
 
-    func playerContext(_ context: ConcretePlayerContext, debugMessage: String?) {
+    func modernAVPlayer(debugMessage: String?) {
         setDebugMessage(debugMessage)
     }
 
-    func playerContext(_ context: ConcretePlayerContext, currentItemUrl: URL?) {
+    func modernAVPlayer(currentItemUrl: URL?) {
         DispatchQueue.main.async {
             self.currentItemLabel.text = currentItemUrl?.absoluteString
         }

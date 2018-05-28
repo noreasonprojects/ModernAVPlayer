@@ -12,10 +12,10 @@ import ModernAVPlayer
 import AVFoundation
 
 final class MockPlayerState: PlayerState {
-    var type: ModernAVPlayerState
+    var type: ModernAVPlayer.State
     var context: PlayerContext
 
-    init(context: PlayerContext, state: ModernAVPlayerState = .initialization) {
+    init(context: PlayerContext, state: ModernAVPlayer.State = .initialization) {
         self.context = context
         self.type = state
     }

@@ -17,7 +17,7 @@ final class FailedState: PlayerState {
     
     // MARK: - Variable
     
-    var type: ModernAVPlayerState = .failed
+    var type: ModernAVPlayer.State = .failed
     
     // MARK: - Init
     

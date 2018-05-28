@@ -11,7 +11,7 @@ import Foundation
 
 protocol PlayerState {
     var context: PlayerContext { get }
-    var type: ModernAVPlayerState { get }
+    var type: ModernAVPlayer.State { get }
     
     func loadMedia(media: PlayerMedia, shouldPlaying: Bool)
     func pause()

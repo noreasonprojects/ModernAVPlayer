@@ -17,7 +17,7 @@ final class LoadingMediaState: PlayerState {
     
     // MARK: - Variables
     
-    var type: ModernAVPlayerState = .loading
+    var type: ModernAVPlayer.State = .loading
     private let shouldPlaying: Bool
     private let media: PlayerMedia?
     private let url: URL?

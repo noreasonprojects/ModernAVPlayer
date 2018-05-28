@@ -18,7 +18,7 @@ final class PlayingState: PlayerState {
     
     // MARK: - Variables
     
-    var type: ModernAVPlayerState = .playing
+    var type: ModernAVPlayer.State = .playing
     private var timerObserver: Any?
     private var itemPlaybackObservingService: ItemPlaybackObservingServiceProtocol
     private var routeAudioService: RouteAudioService

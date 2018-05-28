@@ -17,7 +17,7 @@ struct InitState: PlayerState {
     
     // MARK: - Variable
     
-    var type: ModernAVPlayerState = .initialization
+    var type: ModernAVPlayer.State = .initialization
     
     // MARK: - Init
 

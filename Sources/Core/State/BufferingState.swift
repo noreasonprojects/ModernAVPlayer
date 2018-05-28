@@ -18,7 +18,7 @@ final class BufferingState: NSObject, PlayerState {
     
     // MARK: - Variable
 
-    var type: ModernAVPlayerState = .buffering
+    var type: ModernAVPlayer.State = .buffering
 
     // MARK: - Init
 

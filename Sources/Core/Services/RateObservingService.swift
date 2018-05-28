@@ -38,8 +38,8 @@ final class ModernAVPlayerRateObservingService: RateObservingService {
     
     init(config: PlayerConfiguration, item: AVPlayerItem, timerFactory: TimerFactory = ModernAVPlayerTimerFactory()) {
         LoggerInHouse.instance.log(message: "Init", event: .debug)
-        timeInterval = config.playerRateObserving
-        timeout = config.timeoutBuffering
+        timeInterval = config.rateObservingTickTime
+        timeout = config.rateObservingTimeout
         self.timerFactory = timerFactory
         self.item = item
     }

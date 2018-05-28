@@ -50,10 +50,10 @@ final class ModernAVPlayerReachabilityService: ReachabilityService {
         
         self.dataTaskFactory = dataTaskFactory
         self.timerFactory = timerFactory
-        self.url = config.urlNetworkTesting
-        self.timeoutURLSession = config.timeoutURLSession
-        self.tiNetworkTesting = config.tiNetworkTesting
-        self.remainingNetworkIteration = config.networkIteration
+        self.url = config.reachabilityNetworkTestingURL
+        self.timeoutURLSession = config.reachabilityURLSessionTimeout
+        self.tiNetworkTesting = config.reachabilityNetworkTestingTickTime
+        self.remainingNetworkIteration = config.reachabilityNetworkTestingIteration
     }
 
     deinit {

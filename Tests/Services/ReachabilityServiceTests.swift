@@ -77,7 +77,7 @@ final class ReachabilityServiceTests: QuickSpec {
                     
                     // ACT
                     self.tested.start()
-                    let maxIterationAvailable = self.config.networkIteration
+                    let maxIterationAvailable = self.config.reachabilityNetworkTestingIteration
                     (0...maxIterationAvailable).forEach { _ in
                         self.mockTimerFactory.lastCompletion?()
                     }
@@ -90,7 +90,7 @@ final class ReachabilityServiceTests: QuickSpec {
                     
                     // ACT
                     self.tested.start()
-                    let maxIterationAvailable = self.config.networkIteration
+                    let maxIterationAvailable = self.config.reachabilityNetworkTestingIteration
                     (0...maxIterationAvailable).forEach { _ in
                         self.mockTimerFactory.lastCompletion?()
                     }
@@ -105,7 +105,7 @@ final class ReachabilityServiceTests: QuickSpec {
                     
                     // ACT
                     self.tested.start()
-                    let maxIterationAvailable = self.config.networkIteration - 1
+                    let maxIterationAvailable = self.config.reachabilityNetworkTestingIteration - 1
                     var iteration = 0
                     
                     while iteration < maxIterationAvailable {

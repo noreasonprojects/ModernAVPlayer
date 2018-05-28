@@ -15,7 +15,17 @@ public protocol ModernAVPlayerDelegate: class {
     func modernAVPlayer(currentItemUrl: URL?)
 }
 
-public final class ModernAVPlayer {
+protocol ModernAVPlayerProtocol {
+    func loadMedia(media: PlayerMediaProtocol, shouldPlaying: Bool)
+    func pause()
+    func play()
+    func seek(position: Double)
+    func stop()
+    
+    var delegate: ModernAVPlayerDelegate? { get set }
+}
+
+public final class ModernAVPlayer: ModernAVPlayerProtocol {
     
     // MARK: - Outputs
     
@@ -49,9 +59,9 @@ public final class ModernAVPlayer {
                 audioSessionType: AudioSession.Type = AudioSessionService.self) {
         
         context = PlayerContext(player: player,
-                                        config: config,
-                                        nowPlaying: nowPlaying,
-                                        audioSessionType: audioSessionType)
+                                config: config,
+                                nowPlaying: nowPlaying,
+                                audioSessionType: audioSessionType)
     }
     
     // MARK: - Actions

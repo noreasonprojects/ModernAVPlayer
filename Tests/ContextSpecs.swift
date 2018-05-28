@@ -95,14 +95,14 @@ final class ContextSpecs: QuickSpec {
 
                 // ARRANGE
                 self.tested.changeState(state: self.mockState)
-                let media = ConcretePlayerMedia(url: URL(string: "foo")!, type: .clip)
+                let media = PlayerMedia(url: URL(string: "foo")!, type: .clip)
 
                 // ACT
                 self.tested.loadMedia(media: media, shouldPlaying: false)
 
                 // ASSERT
                 expect(self.mockState.loadMedialCallCount).to(equal(1))
-                expect(self.mockState.lastMediaParam as? ConcretePlayerMedia).to(equal(media))
+                expect(self.mockState.lastMediaParam as? PlayerMedia).to(equal(media))
                 expect(self.mockState.lastShoudlPlayingParam).to(beFalse())
             }
         }

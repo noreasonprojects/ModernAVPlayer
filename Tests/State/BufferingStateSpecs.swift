@@ -16,7 +16,7 @@ final class BufferingStateSpecs: QuickSpec {
     private var bufferingState: BufferingState!
     private var mockPlayer = MockCustomPlayer()
     private var mockRateService: MockObservingRateService!
-    private var playerMedia = ConcretePlayerMedia(url: URL(string: "x")!, type: .clip)
+    private var playerMedia = PlayerMedia(url: URL(string: "x")!, type: .clip)
     private lazy var tested = PlayerContext(player: self.mockPlayer, audioSessionType: MockAudioSession.self)
 
     override func spec() {

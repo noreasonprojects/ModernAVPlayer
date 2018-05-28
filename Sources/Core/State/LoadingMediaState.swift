@@ -18,7 +18,7 @@ final class LoadingMediaState: PlayerState {
     
     var type: ModernAVPlayer.State = .loading
     private let shouldPlaying: Bool
-    private let media: PlayerMedia?
+    private let media: PlayerMediaProtocol?
     private let url: URL?
     private let lastKnownPosition: CMTime?
     private var itemStatusObserving: ItemStatusObservingService?
@@ -47,7 +47,7 @@ final class LoadingMediaState: PlayerState {
     }
 
     init(context: PlayerContextProtocol,
-         media: PlayerMedia,
+         media: PlayerMediaProtocol,
          shouldPlaying: Bool,
          interruptionAudioService: InterruptionAudioService = InterruptionAudioService()) {
         LoggerInHouse.instance.log(message: "Init", event: .debug)
@@ -75,7 +75,7 @@ final class LoadingMediaState: PlayerState {
 
     // MARK: - Shared actions
 
-    func loadMedia(media: PlayerMedia, shouldPlaying: Bool) {
+    func loadMedia(media: PlayerMediaProtocol, shouldPlaying: Bool) {
         createReplaceItem(url: media.url)
     }
 

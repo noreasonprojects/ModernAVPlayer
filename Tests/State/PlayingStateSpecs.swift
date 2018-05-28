@@ -15,7 +15,7 @@ import Nimble
 
 final class PlayingStateSpecs: QuickSpec {
 
-    var media: PlayerMedia!
+    var media: PlayerMediaProtocol!
     var playingState: PlayingState!
     var itemPlaybackObservingService: MockItemPlaybackObservingService!
     var mockPlayer: MockCustomPlayer!
@@ -27,7 +27,7 @@ final class PlayingStateSpecs: QuickSpec {
         beforeEach {
             self.routeAudioService = RouteAudioService()
             self.mockPlayer = MockCustomPlayer.createOne(url: "foo")
-            self.media = ConcretePlayerMedia(url: URL(string: "foo")!, type: .clip)
+            self.media = PlayerMedia(url: URL(string: "foo")!, type: .clip)
             self.itemPlaybackObservingService = MockItemPlaybackObservingService()
             self.tested = PlayerContext(player: self.mockPlayer)
             self.playingState = PlayingState(context: self.tested,

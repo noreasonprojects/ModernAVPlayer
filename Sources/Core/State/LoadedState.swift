@@ -21,7 +21,7 @@ struct LoadedState: PlayerState {
 
     // MARK: - Init
 
-    init(context: PlayerContextProtocol, media: PlayerMedia? = nil) {
+    init(context: PlayerContextProtocol, media: PlayerMediaProtocol? = nil) {
         LoggerInHouse.instance.log(message: "Init", event: .debug)
         self.context = context
         self.context.currentTime = 0
@@ -44,7 +44,7 @@ struct LoadedState: PlayerState {
 
     // MARK: - Shared actions
     
-    func loadMedia(media: PlayerMedia, shouldPlaying: Bool) {
+    func loadMedia(media: PlayerMediaProtocol, shouldPlaying: Bool) {
         let state = LoadingMediaState(context: context, media: media, shouldPlaying: shouldPlaying)
         context.changeState(state: state)
     }

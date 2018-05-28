@@ -68,7 +68,7 @@ public final class ModernAVPlayer {
         context.stop()
     }
     
-    public func loadMedia(media: PlayerMedia, shouldPlaying: Bool) {
+    public func loadMedia(media: PlayerMediaProtocol, shouldPlaying: Bool) {
         context.loadMedia(media: media, shouldPlaying: shouldPlaying)
     }
     

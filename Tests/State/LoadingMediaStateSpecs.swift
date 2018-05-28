@@ -19,7 +19,7 @@ final class LoadingMediaStateSpecs: QuickSpec {
     var item: AVPlayerItem!
     var player: MockCustomPlayer!
     var tested: PlayerContext!
-    var playerMedia = ConcretePlayerMedia(url: URL(string: "x")!, type: .clip)
+    var playerMedia = PlayerMedia(url: URL(string: "x")!, type: .clip)
     
     override func spec() {
         

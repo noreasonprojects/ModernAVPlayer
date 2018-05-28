@@ -31,7 +31,7 @@ struct InitState: PlayerState {
     
     // MARK: - Shared actions
 
-    func loadMedia(media: PlayerMedia, shouldPlaying: Bool) {
+    func loadMedia(media: PlayerMediaProtocol, shouldPlaying: Bool) {
         let state = LoadingMediaState(context: context, media: media, shouldPlaying: shouldPlaying)
         context.changeState(state: state)
     }

@@ -54,13 +54,13 @@ final class ViewController: UIViewController {
 
     @IBAction func loadInvalidFormat(_ sender: UIButton) {
         let url = URL(fileURLWithPath: Bundle.main.path(forResource: "noreason", ofType: "txt")!)
-        let media = ConcretePlayerMedia(url: url, type: .clip)
+        let media = PlayerMedia(url: url, type: .clip)
         loadMedia(media, shouldPlaying: true)
     }
     
     @IBAction func loadInvalidRemoteUrl(_ sender: UIButton) {
         let url = URL(string: "foo://noreason")!
-        let media = ConcretePlayerMedia(url: url, type: .clip)
+        let media = PlayerMedia(url: url, type: .clip)
         loadMedia(media, shouldPlaying: true)
     }
     
@@ -81,18 +81,18 @@ final class ViewController: UIViewController {
             setSliderValue(currentTime: time)
         }
     }
-    private var medias: [PlayerMedia] {
+    private var medias: [PlayerMediaProtocol] {
         //swiftlint:disable force_unwrapping
         let liveUrl = URL(string: "http://direct.franceinter.fr/live/franceinter-midfi.mp3")!
         let remoteClip = URL(string: "http://media.radiofrance-podcast.net/podcast09/13100-17.01.2017-ITEMA_21199585-0.mp3")!
         let localClip = URL(fileURLWithPath: Bundle.main.path(forResource: "AllNew", ofType: "mp3")!)
         //swiftlint:enable force_unwrapping
         return [
-            ConcretePlayerMedia(url: liveUrl, type: .stream(isLive: true), title: "Le live",
+            PlayerMedia(url: liveUrl, type: .stream(isLive: true), title: "Le live",
                                 albumTitle: "Album0", artist: "Artist0", localImageName: "sennaLive"),
-            ConcretePlayerMedia(url: remoteClip, type: .clip, title: "Remote clip",
+            PlayerMedia(url: remoteClip, type: .clip, title: "Remote clip",
                                 albumTitle: "Album1", artist: "Artist1", localImageName: "sennaClip"),
-            ConcretePlayerMedia(url: localClip, type: .clip, title: "Local clip",
+            PlayerMedia(url: localClip, type: .clip, title: "Local clip",
                                 albumTitle: "Album2", artist: "Artist2", localImageName: "ankierman",
                                 remoteImageUrl: URL(string: "https://goo.gl/U4QoQj"))
         ]
@@ -153,7 +153,7 @@ final class ViewController: UIViewController {
 
     // MARK: - Player utils
 
-    private func loadMedia(_ media: PlayerMedia, shouldPlaying: Bool) {
+    private func loadMedia(_ media: PlayerMediaProtocol, shouldPlaying: Bool) {
         player.loadMedia(media: media, shouldPlaying: shouldPlaying)
     }
 

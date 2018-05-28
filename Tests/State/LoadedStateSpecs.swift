@@ -16,7 +16,7 @@ final class LoadedStateSpecs: QuickSpec {
     
     private var loadedState: LoadedState!
     private var mockPlayer: MockCustomPlayer!
-    private var playerMedia = ConcretePlayerMedia(url: URL(string: "x")!, type: .clip)
+    private var playerMedia = PlayerMedia(url: URL(string: "x")!, type: .clip)
     private var tested: PlayerContext!
     
     override func spec() {

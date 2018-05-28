@@ -17,7 +17,7 @@ final class FailedStateSpecs: QuickSpec {
     private var state: FailedState!
     private var mockPlayer = MockCustomPlayer()
     private var url: URL!
-    private var playerMedia = ConcretePlayerMedia(url: URL(string: "x")!, type: .clip)
+    private var playerMedia = PlayerMedia(url: URL(string: "x")!, type: .clip)
 
     private lazy var tested = PlayerContext(player: self.mockPlayer)
 

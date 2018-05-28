@@ -23,7 +23,7 @@ protocol PlayerContextProtocol: class {
     func play()
     func seek(position: Double)
     func stop()
-    func loadMedia(media: PlayerMedia, shouldPlaying: Bool)
+    func loadMedia(media: PlayerMediaProtocol, shouldPlaying: Bool)
     func changeState(state: PlayerState)
     
     var audioSessionType: AudioSession.Type { get }
@@ -106,7 +106,7 @@ final class PlayerContext: NSObject, PlayerContextProtocol {
         state.stop()
     }
 
-    func loadMedia(media: PlayerMedia, shouldPlaying: Bool) {
+    func loadMedia(media: PlayerMediaProtocol, shouldPlaying: Bool) {
         state.loadMedia(media: media, shouldPlaying: shouldPlaying)
     }
     

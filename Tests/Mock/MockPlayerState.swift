@@ -21,9 +21,9 @@ final class MockPlayerState: PlayerState {
     }
     
     var loadMedialCallCount = 0
-    var lastMediaParam: PlayerMedia?
+    var lastMediaParam: PlayerMediaProtocol?
     var lastShoudlPlayingParam: Bool?
-    func loadMedia(media: PlayerMedia, shouldPlaying: Bool) {
+    func loadMedia(media: PlayerMediaProtocol, shouldPlaying: Bool) {
         loadMedialCallCount += 1
         lastMediaParam = media
         lastShoudlPlayingParam = shouldPlaying

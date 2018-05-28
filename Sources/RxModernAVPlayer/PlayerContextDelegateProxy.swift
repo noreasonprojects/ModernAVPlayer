@@ -8,17 +8,17 @@
 import RxCocoa
 import RxSwift
 
-extension ConcretePlayerContext: HasDelegate {
-    public typealias Delegate = PlayerContextDelegate
+extension ModernAVPlayer: HasDelegate {
+    public typealias Delegate = ModernAVPlayerDelegate
 }
 
-public class RxPlayerContextDelegateProxy: DelegateProxy<ConcretePlayerContext, PlayerContextDelegate>,
+public class RxPlayerContextDelegateProxy: DelegateProxy<ModernAVPlayer, ModernAVPlayerDelegate>,
     DelegateProxyType,
-    PlayerContextDelegate {
+    ModernAVPlayerDelegate {
     
     // MARK: - Initialization
     
-    public init(playerContext: ConcretePlayerContext) {
+    public init(playerContext: ModernAVPlayer) {
         super.init(parentObject: playerContext, delegateProxy: RxPlayerContextDelegateProxy.self)
     }
     
@@ -28,7 +28,7 @@ public class RxPlayerContextDelegateProxy: DelegateProxy<ConcretePlayerContext, 
     
     // MARK: - Proxy Subjects
     
-    lazy var stateSubject = PublishSubject<ModernAVPlayer.ModernAVPlayerState>()
+    lazy var stateSubject = PublishSubject<ModernAVPlayer.State>()
     lazy var currentTimeSubject = PublishSubject<Double?>()
     lazy var itemDurationSubject = PublishSubject<Double?>()
     lazy var debugMessageSubject = PublishSubject<String?>()
@@ -36,23 +36,23 @@ public class RxPlayerContextDelegateProxy: DelegateProxy<ConcretePlayerContext, 
     
     // MARK: - PlayerContextDelegate
     
-    public func playerContext(_ context: ConcretePlayerContext, state: ModernAVPlayer.ModernAVPlayerState) {
+    public func modernAVPlayer(state: ModernAVPlayer.State) {
         stateSubject.onNext(state)
     }
     
-    public func playerContext(_ context: ConcretePlayerContext, currentTime: Double?) {
+    public func modernAVPlayer(currentTime: Double?) {
         currentTimeSubject.onNext(currentTime)
     }
     
-    public func playerContext(_ context: ConcretePlayerContext, itemDuration: Double?) {
+    public func modernAVPlayer(itemDuration: Double?) {
         itemDurationSubject.onNext(itemDuration)
     }
     
-    public func playerContext(_ context: ConcretePlayerContext, debugMessage: String?) {
+    public func modernAVPlayer(debugMessage: String?) {
         debugMessageSubject.onNext(debugMessage)
     }
     
-    public func playerContext(_ context: ConcretePlayerContext, currentItemUrl: URL?) {
+    public func modernAVPlayer(currentItemUrl: URL?) {
         currentItemUrlSubject.onNext(currentItemUrl)
     }
 }

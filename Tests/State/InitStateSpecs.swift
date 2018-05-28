@@ -15,7 +15,7 @@ import Nimble
 final class InitStateSpecs: QuickSpec {
 
     var state: InitState!
-    let tested = ConcretePlayerContext()
+    let tested = PlayerContext()
     let media = ConcretePlayerMedia(url: URL(string: "foo")!, type: .stream(isLive: false))
 
     override func spec() {

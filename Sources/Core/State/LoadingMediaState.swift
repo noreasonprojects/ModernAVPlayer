@@ -12,7 +12,7 @@ final class LoadingMediaState: PlayerState {
     
     // MARK: - Input
     
-    unowned let context: PlayerContext
+    unowned let context: PlayerContextProtocol
     
     // MARK: - Variables
     
@@ -26,7 +26,7 @@ final class LoadingMediaState: PlayerState {
 
     // MARK: - Init
     
-    init(context: PlayerContext,
+    init(context: PlayerContextProtocol,
          itemUrl: URL,
          shouldPlaying: Bool,
          lastPosition: CMTime?,
@@ -46,7 +46,7 @@ final class LoadingMediaState: PlayerState {
         createReplaceItem(url: itemUrl)
     }
 
-    init(context: PlayerContext,
+    init(context: PlayerContextProtocol,
          media: PlayerMedia,
          shouldPlaying: Bool,
          interruptionAudioService: InterruptionAudioService = InterruptionAudioService()) {
@@ -137,7 +137,7 @@ final class LoadingMediaState: PlayerState {
         }
     }
 
-    private func startBgTask(context: PlayerContext) {
+    private func startBgTask(context: PlayerContextProtocol) {
         context.bgToken = UIApplication.shared.beginBackgroundTask { [context] in
             if let token = context.bgToken { UIApplication.shared.endBackgroundTask(token) }
             context.bgToken = nil

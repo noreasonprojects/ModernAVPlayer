@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		010C18FE7A14642925BF403782565EFB /* RouteAudioService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D606E9A496399DDAE9DECAB6E1D0B8 /* RouteAudioService.swift */; };
-		083DA194F96B3613F000ADAE744612BC /* ConcretePlayerContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCE491AA214CCD0D902D12C2522D2D1 /* ConcretePlayerContext.swift */; };
+		083DA194F96B3613F000ADAE744612BC /* PlayerContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCE491AA214CCD0D902D12C2522D2D1 /* PlayerContext.swift */; };
 		0A2CA8B0DD7E300ABFCF1956E6B58248 /* Nimble.h in Headers */ = {isa = PBXBuildFile; fileRef = 70984F78BD55360A6CBE89D88BCB41E9 /* Nimble.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C1D517EB8AC6092DA87EE24760676FD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDD0F5DAA0AC84C5E3ADE087C20B50BA /* Foundation.framework */; };
 		0D718A02CF43A540ED5A78B6979AE507 /* ModernAVPlayer-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B37BD2AB73AFA72AB1126C73EDD36A2 /* ModernAVPlayer-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -96,7 +96,6 @@
 		97ECF97F2FAA5D4DC42FC08EE8766A39 /* QuickSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = D04148879FC4C12EE7164A5D15E7902C /* QuickSpec.m */; };
 		988EED125395950177DC14AF9BC87D8D /* HaveCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = E968A0EC49A1127A198F9FB2D16E6A6A /* HaveCount.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		9AC6400E59DAC1DFBE28E01BD502CC25 /* World.h in Headers */ = {isa = PBXBuildFile; fileRef = 5DAD8FF9F7530EBCB7BE021E75D541D2 /* World.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		9F1C187F792C5140A8EDE4C2D6641473 /* PlayerContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52029B780EF7003049D5E086F209C95 /* PlayerContext.swift */; };
 		9F1C686B9567CF0287FE17B59E7DF5D8 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCFDFF37F9CF50E5BC4C9A4B9BCB12B /* Filter.swift */; };
 		A272932A4DF9AC2D3B0A21AC70606F6D /* CwlBadInstructionException.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C8B34BD329255AC55E49E8A5ACF5A8 /* CwlBadInstructionException.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		A40FBEBF6D242204FD27BF4B2F9B9404 /* Example.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A87D5E255A265D2589774D14E68CF1 /* Example.swift */; };
@@ -347,7 +346,6 @@
 		E17ED73A20BBFE1F00BFC749 /* ModernAVPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModernAVPlayer.swift; sourceTree = "<group>"; };
 		E2A87D5E255A265D2589774D14E68CF1 /* Example.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Example.swift; path = Sources/Quick/Example.swift; sourceTree = "<group>"; };
 		E4E708E405F17F36516793443E2C60C2 /* Pods_ModernAVPlayer_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ModernAVPlayer_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E52029B780EF7003049D5E086F209C95 /* PlayerContext.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PlayerContext.swift; sourceTree = "<group>"; };
 		E6AF8F20E350CCD285A7E9B3E4CE3943 /* Expectation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Expectation.swift; path = Sources/Nimble/Expectation.swift; sourceTree = "<group>"; };
 		E71C6B028F3D1FA7032D2AD0D2F14C2C /* Pods-ModernAVPlayer_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ModernAVPlayer_Example-resources.sh"; sourceTree = "<group>"; };
 		E8A97A5CFE80F19F1572E0F63CC9674E /* Match.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Match.swift; path = Sources/Nimble/Matchers/Match.swift; sourceTree = "<group>"; };
@@ -365,7 +363,7 @@
 		F7E0AA94CE0CAA49E486E888D98FE9E4 /* AsyncMatcherWrapper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AsyncMatcherWrapper.swift; path = Sources/Nimble/Matchers/AsyncMatcherWrapper.swift; sourceTree = "<group>"; };
 		F8281D14B3039A8B628B9C06DA9CAAF5 /* ExpectationMessage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpectationMessage.swift; path = Sources/Nimble/ExpectationMessage.swift; sourceTree = "<group>"; };
 		FA4B3673AAEEA42E3AC9026F1C58EB0E /* NimbleEnvironment.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NimbleEnvironment.swift; path = Sources/Nimble/Adapters/NimbleEnvironment.swift; sourceTree = "<group>"; };
-		FCCE491AA214CCD0D902D12C2522D2D1 /* ConcretePlayerContext.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConcretePlayerContext.swift; path = Sources/Core/ConcretePlayerContext.swift; sourceTree = "<group>"; };
+		FCCE491AA214CCD0D902D12C2522D2D1 /* PlayerContext.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PlayerContext.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -419,7 +417,7 @@
 				A7E6ADCD7C43052E6F2C94361435E74B /* ContextConfiguration.swift */,
 				692A56113744C9C3844A9A02B5F993F8 /* CustomError.swift */,
 				B2B6F62556677653636CCA33104B80B1 /* MediaType.swift */,
-				E52029B780EF7003049D5E086F209C95 /* PlayerContext.swift */,
+				FCCE491AA214CCD0D902D12C2522D2D1 /* PlayerContext.swift */,
 				142C01E21153381C5DCEDC7E11EAEB46 /* PlayerMedia.swift */,
 				97F2B8B8661414FFDF764591D9A1F992 /* PlayerState.swift */,
 				378E8D500DB6F1B2B6B5C6573F64F220 /* SetupCommandCenter.swift */,
@@ -504,7 +502,6 @@
 		6E313960718DE7A6D1961F7713B3111F /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				FCCE491AA214CCD0D902D12C2522D2D1 /* ConcretePlayerContext.swift */,
 				E17ED73A20BBFE1F00BFC749 /* ModernAVPlayer.swift */,
 				1841F61AED0A5AC990ACF16A2F36EC5B /* Components */,
 				EF9E458287A5B7F115F0C9EB84C465F0 /* Services */,
@@ -1023,7 +1020,7 @@
 			files = (
 				5BDE3A2BC544F770F4F717BC730516C5 /* AudioSessionService.swift in Sources */,
 				58FCA41846BB3CC1B4C91EB64CC56F2F /* BufferingState.swift in Sources */,
-				083DA194F96B3613F000ADAE744612BC /* ConcretePlayerContext.swift in Sources */,
+				083DA194F96B3613F000ADAE744612BC /* PlayerContext.swift in Sources */,
 				88F35404AAF0D613B27DD6842AA1C25B /* ContextConfiguration.swift in Sources */,
 				774F72AA08DD46F66A0EB81C9B05FC38 /* CustomError.swift in Sources */,
 				E17ED73B20BBFE1F00BFC749 /* ModernAVPlayer.swift in Sources */,
@@ -1040,7 +1037,6 @@
 				8570AC5D01FAD3C030AA43738BA0F532 /* NowPlayingService.swift in Sources */,
 				57915F2CD8748A2F62E6989E0AEA3C84 /* ObservingRateService.swift in Sources */,
 				C34B6C249BCEDEC0A9126F5EBDF0601B /* PausedState.swift in Sources */,
-				9F1C187F792C5140A8EDE4C2D6641473 /* PlayerContext.swift in Sources */,
 				D542F8D499080057AB53B5D99B97285A /* PlayerMedia.swift in Sources */,
 				EB8CAD9F8C1FA5F1C730DEAE3388FD4C /* PlayerState.swift in Sources */,
 				377BC3698C959E0A470730F59B8FF9D3 /* PlayingState.swift in Sources */,

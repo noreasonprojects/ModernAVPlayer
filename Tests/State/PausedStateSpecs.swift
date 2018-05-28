@@ -18,7 +18,7 @@ final class PausedStateSpecs: QuickSpec {
     var tested: PausedState!
     var mockPlayer = MockCustomPlayer()
     var media: PlayerMedia!
-    lazy var playerContext = ConcretePlayerContext(player: self.mockPlayer, audioSessionType: MockAudioSession.self)
+    lazy var playerContext = PlayerContext(player: self.mockPlayer, audioSessionType: MockAudioSession.self)
 
     override func spec() {
 

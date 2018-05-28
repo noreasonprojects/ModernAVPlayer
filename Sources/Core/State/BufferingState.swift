@@ -12,7 +12,7 @@ final class BufferingState: NSObject, PlayerState {
     
     // MARK: - Inputs
     
-    unowned var context: PlayerContext
+    unowned var context: PlayerContextProtocol
     private var observingRateService: ObservingRateServiceProtocol
     
     // MARK: - Variable
@@ -21,7 +21,7 @@ final class BufferingState: NSObject, PlayerState {
 
     // MARK: - Init
 
-    init(context: PlayerContext, observingRateService: ObservingRateServiceProtocol? = nil) {
+    init(context: PlayerContextProtocol, observingRateService: ObservingRateServiceProtocol? = nil) {
         LoggerInHouse.instance.log(message: "Init", event: .debug)
         self.context = context
         

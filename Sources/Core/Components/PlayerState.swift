@@ -9,7 +9,7 @@
 import Foundation
 
 protocol PlayerState {
-    var context: PlayerContext { get }
+    var context: PlayerContextProtocol { get }
     var type: ModernAVPlayer.State { get }
     
     func loadMedia(media: PlayerMedia, shouldPlaying: Bool)

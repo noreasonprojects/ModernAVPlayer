@@ -13,7 +13,7 @@ final class PlayingState: PlayerState {
     
     // MARK: - Input
     
-    unowned var context: PlayerContext
+    unowned var context: PlayerContextProtocol
     
     // MARK: - Variables
     
@@ -25,7 +25,7 @@ final class PlayingState: PlayerState {
     
     // MARK: - Lifecycle
 
-    init(context: PlayerContext,
+    init(context: PlayerContextProtocol,
          itemPlaybackObservingService: ItemPlaybackObservingServiceProtocol = ItemPlaybackObservingService(),
          routeAudioService: RouteAudioService = RouteAudioService(),
          interruptionAudioService: InterruptionAudioService = InterruptionAudioService()) {
@@ -51,7 +51,7 @@ final class PlayingState: PlayerState {
 
     // MARK: - Background task
 
-    private func startBgTask(context: PlayerContext) {
+    private func startBgTask(context: PlayerContextProtocol) {
         context.bgToken = UIApplication.shared.beginBackgroundTask { [context] in
             if let token = context.bgToken {
                 UIApplication.shared.endBackgroundTask(token)
@@ -61,7 +61,7 @@ final class PlayingState: PlayerState {
         LoggerInHouse.instance.log(message: "StartBgTask create: \(String(describing: context.bgToken))", event: .info)
     }
 
-    private func stopBgTask(context: PlayerContext) {
+    private func stopBgTask(context: PlayerContextProtocol) {
         guard let token = context.bgToken else { return }
 
         LoggerInHouse.instance.log(message: "StopBgTask: \(token)", event: .info)

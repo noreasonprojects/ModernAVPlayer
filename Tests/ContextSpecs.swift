@@ -15,13 +15,13 @@ import ModernAVPlayer
 
 final class ContextSpecs: QuickSpec {
     
-    var tested: PlayerContext!
+    var tested: PlayerContextProtocol!
     var mockState: MockPlayerState!
     
     override func spec() {
         
         beforeEach {
-            self.tested = ConcretePlayerContext()
+            self.tested = PlayerContext()
             self.mockState = MockPlayerState(context: self.tested)
         }
         

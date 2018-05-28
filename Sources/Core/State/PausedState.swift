@@ -12,7 +12,7 @@ struct PausedState: PlayerState {
     
     // MARK: - Input
     
-    unowned var context: PlayerContext
+    unowned var context: PlayerContextProtocol
     private var interruptionAudioService: InterruptionAudioService
     
     // MARK: - Variable
@@ -21,7 +21,7 @@ struct PausedState: PlayerState {
 
     // MARK: Init
     
-    init(context: PlayerContext, interruptionAudioService: InterruptionAudioService = InterruptionAudioService()) {
+    init(context: PlayerContextProtocol, interruptionAudioService: InterruptionAudioService = InterruptionAudioService()) {
         LoggerInHouse.instance.log(message: "Init", event: .debug)
         self.context = context
         self.context.player.pause()

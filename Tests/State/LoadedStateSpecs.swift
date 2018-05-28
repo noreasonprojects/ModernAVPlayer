@@ -17,13 +17,13 @@ final class LoadedStateSpecs: QuickSpec {
     private var loadedState: LoadedState!
     private var mockPlayer: MockCustomPlayer!
     private var playerMedia = ConcretePlayerMedia(url: URL(string: "x")!, type: .clip)
-    private var tested: ConcretePlayerContext!
+    private var tested: PlayerContext!
     
     override func spec() {
         
         beforeEach {
             self.mockPlayer = MockCustomPlayer.createOne(url: "foo")
-            self.tested = ConcretePlayerContext(player: self.mockPlayer, audioSessionType: MockAudioSession.self)
+            self.tested = PlayerContext(player: self.mockPlayer, audioSessionType: MockAudioSession.self)
             self.loadedState = LoadedState(context: self.tested)
             self.tested.state = self.loadedState
         }

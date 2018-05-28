@@ -19,7 +19,7 @@ final class FailedStateSpecs: QuickSpec {
     private var url: URL!
     private var playerMedia = ConcretePlayerMedia(url: URL(string: "x")!, type: .clip)
 
-    private lazy var tested = ConcretePlayerContext(player: self.mockPlayer)
+    private lazy var tested = PlayerContext(player: self.mockPlayer)
 
     override func spec() {
         beforeEach {

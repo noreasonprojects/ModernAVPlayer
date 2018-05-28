@@ -19,7 +19,7 @@ final class PlayingStateSpecs: QuickSpec {
     var playingState: PlayingState!
     var itemPlaybackObservingService: MockItemPlaybackObservingService!
     var mockPlayer: MockCustomPlayer!
-    var tested: ConcretePlayerContext!
+    var tested: PlayerContext!
     var routeAudioService: RouteAudioService!
 
     override func spec() {
@@ -29,7 +29,7 @@ final class PlayingStateSpecs: QuickSpec {
             self.mockPlayer = MockCustomPlayer.createOne(url: "foo")
             self.media = ConcretePlayerMedia(url: URL(string: "foo")!, type: .clip)
             self.itemPlaybackObservingService = MockItemPlaybackObservingService()
-            self.tested = ConcretePlayerContext(player: self.mockPlayer)
+            self.tested = PlayerContext(player: self.mockPlayer)
             self.playingState = PlayingState(context: self.tested,
                                              itemPlaybackObservingService: self.itemPlaybackObservingService,
                                              routeAudioService: self.routeAudioService)

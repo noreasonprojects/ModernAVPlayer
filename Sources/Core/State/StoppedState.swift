@@ -12,7 +12,7 @@ struct StoppedState: PlayerState {
 
     // MARK: - Input
 
-    unowned var context: PlayerContext
+    unowned var context: PlayerContextProtocol
     
     // MARK: - Variable
     
@@ -20,7 +20,7 @@ struct StoppedState: PlayerState {
 
     // MARK: - Init
 
-    init(context: PlayerContext) {
+    init(context: PlayerContextProtocol) {
         LoggerInHouse.instance.log(message: "Init", event: .debug)
         
         self.context = context

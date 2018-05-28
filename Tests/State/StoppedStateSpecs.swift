@@ -18,13 +18,13 @@ final class StoppedStateSpecs: QuickSpec {
     var tested: StoppedState!
     var media: PlayerMedia!
     var mockPlayer: MockCustomPlayer!
-    var playerContext: ConcretePlayerContext!
+    var playerContext: PlayerContext!
 
     override func spec() {
 
         beforeEach {
             self.mockPlayer = MockCustomPlayer()
-            self.playerContext = ConcretePlayerContext(player: self.mockPlayer, audioSessionType: MockAudioSession.self)
+            self.playerContext = PlayerContext(player: self.mockPlayer, audioSessionType: MockAudioSession.self)
             self.media = ConcretePlayerMedia(url: URL(string: "foo")!, type: .clip)
             self.tested = StoppedState(context: self.playerContext)
             self.playerContext.state = self.tested

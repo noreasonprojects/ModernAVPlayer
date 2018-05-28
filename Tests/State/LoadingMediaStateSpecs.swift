@@ -18,7 +18,7 @@ final class LoadingMediaStateSpecs: QuickSpec {
     var state: LoadingMediaState!
     var item: AVPlayerItem!
     var player: MockCustomPlayer!
-    var tested: ConcretePlayerContext!
+    var tested: PlayerContext!
     var playerMedia = ConcretePlayerMedia(url: URL(string: "x")!, type: .clip)
     
     override func spec() {
@@ -26,7 +26,7 @@ final class LoadingMediaStateSpecs: QuickSpec {
         beforeEach {
             MockAudioSession.resetCallsCount()
             self.player = MockCustomPlayer.createOnUsingAsset(url: "foo")
-            self.tested = ConcretePlayerContext(player: self.player, audioSessionType: MockAudioSession.self)
+            self.tested = PlayerContext(player: self.player, audioSessionType: MockAudioSession.self)
             self.state = LoadingMediaState(context: self.tested, media: self.playerMedia, shouldPlaying: true)
             self.tested.state = self.state
         }

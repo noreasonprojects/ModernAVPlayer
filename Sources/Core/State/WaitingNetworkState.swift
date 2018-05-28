@@ -11,7 +11,7 @@ final class WaitingNetworkState: PlayerState {
     
     // MARK: - Inputs
     
-    unowned var context: PlayerContext
+    unowned var context: PlayerContextProtocol
     private var reachability: ReachabilityServiceProtocol
     
     // MARK: - Variable
@@ -20,7 +20,7 @@ final class WaitingNetworkState: PlayerState {
     
     // MARK: - Init
     
-    init(context: PlayerContext,
+    init(context: PlayerContextProtocol,
          urlToReload: URL,
          shouldPlaying: Bool,
          error: CustomError,

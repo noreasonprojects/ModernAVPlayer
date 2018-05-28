@@ -12,7 +12,7 @@ final class FailedState: PlayerState {
 
     // MARK: - Input
 
-    unowned var context: PlayerContext
+    unowned var context: PlayerContextProtocol
     
     // MARK: - Variable
     
@@ -20,7 +20,7 @@ final class FailedState: PlayerState {
     
     // MARK: - Init
     
-    init(context: PlayerContext, error: CustomError) {
+    init(context: PlayerContextProtocol, error: CustomError) {
         LoggerInHouse.instance.log(message: "Init reason:\(error.localizedDescription)", event: .debug)
         self.context = context
     }

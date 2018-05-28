@@ -39,7 +39,7 @@ public final class ModernAVPlayer {
     
     // MARK: - Variable
     
-    private let context: ConcretePlayerContext
+    private let context: PlayerContext
     
     // MARK: - Init
     
@@ -48,7 +48,7 @@ public final class ModernAVPlayer {
                 nowPlaying: NowPlaying = NowPlayingService(),
                 audioSessionType: AudioSession.Type = AudioSessionService.self) {
         
-        context = ConcretePlayerContext(player: player,
+        context = PlayerContext(player: player,
                                         config: config,
                                         nowPlaying: nowPlaying,
                                         audioSessionType: audioSessionType)

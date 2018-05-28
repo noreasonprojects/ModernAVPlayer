@@ -13,7 +13,7 @@ struct LoadedState: PlayerState {
 
     // MARK: - Input
 
-    unowned var context: PlayerContext
+    unowned var context: PlayerContextProtocol
     
     // MARK: - Variable
     
@@ -21,7 +21,7 @@ struct LoadedState: PlayerState {
 
     // MARK: - Init
 
-    init(context: PlayerContext, media: PlayerMedia? = nil) {
+    init(context: PlayerContextProtocol, media: PlayerMedia? = nil) {
         LoggerInHouse.instance.log(message: "Init", event: .debug)
         self.context = context
         self.context.currentTime = 0

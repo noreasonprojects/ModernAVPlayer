@@ -13,9 +13,9 @@ import AVFoundation
 
 final class MockPlayerState: PlayerState {
     var type: ModernAVPlayer.State
-    var context: PlayerContext
+    var context: PlayerContextProtocol
 
-    init(context: PlayerContext, state: ModernAVPlayer.State = .initialization) {
+    init(context: PlayerContextProtocol, state: ModernAVPlayer.State = .initialization) {
         self.context = context
         self.type = state
     }

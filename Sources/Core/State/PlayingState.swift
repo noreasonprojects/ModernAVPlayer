@@ -7,7 +7,6 @@
 //
 
 import AVFoundation
-import Foundation
 import MediaPlayer
 
 final class PlayingState: PlayerState {

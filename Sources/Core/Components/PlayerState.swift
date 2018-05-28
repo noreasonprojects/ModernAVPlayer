@@ -6,7 +6,6 @@
 //  Copyright © 2018 raphael ankierman. All rights reserved.
 //
 
-import AVFoundation
 import Foundation
 
 protocol PlayerState {

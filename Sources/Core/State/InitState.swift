@@ -7,7 +7,6 @@
 //
 
 import AVFoundation
-import Foundation
 
 struct InitState: PlayerState {
 

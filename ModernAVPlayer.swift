@@ -5,7 +5,6 @@
 //  Created by raphael ankierman on 28/05/2018.
 //
 
-import Foundation
 import AVFoundation
 
 public protocol ModernAVPlayerDelegate: class {
@@ -40,7 +39,7 @@ public final class ModernAVPlayer {
     
     // MARK: - Variable
     
-    let context: ConcretePlayerContext
+    private let context: ConcretePlayerContext
     
     // MARK: - Init
     

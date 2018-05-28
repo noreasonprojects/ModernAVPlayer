@@ -7,7 +7,6 @@
 //
 
 import AVFoundation
-import UIKit
 
 protocol PlayerContext: class {
     var player: AVPlayer { get }

@@ -7,7 +7,6 @@
 //
 
 import AVFoundation
-import Foundation
 
 final class BufferingState: NSObject, PlayerState {
     

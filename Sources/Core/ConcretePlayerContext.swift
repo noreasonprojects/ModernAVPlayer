@@ -7,7 +7,6 @@
 //
 
 import AVFoundation
-import UIKit
 
 final class ConcretePlayerContext: NSObject, PlayerContext {
     

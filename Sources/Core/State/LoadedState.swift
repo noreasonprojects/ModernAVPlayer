@@ -7,7 +7,6 @@
 //
 
 import AVFoundation
-import Foundation
 import MediaPlayer
 
 struct LoadedState: PlayerState {

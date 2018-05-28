@@ -8,7 +8,7 @@
 
 import AVFoundation
 
-struct InitState: PlayerState {
+struct InitState: PlayerStateProtocol {
 
     // MARK: - Input
 

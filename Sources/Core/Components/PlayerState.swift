@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol PlayerState {
+protocol PlayerStateProtocol {
     var context: PlayerContextProtocol { get }
     var type: ModernAVPlayer.State { get }
     

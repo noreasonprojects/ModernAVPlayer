@@ -8,7 +8,7 @@
 
 import AVFoundation
 
-final class BufferingState: NSObject, PlayerState {
+final class BufferingState: NSObject, PlayerStateProtocol {
     
     // MARK: - Inputs
     

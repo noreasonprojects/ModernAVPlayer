@@ -8,7 +8,7 @@
 
 import AVFoundation
 
-final class FailedState: PlayerState {
+final class FailedState: PlayerStateProtocol {
 
     // MARK: - Input
 

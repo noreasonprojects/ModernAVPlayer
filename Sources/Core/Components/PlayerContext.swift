@@ -14,7 +14,7 @@ protocol PlayerContextProtocol: class {
     var currentItem: AVPlayerItem? { get set }
     var currentTime: Double? { get set }
     var itemDuration: Double? { get set }
-    var state: PlayerState! { get }
+    var state: PlayerStateProtocol! { get }
     var debugMessage: String? { get set }
     var nowPlaying: NowPlaying { get }
     var bgToken: UIBackgroundTaskIdentifier? { get set }
@@ -24,7 +24,7 @@ protocol PlayerContextProtocol: class {
     func seek(position: Double)
     func stop()
     func loadMedia(media: PlayerMediaProtocol, shouldPlaying: Bool)
-    func changeState(state: PlayerState)
+    func changeState(state: PlayerStateProtocol)
     
     var audioSessionType: AudioSession.Type { get }
 }
@@ -55,7 +55,7 @@ final class PlayerContext: NSObject, PlayerContextProtocol {
     var itemDuration: Double? {
         didSet { delegate?.modernAVPlayer(itemDuration: itemDuration) }
     }
-    var state: PlayerState! {
+    var state: PlayerStateProtocol! {
         didSet { delegate?.modernAVPlayer(state: state.type) }
     }
     var debugMessage: String? {
@@ -88,7 +88,7 @@ final class PlayerContext: NSObject, PlayerContextProtocol {
         LoggerInHouse.instance.levelFilter = config.loggerLevelFilter
     }
     
-    func changeState(state: PlayerState) {
+    func changeState(state: PlayerStateProtocol) {
         self.state = state
     }
     

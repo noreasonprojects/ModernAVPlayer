@@ -7,7 +7,7 @@
 
 import AVFoundation
 
-final class WaitingNetworkState: PlayerState {
+final class WaitingNetworkState: PlayerStateProtocol {
     
     // MARK: - Inputs
     

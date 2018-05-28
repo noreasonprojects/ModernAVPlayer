@@ -8,7 +8,7 @@
 
 import AVFoundation
 
-final class LoadingMediaState: PlayerState {
+final class LoadingMediaState: PlayerStateProtocol {
     
     // MARK: - Input
     
@@ -162,7 +162,7 @@ final class LoadingMediaState: PlayerState {
     }
 
     private func moveToLoadedState() {
-        let state: PlayerState
+        let state: PlayerStateProtocol
         if let media = self.media {
             state = LoadedState(context: self.context, media: media)
         } else {

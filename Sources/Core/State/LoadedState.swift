@@ -9,7 +9,7 @@
 import AVFoundation
 import MediaPlayer
 
-struct LoadedState: PlayerState {
+struct LoadedState: PlayerStateProtocol {
 
     // MARK: - Input
 

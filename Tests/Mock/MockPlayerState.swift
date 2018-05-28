@@ -11,7 +11,7 @@ import Foundation
 import ModernAVPlayer
 import AVFoundation
 
-final class MockPlayerState: PlayerState {
+final class MockPlayerState: PlayerStateProtocol {
     var type: ModernAVPlayer.State
     var context: PlayerContextProtocol
 

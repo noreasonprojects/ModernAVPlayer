@@ -9,7 +9,7 @@
 import AVFoundation
 import MediaPlayer
 
-final class PlayingState: PlayerState {
+final class PlayingState: PlayerStateProtocol {
     
     // MARK: - Input
     

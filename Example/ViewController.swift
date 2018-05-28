@@ -66,7 +66,7 @@ final class ViewController: UIViewController {
     
     // MARK: - Private vars
 
-    private let player = ModernAVPlayer(config: PlayerContextConfiguration())
+    private let player = ModernAVPlayer(config: ModernAVPlayerConfig())
     private var commandCenter: SetupCommandCenter?
     private var itemDuration: Double? {
         didSet {

@@ -28,7 +28,7 @@ final class ReachabilityServiceTests: QuickSpec {
             self.isTimedOut = nil
             self.dataTaskFactory = MockDataTaskFactory()
             self.mockTimerFactory = MockTimerFactory()
-            self.config = PlayerContextConfiguration()
+            self.config = ModernAVPlayerConfig()
             self.tested = ReachabilityService(config: self.config, dataTaskFactory: self.dataTaskFactory, timerFactory: self.mockTimerFactory)
             self.tested.isReachable = { [weak self] in self?.isReachable = true }
             self.tested.isTimedOut = { [weak self] in self?.isTimedOut = true }

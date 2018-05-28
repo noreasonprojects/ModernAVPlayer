@@ -45,7 +45,7 @@ public final class ModernAVPlayer {
     // MARK: - Init
     
     public init(player: AVPlayer = AVPlayer(),
-                config: ContextConfiguration = PlayerContextConfiguration(),
+                config: ContextConfiguration = ModernAVPlayerConfig(),
                 nowPlaying: NowPlaying = NowPlayingService(),
                 audioSessionType: AudioSession.Type = AudioSessionService.self) {
         

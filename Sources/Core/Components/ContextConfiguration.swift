@@ -30,7 +30,7 @@ public protocol ContextConfiguration {
     var loggerLevelFilter: LoggerInHouse.LogEvent { get }
 }
 
-public struct PlayerContextConfiguration: ContextConfiguration {
+public struct ModernAVPlayerConfig: ContextConfiguration {
     
     // Buffering State
     public let timeoutBuffering: TimeInterval = 3

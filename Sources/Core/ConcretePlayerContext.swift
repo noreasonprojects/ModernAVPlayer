@@ -45,7 +45,7 @@ final class ConcretePlayerContext: NSObject, PlayerContext {
     // MARK: - LifeCycle
 
     init(player: AVPlayer = AVPlayer(),
-         config: ContextConfiguration = PlayerContextConfiguration(),
+         config: ContextConfiguration = ModernAVPlayerConfig(),
          nowPlaying: NowPlaying = NowPlayingService(),
          audioSessionType: AudioSession.Type = AudioSessionService.self) {
         self.player = player

@@ -8,11 +8,11 @@
 import AVFoundation
 
 public protocol ModernAVPlayerDelegate: class {
-    func modernAVPlayer(state: ModernAVPlayer.State)
-    func modernAVPlayer(currentTime: Double?)
-    func modernAVPlayer(itemDuration: Double?)
-    func modernAVPlayer(debugMessage: String?)
-    func modernAVPlayer(currentItemUrl: URL?)
+    func modernAVPlayer(_ player: ModernAVPlayer, didStateChange state: ModernAVPlayer.State)
+    func modernAVPlayer(_ player: ModernAVPlayer, didCurrentTimeChange currentTime: Double?)
+    func modernAVPlayer(_ player: ModernAVPlayer, didItemDurationChange itemDuration: Double?)
+    func modernAVPlayer(_ player: ModernAVPlayer, didCurrentItemUrlChange currentItemUrl: URL?)
+    func modernAVPlayer(_ player: ModernAVPlayer, debugMessage: String?)
 }
 
 protocol ModernAVPlayerProtocol {
@@ -43,9 +43,7 @@ public final class ModernAVPlayer: ModernAVPlayerProtocol {
         public var description: String { return rawValue.capitalized }
     }
     
-    public weak var delegate: ModernAVPlayerDelegate? {
-        didSet { context.delegate = delegate }
-    }
+    public weak var delegate: ModernAVPlayerDelegate?
     
     // MARK: - Variable
     
@@ -62,6 +60,7 @@ public final class ModernAVPlayer: ModernAVPlayerProtocol {
                                 config: config,
                                 nowPlaying: nowPlaying,
                                 audioSessionType: audioSessionType)
+        context.delegate = self
     }
     
     // MARK: - Actions
@@ -84,5 +83,27 @@ public final class ModernAVPlayer: ModernAVPlayerProtocol {
     
     public func play() {
         context.play()
+    }
+}
+
+extension ModernAVPlayer: PlayerContextDelegate {
+    func playerContext(didStateChange state: ModernAVPlayer.State) {
+        delegate?.modernAVPlayer(self, didStateChange: state)
+    }
+    
+    func playerContext(didCurrentTimeChange currentTime: Double?) {
+        delegate?.modernAVPlayer(self, didCurrentTimeChange: currentTime)
+    }
+    
+    func playerContext(didItemDurationChange itemDuration: Double?) {
+        delegate?.modernAVPlayer(self, didItemDurationChange: itemDuration)
+    }
+    
+    func playerContext(didCurrentItemUrlChange currentItemUrl: URL?) {
+        delegate?.modernAVPlayer(self, didCurrentItemUrlChange: currentItemUrl)
+    }
+    
+    func playerContext(debugMessage: String?) {
+        delegate?.modernAVPlayer(self, debugMessage: debugMessage)
     }
 }

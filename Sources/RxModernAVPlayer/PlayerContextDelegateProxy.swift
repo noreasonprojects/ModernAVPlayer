@@ -34,25 +34,25 @@ public class RxPlayerContextDelegateProxy: DelegateProxy<ModernAVPlayer, ModernA
     lazy var debugMessageSubject = PublishSubject<String?>()
     lazy var currentItemUrlSubject = PublishSubject<URL?>()
     
-    // MARK: - PlayerContextDelegate
+    // MARK: - ModernAVPlayerDelegate
     
-    public func modernAVPlayer(state: ModernAVPlayer.State) {
+    public func modernAVPlayer(_ player: ModernAVPlayer, didStateChange state: ModernAVPlayer.State) {
         stateSubject.onNext(state)
     }
     
-    public func modernAVPlayer(currentTime: Double?) {
+    public func modernAVPlayer(_ player: ModernAVPlayer, didCurrentTimeChange currentTime: Double?) {
         currentTimeSubject.onNext(currentTime)
     }
     
-    public func modernAVPlayer(itemDuration: Double?) {
+    public func modernAVPlayer(_ player: ModernAVPlayer, didItemDurationChange itemDuration: Double?) {
         itemDurationSubject.onNext(itemDuration)
     }
     
-    public func modernAVPlayer(debugMessage: String?) {
+    public func modernAVPlayer(_ player: ModernAVPlayer, debugMessage: String?) {
         debugMessageSubject.onNext(debugMessage)
     }
     
-    public func modernAVPlayer(currentItemUrl: URL?) {
+    public func modernAVPlayer(_ player: ModernAVPlayer, didCurrentItemUrlChange currentItemUrl: URL?) {
         currentItemUrlSubject.onNext(currentItemUrl)
     }
 }

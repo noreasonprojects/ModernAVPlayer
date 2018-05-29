@@ -173,23 +173,23 @@ final class ViewController: UIViewController {
 // MARK: - PLayerContextDelegate
 
 extension ViewController: ModernAVPlayerDelegate {
-    func modernAVPlayer(state: ModernAVPlayer.State) {
+    func modernAVPlayer(_ player: ModernAVPlayer, didStateChange state: ModernAVPlayer.State) {
         self.state = state
     }
-
-    func modernAVPlayer(currentTime: Double?) {
+    
+    func modernAVPlayer(_ player: ModernAVPlayer, didCurrentTimeChange currentTime: Double?) {
         self.currentTime = currentTime
     }
-
-    func modernAVPlayer(itemDuration: Double?) {
+    
+    func modernAVPlayer(_ player: ModernAVPlayer, didItemDurationChange itemDuration: Double?) {
         self.itemDuration = itemDuration
     }
-
-    func modernAVPlayer(debugMessage: String?) {
+    
+    func modernAVPlayer(_ player: ModernAVPlayer, debugMessage: String?) {
         setDebugMessage(debugMessage)
     }
-
-    func modernAVPlayer(currentItemUrl: URL?) {
+    
+    func modernAVPlayer(_ player: ModernAVPlayer, didCurrentItemUrlChange currentItemUrl: URL?) {
         DispatchQueue.main.async {
             self.currentItemLabel.text = currentItemUrl?.absoluteString
         }

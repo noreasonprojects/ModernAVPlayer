@@ -8,6 +8,14 @@
 
 import AVFoundation
 
+protocol PlayerContextDelegate: class {
+    func playerContext(didStateChange state: ModernAVPlayer.State)
+    func playerContext(didCurrentTimeChange currentTime: Double?)
+    func playerContext(didItemDurationChange itemDuration: Double?)
+    func playerContext(didCurrentItemUrlChange currentItemUrl: URL?)
+    func playerContext(debugMessage: String?)
+}
+
 protocol PlayerContextProtocol: class {
     var player: AVPlayer { get }
     var config: ContextConfiguration { get }
@@ -38,7 +46,7 @@ final class PlayerContext: NSObject, PlayerContextProtocol {
     let nowPlaying: NowPlaying
     let audioSessionType: AudioSession.Type
     
-    weak var delegate: ModernAVPlayerDelegate?
+    weak var delegate: PlayerContextDelegate?
     
     // MARK: - Variables
     
@@ -46,20 +54,20 @@ final class PlayerContext: NSObject, PlayerContextProtocol {
     var currentItem: AVPlayerItem? {
         didSet {
             let url = (currentItem?.asset as? AVURLAsset)?.url
-            delegate?.modernAVPlayer(currentItemUrl: url)
+            delegate?.playerContext(didCurrentItemUrlChange: url)
         }
     }
     var currentTime: Double? {
-        didSet { delegate?.modernAVPlayer(currentTime: currentTime) }
+        didSet { delegate?.playerContext(didCurrentTimeChange: currentTime) }
     }
     var itemDuration: Double? {
-        didSet { delegate?.modernAVPlayer(itemDuration: itemDuration) }
+        didSet { delegate?.playerContext(didItemDurationChange: itemDuration) }
     }
     var state: PlayerStateProtocol! {
-        didSet { delegate?.modernAVPlayer(state: state.type) }
+        didSet { delegate?.playerContext(didStateChange: state.type) }
     }
     var debugMessage: String? {
-        didSet { delegate?.modernAVPlayer(debugMessage: debugMessage) }
+        didSet { delegate?.playerContext(debugMessage: debugMessage) }
     }
 
     // MARK: - LifeCycle

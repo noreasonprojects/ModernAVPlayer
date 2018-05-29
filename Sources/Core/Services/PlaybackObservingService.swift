@@ -7,12 +7,12 @@
 
 import Foundation
 
-protocol ItemPlaybackObservingServiceProtocol {
+protocol PlaybackObservingService {
     var onPlaybackStalled: (() -> Void)? { get set }
     var onPlayToEndTime: (() -> Void)? { get set }
 }
 
-final class ItemPlaybackObservingService: ItemPlaybackObservingServiceProtocol {
+final class ModernAVPlayerPlaybackObservingService: PlaybackObservingService {
     
     // MARK: - Outputs
     
@@ -23,11 +23,11 @@ final class ItemPlaybackObservingService: ItemPlaybackObservingServiceProtocol {
     
     init() {
         LoggerInHouse.instance.log(message: "Init", event: .debug)
-        NotificationCenter.default.addObserver(self, selector: #selector(ItemPlaybackObservingService.itemPlaybackStalled),
+        NotificationCenter.default.addObserver(self, selector: #selector(ModernAVPlayerPlaybackObservingService.itemPlaybackStalled),
                                                name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(ItemPlaybackObservingService.itemPlayToEndTime),
+        NotificationCenter.default.addObserver(self, selector: #selector(ModernAVPlayerPlaybackObservingService.itemPlayToEndTime),
                                                name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(ItemPlaybackObservingService.itemFailedToPlayToEndTime),
+        NotificationCenter.default.addObserver(self, selector: #selector(ModernAVPlayerPlaybackObservingService.itemFailedToPlayToEndTime),
                                                name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: nil)
     }
     

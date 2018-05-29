@@ -8,7 +8,7 @@
 
 @testable import ModernAVPlayer
 
-final class MockReachability: ReachabilityServiceProtocol {
+final class MockReachability: ReachabilityService {
     var isReachable: (() -> Void)?
     var isTimedOut: (() -> Void)?
     

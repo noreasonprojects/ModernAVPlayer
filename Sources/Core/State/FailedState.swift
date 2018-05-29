@@ -8,11 +8,11 @@
 
 import AVFoundation
 
-final class FailedState: PlayerStateProtocol {
+final class FailedState: PlayerState {
 
     // MARK: - Input
 
-    unowned var context: PlayerContextProtocol
+    unowned var context: PlayerContext
     
     // MARK: - Variable
     
@@ -20,7 +20,7 @@ final class FailedState: PlayerStateProtocol {
     
     // MARK: - Init
     
-    init(context: PlayerContextProtocol, error: CustomError) {
+    init(context: PlayerContext, error: PlayerError) {
         LoggerInHouse.instance.log(message: "Init reason:\(error.localizedDescription)", event: .debug)
         self.context = context
     }
@@ -31,7 +31,7 @@ final class FailedState: PlayerStateProtocol {
 
     // MARK: - Shared actions
 
-    func loadMedia(media: PlayerMediaProtocol, shouldPlaying: Bool) {
+    func loadMedia(media: PlayerMedia, shouldPlaying: Bool) {
         let state = LoadingMediaState(context: context, media: media, shouldPlaying: shouldPlaying)
         context.changeState(state: state)
     }

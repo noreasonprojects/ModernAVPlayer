@@ -8,29 +8,29 @@
 
 import AVFoundation
 
-final class LoadingMediaState: PlayerStateProtocol {
+final class LoadingMediaState: PlayerState {
     
     // MARK: - Input
     
-    unowned let context: PlayerContextProtocol
+    unowned let context: PlayerContext
     
     // MARK: - Variables
     
     var type: ModernAVPlayer.State = .loading
     private let shouldPlaying: Bool
-    private let media: PlayerMediaProtocol?
+    private let media: PlayerMedia?
     private let url: URL?
     private let lastKnownPosition: CMTime?
-    private var itemStatusObserving: ItemStatusObservingService?
-    private var interruptionAudioService: InterruptionAudioService
+    private var itemStatusObserving: ModernAVPLayerItemStatusObservingService?
+    private var interruptionAudioService: ModernAVPlayerInterruptionAudioService
 
     // MARK: - Init
     
-    init(context: PlayerContextProtocol,
+    init(context: PlayerContext,
          itemUrl: URL,
          shouldPlaying: Bool,
          lastPosition: CMTime?,
-         interruptionAudioService: InterruptionAudioService = InterruptionAudioService()) {
+         interruptionAudioService: ModernAVPlayerInterruptionAudioService = ModernAVPlayerInterruptionAudioService()) {
         LoggerInHouse.instance.log(message: "Init", event: .debug)
         self.context = context
         self.shouldPlaying = shouldPlaying
@@ -46,10 +46,10 @@ final class LoadingMediaState: PlayerStateProtocol {
         createReplaceItem(url: itemUrl)
     }
 
-    init(context: PlayerContextProtocol,
-         media: PlayerMediaProtocol,
+    init(context: PlayerContext,
+         media: PlayerMedia,
          shouldPlaying: Bool,
-         interruptionAudioService: InterruptionAudioService = InterruptionAudioService()) {
+         interruptionAudioService: ModernAVPlayerInterruptionAudioService = ModernAVPlayerInterruptionAudioService()) {
         LoggerInHouse.instance.log(message: "Init", event: .debug)
         self.context = context
         self.shouldPlaying = shouldPlaying
@@ -75,7 +75,7 @@ final class LoadingMediaState: PlayerStateProtocol {
 
     // MARK: - Shared actions
 
-    func loadMedia(media: PlayerMediaProtocol, shouldPlaying: Bool) {
+    func loadMedia(media: PlayerMedia, shouldPlaying: Bool) {
         createReplaceItem(url: media.url)
     }
 
@@ -132,12 +132,12 @@ final class LoadingMediaState: PlayerStateProtocol {
     }
     
     private func startObservingItemStatus(item: AVPlayerItem) {
-        itemStatusObserving = ItemStatusObservingService(item: item) { [unowned self] status in
+        itemStatusObserving = ModernAVPLayerItemStatusObservingService(item: item) { [unowned self] status in
             self.moveToNextState(with: status)
         }
     }
 
-    private func startBgTask(context: PlayerContextProtocol) {
+    private func startBgTask(context: PlayerContext) {
         context.bgToken = UIApplication.shared.beginBackgroundTask { [context] in
             if let token = context.bgToken { UIApplication.shared.endBackgroundTask(token) }
             context.bgToken = nil
@@ -162,7 +162,7 @@ final class LoadingMediaState: PlayerStateProtocol {
     }
 
     private func moveToLoadedState() {
-        let state: PlayerStateProtocol
+        let state: PlayerState
         if let media = self.media {
             state = LoadedState(context: self.context, media: media)
         } else {

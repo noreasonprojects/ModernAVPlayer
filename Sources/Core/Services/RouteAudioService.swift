@@ -7,7 +7,7 @@
 
 import AVFoundation
 
-final class RouteAudioService {
+final class ModernAVPlayerRouteAudioService {
  
     // MARK: - Output
     

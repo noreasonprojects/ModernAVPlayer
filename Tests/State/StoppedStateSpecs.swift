@@ -16,16 +16,16 @@ import Nimble
 final class StoppedStateSpecs: QuickSpec {
     
     var tested: StoppedState!
-    var media: PlayerMediaProtocol!
+    var media: PlayerMedia!
     var mockPlayer: MockCustomPlayer!
-    var playerContext: PlayerContext!
+    var playerContext: ModernAVPlayerContext!
 
     override func spec() {
 
         beforeEach {
             self.mockPlayer = MockCustomPlayer()
-            self.playerContext = PlayerContext(player: self.mockPlayer, audioSessionType: MockAudioSession.self)
-            self.media = PlayerMedia(url: URL(string: "foo")!, type: .clip)
+            self.playerContext = ModernAVPlayerContext(player: self.mockPlayer, audioSessionType: MockAudioSession.self)
+            self.media = ModernAVPlayerMedia(url: URL(string: "foo")!, type: .clip)
             self.tested = StoppedState(context: self.playerContext)
             self.playerContext.state = self.tested
         }

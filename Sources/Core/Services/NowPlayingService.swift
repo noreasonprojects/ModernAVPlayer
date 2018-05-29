@@ -14,11 +14,11 @@ import MediaPlayer
  */
 
 protocol NowPlaying {
-    func update(media: PlayerMediaProtocol, duration: Double?)
+    func update(media: PlayerMedia, duration: Double?)
     func overrideInfoCenter(for key: String, value: Any)
 }
 
-final class NowPlayingService: NowPlaying {
+final class ModernAVPlayerNowPlayingService: NowPlaying {
 
     private var infos = [String: Any]()
     private var session: URLSession {
@@ -26,7 +26,7 @@ final class NowPlayingService: NowPlaying {
     }
     private var task: URLSessionTask?
 
-    func update(media: PlayerMediaProtocol, duration: Double?) {
+    func update(media: PlayerMedia, duration: Double?) {
         infos = parseInfos(media: media, duration: duration)
         MPNowPlayingInfoCenter.default().nowPlayingInfo = infos
     }
@@ -47,7 +47,7 @@ final class NowPlayingService: NowPlaying {
         task?.resume()
     }
 
-    private func parseInfos(media: PlayerMediaProtocol, duration: Double?) -> [String: Any] {
+    private func parseInfos(media: PlayerMedia, duration: Double?) -> [String: Any] {
         var infos = [String: Any]()
         infos[MPMediaItemPropertyTitle] = media.title ?? " "
         infos[MPMediaItemPropertyArtist] = media.artist ?? " "

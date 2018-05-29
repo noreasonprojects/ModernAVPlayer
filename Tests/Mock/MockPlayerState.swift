@@ -11,19 +11,19 @@ import Foundation
 import ModernAVPlayer
 import AVFoundation
 
-final class MockPlayerState: PlayerStateProtocol {
+final class MockPlayerState: PlayerState {
     var type: ModernAVPlayer.State
-    var context: PlayerContextProtocol
+    var context: PlayerContext
 
-    init(context: PlayerContextProtocol, state: ModernAVPlayer.State = .initialization) {
+    init(context: PlayerContext, state: ModernAVPlayer.State = .initialization) {
         self.context = context
         self.type = state
     }
     
     var loadMedialCallCount = 0
-    var lastMediaParam: PlayerMediaProtocol?
+    var lastMediaParam: PlayerMedia?
     var lastShoudlPlayingParam: Bool?
-    func loadMedia(media: PlayerMediaProtocol, shouldPlaying: Bool) {
+    func loadMedia(media: PlayerMedia, shouldPlaying: Bool) {
         loadMedialCallCount += 1
         lastMediaParam = media
         lastShoudlPlayingParam = shouldPlaying

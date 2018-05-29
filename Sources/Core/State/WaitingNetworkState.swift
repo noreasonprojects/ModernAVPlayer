@@ -7,12 +7,12 @@
 
 import AVFoundation
 
-final class WaitingNetworkState: PlayerStateProtocol {
+final class WaitingNetworkState: PlayerState {
     
     // MARK: - Inputs
     
-    unowned var context: PlayerContextProtocol
-    private var reachability: ReachabilityServiceProtocol
+    unowned var context: PlayerContext
+    private var reachability: ReachabilityService
     
     // MARK: - Variable
     
@@ -20,14 +20,14 @@ final class WaitingNetworkState: PlayerStateProtocol {
     
     // MARK: - Init
     
-    init(context: PlayerContextProtocol,
+    init(context: PlayerContext,
          urlToReload: URL,
          shouldPlaying: Bool,
-         error: CustomError,
-         reachabilityService: ReachabilityServiceProtocol? = nil) {
+         error: PlayerError,
+         reachabilityService: ReachabilityService? = nil) {
         LoggerInHouse.instance.log(message: "Init", event: .debug)
         self.context = context
-        self.reachability = reachabilityService ?? ReachabilityService(config: context.config)
+        self.reachability = reachabilityService ?? ModernAVPlayerReachabilityService(config: context.config)
         setupReachabilityCallbacks(shouldPlaying: shouldPlaying, urlToReload: urlToReload, error: error)
         reachability.start()
     }
@@ -38,7 +38,7 @@ final class WaitingNetworkState: PlayerStateProtocol {
     
     // MARK: - Reachability
     
-    private func setupReachabilityCallbacks(shouldPlaying: Bool, urlToReload: URL, error: CustomError) {
+    private func setupReachabilityCallbacks(shouldPlaying: Bool, urlToReload: URL, error: PlayerError) {
         reachability.isTimedOut = { [weak self] in
             guard let strongSelf = self else { return }
             
@@ -64,7 +64,7 @@ final class WaitingNetworkState: PlayerStateProtocol {
     
     // MARK: - Shared actions
     
-    func loadMedia(media: PlayerMediaProtocol, shouldPlaying: Bool) {
+    func loadMedia(media: PlayerMedia, shouldPlaying: Bool) {
         let state = LoadingMediaState(context: context, media: media, shouldPlaying: shouldPlaying)
         context.changeState(state: state)
     }

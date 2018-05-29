@@ -17,14 +17,14 @@ final class FailedStateSpecs: QuickSpec {
     private var state: FailedState!
     private var mockPlayer = MockCustomPlayer()
     private var url: URL!
-    private var playerMedia = PlayerMedia(url: URL(string: "x")!, type: .clip)
+    private var playerMedia = ModernAVPlayerMedia(url: URL(string: "x")!, type: .clip)
 
-    private lazy var tested = PlayerContext(player: self.mockPlayer)
+    private lazy var tested = ModernAVPlayerContext(player: self.mockPlayer)
 
     override func spec() {
         beforeEach {
             self.url = URL(string: "foo")!
-            self.state = FailedState(context: self.tested, error: CustomError.itemFailedWhenLoading)
+            self.state = FailedState(context: self.tested, error: PlayerError.itemFailedWhenLoading)
             self.tested.state = self.state
         }
         

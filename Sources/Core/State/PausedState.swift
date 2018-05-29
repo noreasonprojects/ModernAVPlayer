@@ -8,12 +8,12 @@
 
 import AVFoundation
 
-struct PausedState: PlayerStateProtocol {
+struct PausedState: PlayerState {
     
     // MARK: - Input
     
-    unowned var context: PlayerContextProtocol
-    private var interruptionAudioService: InterruptionAudioService
+    unowned var context: PlayerContext
+    private var interruptionAudioService: ModernAVPlayerInterruptionAudioService
     
     // MARK: - Variable
     
@@ -21,7 +21,8 @@ struct PausedState: PlayerStateProtocol {
 
     // MARK: Init
     
-    init(context: PlayerContextProtocol, interruptionAudioService: InterruptionAudioService = InterruptionAudioService()) {
+    init(context: PlayerContext,
+         interruptionAudioService: ModernAVPlayerInterruptionAudioService = ModernAVPlayerInterruptionAudioService()) {
         LoggerInHouse.instance.log(message: "Init", event: .debug)
         self.context = context
         self.context.player.pause()
@@ -36,7 +37,7 @@ struct PausedState: PlayerStateProtocol {
     
     // MARK: - Shared actions
 
-    func loadMedia(media: PlayerMediaProtocol, shouldPlaying: Bool) {
+    func loadMedia(media: PlayerMedia, shouldPlaying: Bool) {
         let state = LoadingMediaState(context: context, media: media, shouldPlaying: shouldPlaying)
         context.changeState(state: state)
     }

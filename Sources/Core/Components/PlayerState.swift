@@ -8,11 +8,11 @@
 
 import Foundation
 
-protocol PlayerStateProtocol {
-    var context: PlayerContextProtocol { get }
+protocol PlayerState {
+    var context: PlayerContext { get }
     var type: ModernAVPlayer.State { get }
     
-    func loadMedia(media: PlayerMediaProtocol, shouldPlaying: Bool)
+    func loadMedia(media: PlayerMedia, shouldPlaying: Bool)
     func pause()
     func play()
     func seek(position: Double)

@@ -7,7 +7,7 @@
 
 import AVFoundation
 
-final class InterruptionAudioService {
+final class ModernAVPlayerInterruptionAudioService {
     
     // MARK: - Outputs
     

@@ -16,8 +16,8 @@ final class BufferingStateSpecs: QuickSpec {
     private var bufferingState: BufferingState!
     private var mockPlayer = MockCustomPlayer()
     private var mockRateService: MockObservingRateService!
-    private var playerMedia = PlayerMedia(url: URL(string: "x")!, type: .clip)
-    private lazy var tested = PlayerContext(player: self.mockPlayer, audioSessionType: MockAudioSession.self)
+    private var playerMedia = ModernAVPlayerMedia(url: URL(string: "x")!, type: .clip)
+    private lazy var tested = ModernAVPlayerContext(player: self.mockPlayer, audioSessionType: MockAudioSession.self)
 
     override func spec() {
         beforeEach {

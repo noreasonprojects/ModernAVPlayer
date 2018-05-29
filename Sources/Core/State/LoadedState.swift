@@ -9,11 +9,11 @@
 import AVFoundation
 import MediaPlayer
 
-struct LoadedState: PlayerStateProtocol {
+struct LoadedState: PlayerState {
 
     // MARK: - Input
 
-    unowned var context: PlayerContextProtocol
+    unowned var context: PlayerContext
     
     // MARK: - Variable
     
@@ -21,7 +21,7 @@ struct LoadedState: PlayerStateProtocol {
 
     // MARK: - Init
 
-    init(context: PlayerContextProtocol, media: PlayerMediaProtocol? = nil) {
+    init(context: PlayerContext, media: PlayerMedia? = nil) {
         LoggerInHouse.instance.log(message: "Init", event: .debug)
         self.context = context
         self.context.currentTime = 0
@@ -44,7 +44,7 @@ struct LoadedState: PlayerStateProtocol {
 
     // MARK: - Shared actions
     
-    func loadMedia(media: PlayerMediaProtocol, shouldPlaying: Bool) {
+    func loadMedia(media: PlayerMedia, shouldPlaying: Bool) {
         let state = LoadingMediaState(context: context, media: media, shouldPlaying: shouldPlaying)
         context.changeState(state: state)
     }

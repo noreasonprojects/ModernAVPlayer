@@ -8,7 +8,7 @@
 
 import AVFoundation
 
-final class ItemStatusObservingService: NSObject {
+final class ModernAVPLayerItemStatusObservingService: NSObject {
     
     // MARK: - Inputs
     

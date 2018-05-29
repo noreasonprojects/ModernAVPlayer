@@ -15,21 +15,21 @@ import Nimble
 
 final class PlayingStateSpecs: QuickSpec {
 
-    var media: PlayerMediaProtocol!
+    var media: PlayerMedia!
     var playingState: PlayingState!
     var itemPlaybackObservingService: MockItemPlaybackObservingService!
     var mockPlayer: MockCustomPlayer!
-    var tested: PlayerContext!
-    var routeAudioService: RouteAudioService!
+    var tested: ModernAVPlayerContext!
+    var routeAudioService: ModernAVPlayerRouteAudioService!
 
     override func spec() {
 
         beforeEach {
-            self.routeAudioService = RouteAudioService()
+            self.routeAudioService = ModernAVPlayerRouteAudioService()
             self.mockPlayer = MockCustomPlayer.createOne(url: "foo")
-            self.media = PlayerMedia(url: URL(string: "foo")!, type: .clip)
+            self.media = ModernAVPlayerMedia(url: URL(string: "foo")!, type: .clip)
             self.itemPlaybackObservingService = MockItemPlaybackObservingService()
-            self.tested = PlayerContext(player: self.mockPlayer)
+            self.tested = ModernAVPlayerContext(player: self.mockPlayer)
             self.playingState = PlayingState(context: self.tested,
                                              itemPlaybackObservingService: self.itemPlaybackObservingService,
                                              routeAudioService: self.routeAudioService)

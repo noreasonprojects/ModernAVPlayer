@@ -8,12 +8,12 @@
 
 import AVFoundation
 
-protocol AudioSession {
+protocol AudioSessionService {
     static func activate()
     static func setCategory(_ category: String)
 }
 
-struct AudioSessionService: AudioSession {
+struct ModernAVPlayerAudioSessionService: AudioSessionService {
 
     static func activate() {
         DispatchQueue.global(qos: .userInitiated).async {

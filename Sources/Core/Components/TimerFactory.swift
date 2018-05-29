@@ -7,25 +7,25 @@
 
 import Foundation
 
-protocol TimerProtocol {
+protocol CustomTimer {
     func fire()
     func invalidate()
 }
 
-extension Timer: TimerProtocol { }
+extension Timer: CustomTimer { }
 
-protocol TimerFactoryProtocol {
-    func getTimer(timeInterval: TimeInterval, repeats: Bool, block: @escaping () -> Void) -> TimerProtocol
+protocol TimerFactory {
+    func getTimer(timeInterval: TimeInterval, repeats: Bool, block: @escaping () -> Void) -> CustomTimer
 }
 
-struct TimerFactory: TimerFactoryProtocol {
+struct ModernAVPlayerTimerFactory: TimerFactory {
     
-    final class TimerAdapter: TimerProtocol {
+    final class TimerAdapter: CustomTimer {
         
         private let block: (() -> Void)?
         private let repeats: Bool
         private let timeInterval: TimeInterval
-        private lazy var innerTimer: TimerProtocol = {
+        private lazy var innerTimer: CustomTimer = {
             Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(executeBlock), userInfo: nil, repeats: repeats)
         }()
         
@@ -50,7 +50,7 @@ struct TimerFactory: TimerFactoryProtocol {
         }
     }
 
-    func getTimer(timeInterval: TimeInterval, repeats: Bool, block: @escaping () -> Void) -> TimerProtocol {
+    func getTimer(timeInterval: TimeInterval, repeats: Bool, block: @escaping () -> Void) -> CustomTimer {
         return TimerAdapter(timeInterval: timeInterval, repeats: repeats, block: block)
     }
 }

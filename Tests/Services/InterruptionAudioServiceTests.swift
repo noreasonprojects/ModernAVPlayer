@@ -14,14 +14,14 @@ import Nimble
 
 final class InterruptionAudioServiceTests: QuickSpec {
     
-    var tested: InterruptionAudioService!
+    var tested: ModernAVPlayerInterruptionAudioService!
     var interruptionType: AVAudioSessionInterruptionType?
     
     override func spec() {
         
         beforeEach {
             self.interruptionType = nil
-            self.tested = InterruptionAudioService()
+            self.tested = ModernAVPlayerInterruptionAudioService()
             self.tested.onInterruptionBegan = { [weak self] in self?.interruptionType = .began }
             self.tested.onInterruptionEnded = { [weak self] in self?.interruptionType = .ended }
         }

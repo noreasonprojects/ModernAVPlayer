@@ -9,26 +9,26 @@
 import AVFoundation
 import MediaPlayer
 
-final class PlayingState: PlayerStateProtocol {
+final class PlayingState: PlayerState {
     
     // MARK: - Input
     
-    unowned var context: PlayerContextProtocol
+    unowned var context: PlayerContext
     
     // MARK: - Variables
     
     var type: ModernAVPlayer.State = .playing
     private var timerObserver: Any?
-    private var itemPlaybackObservingService: ItemPlaybackObservingServiceProtocol
-    private var routeAudioService: RouteAudioService
-    private var interruptionAudioService: InterruptionAudioService
+    private var itemPlaybackObservingService: PlaybackObservingService
+    private var routeAudioService: ModernAVPlayerRouteAudioService
+    private var interruptionAudioService: ModernAVPlayerInterruptionAudioService
     
     // MARK: - Lifecycle
 
-    init(context: PlayerContextProtocol,
-         itemPlaybackObservingService: ItemPlaybackObservingServiceProtocol = ItemPlaybackObservingService(),
-         routeAudioService: RouteAudioService = RouteAudioService(),
-         interruptionAudioService: InterruptionAudioService = InterruptionAudioService()) {
+    init(context: PlayerContext,
+         itemPlaybackObservingService: PlaybackObservingService = ModernAVPlayerPlaybackObservingService(),
+         routeAudioService: ModernAVPlayerRouteAudioService = ModernAVPlayerRouteAudioService(),
+         interruptionAudioService: ModernAVPlayerInterruptionAudioService = ModernAVPlayerInterruptionAudioService()) {
         
         LoggerInHouse.instance.log(message: "Init", event: .debug)
         self.context = context
@@ -51,7 +51,7 @@ final class PlayingState: PlayerStateProtocol {
 
     // MARK: - Background task
 
-    private func startBgTask(context: PlayerContextProtocol) {
+    private func startBgTask(context: PlayerContext) {
         context.bgToken = UIApplication.shared.beginBackgroundTask { [context] in
             if let token = context.bgToken {
                 UIApplication.shared.endBackgroundTask(token)
@@ -61,7 +61,7 @@ final class PlayingState: PlayerStateProtocol {
         LoggerInHouse.instance.log(message: "StartBgTask create: \(String(describing: context.bgToken))", event: .info)
     }
 
-    private func stopBgTask(context: PlayerContextProtocol) {
+    private func stopBgTask(context: PlayerContext) {
         guard let token = context.bgToken else { return }
 
         LoggerInHouse.instance.log(message: "StopBgTask: \(token)", event: .info)
@@ -71,7 +71,7 @@ final class PlayingState: PlayerStateProtocol {
 
     // MARK: - Shared actions
 
-    func loadMedia(media: PlayerMediaProtocol, shouldPlaying: Bool) {
+    func loadMedia(media: PlayerMedia, shouldPlaying: Bool) {
         let state = LoadingMediaState(context: context, media: media, shouldPlaying: shouldPlaying)
         context.changeState(state: state)
     }

@@ -13,7 +13,7 @@ import Quick
 import ModernAVPlayer
 import Nimble
 
-final class MockTimer: TimerProtocol {
+final class MockTimer: CustomTimer {
     
     var fire_CallCount = 0
     func fire() {
@@ -26,11 +26,11 @@ final class MockTimer: TimerProtocol {
     }
 }
 
-final class MockTimerFactory: TimerFactoryProtocol {
+final class MockTimerFactory: TimerFactory {
     
     var lastCompletion: (() -> Void)?
     var timer =  MockTimer()
-    func getTimer(timeInterval: TimeInterval, repeats: Bool, block: @escaping () -> Void) -> TimerProtocol {
+    func getTimer(timeInterval: TimeInterval, repeats: Bool, block: @escaping () -> Void) -> CustomTimer {
         lastCompletion = block
         return timer
     }

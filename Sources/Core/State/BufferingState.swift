@@ -8,12 +8,12 @@
 
 import AVFoundation
 
-final class BufferingState: NSObject, PlayerStateProtocol {
+final class BufferingState: NSObject, PlayerState {
     
     // MARK: - Inputs
     
-    unowned var context: PlayerContextProtocol
-    private var observingRateService: ObservingRateServiceProtocol
+    unowned var context: PlayerContext
+    private var rateObservingService: RateObservingService
     
     // MARK: - Variable
 
@@ -21,14 +21,14 @@ final class BufferingState: NSObject, PlayerStateProtocol {
 
     // MARK: - Init
 
-    init(context: PlayerContextProtocol, observingRateService: ObservingRateServiceProtocol? = nil) {
+    init(context: PlayerContext, observingRateService: RateObservingService? = nil) {
         LoggerInHouse.instance.log(message: "Init", event: .debug)
         self.context = context
         
         guard let item = context.player.currentItem else { fatalError("item should exist") }
-        self.observingRateService = observingRateService ?? ObservingRateService(config: context.config, item: item)
+        self.rateObservingService = observingRateService ?? ModernAVPlayerRateObservingService(config: context.config, item: item)
 
-        self.observingRateService.onTimeout = { [context] in
+        self.rateObservingService.onTimeout = { [context] in
             guard let url = (context.player.currentItem?.asset as? AVURLAsset)?.url
                 else { return }
             
@@ -39,7 +39,7 @@ final class BufferingState: NSObject, PlayerStateProtocol {
             context.changeState(state: waitingState)
         }
 
-        self.observingRateService.onPlaying = { [context] in
+        self.rateObservingService.onPlaying = { [context] in
             context.changeState(state: PlayingState(context: context))
         }
         
@@ -53,7 +53,7 @@ final class BufferingState: NSObject, PlayerStateProtocol {
     // MARK: - Player Commands
 
     func playCommand() {
-        observingRateService.start()
+        rateObservingService.start()
         context.player.play()
     }
 
@@ -65,7 +65,7 @@ final class BufferingState: NSObject, PlayerStateProtocol {
 
     // MARK: - Shared actions
 
-    func loadMedia(media: PlayerMediaProtocol, shouldPlaying: Bool) {
+    func loadMedia(media: PlayerMedia, shouldPlaying: Bool) {
         let state = LoadingMediaState(context: context, media: media, shouldPlaying: shouldPlaying)
         context.changeState(state: state)
     }

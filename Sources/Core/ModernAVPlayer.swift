@@ -15,8 +15,8 @@ public protocol ModernAVPlayerDelegate: class {
     func modernAVPlayer(_ player: ModernAVPlayer, debugMessage: String?)
 }
 
-public protocol ModernAVPlayerProtocol {
-    func loadMedia(media: PlayerMediaProtocol, shouldPlaying: Bool)
+public protocol MediaPlayer {
+    func loadMedia(media: PlayerMedia, shouldPlaying: Bool)
     func pause()
     func play()
     func seek(position: Double)
@@ -25,7 +25,7 @@ public protocol ModernAVPlayerProtocol {
     var delegate: ModernAVPlayerDelegate? { get set }
 }
 
-public final class ModernAVPlayer: ModernAVPlayerProtocol {
+public final class ModernAVPlayer: MediaPlayer {
     
     // MARK: - Output
     
@@ -33,15 +33,15 @@ public final class ModernAVPlayer: ModernAVPlayerProtocol {
     
     // MARK: - Variable
     
-    private let context: PlayerContext
+    private let context: ModernAVPlayerContext
     
     // MARK: - Init
     
-    public init(config: ContextConfiguration = ModernAVPlayerConfig()) {
-        context = PlayerContext(player: AVPlayer(),
-                                config: config,
-                                nowPlaying: NowPlayingService(),
-                                audioSessionType: AudioSessionService.self)
+    public init(config: PlayerConfiguration = ModernAVPlayerConfiguration()) {
+        context = ModernAVPlayerContext(player: AVPlayer(),
+                                        config: config,
+                                        nowPlaying: ModernAVPlayerNowPlayingService(),
+                                        audioSessionType: ModernAVPlayerAudioSessionService.self)
         context.delegate = self
     }
     
@@ -59,7 +59,7 @@ public final class ModernAVPlayer: ModernAVPlayerProtocol {
         context.stop()
     }
     
-    public func loadMedia(media: PlayerMediaProtocol, shouldPlaying: Bool) {
+    public func loadMedia(media: PlayerMedia, shouldPlaying: Bool) {
         context.loadMedia(media: media, shouldPlaying: shouldPlaying)
     }
     

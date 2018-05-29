@@ -9,7 +9,7 @@
 import Foundation
 @testable import ModernAVPlayer
 
-final class MockAudioSession: AudioSession {
+final class MockAudioSession: AudioSessionService {
     static func resetCallsCount() {
         activateCallCount = 0
         setCategoryCallCount = 0

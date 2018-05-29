@@ -8,11 +8,11 @@
 
 import AVFoundation
 
-struct InitState: PlayerStateProtocol {
+struct InitState: PlayerState {
 
     // MARK: - Input
 
-    unowned var context: PlayerContextProtocol
+    unowned var context: PlayerContext
     
     // MARK: - Variable
     
@@ -20,7 +20,7 @@ struct InitState: PlayerStateProtocol {
     
     // MARK: - Init
 
-    init(context: PlayerContextProtocol) {
+    init(context: PlayerContext) {
         LoggerInHouse.instance.log(message: "Init", event: .debug)
         self.context = context
         
@@ -31,7 +31,7 @@ struct InitState: PlayerStateProtocol {
     
     // MARK: - Shared actions
 
-    func loadMedia(media: PlayerMediaProtocol, shouldPlaying: Bool) {
+    func loadMedia(media: PlayerMedia, shouldPlaying: Bool) {
         let state = LoadingMediaState(context: context, media: media, shouldPlaying: shouldPlaying)
         context.changeState(state: state)
     }

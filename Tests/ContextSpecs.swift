@@ -15,13 +15,13 @@ import ModernAVPlayer
 
 final class ContextSpecs: QuickSpec {
     
-    var tested: PlayerContextProtocol!
+    var tested: PlayerContext!
     var mockState: MockPlayerState!
     
     override func spec() {
         
         beforeEach {
-            self.tested = PlayerContext()
+            self.tested = ModernAVPlayerContext()
             self.mockState = MockPlayerState(context: self.tested)
         }
         
@@ -95,14 +95,14 @@ final class ContextSpecs: QuickSpec {
 
                 // ARRANGE
                 self.tested.changeState(state: self.mockState)
-                let media = PlayerMedia(url: URL(string: "foo")!, type: .clip)
+                let media = ModernAVPlayerMedia(url: URL(string: "foo")!, type: .clip)
 
                 // ACT
                 self.tested.loadMedia(media: media, shouldPlaying: false)
 
                 // ASSERT
                 expect(self.mockState.loadMedialCallCount).to(equal(1))
-                expect(self.mockState.lastMediaParam as? PlayerMedia).to(equal(media))
+                expect(self.mockState.lastMediaParam as? ModernAVPlayerMedia).to(equal(media))
                 expect(self.mockState.lastShoudlPlayingParam).to(beFalse())
             }
         }

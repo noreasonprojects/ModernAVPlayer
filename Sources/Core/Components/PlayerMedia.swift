@@ -8,7 +8,7 @@
 
 import AVFoundation
 
-public protocol PlayerMediaProtocol {
+public protocol PlayerMedia {
     var url: URL { get }
     var type: MediaType { get }
     var title: String? { get }
@@ -20,7 +20,7 @@ public protocol PlayerMediaProtocol {
     func isLive() -> Bool
 }
 
-public extension PlayerMediaProtocol {
+public extension PlayerMedia {
     func isLive() -> Bool {
         guard case let MediaType.stream(isLive) = type, isLive
             else { return false }
@@ -28,7 +28,7 @@ public extension PlayerMediaProtocol {
     }
 }
 
-public struct PlayerMedia: PlayerMediaProtocol, Equatable {
+public struct ModernAVPlayerMedia: PlayerMedia, Equatable {
     public let url: URL
     public let type: MediaType
     public let title: String?
@@ -49,6 +49,6 @@ public struct PlayerMedia: PlayerMediaProtocol, Equatable {
     }
 }
 
-public func == (lhs: PlayerMedia, rhs: PlayerMedia) -> Bool {
+public func == (lhs: ModernAVPlayerMedia, rhs: ModernAVPlayerMedia) -> Bool {
     return lhs.url.absoluteString == rhs.url.absoluteString
 }

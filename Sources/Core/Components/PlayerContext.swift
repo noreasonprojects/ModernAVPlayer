@@ -16,13 +16,13 @@ protocol PlayerContextDelegate: class {
     func playerContext(debugMessage: String?)
 }
 
-protocol PlayerContextProtocol: class {
+protocol PlayerContext: class {
     var player: AVPlayer { get }
-    var config: ContextConfiguration { get }
+    var config: PlayerConfiguration { get }
     var currentItem: AVPlayerItem? { get set }
     var currentTime: Double? { get set }
     var itemDuration: Double? { get set }
-    var state: PlayerStateProtocol! { get }
+    var state: PlayerState! { get }
     var debugMessage: String? { get set }
     var nowPlaying: NowPlaying { get }
     var bgToken: UIBackgroundTaskIdentifier? { get set }
@@ -31,20 +31,20 @@ protocol PlayerContextProtocol: class {
     func play()
     func seek(position: Double)
     func stop()
-    func loadMedia(media: PlayerMediaProtocol, shouldPlaying: Bool)
-    func changeState(state: PlayerStateProtocol)
+    func loadMedia(media: PlayerMedia, shouldPlaying: Bool)
+    func changeState(state: PlayerState)
     
-    var audioSessionType: AudioSession.Type { get }
+    var audioSessionType: AudioSessionService.Type { get }
 }
 
-final class PlayerContext: NSObject, PlayerContextProtocol {
+final class ModernAVPlayerContext: NSObject, PlayerContext {
     
     // MARK: - Inputs
     
     let player: AVPlayer
-    let config: ContextConfiguration
+    let config: PlayerConfiguration
     let nowPlaying: NowPlaying
-    let audioSessionType: AudioSession.Type
+    let audioSessionType: AudioSessionService.Type
     
     weak var delegate: PlayerContextDelegate?
     
@@ -63,7 +63,7 @@ final class PlayerContext: NSObject, PlayerContextProtocol {
     var itemDuration: Double? {
         didSet { delegate?.playerContext(didItemDurationChange: itemDuration) }
     }
-    var state: PlayerStateProtocol! {
+    var state: PlayerState! {
         didSet { delegate?.playerContext(didStateChange: state.type) }
     }
     var debugMessage: String? {
@@ -73,9 +73,9 @@ final class PlayerContext: NSObject, PlayerContextProtocol {
     // MARK: - LifeCycle
 
     init(player: AVPlayer = AVPlayer(),
-         config: ContextConfiguration = ModernAVPlayerConfig(),
-         nowPlaying: NowPlaying = NowPlayingService(),
-         audioSessionType: AudioSession.Type = AudioSessionService.self) {
+         config: PlayerConfiguration = ModernAVPlayerConfiguration(),
+         nowPlaying: NowPlaying = ModernAVPlayerNowPlayingService(),
+         audioSessionType: AudioSessionService.Type = ModernAVPlayerAudioSessionService.self) {
         self.player = player
         self.config = config
         self.nowPlaying = nowPlaying
@@ -96,7 +96,7 @@ final class PlayerContext: NSObject, PlayerContextProtocol {
         LoggerInHouse.instance.levelFilter = config.loggerLevelFilter
     }
     
-    func changeState(state: PlayerStateProtocol) {
+    func changeState(state: PlayerState) {
         self.state = state
     }
     
@@ -114,7 +114,7 @@ final class PlayerContext: NSObject, PlayerContextProtocol {
         state.stop()
     }
 
-    func loadMedia(media: PlayerMediaProtocol, shouldPlaying: Bool) {
+    func loadMedia(media: PlayerMedia, shouldPlaying: Bool) {
         state.loadMedia(media: media, shouldPlaying: shouldPlaying)
     }
     

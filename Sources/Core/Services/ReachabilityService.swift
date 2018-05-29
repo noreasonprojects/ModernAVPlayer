@@ -8,21 +8,21 @@
 
 import Foundation
 
-protocol ReachabilityServiceProtocol {
+protocol ReachabilityService {
     var isReachable: (() -> Void)? { get set }
     var isTimedOut: (() -> Void)? { get set }
     
     func start()
 }
 
-final class ReachabilityService: ReachabilityServiceProtocol {
+final class ModernAVPlayerReachabilityService: ReachabilityService {
 
     // MARK: - Inputs
     
-    private let dataTaskFactory: URLSessionDataTaskFactoryProtocol
+    private let dataTaskFactory: URLSessionDataTaskFactory
     private var remainingNetworkIteration: UInt
     private let timeoutURLSession: TimeInterval
-    private let timerFactory: TimerFactoryProtocol
+    private let timerFactory: TimerFactory
     private let tiNetworkTesting: TimeInterval
     private let url: URL
     
@@ -33,19 +33,19 @@ final class ReachabilityService: ReachabilityServiceProtocol {
     
     // MARK: - Variables
 
-    private var timer: TimerProtocol? {
+    private var timer: CustomTimer? {
         didSet { timer?.fire() }
     }
-    private var networkTask: URLSessionDataTaskProtocol? {
+    private var networkTask: CustomURLSessionDataTask? {
         willSet { networkTask?.cancel() }
         didSet { networkTask?.resume() }
     }
 
     // MARK: - Init
 
-    init(config: ContextConfiguration,
-         dataTaskFactory: URLSessionDataTaskFactoryProtocol = URLSessionDataTaskFactory(),
-         timerFactory: TimerFactoryProtocol = TimerFactory()) {
+    init(config: PlayerConfiguration,
+         dataTaskFactory: URLSessionDataTaskFactory = ModernAVPlayerURLSessionDataTaskFactory(),
+         timerFactory: TimerFactory = ModernAVPlayerTimerFactory()) {
         LoggerInHouse.instance.log(message: "Init", event: .debug)
         
         self.dataTaskFactory = dataTaskFactory

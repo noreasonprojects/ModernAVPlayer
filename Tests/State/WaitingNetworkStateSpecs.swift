@@ -17,9 +17,9 @@ final class WaitingNetworkStateSpecs: QuickSpec {
     private var state: WaitingNetworkState!
     private var mockPlayer = MockCustomPlayer()
     private var url: URL!
-    private var playerMedia = PlayerMedia(url: URL(string: "x")!, type: .clip)
+    private var playerMedia = ModernAVPlayerMedia(url: URL(string: "x")!, type: .clip)
     private var mockReachability: MockReachability!
-    private lazy var tested = PlayerContext(player: self.mockPlayer)
+    private lazy var tested = ModernAVPlayerContext(player: self.mockPlayer)
     
     override func spec() {
         beforeEach {
@@ -28,7 +28,7 @@ final class WaitingNetworkStateSpecs: QuickSpec {
             self.state = WaitingNetworkState(context: self.tested,
                                              urlToReload: self.url,
                                              shouldPlaying: true,
-                                             error: CustomError.itemFailedWhenLoading,
+                                             error: PlayerError.itemFailedWhenLoading,
                                              reachabilityService: self.mockReachability)
             self.tested.state = self.state
         }

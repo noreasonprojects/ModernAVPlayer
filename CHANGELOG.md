@@ -19,3 +19,4 @@ All notable changes to this project will be documented in this file.
 	* Separate rate observing service
 	* Separate notification service on PlayingState
 	* Remove useless public access control
+	* Protocol and implementation naming

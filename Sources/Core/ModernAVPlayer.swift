@@ -15,7 +15,7 @@ public protocol ModernAVPlayerDelegate: class {
     func modernAVPlayer(_ player: ModernAVPlayer, debugMessage: String?)
 }
 
-protocol ModernAVPlayerProtocol {
+public protocol ModernAVPlayerProtocol {
     func loadMedia(media: PlayerMediaProtocol, shouldPlaying: Bool)
     func pause()
     func play()
@@ -27,21 +27,7 @@ protocol ModernAVPlayerProtocol {
 
 public final class ModernAVPlayer: ModernAVPlayerProtocol {
     
-    // MARK: - Outputs
-    
-    public enum State: String {
-        case buffering
-        case failed
-        case initialization
-        case loaded
-        case loading
-        case paused
-        case playing
-        case stopped
-        case waitingNetwork
-        
-        public var description: String { return rawValue.capitalized }
-    }
+    // MARK: - Output
     
     public weak var delegate: ModernAVPlayerDelegate?
     
@@ -51,15 +37,11 @@ public final class ModernAVPlayer: ModernAVPlayerProtocol {
     
     // MARK: - Init
     
-    public init(player: AVPlayer = AVPlayer(),
-                config: ContextConfiguration = ModernAVPlayerConfig(),
-                nowPlaying: NowPlaying = NowPlayingService(),
-                audioSessionType: AudioSession.Type = AudioSessionService.self) {
-        
-        context = PlayerContext(player: player,
+    public init(config: ContextConfiguration = ModernAVPlayerConfig()) {
+        context = PlayerContext(player: AVPlayer(),
                                 config: config,
-                                nowPlaying: nowPlaying,
-                                audioSessionType: audioSessionType)
+                                nowPlaying: NowPlayingService(),
+                                audioSessionType: AudioSessionService.self)
         context.delegate = self
     }
     
@@ -83,6 +65,22 @@ public final class ModernAVPlayer: ModernAVPlayerProtocol {
     
     public func play() {
         context.play()
+    }
+}
+
+public extension ModernAVPlayer {
+    enum State: String {
+        case buffering
+        case failed
+        case initialization
+        case loaded
+        case loading
+        case paused
+        case playing
+        case stopped
+        case waitingNetwork
+        
+        public var description: String { return rawValue.capitalized }
     }
 }
 

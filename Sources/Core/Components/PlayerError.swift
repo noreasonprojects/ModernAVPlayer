@@ -8,14 +8,14 @@
 
 import Foundation
 
-public enum CustomError: Error {
+enum PlayerError: Error {
     case itemFailedWhenLoading
     case itemPlaybackStalled
     case buffering
 }
 
-extension CustomError: LocalizedError {
-    public var errorDescription: String? {
+extension PlayerError: LocalizedError {
+    var errorDescription: String? {
         switch self {
         case .itemFailedWhenLoading:
             return "loading failed"

@@ -7,15 +7,22 @@
 //
 
 import AVFoundation
-import Foundation
 
-public struct PausedState: PlayerState {
-    public unowned var context: PlayerContext
-    private var interruptionAudioService: InterruptionAudioService
+struct PausedState: PlayerState {
+    
+    // MARK: - Input
+    
+    unowned var context: PlayerContext
+    private var interruptionAudioService: ModernAVPlayerInterruptionAudioService
+    
+    // MARK: - Variable
+    
+    var type: ModernAVPlayer.State = .paused
 
     // MARK: Init
     
-    public init(context: PlayerContext, interruptionAudioService: InterruptionAudioService = InterruptionAudioService()) {
+    init(context: PlayerContext,
+         interruptionAudioService: ModernAVPlayerInterruptionAudioService = ModernAVPlayerInterruptionAudioService()) {
         LoggerInHouse.instance.log(message: "Init", event: .debug)
         self.context = context
         self.context.player.pause()
@@ -30,18 +37,18 @@ public struct PausedState: PlayerState {
     
     // MARK: - Shared actions
 
-    public func loadMedia(media: PlayerMedia, shouldPlaying: Bool) {
+    func loadMedia(media: PlayerMedia, shouldPlaying: Bool) {
         let state = LoadingMediaState(context: context, media: media, shouldPlaying: shouldPlaying)
         context.changeState(state: state)
     }
 
-    public func pause() {
+    func pause() {
         let debug = "Already paused"
         context.debugMessage = debug
         LoggerInHouse.instance.log(message: debug, event: .warning)
     }
 
-    public func play() {
+    func play() {
         if context.player.currentItem?.status == .readyToPlay {
             let state = BufferingState(context: context)
             context.changeState(state: state)
@@ -53,14 +60,14 @@ public struct PausedState: PlayerState {
         }
     }
 
-    public func seek(position: Double) {
+    func seek(position: Double) {
         let time = CMTime(seconds: position, preferredTimescale: context.config.preferedTimeScale)
         context.player.seek(to: time) { [context] completed in
             if completed { context.currentTime = position }
         }
     }
 
-    public func stop() {
+    func stop() {
         context.changeState(state: StoppedState(context: context))
     }
 }

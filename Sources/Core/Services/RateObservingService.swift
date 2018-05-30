@@ -7,21 +7,21 @@
 
 import AVFoundation
 
-public protocol ObservingRateServiceProtocol {
+protocol RateObservingService {
     var onPlaying: (() -> Void)? { get set }
     var onTimeout: (() -> Void)? { get set }
 
     func start()
 }
 
-final class ObservingRateService: ObservingRateServiceProtocol {
+final class ModernAVPlayerRateObservingService: RateObservingService {
     
     // MARK: - Inputs
     
     private let item: AVPlayerItem
     private let timeInterval: TimeInterval
     private let timeout: TimeInterval
-    private let timerFactory: TimerFactoryProtocol
+    private let timerFactory: TimerFactory
 
     // MARK: - Outputs
     
@@ -30,14 +30,12 @@ final class ObservingRateService: ObservingRateServiceProtocol {
     
     // MARK: - Variables
     
-    private var timer: TimerProtocol?
+    private var timer: CustomTimer?
     private var remainingTime: TimeInterval = 0
 
     // MARK: - Lifecycle
     
-    init(config: ContextConfiguration,
-         item: AVPlayerItem,
-         timerFactory: TimerFactoryProtocol = TimerFactory()) {
+    init(config: PlayerConfiguration, item: AVPlayerItem, timerFactory: TimerFactory = ModernAVPlayerTimerFactory()) {
         LoggerInHouse.instance.log(message: "Init", event: .debug)
         timeInterval = config.playerRateObserving
         timeout = config.timeoutBuffering

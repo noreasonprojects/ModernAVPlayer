@@ -13,12 +13,12 @@ import MediaPlayer
  Because of race condition, we have to share infos property when updating
  */
 
-public protocol NowPlaying {
+protocol NowPlaying {
     func update(media: PlayerMedia, duration: Double?)
     func overrideInfoCenter(for key: String, value: Any)
 }
 
-public final class NowPlayingService: NowPlaying {
+final class ModernAVPlayerNowPlayingService: NowPlaying {
 
     private var infos = [String: Any]()
     private var session: URLSession {
@@ -26,14 +26,12 @@ public final class NowPlayingService: NowPlaying {
     }
     private var task: URLSessionTask?
 
-    public init() { }
-
-    public func update(media: PlayerMedia, duration: Double?) {
+    func update(media: PlayerMedia, duration: Double?) {
         infos = parseInfos(media: media, duration: duration)
         MPNowPlayingInfoCenter.default().nowPlayingInfo = infos
     }
 
-    public func overrideInfoCenter(for key: String, value: Any) {
+    func overrideInfoCenter(for key: String, value: Any) {
         infos[key] = value
         MPNowPlayingInfoCenter.default().nowPlayingInfo = infos
     }

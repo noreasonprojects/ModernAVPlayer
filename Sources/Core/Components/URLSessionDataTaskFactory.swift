@@ -7,23 +7,23 @@
 
 import Foundation
 
-protocol URLSessionDataTaskProtocol {
+protocol CustomURLSessionDataTask {
     func cancel()
     func resume()
 }
-extension URLSessionDataTask: URLSessionDataTaskProtocol { }
+extension URLSessionDataTask: CustomURLSessionDataTask { }
 
-protocol URLSessionDataTaskFactoryProtocol {
+protocol URLSessionDataTaskFactory {
     func getDataTask(with url: URL,
                      timeout: TimeInterval,
-                     completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTaskProtocol
+                     completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> CustomURLSessionDataTask
 }
 
-struct URLSessionDataTaskFactory: URLSessionDataTaskFactoryProtocol {
+struct ModernAVPlayerURLSessionDataTaskFactory: URLSessionDataTaskFactory {
     
     func getDataTask(with url: URL,
                      timeout: TimeInterval,
-                     completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTaskProtocol {
+                     completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> CustomURLSessionDataTask {
         let sessionConfig = URLSessionConfiguration.ephemeral
         sessionConfig.timeoutIntervalForRequest = timeout
         return URLSession(configuration: sessionConfig).dataTask(with: url, completionHandler: completionHandler)

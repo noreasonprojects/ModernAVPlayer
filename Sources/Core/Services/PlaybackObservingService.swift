@@ -7,22 +7,27 @@
 
 import Foundation
 
-public protocol ItemPlaybackObservingServiceProtocol {
+protocol PlaybackObservingService {
     var onPlaybackStalled: (() -> Void)? { get set }
     var onPlayToEndTime: (() -> Void)? { get set }
 }
 
-public final class ItemPlaybackObservingService: ItemPlaybackObservingServiceProtocol {
-    public var onPlaybackStalled: (() -> Void)?
-    public var onPlayToEndTime: (() -> Void)?
+final class ModernAVPlayerPlaybackObservingService: PlaybackObservingService {
     
-    public init() {
+    // MARK: - Outputs
+    
+    var onPlaybackStalled: (() -> Void)?
+    var onPlayToEndTime: (() -> Void)?
+    
+    // MARK: - Init
+    
+    init() {
         LoggerInHouse.instance.log(message: "Init", event: .debug)
-        NotificationCenter.default.addObserver(self, selector: #selector(ItemPlaybackObservingService.itemPlaybackStalled),
+        NotificationCenter.default.addObserver(self, selector: #selector(ModernAVPlayerPlaybackObservingService.itemPlaybackStalled),
                                                name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(ItemPlaybackObservingService.itemPlayToEndTime),
+        NotificationCenter.default.addObserver(self, selector: #selector(ModernAVPlayerPlaybackObservingService.itemPlayToEndTime),
                                                name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(ItemPlaybackObservingService.itemFailedToPlayToEndTime),
+        NotificationCenter.default.addObserver(self, selector: #selector(ModernAVPlayerPlaybackObservingService.itemFailedToPlayToEndTime),
                                                name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: nil)
     }
     

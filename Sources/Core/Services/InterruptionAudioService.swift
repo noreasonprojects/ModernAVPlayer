@@ -6,15 +6,21 @@
 //
 
 import AVFoundation
-import Foundation
 
-public final class InterruptionAudioService {
+final class ModernAVPlayerInterruptionAudioService {
+    
+    // MARK: - Outputs
+    
+    var onInterruptionBegan: (() -> Void)?
+    var onInterruptionEnded: (() -> Void)?
+    
+    // MARK: - Variables
     
     private let notificationName = Notification.Name.AVAudioSessionInterruption
-    public var onInterruptionBegan: (() -> Void)?
-    public var onInterruptionEnded: (() -> Void)?
     
-    public init() {
+    // MARK: - Init
+    
+    init() {
         LoggerInHouse.instance.log(message: "Init", event: .debug)
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(incomingInterruption),

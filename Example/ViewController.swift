@@ -25,11 +25,11 @@ final class ViewController: UIViewController {
     // MARK: - Actions
 
     @IBAction func pause(_ sender: UIButton) {
-        context.pause()
+        player.pause()
     }
 
     @IBAction func play(_ sender: UIButton) {
-        context.play()
+        player.play()
     }
 
     @IBAction func fixSeeking(_ sender: UIButton) {
@@ -40,11 +40,11 @@ final class ViewController: UIViewController {
             else { setDebugMessage("Seek unavailable for live audio"); return }
 
         let seektime = (sender.tag == 0) ? currentTimeInDouble - 10 : currentTimeInDouble + 10
-        context.seek(position: seektime)
+        player.seek(position: seektime)
     }
 
     @IBAction func stop(_ sender: UIButton) {
-        context.stop()
+        player.stop()
     }
 
     @IBAction func loadMedia(_ sender: UIButton) {
@@ -54,20 +54,19 @@ final class ViewController: UIViewController {
 
     @IBAction func loadInvalidFormat(_ sender: UIButton) {
         let url = URL(fileURLWithPath: Bundle.main.path(forResource: "noreason", ofType: "txt")!)
-        let media = ConcretePlayerMedia(url: url, type: .clip)
+        let media = ModernAVPlayerMedia(url: url, type: .clip)
         loadMedia(media, shouldPlaying: true)
     }
     
     @IBAction func loadInvalidRemoteUrl(_ sender: UIButton) {
         let url = URL(string: "foo://noreason")!
-        let media = ConcretePlayerMedia(url: url, type: .clip)
+        let media = ModernAVPlayerMedia(url: url, type: .clip)
         loadMedia(media, shouldPlaying: true)
     }
     
     // MARK: - Private vars
 
-    private let config = PlayerContextConfiguration()
-    private lazy var context = ConcretePlayerContext(config: config)
+    private let player = ModernAVPlayer()
     private var commandCenter: SetupCommandCenter?
     private var itemDuration: Double? {
         didSet {
@@ -89,22 +88,22 @@ final class ViewController: UIViewController {
         let localClip = URL(fileURLWithPath: Bundle.main.path(forResource: "AllNew", ofType: "mp3")!)
         //swiftlint:enable force_unwrapping
         return [
-            ConcretePlayerMedia(url: liveUrl, type: .stream(isLive: true), title: "Le live",
+            ModernAVPlayerMedia(url: liveUrl, type: .stream(isLive: true), title: "Le live",
                                 albumTitle: "Album0", artist: "Artist0", localImageName: "sennaLive"),
-            ConcretePlayerMedia(url: remoteClip, type: .clip, title: "Remote clip",
+            ModernAVPlayerMedia(url: remoteClip, type: .clip, title: "Remote clip",
                                 albumTitle: "Album1", artist: "Artist1", localImageName: "sennaClip"),
-            ConcretePlayerMedia(url: localClip, type: .clip, title: "Local clip",
+            ModernAVPlayerMedia(url: localClip, type: .clip, title: "Local clip",
                                 albumTitle: "Album2", artist: "Artist2", localImageName: "ankierman",
                                 remoteImageUrl: URL(string: "https://goo.gl/U4QoQj"))
         ]
     }
 
-    private var state: PlayerState? {
+    private var state: ModernAVPlayer.State? {
         didSet {
             DispatchQueue.main.async {
                 self.playerStateLabel.text = self.state?.description
 
-                if let s = self.state, s is PlayingState, self.isSliderSeeking {
+                if let s = self.state, s == .playing, self.isSliderSeeking {
                     self.isSliderSeeking = false
                 }
                 if self.isPlayerWorking() {
@@ -122,12 +121,11 @@ final class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        context.delegate = self
-        playerStateLabel.text = context.state.description
+        player.delegate = self
         positionSlider.value = 0
         positionSlider.addTarget(self, action: #selector(ViewController.sliderSeeking(_:)), for: .valueChanged)
         debugMessage.text = nil
-        commandCenter = SetupCommandCenter(context: context)
+        commandCenter = SetupCommandCenter(player: player)
     }
 
     // MARK: - Slider events
@@ -141,7 +139,7 @@ final class ViewController: UIViewController {
         isSliderSeeking = true
         let limitedSliderValue = min(sender.value, 0.99)
         let position = Double(limitedSliderValue) * duration
-        context.state.seek(position: position)
+        player.seek(position: position)
     }
 
     private func setSliderValue(currentTime: Double) {
@@ -156,11 +154,11 @@ final class ViewController: UIViewController {
     // MARK: - Player utils
 
     private func loadMedia(_ media: PlayerMedia, shouldPlaying: Bool) {
-        context.loadMedia(media: media, shouldPlaying: shouldPlaying)
+        player.loadMedia(media: media, shouldPlaying: shouldPlaying)
     }
 
     private func isPlayerWorking() -> Bool {
-        return state is BufferingState || state is LoadingMediaState
+        return state == .buffering || state == .loading || state == .waitingNetwork
     }
 
     private func setDebugMessage(_ msg: String?) {
@@ -174,24 +172,24 @@ final class ViewController: UIViewController {
 
 // MARK: - PLayerContextDelegate
 
-extension ViewController: PlayerContextDelegate {
-    func playerContext(_ context: ConcretePlayerContext, state: PlayerState) {
+extension ViewController: ModernAVPlayerDelegate {
+    func modernAVPlayer(_ player: ModernAVPlayer, didStateChange state: ModernAVPlayer.State) {
         self.state = state
     }
-
-    func playerContext(_ context: ConcretePlayerContext, currentTime: Double?) {
+    
+    func modernAVPlayer(_ player: ModernAVPlayer, didCurrentTimeChange currentTime: Double?) {
         self.currentTime = currentTime
     }
-
-    func playerContext(_ context: ConcretePlayerContext, itemDuration: Double?) {
+    
+    func modernAVPlayer(_ player: ModernAVPlayer, didItemDurationChange itemDuration: Double?) {
         self.itemDuration = itemDuration
     }
-
-    func playerContext(_ context: ConcretePlayerContext, debugMessage: String?) {
+    
+    func modernAVPlayer(_ player: ModernAVPlayer, debugMessage: String?) {
         setDebugMessage(debugMessage)
     }
-
-    func playerContext(_ context: ConcretePlayerContext, currentItemUrl: URL?) {
+    
+    func modernAVPlayer(_ player: ModernAVPlayer, didCurrentItemUrlChange currentItemUrl: URL?) {
         DispatchQueue.main.async {
             self.currentItemLabel.text = currentItemUrl?.absoluteString
         }

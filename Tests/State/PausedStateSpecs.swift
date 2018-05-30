@@ -9,6 +9,7 @@
 import AVFoundation
 import Foundation
 import Quick
+@testable
 import ModernAVPlayer
 import Nimble
 
@@ -17,12 +18,12 @@ final class PausedStateSpecs: QuickSpec {
     var tested: PausedState!
     var mockPlayer = MockCustomPlayer()
     var media: PlayerMedia!
-    lazy var playerContext = ConcretePlayerContext(player: self.mockPlayer, audioSessionType: MockAudioSession.self)
+    lazy var playerContext = ModernAVPlayerContext(player: self.mockPlayer, audioSessionType: MockAudioSession.self)
 
     override func spec() {
 
         beforeEach {
-            self.media = ConcretePlayerMedia(url: URL(string: "foo")!, type: .clip)
+            self.media = ModernAVPlayerMedia(url: URL(string: "foo")!, type: .clip)
             self.tested = PausedState(context: self.playerContext)
             self.playerContext.state = self.tested
         }

@@ -14,8 +14,8 @@ import Nimble
 
 final class ReachabilityServiceTests: QuickSpec {
     
-    var tested: ReachabilityServiceProtocol!
-    var config: ContextConfiguration!
+    var tested: ReachabilityService!
+    var config: PlayerConfiguration!
     var isReachable: Bool?
     var isTimedOut: Bool?
     var mockTimerFactory: MockTimerFactory!
@@ -28,8 +28,8 @@ final class ReachabilityServiceTests: QuickSpec {
             self.isTimedOut = nil
             self.dataTaskFactory = MockDataTaskFactory()
             self.mockTimerFactory = MockTimerFactory()
-            self.config = PlayerContextConfiguration()
-            self.tested = ReachabilityService(config: self.config, dataTaskFactory: self.dataTaskFactory, timerFactory: self.mockTimerFactory)
+            self.config = ModernAVPlayerConfiguration()
+            self.tested = ModernAVPlayerReachabilityService(config: self.config, dataTaskFactory: self.dataTaskFactory, timerFactory: self.mockTimerFactory)
             self.tested.isReachable = { [weak self] in self?.isReachable = true }
             self.tested.isTimedOut = { [weak self] in self?.isTimedOut = true }
         }
@@ -39,7 +39,7 @@ final class ReachabilityServiceTests: QuickSpec {
                 
                 // ACT - closure used to deinit the instance
                 {
-                    let service = ReachabilityService(config: self.config, dataTaskFactory: self.dataTaskFactory, timerFactory: self.mockTimerFactory)
+                    let service = ModernAVPlayerReachabilityService(config: self.config, dataTaskFactory: self.dataTaskFactory, timerFactory: self.mockTimerFactory)
                     service.start()
                 }()
                 
@@ -52,7 +52,7 @@ final class ReachabilityServiceTests: QuickSpec {
                 
                 // ACT - closure used to deinit the instance
                 {
-                    let service = ReachabilityService(config: self.config, dataTaskFactory: self.dataTaskFactory, timerFactory: self.mockTimerFactory)
+                    let service = ModernAVPlayerReachabilityService(config: self.config, dataTaskFactory: self.dataTaskFactory, timerFactory: self.mockTimerFactory)
                     service.start()
                     self.mockTimerFactory.lastCompletion?()
                 }()

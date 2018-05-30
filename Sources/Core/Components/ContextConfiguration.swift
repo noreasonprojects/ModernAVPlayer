@@ -7,9 +7,8 @@
 //
 
 import AVFoundation
-import Foundation
 
-public protocol ContextConfiguration {
+public protocol PlayerConfiguration {
 
     // Buffering State
     var timeoutBuffering: TimeInterval { get }
@@ -30,7 +29,7 @@ public protocol ContextConfiguration {
     var loggerLevelFilter: LoggerInHouse.LogEvent { get }
 }
 
-public struct PlayerContextConfiguration: ContextConfiguration {
+public struct ModernAVPlayerConfiguration: PlayerConfiguration {
     
     // Buffering State
     public let timeoutBuffering: TimeInterval = 3

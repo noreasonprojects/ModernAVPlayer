@@ -7,7 +7,6 @@
 //
 
 import AVFoundation
-import Foundation
 
 public protocol PlayerMedia {
     var url: URL { get }
@@ -29,7 +28,7 @@ public extension PlayerMedia {
     }
 }
 
-public struct ConcretePlayerMedia: PlayerMedia, Equatable {
+public struct ModernAVPlayerMedia: PlayerMedia, Equatable {
     public let url: URL
     public let type: MediaType
     public let title: String?
@@ -50,6 +49,6 @@ public struct ConcretePlayerMedia: PlayerMedia, Equatable {
     }
 }
 
-public func == (lhs: ConcretePlayerMedia, rhs: ConcretePlayerMedia) -> Bool {
+public func == (lhs: ModernAVPlayerMedia, rhs: ModernAVPlayerMedia) -> Bool {
     return lhs.url.absoluteString == rhs.url.absoluteString
 }

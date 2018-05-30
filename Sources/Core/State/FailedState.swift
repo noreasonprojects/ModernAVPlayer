@@ -7,17 +7,20 @@
 //
 
 import AVFoundation
-import Foundation
 
-public final class FailedState: PlayerState {
+final class FailedState: PlayerState {
 
     // MARK: - Input
 
-    public unowned var context: PlayerContext
-
+    unowned var context: PlayerContext
+    
+    // MARK: - Variable
+    
+    var type: ModernAVPlayer.State = .failed
+    
     // MARK: - Init
     
-    public init(context: PlayerContext, error: CustomError) {
+    init(context: PlayerContext, error: PlayerError) {
         LoggerInHouse.instance.log(message: "Init reason:\(error.localizedDescription)", event: .debug)
         self.context = context
     }
@@ -28,24 +31,24 @@ public final class FailedState: PlayerState {
 
     // MARK: - Shared actions
 
-    public func loadMedia(media: PlayerMedia, shouldPlaying: Bool) {
+    func loadMedia(media: PlayerMedia, shouldPlaying: Bool) {
         let state = LoadingMediaState(context: context, media: media, shouldPlaying: shouldPlaying)
         context.changeState(state: state)
     }
 
-    public func pause() {
+    func pause() {
         sendDebugMessage("Unable to pause, load a media first")
     }
 
-    public func play() {
+    func play() {
         sendDebugMessage("Unable to play, load a media first")
     }
 
-    public func seek(position: Double) {
+    func seek(position: Double) {
         sendDebugMessage("Unable to seek, load a media first")
     }
 
-    public func stop() {
+    func stop() {
         sendDebugMessage("Unable to stop, load a media first")
     }
     

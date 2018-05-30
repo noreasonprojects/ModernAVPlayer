@@ -12,8 +12,8 @@ import Quick
 @testable import ModernAVPlayer
 import Nimble
 
-final class MockObservingRateService: ObservingRateServiceProtocol {
-    init(config: ContextConfiguration, item: AVPlayerItem) {
+final class MockObservingRateService: RateObservingService {
+    init(config: PlayerConfiguration, item: AVPlayerItem) {
     }
     
     private(set) var startCallCount = 0

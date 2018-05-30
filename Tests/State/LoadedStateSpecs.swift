@@ -9,20 +9,21 @@
 import Foundation
 import Quick
 import Nimble
+@testable
 import ModernAVPlayer
 
 final class LoadedStateSpecs: QuickSpec {
     
     private var loadedState: LoadedState!
     private var mockPlayer: MockCustomPlayer!
-    private var playerMedia = ConcretePlayerMedia(url: URL(string: "x")!, type: .clip)
-    private var tested: ConcretePlayerContext!
+    private var playerMedia = ModernAVPlayerMedia(url: URL(string: "x")!, type: .clip)
+    private var tested: ModernAVPlayerContext!
     
     override func spec() {
         
         beforeEach {
             self.mockPlayer = MockCustomPlayer.createOne(url: "foo")
-            self.tested = ConcretePlayerContext(player: self.mockPlayer, audioSessionType: MockAudioSession.self)
+            self.tested = ModernAVPlayerContext(player: self.mockPlayer, audioSessionType: MockAudioSession.self)
             self.loadedState = LoadedState(context: self.tested)
             self.tested.state = self.loadedState
         }

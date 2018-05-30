@@ -14,14 +14,14 @@ import Nimble
 
 final class RouteAudioServiceTests: QuickSpec {
     
-    var tested: RouteAudioService!
+    var tested: ModernAVPlayerRouteAudioService!
     var routeChangedReason: AVAudioSessionRouteChangeReason?
     
     override func spec() {
         
         beforeEach {
             self.routeChangedReason = nil
-            self.tested = RouteAudioService()
+            self.tested = ModernAVPlayerRouteAudioService()
             self.tested.onRouteChanged = { [weak self] in self?.routeChangedReason = $0 }
         }
         

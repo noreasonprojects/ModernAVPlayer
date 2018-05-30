@@ -8,14 +8,15 @@
 
 import Foundation
 import Quick
+@testable
 import ModernAVPlayer
 import Nimble
 
 final class InitStateSpecs: QuickSpec {
 
     var state: InitState!
-    let tested = ConcretePlayerContext()
-    let media = ConcretePlayerMedia(url: URL(string: "foo")!, type: .stream(isLive: false))
+    let tested = ModernAVPlayerContext()
+    let media = ModernAVPlayerMedia(url: URL(string: "foo")!, type: .stream(isLive: false))
 
     override func spec() {
 

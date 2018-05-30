@@ -6,25 +6,28 @@
 //
 
 import AVFoundation
-import Foundation
 
-public final class WaitingNetworkState: PlayerState {
+final class WaitingNetworkState: PlayerState {
     
     // MARK: - Inputs
     
-    public unowned var context: PlayerContext
-    private var reachability: ReachabilityServiceProtocol
+    unowned var context: PlayerContext
+    private var reachability: ReachabilityService
+    
+    // MARK: - Variable
+    
+    var type: ModernAVPlayer.State = .waitingNetwork
     
     // MARK: - Init
     
-    public init(context: PlayerContext,
-                urlToReload: URL,
-                shouldPlaying: Bool,
-                error: CustomError,
-                reachabilityService: ReachabilityServiceProtocol? = nil) {
+    init(context: PlayerContext,
+         urlToReload: URL,
+         shouldPlaying: Bool,
+         error: PlayerError,
+         reachabilityService: ReachabilityService? = nil) {
         LoggerInHouse.instance.log(message: "Init", event: .debug)
         self.context = context
-        self.reachability = reachabilityService ?? ReachabilityService(config: context.config)
+        self.reachability = reachabilityService ?? ModernAVPlayerReachabilityService(config: context.config)
         setupReachabilityCallbacks(shouldPlaying: shouldPlaying, urlToReload: urlToReload, error: error)
         reachability.start()
     }
@@ -35,7 +38,7 @@ public final class WaitingNetworkState: PlayerState {
     
     // MARK: - Reachability
     
-    private func setupReachabilityCallbacks(shouldPlaying: Bool, urlToReload: URL, error: CustomError) {
+    private func setupReachabilityCallbacks(shouldPlaying: Bool, urlToReload: URL, error: PlayerError) {
         reachability.isTimedOut = { [weak self] in
             guard let strongSelf = self else { return }
             
@@ -61,28 +64,28 @@ public final class WaitingNetworkState: PlayerState {
     
     // MARK: - Shared actions
     
-    public func loadMedia(media: PlayerMedia, shouldPlaying: Bool) {
+    func loadMedia(media: PlayerMedia, shouldPlaying: Bool) {
         let state = LoadingMediaState(context: context, media: media, shouldPlaying: shouldPlaying)
         context.changeState(state: state)
     }
     
-    public func pause() {
+    func pause() {
         context.changeState(state: PausedState(context: context))
     }
     
-    public func play() {
+    func play() {
         let debug = "Unable to play, reload a media first"
         context.debugMessage = debug
         LoggerInHouse.instance.log(message: "Unable to play, reload a media first", event: .warning)
     }
     
-    public func seek(position: Double) {
+    func seek(position: Double) {
         let debug = "Unable to seek, load a media first"
         context.debugMessage = debug
         LoggerInHouse.instance.log(message: "Unable to seek, load a media first", event: .warning)
     }
     
-    public func stop() {
+    func stop() {
         context.changeState(state: StoppedState(context: context))
     }
 }

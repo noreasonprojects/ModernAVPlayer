@@ -15,7 +15,7 @@ import Nimble
 
 final class ItemPlaybackObservingServiceTests: QuickSpec {
 
-    var tested: ItemPlaybackObservingService!
+    var tested: ModernAVPlayerPlaybackObservingService!
     var wasPlaybackStalledCalled = false
     var wasPlayToEndTimeCalled = false
 
@@ -24,7 +24,7 @@ final class ItemPlaybackObservingServiceTests: QuickSpec {
         beforeEach {
             self.wasPlaybackStalledCalled = false
             self.wasPlayToEndTimeCalled = false
-            self.tested = ItemPlaybackObservingService()
+            self.tested = ModernAVPlayerPlaybackObservingService()
             self.tested.onPlaybackStalled = { [weak self] in self?.wasPlaybackStalledCalled = true }
             self.tested.onPlayToEndTime = { [weak self] in self?.wasPlayToEndTimeCalled = true }
         }

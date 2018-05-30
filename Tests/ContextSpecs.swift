@@ -10,6 +10,7 @@ import Foundation
 import Nimble
 import Quick
 import AVFoundation
+@testable
 import ModernAVPlayer
 
 final class ContextSpecs: QuickSpec {
@@ -20,7 +21,7 @@ final class ContextSpecs: QuickSpec {
     override func spec() {
         
         beforeEach {
-            self.tested = ConcretePlayerContext()
+            self.tested = ModernAVPlayerContext()
             self.mockState = MockPlayerState(context: self.tested)
         }
         
@@ -94,14 +95,14 @@ final class ContextSpecs: QuickSpec {
 
                 // ARRANGE
                 self.tested.changeState(state: self.mockState)
-                let media = ConcretePlayerMedia(url: URL(string: "foo")!, type: .clip)
+                let media = ModernAVPlayerMedia(url: URL(string: "foo")!, type: .clip)
 
                 // ACT
                 self.tested.loadMedia(media: media, shouldPlaying: false)
 
                 // ASSERT
                 expect(self.mockState.loadMedialCallCount).to(equal(1))
-                expect(self.mockState.lastMediaParam as? ConcretePlayerMedia).to(equal(media))
+                expect(self.mockState.lastMediaParam as? ModernAVPlayerMedia).to(equal(media))
                 expect(self.mockState.lastShoudlPlayingParam).to(beFalse())
             }
         }

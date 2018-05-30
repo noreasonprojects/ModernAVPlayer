@@ -9,7 +9,7 @@
 @testable
 import ModernAVPlayer
 
-final class MockURLSessionDataTask: URLSessionDataTaskProtocol {
+final class MockURLSessionDataTask: CustomURLSessionDataTask {
     
     var cancel_CallCount = 0
     func cancel() {

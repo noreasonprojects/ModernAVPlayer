@@ -10,11 +10,11 @@
 import ModernAVPlayer
 import Nimble
 
-final class MockDataTaskFactory: URLSessionDataTaskFactoryProtocol {
+final class MockDataTaskFactory: URLSessionDataTaskFactory {
     
     var dataTask = MockURLSessionDataTask()
     var lastCompletionHandler: ((Data?, URLResponse?, Error?) -> Void)?
-    func getDataTask(with url: URL, timeout: TimeInterval, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTaskProtocol {
+    func getDataTask(with url: URL, timeout: TimeInterval, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> CustomURLSessionDataTask {
         lastCompletionHandler = completionHandler
         return dataTask
     }

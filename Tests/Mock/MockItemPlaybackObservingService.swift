@@ -9,7 +9,7 @@
 import Foundation
 @testable import ModernAVPlayer
 
-final class MockItemPlaybackObservingService: ItemPlaybackObservingServiceProtocol {
+final class MockItemPlaybackObservingService: PlaybackObservingService {
     var onPlaybackStalled: (() -> Void)?
     var onPlayToEndTime: (() -> Void)?
     var onFailedToPlayToEndTime: (() -> Void)?

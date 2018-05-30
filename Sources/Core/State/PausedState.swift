@@ -14,6 +14,12 @@ final class PausedState: PlayerState {
     
     unowned var context: PlayerContext
     private var interruptionAudioService: ModernAVPlayerInterruptionAudioService
+
+    // MARK: - Output
+    
+    var onInterruptionEnded: (() -> Void)? {
+        didSet { interruptionAudioService.onInterruptionEnded = onInterruptionEnded }
+    }
     
     // MARK: - Variable
     
@@ -27,16 +33,10 @@ final class PausedState: PlayerState {
         self.context = context
         self.context.player.pause()
         self.interruptionAudioService = interruptionAudioService
-        
-        setupInterruptionCallback()
     }
     
     deinit {
         LoggerInHouse.instance.log(message: "Deinit", event: .debug)
-    }
-    
-    private func setupInterruptionCallback() {
-        interruptionAudioService.onInterruptionEnded = { [weak self] in self?.play() }
     }
     
     // MARK: - Shared actions

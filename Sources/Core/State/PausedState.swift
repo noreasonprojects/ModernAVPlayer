@@ -8,7 +8,7 @@
 
 import AVFoundation
 
-struct PausedState: PlayerState {
+final class PausedState: PlayerState {
     
     // MARK: - Input
     
@@ -31,8 +31,12 @@ struct PausedState: PlayerState {
         setupInterruptionCallback()
     }
     
+    deinit {
+        LoggerInHouse.instance.log(message: "Deinit", event: .debug)
+    }
+    
     private func setupInterruptionCallback() {
-        interruptionAudioService.onInterruptionEnded = { self.play() }
+        interruptionAudioService.onInterruptionEnded = { [weak self] in self?.play() }
     }
     
     // MARK: - Shared actions

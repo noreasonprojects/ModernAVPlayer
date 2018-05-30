@@ -20,3 +20,4 @@ All notable changes to this project will be documented in this file.
 	* Separate notification service on PlayingState
 	* Remove useless public access control
 	* Protocol and implementation naming
+	* Paused state leak

@@ -18,6 +18,7 @@ protocol PlayerContextDelegate: class {
 
 protocol PlayerContext: class {
     var player: AVPlayer { get }
+    var plugins: [PlayerPlugin] { get }
     var config: PlayerConfiguration { get }
     var currentItem: AVPlayerItem? { get set }
     var currentTime: Double? { get set }
@@ -45,6 +46,7 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
     let config: PlayerConfiguration
     let nowPlaying: NowPlaying
     let audioSessionType: AudioSessionService.Type
+    let plugins: [PlayerPlugin]
     
     weak var delegate: PlayerContextDelegate?
     
@@ -75,11 +77,13 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
     init(player: AVPlayer = AVPlayer(),
          config: PlayerConfiguration = ModernAVPlayerConfiguration(),
          nowPlaying: NowPlaying = ModernAVPlayerNowPlayingService(),
-         audioSessionType: AudioSessionService.Type = ModernAVPlayerAudioSessionService.self) {
+         audioSessionType: AudioSessionService.Type = ModernAVPlayerAudioSessionService.self,
+         plugins: [PlayerPlugin] = []) {
         self.player = player
         self.config = config
         self.nowPlaying = nowPlaying
         self.audioSessionType = audioSessionType
+        self.plugins = plugins
         super.init()
 
         setupLogger()

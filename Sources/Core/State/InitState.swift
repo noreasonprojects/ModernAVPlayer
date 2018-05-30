@@ -27,6 +27,7 @@ struct InitState: PlayerState {
         if #available(iOS 10, *) {
             context.player.automaticallyWaitsToMinimizeStalling = false
         }
+        context.plugins.forEach { $0.didInit(player: context.player) }
     }
     
     // MARK: - Shared actions

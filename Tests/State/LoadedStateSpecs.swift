@@ -14,18 +14,32 @@ import ModernAVPlayer
 
 final class LoadedStateSpecs: QuickSpec {
     
-    private var loadedState: LoadedState!
+    private var loadedState: PlayerState!
     private var mockPlayer: MockCustomPlayer!
-    private var playerMedia = ModernAVPlayerMedia(url: URL(string: "x")!, type: .clip)
+    private let playerMedia = ModernAVPlayerMedia(url: URL(string: "x")!, type: .clip)
     private var tested: ModernAVPlayerContext!
+    private var plugins: [MockPlayerPlugin]!
     
     override func spec() {
         
         beforeEach {
+            self.plugins = [MockPlayerPlugin(), MockPlayerPlugin()]
             self.mockPlayer = MockCustomPlayer.createOne(url: "foo")
-            self.tested = ModernAVPlayerContext(player: self.mockPlayer, audioSessionType: MockAudioSession.self)
-            self.loadedState = LoadedState(context: self.tested)
+            self.tested = ModernAVPlayerContext(player: self.mockPlayer, audioSessionType: MockAudioSession.self, plugins: self.plugins)
+            self.loadedState = LoadedState(context: self.tested, media: self.playerMedia)
             self.tested.state = self.loadedState
+        }
+        
+        context("init") {
+            it("should execute didLoad plugin method") {
+                
+                // ASSERT
+                expect(self.plugins[0].didLoadmediaCallCount).to(equal(1))
+                expect(self.plugins[0].didLoadMediaLastParam).to(equal(self.playerMedia))
+                
+                expect(self.plugins[1].didLoadmediaCallCount).to(equal(1))
+                expect(self.plugins[1].didLoadMediaLastParam).to(equal(self.playerMedia))
+            }
         }
         
         context("loadMedia") {

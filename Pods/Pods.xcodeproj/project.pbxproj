@@ -135,6 +135,7 @@
 		D9E62C41794D0B5D2CD68CA92C4BA836 /* mach_excServer.c in Sources */ = {isa = PBXBuildFile; fileRef = CE31CE7D8BD558E76797984F435D8C70 /* mach_excServer.c */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		DF026F6F406A4FB6CEA63B0A4B9E27DD /* AllPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F24AC07B43494547D3A11F865DD8BE4 /* AllPass.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		E17ED73B20BBFE1F00BFC749 /* ModernAVPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17ED73A20BBFE1F00BFC749 /* ModernAVPlayer.swift */; };
+		E187F8F520BECB8E00B1D832 /* PlayerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = E187F8F420BECB8E00B1D832 /* PlayerPlugin.swift */; };
 		E2F590A5848E058EF502464DDD6ED322 /* QuickSpecBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 80B1A5EB2FA61010F654369FA870CE07 /* QuickSpecBase.m */; };
 		E549E6E34812823E87B71BE6D16D5073 /* QuickSelectedTestSuiteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24BD5E7A097EA2063B4A2941DB69FB0 /* QuickSelectedTestSuiteBuilder.swift */; };
 		E90F0C041F1CC09616AE22370F0C6A2E /* WaitingNetworkState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5787CC6EFC8878C9301F6C9A3C6DCC7C /* WaitingNetworkState.swift */; };
@@ -344,6 +345,7 @@
 		DEDD3E0714A9F12C9FC2DAC6DA5B76E3 /* StoppedState.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = StoppedState.swift; sourceTree = "<group>"; };
 		DF1A286E22B74223EDAF748AA84E9B55 /* XCTestObservationCenter+Register.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "XCTestObservationCenter+Register.m"; path = "Sources/NimbleObjectiveC/XCTestObservationCenter+Register.m"; sourceTree = "<group>"; };
 		E17ED73A20BBFE1F00BFC749 /* ModernAVPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ModernAVPlayer.swift; path = Sources/Core/ModernAVPlayer.swift; sourceTree = "<group>"; };
+		E187F8F420BECB8E00B1D832 /* PlayerPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerPlugin.swift; sourceTree = "<group>"; };
 		E2A87D5E255A265D2589774D14E68CF1 /* Example.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Example.swift; path = Sources/Quick/Example.swift; sourceTree = "<group>"; };
 		E4E708E405F17F36516793443E2C60C2 /* Pods_ModernAVPlayer_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ModernAVPlayer_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6AF8F20E350CCD285A7E9B3E4CE3943 /* Expectation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Expectation.swift; path = Sources/Nimble/Expectation.swift; sourceTree = "<group>"; };
@@ -423,6 +425,7 @@
 				378E8D500DB6F1B2B6B5C6573F64F220 /* SetupCommandCenter.swift */,
 				0CD4177B14072F3C54F1DFA867FDC1AD /* TimerFactory.swift */,
 				C3B7421363D26BEFBF08249412CAC753 /* URLSessionDataTaskFactory.swift */,
+				E187F8F420BECB8E00B1D832 /* PlayerPlugin.swift */,
 			);
 			name = Components;
 			path = Sources/Core/Components;
@@ -1025,6 +1028,7 @@
 				774F72AA08DD46F66A0EB81C9B05FC38 /* PlayerError.swift in Sources */,
 				E17ED73B20BBFE1F00BFC749 /* ModernAVPlayer.swift in Sources */,
 				81B11653DF0BDEE6D3B1466427A90A35 /* FailedState.swift in Sources */,
+				E187F8F520BECB8E00B1D832 /* PlayerPlugin.swift in Sources */,
 				3106F5D9CF22BAC21D4E0BFB41ED6DF0 /* InitState.swift in Sources */,
 				65880DAA4FE026CBA005839D7F72153F /* InterruptionAudioService.swift in Sources */,
 				8C62891873A811E0874C6DEDBA29C11D /* PlaybackObservingService.swift in Sources */,

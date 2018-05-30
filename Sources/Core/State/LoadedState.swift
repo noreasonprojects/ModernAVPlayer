@@ -32,6 +32,7 @@ struct LoadedState: PlayerState {
             updateRemoteCommandCenter(mediaType: media.type)
         }
         context.nowPlaying.update(media: media, duration: context.player.currentItem?.duration.seconds)
+        context.plugins.forEach { $0.didLoadMedia(media) }
     }
 
     // MARK: - Command Center

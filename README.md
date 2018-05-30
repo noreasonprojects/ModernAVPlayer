@@ -80,6 +80,10 @@ player.loadMedia(media: media, shouldPlaying: true)
 | WaitingNetwork  | O | X | O | O | X
 | Failed  | O | X | X | X | X
 
+### Plugin
+
+Use `PlayerPlugin` protocol to create your own plugin system. 
+
 ### RxSwift
 
 Instead of using delegate pattern, you can use rx to bind player attributes.

@@ -6,29 +6,50 @@
 //  Copyright © 2018 raphael ankierman. All rights reserved.
 //
 
-import Foundation
+import AVFoundation
 import Quick
 @testable import ModernAVPlayer
 import Nimble
 
 final class BufferingStateSpecs: QuickSpec {
 
+    private let playerMedia = ModernAVPlayerMedia(url: URL(string: "x")!, type: .clip)
     private var bufferingState: BufferingState!
-    private var mockPlayer = MockCustomPlayer()
+    private var mockPlayer: MockCustomPlayer!
+    private var mockItem: MockPlayerItem!
     private var mockRateService: MockObservingRateService!
-    private var playerMedia = ModernAVPlayerMedia(url: URL(string: "x")!, type: .clip)
-    private lazy var tested = ModernAVPlayerContext(player: self.mockPlayer, audioSessionType: MockAudioSession.self)
+    private var tested: PlayerContext!
 
     override func spec() {
         beforeEach {
-            let item = MockPlayerItem.createOne(url: "HELLO")
-            self.mockPlayer.overrideCurrentItem = item
-            self.mockRateService = MockObservingRateService(config: self.tested.config, item: item)
-            self.bufferingState = BufferingState(context: self.tested, observingRateService: self.mockRateService)
-            self.tested.state = self.bufferingState
+            self.mockItem = MockPlayerItem.createOne(url: "HELLO")
+            self.mockPlayer = MockCustomPlayer()
+            self.mockPlayer.overrideCurrentItem = self.mockItem
+            self.tested = ModernAVPlayerContext(player: self.mockPlayer, audioSessionType: MockAudioSession.self)
+            self.mockRateService = MockObservingRateService(config: self.tested.config, item: self.mockItem)
+            self.bufferingState = BufferingState(context: self.tested, rateObservingService: self.mockRateService)
+            self.tested.changeState(state: self.bufferingState)
         }
 
         context("loadMedia") {
+            it("should stop observing rate service") {
+                
+                // ACT
+                self.bufferingState.loadMedia(media: self.playerMedia, shouldPlaying: true)
+                
+                // ASSERT
+                expect(self.mockRateService.stopCallCount).to(equal(1))
+            }
+            
+            it("should cancel pending seek") {
+                
+                // ACT
+                self.bufferingState.loadMedia(media: self.playerMedia, shouldPlaying: true)
+                
+                // ASSERT
+                expect(self.mockItem.cancelPendingSeeksCallCount).to(equal(1))
+            }
+            
             it("should update state context to LoadingMedia") {
 
                 // ACT
@@ -93,6 +114,24 @@ final class BufferingStateSpecs: QuickSpec {
         }
 
         context("stop") {
+            it("should stop observing rate service") {
+                
+                // ACT
+                self.bufferingState.stop()
+                
+                // ASSERT
+                expect(self.mockRateService.stopCallCount).to(equal(1))
+            }
+            
+            it("should cancel pending seek") {
+                
+                // ACT
+                self.bufferingState.stop()
+                
+                // ASSERT
+                expect(self.mockItem.cancelPendingSeeksCallCount).to(equal(1))
+            }
+            
             it("should update state context to Stopped") {
 
                 // ACT
@@ -104,6 +143,24 @@ final class BufferingStateSpecs: QuickSpec {
         }
 
         context("pause") {
+            it("should stop observing rate service") {
+                
+                // ACT
+                self.bufferingState.pause()
+                
+                // ASSERT
+                expect(self.mockRateService.stopCallCount).to(equal(1))
+            }
+            
+            it("should cancel pending seek") {
+                
+                // ACT
+                self.bufferingState.pause()
+                
+                // ASSERT
+                expect(self.mockItem.cancelPendingSeeksCallCount).to(equal(1))
+            }
+            
             it("should update state context to Paused") {
 
                 // ACT
@@ -111,6 +168,26 @@ final class BufferingStateSpecs: QuickSpec {
 
                 // ASSERT
                 expect(self.tested.state).to(beAnInstanceOf(PausedState.self))
+            }
+        }
+        
+        context("seek") {
+            it("should cancel pending seek") {
+                
+                // ACT
+                self.bufferingState.seek(position: kCMTimeZero.seconds)
+                
+                // ASSERT
+                expect(self.mockItem.cancelPendingSeeksCallCount).to(equal(1))
+            }
+            
+            it("should call player seek command") {
+                
+                // ACT
+                self.bufferingState.seek(position: kCMTimeZero.seconds)
+                
+                // ASSERT
+                expect(self.mockPlayer.seekCompletionCallCount).to(equal(1))
             }
         }
     }

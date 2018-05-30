@@ -14,6 +14,7 @@ final class BufferingState: NSObject, PlayerState {
     
     unowned var context: PlayerContext
     private var rateObservingService: RateObservingService
+    private var interruptionAudioService: ModernAVPlayerInterruptionAudioService
     
     // MARK: - Variable
 
@@ -21,14 +22,30 @@ final class BufferingState: NSObject, PlayerState {
 
     // MARK: - Init
 
-    init(context: PlayerContext, observingRateService: RateObservingService? = nil) {
+    init(context: PlayerContext,
+         rateObservingService: RateObservingService? = nil,
+         interruptionAudioService: ModernAVPlayerInterruptionAudioService = ModernAVPlayerInterruptionAudioService()) {
         LoggerInHouse.instance.log(message: "Init", event: .debug)
-        self.context = context
         
         guard let item = context.player.currentItem else { fatalError("item should exist") }
-        self.rateObservingService = observingRateService ?? ModernAVPlayerRateObservingService(config: context.config, item: item)
-
-        self.rateObservingService.onTimeout = { [context] in
+        
+        self.context = context
+        self.rateObservingService = rateObservingService ?? ModernAVPlayerRateObservingService(config: context.config, item: item)
+        self.interruptionAudioService = interruptionAudioService
+        
+        super.init()
+        setupRateObservingCallback()
+        setupInterruptionCallback()
+    }
+    
+    deinit {
+        LoggerInHouse.instance.log(message: "Deinit", event: .debug)
+    }
+    
+    // MARK: - Setup
+    
+    private func setupRateObservingCallback() {
+        rateObservingService.onTimeout = { [context] in
             guard let url = (context.player.currentItem?.asset as? AVURLAsset)?.url
                 else { return }
             
@@ -38,16 +55,14 @@ final class BufferingState: NSObject, PlayerState {
                                                    error: .buffering)
             context.changeState(state: waitingState)
         }
-
-        self.rateObservingService.onPlaying = { [context] in
+        
+        rateObservingService.onPlaying = { [context] in
             context.changeState(state: PlayingState(context: context))
         }
-        
-        super.init()
     }
     
-    deinit {
-        LoggerInHouse.instance.log(message: "Deinit", event: .debug)
+    private func setupInterruptionCallback() {
+        interruptionAudioService.onInterruptionBegan = { [weak self] in self?.pause() }
     }
     
     // MARK: - Player Commands
@@ -58,7 +73,7 @@ final class BufferingState: NSObject, PlayerState {
     }
 
     func seekCommand(position: Double) {
-        context.currentItem?.cancelPendingSeeks()
+        context.player.currentItem?.cancelPendingSeeks()
         let time = CMTime(seconds: position, preferredTimescale: context.config.preferedTimeScale)
         context.player.seek(to: time) { _ in self.playCommand() }
     }
@@ -67,11 +82,11 @@ final class BufferingState: NSObject, PlayerState {
 
     func loadMedia(media: PlayerMedia, shouldPlaying: Bool) {
         let state = LoadingMediaState(context: context, media: media, shouldPlaying: shouldPlaying)
-        context.changeState(state: state)
+        changeState(state)
     }
 
     func pause() {
-        context.changeState(state: PausedState(context: context))
+        changeState(PausedState(context: context))
     }
 
     func play() {
@@ -85,6 +100,14 @@ final class BufferingState: NSObject, PlayerState {
     }
 
     func stop() {
-        context.changeState(state: StoppedState(context: context))
+        changeState(StoppedState(context: context))
+    }
+    
+    // MARK: - Private
+    
+    private func changeState(_ state: PlayerState) {
+        rateObservingService.stop(clearCallbacks: true)
+        context.player.currentItem?.cancelPendingSeeks()
+        context.changeState(state: state)
     }
 }

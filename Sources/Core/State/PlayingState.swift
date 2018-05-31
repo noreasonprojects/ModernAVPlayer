@@ -13,15 +13,15 @@ final class PlayingState: PlayerState {
     
     // MARK: - Input
     
-    unowned var context: PlayerContext
+    unowned let context: PlayerContext
+    private var itemPlaybackObservingService: PlaybackObservingService
+    private let routeAudioService: ModernAVPlayerRouteAudioService
+    private let interruptionAudioService: ModernAVPlayerInterruptionAudioService
     
     // MARK: - Variables
     
     var type: ModernAVPlayer.State = .playing
     private var timerObserver: Any?
-    private var itemPlaybackObservingService: PlaybackObservingService
-    private var routeAudioService: ModernAVPlayerRouteAudioService
-    private var interruptionAudioService: ModernAVPlayerInterruptionAudioService
     
     // MARK: - Lifecycle
 

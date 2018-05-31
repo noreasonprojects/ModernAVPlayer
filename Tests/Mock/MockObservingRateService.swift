@@ -7,12 +7,13 @@
 //
 
 import AVFoundation
-import Foundation
-import Quick
-@testable import ModernAVPlayer
-import Nimble
+@testable
+import ModernAVPlayer
 
 final class MockObservingRateService: RateObservingService {
+    var onPlaying: (() -> Void)?
+    var onTimeout: (() -> Void)?
+    
     init(config: PlayerConfiguration, item: AVPlayerItem) {
     }
     
@@ -21,9 +22,8 @@ final class MockObservingRateService: RateObservingService {
         startCallCount += 1
     }
     
-    var onPlaying: (() -> Void)?
-    
-    var onTimeout: (() -> Void)?
-    
-    
+    private(set) var stopCallCount = 0
+    func stop(clearCallbacks: Bool) {
+        stopCallCount += 1
+    }
 }

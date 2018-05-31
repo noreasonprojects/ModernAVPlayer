@@ -7,13 +7,17 @@
 //
 
 import AVFoundation
-import Foundation
 
 final class MockPlayerItem: AVPlayerItem {
 
     var overrideStatus: AVPlayerItemStatus?
     override var status: AVPlayerItemStatus {
         return overrideStatus ?? AVPlayerItemStatus.unknown
+    }
+    
+    private(set) var cancelPendingSeeksCallCount = 0
+    override func cancelPendingSeeks() {
+        cancelPendingSeeksCallCount += 1
     }
 }
 

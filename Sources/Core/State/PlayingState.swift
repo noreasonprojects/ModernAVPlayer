@@ -79,6 +79,14 @@ final class PlayingState: PlayerState {
     func pause() {
         context.changeState(state: PausedState(context: context))
     }
+    
+    private func pauseByInterruption() {
+        let state = PausedState(context: context)
+        state.onInterruptionEnded = { [weak state] in
+            state?.play()
+        }
+        context.changeState(state: state)
+    }
 
     func play() {
         let debug = "Already playing"
@@ -138,6 +146,6 @@ final class PlayingState: PlayerState {
     }
     
     private func setupInterruptionCallback() {
-        interruptionAudioService.onInterruptionBegan = { [weak self] in self?.pause() }
+        interruptionAudioService.onInterruptionBegan = { [weak self] in self?.pauseByInterruption() }
     }
 }

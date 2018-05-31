@@ -7,7 +7,7 @@ All notable changes to this project will be documented in this file.
 	* Add Logger
 	* Manage audio route changes
 	* Enable audio background mode
-	* Manage audio interruptions in playing and loading state
+	* Manage audio interruptions
 	* Add RxModernAVPlayer Pod Subspec
 	* Revert iOS 9 compatibility
 	* Add waiting step state

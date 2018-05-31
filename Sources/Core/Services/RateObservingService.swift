@@ -12,6 +12,7 @@ protocol RateObservingService {
     var onTimeout: (() -> Void)? { get set }
 
     func start()
+    func stop(clearCallbacks: Bool)
 }
 
 final class ModernAVPlayerRateObservingService: RateObservingService {
@@ -57,6 +58,16 @@ final class ModernAVPlayerRateObservingService: RateObservingService {
         DispatchQueue.main.async {
             self.timer = self.timerFactory.getTimer(timeInterval: self.timeInterval, repeats: true, block: self.blockTimer)
         }
+    }
+    
+    func stop(clearCallbacks: Bool) {
+        if clearCallbacks { self.clearCallbacks() }
+        timer?.invalidate()
+    }
+    
+    private func clearCallbacks() {
+        onPlaying = nil
+        onTimeout = nil
     }
     
     func blockTimer() {

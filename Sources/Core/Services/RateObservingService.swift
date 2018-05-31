@@ -31,7 +31,7 @@ final class ModernAVPlayerRateObservingService: RateObservingService {
     
     // MARK: - Variables
     
-    private var timer: CustomTimer?
+    private weak var timer: CustomTimer?
     private var remainingTime: TimeInterval = 0
 
     // MARK: - Lifecycle
@@ -63,6 +63,7 @@ final class ModernAVPlayerRateObservingService: RateObservingService {
     func stop(clearCallbacks: Bool) {
         if clearCallbacks { self.clearCallbacks() }
         timer?.invalidate()
+        timer = nil
     }
     
     private func clearCallbacks() {

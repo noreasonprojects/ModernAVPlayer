@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol CustomTimer {
+protocol CustomTimer: class {
     func fire()
     func invalidate()
 }

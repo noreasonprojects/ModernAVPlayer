@@ -14,15 +14,32 @@ import Nimble
 
 final class InitStateSpecs: QuickSpec {
 
-    var state: InitState!
-    let tested = ModernAVPlayerContext()
-    let media = ModernAVPlayerMedia(url: URL(string: "foo")!, type: .stream(isLive: false))
+    private var state: PlayerState!
+    private var tested: PlayerContext!
+    private var plugin: MockPlayerPlugin!
+    private let media = ModernAVPlayerMedia(url: URL(string: "foo")!, type: .stream(isLive: false))
 
     override func spec() {
 
         beforeEach {
-            self.state = InitState(context: self.tested)
-            self.tested.state = self.state
+            self.plugin = MockPlayerPlugin()
+            self.tested = ModernAVPlayerContext(plugins: [self.plugin])
+            self.state = self.tested.state
+        }
+        
+        context("init") {
+            it("should execute didInit plugin method") {
+                
+                // ASSERT
+                expect(self.plugin.didInitLastParam).to(beIdenticalTo(self.tested.player))
+                expect(self.plugin.didInitCallCount).to(equal(1))
+            }
+            
+            it("should not execute didLoad plugin method") {
+                
+                // ASSERT
+                expect(self.plugin.didLoadmediaCallCount).to(equal(0))
+            }
         }
 
         context("pause") {

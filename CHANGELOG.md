@@ -13,6 +13,7 @@ All notable changes to this project will be documented in this file.
 	* Add waiting step state
 	* Bypass waiting state when loading failed
 	* Check edge cases when loading
+	* Add plugin system management
 
 * Fixes:
 	* Fix commented unit tests

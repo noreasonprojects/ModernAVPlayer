@@ -37,11 +37,12 @@ public final class ModernAVPlayer: MediaPlayer {
     
     // MARK: - Init
     
-    public init(config: PlayerConfiguration = ModernAVPlayerConfiguration()) {
+    public init(config: PlayerConfiguration = ModernAVPlayerConfiguration(), plugins: [PlayerPlugin] = []) {
         context = ModernAVPlayerContext(player: AVPlayer(),
                                         config: config,
                                         nowPlaying: ModernAVPlayerNowPlayingService(),
-                                        audioSessionType: ModernAVPlayerAudioSessionService.self)
+                                        audioSessionType: ModernAVPlayerAudioSessionService.self,
+                                        plugins: plugins)
         context.delegate = self
     }
     

@@ -16,7 +16,7 @@ final class WaitingNetworkState: PlayerState {
     
     // MARK: - Variable
     
-    var type: ModernAVPlayer.State = .waitingNetwork
+    var type: ModernAVPlayer.State = .waitingForNetwork
     
     // MARK: - Init
     

@@ -158,7 +158,7 @@ final class ViewController: UIViewController {
     }
 
     private func isPlayerWorking() -> Bool {
-        return state == .buffering || state == .loading || state == .waitingNetwork
+        return state == .buffering || state == .loading || state == .waitingForNetwork
     }
 
     private func setDebugMessage(_ msg: String?) {

@@ -48,22 +48,36 @@ public final class ModernAVPlayer: MediaPlayer {
     
     // MARK: - Actions
     
+    /// Pauses playback of the current item
     public func pause() {
         context.pause()
     }
     
+   /**
+     Sets the current playback time to the specified time
+   
+     - parameter position: time to seek
+     */
     public func seek(position: Double) {
         context.seek(position: position)
     }
     
+    /// Stops playback of the current item then seek to 0
     public func stop() {
         context.stop()
     }
     
+    /**
+    Replaces the current player media with the new media
+    
+    - parameter media: media to load
+    - parameter shouldPlaying: play after media is loaded
+    */
     public func loadMedia(media: PlayerMedia, shouldPlaying: Bool) {
         context.loadMedia(media: media, shouldPlaying: shouldPlaying)
     }
     
+    /// Begins playback of the current item
     public func play() {
         context.play()
     }
@@ -79,9 +93,16 @@ public extension ModernAVPlayer {
         case paused
         case playing
         case stopped
-        case waitingNetwork
+        case waitingForNetwork
         
-        public var description: String { return rawValue.capitalized }
+        public var description: String {
+            switch self {
+            case .waitingForNetwork:
+                return "Waiting For Network"
+            default:
+                return rawValue.capitalized
+            }
+        }
     }
 }
 

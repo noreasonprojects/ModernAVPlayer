@@ -103,7 +103,7 @@ public final class ModernAVPlayer: MediaPlayer {
 }
 
 public extension ModernAVPlayer {
-    enum State: String {
+    enum State: String, CustomStringConvertible {
         case buffering
         case failed
         case initialization

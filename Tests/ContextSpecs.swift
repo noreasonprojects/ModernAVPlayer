@@ -3,7 +3,7 @@
 // ModernAVPlayer
 // Copyright (c) 2018 Raphael Ankierman <raphael.ankierman@radiofrance.com>
 //
-// ContextSpecas.swift
+// ContextSpecs.swift
 // Created by raphael ankierman on 28/02/2018.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy

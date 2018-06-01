@@ -1,9 +1,28 @@
+// The MIT License (MIT)
 //
-//  ObservingRateService.swift
-//  RFAVPlayer
+// ModernAVPlayer
+// Copyright (c) 2018 Raphael Ankierman <raphael.ankierman@radiofrance.com>
 //
-//  Created by Jean-Charles Dessaint on 20/04/2018.
+// RateObservingService.swift
+// Created by Jean-Charles Dessaint on 20/04/2018.
 //
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
 
 import AVFoundation
 
@@ -31,15 +50,15 @@ final class ModernAVPlayerRateObservingService: RateObservingService {
     
     // MARK: - Variables
     
-    private var timer: CustomTimer?
+    private weak var timer: CustomTimer?
     private var remainingTime: TimeInterval = 0
 
     // MARK: - Lifecycle
     
     init(config: PlayerConfiguration, item: AVPlayerItem, timerFactory: TimerFactory = ModernAVPlayerTimerFactory()) {
         LoggerInHouse.instance.log(message: "Init", event: .debug)
-        timeInterval = config.playerRateObserving
-        timeout = config.timeoutBuffering
+        timeInterval = config.rateObservingTickTime
+        timeout = config.rateObservingTimeout
         self.timerFactory = timerFactory
         self.item = item
     }
@@ -63,6 +82,7 @@ final class ModernAVPlayerRateObservingService: RateObservingService {
     func stop(clearCallbacks: Bool) {
         if clearCallbacks { self.clearCallbacks() }
         timer?.invalidate()
+        timer = nil
     }
     
     private func clearCallbacks() {

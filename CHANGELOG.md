@@ -22,3 +22,5 @@ All notable changes to this project will be documented in this file.
 	* Remove useless public access control
 	* Protocol and implementation naming
 	* Paused state leak
+	* Timer leaks
+	* Unwanted state whhen buffering in buffering sate

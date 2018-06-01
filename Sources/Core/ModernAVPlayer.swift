@@ -1,9 +1,28 @@
+// The MIT License (MIT)
 //
-//  ModernAVPlayer.swift
-//  ModernAVPlayer
+// ModernAVPlayer
+// Copyright (c) 2018 Raphael Ankierman <raphael.ankierman@radiofrance.com>
 //
-//  Created by raphael ankierman on 28/05/2018.
+// ModernAVPlayer.swift
+// Created by raphael ankierman on 28/05/2018.
 //
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
 
 import AVFoundation
 
@@ -48,29 +67,43 @@ public final class ModernAVPlayer: MediaPlayer {
     
     // MARK: - Actions
     
+    /// Pauses playback of the current item
     public func pause() {
         context.pause()
     }
     
+   /**
+     Sets the current playback time to the specified time
+   
+     - parameter position: time to seek
+     */
     public func seek(position: Double) {
         context.seek(position: position)
     }
     
+    /// Stops playback of the current item then seek to 0
     public func stop() {
         context.stop()
     }
     
+    /**
+    Replaces the current player media with the new media
+    
+    - parameter media: media to load
+    - parameter shouldPlaying: play after media is loaded
+    */
     public func loadMedia(media: PlayerMedia, shouldPlaying: Bool) {
         context.loadMedia(media: media, shouldPlaying: shouldPlaying)
     }
     
+    /// Begins playback of the current item
     public func play() {
         context.play()
     }
 }
 
 public extension ModernAVPlayer {
-    enum State: String {
+    enum State: String, CustomStringConvertible {
         case buffering
         case failed
         case initialization
@@ -79,9 +112,16 @@ public extension ModernAVPlayer {
         case paused
         case playing
         case stopped
-        case waitingNetwork
+        case waitingForNetwork
         
-        public var description: String { return rawValue.capitalized }
+        public var description: String {
+            switch self {
+            case .waitingForNetwork:
+                return "Waiting For Network"
+            default:
+                return rawValue.capitalized
+            }
+        }
     }
 }
 

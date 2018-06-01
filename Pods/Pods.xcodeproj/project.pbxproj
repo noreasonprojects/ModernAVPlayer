@@ -421,11 +421,11 @@
 				FCCE491AA214CCD0D902D12C2522D2D1 /* PlayerContext.swift */,
 				692A56113744C9C3844A9A02B5F993F8 /* PlayerError.swift */,
 				142C01E21153381C5DCEDC7E11EAEB46 /* PlayerMedia.swift */,
+				E187F8F420BECB8E00B1D832 /* PlayerPlugin.swift */,
 				97F2B8B8661414FFDF764591D9A1F992 /* PlayerState.swift */,
 				378E8D500DB6F1B2B6B5C6573F64F220 /* SetupCommandCenter.swift */,
 				0CD4177B14072F3C54F1DFA867FDC1AD /* TimerFactory.swift */,
 				C3B7421363D26BEFBF08249412CAC753 /* URLSessionDataTaskFactory.swift */,
-				E187F8F420BECB8E00B1D832 /* PlayerPlugin.swift */,
 			);
 			name = Components;
 			path = Sources/Core/Components;

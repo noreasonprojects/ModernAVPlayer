@@ -84,6 +84,11 @@ player.loadMedia(media: media, shouldPlaying: true)
 
 Use `PlayerPlugin` protocol to create your own plugin system. 
 
+### Configuration
+
+All player configuration are available from `ContextConfiguration` protocol.  
+A default implementation `ModernAVPlayerConfig` is provided with documentation
+
 ### RxSwift
 
 Instead of using delegate pattern, you can use rx to bind player attributes.

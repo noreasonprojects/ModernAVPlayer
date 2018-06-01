@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 
 ---
+## [X.X.X]
+* Fixes:
+	* Display nowPlaying isLiveStream information (from iOS 10)
+
 ## [0.9.1]
 * Features:
 	* Add Logger

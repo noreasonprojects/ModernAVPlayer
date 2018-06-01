@@ -1,4 +1,3 @@
-//
 //  Logger.swift
 //  SwiftLogger
 //

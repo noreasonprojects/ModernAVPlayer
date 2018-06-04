@@ -29,6 +29,7 @@ import Foundation
 protocol PlaybackObservingService {
     var onPlaybackStalled: (() -> Void)? { get set }
     var onPlayToEndTime: (() -> Void)? { get set }
+    var onFailedToPlayToEndTime: (() -> Void)? { get set }
 }
 
 final class ModernAVPlayerPlaybackObservingService: PlaybackObservingService {
@@ -37,6 +38,7 @@ final class ModernAVPlayerPlaybackObservingService: PlaybackObservingService {
     
     var onPlaybackStalled: (() -> Void)?
     var onPlayToEndTime: (() -> Void)?
+    var onFailedToPlayToEndTime: (() -> Void)?
     
     // MARK: - Init
     
@@ -65,16 +67,19 @@ final class ModernAVPlayerPlaybackObservingService: PlaybackObservingService {
     
     @objc
     private func itemPlaybackStalled() {
+        LoggerInHouse.instance.log(message: "Item playback stalled notification", event: .info)
         onPlaybackStalled?()
     }
     
     @objc
     private func itemPlayToEndTime() {
+        LoggerInHouse.instance.log(message: "Item play to end time notification", event: .info)
         onPlayToEndTime?()
     }
     
     @objc
     private func itemFailedToPlayToEndTime() {
-        LoggerInHouse.instance.log(message: "Item failed to play endtime notification", event: .warning)
+        LoggerInHouse.instance.log(message: "Item failed to play endtime notification", event: .info)
+        onFailedToPlayToEndTime?()
     }
 }

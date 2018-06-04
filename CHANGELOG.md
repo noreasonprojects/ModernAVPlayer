@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 	* Display nowPlaying isLiveStream information (from iOS 10)
 	* Keep playing when connect bluetooth headphone
 	* Display coherent live stream duration
+	* Manage live stream audio cut
 
 ## [0.9.1]
 * Features:

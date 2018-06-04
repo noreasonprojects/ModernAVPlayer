@@ -122,10 +122,21 @@ final class PlayingStateSpecs: QuickSpec {
         }
         
         context("observing item onPlaybackStalled") {
-            it("should update state context to Failed") {
+            it("should update state context to WaitingNetwork") {
 
                 // ACT
                 self.itemPlaybackObservingService.onPlaybackStalled?()
+                
+                // ASSERT
+                expect(self.tested.state).to(beAnInstanceOf(WaitingNetworkState.self))
+            }
+        }
+        
+        context("observing item onFailedToPlayToEndTime") {
+            it("should update state context to WaitingNetwork") {
+                
+                // ACT
+                self.itemPlaybackObservingService.onFailedToPlayToEndTime?()
                 
                 // ASSERT
                 expect(self.tested.state).to(beAnInstanceOf(WaitingNetworkState.self))

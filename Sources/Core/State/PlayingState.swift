@@ -156,9 +156,9 @@ final class PlayingState: PlayerState {
     
     private func routeAudioChanged(reason: AVAudioSessionRouteChangeReason) {
         switch reason {
-        case .oldDeviceUnavailable, .categoryChange, .unknown:
+        case .oldDeviceUnavailable, .unknown:
             context.changeState(state: PausedState(context: context))
-        case .newDeviceAvailable, .wakeFromSleep, .override, .noSuitableRouteForCategory, .routeConfigurationChange:
+        case .newDeviceAvailable, .wakeFromSleep, .override, .noSuitableRouteForCategory, .routeConfigurationChange, .categoryChange:
             break
         }
     }

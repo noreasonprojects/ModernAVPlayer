@@ -180,22 +180,6 @@ final class PlayingStateSpecs: QuickSpec {
         }
         
         describe("route audio session changed") {
-            context("new category set") {
-                it("should pause the player") {
-                    
-                    // ARRANGE
-                    let info: [String: UInt] = [AVAudioSessionRouteChangeReasonKey: AVAudioSessionRouteChangeReason.categoryChange.rawValue]
-                    var notif = Notification(name: NSNotification.Name.AVAudioSessionRouteChange)
-                    notif.userInfo = info
-                    
-                    // ACT
-                    NotificationCenter.default.post(notif)
-                    
-                    // ASSERT
-                    expect(self.tested.state).to(beAnInstanceOf(PausedState.self))
-                }
-            }
-            
             context("device is unplugged") {
                 it("should pause the player") {
                     
@@ -233,6 +217,22 @@ final class PlayingStateSpecs: QuickSpec {
                     
                     // ARRANGE
                     let info: [String: UInt] = [AVAudioSessionRouteChangeReasonKey: AVAudioSessionRouteChangeReason.newDeviceAvailable.rawValue]
+                    var notif = Notification(name: NSNotification.Name.AVAudioSessionRouteChange)
+                    notif.userInfo = info
+                    
+                    // ACT
+                    NotificationCenter.default.post(notif)
+                    
+                    // ASSERT
+                    expect(self.tested.state).to(beIdenticalTo(self.playingState))
+                }
+            }
+            
+            context("new category set") {
+                it("should stay in playing mode") {
+                    
+                    // ARRANGE
+                    let info: [String: UInt] = [AVAudioSessionRouteChangeReasonKey: AVAudioSessionRouteChangeReason.categoryChange.rawValue]
                     var notif = Notification(name: NSNotification.Name.AVAudioSessionRouteChange)
                     notif.userInfo = info
                     

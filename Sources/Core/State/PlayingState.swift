@@ -150,9 +150,7 @@ final class PlayingState: PlayerState {
     
     private func pauseByInterruption() {
         let state = PausedState(context: context)
-        state.onInterruptionEnded = { [weak state] in
-            state?.play()
-        }
+        state.onInterruptionEnded = { [weak state] in state?.play() }
         context.changeState(state: state)
     }
     

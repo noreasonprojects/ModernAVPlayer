@@ -73,7 +73,7 @@ final class ModernAVPlayerNowPlayingService: NowPlaying {
         infos[MPMediaItemPropertyPlaybackDuration] = duration ?? 0
         infos[MPNowPlayingInfoPropertyPlaybackRate] = 1.0
         if #available(iOS 10, *) {
-            infos[MPNowPlayingInfoPropertyIsLiveStream] = media.isLive
+            infos[MPNowPlayingInfoPropertyIsLiveStream] = media.isLive()
         }
 
         if let imageName = media.localPlaceHolderImageName, let image = UIImage(named: imageName) {

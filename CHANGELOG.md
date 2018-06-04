@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 * Fixes:
 	* Display nowPlaying isLiveStream information (from iOS 10)
 	* Keep playing when connect bluetooth headphone
+	* Display coherent live stream duration
 
 ## [0.9.1]
 * Features:

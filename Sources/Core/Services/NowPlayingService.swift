@@ -70,7 +70,7 @@ final class ModernAVPlayerNowPlayingService: NowPlaying {
         infos[MPMediaItemPropertyTitle] = media.title ?? " "
         infos[MPMediaItemPropertyArtist] = media.artist ?? " "
         infos[MPMediaItemPropertyAlbumTitle] = media.albumTitle ?? " "
-        infos[MPMediaItemPropertyPlaybackDuration] = duration ?? 0
+        infos[MPMediaItemPropertyPlaybackDuration] = isDurationExistAndNormal(duration) ? duration : 0
         infos[MPNowPlayingInfoPropertyPlaybackRate] = 1.0
         if #available(iOS 10, *) {
             infos[MPNowPlayingInfoPropertyIsLiveStream] = media.isLive()
@@ -86,5 +86,10 @@ final class ModernAVPlayerNowPlayingService: NowPlaying {
         }
 
         return infos
+    }
+    
+    private func isDurationExistAndNormal(_ duration: Double?) -> Bool {
+        guard let d = duration, d.isNormal else { return false }
+        return true
     }
 }

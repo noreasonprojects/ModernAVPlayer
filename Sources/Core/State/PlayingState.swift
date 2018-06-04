@@ -48,7 +48,7 @@ final class PlayingState: PlayerState {
          routeAudioService: ModernAVPlayerRouteAudioService = ModernAVPlayerRouteAudioService(),
          interruptionAudioService: ModernAVPlayerInterruptionAudioService = ModernAVPlayerInterruptionAudioService()) {
         
-        LoggerInHouse.instance.log(message: "Init", event: .debug)
+        LoggerInHouse.instance.log(message: "Entering playing state", event: .info)
         self.context = context
         self.itemPlaybackObservingService = itemPlaybackObservingService
         self.routeAudioService = routeAudioService

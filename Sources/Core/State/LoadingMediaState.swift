@@ -68,7 +68,7 @@ final class LoadingMediaState: PlayerState {
          media: PlayerMedia,
          shouldPlaying: Bool,
          interruptionAudioService: ModernAVPlayerInterruptionAudioService = ModernAVPlayerInterruptionAudioService()) {
-        LoggerInHouse.instance.log(message: "Init", event: .debug)
+        LoggerInHouse.instance.log(message: "Entering loading state", event: .info)
         self.context = context
         self.shouldPlaying = shouldPlaying
         self.media = media

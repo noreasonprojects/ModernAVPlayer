@@ -72,7 +72,7 @@ public struct ModernAVPlayerConfiguration: PlayerConfiguration {
     public let reachabilityNetworkTestingTickTime: TimeInterval = 3
     public let reachabilityNetworkTestingIteration: UInt = 10
 
-    public var loggerLevelFilter: LoggerInHouse.LogEvent = .verbose
+    public var loggerLevelFilter: LoggerInHouse.LogEvent = .info
     
     public init() {
         periodicPlayingTime = CMTime(seconds: 1, preferredTimescale: preferedTimeScale)

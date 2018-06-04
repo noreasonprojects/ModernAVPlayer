@@ -47,7 +47,7 @@ final class PausedState: PlayerState {
     
     init(context: PlayerContext,
          interruptionAudioService: ModernAVPlayerInterruptionAudioService = ModernAVPlayerInterruptionAudioService()) {
-        LoggerInHouse.instance.log(message: "Init", event: .debug)
+        LoggerInHouse.instance.log(message: "Entering paused state", event: .info)
         self.context = context
         self.context.player.pause()
         self.interruptionAudioService = interruptionAudioService

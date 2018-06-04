@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 	* Keep playing when connect bluetooth headphone
 	* Display coherent live stream duration
 	* Manage live stream audio cut
+	* Improve state log readability
 
 ## [0.9.1]
 * Features:

@@ -75,13 +75,13 @@ final class PlayingState: PlayerState {
             }
             context.bgToken = nil
         }
-        LoggerInHouse.instance.log(message: "StartBgTask create: \(String(describing: context.bgToken))", event: .info)
+        LoggerInHouse.instance.log(message: "StartBgTask create: \(String(describing: context.bgToken))", event: .debug)
     }
 
     private func stopBgTask(context: PlayerContext) {
         guard let token = context.bgToken else { return }
 
-        LoggerInHouse.instance.log(message: "StopBgTask: \(token)", event: .info)
+        LoggerInHouse.instance.log(message: "StopBgTask: \(token)", event: .debug)
         UIApplication.shared.endBackgroundTask(token)
         context.bgToken = nil
     }

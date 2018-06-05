@@ -67,19 +67,19 @@ final class ModernAVPlayerPlaybackObservingService: PlaybackObservingService {
     
     @objc
     private func itemPlaybackStalled() {
-        LoggerInHouse.instance.log(message: "Item playback stalled notification", event: .info)
+        LoggerInHouse.instance.log(message: "Item playback stalled notification", event: .debug)
         onPlaybackStalled?()
     }
     
     @objc
     private func itemPlayToEndTime() {
-        LoggerInHouse.instance.log(message: "Item play to end time notification", event: .info)
+        LoggerInHouse.instance.log(message: "Item play to end time notification", event: .debug)
         onPlayToEndTime?()
     }
     
     @objc
     private func itemFailedToPlayToEndTime() {
-        LoggerInHouse.instance.log(message: "Item failed to play endtime notification", event: .info)
+        LoggerInHouse.instance.log(message: "Item failed to play endtime notification", event: .debug)
         onFailedToPlayToEndTime?()
     }
 }

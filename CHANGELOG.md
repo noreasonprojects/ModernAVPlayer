@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 	* Display coherent live stream duration
 	* Manage live stream audio cut
 	* Improve log readability
+	* End reach notification 
 
 ## [0.9.1]
 * Features:

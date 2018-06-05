@@ -118,7 +118,7 @@ final class PlayingState: PlayerState {
     private func setupPlaybackObservingCallback() {
         itemPlaybackObservingService.onPlaybackStalled = { [weak self] in self?.redirectToWaitingForNetworkState() }
         itemPlaybackObservingService.onFailedToPlayToEndTime = { [weak self] in self?.redirectToWaitingForNetworkState() }
-        itemPlaybackObservingService.onPlayToEndTime = { [weak self] in self?.playToEndTime() }
+        itemPlaybackObservingService.onPlayToEndTime = { [weak self] in self?.redirectToStoppedState() }
     }
     
     private func redirectToWaitingForNetworkState() {
@@ -132,13 +132,7 @@ final class PlayingState: PlayerState {
                                                        error: .itemPlaybackStalled))
     }
     
-    private func playToEndTime() {
-        guard let duration = context.itemDuration
-            else { assertionFailure(); return }
-        
-        let roundedCurrentTime = context.player.currentTime().seconds.rounded(.up)
-        guard roundedCurrentTime >= duration
-            else { self.redirectToWaitingForNetworkState(); return }
+    private func redirectToStoppedState() {
         context.changeState(state: StoppedState(context: context))
     }
     

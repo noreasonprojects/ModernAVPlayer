@@ -144,49 +144,13 @@ final class PlayingStateSpecs: QuickSpec {
         }
         
         context("observing item onPlayToEndTime") {
-            context("currentTime is greater than duration") {
-                it("should update state context to Stopped") {
-                    
-                    // ARRANGE
-                    self.mockPlayer.overrideCurrentTime = CMTime(seconds: 10, preferredTimescale: 1)
-                    self.tested.itemDuration = 1
-
-                    // ACT
-                    self.itemPlaybackObservingService.onPlayToEndTime?()
-                    
-                    // ASSERT
-                    expect(self.tested.state).to(beAnInstanceOf(StoppedState.self))
-                }
-            }
-            
-            context("currentTime is equal duration") {
-                it("should update state context to Stopped") {
-                    
-                    // ARRANGE
-                    self.mockPlayer.overrideCurrentTime = CMTime(seconds: 10, preferredTimescale: 1)
-                    self.tested.itemDuration = 10
-                    
-                    // ACT
-                    self.itemPlaybackObservingService.onPlayToEndTime?()
-                    
-                    // ASSERT
-                    expect(self.tested.state).to(beAnInstanceOf(StoppedState.self))
-                }
-            }
-            
-            context("currentTime is less than duration") {
-                it("should update state context to Failed") {
-                    
-                    // ARRANGE
-                    self.mockPlayer.overrideCurrentTime = CMTime(seconds: 1, preferredTimescale: 1)
-                    self.tested.itemDuration = 10
-                    
-                    // ACT
-                    self.itemPlaybackObservingService.onPlayToEndTime?()
-                    
-                    // ASSERT
-                    expect(self.tested.state).to(beAnInstanceOf(WaitingNetworkState.self))
-                }
+            it("should update state context to Stopped") {
+                
+                // ACT
+                self.itemPlaybackObservingService.onPlayToEndTime?()
+                
+                // ASSERT
+                expect(self.tested.state).to(beAnInstanceOf(StoppedState.self))
             }
         }
         

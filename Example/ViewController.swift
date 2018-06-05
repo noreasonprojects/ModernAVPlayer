@@ -25,22 +25,50 @@
 // THE SOFTWARE.
 
 import ModernAVPlayer
+import RxSwift
+import RxCocoa
 import UIKit
+
+struct Data {
+    static let medias: [PlayerMedia] = {
+        guard
+            let liveUrl = URL(string: "http://direct.franceinter.fr/live/franceinter-midfi.mp3"),
+            let remoteClip = URL(string: "http://media.radiofrance-podcast.net/podcast09/13100-17.01.2017-ITEMA_21199585-0.mp3"),
+            let file = Bundle.main.path(forResource: "AllNew", ofType: "mp3")
+            else { assertionFailure(); return [] }
+        
+        let localClip = URL(fileURLWithPath: file)
+        return [
+            ModernAVPlayerMedia(url: liveUrl, type: .stream(isLive: true), title: "Le live",
+                                albumTitle: "Album0", artist: "Artist0", localImageName: "sennaLive"),
+            ModernAVPlayerMedia(url: remoteClip, type: .clip, title: "Remote clip",
+                                albumTitle: "Album1", artist: "Artist1", localImageName: "sennaClip"),
+            ModernAVPlayerMedia(url: localClip, type: .clip, title: "Local clip",
+                                albumTitle: "Album2", artist: "Artist2", localImageName: "ankierman",
+                                remoteImageUrl: URL(string: "https://goo.gl/U4QoQj"))
+        ]
+    }()
+}
 
 final class ViewController: UIViewController {
 
+    enum PositionRequest {
+        case currentTime(time: Double?, duration: Double?)
+        case seekTime(Double)
+        case seekRatio(Float)
+    }
+    
     // MARK: - Outlets
 
     @IBOutlet weak private var playerStateLabel: UILabel!
     @IBOutlet weak private var timingLabel: UILabel!
     @IBOutlet weak private var durationLabel: UILabel!
-    @IBOutlet weak private var positionSlider: UISlider!
-    @IBOutlet private var fixedSeekButtons: [UIButton]!
+    @IBOutlet weak private var slider: UISlider!
     @IBOutlet weak private var indicatorView: UIActivityIndicatorView!
     @IBOutlet weak private var debugMessage: UILabel!
     @IBOutlet weak private var currentItemLabel: UILabel!
     
-    // MARK: - Actions
+    // MARK: - Player Commands
 
     @IBAction func pause(_ sender: UIButton) {
         player.pause()
@@ -50,23 +78,12 @@ final class ViewController: UIViewController {
         player.play()
     }
 
-    @IBAction func fixSeeking(_ sender: UIButton) {
-        let currentTime = timingLabel.text ?? "0"
-        guard let currentTimeInDouble = Double(currentTime)
-            else { setDebugMessage("Seek unavailable, load a media first"); return }
-        guard currentTimeInDouble.isFinite
-            else { setDebugMessage("Seek unavailable for live audio"); return }
-
-        let seektime = (sender.tag == 0) ? currentTimeInDouble - 10 : currentTimeInDouble + 10
-        player.seek(position: seektime)
-    }
-
     @IBAction func stop(_ sender: UIButton) {
         player.stop()
     }
 
     @IBAction func loadMedia(_ sender: UIButton) {
-        let media = medias[sender.tag % 3]
+        let media = Data.medias[sender.tag % 3]
         loadMedia(media, shouldPlaying: sender.tag < 3)
     }
 
@@ -82,133 +99,188 @@ final class ViewController: UIViewController {
         loadMedia(media, shouldPlaying: true)
     }
     
-    // MARK: - Private vars
+    // MARK: - Variables
 
     private let player = ModernAVPlayer()
     private var commandCenter: SetupCommandCenter?
-    private var itemDuration: Double? {
-        didSet {
-            guard let duration = itemDuration else { return }
-            durationLabel.text = String(format: "%.2f", duration)
-        }
-    }
-    private var currentTime: Double? {
-        didSet {
-            guard let time = currentTime else { return }
-            timingLabel.text = String(format: "%.2f", time)
-            setSliderValue(currentTime: time)
-        }
-    }
-    private var medias: [PlayerMedia] {
-        //swiftlint:disable force_unwrapping
-        let liveUrl = URL(string: "http://direct.franceinter.fr/live/franceinter-midfi.mp3")!
-        let remoteClip = URL(string: "http://media.radiofrance-podcast.net/podcast09/13100-17.01.2017-ITEMA_21199585-0.mp3")!
-        let localClip = URL(fileURLWithPath: Bundle.main.path(forResource: "AllNew", ofType: "mp3")!)
-        //swiftlint:enable force_unwrapping
-        return [
-            ModernAVPlayerMedia(url: liveUrl, type: .stream(isLive: true), title: "Le live",
-                                albumTitle: "Album0", artist: "Artist0", localImageName: "sennaLive"),
-            ModernAVPlayerMedia(url: remoteClip, type: .clip, title: "Remote clip",
-                                albumTitle: "Album1", artist: "Artist1", localImageName: "sennaClip"),
-            ModernAVPlayerMedia(url: localClip, type: .clip, title: "Local clip",
-                                albumTitle: "Album2", artist: "Artist2", localImageName: "ankierman",
-                                remoteImageUrl: URL(string: "https://goo.gl/U4QoQj"))
-        ]
-    }
-
-    private var state: ModernAVPlayer.State? {
-        didSet {
-            DispatchQueue.main.async {
-                self.playerStateLabel.text = self.state?.description
-
-                if let s = self.state, s == .playing, self.isSliderSeeking {
-                    self.isSliderSeeking = false
-                }
-                if self.isPlayerWorking() {
-                    self.indicatorView.startAnimating()
-                } else {
-                    self.indicatorView.stopAnimating()
-                }
-            }
-        }
-    }
-    private var isSliderSeeking = false
-
+    
+    // MARK: - Observables
+    
+    private let concurrentBackgroundScheduler = ConcurrentDispatchQueueScheduler(qos: .background)
+    private let disposeBag = DisposeBag()
+    private var sliderEvents: [Observable<Bool>] = []
+    private var isSliderSeeking: Observable<Bool>!
+    private var sliderValue: ControlProperty<Float>!
+    private let itemDurationSubject = BehaviorSubject<Double?>(value: 0)
+    private let positionChanged = PublishSubject<PositionRequest>()
+    
     // MARK: - LifeCycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        player.delegate = self
-        positionSlider.value = 0
-        positionSlider.addTarget(self, action: #selector(ViewController.sliderSeeking(_:)), for: .valueChanged)
+        
         debugMessage.text = nil
+        initSliderObservables()
+        bindPlayerRxAttibutes()
         commandCenter = SetupCommandCenter(player: player)
     }
+    
+    private func initSliderObservables() {
+        sliderEvents = [
+            slider.rx.controlEvent(.valueChanged).map { return true },
+            slider.rx.controlEvent(.touchUpInside).map { return false },
+            slider.rx.controlEvent(.touchUpOutside).map { return false }
+        ]
+        isSliderSeeking = Observable.merge(sliderEvents).startWith(false)
+        sliderValue = slider.rx.value
+    }
 
-    // MARK: - Slider events
+    // MARK: - Player
 
-    @objc
-    private func sliderSeeking(_ sender: UISlider) {
-        guard let duration = itemDuration
-            else { setDebugMessage("failed to seek, no duration set"); return }
-
-        isSliderSeeking = true
-        let limitedSliderValue = min(sender.value, 0.99)
-        let position = Double(limitedSliderValue) * duration
+    private func seek(position: Double) {
         player.seek(position: position)
     }
-
-    private func setSliderValue(currentTime: Double) {
-        guard let duration = itemDuration else { return }
-        guard duration.isFinite else { positionSlider.value = 0; return }
-        guard duration > 0, !isSliderSeeking else { return }
-
-        let position = Float(min(currentTime / duration, 1))
-        positionSlider.value = position
-    }
-
-    // MARK: - Player utils
-
+    
     private func loadMedia(_ media: PlayerMedia, shouldPlaying: Bool) {
         player.loadMedia(media: media, shouldPlaying: shouldPlaying)
     }
 
-    private func isPlayerWorking() -> Bool {
+    private func isPlayerWorking(state: ModernAVPlayer.State) -> Bool {
         return state == .buffering || state == .loading || state == .waitingForNetwork
     }
 
     private func setDebugMessage(_ msg: String?) {
         self.debugMessage.text = msg
         self.debugMessage.alpha = 1.0
-        UIView.animate(withDuration: 1.5, animations: {
-            self.debugMessage.alpha = 0
-        }, completion: nil)
+        UIView.animate(withDuration: 1.5) { self.debugMessage.alpha = 0 }
+    }
+    
+    private func formatPosition(_ position: PositionRequest) -> String? {
+        switch position {
+        case .currentTime(let time, _):
+            guard let t = time else { return nil }
+            return String(format: "%.2f", t)
+        case .seekRatio(let ratio):
+            return "ratio:\(ratio)"
+        case .seekTime(let time):
+            return String(format: "%.2f", time)
+        }
+    }
+    
+    private func createPositionRequest(state: ModernAVPlayer.State,
+                                       currentTime: Double?,
+                                       isSliderSeeking: Bool,
+                                       sliderPosition: Float,
+                                       optDuration: Double?) -> PositionRequest {
+        
+        guard isSliderSeeking || state == .buffering
+            else { return .currentTime(time: currentTime, duration: optDuration) }
+        
+        guard let duration = optDuration else { return .seekRatio(sliderPosition) }
+        
+        return .seekTime(Double(sliderPosition) * duration)
+    }
+    
+    private func setSliderPosition(current: Double, duration: Double) -> Float {
+        return Float(current / duration)
+    }
+    
+    private func setSeekPosition(from duration: Double) -> Double {
+        return Double(slider.value) * duration
     }
 }
 
-// MARK: - PLayerContextDelegate
+// MARK: - Player RxSwift
 
-extension ViewController: ModernAVPlayerDelegate {
-    func modernAVPlayer(_ player: ModernAVPlayer, didStateChange state: ModernAVPlayer.State) {
-        self.state = state
-    }
+extension ViewController {
     
-    func modernAVPlayer(_ player: ModernAVPlayer, didCurrentTimeChange currentTime: Double?) {
-        self.currentTime = currentTime
-    }
-    
-    func modernAVPlayer(_ player: ModernAVPlayer, didItemDurationChange itemDuration: Double?) {
-        self.itemDuration = itemDuration
-    }
-    
-    func modernAVPlayer(_ player: ModernAVPlayer, debugMessage: String?) {
-        setDebugMessage(debugMessage)
-    }
-    
-    func modernAVPlayer(_ player: ModernAVPlayer, didCurrentItemUrlChange currentItemUrl: URL?) {
-        DispatchQueue.main.async {
-            self.currentItemLabel.text = currentItemUrl?.absoluteString
-        }
+    private func bindPlayerRxAttibutes() {
+        
+        // Display current time label
+        Observable
+            .combineLatest(player.rx.currentTime.distinctUntilChanged(),
+                           slider.rx.value.asObservable().distinctUntilChanged())
+            .withLatestFrom(itemDurationSubject.asObservable()) { return ($0.0, $0.1, $1) }
+            .withLatestFrom(player.rx.state) { return ($0.0, $0.1, $0.2, $1) }
+            .withLatestFrom(isSliderSeeking) { return ($0.3, $0.0, $1, $0.1, $0.2) }
+            .subscribeOn(concurrentBackgroundScheduler)
+            .map(createPositionRequest)
+            .map(formatPosition)
+            .asDriver(onErrorJustReturn: "error")
+            .drive(timingLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        // Seek
+        isSliderSeeking
+            .distinctUntilChanged()
+            .skip(1) // skip init value
+            .filter { !$0 }
+            .withLatestFrom(itemDurationSubject.asObservable())
+            .filter { $0 != nil }.map { $0! }
+            .map(setSeekPosition)
+            .subscribe(onNext: seek)
+            .disposed(by: disposeBag)
+        
+        // Set slider value
+        Observable
+            .combineLatest(isSliderSeeking, player.rx.currentTime, player.rx.state)
+            .filter { !$0.0 }
+            .map { return ($0.1, $0.2) }
+            .withLatestFrom(itemDurationSubject.asObservable()) { return ($0, $1) }
+            .filter { args, _ -> Bool in
+                let (_, state) = args
+                return state == .playing || state == .stopped
+            }
+            .filter { args, duration -> Bool in
+                let (current, _) = args
+                return current != nil && duration != nil
+            }
+            .map { return ($0.0.0!, $0.1!) } //unwrap current time & duration
+            .map(setSliderPosition)
+            .bind(to: slider.rx.value)
+            .disposed(by: disposeBag)
+        
+        // Display itemUrl
+        player.rx.currentItemUrl
+            .observeOn(concurrentBackgroundScheduler)
+            .map { $0?.absoluteString }
+            .asDriver(onErrorJustReturn: nil)
+            .drive(currentItemLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        // Display dbugMessage
+        player.rx.debugMessage
+            .asDriver(onErrorJustReturn: "error")
+            .drive(onNext: setDebugMessage)
+            .disposed(by: disposeBag)
+        
+        // Display item duration
+        player.rx.itemDuration
+            .observeOn(concurrentBackgroundScheduler)
+            .filter { $0 != nil }
+            .map { String(format: "%.2f", $0!) }
+            .asDriver(onErrorJustReturn: "error")
+            .drive(durationLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        player.rx.itemDuration
+            .bind(to: itemDurationSubject)
+            .disposed(by: disposeBag)
+        
+        // Animate state working loader
+        player.rx.state
+            .observeOn(concurrentBackgroundScheduler)
+            .map(isPlayerWorking)
+            .asDriver(onErrorJustReturn: false)
+            .drive(indicatorView.rx.isAnimating)
+            .disposed(by: disposeBag)
+        
+        // Display state
+        player.rx.state
+            .observeOn(concurrentBackgroundScheduler)
+            .map { $0.description }
+            .asDriver(onErrorJustReturn: "error")
+            .drive(playerStateLabel.rx.text)
+            .disposed(by: disposeBag)
     }
 }

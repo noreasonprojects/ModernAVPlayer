@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ## [X.X.X]
 * Feature:
 	* Add readme pod shields
+	* Use RxSwift in example
 * Fixes:
 	* RxSwift compatibility
 

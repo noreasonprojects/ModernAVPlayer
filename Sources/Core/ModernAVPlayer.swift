@@ -44,7 +44,7 @@ public protocol MediaPlayer {
     var delegate: ModernAVPlayerDelegate? { get set }
 }
 
-public final class ModernAVPlayer: MediaPlayer {
+public final class ModernAVPlayer: NSObject, MediaPlayer {
     
     // MARK: - Output
     
@@ -62,6 +62,7 @@ public final class ModernAVPlayer: MediaPlayer {
                                         nowPlaying: ModernAVPlayerNowPlayingService(),
                                         audioSessionType: ModernAVPlayerAudioSessionService.self,
                                         plugins: plugins)
+        super.init()
         context.delegate = self
     }
     

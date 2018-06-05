@@ -39,7 +39,7 @@ final class FailedState: PlayerState {
     // MARK: - Init
     
     init(context: PlayerContext, error: PlayerError) {
-        LoggerInHouse.instance.log(message: "Init reason:\(error.localizedDescription)", event: .debug)
+        LoggerInHouse.instance.log(message: "Entering failed state (\(error.localizedDescription))", event: .info)
         self.context = context
     }
 

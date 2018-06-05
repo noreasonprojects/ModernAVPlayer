@@ -39,7 +39,7 @@ struct StoppedState: PlayerState {
     // MARK: - Init
 
     init(context: PlayerContext) {
-        LoggerInHouse.instance.log(message: "Init", event: .debug)
+        LoggerInHouse.instance.log(message: "Entering stopped state", event: .info)
         
         self.context = context
         self.context.player.pause()

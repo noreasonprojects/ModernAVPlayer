@@ -3,8 +3,14 @@ All notable changes to this project will be documented in this file.
 
 ---
 ## [X.X.X]
+* Features:
+	* Make example app universal
 * Fixes:
 	* Display nowPlaying isLiveStream information (from iOS 10)
+	* Keep playing when connect bluetooth headphone
+	* Display coherent live stream duration
+	* Manage live stream audio cut
+	* Improve log readability
 
 ## [0.9.1]
 * Features:

@@ -39,7 +39,7 @@ struct InitState: PlayerState {
     // MARK: - Init
 
     init(context: PlayerContext) {
-        LoggerInHouse.instance.log(message: "Init", event: .debug)
+        LoggerInHouse.instance.log(message: "Entering init state", event: .info)
         self.context = context
         
         if #available(iOS 10, *) {

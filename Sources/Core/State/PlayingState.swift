@@ -48,7 +48,7 @@ final class PlayingState: PlayerState {
          routeAudioService: ModernAVPlayerRouteAudioService = ModernAVPlayerRouteAudioService(),
          interruptionAudioService: ModernAVPlayerInterruptionAudioService = ModernAVPlayerInterruptionAudioService()) {
         
-        LoggerInHouse.instance.log(message: "Init", event: .debug)
+        LoggerInHouse.instance.log(message: "Entering playing state", event: .info)
         self.context = context
         self.itemPlaybackObservingService = itemPlaybackObservingService
         self.routeAudioService = routeAudioService
@@ -56,12 +56,11 @@ final class PlayingState: PlayerState {
         stopBgTask(context: context)
         setTimerObserver()
         
-        self.itemPlaybackObservingService.onPlaybackStalled = { [weak self] in self?.playbackStalled() }
-        self.itemPlaybackObservingService.onPlayToEndTime = { [weak self] in self?.playToEndTime() }
         self.routeAudioService.onRouteChanged = { [weak self] in self?.routeAudioChanged(reason: $0) }
+        setupPlaybackObservingCallback()
         setupInterruptionCallback()
     }
-
+    
     deinit {
         LoggerInHouse.instance.log(message: "Deinit", event: .debug)
         if let to = timerObserver { context.player.removeTimeObserver(to) }
@@ -76,13 +75,13 @@ final class PlayingState: PlayerState {
             }
             context.bgToken = nil
         }
-        LoggerInHouse.instance.log(message: "StartBgTask create: \(String(describing: context.bgToken))", event: .info)
+        LoggerInHouse.instance.log(message: "StartBgTask create: \(String(describing: context.bgToken))", event: .debug)
     }
 
     private func stopBgTask(context: PlayerContext) {
         guard let token = context.bgToken else { return }
 
-        LoggerInHouse.instance.log(message: "StopBgTask: \(token)", event: .info)
+        LoggerInHouse.instance.log(message: "StopBgTask: \(token)", event: .debug)
         UIApplication.shared.endBackgroundTask(token)
         context.bgToken = nil
     }
@@ -98,14 +97,6 @@ final class PlayingState: PlayerState {
         context.changeState(state: PausedState(context: context))
     }
     
-    private func pauseByInterruption() {
-        let state = PausedState(context: context)
-        state.onInterruptionEnded = { [weak state] in
-            state?.play()
-        }
-        context.changeState(state: state)
-    }
-
     func play() {
         let debug = "Already playing"
         context.debugMessage = debug
@@ -122,21 +113,18 @@ final class PlayingState: PlayerState {
         context.changeState(state: StoppedState(context: context))
     }
 
-    // MARK: - Private actions
-
-    private func setTimerObserver() {
-        timerObserver = context.player.addPeriodicTimeObserver(forInterval: context.config.periodicPlayingTime,
-                                                               queue: nil) { [context] time in
-            context.currentTime = time.seconds
-            context.nowPlaying.overrideInfoCenter(for: MPNowPlayingInfoPropertyElapsedPlaybackTime,
-                                                  value: time.seconds)
-        }
+    // MARK: - Playback Observing Service
+    
+    private func setupPlaybackObservingCallback() {
+        itemPlaybackObservingService.onPlaybackStalled = { [weak self] in self?.redirectToWaitingForNetworkState() }
+        itemPlaybackObservingService.onFailedToPlayToEndTime = { [weak self] in self?.redirectToWaitingForNetworkState() }
+        itemPlaybackObservingService.onPlayToEndTime = { [weak self] in self?.playToEndTime() }
     }
     
-    private func playbackStalled() {
+    private func redirectToWaitingForNetworkState() {
         guard let url = (context.player.currentItem?.asset as? AVURLAsset)?.url
             else { assertionFailure(); return }
-
+        
         startBgTask(context: context)
         context.changeState(state: WaitingNetworkState(context: context,
                                                        urlToReload: url,
@@ -150,20 +138,39 @@ final class PlayingState: PlayerState {
         
         let roundedCurrentTime = context.player.currentTime().seconds.rounded(.up)
         guard roundedCurrentTime >= duration
-            else { self.playbackStalled(); return }
+            else { self.redirectToWaitingForNetworkState(); return }
         context.changeState(state: StoppedState(context: context))
+    }
+    
+    // MARK: - Interruption Service
+    
+    private func setupInterruptionCallback() {
+        interruptionAudioService.onInterruptionBegan = { [weak self] in self?.pauseByInterruption() }
+    }
+    
+    private func pauseByInterruption() {
+        let state = PausedState(context: context)
+        state.onInterruptionEnded = { [weak state] in state?.play() }
+        context.changeState(state: state)
+    }
+    
+    // MARK: - Private actions
+
+    private func setTimerObserver() {
+        timerObserver = context.player.addPeriodicTimeObserver(forInterval: context.config.periodicPlayingTime,
+                                                               queue: nil) { [context] time in
+            context.currentTime = time.seconds
+            context.nowPlaying.overrideInfoCenter(for: MPNowPlayingInfoPropertyElapsedPlaybackTime,
+                                                  value: time.seconds)
+        }
     }
     
     private func routeAudioChanged(reason: AVAudioSessionRouteChangeReason) {
         switch reason {
-        case .oldDeviceUnavailable, .categoryChange, .unknown:
+        case .oldDeviceUnavailable, .unknown:
             context.changeState(state: PausedState(context: context))
-        case .newDeviceAvailable, .wakeFromSleep, .override, .noSuitableRouteForCategory, .routeConfigurationChange:
+        case .newDeviceAvailable, .wakeFromSleep, .override, .noSuitableRouteForCategory, .routeConfigurationChange, .categoryChange:
             break
         }
-    }
-    
-    private func setupInterruptionCallback() {
-        interruptionAudioService.onInterruptionBegan = { [weak self] in self?.pauseByInterruption() }
     }
 }

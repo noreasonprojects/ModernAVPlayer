@@ -43,7 +43,7 @@ final class BufferingState: NSObject, PlayerState {
     init(context: PlayerContext,
          rateObservingService: RateObservingService? = nil,
          interruptionAudioService: ModernAVPlayerInterruptionAudioService = ModernAVPlayerInterruptionAudioService()) {
-        LoggerInHouse.instance.log(message: "Init", event: .debug)
+        LoggerInHouse.instance.log(message: "Entering buffering state", event: .info)
         
         guard let item = context.player.currentItem else { fatalError("item should exist") }
         

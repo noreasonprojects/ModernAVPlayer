@@ -40,7 +40,7 @@ struct LoadedState: PlayerState {
     // MARK: - Init
 
     init(context: PlayerContext, media: PlayerMedia? = nil) {
-        LoggerInHouse.instance.log(message: "Init", event: .debug)
+        LoggerInHouse.instance.log(message: "Entering loaded state", event: .info)
         self.context = context
         self.context.currentTime = 0
         

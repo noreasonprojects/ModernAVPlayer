@@ -68,7 +68,7 @@ final class LoadingMediaState: PlayerState {
          media: PlayerMedia,
          shouldPlaying: Bool,
          interruptionAudioService: ModernAVPlayerInterruptionAudioService = ModernAVPlayerInterruptionAudioService()) {
-        LoggerInHouse.instance.log(message: "Init", event: .debug)
+        LoggerInHouse.instance.log(message: "Entering loading state", event: .info)
         self.context = context
         self.shouldPlaying = shouldPlaying
         self.media = media
@@ -160,7 +160,7 @@ final class LoadingMediaState: PlayerState {
             if let token = context.bgToken { UIApplication.shared.endBackgroundTask(token) }
             context.bgToken = nil
         }
-        LoggerInHouse.instance.log(message: "StartBgTask create: \(String(describing: context.bgToken))", event: .info)
+        LoggerInHouse.instance.log(message: "StartBgTask create: \(String(describing: context.bgToken))", event: .debug)
     }
 
     private func moveToNextState(with status: AVPlayerItemStatus) {

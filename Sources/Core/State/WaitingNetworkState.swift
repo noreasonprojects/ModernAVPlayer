@@ -44,7 +44,7 @@ final class WaitingNetworkState: PlayerState {
          shouldPlaying: Bool,
          error: PlayerError,
          reachabilityService: ReachabilityService? = nil) {
-        LoggerInHouse.instance.log(message: "Init", event: .debug)
+        LoggerInHouse.instance.log(message: "Entering waiting for network state", event: .info)
         self.context = context
         self.reachability = reachabilityService ?? ModernAVPlayerReachabilityService(config: context.config)
         setupReachabilityCallbacks(shouldPlaying: shouldPlaying, urlToReload: urlToReload, error: error)

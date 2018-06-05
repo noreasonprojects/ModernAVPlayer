@@ -102,7 +102,7 @@ final class ModernAVPlayerReachabilityService: ReachabilityService {
                 error == nil,
                 let r = response as? HTTPURLResponse,
                 r.statusCode >= 200 && r.statusCode < 300
-                else { LoggerInHouse.instance.log(message: "Unreachable network", event: .info); return }
+                else { LoggerInHouse.instance.log(message: "Unreachable network", event: .debug); return }
             
             self?.timer?.invalidate()
             self?.isReachable?()

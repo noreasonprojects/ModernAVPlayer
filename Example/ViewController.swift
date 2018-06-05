@@ -153,7 +153,6 @@ final class ViewController: UIViewController {
         guard let duration = itemDuration
             else { setDebugMessage("failed to seek, no duration set"); return }
 
-        print("±±± slider seeking: \(sender.value)")
         isSliderSeeking = true
         let limitedSliderValue = min(sender.value, 0.99)
         let position = Double(limitedSliderValue) * duration

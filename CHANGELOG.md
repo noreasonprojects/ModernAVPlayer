@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 
 ---
+## [X.X.X]
+* Feature:
+	* Add readme pod shields
+
 ## [0.9.2]
 * Feature:
 	* Make example app universal

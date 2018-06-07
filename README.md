@@ -1,5 +1,7 @@
 # ModernAVPlayer
 [![Build Status](https://travis-ci.org/noreasonprojects/ModernAVPlayer.svg?branch=develop)](https://travis-ci.org/noreasonprojects/ModernAVPlayer)
+![CocoaPods](https://img.shields.io/cocoapods/v/ModernAVPlayer.svg)
+![CocoaPods](https://img.shields.io/cocoapods/l/ModernAVPlayer.svg)
 
 ``ModernAVPlayer`` is an audio persistence ``AVPlayer`` wrapper
 

@@ -45,7 +45,10 @@ final class ModernAVPlayerNowPlayingService: NowPlaying {
     private var task: URLSessionTask?
 
     func update(media: PlayerMedia, duration: Double?) {
-        infos = parseInfos(media: media, duration: duration)
+        infos = parseInfos(metadata: media.metadata, duration: duration)
+        if #available(iOS 10, *) {
+            infos[MPNowPlayingInfoPropertyIsLiveStream] = media.isLive()
+        }
         MPNowPlayingInfoCenter.default().nowPlayingInfo = infos
     }
 
@@ -65,23 +68,20 @@ final class ModernAVPlayerNowPlayingService: NowPlaying {
         task?.resume()
     }
 
-    private func parseInfos(media: PlayerMedia, duration: Double?) -> [String: Any] {
+    private func parseInfos(metadata: PlayerMetadata?, duration: Double?) -> [String: Any] {
         var infos = [String: Any]()
-        infos[MPMediaItemPropertyTitle] = media.title ?? " "
-        infos[MPMediaItemPropertyArtist] = media.artist ?? " "
-        infos[MPMediaItemPropertyAlbumTitle] = media.albumTitle ?? " "
+        infos[MPMediaItemPropertyTitle] = metadata?.title ?? " "
+        infos[MPMediaItemPropertyArtist] = metadata?.artist ?? " "
+        infos[MPMediaItemPropertyAlbumTitle] = metadata?.albumTitle ?? " "
         infos[MPMediaItemPropertyPlaybackDuration] = isDurationExistAndNormal(duration) ? duration : 0
         infos[MPNowPlayingInfoPropertyPlaybackRate] = 1.0
-        if #available(iOS 10, *) {
-            infos[MPNowPlayingInfoPropertyIsLiveStream] = media.isLive()
-        }
 
-        if let imageName = media.localPlaceHolderImageName, let image = UIImage(named: imageName) {
+        if let imageName = metadata?.localPlaceHolderImageName, let image = UIImage(named: imageName) {
             let artwork = MPMediaItemArtwork(image: image)
             infos[MPMediaItemPropertyArtwork] = artwork
         }
 
-        if let imageUrl = media.remoteImageUrl {
+        if let imageUrl = metadata?.remoteImageUrl {
             updateRemoteImage(url: imageUrl)
         }
 

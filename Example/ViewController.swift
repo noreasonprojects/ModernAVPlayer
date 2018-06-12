@@ -248,7 +248,7 @@ extension ViewController {
             .drive(currentItemLabel.rx.text)
             .disposed(by: disposeBag)
         
-        // Display dbugMessage
+        // Display debugMessage
         player.rx.debugMessage
             .asDriver(onErrorJustReturn: "error")
             .drive(onNext: setDebugMessage)

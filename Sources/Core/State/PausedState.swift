@@ -59,8 +59,8 @@ final class PausedState: PlayerState {
     
     // MARK: - Shared actions
 
-    func loadMedia(media: PlayerMedia, shouldPlaying: Bool) {
-        let state = LoadingMediaState(context: context, media: media, shouldPlaying: shouldPlaying)
+    func loadMedia(media: PlayerMedia, autostart: Bool) {
+        let state = LoadingMediaState(context: context, media: media, autostart: autostart)
         context.changeState(state: state)
     }
 

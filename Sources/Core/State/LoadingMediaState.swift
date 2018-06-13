@@ -35,7 +35,7 @@ final class LoadingMediaState: PlayerState {
     // MARK: - Variables
     
     var type: ModernAVPlayer.State = .loading
-    private let shouldPlaying: Bool
+    private let autostart: Bool
     private let media: PlayerMedia?
     private let url: URL?
     private let lastKnownPosition: CMTime?
@@ -46,12 +46,12 @@ final class LoadingMediaState: PlayerState {
     
     init(context: PlayerContext,
          itemUrl: URL,
-         shouldPlaying: Bool,
+         autostart: Bool,
          lastPosition: CMTime?,
          interruptionAudioService: ModernAVPlayerInterruptionAudioService = ModernAVPlayerInterruptionAudioService()) {
         LoggerInHouse.instance.log(message: "Init", event: .debug)
         self.context = context
-        self.shouldPlaying = shouldPlaying
+        self.autostart = autostart
         self.media = nil
         self.url = itemUrl
         self.lastKnownPosition = lastPosition
@@ -66,11 +66,11 @@ final class LoadingMediaState: PlayerState {
 
     init(context: PlayerContext,
          media: PlayerMedia,
-         shouldPlaying: Bool,
+         autostart: Bool,
          interruptionAudioService: ModernAVPlayerInterruptionAudioService = ModernAVPlayerInterruptionAudioService()) {
         LoggerInHouse.instance.log(message: "Entering loading state", event: .info)
         self.context = context
-        self.shouldPlaying = shouldPlaying
+        self.autostart = autostart
         self.media = media
         self.url = nil
         self.lastKnownPosition = nil
@@ -93,7 +93,7 @@ final class LoadingMediaState: PlayerState {
 
     // MARK: - Shared actions
 
-    func loadMedia(media: PlayerMedia, shouldPlaying: Bool) {
+    func loadMedia(media: PlayerMedia, autostart: Bool) {
         createReplaceItem(url: media.url)
     }
 
@@ -187,6 +187,6 @@ final class LoadingMediaState: PlayerState {
             state = LoadedState(context: self.context)
         }
         self.context.changeState(state: state)
-        if self.shouldPlaying { state.play() }
+        if self.autostart { state.play() }
     }
 }

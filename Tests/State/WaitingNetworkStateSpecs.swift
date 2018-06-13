@@ -45,7 +45,7 @@ final class WaitingNetworkStateSpecs: QuickSpec {
             self.url = URL(string: "foo")!
             self.state = WaitingNetworkState(context: self.tested,
                                              urlToReload: self.url,
-                                             shouldPlaying: true,
+                                             autostart: true,
                                              error: PlayerError.itemFailedWhenLoading,
                                              reachabilityService: self.mockReachability)
             self.tested.state = self.state
@@ -85,7 +85,7 @@ final class WaitingNetworkStateSpecs: QuickSpec {
             it("should update state context to LoadingMedia") {
                 
                 // ACT
-                self.state.loadMedia(media: self.playerMedia, shouldPlaying: false)
+                self.state.loadMedia(media: self.playerMedia, autostart: false)
                 
                 // ASSERT
                 expect(self.tested.state).to(beAnInstanceOf(LoadingMediaState.self))

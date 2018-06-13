@@ -84,19 +84,19 @@ final class ViewController: UIViewController {
 
     @IBAction func loadMedia(_ sender: UIButton) {
         let media = Data.medias[sender.tag % 3]
-        loadMedia(media, shouldPlaying: sender.tag < 3)
+        loadMedia(media, autostart: sender.tag < 3)
     }
 
     @IBAction func loadInvalidFormat(_ sender: UIButton) {
         let url = URL(fileURLWithPath: Bundle.main.path(forResource: "noreason", ofType: "txt")!)
         let media = ModernAVPlayerMedia(url: url, type: .clip)
-        loadMedia(media, shouldPlaying: true)
+        loadMedia(media, autostart: true)
     }
     
     @IBAction func loadInvalidRemoteUrl(_ sender: UIButton) {
         let url = URL(string: "foo://noreason")!
         let media = ModernAVPlayerMedia(url: url, type: .clip)
-        loadMedia(media, shouldPlaying: true)
+        loadMedia(media, autostart: true)
     }
     
     // MARK: - Variables
@@ -139,8 +139,8 @@ final class ViewController: UIViewController {
         player.seek(position: position)
     }
     
-    private func loadMedia(_ media: PlayerMedia, shouldPlaying: Bool) {
-        player.loadMedia(media: media, shouldPlaying: shouldPlaying)
+    private func loadMedia(_ media: PlayerMedia, autostart: Bool) {
+        player.loadMedia(media: media, autostart: autostart)
     }
 
     private func isPlayerWorking(state: ModernAVPlayer.State) -> Bool {

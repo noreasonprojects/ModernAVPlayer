@@ -66,7 +66,7 @@ let player = ModernAVPlayer()
 ```
 > Load and play the media
 ```swift
-player.loadMedia(media: media, shouldPlaying: true)
+player.loadMedia(media: media, autostart: true)
 ```
 
 ### Available Commands

@@ -41,13 +41,13 @@ final class WaitingNetworkState: PlayerState {
     
     init(context: PlayerContext,
          urlToReload: URL,
-         shouldPlaying: Bool,
+         autostart: Bool,
          error: PlayerError,
          reachabilityService: ReachabilityService? = nil) {
         LoggerInHouse.instance.log(message: "Entering waiting for network state", event: .info)
         self.context = context
         self.reachability = reachabilityService ?? ModernAVPlayerReachabilityService(config: context.config)
-        setupReachabilityCallbacks(shouldPlaying: shouldPlaying, urlToReload: urlToReload, error: error)
+        setupReachabilityCallbacks(autostart: autostart, urlToReload: urlToReload, error: error)
         reachability.start()
     }
     
@@ -57,7 +57,7 @@ final class WaitingNetworkState: PlayerState {
     
     // MARK: - Reachability
     
-    private func setupReachabilityCallbacks(shouldPlaying: Bool, urlToReload: URL, error: PlayerError) {
+    private func setupReachabilityCallbacks(autostart: Bool, urlToReload: URL, error: PlayerError) {
         reachability.isTimedOut = { [weak self] in
             guard let strongSelf = self else { return }
             
@@ -71,7 +71,7 @@ final class WaitingNetworkState: PlayerState {
             let lastKnownPosition = strongSelf.isDurationItemFinite() ? strongSelf.context.player.currentTime() : nil
             let state = LoadingMediaState(context: strongSelf.context,
                                           itemUrl: urlToReload,
-                                          shouldPlaying: shouldPlaying,
+                                          autostart: autostart,
                                           lastPosition: lastKnownPosition)
             strongSelf.context.changeState(state: state)
         }
@@ -83,8 +83,8 @@ final class WaitingNetworkState: PlayerState {
     
     // MARK: - Shared actions
     
-    func loadMedia(media: PlayerMedia, shouldPlaying: Bool) {
-        let state = LoadingMediaState(context: context, media: media, shouldPlaying: shouldPlaying)
+    func loadMedia(media: PlayerMedia, autostart: Bool) {
+        let state = LoadingMediaState(context: context, media: media, autostart: autostart)
         context.changeState(state: state)
     }
     

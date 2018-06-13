@@ -116,7 +116,7 @@ final class ContextSpecs: QuickSpec {
                 let media = ModernAVPlayerMedia(url: URL(string: "foo")!, type: .clip)
 
                 // ACT
-                self.tested.loadMedia(media: media, shouldPlaying: false)
+                self.tested.loadMedia(media: media, autostart: false)
 
                 // ASSERT
                 expect(self.mockState.loadMedialCallCount).to(equal(1))

@@ -293,7 +293,6 @@
 		AE17A62616271EF678EFD47149035492 /* Driver+Subscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821964B980397F8D0D25E74298B6AB5E /* Driver+Subscription.swift */; };
 		AE469E3D1BA9F2727D3B69A1A160D512 /* ControlEvent+Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7503027883635332FA0187A7E341A14 /* ControlEvent+Signal.swift */; };
 		AE4DA49ECD693BF384CD824DF02D7C6E /* NMBStringify.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B38546814DFC5D564B3576B2AC06E1E /* NMBStringify.m */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
-		AE533CC963E388BCAA4C56F8490584A5 /* SetupCommandCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D97566F25298E9C5CB0D3BBFCEE6FB /* SetupCommandCenter.swift */; };
 		AEA7547CFB956C44457DDA5B28EF92A2 /* ExampleGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CDC80CEA10EFFCA68CBAE3922C61F7D /* ExampleGroup.swift */; };
 		AF1174085D9BC5D50FCE0480E9C2BE94 /* BeGreaterThan.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE1C7AA435F43876EB06AEA86EC1EFF /* BeGreaterThan.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		B102ABE4E54B71B3D2C2118E2782FAB9 /* BeLessThan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06DD54B17A4273C576918409A60714EB /* BeLessThan.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
@@ -373,6 +372,7 @@
 		DF2E97F126062EB1EA4BCCB0040B8DD8 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1E3993E6AC4793C6FFF9FEE53974B6 /* Error.swift */; };
 		DFDC58D22CA87F9FF98D1C26DB909A61 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435A62BD15436900F4212821F617315A /* Errors.swift */; };
 		E0D2CCD663F94FD8BF9572B27E7644B6 /* StartWith.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6DB0C036A0D3CBAD04E050682A89E9 /* StartWith.swift */; };
+		E1153CE620D0217300ABCCD0 /* CommandCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1153CE520D0217300ABCCD0 /* CommandCenter.swift */; };
 		E11A93017086CA10BFB06CBB871AB00F /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D298531A2A5C9758150EBC7E5C00FE /* Timer.swift */; };
 		E14FDEE83830F0CA66E996B5D48D87CD /* Platform.Linux.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFC838184A35DC95BF86AEB295EAC5A /* Platform.Linux.swift */; };
 		E18B5A749AC6F667FF26E95D90F85C3C /* RxCocoa-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A712AD88B075D331FFB4543FAB5F1F3 /* RxCocoa-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -813,7 +813,6 @@
 		B79FA503E84B0953E32063E2E1484C01 /* FailedState.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FailedState.swift; sourceTree = "<group>"; };
 		B94F5998FBCF936DBDD7ED834396D607 /* NimbleXCTestHandler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NimbleXCTestHandler.swift; path = Sources/Nimble/Adapters/NimbleXCTestHandler.swift; sourceTree = "<group>"; };
 		B9AB3EBD6D8586FAEF9C84A9DCA5F70B /* UIApplication+Rx.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIApplication+Rx.swift"; path = "RxCocoa/iOS/UIApplication+Rx.swift"; sourceTree = "<group>"; };
-		B9D97566F25298E9C5CB0D3BBFCEE6FB /* SetupCommandCenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SetupCommandCenter.swift; sourceTree = "<group>"; };
 		B9DBE3BA21FE444759C92EFCFEA4D2CE /* Equal.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Equal.swift; path = Sources/Nimble/Matchers/Equal.swift; sourceTree = "<group>"; };
 		BA079160BE38E91518A2D9289814F8E4 /* Amb.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Amb.swift; path = RxSwift/Observables/Amb.swift; sourceTree = "<group>"; };
 		BA181BFC30DA999C12CF9ECB8E4E4339 /* AsyncSubject.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AsyncSubject.swift; path = RxSwift/Subjects/AsyncSubject.swift; sourceTree = "<group>"; };
@@ -896,6 +895,7 @@
 		DFBCE601CF995E292839A37BB9783DCD /* MainScheduler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MainScheduler.swift; path = RxSwift/Schedulers/MainScheduler.swift; sourceTree = "<group>"; };
 		E0279172BDF24100E8C9381BF46BAE27 /* UISearchBar+Rx.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UISearchBar+Rx.swift"; path = "RxCocoa/iOS/UISearchBar+Rx.swift"; sourceTree = "<group>"; };
 		E06109D88DC786607607FD37436FAC45 /* Completable+AndThen.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Completable+AndThen.swift"; path = "RxSwift/Traits/Completable+AndThen.swift"; sourceTree = "<group>"; };
+		E1153CE520D0217300ABCCD0 /* CommandCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandCenter.swift; sourceTree = "<group>"; };
 		E14C73CF1F1CEF6BB20B7549563F61E5 /* SectionedViewDataSourceType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SectionedViewDataSourceType.swift; path = RxCocoa/Common/SectionedViewDataSourceType.swift; sourceTree = "<group>"; };
 		E1BF20DBFE95791C9E65A1F124E736E6 /* BehaviorRelay.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BehaviorRelay.swift; path = RxCocoa/Traits/BehaviorRelay.swift; sourceTree = "<group>"; };
 		E247714B83331315EB23EC56E5F34E59 /* EndWith.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EndWith.swift; path = Sources/Nimble/Matchers/EndWith.swift; sourceTree = "<group>"; };
@@ -1122,6 +1122,7 @@
 		40579ACFD3DC560845C9D9FBF95AB115 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				E1153CE520D0217300ABCCD0 /* CommandCenter.swift */,
 				C6C4C2F7EBAE31A37F94EFE9F6EAE644 /* ContextConfiguration.swift */,
 				B4E7B9129D5B9D15411293751E92FBEE /* MediaType.swift */,
 				5B15EC6BE9794B57CEE21413ABD45C04 /* PlayerContext.swift */,
@@ -1129,7 +1130,6 @@
 				CA965028B2B148C47D68EB51B2C431C6 /* PlayerMedia.swift */,
 				84AD8E298C80264E5BF78DF50DE5B772 /* PlayerPlugin.swift */,
 				7266A4570AAC67C1C3D98F7A2DD940F4 /* PlayerState.swift */,
-				B9D97566F25298E9C5CB0D3BBFCEE6FB /* SetupCommandCenter.swift */,
 				102CF40DD7D41F6F76F08E30463CB411 /* TimerFactory.swift */,
 				10BE5C7AB21B49E9C85262C58123F6B3 /* URLSessionDataTaskFactory.swift */,
 			);
@@ -1967,6 +1967,7 @@
 				11FE0E9945C20570FB380CF3A422D35B /* LoggerInHouse.swift in Sources */,
 				0A9B751CA9ABB08A4BF7DE5D4C833570 /* MediaType.swift in Sources */,
 				007828AFEC669C3BD88BB4CF74ECFCEC /* ModernAVPlayer-dummy.m in Sources */,
+				E1153CE620D0217300ABCCD0 /* CommandCenter.swift in Sources */,
 				97F716F9D2B8787055981CDBD759E07B /* ModernAVPlayer.swift in Sources */,
 				F1FFF940DC931C9C01A66A3F47235434 /* NowPlayingService.swift in Sources */,
 				129ECA565CBE10F86D5EE9765DE717DD /* PausedState.swift in Sources */,
@@ -1981,7 +1982,6 @@
 				EB84DF04E8E14341A085034C7FBC30F8 /* RateObservingService.swift in Sources */,
 				055543CF7CD636D6A8E2EF7BFFC25F9D /* ReachabilityService.swift in Sources */,
 				5151BB09A1210B4C6C7E6761C2202600 /* RouteAudioService.swift in Sources */,
-				AE533CC963E388BCAA4C56F8490584A5 /* SetupCommandCenter.swift in Sources */,
 				FF65EB1ECD4C3DA9D47078B19A261636 /* StoppedState.swift in Sources */,
 				83F69DD373400EA3869AC57348714505 /* TimerFactory.swift in Sources */,
 				55E9EF3E5F6484ACCB23797289D82F98 /* URLSessionDataTaskFactory.swift in Sources */,

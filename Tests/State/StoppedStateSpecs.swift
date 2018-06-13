@@ -62,7 +62,7 @@ final class StoppedStateSpecs: QuickSpec {
             it("should update state context to LoadingMedia") {
 
                 // ACT
-                self.tested.loadMedia(media: self.media, shouldPlaying: false)
+                self.tested.loadMedia(media: self.media, autostart: false)
 
                 // ASSERT
                 expect(self.playerContext.state).to(beAnInstanceOf(LoadingMediaState.self))

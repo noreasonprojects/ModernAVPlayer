@@ -35,7 +35,7 @@ public protocol ModernAVPlayerDelegate: class {
 }
 
 public protocol MediaPlayer {
-    func loadMedia(media: PlayerMedia, shouldPlaying: Bool)
+    func loadMedia(media: PlayerMedia, autostart: Bool)
     func pause()
     func play()
     func seek(position: Double)
@@ -50,18 +50,29 @@ public final class ModernAVPlayer: NSObject, MediaPlayer {
     
     public weak var delegate: ModernAVPlayerDelegate?
     
-    // MARK: - Variable
+    // MARK: - Variables
     
     private let context: ModernAVPlayerContext
+    private let commandCenter: CommandCenter
     
     // MARK: - Init
     
-    public init(config: PlayerConfiguration = ModernAVPlayerConfiguration(), plugins: [PlayerPlugin] = []) {
+    ///
+    /// ModernAVPlayer initialisation
+    ///
+    /// - parameter config: setup player configuration
+    /// - parameter plugins: array of plugin
+    /// - parameter commandCenter: setup control center custom control
+    ///
+    public init(config: PlayerConfiguration = ModernAVPlayerConfiguration(),
+                plugins: [PlayerPlugin] = [],
+                commandCenter: CommandCenter? = nil) {
         context = ModernAVPlayerContext(player: AVPlayer(),
                                         config: config,
                                         nowPlaying: ModernAVPlayerNowPlayingService(),
                                         audioSessionType: ModernAVPlayerAudioSessionService.self,
                                         plugins: plugins)
+        self.commandCenter = commandCenter ?? ModernAVPlayerCommandCenter()
         super.init()
         context.delegate = self
     }
@@ -73,11 +84,11 @@ public final class ModernAVPlayer: NSObject, MediaPlayer {
         context.pause()
     }
     
-   /**
-     Sets the current playback time to the specified time
-   
-     - parameter position: time to seek
-     */
+    ///
+    /// Sets the current playback time to the specified time
+    ///
+    /// - parameter position: time to seek
+    ///
     public func seek(position: Double) {
         context.seek(position: position)
     }
@@ -87,18 +98,22 @@ public final class ModernAVPlayer: NSObject, MediaPlayer {
         context.stop()
     }
     
-    /**
-    Replaces the current player media with the new media
-    
-    - parameter media: media to load
-    - parameter shouldPlaying: play after media is loaded
-    */
-    public func loadMedia(media: PlayerMedia, shouldPlaying: Bool) {
-        context.loadMedia(media: media, shouldPlaying: shouldPlaying)
+    ///
+    /// Replaces the current player media with the new media
+    ///
+    /// - parameter media: media to load
+    /// - parameter autostart: play after media is loaded
+    ///
+    public func loadMedia(media: PlayerMedia, autostart: Bool) {
+        if autostart {
+            commandCenter.configure(player: self)
+        }
+        context.loadMedia(media: media, autostart: autostart)
     }
     
     /// Begins playback of the current item
     public func play() {
+        commandCenter.configure(player: self)
         context.play()
     }
 }

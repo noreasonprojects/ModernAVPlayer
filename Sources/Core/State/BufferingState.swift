@@ -69,7 +69,7 @@ final class BufferingState: NSObject, PlayerState {
             
             let waitingState = WaitingNetworkState(context: context,
                                                    urlToReload: url,
-                                                   shouldPlaying: true,
+                                                   autostart: true,
                                                    error: .buffering)
             context.changeState(state: waitingState)
         }
@@ -98,8 +98,8 @@ final class BufferingState: NSObject, PlayerState {
 
     // MARK: - Shared actions
 
-    func loadMedia(media: PlayerMedia, shouldPlaying: Bool) {
-        let state = LoadingMediaState(context: context, media: media, shouldPlaying: shouldPlaying)
+    func loadMedia(media: PlayerMedia, autostart: Bool) {
+        let state = LoadingMediaState(context: context, media: media, autostart: autostart)
         changeState(state)
     }
 

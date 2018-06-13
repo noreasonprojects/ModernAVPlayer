@@ -45,7 +45,7 @@ final class LoadingMediaStateSpecs: QuickSpec {
             MockAudioSession.resetCallsCount()
             self.player = MockCustomPlayer.createOnUsingAsset(url: "foo")
             self.tested = ModernAVPlayerContext(player: self.player, audioSessionType: MockAudioSession.self)
-            self.state = LoadingMediaState(context: self.tested, media: self.playerMedia, shouldPlaying: true)
+            self.state = LoadingMediaState(context: self.tested, media: self.playerMedia, autostart: true)
             self.tested.state = self.state
         }
 
@@ -67,7 +67,7 @@ final class LoadingMediaStateSpecs: QuickSpec {
             it("should not update state context") {
                 
                 // ACT
-                self.state.loadMedia(media: self.playerMedia, shouldPlaying: true)
+                self.state.loadMedia(media: self.playerMedia, autostart: true)
                 
                 // ASSERT
                 expect(self.tested.state).to(beIdenticalTo(self.state))

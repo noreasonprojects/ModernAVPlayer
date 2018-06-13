@@ -43,11 +43,11 @@ struct ModernAVPlayerCommandCenter: CommandCenter {
     
     func configure(player: MediaPlayer) {
         enableCommands()
-        playCommand(player: player)
-        pauseCommand(player: player)
+        setPlayCommandCallback(player: player)
+        setPauseCommandCallback(player: player)
         
         if #available(iOS 9.1, *) {
-            changePlaybackPositionCommand(player: player)
+            setChangePlaybackPositionCommandCallback(player: player)
         }
     }
     
@@ -65,7 +65,7 @@ struct ModernAVPlayerCommandCenter: CommandCenter {
         }
     }
     
-    private func playCommand(player: MediaPlayer) {
+    private func setPlayCommandCallback(player: MediaPlayer) {
         remote.playCommand.addTarget { [player] _ -> MPRemoteCommandHandlerStatus in
             LoggerInHouse.instance.log(message: "Remote command: play", event: .info)
             player.play()
@@ -73,7 +73,7 @@ struct ModernAVPlayerCommandCenter: CommandCenter {
         }
     }
     
-    private func pauseCommand(player: MediaPlayer) {
+    private func setPauseCommandCallback(player: MediaPlayer) {
         remote.pauseCommand.addTarget { [player] _ -> MPRemoteCommandHandlerStatus in
             LoggerInHouse.instance.log(message: "Remote command: pause", event: .info)
             player.pause()
@@ -82,7 +82,7 @@ struct ModernAVPlayerCommandCenter: CommandCenter {
     }
     
     @available(iOS 9.1, *)
-    private func changePlaybackPositionCommand(player: MediaPlayer) {
+    private func setChangePlaybackPositionCommandCallback(player: MediaPlayer) {
         remote.changePlaybackPositionCommand.addTarget { [player] event -> MPRemoteCommandHandlerStatus in
             guard let e = event as? MPChangePlaybackPositionCommandEvent
                 else { return .commandFailed }

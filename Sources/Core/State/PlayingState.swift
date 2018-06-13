@@ -35,7 +35,7 @@ final class PlayingState: PlayerState {
     private var itemPlaybackObservingService: PlaybackObservingService
     private let routeAudioService: ModernAVPlayerRouteAudioService
     private let interruptionAudioService: ModernAVPlayerInterruptionAudioService
-    private let audioSession: CustomAVAudioSession
+    private let audioSession: AVAudioSession
     
     // MARK: - Variables
     
@@ -48,7 +48,7 @@ final class PlayingState: PlayerState {
          itemPlaybackObservingService: PlaybackObservingService = ModernAVPlayerPlaybackObservingService(),
          routeAudioService: ModernAVPlayerRouteAudioService = ModernAVPlayerRouteAudioService(),
          interruptionAudioService: ModernAVPlayerInterruptionAudioService = ModernAVPlayerInterruptionAudioService(),
-         audioSession: CustomAVAudioSession = AVAudioSession.sharedInstance()) {
+         audioSession: AVAudioSession = AVAudioSession.sharedInstance()) {
         
         LoggerInHouse.instance.log(message: "Entering playing state", event: .info)
         self.context = context

@@ -5,6 +5,10 @@
 
 ``ModernAVPlayer`` is an audio persistence ``AVPlayer`` wrapper
 
+## Anomaly
+
+Don't use simulator to test example: Item duration is not fetch on simulator but on device. 
+
 ## Requirements
 
 - iOS 9.0+

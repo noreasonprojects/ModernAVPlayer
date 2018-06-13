@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 
 ---
-## [X.X.X]
+## [0.9.3]
 * Feature:
 	* Add readme pod shields
 	* Use RxSwift in example

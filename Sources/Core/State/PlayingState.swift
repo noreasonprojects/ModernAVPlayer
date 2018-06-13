@@ -35,6 +35,7 @@ final class PlayingState: PlayerState {
     private var itemPlaybackObservingService: PlaybackObservingService
     private let routeAudioService: ModernAVPlayerRouteAudioService
     private let interruptionAudioService: ModernAVPlayerInterruptionAudioService
+    private let audioSession: CustomAVAudioSession
     
     // MARK: - Variables
     
@@ -46,13 +47,15 @@ final class PlayingState: PlayerState {
     init(context: PlayerContext,
          itemPlaybackObservingService: PlaybackObservingService = ModernAVPlayerPlaybackObservingService(),
          routeAudioService: ModernAVPlayerRouteAudioService = ModernAVPlayerRouteAudioService(),
-         interruptionAudioService: ModernAVPlayerInterruptionAudioService = ModernAVPlayerInterruptionAudioService()) {
+         interruptionAudioService: ModernAVPlayerInterruptionAudioService = ModernAVPlayerInterruptionAudioService(),
+         audioSession: CustomAVAudioSession = AVAudioSession.sharedInstance()) {
         
         LoggerInHouse.instance.log(message: "Entering playing state", event: .info)
         self.context = context
         self.itemPlaybackObservingService = itemPlaybackObservingService
         self.routeAudioService = routeAudioService
         self.interruptionAudioService = interruptionAudioService
+        self.audioSession = audioSession
         stopBgTask(context: context)
         setTimerObserver()
         
@@ -142,9 +145,14 @@ final class PlayingState: PlayerState {
         interruptionAudioService.onInterruptionBegan = { [weak self] in self?.pauseByInterruption() }
     }
     
+    /*
+     Do not set any call back on interruption ended when user play from another app
+    */
     private func pauseByInterruption() {
         let state = PausedState(context: context)
-        state.onInterruptionEnded = { [weak state] in state?.play() }
+        if !audioSession.secondaryAudioShouldBeSilencedHint {
+            state.onInterruptionEnded = { [weak state] in state?.play() }
+        }
         context.changeState(state: state)
     }
     

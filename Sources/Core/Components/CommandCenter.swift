@@ -27,50 +27,70 @@
 import Foundation
 import MediaPlayer
 
-public struct SetupCommandCenter {
-    let player: ModernAVPlayer
-    let remote: MPRemoteCommandCenter
+public protocol CommandCenter {
+    var remote: MPRemoteCommandCenter { get }
     
-    public init(player: ModernAVPlayer, remote: MPRemoteCommandCenter = MPRemoteCommandCenter.shared()) {
-        self.player = player
+    init(remote: MPRemoteCommandCenter)
+    func configure(player: MediaPlayer)
+}
+
+public struct ModernAVPlayerCommandCenter: CommandCenter {
+    public let remote: MPRemoteCommandCenter
+    
+    public init(remote: MPRemoteCommandCenter = MPRemoteCommandCenter.shared()) {
         self.remote = remote
-        defaultSetup()
     }
     
-    private func defaultSetup() {
+    public func configure(player: MediaPlayer) {
+        enableCommands()
+        playCommand(player: player)
+        pauseCommand(player: player)
+        
+        if #available(iOS 9.1, *) {
+            changePlaybackPositionCommand(player: player)
+        }
+    }
+    
+    private func enableCommands() {
         remote.playCommand.isEnabled = true
         remote.pauseCommand.isEnabled = true
         remote.togglePlayPauseCommand.isEnabled = true
-        if #available(iOS 9.1, *) {
-            remote.changePlaybackPositionCommand.isEnabled = true
-        }
-
+        
         remote.stopCommand.isEnabled = false
         remote.previousTrackCommand.isEnabled = false
         remote.nextTrackCommand.isEnabled = false
-
+        
+        if #available(iOS 9.1, *) {
+            remote.changePlaybackPositionCommand.isEnabled = true
+        }
+    }
+    
+    private func playCommand(player: MediaPlayer) {
         remote.playCommand.addTarget { [player] _ -> MPRemoteCommandHandlerStatus in
             LoggerInHouse.instance.log(message: "Remote command: play", event: .info)
             player.play()
             return .success
         }
-        
+    }
+    
+    private func pauseCommand(player: MediaPlayer) {
         remote.pauseCommand.addTarget { [player] _ -> MPRemoteCommandHandlerStatus in
             LoggerInHouse.instance.log(message: "Remote command: pause", event: .info)
             player.pause()
             return .success
         }
-
-        if #available(iOS 9.1, *) {
-            remote.changePlaybackPositionCommand.addTarget { [player] event -> MPRemoteCommandHandlerStatus in
-                guard let e = event as? MPChangePlaybackPositionCommandEvent
-                    else { return .commandFailed }
-                
-                let position = e.positionTime
-                LoggerInHouse.instance.log(message: "Remote command: seek to \(position)", event: .info)
-                player.seek(position: position)
-                return .success
-            }
+    }
+    
+    @available(iOS 9.1, *)
+    private func changePlaybackPositionCommand(player: MediaPlayer) {
+        remote.changePlaybackPositionCommand.addTarget { [player] event -> MPRemoteCommandHandlerStatus in
+            guard let e = event as? MPChangePlaybackPositionCommandEvent
+                else { return .commandFailed }
+            
+            let position = e.positionTime
+            LoggerInHouse.instance.log(message: "Remote command: seek to \(position)", event: .info)
+            player.seek(position: position)
+            return .success
         }
     }
 }

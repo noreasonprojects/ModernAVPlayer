@@ -101,8 +101,7 @@ final class ViewController: UIViewController {
     
     // MARK: - Variables
 
-    private let player = ModernAVPlayer()
-    private var commandCenter: SetupCommandCenter?
+    let player = ModernAVPlayer()
     
     // MARK: - Observables
     
@@ -122,7 +121,6 @@ final class ViewController: UIViewController {
         debugMessage.text = nil
         initSliderObservables()
         bindPlayerRxAttibutes()
-        commandCenter = SetupCommandCenter(player: player)
     }
     
     private func initSliderObservables() {

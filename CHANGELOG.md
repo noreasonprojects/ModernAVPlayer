@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 	* Use RxSwift in example
 * Fixes:
 	* RxSwift compatibility
+	* CommandCenter set when playing
 
 ## [0.9.2]
 * Feature:

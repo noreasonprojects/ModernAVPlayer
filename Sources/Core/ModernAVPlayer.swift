@@ -50,18 +50,22 @@ public final class ModernAVPlayer: NSObject, MediaPlayer {
     
     public weak var delegate: ModernAVPlayerDelegate?
     
-    // MARK: - Variable
+    // MARK: - Variables
     
     private let context: ModernAVPlayerContext
+    private let commandCenter: CommandCenter
     
     // MARK: - Init
     
-    public init(config: PlayerConfiguration = ModernAVPlayerConfiguration(), plugins: [PlayerPlugin] = []) {
+    public init(config: PlayerConfiguration = ModernAVPlayerConfiguration(),
+                plugins: [PlayerPlugin] = [],
+                commandCenter: CommandCenter = ModernAVPlayerCommandCenter()) {
         context = ModernAVPlayerContext(player: AVPlayer(),
                                         config: config,
                                         nowPlaying: ModernAVPlayerNowPlayingService(),
                                         audioSessionType: ModernAVPlayerAudioSessionService.self,
                                         plugins: plugins)
+        self.commandCenter = commandCenter
         super.init()
         context.delegate = self
     }
@@ -94,11 +98,15 @@ public final class ModernAVPlayer: NSObject, MediaPlayer {
     - parameter shouldPlaying: play after media is loaded
     */
     public func loadMedia(media: PlayerMedia, shouldPlaying: Bool) {
+        if shouldPlaying {
+            commandCenter.configure(player: self)
+        }
         context.loadMedia(media: media, shouldPlaying: shouldPlaying)
     }
     
     /// Begins playback of the current item
     public func play() {
+        commandCenter.configure(player: self)
         context.play()
     }
 }

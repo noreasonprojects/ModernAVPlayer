@@ -27,10 +27,18 @@
 import Foundation
 import MediaPlayer
 
+/// CommanderCenter
+///
+/// Adopt this protocol to add control center custom command
+///
 public protocol CommandCenter {
     var remote: MPRemoteCommandCenter { get }
     
     init(remote: MPRemoteCommandCenter)
+    
+    ///
+    /// Enable and set callback commands
+    /// - parameter player: player used in th project
     func configure(player: MediaPlayer)
 }
 

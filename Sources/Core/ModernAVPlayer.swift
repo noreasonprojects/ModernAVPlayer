@@ -57,6 +57,13 @@ public final class ModernAVPlayer: NSObject, MediaPlayer {
     
     // MARK: - Init
     
+    ///
+    /// ModernAVPlayer initialisation
+    ///
+    /// - parameter config: setup player configuration
+    /// - parameter plugins: array of plugin
+    /// - parameter commandCenter: setup control center custom control
+    ///
     public init(config: PlayerConfiguration = ModernAVPlayerConfiguration(),
                 plugins: [PlayerPlugin] = [],
                 commandCenter: CommandCenter? = nil) {
@@ -77,11 +84,11 @@ public final class ModernAVPlayer: NSObject, MediaPlayer {
         context.pause()
     }
     
-   /**
-     Sets the current playback time to the specified time
-   
-     - parameter position: time to seek
-     */
+    ///
+    /// Sets the current playback time to the specified time
+    ///
+    /// - parameter position: time to seek
+    ///
     public func seek(position: Double) {
         context.seek(position: position)
     }
@@ -91,12 +98,12 @@ public final class ModernAVPlayer: NSObject, MediaPlayer {
         context.stop()
     }
     
-    /**
-    Replaces the current player media with the new media
-    
-    - parameter media: media to load
-    - parameter autostart: play after media is loaded
-    */
+    ///
+    /// Replaces the current player media with the new media
+    ///
+    /// - parameter media: media to load
+    /// - parameter autostart: play after media is loaded
+    ///
     public func loadMedia(media: PlayerMedia, autostart: Bool) {
         if autostart {
             commandCenter.configure(player: self)

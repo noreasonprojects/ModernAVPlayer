@@ -34,14 +34,14 @@ public protocol CommandCenter {
     func configure(player: MediaPlayer)
 }
 
-public struct ModernAVPlayerCommandCenter: CommandCenter {
-    public let remote: MPRemoteCommandCenter
+struct ModernAVPlayerCommandCenter: CommandCenter {
+    let remote: MPRemoteCommandCenter
     
-    public init(remote: MPRemoteCommandCenter = MPRemoteCommandCenter.shared()) {
+    init(remote: MPRemoteCommandCenter = MPRemoteCommandCenter.shared()) {
         self.remote = remote
     }
     
-    public func configure(player: MediaPlayer) {
+    func configure(player: MediaPlayer) {
         enableCommands()
         playCommand(player: player)
         pauseCommand(player: player)

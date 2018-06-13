@@ -59,13 +59,13 @@ public final class ModernAVPlayer: NSObject, MediaPlayer {
     
     public init(config: PlayerConfiguration = ModernAVPlayerConfiguration(),
                 plugins: [PlayerPlugin] = [],
-                commandCenter: CommandCenter = ModernAVPlayerCommandCenter()) {
+                commandCenter: CommandCenter? = nil) {
         context = ModernAVPlayerContext(player: AVPlayer(),
                                         config: config,
                                         nowPlaying: ModernAVPlayerNowPlayingService(),
                                         audioSessionType: ModernAVPlayerAudioSessionService.self,
                                         plugins: plugins)
-        self.commandCenter = commandCenter
+        self.commandCenter = commandCenter ?? ModernAVPlayerCommandCenter()
         super.init()
         context.delegate = self
     }

@@ -83,7 +83,10 @@ final class ViewController: UIViewController {
     }
     
     @IBAction func metadata(_ sender: Any) {
-        let newMetadata = ModernAVPlayerMediaMetadata(title: "Updated title",
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm:ss"
+        let timeStamp = formatter.string(from: Date())
+        let newMetadata = ModernAVPlayerMediaMetadata(title: "Updated title (\(timeStamp))",
                                                  albumTitle: "Updated album",
                                                  artist: "Updated artist",
                                                 localImageName: "ankierman")

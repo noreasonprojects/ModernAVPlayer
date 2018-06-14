@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [X.X.X]
+* Feature:
+	* Add function to update metadata in live
+
 ---
 ## [0.9.3]
 * Feature:

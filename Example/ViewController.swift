@@ -81,6 +81,15 @@ final class ViewController: UIViewController {
     @IBAction func stop(_ sender: UIButton) {
         player.stop()
     }
+    
+    @IBAction func metadata(_ sender: Any) {
+        let newMetadata = ModernAVPlayerMetadata(title: "Updated title",
+                                                 albumTitle: "Updated album",
+                                                 artist: "Updated artist",
+                                                localImageName: "ankierman")
+        player.updateLive(metadata: newMetadata)
+    }
+    
 
     @IBAction func loadMedia(_ sender: UIButton) {
         let media = Data.medias[sender.tag % 3]

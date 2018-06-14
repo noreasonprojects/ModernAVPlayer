@@ -32,7 +32,7 @@ import MediaPlayer
  */
 
 protocol NowPlaying {
-    func update(media: PlayerMedia, duration: Double?)
+    func update(metadata: PlayerMetadata?, duration: Double?, isLive: Bool)
     func overrideInfoCenter(for key: String, value: Any)
 }
 
@@ -44,14 +44,14 @@ final class ModernAVPlayerNowPlayingService: NowPlaying {
     }
     private var task: URLSessionTask?
 
-    func update(media: PlayerMedia, duration: Double?) {
-        infos = parseInfos(metadata: media.metadata, duration: duration)
+    func update(metadata: PlayerMetadata?, duration: Double?, isLive: Bool) {
+        infos = parseInfos(metadata: metadata, duration: duration)
         if #available(iOS 10, *) {
-            infos[MPNowPlayingInfoPropertyIsLiveStream] = media.isLive()
+            infos[MPNowPlayingInfoPropertyIsLiveStream] = isLive
         }
         MPNowPlayingInfoCenter.default().nowPlayingInfo = infos
     }
-
+    
     func overrideInfoCenter(for key: String, value: Any) {
         infos[key] = value
         MPNowPlayingInfoCenter.default().nowPlayingInfo = infos

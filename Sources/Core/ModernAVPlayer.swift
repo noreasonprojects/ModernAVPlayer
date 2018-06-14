@@ -40,6 +40,7 @@ public protocol MediaPlayer {
     func play()
     func seek(position: Double)
     func stop()
+    func updateLive(metadata: PlayerMetadata)
     
     var delegate: ModernAVPlayerDelegate? { get set }
 }
@@ -109,6 +110,16 @@ public final class ModernAVPlayer: NSObject, MediaPlayer {
             commandCenter.configure(player: self)
         }
         context.loadMedia(media: media, autostart: autostart)
+    }
+   
+    /**
+     Replaces the current player metadata with the new metadata
+     This function is dedicated for updating live data, and though, will discard duration and isLive previously set.
+     
+     - parameter metadata: metadata to load
+     */
+    public func updateLive(metadata: PlayerMetadata) {
+        context.nowPlaying.update(metadata: metadata, duration: nil, isLive: true)
     }
     
     /// Begins playback of the current item

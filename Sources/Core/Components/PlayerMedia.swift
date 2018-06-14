@@ -53,8 +53,13 @@ public struct ModernAVPlayerMedia: PlayerMedia, Equatable {
         self.metadata = metadata
     }
     
-    public init(url: URL, type: MediaType, title: String? = nil, albumTitle: String? = nil,
-                artist: String? = nil, localImageName: String? = nil, remoteImageUrl: URL? = nil) {
+    public init(url: URL,
+                type: MediaType,
+                title: String? = nil,
+                albumTitle: String? = nil,
+                artist: String? = nil,
+                localImageName: String? = nil,
+                remoteImageUrl: URL? = nil) {
         let metadata = ModernAVPlayerMetadata(title: title,
                                               albumTitle: albumTitle,
                                               artist: artist,

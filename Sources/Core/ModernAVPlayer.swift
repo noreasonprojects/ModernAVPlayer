@@ -112,12 +112,12 @@ public final class ModernAVPlayer: NSObject, MediaPlayer {
         context.loadMedia(media: media, autostart: autostart)
     }
    
-    /**
-     Replaces the current player metadata with the new metadata
-     This function is dedicated for updating live data, and though, will discard duration and isLive previously set.
-     
-     - parameter metadata: metadata to load
-     */
+    ///
+    /// Replaces the current item metadata with the new metadata
+    /// This method is dedicated for updating nowPlayingInfo data, and though, will discard duration and isLive previously set.
+    ///
+    /// - parameter metadata: metadata to load
+    ///
     public func updateNowPlayingInfo(metadata: PlayerMetadata) {
         context.nowPlaying.update(metadata: metadata, duration: nil, isLive: true)
     }

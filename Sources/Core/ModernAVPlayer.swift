@@ -40,7 +40,7 @@ public protocol MediaPlayer {
     func play()
     func seek(position: Double)
     func stop()
-    func updateLive(metadata: PlayerMetadata)
+    func updateNowPlayingInfo(metadata: PlayerMetadata)
     
     var delegate: ModernAVPlayerDelegate? { get set }
 }
@@ -118,7 +118,7 @@ public final class ModernAVPlayer: NSObject, MediaPlayer {
      
      - parameter metadata: metadata to load
      */
-    public func updateLive(metadata: PlayerMetadata) {
+    public func updateNowPlayingInfo(metadata: PlayerMetadata) {
         context.nowPlaying.update(metadata: metadata, duration: nil, isLive: true)
     }
     

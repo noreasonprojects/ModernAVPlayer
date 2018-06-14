@@ -87,7 +87,7 @@ final class ViewController: UIViewController {
                                                  albumTitle: "Updated album",
                                                  artist: "Updated artist",
                                                 localImageName: "ankierman")
-        player.updateLive(metadata: newMetadata)
+        player.updateNowPlayingInfo(metadata: newMetadata)
     }
     
 

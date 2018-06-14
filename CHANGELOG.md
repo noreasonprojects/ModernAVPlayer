@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ## [X.X.X]
 * Feature:
-	* Add function to update metadata in live
+	* Add a public method to update now playing info metadata
 
 ---
 ## [0.9.3]

@@ -83,7 +83,7 @@ final class ViewController: UIViewController {
     }
     
     @IBAction func metadata(_ sender: Any) {
-        let newMetadata = ModernAVPlayerMetadata(title: "Updated title",
+        let newMetadata = ModernAVPlayerMediaMetadata(title: "Updated title",
                                                  albumTitle: "Updated album",
                                                  artist: "Updated artist",
                                                 localImageName: "ankierman")

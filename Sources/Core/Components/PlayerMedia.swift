@@ -29,7 +29,7 @@ import AVFoundation
 public protocol PlayerMedia {
     var url: URL { get }
     var type: MediaType { get }
-    var metadata: PlayerMetadata? { get }
+    var metadata: PlayerMediaMetadata? { get }
     
     func isLive() -> Bool
 }
@@ -45,9 +45,9 @@ public extension PlayerMedia {
 public struct ModernAVPlayerMedia: PlayerMedia, Equatable {
     public let url: URL
     public let type: MediaType
-    public let metadata: PlayerMetadata?
+    public let metadata: PlayerMediaMetadata?
     
-    public init(url: URL, type: MediaType, metadata: PlayerMetadata? = nil) {
+    public init(url: URL, type: MediaType, metadata: PlayerMediaMetadata? = nil) {
         self.url = url
         self.type = type
         self.metadata = metadata
@@ -60,11 +60,11 @@ public struct ModernAVPlayerMedia: PlayerMedia, Equatable {
                 artist: String? = nil,
                 localImageName: String? = nil,
                 remoteImageUrl: URL? = nil) {
-        let metadata = ModernAVPlayerMetadata(title: title,
-                                              albumTitle: albumTitle,
-                                              artist: artist,
-                                              localImageName: localImageName,
-                                              remoteImageUrl: remoteImageUrl)
+        let metadata = ModernAVPlayerMediaMetadata(title: title,
+                                                   albumTitle: albumTitle,
+                                                   artist: artist,
+                                                   localImageName: localImageName,
+                                                   remoteImageUrl: remoteImageUrl)
         self.init(url: url, type: type, metadata: metadata)
     }
 }

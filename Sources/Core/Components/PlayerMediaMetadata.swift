@@ -3,7 +3,7 @@
 // ModernAVPlayer
 // Copyright (c) 2018 Raphael Ankierman <raphael.ankierman@radiofrance.com>
 //
-// PlayerMedia.swift
+// PlayerMediaMetadata.swift
 // Created by Jean-Charles Dessaint on 12/06/2018.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -26,7 +26,7 @@
 
 import AVFoundation
 
-public protocol PlayerMetadata {
+public protocol PlayerMediaMetadata {
     var title: String? { get }
     var artist: String? { get }
     var albumTitle: String? { get }
@@ -34,14 +34,17 @@ public protocol PlayerMetadata {
     var remoteImageUrl: URL? { get }
 }
 
-public struct ModernAVPlayerMetadata: PlayerMetadata {
+public struct ModernAVPlayerMediaMetadata: PlayerMediaMetadata {
     public let title: String?
     public let albumTitle: String?
     public let artist: String?
     public let localPlaceHolderImageName: String?
     public let remoteImageUrl: URL?
     
-    public init(title: String? = nil, albumTitle: String? = nil, artist: String? = nil, localImageName: String? = nil,
+    public init(title: String? = nil,
+                albumTitle: String? = nil,
+                artist: String? = nil,
+                localImageName: String? = nil,
                 remoteImageUrl: URL? = nil) {
         self.title = title
         self.albumTitle = albumTitle

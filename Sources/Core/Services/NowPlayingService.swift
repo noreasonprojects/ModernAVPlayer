@@ -33,6 +33,7 @@ import MediaPlayer
 
 protocol NowPlaying {
     func update(metadata: PlayerMediaMetadata?, duration: Double?, isLive: Bool)
+    func update(metadata: PlayerMediaMetadata)
     func overrideInfoCenter(for key: String, value: Any)
 }
 
@@ -45,11 +46,19 @@ final class ModernAVPlayerNowPlayingService: NowPlaying {
     private var task: URLSessionTask?
 
     func update(metadata: PlayerMediaMetadata?, duration: Double?, isLive: Bool) {
-        infos = parseInfos(metadata: metadata, duration: duration)
+        infos = parse(metadata: metadata)
         if #available(iOS 10, *) {
             infos[MPNowPlayingInfoPropertyIsLiveStream] = isLive
         }
+        if let duration = duration,
+            duration.isNormal {
+            infos[MPMediaItemPropertyPlaybackDuration] = duration
+        }
         MPNowPlayingInfoCenter.default().nowPlayingInfo = infos
+    }
+
+    func update(metadata: PlayerMediaMetadata) {
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = parse(metadata: metadata)
     }
     
     func overrideInfoCenter(for key: String, value: Any) {
@@ -68,12 +77,11 @@ final class ModernAVPlayerNowPlayingService: NowPlaying {
         task?.resume()
     }
 
-    private func parseInfos(metadata: PlayerMediaMetadata?, duration: Double?) -> [String: Any] {
+    private func parse(metadata: PlayerMediaMetadata?) -> [String: Any] {
         var infos = [String: Any]()
         infos[MPMediaItemPropertyTitle] = metadata?.title ?? " "
         infos[MPMediaItemPropertyArtist] = metadata?.artist ?? " "
         infos[MPMediaItemPropertyAlbumTitle] = metadata?.albumTitle ?? " "
-        infos[MPMediaItemPropertyPlaybackDuration] = isDurationExistAndNormal(duration) ? duration : 0
         infos[MPNowPlayingInfoPropertyPlaybackRate] = 1.0
 
         if let imageName = metadata?.localPlaceHolderImageName, let image = UIImage(named: imageName) {
@@ -86,10 +94,5 @@ final class ModernAVPlayerNowPlayingService: NowPlaying {
         }
 
         return infos
-    }
-    
-    private func isDurationExistAndNormal(_ duration: Double?) -> Bool {
-        guard let d = duration, d.isNormal else { return false }
-        return true
     }
 }

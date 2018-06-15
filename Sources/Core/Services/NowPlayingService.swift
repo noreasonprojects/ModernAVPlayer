@@ -39,14 +39,16 @@ protocol NowPlaying {
 
 final class ModernAVPlayerNowPlayingService: NowPlaying {
 
-    private var infos = [String: Any]()
+    private var infos = [String: Any]() {
+        didSet { MPNowPlayingInfoCenter.default().nowPlayingInfo = infos }
+    }
     private var session: URLSession {
         return URLSession.shared
     }
     private var task: URLSessionTask?
 
     func update(metadata: PlayerMediaMetadata?, duration: Double?, isLive: Bool) {
-        infos = parse(metadata: metadata)
+        var infos = parse(metadata: metadata)
         if #available(iOS 10, *) {
             infos[MPNowPlayingInfoPropertyIsLiveStream] = isLive
         }
@@ -54,16 +56,15 @@ final class ModernAVPlayerNowPlayingService: NowPlaying {
             duration.isNormal {
             infos[MPMediaItemPropertyPlaybackDuration] = duration
         }
-        MPNowPlayingInfoCenter.default().nowPlayingInfo = infos
+        self.infos = infos
     }
 
     func update(metadata: PlayerMediaMetadata) {
-        MPNowPlayingInfoCenter.default().nowPlayingInfo = parse(metadata: metadata)
+        infos = parse(metadata: metadata)
     }
     
     func overrideInfoCenter(for key: String, value: Any) {
         infos[key] = value
-        MPNowPlayingInfoCenter.default().nowPlayingInfo = infos
     }
 
     private func updateRemoteImage(url: URL) {

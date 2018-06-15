@@ -1,11 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [X.X.X]
-* Feature:
-	* Add a public method to update now playing info metadata
-
 ---
+## [0.9.4]
+* Feature:
+	* Update now playing info metadata anytime
+
 ## [0.9.3]
 * Feature:
 	* Add readme pod shields

@@ -29,12 +29,8 @@ import AVFoundation
 public protocol PlayerMedia {
     var url: URL { get }
     var type: MediaType { get }
-    var title: String? { get }
-    var artist: String? { get }
-    var albumTitle: String? { get }
-    var localPlaceHolderImageName: String? { get }
-    var remoteImageUrl: URL? { get }
-
+    var metadata: PlayerMediaMetadata? { get }
+    
     func isLive() -> Bool
 }
 
@@ -49,21 +45,27 @@ public extension PlayerMedia {
 public struct ModernAVPlayerMedia: PlayerMedia, Equatable {
     public let url: URL
     public let type: MediaType
-    public let title: String?
-    public let albumTitle: String?
-    public let artist: String?
-    public let localPlaceHolderImageName: String?
-    public let remoteImageUrl: URL?
-
-    public init(url: URL, type: MediaType, title: String? = nil, albumTitle: String? = nil,
-                artist: String? = nil, localImageName: String? = nil, remoteImageUrl: URL? = nil) {
+    public let metadata: PlayerMediaMetadata?
+    
+    public init(url: URL, type: MediaType, metadata: PlayerMediaMetadata? = nil) {
         self.url = url
         self.type = type
-        self.title = title
-        self.albumTitle = albumTitle
-        self.artist = artist
-        self.localPlaceHolderImageName = localImageName
-        self.remoteImageUrl = remoteImageUrl
+        self.metadata = metadata
+    }
+    
+    public init(url: URL,
+                type: MediaType,
+                title: String? = nil,
+                albumTitle: String? = nil,
+                artist: String? = nil,
+                localImageName: String? = nil,
+                remoteImageUrl: URL? = nil) {
+        let metadata = ModernAVPlayerMediaMetadata(title: title,
+                                                   albumTitle: albumTitle,
+                                                   artist: artist,
+                                                   localImageName: localImageName,
+                                                   remoteImageUrl: remoteImageUrl)
+        self.init(url: url, type: type, metadata: metadata)
     }
 }
 

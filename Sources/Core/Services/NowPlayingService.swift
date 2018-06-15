@@ -32,26 +32,39 @@ import MediaPlayer
  */
 
 protocol NowPlaying {
-    func update(media: PlayerMedia, duration: Double?)
+    func update(metadata: PlayerMediaMetadata?, duration: Double?, isLive: Bool)
+    func update(metadata: PlayerMediaMetadata)
     func overrideInfoCenter(for key: String, value: Any)
 }
 
 final class ModernAVPlayerNowPlayingService: NowPlaying {
 
     private var infos = [String: Any]()
-    private var session: URLSession {
-        return URLSession.shared
-    }
+    private var session: URLSession { return URLSession.shared }
     private var task: URLSessionTask?
 
-    func update(media: PlayerMedia, duration: Double?) {
-        infos = parseInfos(media: media, duration: duration)
-        MPNowPlayingInfoCenter.default().nowPlayingInfo = infos
+    func update(metadata: PlayerMediaMetadata?, duration: Double?, isLive: Bool) {
+        if #available(iOS 10, *) {
+            infos[MPNowPlayingInfoPropertyIsLiveStream] = isLive
+        }
+        if let duration = duration, duration.isNormal {
+            infos[MPMediaItemPropertyPlaybackDuration] = duration
+        }
+        updateDictionnary(with: metadata)
+        let debug = "Update nowPlayingInfo metadata: \(metadata?.description ?? "nil") | duration: \(duration?.description ?? "nil")"
+                    + " | isLive: \(isLive.description))"
+        LoggerInHouse.instance.log(message: debug, event: .debug)
     }
 
+    func update(metadata: PlayerMediaMetadata) {
+        updateDictionnary(with: metadata)
+        LoggerInHouse.instance.log(message: "Update nowPlayingInfo metadata: \(metadata.description)", event: .debug)
+    }
+    
     func overrideInfoCenter(for key: String, value: Any) {
         infos[key] = value
         MPNowPlayingInfoCenter.default().nowPlayingInfo = infos
+        LoggerInHouse.instance.log(message: "Update nowPlayingInfo \(key):\(value)", event: .debug)
     }
 
     private func updateRemoteImage(url: URL) {
@@ -65,31 +78,20 @@ final class ModernAVPlayerNowPlayingService: NowPlaying {
         task?.resume()
     }
 
-    private func parseInfos(media: PlayerMedia, duration: Double?) -> [String: Any] {
-        var infos = [String: Any]()
-        infos[MPMediaItemPropertyTitle] = media.title ?? " "
-        infos[MPMediaItemPropertyArtist] = media.artist ?? " "
-        infos[MPMediaItemPropertyAlbumTitle] = media.albumTitle ?? " "
-        infos[MPMediaItemPropertyPlaybackDuration] = isDurationExistAndNormal(duration) ? duration : 0
+    private func updateDictionnary(with metadata: PlayerMediaMetadata?) {
+        infos[MPMediaItemPropertyTitle] = metadata?.title ?? " "
+        infos[MPMediaItemPropertyArtist] = metadata?.artist ?? " "
+        infos[MPMediaItemPropertyAlbumTitle] = metadata?.albumTitle ?? " "
         infos[MPNowPlayingInfoPropertyPlaybackRate] = 1.0
-        if #available(iOS 10, *) {
-            infos[MPNowPlayingInfoPropertyIsLiveStream] = media.isLive()
-        }
-
-        if let imageName = media.localPlaceHolderImageName, let image = UIImage(named: imageName) {
+        
+        if let imageName = metadata?.localPlaceHolderImageName, let image = UIImage(named: imageName) {
             let artwork = MPMediaItemArtwork(image: image)
             infos[MPMediaItemPropertyArtwork] = artwork
         }
-
-        if let imageUrl = media.remoteImageUrl {
+        
+        if let imageUrl = metadata?.remoteImageUrl {
             updateRemoteImage(url: imageUrl)
         }
-
-        return infos
-    }
-    
-    private func isDurationExistAndNormal(_ duration: Double?) -> Bool {
-        guard let d = duration, d.isNormal else { return false }
-        return true
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = infos
     }
 }

@@ -81,6 +81,18 @@ final class ViewController: UIViewController {
     @IBAction func stop(_ sender: UIButton) {
         player.stop()
     }
+    
+    @IBAction func metadata(_ sender: Any) {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm:ss"
+        let timeStamp = formatter.string(from: Date())
+        let newMetadata = ModernAVPlayerMediaMetadata(title: timeStamp,
+                                                 albumTitle: "Updated album",
+                                                 artist: "Updated artist",
+                                                localImageName: "ankierman")
+        player.updateNowPlayingInfo(metadata: newMetadata)
+    }
+    
 
     @IBAction func loadMedia(_ sender: UIButton) {
         let media = Data.medias[sender.tag % 3]

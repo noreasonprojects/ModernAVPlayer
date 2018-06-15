@@ -49,7 +49,9 @@ struct LoadedState: PlayerState {
         if #available(iOS 9.1, *) {
             updateRemoteCommandCenter(mediaType: media.type)
         }
-        context.nowPlaying.update(media: media, duration: context.player.currentItem?.duration.seconds)
+        context.nowPlaying.update(metadata: media.metadata,
+                                  duration: context.player.currentItem?.duration.seconds,
+                                  isLive: media.isLive())
         context.plugins.forEach { $0.didLoadMedia(media) }
     }
 

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,23 +15,23 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ModernAVPlayer_Example" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="yda-Pn-Lut">
-                                <rect key="frame" x="10" y="40" width="580" height="154"/>
+                                <rect key="frame" x="10" y="40" width="355" height="154"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="Od9-ZL-As6" userLabel="Stack LiveLoading">
-                                        <rect key="frame" x="0.0" y="0.0" width="580" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="355" height="50"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Play" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W0n-zi-Rid">
-                                                <rect key="frame" x="0.0" y="16" width="69.5" height="18"/>
+                                                <rect key="frame" x="0.0" y="16" width="40" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hgg-3y-CVQ" customClass="LoadButton" customModule="ModernAVPlayer_Example" customModuleProvider="target">
-                                                <rect key="frame" x="71.5" y="0.0" width="177" height="50"/>
+                                                <rect key="frame" x="42" y="0.0" width="108.5" height="50"/>
                                                 <color key="backgroundColor" red="0.82745098039999998" green="0.8980392157" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="Ez6-ap-jij"/>
@@ -47,7 +51,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cd3-I9-rLQ" customClass="LoadButton" customModule="ModernAVPlayer_Example" customModuleProvider="target">
-                                                <rect key="frame" x="250.5" y="0.0" width="181" height="50"/>
+                                                <rect key="frame" x="152.5" y="0.0" width="111" height="50"/>
                                                 <color key="backgroundColor" red="0.82745098039999998" green="0.8980392157" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal">
                                                     <attributedString key="attributedTitle">
@@ -64,7 +68,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cNo-VJ-OYz" customClass="LoadButton" customModule="ModernAVPlayer_Example" customModuleProvider="target">
-                                                <rect key="frame" x="433.5" y="0.0" width="146.5" height="50"/>
+                                                <rect key="frame" x="265.5" y="0.0" width="89.5" height="50"/>
                                                 <color key="backgroundColor" red="0.82745098039999998" green="0.8980392157" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal">
                                                     <attributedString key="attributedTitle">
@@ -87,16 +91,16 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="OIm-As-RFf" userLabel="Stack Loading">
-                                        <rect key="frame" x="0.0" y="52" width="580" height="50"/>
+                                        <rect key="frame" x="0.0" y="52" width="355" height="50"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Load" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fS1-Ba-3ND">
-                                                <rect key="frame" x="0.0" y="16" width="69.5" height="18"/>
+                                                <rect key="frame" x="0.0" y="16" width="40" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="U99-ZH-C73" userLabel="Load Live Media" customClass="LoadButton" customModule="ModernAVPlayer_Example" customModuleProvider="target">
-                                                <rect key="frame" x="71.5" y="0.0" width="173" height="50"/>
+                                                <rect key="frame" x="42" y="0.0" width="106" height="50"/>
                                                 <color key="backgroundColor" red="0.6191481419" green="1" blue="0.76628168949999997" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal">
                                                     <attributedString key="attributedTitle">
@@ -113,7 +117,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tzn-Eq-bbA" userLabel="Load short Aod" customClass="LoadButton" customModule="ModernAVPlayer_Example" customModuleProvider="target">
-                                                <rect key="frame" x="246.5" y="0.0" width="178" height="50"/>
+                                                <rect key="frame" x="150" y="0.0" width="109" height="50"/>
                                                 <color key="backgroundColor" red="0.6191481419" green="1" blue="0.76628168949999997" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal">
                                                     <attributedString key="attributedTitle">
@@ -130,7 +134,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8x4-uI-Bz7" userLabel="Load long aod" customClass="LoadButton" customModule="ModernAVPlayer_Example" customModuleProvider="target">
-                                                <rect key="frame" x="426.5" y="0.0" width="153.5" height="50"/>
+                                                <rect key="frame" x="261" y="0.0" width="94" height="50"/>
                                                 <color key="backgroundColor" red="0.6191481419" green="1" blue="0.76628168949999997" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal">
                                                     <attributedString key="attributedTitle">
@@ -149,10 +153,10 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="fhj-ml-7RV" userLabel="Failed Format">
-                                        <rect key="frame" x="0.0" y="104" width="580" height="50"/>
+                                        <rect key="frame" x="0.0" y="104" width="355" height="50"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t1C-7K-w1g">
-                                                <rect key="frame" x="0.0" y="0.0" width="260" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="159.5" height="50"/>
                                                 <color key="backgroundColor" red="1" green="0.42835564947445726" blue="0.26172470390495706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
                                                 <state key="normal" title="Load invalid format"/>
@@ -161,7 +165,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="km5-HK-nqh">
-                                                <rect key="frame" x="262" y="0.0" width="318" height="50"/>
+                                                <rect key="frame" x="161.5" y="0.0" width="193.5" height="50"/>
                                                 <color key="backgroundColor" red="1" green="0.42835564949999999" blue="0.26172470390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <state key="normal" title="Load invalid remote url "/>
@@ -190,7 +194,7 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="jRa-DP-PJB">
-                                <rect key="frame" x="210.5" y="254" width="179.5" height="30"/>
+                                <rect key="frame" x="98" y="254" width="179.5" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="default state" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zzn-sM-nLM" userLabel="StateValue">
                                         <rect key="frame" x="0.0" y="0.0" width="149.5" height="30"/>
@@ -204,45 +208,52 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="DLZ-YT-GWw" userLabel="Stack Commands">
-                                <rect key="frame" x="219" y="324" width="162" height="30"/>
+                                <rect key="frame" x="30.5" y="324" width="314" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fqp-f4-dhf">
-                                        <rect key="frame" x="0.0" y="0.0" width="42" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="65" height="30"/>
                                         <state key="normal" title="Pause"/>
                                         <connections>
                                             <action selector="pause:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OT5-N3-q6I"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nco-0m-d6w">
-                                        <rect key="frame" x="60" y="0.0" width="42" height="30"/>
+                                        <rect key="frame" x="83" y="0.0" width="65" height="30"/>
                                         <state key="normal" title="Stop"/>
                                         <connections>
                                             <action selector="stop:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NDR-Fk-hZx"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dgm-io-PwR">
-                                        <rect key="frame" x="120" y="0.0" width="42" height="30"/>
+                                        <rect key="frame" x="166" y="0.0" width="65" height="30"/>
                                         <state key="normal" title="Play"/>
                                         <connections>
                                             <action selector="play:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XvB-EF-aQQ"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C1f-rH-JSC">
+                                        <rect key="frame" x="249" y="0.0" width="65" height="30"/>
+                                        <state key="normal" title="Metadata"/>
+                                        <connections>
+                                            <action selector="metadata:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FDK-7K-04A"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </stackView>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="KVE-RP-I9x">
-                                <rect key="frame" x="38" y="414" width="524" height="31"/>
+                                <rect key="frame" x="38" y="414" width="299" height="31"/>
                             </slider>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="occ-dY-JEv" userLabel="SliderLabels">
-                                <rect key="frame" x="40" y="450" width="520" height="21"/>
+                                <rect key="frame" x="40" y="450" width="295" height="21"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="current time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZvH-SF-VsK" userLabel="CurrentTime">
-                                        <rect key="frame" x="0.0" y="0.0" width="260" height="21"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="147.5" height="21"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="duration" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KRz-I4-0Ph" userLabel="Duration">
-                                        <rect key="frame" x="260" y="0.0" width="260" height="21"/>
+                                        <rect key="frame" x="147.5" y="0.0" width="147.5" height="21"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -250,13 +261,13 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DebugMsg" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HC6-AH-Aas" userLabel="DebugMessage">
-                                <rect key="frame" x="258.5" y="531" width="83" height="19.5"/>
+                                <rect key="frame" x="146" y="531" width="83" height="19.5"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
                                 <color key="textColor" red="1" green="0.27549239646099244" blue="0.20477252612872443" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CurrentItem" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sdS-SJ-5qq" userLabel="CurrentItem">
-                                <rect key="frame" x="10" y="569" width="580" height="11"/>
+                                <rect key="frame" x="10" y="636" width="355" height="11"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>

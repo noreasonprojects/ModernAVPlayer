@@ -51,15 +51,20 @@ final class ModernAVPlayerNowPlayingService: NowPlaying {
             infos[MPMediaItemPropertyPlaybackDuration] = duration
         }
         updateDictionnary(with: metadata)
+        let debug = "Update nowPlayingInfo metadata: \(metadata?.description ?? "nil") | duration: \(duration?.description ?? "nil")"
+                    + " | isLive: \(isLive.description))"
+        LoggerInHouse.instance.log(message: debug, event: .debug)
     }
 
     func update(metadata: PlayerMediaMetadata) {
         updateDictionnary(with: metadata)
+        LoggerInHouse.instance.log(message: "Update nowPlayingInfo metadata: \(metadata.description)", event: .debug)
     }
     
     func overrideInfoCenter(for key: String, value: Any) {
         infos[key] = value
         MPNowPlayingInfoCenter.default().nowPlayingInfo = infos
+        LoggerInHouse.instance.log(message: "Update nowPlayingInfo \(key):\(value)", event: .debug)
     }
 
     private func updateRemoteImage(url: URL) {

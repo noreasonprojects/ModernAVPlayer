@@ -26,7 +26,7 @@
 
 import AVFoundation
 
-public protocol PlayerMediaMetadata {
+public protocol PlayerMediaMetadata: CustomStringConvertible {
     var title: String? { get }
     var artist: String? { get }
     var albumTitle: String? { get }
@@ -51,5 +51,11 @@ public struct ModernAVPlayerMediaMetadata: PlayerMediaMetadata {
         self.artist = artist
         self.localPlaceHolderImageName = localImageName
         self.remoteImageUrl = remoteImageUrl
+    }
+    
+    public var description: String {
+        let debug = "title: \(title ?? "nil") | album: \(albumTitle ?? "nil") | artist: \(artist ?? "nil") | "
+                    + "localImage: \(localPlaceHolderImageName ?? "nil") | remoteImage: \(remoteImageUrl?.description ?? "nil")"
+        return debug
     }
 }

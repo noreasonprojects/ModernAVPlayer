@@ -39,32 +39,27 @@ protocol NowPlaying {
 
 final class ModernAVPlayerNowPlayingService: NowPlaying {
 
-    private var infos = [String: Any]() {
-        didSet { MPNowPlayingInfoCenter.default().nowPlayingInfo = infos }
-    }
-    private var session: URLSession {
-        return URLSession.shared
-    }
+    private var infos = [String: Any]()
+    private var session: URLSession { return URLSession.shared }
     private var task: URLSessionTask?
 
     func update(metadata: PlayerMediaMetadata?, duration: Double?, isLive: Bool) {
-        var infos = parse(metadata: metadata)
         if #available(iOS 10, *) {
             infos[MPNowPlayingInfoPropertyIsLiveStream] = isLive
         }
-        if let duration = duration,
-            duration.isNormal {
+        if let duration = duration, duration.isNormal {
             infos[MPMediaItemPropertyPlaybackDuration] = duration
         }
-        self.infos = infos
+        updateDictionnary(with: metadata)
     }
 
     func update(metadata: PlayerMediaMetadata) {
-        infos = parse(metadata: metadata)
+        updateDictionnary(with: metadata)
     }
     
     func overrideInfoCenter(for key: String, value: Any) {
         infos[key] = value
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = infos
     }
 
     private func updateRemoteImage(url: URL) {
@@ -78,22 +73,20 @@ final class ModernAVPlayerNowPlayingService: NowPlaying {
         task?.resume()
     }
 
-    private func parse(metadata: PlayerMediaMetadata?) -> [String: Any] {
-        var infos = [String: Any]()
+    private func updateDictionnary(with metadata: PlayerMediaMetadata?) {
         infos[MPMediaItemPropertyTitle] = metadata?.title ?? " "
         infos[MPMediaItemPropertyArtist] = metadata?.artist ?? " "
         infos[MPMediaItemPropertyAlbumTitle] = metadata?.albumTitle ?? " "
         infos[MPNowPlayingInfoPropertyPlaybackRate] = 1.0
-
+        
         if let imageName = metadata?.localPlaceHolderImageName, let image = UIImage(named: imageName) {
             let artwork = MPMediaItemArtwork(image: image)
             infos[MPMediaItemPropertyArtwork] = artwork
         }
-
+        
         if let imageUrl = metadata?.remoteImageUrl {
             updateRemoteImage(url: imageUrl)
         }
-
-        return infos
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = infos
     }
 }

@@ -121,7 +121,10 @@ final class PlayingState: PlayerState {
     private func setupPlaybackObservingCallback() {
         itemPlaybackObservingService.onPlaybackStalled = { [weak self] in self?.redirectToWaitingForNetworkState() }
         itemPlaybackObservingService.onFailedToPlayToEndTime = { [weak self] in self?.redirectToWaitingForNetworkState() }
-        itemPlaybackObservingService.onPlayToEndTime = { [weak self] in self?.redirectToStoppedState() }
+        itemPlaybackObservingService.onPlayToEndTime = { [weak self] in
+            self?.context.nowPlaying.overrideInfoCenter(for: MPNowPlayingInfoPropertyElapsedPlaybackTime, value: NSNumber(value: 0))
+            self?.redirectToStoppedState()
+        }
     }
     
     private func redirectToWaitingForNetworkState() {

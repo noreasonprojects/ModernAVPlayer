@@ -62,6 +62,8 @@ final class PlayingState: PlayerState {
         self.routeAudioService.onRouteChanged = { [weak self] in self?.routeAudioChanged(reason: $0) }
         setupPlaybackObservingCallback()
         setupInterruptionCallback()
+        
+        context.plugins.forEach { $0.startPlaying() }
     }
     
     deinit {

@@ -27,17 +27,38 @@
 import AVFoundation
 
 public protocol PlayerPlugin {
-    /**
-    Method called when Player is in Init state
-     - parameters:
-        - player: instance of AVPlayer used
-     */
+    ///
+    /// Called when Player init Initialization state
+    /// - parameters:
+    ///    - player: instance of AVPlayer used
+    ///
     func didInit(player: AVPlayer)
     
-    /**
-    Method called when Player is in Loaded state
-     - parameters:
-        - media: PlayerMedia just loaded
-     */
-    func didLoadMedia(_ media: PlayerMedia?)
+    /// Called when Player init Loading state
+    func startLoading()
+    
+    /// Called when Player init Buffering state
+    func startBuffering()
+    
+    ///
+    /// Called when Player init Initialization state
+    /// - parameters:
+    ///    - media: PlayerMedia just loaded
+    ///
+    func didLoad(media: PlayerMedia?, duration: Double?)
+    
+    /// Called when Player init Playing state
+    func startPlaying()
+    
+    /// Called when Player init Paused state
+    func didPaused()
+    
+    /// Called when Player init Stopped state
+    func didStopped()
+    
+    /// Called when Player init WaintForNetwork state
+    func startWaitingForNetwork()
+    
+    /// Called when Player init Failed state
+    func didFailed()
 }

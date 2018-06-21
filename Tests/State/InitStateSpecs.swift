@@ -46,7 +46,7 @@ final class InitStateSpecs: QuickSpec {
         }
         
         context("init") {
-            it("should execute didInit plugin method") {
+            it("should execute plugin method") {
                 
                 // ASSERT
                 expect(self.plugin.didInitLastParam).to(beIdenticalTo(self.tested.player))
@@ -56,7 +56,7 @@ final class InitStateSpecs: QuickSpec {
             it("should not execute didLoad plugin method") {
                 
                 // ASSERT
-                expect(self.plugin.didLoadmediaCallCount).to(equal(0))
+                expect(self.plugin.didLoadCallCount).to(equal(0))
             }
         }
 

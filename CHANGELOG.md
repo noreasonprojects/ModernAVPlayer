@@ -3,6 +3,8 @@ All notable changes to this project will be documented in this file.
 
 ---
 ## [X.X.X]
+* Feature:
+	* Add plugin methods to reflet all player's states
 * Fix:
 	* Reset item duration when loading media 
 

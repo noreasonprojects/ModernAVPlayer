@@ -45,6 +45,8 @@ struct StoppedState: PlayerState {
         self.context.player.pause()
         self.context.player.seek(to: kCMTimeZero)
         self.context.currentTime = 0
+        
+        context.plugins.forEach { $0.didStopped() }
     }
 
     // MARK: - Shared actions

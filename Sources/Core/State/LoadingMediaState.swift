@@ -63,6 +63,8 @@ final class LoadingMediaState: PlayerState {
         setupInterruptionCallback()
         startBgTask(context: context)
         createReplaceItem(url: itemUrl)
+        
+        context.plugins.forEach { $0.startLoading() }
     }
 
     init(context: PlayerContext,
@@ -83,6 +85,8 @@ final class LoadingMediaState: PlayerState {
         setupInterruptionCallback()
         startBgTask(context: context)
         createReplaceItem(url: media.url)
+        
+        context.plugins.forEach { $0.startLoading() }
     }
 
     deinit {

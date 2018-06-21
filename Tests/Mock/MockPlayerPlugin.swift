@@ -30,6 +30,41 @@ import ModernAVPlayer
 
 final class MockPlayerPlugin: PlayerPlugin {
     
+    private(set) var startLoadingCallCount = 0
+    func startLoading() {
+        startLoadingCallCount += 1
+    }
+    
+    private(set) var startBufferingCallCount = 0
+    func startBuffering() {
+        startBufferingCallCount += 1
+    }
+    
+    private(set) var startPlayingCallCount = 0
+    func startPlaying() {
+        startPlayingCallCount += 1
+    }
+    
+    private(set) var didPausedCallCount = 0
+    func didPaused() {
+        didPausedCallCount += 1
+    }
+    
+    private(set) var didStoppedCallCount = 0
+    func didStopped() {
+        didStoppedCallCount += 1
+    }
+    
+    private(set) var startWaitingCallCount = 0
+    func startWaitingForNetwork() {
+        startWaitingCallCount += 1
+    }
+    
+    private(set) var didFailedCallCount = 0
+    func didFailed() {
+        didFailedCallCount += 1
+    }
+    
     private(set) var didInitCallCount = 0
     private(set) var didInitLastParam: AVPlayer?
     func didInit(player: AVPlayer) {
@@ -37,10 +72,12 @@ final class MockPlayerPlugin: PlayerPlugin {
         didInitLastParam = player
     }
     
-    private(set) var didLoadmediaCallCount = 0
-    private(set) var didLoadMediaLastParam: ModernAVPlayerMedia?
-    func didLoadMedia(_ media: PlayerMedia?) {
-        didLoadmediaCallCount += 1
-        didLoadMediaLastParam = media as? ModernAVPlayerMedia
+    private(set) var didLoadCallCount = 0
+    private(set) var didLoadLastMediaParam: ModernAVPlayerMedia?
+    private(set) var didLoadLastDurationParam: Double?
+    func didLoad(media: PlayerMedia?, duration: Double?) {
+        didLoadCallCount += 1
+        didLoadLastMediaParam = media as? ModernAVPlayerMedia
+        didLoadLastDurationParam = duration
     }
 }

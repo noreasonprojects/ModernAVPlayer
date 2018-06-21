@@ -33,15 +33,18 @@ import Nimble
 
 final class PausedStateSpecs: QuickSpec {
     
-    var tested: PausedState!
-    var mockPlayer = MockCustomPlayer()
-    var media: PlayerMedia!
-    lazy var playerContext = ModernAVPlayerContext(player: self.mockPlayer, audioSessionType: MockAudioSession.self)
+    private var tested: PausedState!
+    private var mockPlayer = MockCustomPlayer()
+    private var media: PlayerMedia!
+    private var playerContext: ModernAVPlayerContext!
+    private var plugin: MockPlayerPlugin!
 
     override func spec() {
 
         beforeEach {
             self.media = ModernAVPlayerMedia(url: URL(string: "foo")!, type: .clip)
+            self.plugin = MockPlayerPlugin()
+            self.playerContext = ModernAVPlayerContext(player: self.mockPlayer, audioSessionType: MockAudioSession.self, plugins: [self.plugin])
             self.tested = PausedState(context: self.playerContext)
             self.playerContext.state = self.tested
         }
@@ -51,6 +54,12 @@ final class PausedStateSpecs: QuickSpec {
 
                 // ASSERT
                 expect(self.mockPlayer.pauseCallCount).to(equal(1))
+            }
+            
+            it("should execute plugin method") {
+                
+                // ASSERT
+                expect(self.plugin.didPausedCallCount).to(equal(1))
             }
         }
 

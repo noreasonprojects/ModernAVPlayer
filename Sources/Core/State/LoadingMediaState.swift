@@ -58,6 +58,7 @@ final class LoadingMediaState: PlayerState {
         self.interruptionAudioService = interruptionAudioService
 
         context.audioSessionType.activate()
+        context.itemDuration = nil
         
         setupInterruptionCallback()
         startBgTask(context: context)
@@ -77,6 +78,7 @@ final class LoadingMediaState: PlayerState {
         self.interruptionAudioService = interruptionAudioService
         
         context.audioSessionType.activate()
+        context.itemDuration = nil
         
         setupInterruptionCallback()
         startBgTask(context: context)

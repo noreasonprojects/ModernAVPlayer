@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 
 ---
+## [X.X.X]
+* Fix:
+	* Reset item duration when loading media 
+
 ## [0.9.4]
 * Feature:
 	* Update now playing info metadata anytime

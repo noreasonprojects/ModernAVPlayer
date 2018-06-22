@@ -60,7 +60,7 @@ final class PlayingStateSpecs: QuickSpec {
             it("should execute plugin method") {
                 
                 // ASSERT
-                expect(self.plugin.startPlayingCallCount).to(equal(1))
+                expect(self.plugin.didStartPlayingCallCount).to(equal(1))
             }
             
             it("should set itemPlaybackObservingService callbacks") {

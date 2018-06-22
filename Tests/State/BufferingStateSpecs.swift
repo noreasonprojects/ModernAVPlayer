@@ -55,7 +55,7 @@ final class BufferingStateSpecs: QuickSpec {
             it("should execute plugin method") {
                 
                 // ASSERT
-                expect(self.plugin.startBufferingCallCount).to(equal(1))
+                expect(self.plugin.didStartBufferingCallCount).to(equal(1))
             }
         }
 

@@ -58,7 +58,7 @@ final class WaitingNetworkStateSpecs: QuickSpec {
             it("should execute plugin method") {
                 
                 // ASSERT
-                expect(self.plugin.startWaitingCallCount).to(equal(1))
+                expect(self.plugin.didStartWaitingCallCount).to(equal(1))
             }
             
             it("should start reachability service") {

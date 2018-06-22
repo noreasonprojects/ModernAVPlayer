@@ -55,7 +55,7 @@ final class LoadingMediaStateSpecs: QuickSpec {
             it("should execute plugin method") {
                 
                 // ASSERT
-                expect(self.plugin.startLoadingCallCount).to(equal(1))
+                expect(self.plugin.didStartLoadingCallCount).to(equal(1))
             }
             
             it("should replace current item") {

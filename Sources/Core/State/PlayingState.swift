@@ -63,7 +63,7 @@ final class PlayingState: PlayerState {
         setupPlaybackObservingCallback()
         setupInterruptionCallback()
         
-        context.plugins.forEach { $0.startPlaying() }
+        context.plugins.forEach { $0.didStartPlaying() }
     }
     
     deinit {

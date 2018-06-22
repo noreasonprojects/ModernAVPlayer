@@ -55,7 +55,7 @@ final class BufferingState: NSObject, PlayerState {
         setupRateObservingCallback()
         setupInterruptionCallback()
         
-        context.plugins.forEach { $0.startBuffering() }
+        context.plugins.forEach { $0.didStartBuffering() }
     }
     
     deinit {

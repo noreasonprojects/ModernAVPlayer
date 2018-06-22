@@ -30,19 +30,19 @@ import ModernAVPlayer
 
 final class MockPlayerPlugin: PlayerPlugin {
     
-    private(set) var startLoadingCallCount = 0
-    func startLoading() {
-        startLoadingCallCount += 1
+    private(set) var didStartLoadingCallCount = 0
+    func didStartLoading() {
+        didStartLoadingCallCount += 1
     }
     
-    private(set) var startBufferingCallCount = 0
-    func startBuffering() {
-        startBufferingCallCount += 1
+    private(set) var didStartBufferingCallCount = 0
+    func didStartBuffering() {
+        didStartBufferingCallCount += 1
     }
     
-    private(set) var startPlayingCallCount = 0
-    func startPlaying() {
-        startPlayingCallCount += 1
+    private(set) var didStartPlayingCallCount = 0
+    func didStartPlaying() {
+        didStartPlayingCallCount += 1
     }
     
     private(set) var didPausedCallCount = 0
@@ -55,9 +55,9 @@ final class MockPlayerPlugin: PlayerPlugin {
         didStoppedCallCount += 1
     }
     
-    private(set) var startWaitingCallCount = 0
-    func startWaitingForNetwork() {
-        startWaitingCallCount += 1
+    private(set) var didStartWaitingCallCount = 0
+    func didStartWaitingForNetwork() {
+        didStartWaitingCallCount += 1
     }
     
     private(set) var didFailedCallCount = 0

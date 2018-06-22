@@ -50,7 +50,7 @@ final class WaitingNetworkState: PlayerState {
         setupReachabilityCallbacks(autostart: autostart, urlToReload: urlToReload, error: error)
         reachability.start()
         
-        context.plugins.forEach { $0.startWaitingForNetwork() }
+        context.plugins.forEach { $0.didStartWaitingForNetwork() }
     }
     
     deinit {

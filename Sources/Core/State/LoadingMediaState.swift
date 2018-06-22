@@ -64,7 +64,7 @@ final class LoadingMediaState: PlayerState {
         startBgTask(context: context)
         createReplaceItem(url: itemUrl)
         
-        context.plugins.forEach { $0.startLoading() }
+        context.plugins.forEach { $0.didStartLoading() }
     }
 
     init(context: PlayerContext,
@@ -86,7 +86,7 @@ final class LoadingMediaState: PlayerState {
         startBgTask(context: context)
         createReplaceItem(url: media.url)
         
-        context.plugins.forEach { $0.startLoading() }
+        context.plugins.forEach { $0.didStartLoading() }
     }
 
     deinit {

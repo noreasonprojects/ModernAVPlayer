@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 
 ---
-## [X.X.X]
+## [0.9.5]
 * Features:
 	* Add plugin methods to reflet all player's states
 	* Remove useless MediaPlayer delegate attribute

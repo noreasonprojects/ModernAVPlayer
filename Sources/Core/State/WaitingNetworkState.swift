@@ -49,6 +49,8 @@ final class WaitingNetworkState: PlayerState {
         self.reachability = reachabilityService ?? ModernAVPlayerReachabilityService(config: context.config)
         setupReachabilityCallbacks(autostart: autostart, urlToReload: urlToReload, error: error)
         reachability.start()
+        
+        context.plugins.forEach { $0.didStartWaitingForNetwork() }
     }
     
     deinit {

@@ -51,6 +51,8 @@ final class PausedState: PlayerState {
         self.context = context
         self.context.player.pause()
         self.interruptionAudioService = interruptionAudioService
+        
+        context.plugins.forEach { $0.didPaused() }
     }
     
     deinit {

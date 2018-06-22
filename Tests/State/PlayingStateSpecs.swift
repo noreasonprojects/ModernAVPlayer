@@ -33,21 +33,23 @@ import Nimble
 
 final class PlayingStateSpecs: QuickSpec {
 
-    var media: PlayerMedia!
-    var playingState: PlayingState!
-    var itemPlaybackObservingService: MockItemPlaybackObservingService!
-    var mockPlayer: MockCustomPlayer!
-    var tested: ModernAVPlayerContext!
-    var routeAudioService: ModernAVPlayerRouteAudioService!
+    private var media: PlayerMedia!
+    private var playingState: PlayingState!
+    private var itemPlaybackObservingService: MockItemPlaybackObservingService!
+    private var mockPlayer: MockCustomPlayer!
+    private var tested: ModernAVPlayerContext!
+    private var routeAudioService: ModernAVPlayerRouteAudioService!
+    private var plugin: MockPlayerPlugin!
 
     override func spec() {
 
         beforeEach {
+            self.plugin = MockPlayerPlugin()
             self.routeAudioService = ModernAVPlayerRouteAudioService()
             self.mockPlayer = MockCustomPlayer.createOne(url: "foo")
             self.media = ModernAVPlayerMedia(url: URL(string: "foo")!, type: .clip)
             self.itemPlaybackObservingService = MockItemPlaybackObservingService()
-            self.tested = ModernAVPlayerContext(player: self.mockPlayer)
+            self.tested = ModernAVPlayerContext(player: self.mockPlayer, plugins: [self.plugin])
             self.playingState = PlayingState(context: self.tested,
                                              itemPlaybackObservingService: self.itemPlaybackObservingService,
                                              routeAudioService: self.routeAudioService)
@@ -55,6 +57,12 @@ final class PlayingStateSpecs: QuickSpec {
         }
 
         context("init") {
+            it("should execute plugin method") {
+                
+                // ASSERT
+                expect(self.plugin.didStartPlayingCallCount).to(equal(1))
+            }
+            
             it("should set itemPlaybackObservingService callbacks") {
                 
                 // ASSERT

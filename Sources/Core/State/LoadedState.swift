@@ -52,7 +52,7 @@ struct LoadedState: PlayerState {
         context.nowPlaying.update(metadata: media.metadata,
                                   duration: context.player.currentItem?.duration.seconds,
                                   isLive: media.isLive())
-        context.plugins.forEach { $0.didLoadMedia(media) }
+        context.plugins.forEach { $0.didLoad(media: media, duration: context.itemDuration) }
     }
 
     // MARK: - Command Center

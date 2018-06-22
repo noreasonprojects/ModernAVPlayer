@@ -33,23 +33,31 @@ import ModernAVPlayer
 
 final class LoadingMediaStateSpecs: QuickSpec {
     
-    var state: LoadingMediaState!
-    var item: AVPlayerItem!
-    var player: MockCustomPlayer!
-    var tested: ModernAVPlayerContext!
-    var playerMedia = ModernAVPlayerMedia(url: URL(string: "x")!, type: .clip)
+    private var state: LoadingMediaState!
+    private var item: AVPlayerItem!
+    private var player: MockCustomPlayer!
+    private var tested: ModernAVPlayerContext!
+    private var playerMedia = ModernAVPlayerMedia(url: URL(string: "x")!, type: .clip)
+    private var plugin: MockPlayerPlugin!
     
     override func spec() {
         
         beforeEach {
+            self.plugin = MockPlayerPlugin()
             MockAudioSession.resetCallsCount()
             self.player = MockCustomPlayer.createOnUsingAsset(url: "foo")
-            self.tested = ModernAVPlayerContext(player: self.player, audioSessionType: MockAudioSession.self)
+            self.tested = ModernAVPlayerContext(player: self.player, audioSessionType: MockAudioSession.self, plugins: [self.plugin])
             self.state = LoadingMediaState(context: self.tested, media: self.playerMedia, autostart: true)
             self.tested.state = self.state
         }
 
         context("init") {
+            it("should execute plugin method") {
+                
+                // ASSERT
+                expect(self.plugin.didStartLoadingCallCount).to(equal(1))
+            }
+            
             it("should replace current item") {
                 
                 // ASSERT

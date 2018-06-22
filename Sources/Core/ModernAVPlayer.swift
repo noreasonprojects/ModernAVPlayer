@@ -41,8 +41,6 @@ public protocol MediaPlayer {
     func seek(position: Double)
     func stop()
     func updateNowPlayingInfo(metadata: PlayerMediaMetadata)
-    
-    var delegate: ModernAVPlayerDelegate? { get set }
 }
 
 public final class ModernAVPlayer: NSObject, MediaPlayer {

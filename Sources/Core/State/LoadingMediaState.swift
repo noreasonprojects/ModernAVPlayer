@@ -26,7 +26,7 @@
 
 import AVFoundation
 
-final class LoadingMediaState: PlayerState {
+final class LoadingMediaState<T: PlayerMediaMetadata>: PlayerState {
     
     // MARK: - Input
     
@@ -36,7 +36,7 @@ final class LoadingMediaState: PlayerState {
     
     var type: ModernAVPlayer.State = .loading
     private let autostart: Bool
-    private let media: PlayerMedia<PlayerMediaMetadata>?
+    private let media: PlayerMedia<T>?
     private let url: URL?
     private let lastKnownPosition: CMTime?
     private var itemStatusObserving: ModernAVPLayerItemStatusObservingService?
@@ -68,7 +68,7 @@ final class LoadingMediaState: PlayerState {
     }
 
     init(context: PlayerContext,
-         media: PlayerMedia<PlayerMediaMetadata>,
+         media: PlayerMedia<T>,
          autostart: Bool,
          interruptionAudioService: ModernAVPlayerInterruptionAudioService = ModernAVPlayerInterruptionAudioService()) {
         LoggerInHouse.instance.log(message: "Entering loading state", event: .info)
@@ -99,7 +99,7 @@ final class LoadingMediaState: PlayerState {
 
     // MARK: - Shared actions
 
-    func loadMedia(media: PlayerMedia<PlayerMediaMetadata>, autostart: Bool) {
+    func loadMedia<T: PlayerMediaMetadata>(media: PlayerMedia<T>, autostart: Bool) {
         createReplaceItem(url: media.url)
     }
 

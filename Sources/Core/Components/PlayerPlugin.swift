@@ -45,7 +45,7 @@ public protocol PlayerPlugin {
     /// - parameters:
     ///    - media: PlayerMedia just loaded
     ///
-    func didLoad(media: PlayerMedia<PlayerMediaMetadata>?, duration: Double?)
+    func didLoad<T: PlayerMediaMetadata>(media: PlayerMedia<T>?, duration: Double?)
     
     /// Called when Player enters Playing state
     func didStartPlaying()

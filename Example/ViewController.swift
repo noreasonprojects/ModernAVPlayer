@@ -169,7 +169,7 @@ final class ViewController: UIViewController {
     }
     
     private func loadMedia(_ media: ExamplePlayerMedia, autostart: Bool) {
-        
+    
         player.loadMedia(media: media, autostart: autostart)
     }
 

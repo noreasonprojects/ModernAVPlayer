@@ -39,7 +39,7 @@ struct LoadedState: PlayerState {
 
     // MARK: - Init
 
-    init(context: PlayerContext, media: PlayerMedia? = nil) {
+    init(context: PlayerContext, media: PlayerMedia<PlayerMediaMetadata>? = nil) {
         LoggerInHouse.instance.log(message: "Entering loaded state", event: .info)
         self.context = context
         self.context.currentTime = 0
@@ -65,7 +65,7 @@ struct LoadedState: PlayerState {
 
     // MARK: - Shared actions
     
-    func loadMedia(media: PlayerMedia, autostart: Bool) {
+    func loadMedia(media: PlayerMedia<PlayerMediaMetadata>, autostart: Bool) {
         let state = LoadingMediaState(context: context, media: media, autostart: autostart)
         context.changeState(state: state)
     }

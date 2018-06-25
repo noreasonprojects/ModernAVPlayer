@@ -26,49 +26,25 @@
 
 import AVFoundation
 
-public protocol PlayerMedia {
-    var url: URL { get }
-    var type: MediaType { get }
-    var metadata: PlayerMediaMetadata? { get }
+open class PlayerMedia<T: PlayerMediaMetadata>: Equatable {
     
-    func isLive() -> Bool
-}
-
-public extension PlayerMedia {
-    func isLive() -> Bool {
-        guard case let MediaType.stream(isLive) = type, isLive
-            else { return false }
-        return true
+    public static func == (lhs: PlayerMedia<T>, rhs: PlayerMedia<T>) -> Bool {
+        return lhs.url.absoluteString == rhs.url.absoluteString
     }
-}
-
-public struct ModernAVPlayerMedia: PlayerMedia, Equatable {
-    public let url: URL
-    public let type: MediaType
-    public let metadata: PlayerMediaMetadata?
     
-    public init(url: URL, type: MediaType, metadata: PlayerMediaMetadata? = nil) {
+    var url: URL
+    var type: MediaType
+    var metadata: T?
+    
+    public init(url: URL, type: MediaType, metadata: T? = nil) {
         self.url = url
         self.type = type
         self.metadata = metadata
     }
     
-    public init(url: URL,
-                type: MediaType,
-                title: String? = nil,
-                albumTitle: String? = nil,
-                artist: String? = nil,
-                localImageName: String? = nil,
-                remoteImageUrl: URL? = nil) {
-        let metadata = ModernAVPlayerMediaMetadata(title: title,
-                                                   albumTitle: albumTitle,
-                                                   artist: artist,
-                                                   localImageName: localImageName,
-                                                   remoteImageUrl: remoteImageUrl)
-        self.init(url: url, type: type, metadata: metadata)
+    func isLive() -> Bool {
+        guard case let MediaType.stream(isLive) = type, isLive
+            else { return false }
+        return true
     }
-}
-
-public func == (lhs: ModernAVPlayerMedia, rhs: ModernAVPlayerMedia) -> Bool {
-    return lhs.url.absoluteString == rhs.url.absoluteString
 }

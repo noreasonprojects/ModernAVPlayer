@@ -36,9 +36,9 @@ struct Data {
     final class ExamplePlayerMediaMetadata: PlayerMediaMetadata {
         var id: Int
         
-        init(id: Int, title: String?, albumTitle: String?, artist: String?, localImageName: String?, remoteImageUrl: URL?) {
+        init(id: Int, title: String? = nil, albumTitle: String? = nil, artist: String? = nil, localImageName: String? = nil, remoteImageUrl: URL? = nil) {
             self.id = id
-            super.init(title: nil, albumTitle: nil, artist: nil, localImageName: nil, remoteImageUrl: nil)
+            super.init(title: title, albumTitle: albumTitle, artist: artist, localImageName: localImageName, remoteImageUrl: remoteImageUrl)
         }
     }
     

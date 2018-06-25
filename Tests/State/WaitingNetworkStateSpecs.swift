@@ -35,7 +35,7 @@ final class WaitingNetworkStateSpecs: QuickSpec {
     private var state: WaitingNetworkState!
     private var mockPlayer = MockCustomPlayer()
     private var url: URL!
-    private var playerMedia = ModernAVPlayerMedia(url: URL(string: "x")!, type: .clip)
+    private var playerMedia = PlayerMedia(url: URL(string: "x")!, type: .clip)
     private var mockReachability: MockReachability!
     private var tested: ModernAVPlayerContext!
     private var plugin: MockPlayerPlugin!

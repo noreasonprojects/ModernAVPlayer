@@ -35,14 +35,14 @@ final class PausedStateSpecs: QuickSpec {
     
     private var tested: PausedState!
     private var mockPlayer = MockCustomPlayer()
-    private var media: PlayerMedia!
+    private var media: PlayerMedia<PlayerMediaMetadata>!
     private var playerContext: ModernAVPlayerContext!
     private var plugin: MockPlayerPlugin!
 
     override func spec() {
 
         beforeEach {
-            self.media = ModernAVPlayerMedia(url: URL(string: "foo")!, type: .clip)
+            self.media = PlayerMedia(url: URL(string: "foo")!, type: .clip)
             self.plugin = MockPlayerPlugin()
             self.playerContext = ModernAVPlayerContext(player: self.mockPlayer, audioSessionType: MockAudioSession.self, plugins: [self.plugin])
             self.tested = PausedState(context: self.playerContext)

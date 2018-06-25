@@ -60,9 +60,10 @@ $ pod install
 
 * Play your first audio source:
 
-> Create a media
+> Create a media (check example to use custom metadata)
 ```swift
-let media = ModernAVPlayerMedia(url: liveUrl, type: .stream, isLive: true)
+let metadata = PlayerMediaMetadata(title: "CustomTitle") 
+let media = PlayerMedia(url: liveUrl, type: .clip, metadata: metadata)
 ```
 > Instanciate the wrapper
 ```swift

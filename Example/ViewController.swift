@@ -30,22 +30,33 @@ import RxCocoa
 import UIKit
 
 struct Data {
-    static let medias: [PlayerMedia] = {
+    
+    final class ExamplePlayerMedia: PlayerMedia<ExamplePlayerMediaMetadata> { }
+    
+    final class ExamplePlayerMediaMetadata: PlayerMediaMetadata {
+        var id: Int
+        
+        init(id: Int, title: String? = nil, albumTitle: String? = nil, artist: String? = nil, localImageName: String? = nil, remoteImageUrl: URL? = nil) {
+            self.id = id
+            super.init(title: title, albumTitle: albumTitle, artist: artist, localImageName: localImageName, remoteImageUrl: remoteImageUrl)
+        }
+    }
+    
+    static let medias: [ExamplePlayerMedia] = {
         guard
             let liveUrl = URL(string: "http://direct.franceinter.fr/live/franceinter-midfi.mp3"),
             let remoteClip = URL(string: "http://media.radiofrance-podcast.net/podcast09/13100-17.01.2017-ITEMA_21199585-0.mp3"),
             let file = Bundle.main.path(forResource: "AllNew", ofType: "mp3")
             else { assertionFailure(); return [] }
         
+        let meta0 = ExamplePlayerMediaMetadata(id: 0, title: "Le live", albumTitle: "Album0", artist: "Artist0", localImageName: "sennaLive", remoteImageUrl: nil)
+        let meta1 = ExamplePlayerMediaMetadata(id: 1,title: "Remote clip", albumTitle: "Album1", artist: "Artist1", localImageName: "sennaClip", remoteImageUrl: nil)
+        let meta2 = ExamplePlayerMediaMetadata(id: 2,title: "Local clip", albumTitle: "Album2", artist: "Artist2", localImageName: "ankierman", remoteImageUrl: URL(string: "https://goo.gl/U4QoQj"))
         let localClip = URL(fileURLWithPath: file)
         return [
-            ModernAVPlayerMedia(url: liveUrl, type: .stream(isLive: true), title: "Le live",
-                                albumTitle: "Album0", artist: "Artist0", localImageName: "sennaLive"),
-            ModernAVPlayerMedia(url: remoteClip, type: .clip, title: "Remote clip",
-                                albumTitle: "Album1", artist: "Artist1", localImageName: "sennaClip"),
-            ModernAVPlayerMedia(url: localClip, type: .clip, title: "Local clip",
-                                albumTitle: "Album2", artist: "Artist2", localImageName: "ankierman",
-                                remoteImageUrl: URL(string: "https://goo.gl/U4QoQj"))
+            ExamplePlayerMedia(url: liveUrl, type: .stream(isLive: true), metadata: meta0),
+            ExamplePlayerMedia(url: remoteClip, type: .clip, metadata: meta1),
+            ExamplePlayerMedia(url: localClip, type: .clip, metadata: meta2)
         ]
     }()
 }
@@ -86,10 +97,10 @@ final class ViewController: UIViewController {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm:ss"
         let timeStamp = formatter.string(from: Date())
-        let newMetadata = ModernAVPlayerMediaMetadata(title: timeStamp,
-                                                 albumTitle: "Updated album",
-                                                 artist: "Updated artist",
-                                                localImageName: "ankierman")
+        let newMetadata = PlayerMediaMetadata(title: timeStamp,
+                                              albumTitle: "Updated album",
+                                              artist: "Updated artist",
+                                              localImageName: "ankierman")
         player.updateNowPlayingInfo(metadata: newMetadata)
     }
     
@@ -101,13 +112,13 @@ final class ViewController: UIViewController {
 
     @IBAction func loadInvalidFormat(_ sender: UIButton) {
         let url = URL(fileURLWithPath: Bundle.main.path(forResource: "noreason", ofType: "txt")!)
-        let media = ModernAVPlayerMedia(url: url, type: .clip)
+        let media = Data.ExamplePlayerMedia(url: url, type: .clip)
         loadMedia(media, autostart: true)
     }
     
     @IBAction func loadInvalidRemoteUrl(_ sender: UIButton) {
         let url = URL(string: "foo://noreason")!
-        let media = ModernAVPlayerMedia(url: url, type: .clip)
+        let media = Data.ExamplePlayerMedia(url: url, type: .clip)
         loadMedia(media, autostart: true)
     }
     
@@ -151,7 +162,7 @@ final class ViewController: UIViewController {
         player.seek(position: position)
     }
     
-    private func loadMedia(_ media: PlayerMedia, autostart: Bool) {
+    private func loadMedia(_ media: Data.ExamplePlayerMedia, autostart: Bool) {
         player.loadMedia(media: media, autostart: autostart)
     }
 

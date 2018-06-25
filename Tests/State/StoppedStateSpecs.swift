@@ -34,7 +34,7 @@ import Nimble
 final class StoppedStateSpecs: QuickSpec {
     
     private var tested: StoppedState!
-    private var media: PlayerMedia!
+    private var media: PlayerMedia<PlayerMediaMetadata>!
     private var mockPlayer: MockCustomPlayer!
     private var playerContext: ModernAVPlayerContext!
     private var plugin: MockPlayerPlugin!
@@ -45,7 +45,7 @@ final class StoppedStateSpecs: QuickSpec {
             self.plugin = MockPlayerPlugin()
             self.mockPlayer = MockCustomPlayer()
             self.playerContext = ModernAVPlayerContext(player: self.mockPlayer, audioSessionType: MockAudioSession.self, plugins: [self.plugin])
-            self.media = ModernAVPlayerMedia(url: URL(string: "foo")!, type: .clip)
+            self.media = PlayerMedia(url: URL(string: "foo")!, type: .clip)
             self.tested = StoppedState(context: self.playerContext)
             self.playerContext.state = self.tested
         }

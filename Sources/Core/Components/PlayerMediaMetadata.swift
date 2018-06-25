@@ -26,20 +26,12 @@
 
 import AVFoundation
 
-public protocol PlayerMediaMetadata: CustomStringConvertible {
-    var title: String? { get }
-    var artist: String? { get }
-    var albumTitle: String? { get }
-    var localPlaceHolderImageName: String? { get }
-    var remoteImageUrl: URL? { get }
-}
-
-public struct ModernAVPlayerMediaMetadata: PlayerMediaMetadata {
-    public let title: String?
-    public let albumTitle: String?
-    public let artist: String?
-    public let localPlaceHolderImageName: String?
-    public let remoteImageUrl: URL?
+open class PlayerMediaMetadata: CustomStringConvertible {
+    var title: String?
+    var artist: String?
+    var albumTitle: String?
+    var localPlaceHolderImageName: String?
+    var remoteImageUrl: URL?
     
     public init(title: String? = nil,
                 albumTitle: String? = nil,
@@ -55,7 +47,7 @@ public struct ModernAVPlayerMediaMetadata: PlayerMediaMetadata {
     
     public var description: String {
         let debug = "title: \(title ?? "nil") | album: \(albumTitle ?? "nil") | artist: \(artist ?? "nil") | "
-                    + "localImage: \(localPlaceHolderImageName ?? "nil") | remoteImage: \(remoteImageUrl?.description ?? "nil")"
+            + "localImage: \(localPlaceHolderImageName ?? "nil") | remoteImage: \(remoteImageUrl?.description ?? "nil")"
         return debug
     }
 }

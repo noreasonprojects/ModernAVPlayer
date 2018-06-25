@@ -50,7 +50,7 @@ protocol PlayerContext: class {
     func play()
     func seek(position: Double)
     func stop()
-    func loadMedia(media: PlayerMedia, autostart: Bool)
+    func loadMedia(media: PlayerMedia<PlayerMediaMetadata>, autostart: Bool)
     func changeState(state: PlayerState)
     
     var audioSessionType: AudioSessionService.Type { get }
@@ -136,7 +136,7 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
         state.stop()
     }
 
-    func loadMedia(media: PlayerMedia, autostart: Bool) {
+    func loadMedia<T: PlayerMediaMetadata>(media: PlayerMedia<T>, autostart: Bool) {
         state.loadMedia(media: media, autostart: autostart)
     }
     

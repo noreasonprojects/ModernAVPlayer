@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 
 ---
+## [X.X.X]
+* Features:
+	* Update media to accept generic metadata
+
 ## [0.9.5]
 * Features:
 	* Add plugin methods to reflet all player's states

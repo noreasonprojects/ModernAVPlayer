@@ -36,7 +36,7 @@ final class FailedStateSpecs: QuickSpec {
     private var mockPlayer = MockCustomPlayer()
     private var url: URL!
     private var plugin: MockPlayerPlugin!
-    private var playerMedia = ModernAVPlayerMedia(url: URL(string: "x")!, type: .clip)
+    private var playerMedia = PlayerMedia(url: URL(string: "x")!, type: .clip)
     private var tested: ModernAVPlayerContext!
 
     override func spec() {

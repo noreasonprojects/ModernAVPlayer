@@ -85,7 +85,7 @@ final class WaitingNetworkState: PlayerState {
     
     // MARK: - Shared actions
     
-    func loadMedia(media: PlayerMedia, autostart: Bool) {
+    func loadMedia<T: PlayerMediaMetadata>(media: PlayerMedia<T>, autostart: Bool) {
         let state = LoadingMediaState(context: context, media: media, autostart: autostart)
         context.changeState(state: state)
     }

@@ -31,7 +31,7 @@ import Nimble
 
 final class BufferingStateSpecs: QuickSpec {
 
-    private let playerMedia = ModernAVPlayerMedia(url: URL(string: "x")!, type: .clip)
+    private let playerMedia = PlayerMedia(url: URL(string: "x")!, type: .clip)
     private var bufferingState: BufferingState!
     private var mockPlayer: MockCustomPlayer!
     private var mockItem: MockPlayerItem!

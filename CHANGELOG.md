@@ -8,6 +8,8 @@ All notable changes to this project will be documented in this file.
 	* Use of custom media metadata
 * Breaking Change:
 	* Update PlayerMedia protocol: getMetadata() replace metadata attribute 
+* Fix:
+	* Refactor context protocol
 
 ## [0.9.5]
 * Features:

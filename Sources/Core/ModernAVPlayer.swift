@@ -49,6 +49,9 @@ public final class ModernAVPlayer: NSObject, MediaPlayer {
     
     public weak var delegate: ModernAVPlayerDelegate?
     
+    /// Last media requested to be load
+    public var currentMedia: PlayerMedia?
+    
     // MARK: - Variables
     
     private let context: ModernAVPlayerContext
@@ -74,6 +77,7 @@ public final class ModernAVPlayer: NSObject, MediaPlayer {
         self.commandCenter = commandCenter ?? ModernAVPlayerCommandCenter()
         super.init()
         context.delegate = self
+        context.didSetCurrentMedia = { [weak self] in self?.currentMedia = $0 }
     }
     
     // MARK: - Actions

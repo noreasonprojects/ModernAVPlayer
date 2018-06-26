@@ -31,6 +31,17 @@ public enum MediaType {
     case stream(isLive: Bool)
 }
 
+extension MediaType: CustomStringConvertible {
+    public var description: String {
+        switch self {
+        case .clip:
+            return "Clip"
+        case let .stream(isLive):
+            return isLive ? "Live Stream" : "Replay Stream"
+        }
+    }
+}
+
 extension MediaType: Equatable { }
 
 public func == (lhs: MediaType, rhs: MediaType) -> Bool {

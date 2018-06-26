@@ -26,12 +26,18 @@
 
 import AVFoundation
 
-public protocol PlayerMedia {
+public protocol PlayerMedia: CustomStringConvertible {
     var url: URL { get }
     var type: MediaType { get }
     var metadata: PlayerMediaMetadata? { get }
     
     func isLive() -> Bool
+}
+
+public extension PlayerMedia {
+    var description: String {
+        return "url: \(url.description) | type: \(type.description)"
+    }
 }
 
 public extension PlayerMedia {

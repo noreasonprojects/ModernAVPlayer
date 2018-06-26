@@ -30,7 +30,7 @@ protocol PlayerState {
     var context: PlayerContext { get }
     var type: ModernAVPlayer.State { get }
     
-    func loadMedia(media: PlayerMedia, autostart: Bool)
+    func loadCurrentMedia(autostart: Bool)
     func pause()
     func play()
     func seek(position: Double)

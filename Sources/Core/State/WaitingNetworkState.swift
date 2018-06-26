@@ -72,7 +72,6 @@ final class WaitingNetworkState: PlayerState {
             
             let lastKnownPosition = strongSelf.isDurationItemFinite() ? strongSelf.context.player.currentTime() : nil
             let state = LoadingMediaState(context: strongSelf.context,
-                                          itemUrl: urlToReload,
                                           autostart: autostart,
                                           lastPosition: lastKnownPosition)
             strongSelf.context.changeState(state: state)
@@ -85,8 +84,8 @@ final class WaitingNetworkState: PlayerState {
     
     // MARK: - Shared actions
     
-    func loadMedia(media: PlayerMedia, autostart: Bool) {
-        let state = LoadingMediaState(context: context, media: media, autostart: autostart)
+    func loadCurrentMedia(autostart: Bool) {
+        let state = LoadingMediaState(context: context, autostart: autostart)
         context.changeState(state: state)
     }
     

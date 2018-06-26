@@ -66,7 +66,7 @@ final class ViewController: UIViewController {
     @IBOutlet weak private var slider: UISlider!
     @IBOutlet weak private var indicatorView: UIActivityIndicatorView!
     @IBOutlet weak private var debugMessage: UILabel!
-    @IBOutlet weak private var currentItemLabel: UILabel!
+    @IBOutlet weak private var currentMedia: UILabel!
     
     // MARK: - Player Commands
 
@@ -97,6 +97,7 @@ final class ViewController: UIViewController {
     @IBAction func loadMedia(_ sender: UIButton) {
         let media = Data.medias[sender.tag % 3]
         loadMedia(media, autostart: sender.tag < 3)
+        currentMedia.text = player.currentMedia?.description
     }
 
     @IBAction func loadInvalidFormat(_ sender: UIButton) {
@@ -131,6 +132,7 @@ final class ViewController: UIViewController {
         super.viewDidLoad()
         
         debugMessage.text = nil
+        currentMedia.text = nil
         initSliderObservables()
         bindPlayerRxAttibutes()
     }
@@ -248,14 +250,6 @@ extension ViewController {
             .map { return ($0.0.0!, $0.1!) } //unwrap current time & duration
             .map(setSliderPosition)
             .bind(to: slider.rx.value)
-            .disposed(by: disposeBag)
-        
-        // Display itemUrl
-        player.rx.currentItemUrl
-            .observeOn(concurrentBackgroundScheduler)
-            .map { $0?.absoluteString }
-            .asDriver(onErrorJustReturn: nil)
-            .drive(currentItemLabel.rx.text)
             .disposed(by: disposeBag)
         
         // Display debugMessage

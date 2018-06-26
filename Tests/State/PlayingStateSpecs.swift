@@ -50,6 +50,7 @@ final class PlayingStateSpecs: QuickSpec {
             self.media = ModernAVPlayerMedia(url: URL(string: "foo")!, type: .clip)
             self.itemPlaybackObservingService = MockItemPlaybackObservingService()
             self.tested = ModernAVPlayerContext(player: self.mockPlayer, plugins: [self.plugin])
+            self.tested.currentMedia = self.media
             self.playingState = PlayingState(context: self.tested,
                                              itemPlaybackObservingService: self.itemPlaybackObservingService,
                                              routeAudioService: self.routeAudioService)
@@ -75,7 +76,7 @@ final class PlayingStateSpecs: QuickSpec {
             it("should update state context to LoadingMedia") {
                 
                 // ACT
-                self.playingState.loadMedia(media: self.media, autostart: false)
+                self.playingState.loadCurrentMedia(autostart: false)
                 
                 // ASSERT
                 expect(self.tested.state).to(beAnInstanceOf(LoadingMediaState.self))

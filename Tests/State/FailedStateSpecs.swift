@@ -44,6 +44,7 @@ final class FailedStateSpecs: QuickSpec {
             self.plugin = MockPlayerPlugin()
             self.url = URL(string: "foo")!
             self.tested = ModernAVPlayerContext(player: self.mockPlayer, plugins: [self.plugin])
+            self.tested.currentMedia = self.playerMedia
             self.state = FailedState(context: self.tested, error: PlayerError.itemFailedWhenLoading)
             self.tested.state = self.state
         }
@@ -60,7 +61,7 @@ final class FailedStateSpecs: QuickSpec {
             it("should update state context to LoadingMedia") {
 
                 // ACT
-                self.state.loadMedia(media: self.playerMedia, autostart: false)
+                self.state.loadCurrentMedia(autostart: false)
 
                 // ASSERT
                 expect(self.tested.state).to(beAnInstanceOf(LoadingMediaState.self))

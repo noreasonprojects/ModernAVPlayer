@@ -35,7 +35,7 @@ final class InitStateSpecs: QuickSpec {
     private var state: PlayerState!
     private var tested: ModernAVPlayerContext!
     private var plugin: MockPlayerPlugin!
-    private let media = ModernAVPlayerMedia(url: URL(string: "foo")!, type: .stream(isLive: false))
+    private let media = MockPlayerMedia(url: URL(string: "foo")!, type: .stream(isLive: false))
 
     override func spec() {
 

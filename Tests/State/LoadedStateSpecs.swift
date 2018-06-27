@@ -42,7 +42,8 @@ final class LoadedStateSpecs: QuickSpec {
         beforeEach {
             self.mockPlayer = MockCustomPlayer.createOne(url: "foo")
             self.tested = ModernAVPlayerContext(player: self.mockPlayer, audioSessionType: MockAudioSession.self)
-            self.loadedState = LoadedState(context: self.tested, media: self.playerMedia)
+            self.tested.currentMedia = self.playerMedia
+            self.loadedState = LoadedState(context: self.tested)
             self.tested.state = self.loadedState
         }
         
@@ -52,8 +53,9 @@ final class LoadedStateSpecs: QuickSpec {
                 // ARRANGE
                 let plugins = [MockPlayerPlugin(), MockPlayerPlugin()]
                 let context = ModernAVPlayerContext(player: self.mockPlayer, audioSessionType: MockAudioSession.self, plugins: plugins)
+                context.currentMedia = self.playerMedia
                 context.itemDuration = 42
-                _ = LoadedState(context: context, media: self.playerMedia)
+                _ = LoadedState(context: context)
                 
                 // ASSERT
                 expect(plugins[0].didLoadCallCount).to(equal(1))
@@ -70,7 +72,7 @@ final class LoadedStateSpecs: QuickSpec {
             it("should update state context to LoadingMedia") {
                 
                 // ACT
-                self.loadedState.loadMedia(media: self.playerMedia, autostart: false)
+                self.loadedState.loadCurrentMedia(autostart: false)
                 
                 // ASSERT
                 expect(self.tested.state).to(beAnInstanceOf(LoadingMediaState.self))

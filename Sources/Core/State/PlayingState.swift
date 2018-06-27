@@ -93,8 +93,8 @@ final class PlayingState: PlayerState {
 
     // MARK: - Shared actions
 
-    func loadMedia(media: PlayerMedia, autostart: Bool) {
-        let state = LoadingMediaState(context: context, media: media, autostart: autostart)
+    func loadCurrentMedia(autostart: Bool) {
+        let state = LoadingMediaState(context: context, autostart: autostart)
         context.changeState(state: state)
     }
 

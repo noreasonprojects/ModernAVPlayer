@@ -46,6 +46,7 @@ final class WaitingNetworkStateSpecs: QuickSpec {
             self.mockReachability = MockReachability()
             self.url = URL(string: "foo")!
             self.tested = ModernAVPlayerContext(player: self.mockPlayer, plugins: [self.plugin])
+            self.tested.currentMedia = self.playerMedia
             self.state = WaitingNetworkState(context: self.tested,
                                              urlToReload: self.url,
                                              autostart: true,
@@ -94,7 +95,7 @@ final class WaitingNetworkStateSpecs: QuickSpec {
             it("should update state context to LoadingMedia") {
                 
                 // ACT
-                self.state.loadMedia(media: self.playerMedia, autostart: false)
+                self.state.loadCurrentMedia(autostart: false)
                 
                 // ASSERT
                 expect(self.tested.state).to(beAnInstanceOf(LoadingMediaState.self))

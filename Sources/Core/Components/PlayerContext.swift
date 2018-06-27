@@ -45,6 +45,7 @@ protocol PlayerContext: class {
     var debugMessage: String? { get set }
     var nowPlaying: NowPlaying { get }
     var bgToken: UIBackgroundTaskIdentifier? { get set }
+    var currentMedia: PlayerMedia? { get }
     
     func pause()
     func play()
@@ -76,6 +77,10 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
             let url = (currentItem?.asset as? AVURLAsset)?.url
             delegate?.playerContext(didCurrentItemUrlChange: url)
         }
+    }
+    var didSetCurrentMedia: ((PlayerMedia?) -> Void)?
+    var currentMedia: PlayerMedia? {
+        didSet { didSetCurrentMedia?(currentMedia) }
     }
     var currentTime: Double? {
         didSet { delegate?.playerContext(didCurrentTimeChange: currentTime) }
@@ -137,7 +142,8 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
     }
 
     func loadMedia(media: PlayerMedia, autostart: Bool) {
-        state.loadMedia(media: media, autostart: autostart)
+        currentMedia = media
+        state.loadCurrentMedia(autostart: autostart)
     }
     
     func play() {

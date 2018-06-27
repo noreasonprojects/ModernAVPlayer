@@ -39,12 +39,12 @@ struct LoadedState: PlayerState {
 
     // MARK: - Init
 
-    init(context: PlayerContext, media: PlayerMedia? = nil) {
+    init(context: PlayerContext) {
         LoggerInHouse.instance.log(message: "Entering loaded state", event: .info)
         self.context = context
         self.context.currentTime = 0
         
-        guard let media = media else { return }
+        guard let media = context.currentMedia else { assertionFailure(); return }
         
         if #available(iOS 9.1, *) {
             updateRemoteCommandCenter(mediaType: media.type)
@@ -65,8 +65,8 @@ struct LoadedState: PlayerState {
 
     // MARK: - Shared actions
     
-    func loadMedia(media: PlayerMedia, autostart: Bool) {
-        let state = LoadingMediaState(context: context, media: media, autostart: autostart)
+    func loadCurrentMedia(autostart: Bool) {
+        let state = LoadingMediaState(context: context, autostart: autostart)
         context.changeState(state: state)
     }
 

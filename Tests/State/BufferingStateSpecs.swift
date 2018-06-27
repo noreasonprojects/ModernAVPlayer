@@ -36,7 +36,7 @@ final class BufferingStateSpecs: QuickSpec {
     private var mockPlayer: MockCustomPlayer!
     private var mockItem: MockPlayerItem!
     private var mockRateService: MockObservingRateService!
-    private var tested: PlayerContext!
+    private var tested: ModernAVPlayerContext!
     private var plugin: MockPlayerPlugin!
 
     override func spec() {
@@ -46,6 +46,7 @@ final class BufferingStateSpecs: QuickSpec {
             self.mockPlayer = MockCustomPlayer()
             self.mockPlayer.overrideCurrentItem = self.mockItem
             self.tested = ModernAVPlayerContext(player: self.mockPlayer, audioSessionType: MockAudioSession.self, plugins: [self.plugin])
+            self.tested.currentMedia = self.playerMedia
             self.mockRateService = MockObservingRateService(config: self.tested.config, item: self.mockItem)
             self.bufferingState = BufferingState(context: self.tested, rateObservingService: self.mockRateService)
             self.tested.changeState(state: self.bufferingState)
@@ -63,7 +64,7 @@ final class BufferingStateSpecs: QuickSpec {
             it("should stop observing rate service") {
                 
                 // ACT
-                self.bufferingState.loadMedia(media: self.playerMedia, autostart: true)
+                self.bufferingState.loadCurrentMedia(autostart: true)
                 
                 // ASSERT
                 expect(self.mockRateService.stopCallCount).to(equal(1))
@@ -72,7 +73,7 @@ final class BufferingStateSpecs: QuickSpec {
             it("should cancel pending seek") {
                 
                 // ACT
-                self.bufferingState.loadMedia(media: self.playerMedia, autostart: true)
+                self.bufferingState.loadCurrentMedia(autostart: true)
                 
                 // ASSERT
                 expect(self.mockItem.cancelPendingSeeksCallCount).to(equal(1))
@@ -81,7 +82,7 @@ final class BufferingStateSpecs: QuickSpec {
             it("should update state context to LoadingMedia") {
 
                 // ACT
-                self.bufferingState.loadMedia(media: self.playerMedia, autostart: false)
+                self.bufferingState.loadCurrentMedia(autostart: false)
 
                 // ASSERT
                 expect(self.tested.state).to(beAnInstanceOf(LoadingMediaState.self))

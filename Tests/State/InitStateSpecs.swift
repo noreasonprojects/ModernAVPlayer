@@ -33,7 +33,7 @@ import Nimble
 final class InitStateSpecs: QuickSpec {
 
     private var state: PlayerState!
-    private var tested: PlayerContext!
+    private var tested: ModernAVPlayerContext!
     private var plugin: MockPlayerPlugin!
     private let media = ModernAVPlayerMedia(url: URL(string: "foo")!, type: .stream(isLive: false))
 
@@ -42,6 +42,7 @@ final class InitStateSpecs: QuickSpec {
         beforeEach {
             self.plugin = MockPlayerPlugin()
             self.tested = ModernAVPlayerContext(plugins: [self.plugin])
+            self.tested.currentMedia = self.media
             self.state = self.tested.state
         }
         
@@ -86,7 +87,7 @@ final class InitStateSpecs: QuickSpec {
             it("should update state context to loadingMedia") {
 
                 // ACT
-                self.state.loadMedia(media: self.media, autostart: true)
+                self.state.loadCurrentMedia(autostart: true)
 
                 // ASSERT
                 expect(self.tested.state).to(beAnInstanceOf(LoadingMediaState.self))

@@ -36,48 +36,24 @@ final class LoadingMediaState: PlayerState {
     
     var type: ModernAVPlayer.State = .loading
     private let autostart: Bool
-    private let media: PlayerMedia?
-    private let url: URL?
     private let lastKnownPosition: CMTime?
     private var itemStatusObserving: ModernAVPLayerItemStatusObservingService?
     private var interruptionAudioService: ModernAVPlayerInterruptionAudioService
 
     // MARK: - Init
-    
-    init(context: PlayerContext,
-         itemUrl: URL,
-         autostart: Bool,
-         lastPosition: CMTime?,
-         interruptionAudioService: ModernAVPlayerInterruptionAudioService = ModernAVPlayerInterruptionAudioService()) {
-        LoggerInHouse.instance.log(message: "Init", event: .debug)
-        self.context = context
-        self.autostart = autostart
-        self.media = nil
-        self.url = itemUrl
-        self.lastKnownPosition = lastPosition
-        self.interruptionAudioService = interruptionAudioService
-
-        context.audioSessionType.activate()
-        context.itemDuration = nil
-        
-        setupInterruptionCallback()
-        startBgTask(context: context)
-        createReplaceItem(url: itemUrl)
-        
-        context.plugins.forEach { $0.didStartLoading() }
-    }
 
     init(context: PlayerContext,
-         media: PlayerMedia,
          autostart: Bool,
+         lastPosition: CMTime? = nil,
          interruptionAudioService: ModernAVPlayerInterruptionAudioService = ModernAVPlayerInterruptionAudioService()) {
         LoggerInHouse.instance.log(message: "Entering loading state", event: .info)
+        
         self.context = context
         self.autostart = autostart
-        self.media = media
-        self.url = nil
-        self.lastKnownPosition = nil
+        self.lastKnownPosition = lastPosition
         self.interruptionAudioService = interruptionAudioService
+        
+        guard let media = context.currentMedia else { assertionFailure(); return }
         
         context.audioSessionType.activate()
         context.itemDuration = nil
@@ -99,8 +75,9 @@ final class LoadingMediaState: PlayerState {
 
     // MARK: - Shared actions
 
-    func loadMedia(media: PlayerMedia, autostart: Bool) {
-        createReplaceItem(url: media.url)
+    func loadCurrentMedia(autostart: Bool) {
+        guard let currentMedia = context.currentMedia else { assertionFailure(); return }
+        createReplaceItem(url: currentMedia.url)
     }
 
     func pause() {
@@ -186,12 +163,7 @@ final class LoadingMediaState: PlayerState {
     }
 
     private func moveToLoadedState() {
-        let state: PlayerState
-        if let media = self.media {
-            state = LoadedState(context: self.context, media: media)
-        } else {
-            state = LoadedState(context: self.context)
-        }
+        let state = LoadedState(context: self.context)
         self.context.changeState(state: state)
         if self.autostart { state.play() }
     }

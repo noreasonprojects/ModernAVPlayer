@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 	* Use of custom media metadata
 * Breaking Change:
 	* Update PlayerMedia protocol: getMetadata() replace metadata attribute 
+	* Remove useless optional media attribute in plugin loadMedia method
 * Fix:
 	* Refactor context protocol
 

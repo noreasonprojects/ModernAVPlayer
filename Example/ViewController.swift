@@ -38,14 +38,13 @@ struct Data {
             else { assertionFailure(); return [] }
         
         let localClip = URL(fileURLWithPath: file)
+        let meta0 = ModernAVPlayerMediaMetadata(title: "Le live", albumTitle: "Album0", artist: "Artist0", localImageName: "sennaLive", customAttribute: "attribute0")
+        let meta1 = ModernAVPlayerMediaMetadata(title: "Remote clip", albumTitle: "Album1", artist: "Artist1", localImageName: "sennaClip", customAttribute: "attribute1")
+        let meta2 = ModernAVPlayerMediaMetadata(title: "Local clip", albumTitle: "Album2", artist: "Artist2", localImageName: "ankierman", remoteImageUrl: URL(string: "https://goo.gl/U4QoQj"), customAttribute: "attribute2")
         return [
-            ModernAVPlayerMedia(url: liveUrl, type: .stream(isLive: true), title: "Le live",
-                                albumTitle: "Album0", artist: "Artist0", localImageName: "sennaLive"),
-            ModernAVPlayerMedia(url: remoteClip, type: .clip, title: "Remote clip",
-                                albumTitle: "Album1", artist: "Artist1", localImageName: "sennaClip"),
-            ModernAVPlayerMedia(url: localClip, type: .clip, title: "Local clip",
-                                albumTitle: "Album2", artist: "Artist2", localImageName: "ankierman",
-                                remoteImageUrl: URL(string: "https://goo.gl/U4QoQj"))
+            ModernAVPlayerMedia(url: liveUrl, type: .stream(isLive: true), metadata: meta0),
+            ModernAVPlayerMedia(url: remoteClip, type: .clip, metadata: meta1),
+            ModernAVPlayerMedia(url: localClip, type: .clip, metadata: meta2)
         ]
     }()
 }
@@ -102,19 +101,19 @@ final class ViewController: UIViewController {
 
     @IBAction func loadInvalidFormat(_ sender: UIButton) {
         let url = URL(fileURLWithPath: Bundle.main.path(forResource: "noreason", ofType: "txt")!)
-        let media = ModernAVPlayerMedia(url: url, type: .clip)
+        let media = ModernAVPlayerMedia(url: url, type: .clip, metadata: nil)
         loadMedia(media, autostart: true)
     }
     
     @IBAction func loadInvalidRemoteUrl(_ sender: UIButton) {
         let url = URL(string: "foo://noreason")!
-        let media = ModernAVPlayerMedia(url: url, type: .clip)
+        let media = ModernAVPlayerMedia(url: url, type: .clip, metadata: nil)
         loadMedia(media, autostart: true)
     }
     
     // MARK: - Variables
 
-    let player = ModernAVPlayer()
+    let player = ModernAVPlayer(plugins: [CustomTrackerPlugin()])
     
     // MARK: - Observables
     

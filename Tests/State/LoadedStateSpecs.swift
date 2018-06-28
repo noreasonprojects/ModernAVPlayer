@@ -34,7 +34,7 @@ final class LoadedStateSpecs: QuickSpec {
     
     private var loadedState: PlayerState!
     private var mockPlayer: MockCustomPlayer!
-    private let playerMedia = ModernAVPlayerMedia(url: URL(string: "x")!, type: .clip)
+    private let playerMedia = MockPlayerMedia(url: URL(string: "x")!, type: .clip)
     private var tested: ModernAVPlayerContext!
     
     override func spec() {

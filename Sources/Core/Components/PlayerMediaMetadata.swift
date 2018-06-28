@@ -34,28 +34,10 @@ public protocol PlayerMediaMetadata: CustomStringConvertible {
     var remoteImageUrl: URL? { get }
 }
 
-public struct ModernAVPlayerMediaMetadata: PlayerMediaMetadata {
-    public let title: String?
-    public let albumTitle: String?
-    public let artist: String?
-    public let localPlaceHolderImageName: String?
-    public let remoteImageUrl: URL?
-    
-    public init(title: String? = nil,
-                albumTitle: String? = nil,
-                artist: String? = nil,
-                localImageName: String? = nil,
-                remoteImageUrl: URL? = nil) {
-        self.title = title
-        self.albumTitle = albumTitle
-        self.artist = artist
-        self.localPlaceHolderImageName = localImageName
-        self.remoteImageUrl = remoteImageUrl
-    }
-    
-    public var description: String {
+public extension PlayerMediaMetadata {
+    var description: String {
         let debug = "title: \(title ?? "nil") | album: \(albumTitle ?? "nil") | artist: \(artist ?? "nil") | "
-                    + "localImage: \(localPlaceHolderImageName ?? "nil") | remoteImage: \(remoteImageUrl?.description ?? "nil")"
+            + "localImage: \(localPlaceHolderImageName ?? "nil") | remoteImage: \(remoteImageUrl?.description ?? "nil")"
         return debug
     }
 }

@@ -29,9 +29,9 @@ import AVFoundation
 public protocol PlayerMedia: CustomStringConvertible {
     var url: URL { get }
     var type: MediaType { get }
-    var metadata: PlayerMediaMetadata? { get }
     
     func isLive() -> Bool
+    func getMetadata() -> PlayerMediaMetadata?
 }
 
 public extension PlayerMedia {
@@ -46,35 +46,4 @@ public extension PlayerMedia {
             else { return false }
         return true
     }
-}
-
-public struct ModernAVPlayerMedia: PlayerMedia, Equatable {
-    public let url: URL
-    public let type: MediaType
-    public let metadata: PlayerMediaMetadata?
-    
-    public init(url: URL, type: MediaType, metadata: PlayerMediaMetadata? = nil) {
-        self.url = url
-        self.type = type
-        self.metadata = metadata
-    }
-    
-    public init(url: URL,
-                type: MediaType,
-                title: String? = nil,
-                albumTitle: String? = nil,
-                artist: String? = nil,
-                localImageName: String? = nil,
-                remoteImageUrl: URL? = nil) {
-        let metadata = ModernAVPlayerMediaMetadata(title: title,
-                                                   albumTitle: albumTitle,
-                                                   artist: artist,
-                                                   localImageName: localImageName,
-                                                   remoteImageUrl: remoteImageUrl)
-        self.init(url: url, type: type, metadata: metadata)
-    }
-}
-
-public func == (lhs: ModernAVPlayerMedia, rhs: ModernAVPlayerMedia) -> Bool {
-    return lhs.url.absoluteString == rhs.url.absoluteString
 }

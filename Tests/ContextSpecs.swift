@@ -113,7 +113,7 @@ final class ContextSpecs: QuickSpec {
 
                 // ARRANGE
                 self.tested.changeState(state: self.mockState)
-                let media = ModernAVPlayerMedia(url: URL(string: "foo")!, type: .clip)
+                let media = MockPlayerMedia(url: URL(string: "foo")!, type: .clip)
 
                 // ACT
                 self.tested.loadMedia(media: media, autostart: false)
@@ -127,13 +127,13 @@ final class ContextSpecs: QuickSpec {
                 
                 // ARRANGE
                 self.tested.changeState(state: self.mockState)
-                let media = ModernAVPlayerMedia(url: URL(string: "foo")!, type: .clip)
+                let media = MockPlayerMedia(url: URL(string: "foo")!, type: .clip)
                 
                 // ACT
                 self.tested.loadMedia(media: media, autostart: false)
                 
                 // ASSERT
-                expect(self.tested.currentMedia as? ModernAVPlayerMedia).to(equal(media))
+                expect(self.tested.currentMedia as? MockPlayerMedia).to(equal(media))
             }
         }
 

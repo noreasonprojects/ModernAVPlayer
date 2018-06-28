@@ -42,7 +42,7 @@ final class PausedStateSpecs: QuickSpec {
     override func spec() {
 
         beforeEach {
-            self.media = ModernAVPlayerMedia(url: URL(string: "foo")!, type: .clip)
+            self.media = MockPlayerMedia(url: URL(string: "foo")!, type: .clip)
             self.plugin = MockPlayerPlugin()
             self.playerContext = ModernAVPlayerContext(player: self.mockPlayer, audioSessionType: MockAudioSession.self, plugins: [self.plugin])
             self.playerContext.currentMedia = self.media

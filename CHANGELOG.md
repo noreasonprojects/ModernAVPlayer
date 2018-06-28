@@ -5,6 +5,9 @@ All notable changes to this project will be documented in this file.
 ## [X.X.X]
 * Features:
 	* Expose currentMedia attribute
+	* Use of custom media metadata
+* Breaking Change:
+	* Update PlayerMedia protocol: getMetadata() replace metadata attribute 
 
 ## [0.9.5]
 * Features:

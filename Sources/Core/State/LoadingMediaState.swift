@@ -122,9 +122,7 @@ final class LoadingMediaState: PlayerState {
         context.player.replaceCurrentItem(with: nil)
         context.itemDuration = nil
         
-        guard let url = media?.url else {
-            assertionFailure();
-            return }
+        guard let url = media?.url else { assertionFailure(); return }
         let item = createItem(with: url)
         
         startObservingItemStatus(item: item)

@@ -68,10 +68,12 @@ final class WaitingNetworkState: PlayerState {
         }
         
         reachability.isReachable = { [weak self] in
+            guard let media = self?.context.currentMedia else { assertionFailure(); return }
             guard let strongSelf = self else { return }
             
             let lastKnownPosition = strongSelf.isDurationItemFinite() ? strongSelf.context.player.currentTime() : nil
             let state = LoadingMediaState(context: strongSelf.context,
+                                          media: media,
                                           autostart: autostart,
                                           lastPosition: lastKnownPosition)
             strongSelf.context.changeState(state: state)
@@ -84,7 +86,7 @@ final class WaitingNetworkState: PlayerState {
     
     // MARK: - Shared actions
     
-    func loadCurrentMedia(media: PlayerMedia, autostart: Bool) {
+    func load(media: PlayerMedia, autostart: Bool) {
         let state = LoadingMediaState(context: context, media: media, autostart: autostart)
         context.changeState(state: state)
     }

@@ -78,7 +78,6 @@ public final class ModernAVPlayer: NSObject, MediaPlayer {
         self.commandCenter = commandCenter ?? ModernAVPlayerCommandCenter()
         super.init()
         context.delegate = self
-        context.didSetCurrentMedia = { [weak self] in self?.currentMedia = $0 }
     }
     
     // MARK: - Actions
@@ -160,6 +159,7 @@ extension ModernAVPlayer: PlayerContextDelegate {
     }
     
     func playerContext(didCurrentMediaChange media: PlayerMedia?) {
+        currentMedia = media
         delegate?.modernAVPlayer(self, didCurrentMediaChange: media)
     }
     

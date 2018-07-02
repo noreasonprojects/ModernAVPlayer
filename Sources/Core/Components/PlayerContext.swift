@@ -49,8 +49,6 @@ protocol PlayerContext: class, MediaPlayer {
     var plugins: [PlayerPlugin] { get }
     var state: PlayerState! { get }
     
-    var delegate: PlayerContextDelegate? { get }
-    
     func changeState(state: PlayerState)
 }
 
@@ -75,9 +73,8 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
             delegate?.playerContext(didCurrentItemUrlChange: url)
         }
     }
-    var didSetCurrentMedia: ((PlayerMedia?) -> Void)?
     var currentMedia: PlayerMedia? {
-        didSet { didSetCurrentMedia?(currentMedia) }
+        didSet { delegate?.playerContext(didCurrentMediaChange: currentMedia) }
     }
     var currentTime: Double? {
         didSet { delegate?.playerContext(didCurrentTimeChange: currentTime) }
@@ -139,7 +136,7 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
     }
 
     func loadMedia(media: PlayerMedia, autostart: Bool) {
-        state.loadCurrentMedia(media: media, autostart: autostart)
+        state.load(media: media, autostart: autostart)
     }
     
     func play() {

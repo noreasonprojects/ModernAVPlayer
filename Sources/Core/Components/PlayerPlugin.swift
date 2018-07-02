@@ -34,34 +34,34 @@ public protocol PlayerPlugin {
     ///
     func didInit(player: AVPlayer)
     
-    /// Called before Player start loading media
+    /// Called when the media will start loading
     func willStartLoading()
     
-    /// Called when Player enters Loading state
+    /// Called when the media has started loading
     func didStartLoading()
     
-    /// Called when Player enters Buffering state
+    /// Called before buffering media
     func didStartBuffering()
     
     ///
-    /// Called when Player enters Initialization state
+    /// Called when the media is loaded
     /// - parameters:
     ///    - media: PlayerMedia just loaded
     ///
     func didLoad(media: PlayerMedia, duration: Double?)
     
-    /// Called when Player enters Playing state
+    /// Called when the media is playing
     func didStartPlaying()
     
-    /// Called when Player enters Paused state
+    /// Called when the media is paused
     func didPaused()
     
-    /// Called when Player enters Stopped state
+    /// Called when the media is stopped
     func didStopped()
     
-    /// Called when Player enters WaintForNetwork state
+    /// Called when player check network access
     func didStartWaitingForNetwork()
     
-    /// Called when Player enters Failed state
+    /// Called when the media failed
     func didFailed()
 }

@@ -6,15 +6,14 @@ All notable changes to this project will be documented in this file.
 * Features:
 	* Expose currentMedia attribute
 	* Use of custom media metadata
-	* Added willStartLoading method (called just before replacing item)
-
+	* Add willStartLoading plugin method
 * Breaking Change:
 	* Update PlayerMedia protocol: getMetadata() replace metadata attribute 
 	* Remove useless optional media attribute in plugin loadMedia method
-	
 * Fix:
 	* Refactor context protocol
 	* Item duration fetch using simulator device
+	* Plugin method description
 
 ## [0.9.5]
 * Features:

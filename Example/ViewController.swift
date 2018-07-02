@@ -251,6 +251,12 @@ extension ViewController {
             .bind(to: slider.rx.value)
             .disposed(by: disposeBag)
         
+        
+        // Check didCurrentMediaChanged delegate
+        player.rx.currentMedia
+            .subscribe(onNext: { print("~~~ DELEGATE: currentMedia changed \(String(describing: $0?.url))") })
+            .disposed(by: disposeBag)
+        
         // Display debugMessage
         player.rx.debugMessage
             .asDriver(onErrorJustReturn: "error")

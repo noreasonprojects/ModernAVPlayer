@@ -51,7 +51,7 @@ final class FailedState: PlayerState {
 
     // MARK: - Shared actions
 
-    func loadCurrentMedia(media: PlayerMedia, autostart: Bool) {
+    func load(media: PlayerMedia, autostart: Bool) {
         let state = LoadingMediaState(context: context, media: media, autostart: autostart)
         context.changeState(state: state)
     }

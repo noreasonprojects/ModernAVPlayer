@@ -64,7 +64,7 @@ final class BufferingStateSpecs: QuickSpec {
             it("should stop observing rate service") {
                 
                 // ACT
-                self.bufferingState.loadCurrentMedia(media: self.playerMedia, autostart: true)
+                self.bufferingState.load(media: self.playerMedia, autostart: true)
                 
                 // ASSERT
                 expect(self.mockRateService.stopCallCount).to(equal(1))
@@ -73,7 +73,7 @@ final class BufferingStateSpecs: QuickSpec {
             it("should cancel pending seek") {
                 
                 // ACT
-                self.bufferingState.loadCurrentMedia(media: self.playerMedia, autostart: true)
+                self.bufferingState.load(media: self.playerMedia, autostart: true)
                 
                 // ASSERT
                 expect(self.mockItem.cancelPendingSeeksCallCount).to(equal(1))
@@ -82,7 +82,7 @@ final class BufferingStateSpecs: QuickSpec {
             it("should update state context to LoadingMedia") {
 
                 // ACT
-                self.bufferingState.loadCurrentMedia(media: self.playerMedia, autostart: false)
+                self.bufferingState.load(media: self.playerMedia, autostart: false)
 
                 // ASSERT
                 expect(self.tested.state).to(beAnInstanceOf(LoadingMediaState.self))

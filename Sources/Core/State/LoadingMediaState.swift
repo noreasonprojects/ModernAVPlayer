@@ -43,7 +43,7 @@ final class LoadingMediaState: PlayerState {
     // MARK: - Init
 
     init(context: PlayerContext,
-         media: PlayerMedia? = nil,
+         media: PlayerMedia,
          autostart: Bool,
          lastPosition: CMTime? = nil,
          interruptionAudioService: ModernAVPlayerInterruptionAudioService = ModernAVPlayerInterruptionAudioService()) {
@@ -71,7 +71,7 @@ final class LoadingMediaState: PlayerState {
 
     // MARK: - Shared actions
 
-    func loadCurrentMedia(media: PlayerMedia, autostart: Bool) {
+    func load(media: PlayerMedia, autostart: Bool) {
         createReplaceItem(media: media)
     }
 
@@ -111,7 +111,7 @@ final class LoadingMediaState: PlayerState {
         return AVPlayerItem(asset: asset, automaticallyLoadedAssetKeys: ["playable", "duration"])
     }
 
-    private func createReplaceItem(media: PlayerMedia? = nil) {
+    private func createReplaceItem(media: PlayerMedia) {
         /*
          It seems to be a good idea to reset player current item
          Loading clip media from playing state, play automatically the new clip media
@@ -122,14 +122,12 @@ final class LoadingMediaState: PlayerState {
         context.player.replaceCurrentItem(with: nil)
         context.itemDuration = nil
         
-        guard let url = media?.url else { assertionFailure(); return }
-        let item = createItem(with: url)
+        let item = createItem(with: media.url)
         
         startObservingItemStatus(item: item)
         context.currentItem = item
-        context.currentMedia = media
         context.player.replaceCurrentItem(with: item)
-        context.delegate?.playerContext(didCurrentMediaChange: media)
+        context.currentMedia = media
         context.plugins.forEach { $0.didStartLoading() }
     }
     

@@ -22,6 +22,7 @@ final class CustomTrackerPlugin: PlayerPlugin {
     }
     
     func didInit(player: AVPlayer) { }
+    func willStartLoading() { }
     func didStartLoading() { }
     func didStartBuffering() { }
     func didStartPlaying() { }

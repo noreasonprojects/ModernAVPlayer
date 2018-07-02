@@ -34,37 +34,31 @@ protocol PlayerContextDelegate: class {
     func playerContext(debugMessage: String?)
 }
 
-protocol PlayerContext: class {
-    var player: AVPlayer { get }
-    var plugins: [PlayerPlugin] { get }
+protocol PlayerContext: class, MediaPlayer {
+    var audioSessionType: AudioSessionService.Type { get }
+    var bgToken: UIBackgroundTaskIdentifier? { get set }
     var config: PlayerConfiguration { get }
+    var currentMedia: PlayerMedia? { get }
     var currentItem: AVPlayerItem? { get set }
     var currentTime: Double? { get set }
-    var itemDuration: Double? { get set }
-    var state: PlayerState! { get }
     var debugMessage: String? { get set }
+    var itemDuration: Double? { get set }
     var nowPlaying: NowPlaying { get }
-    var bgToken: UIBackgroundTaskIdentifier? { get set }
-    var currentMedia: PlayerMedia? { get }
+    var player: AVPlayer { get }
+    var plugins: [PlayerPlugin] { get }
+    var state: PlayerState! { get }
     
-    func pause()
-    func play()
-    func seek(position: Double)
-    func stop()
-    func loadMedia(media: PlayerMedia, autostart: Bool)
     func changeState(state: PlayerState)
-    
-    var audioSessionType: AudioSessionService.Type { get }
 }
 
 final class ModernAVPlayerContext: NSObject, PlayerContext {
     
     // MARK: - Inputs
     
-    let player: AVPlayer
+    let audioSessionType: AudioSessionService.Type
     let config: PlayerConfiguration
     let nowPlaying: NowPlaying
-    let audioSessionType: AudioSessionService.Type
+    let player: AVPlayer
     let plugins: [PlayerPlugin]
     
     weak var delegate: PlayerContextDelegate?
@@ -148,5 +142,9 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
     
     func play() {
         state.play()
+    }
+    
+    func updateNowPlayingInfo(metadata: PlayerMediaMetadata) {
+        nowPlaying.update(metadata: metadata)
     }
 }

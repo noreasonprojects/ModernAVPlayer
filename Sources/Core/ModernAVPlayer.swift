@@ -120,7 +120,7 @@ public final class ModernAVPlayer: NSObject, MediaPlayer {
     /// - parameter metadata: metadata to load
     ///
     public func updateNowPlayingInfo(metadata: PlayerMediaMetadata) {
-        context.nowPlaying.update(metadata: metadata)
+        context.updateNowPlayingInfo(metadata: metadata)
     }
     
     /// Begins playback of the current item

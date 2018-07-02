@@ -30,6 +30,11 @@ import ModernAVPlayer
 
 final class MockPlayerPlugin: PlayerPlugin {
     
+    private(set) var willStartLoadingCallCount = 0
+    func willStartLoading() {
+        willStartLoadingCallCount += 1
+    }
+    
     private(set) var didStartLoadingCallCount = 0
     func didStartLoading() {
         didStartLoadingCallCount += 1

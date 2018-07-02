@@ -76,7 +76,7 @@ final class PlayingStateSpecs: QuickSpec {
             it("should update state context to LoadingMedia") {
                 
                 // ACT
-                self.playingState.loadCurrentMedia(autostart: false)
+                self.playingState.loadCurrentMedia(media: self.media, autostart: false)
                 
                 // ASSERT
                 expect(self.tested.state).to(beAnInstanceOf(LoadingMediaState.self))

@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 	* Remove useless optional media attribute in plugin loadMedia method
 * Fix:
 	* Refactor context protocol
+	* Item duration fetch using simulator device
 
 ## [0.9.5]
 * Features:

@@ -33,7 +33,7 @@ extension ModernAVPlayer: HasDelegate {
 
 public class RxPlayerContextDelegateProxy: DelegateProxy<ModernAVPlayer, ModernAVPlayerDelegate>,
     DelegateProxyType,
-    ModernAVPlayerDelegate {
+ModernAVPlayerDelegate {
     
     // MARK: - Initialization
     
@@ -48,6 +48,7 @@ public class RxPlayerContextDelegateProxy: DelegateProxy<ModernAVPlayer, ModernA
     // MARK: - Proxy Subjects
     
     lazy var stateSubject = PublishSubject<ModernAVPlayer.State>()
+    lazy var currentMediaSubject = PublishSubject<PlayerMedia?>()
     lazy var currentTimeSubject = PublishSubject<Double?>()
     lazy var itemDurationSubject = PublishSubject<Double?>()
     lazy var debugMessageSubject = PublishSubject<String?>()
@@ -57,6 +58,10 @@ public class RxPlayerContextDelegateProxy: DelegateProxy<ModernAVPlayer, ModernA
     
     public func modernAVPlayer(_ player: ModernAVPlayer, didStateChange state: ModernAVPlayer.State) {
         stateSubject.onNext(state)
+    }
+    
+    public func modernAVPlayer(_ player: ModernAVPlayer, didCurrentMediaChange media: PlayerMedia?) {
+        currentMediaSubject.onNext(media)
     }
     
     public func modernAVPlayer(_ player: ModernAVPlayer, didCurrentTimeChange currentTime: Double?) {

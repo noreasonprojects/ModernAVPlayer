@@ -75,7 +75,7 @@ final class MockPlayerPlugin: PlayerPlugin {
     private(set) var didLoadCallCount = 0
     private(set) var didLoadLastMediaParam: MockPlayerMedia?
     private(set) var didLoadLastDurationParam: Double?
-    func didLoad(media: PlayerMedia?, duration: Double?) {
+    func didLoad(media: PlayerMedia, duration: Double?) {
         didLoadCallCount += 1
         didLoadLastMediaParam = media as? MockPlayerMedia
         didLoadLastDurationParam = duration

@@ -15,7 +15,7 @@ protocol CustomTracker {
 
 final class CustomTrackerPlugin: PlayerPlugin {
     
-    func didLoad(media: PlayerMedia?, duration: Double?) {
+    func didLoad(media: PlayerMedia, duration: Double?) {
         guard let attr = (media as? ModernAVPlayerMedia)?.metadata?.customAttribute
             else { assertionFailure(); return }
         print("~~~ PLUGIN: customAttribute=\(attr)")

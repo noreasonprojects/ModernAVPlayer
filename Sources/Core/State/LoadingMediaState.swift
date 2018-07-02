@@ -43,6 +43,7 @@ final class LoadingMediaState: PlayerState {
     // MARK: - Init
 
     init(context: PlayerContext,
+         media: PlayerMedia? = nil,
          autostart: Bool,
          lastPosition: CMTime? = nil,
          interruptionAudioService: ModernAVPlayerInterruptionAudioService = ModernAVPlayerInterruptionAudioService()) {
@@ -53,16 +54,11 @@ final class LoadingMediaState: PlayerState {
         self.lastKnownPosition = lastPosition
         self.interruptionAudioService = interruptionAudioService
         
-        guard let media = context.currentMedia else { assertionFailure(); return }
-        
         context.audioSessionType.activate()
-        context.itemDuration = nil
         
         setupInterruptionCallback()
         startBgTask(context: context)
-        createReplaceItem(url: media.url)
-        
-        context.plugins.forEach { $0.didStartLoading() }
+        createReplaceItem(media: media)
     }
 
     deinit {
@@ -75,9 +71,8 @@ final class LoadingMediaState: PlayerState {
 
     // MARK: - Shared actions
 
-    func loadCurrentMedia(autostart: Bool) {
-        guard let currentMedia = context.currentMedia else { assertionFailure(); return }
-        createReplaceItem(url: currentMedia.url)
+    func loadCurrentMedia(media: PlayerMedia, autostart: Bool) {
+        createReplaceItem(media: media)
     }
 
     func pause() {
@@ -116,20 +111,28 @@ final class LoadingMediaState: PlayerState {
         return AVPlayerItem(asset: asset, automaticallyLoadedAssetKeys: ["playable", "duration"])
     }
 
-    private func createReplaceItem(url: URL) {
+    private func createReplaceItem(media: PlayerMedia? = nil) {
         /*
          It seems to be a good idea to reset player current item
          Loading clip media from playing state, play automatically the new clip media
          Ensure player will play only when we ask
          Also some side effect when coming from failed state
          */
+        context.plugins.forEach { $0.willStartLoading() }
         context.player.replaceCurrentItem(with: nil)
+        context.itemDuration = nil
         
+        guard let url = media?.url else {
+            assertionFailure();
+            return }
         let item = createItem(with: url)
         
         startObservingItemStatus(item: item)
         context.currentItem = item
+        context.currentMedia = media
         context.player.replaceCurrentItem(with: item)
+        context.delegate?.playerContext(didCurrentMediaChange: media)
+        context.plugins.forEach { $0.didStartLoading() }
     }
     
     private func startObservingItemStatus(item: AVPlayerItem) {

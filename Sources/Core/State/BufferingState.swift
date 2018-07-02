@@ -100,8 +100,8 @@ final class BufferingState: NSObject, PlayerState {
 
     // MARK: - Shared actions
 
-    func loadCurrentMedia(autostart: Bool) {
-        let state = LoadingMediaState(context: context, autostart: autostart)
+    func loadCurrentMedia(media: PlayerMedia, autostart: Bool) {
+        let state = LoadingMediaState(context: context, media: media, autostart: autostart)
         changeState(state)
     }
 

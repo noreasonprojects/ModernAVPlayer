@@ -34,6 +34,9 @@ public protocol PlayerPlugin {
     ///
     func didInit(player: AVPlayer)
     
+    /// Called before Player start loading media
+    func willStartLoading()
+    
     /// Called when Player enters Loading state
     func didStartLoading()
     

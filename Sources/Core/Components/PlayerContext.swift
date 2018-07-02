@@ -28,6 +28,7 @@ import AVFoundation
 
 protocol PlayerContextDelegate: class {
     func playerContext(didStateChange state: ModernAVPlayer.State)
+    func playerContext(didCurrentMediaChange media: PlayerMedia?)
     func playerContext(didCurrentTimeChange currentTime: Double?)
     func playerContext(didItemDurationChange itemDuration: Double?)
     func playerContext(didCurrentItemUrlChange currentItemUrl: URL?)
@@ -38,7 +39,7 @@ protocol PlayerContext: class, MediaPlayer {
     var audioSessionType: AudioSessionService.Type { get }
     var bgToken: UIBackgroundTaskIdentifier? { get set }
     var config: PlayerConfiguration { get }
-    var currentMedia: PlayerMedia? { get }
+    var currentMedia: PlayerMedia? { get set }
     var currentItem: AVPlayerItem? { get set }
     var currentTime: Double? { get set }
     var debugMessage: String? { get set }
@@ -47,6 +48,8 @@ protocol PlayerContext: class, MediaPlayer {
     var player: AVPlayer { get }
     var plugins: [PlayerPlugin] { get }
     var state: PlayerState! { get }
+    
+    var delegate: PlayerContextDelegate? { get }
     
     func changeState(state: PlayerState)
 }
@@ -136,8 +139,7 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
     }
 
     func loadMedia(media: PlayerMedia, autostart: Bool) {
-        currentMedia = media
-        state.loadCurrentMedia(autostart: autostart)
+        state.loadCurrentMedia(media: media, autostart: autostart)
     }
     
     func play() {

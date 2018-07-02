@@ -28,6 +28,7 @@ import AVFoundation
 
 public protocol ModernAVPlayerDelegate: class {
     func modernAVPlayer(_ player: ModernAVPlayer, didStateChange state: ModernAVPlayer.State)
+    func modernAVPlayer(_ player: ModernAVPlayer, didCurrentMediaChange media: PlayerMedia?)
     func modernAVPlayer(_ player: ModernAVPlayer, didCurrentTimeChange currentTime: Double?)
     func modernAVPlayer(_ player: ModernAVPlayer, didItemDurationChange itemDuration: Double?)
     func modernAVPlayer(_ player: ModernAVPlayer, didCurrentItemUrlChange currentItemUrl: URL?)
@@ -77,7 +78,6 @@ public final class ModernAVPlayer: NSObject, MediaPlayer {
         self.commandCenter = commandCenter ?? ModernAVPlayerCommandCenter()
         super.init()
         context.delegate = self
-        context.didSetCurrentMedia = { [weak self] in self?.currentMedia = $0 }
     }
     
     // MARK: - Actions
@@ -156,6 +156,11 @@ public extension ModernAVPlayer {
 extension ModernAVPlayer: PlayerContextDelegate {
     func playerContext(didStateChange state: ModernAVPlayer.State) {
         delegate?.modernAVPlayer(self, didStateChange: state)
+    }
+    
+    func playerContext(didCurrentMediaChange media: PlayerMedia?) {
+        currentMedia = media
+        delegate?.modernAVPlayer(self, didCurrentMediaChange: media)
     }
     
     func playerContext(didCurrentTimeChange currentTime: Double?) {

@@ -122,19 +122,6 @@ final class ContextSpecs: QuickSpec {
                 expect(self.mockState.loadMedialCallCount).to(equal(1))
                 expect(self.mockState.lastShoudlPlayingParam).to(beFalse())
             }
-            
-            it("should set context currentMedia") {
-                
-                // ARRANGE
-                self.tested.changeState(state: self.mockState)
-                let media = MockPlayerMedia(url: URL(string: "foo")!, type: .clip)
-                
-                // ACT
-                self.tested.loadMedia(media: media, autostart: false)
-                
-                // ASSERT
-                expect(self.tested.currentMedia as? MockPlayerMedia).to(equal(media))
-            }
         }
 
         context("changeState context") {

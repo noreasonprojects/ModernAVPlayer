@@ -48,7 +48,7 @@ final class LoadingMediaStateSpecs: QuickSpec {
             self.player = MockCustomPlayer.createOnUsingAsset(url: "foo")
             self.tested = ModernAVPlayerContext(player: self.player, audioSessionType: MockAudioSession.self, plugins: [self.plugin])
             self.tested.currentMedia = self.playerMedia
-            self.state = LoadingMediaState(context: self.tested, autostart: true)
+            self.state = LoadingMediaState(context: self.tested, media: self.playerMedia, autostart: true)
             self.tested.state = self.state
         }
 
@@ -56,6 +56,7 @@ final class LoadingMediaStateSpecs: QuickSpec {
             it("should execute plugin method") {
                 
                 // ASSERT
+                expect(self.plugin.willStartLoadingCallCount).to(equal(1))
                 expect(self.plugin.didStartLoadingCallCount).to(equal(1))
             }
             
@@ -77,7 +78,7 @@ final class LoadingMediaStateSpecs: QuickSpec {
                 let context = ModernAVPlayerContext(player: self.player, audioSessionType: MockAudioSession.self)
                 context.currentMedia = self.playerMedia
                 context.itemDuration = 42
-                _ = LoadingMediaState(context: context, autostart: true)
+                _ = LoadingMediaState(context: context, media: self.playerMedia, autostart: true)
                 
                 //ASSERT
                 expect(context.itemDuration).to(beNil())
@@ -89,10 +90,29 @@ final class LoadingMediaStateSpecs: QuickSpec {
             it("should not update state context") {
                 
                 // ACT
-                self.state.loadCurrentMedia(autostart: true)
+                self.state.load(media: self.playerMedia, autostart: true)
                 
                 // ASSERT
                 expect(self.tested.state).to(beIdenticalTo(self.state))
+            }
+            
+            it("should set context currentMedia") {
+                
+                // ARRANGE
+                let newMedia = MockPlayerMedia(url: URL(string: "newMediaFoo")!, type: .clip)
+                
+                // ACT
+                self.state.load(media: newMedia, autostart: false)
+                
+                // ASSERT
+                expect(self.tested.currentMedia as? MockPlayerMedia).to(equal(newMedia))
+            }
+            
+            it("should execute plugin method") {
+                
+                // ASSERT
+                expect(self.plugin.willStartLoadingCallCount).to(equal(1))
+                expect(self.plugin.didStartLoadingCallCount).to(equal(1))
             }
         }
         

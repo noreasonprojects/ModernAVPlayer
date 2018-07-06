@@ -252,9 +252,10 @@ extension ViewController {
             .disposed(by: disposeBag)
         
         
-        // Check didCurrentMediaChanged delegate
+        // Enable slider interaction
         player.rx.currentMedia
-            .subscribe(onNext: { print("~~~ DELEGATE: currentMedia changed \(String(describing: $0?.url))") })
+            .map { return $0?.type == .clip }
+            .bind(to: slider.rx.isEnabled)
             .disposed(by: disposeBag)
         
         // Display debugMessage

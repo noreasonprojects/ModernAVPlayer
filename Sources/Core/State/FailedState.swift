@@ -42,7 +42,7 @@ final class FailedState: PlayerState {
         LoggerInHouse.instance.log(message: "Entering failed state (\(error.localizedDescription))", event: .info)
         self.context = context
         
-        context.plugins.forEach { $0.didFailed() }
+        context.plugins.forEach { $0.didFailed(error: error) }
     }
 
     deinit {

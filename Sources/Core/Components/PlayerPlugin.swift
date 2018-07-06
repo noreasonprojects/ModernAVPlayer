@@ -63,5 +63,5 @@ public protocol PlayerPlugin {
     func didStartWaitingForNetwork()
     
     /// Called when the media failed
-    func didFailed()
+    func didFailed(error: PlayerError)
 }

@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ## [X.X.X]
 * Features:
 	* Expose currentMedia attribute
+	* Expose player errors
 	* Use of custom media metadata
 	* Add willStartLoading plugin method
 * Breaking Change:

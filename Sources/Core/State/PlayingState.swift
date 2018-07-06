@@ -137,7 +137,7 @@ final class PlayingState: PlayerState {
         context.changeState(state: WaitingNetworkState(context: context,
                                                        urlToReload: url,
                                                        autostart: true,
-                                                       error: .itemPlaybackStalled))
+                                                       error: .playbackStalled))
     }
     
     private func redirectToStoppedState() {

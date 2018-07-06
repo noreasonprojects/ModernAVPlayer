@@ -121,6 +121,7 @@ final class LoadingMediaState: PlayerState {
         context.plugins.forEach { $0.willStartLoading() }
         context.player.replaceCurrentItem(with: nil)
         context.itemDuration = nil
+        context.currentTime = nil
         
         let item = createItem(with: media.url)
         

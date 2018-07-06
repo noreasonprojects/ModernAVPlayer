@@ -29,6 +29,6 @@ final class CustomTrackerPlugin: PlayerPlugin {
     func didPaused() { }
     func didStopped() { }
     func didStartWaitingForNetwork() { }
-    func didFailed() { }
+    func didFailed(error: PlayerError) { }
     
 }

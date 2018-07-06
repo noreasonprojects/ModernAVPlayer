@@ -50,7 +50,7 @@ final class WaitingNetworkStateSpecs: QuickSpec {
             self.state = WaitingNetworkState(context: self.tested,
                                              urlToReload: self.url,
                                              autostart: true,
-                                             error: PlayerError.itemFailedWhenLoading,
+                                             error: PlayerError.loadingFailed,
                                              reachabilityService: self.mockReachability)
             self.tested.state = self.state
         }

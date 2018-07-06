@@ -66,8 +66,10 @@ final class MockPlayerPlugin: PlayerPlugin {
     }
     
     private(set) var didFailedCallCount = 0
-    func didFailed() {
+    private(set) var didFailedLastParam: PlayerError?
+    func didFailed(error: PlayerError) {
         didFailedCallCount += 1
+        didFailedLastParam = error
     }
     
     private(set) var didInitCallCount = 0

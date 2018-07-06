@@ -72,7 +72,7 @@ final class BufferingState: NSObject, PlayerState {
             let waitingState = WaitingNetworkState(context: context,
                                                    urlToReload: url,
                                                    autostart: true,
-                                                   error: .buffering)
+                                                   error: .bufferingFailed)
             context.changeState(state: waitingState)
         }
         

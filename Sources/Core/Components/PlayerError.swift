@@ -26,21 +26,8 @@
 
 import Foundation
 
-enum PlayerError: Error {
-    case itemFailedWhenLoading
-    case itemPlaybackStalled
-    case buffering
-}
-
-extension PlayerError: LocalizedError {
-    var errorDescription: String? {
-        switch self {
-        case .itemFailedWhenLoading:
-            return "loading failed"
-        case .itemPlaybackStalled:
-            return "item playback stalled"
-        case .buffering:
-            return "buffering failed"
-        }
-    }
+public enum PlayerError: Error {
+    case loadingFailed
+    case playbackStalled
+    case bufferingFailed
 }

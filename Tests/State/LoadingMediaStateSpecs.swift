@@ -37,8 +37,9 @@ final class LoadingMediaStateSpecs: QuickSpec {
     private var item: AVPlayerItem!
     private var player: MockCustomPlayer!
     private var tested: ModernAVPlayerContext!
-    private var playerMedia = MockPlayerMedia(url: URL(string: "x")!, type: .clip)
     private var plugin: MockPlayerPlugin!
+    private let playerMedia = MockPlayerMedia(url: URL(string: "x")!, type: .clip)
+    private let seekPosition = 42.0
     
     override func spec() {
         
@@ -48,7 +49,7 @@ final class LoadingMediaStateSpecs: QuickSpec {
             self.player = MockCustomPlayer.createOnUsingAsset(url: "foo")
             self.tested = ModernAVPlayerContext(player: self.player, audioSessionType: MockAudioSession.self, plugins: [self.plugin])
             self.tested.currentMedia = self.playerMedia
-            self.state = LoadingMediaState(context: self.tested, media: self.playerMedia, autostart: true)
+            self.state = LoadingMediaState(context: self.tested, media: self.playerMedia, autostart: true, position: self.seekPosition)
             self.tested.state = self.state
         }
 
@@ -84,7 +85,6 @@ final class LoadingMediaStateSpecs: QuickSpec {
                 expect(context.itemDuration).to(beNil())
             }
         }
-        
         
         context("loadMedia") {
             it("should not update state context") {

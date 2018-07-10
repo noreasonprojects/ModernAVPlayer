@@ -135,8 +135,8 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
         state.stop()
     }
 
-    func loadMedia(media: PlayerMedia, autostart: Bool) {
-        state.load(media: media, autostart: autostart)
+    func loadMedia(media: PlayerMedia, autostart: Bool, position: Double?) {
+        state.load(media: media, autostart: autostart, position: position)
     }
     
     func play() {

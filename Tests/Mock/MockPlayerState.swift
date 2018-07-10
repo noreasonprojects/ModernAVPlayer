@@ -39,10 +39,12 @@ final class MockPlayerState: PlayerState {
     }
     
     var loadMedialCallCount = 0
-    var lastShoudlPlayingParam: Bool?
-    func load(media: PlayerMedia, autostart: Bool) {
+    var lastLoadAutostartParam: Bool?
+    var lastLoadPositionParam: Double?
+    func load(media: PlayerMedia, autostart: Bool, position: Double?) {
         loadMedialCallCount += 1
-        lastShoudlPlayingParam = autostart
+        lastLoadAutostartParam = autostart
+        lastLoadPositionParam = position
     }
     
     var playCallCount = 0

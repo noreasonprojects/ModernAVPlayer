@@ -36,7 +36,7 @@ public protocol ModernAVPlayerDelegate: class {
 }
 
 public protocol MediaPlayer {
-    func loadMedia(media: PlayerMedia, autostart: Bool)
+    func loadMedia(media: PlayerMedia, autostart: Bool, position: Double?)
     func pause()
     func play()
     func seek(position: Double)
@@ -106,12 +106,13 @@ public final class ModernAVPlayer: NSObject, MediaPlayer {
     ///
     /// - parameter media: media to load
     /// - parameter autostart: play after media is loaded
+    /// - parameter position: seek position
     ///
-    public func loadMedia(media: PlayerMedia, autostart: Bool) {
+    public func loadMedia(media: PlayerMedia, autostart: Bool, position: Double? = nil) {
         if autostart {
             commandCenter.configure(player: self)
         }
-        context.loadMedia(media: media, autostart: autostart)
+        context.loadMedia(media: media, autostart: autostart, position: position)
     }
    
     ///

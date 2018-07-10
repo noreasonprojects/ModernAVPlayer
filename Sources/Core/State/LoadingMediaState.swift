@@ -35,8 +35,8 @@ final class LoadingMediaState: PlayerState {
     // MARK: - Variables
     
     var type: ModernAVPlayer.State = .loading
-    private let autostart: Bool
-    private let lastKnownPosition: CMTime?
+    private var autostart: Bool
+    private var position: Double?
     private var itemStatusObserving: ModernAVPLayerItemStatusObservingService?
     private var interruptionAudioService: ModernAVPlayerInterruptionAudioService
 
@@ -45,14 +45,20 @@ final class LoadingMediaState: PlayerState {
     init(context: PlayerContext,
          media: PlayerMedia,
          autostart: Bool,
-         lastPosition: CMTime? = nil,
+         position: Double? = nil,
          interruptionAudioService: ModernAVPlayerInterruptionAudioService = ModernAVPlayerInterruptionAudioService()) {
         LoggerInHouse.instance.log(message: "Entering loading state", event: .info)
         
         self.context = context
         self.autostart = autostart
-        self.lastKnownPosition = lastPosition
+        self.position = position
         self.interruptionAudioService = interruptionAudioService
+        
+        /*
+         Loading a clip media from playing state, play automatically the new clip media
+         Ensure player will play only when we ask
+         */
+        context.player.pause()
         
         context.audioSessionType.activate()
         
@@ -71,7 +77,9 @@ final class LoadingMediaState: PlayerState {
 
     // MARK: - Shared actions
 
-    func load(media: PlayerMedia, autostart: Bool) {
+    func load(media: PlayerMedia, autostart: Bool, position: Double? = nil) {
+        self.position = position
+        self.autostart = autostart
         createReplaceItem(media: media)
     }
 
@@ -112,14 +120,14 @@ final class LoadingMediaState: PlayerState {
     }
 
     private func createReplaceItem(media: PlayerMedia) {
+        context.plugins.forEach { $0.willStartLoading() }
+        
         /*
          It seems to be a good idea to reset player current item
-         Loading clip media from playing state, play automatically the new clip media
-         Ensure player will play only when we ask
-         Also some side effect when coming from failed state
+         Fix side effect when coming from failed state
          */
-        context.plugins.forEach { $0.willStartLoading() }
         context.player.replaceCurrentItem(with: nil)
+        
         context.itemDuration = nil
         context.currentTime = nil
         
@@ -154,8 +162,9 @@ final class LoadingMediaState: PlayerState {
             context.changeState(state: FailedState(context: context, error: .loadingFailed))
         case .readyToPlay:
             context.itemDuration = context.player.currentItem?.duration.seconds
-            guard let position = lastKnownPosition else { moveToLoadedState(); return }
-            context.player.seek(to: position) { completed in
+            guard let position = self.position else { moveToLoadedState(); return }
+            let seekPosition = CMTime(seconds: position, preferredTimescale: context.config.preferedTimeScale)
+            context.player.seek(to: seekPosition) { completed in
                 guard completed else { return }
                 self.moveToLoadedState()
             }

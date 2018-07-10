@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 	* Expose player errors
 	* Use of custom media metadata
 	* Add willStartLoading plugin method
+	* Accept to load media from a specific position
 * Breaking Change:
 	* Update PlayerMedia protocol: getMetadata() replace metadata attribute 
 	* Remove useless optional media attribute in plugin loadMedia method

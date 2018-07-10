@@ -75,7 +75,7 @@ final class WaitingNetworkState: PlayerState {
             let state = LoadingMediaState(context: strongSelf.context,
                                           media: media,
                                           autostart: autostart,
-                                          seekPosition: lastKnownPosition?.seconds)
+                                          position: lastKnownPosition?.seconds)
             strongSelf.context.changeState(state: state)
         }
     }
@@ -87,7 +87,7 @@ final class WaitingNetworkState: PlayerState {
     // MARK: - Shared actions
     
     func load(media: PlayerMedia, autostart: Bool, position: Double? = nil) {
-        let state = LoadingMediaState(context: context, media: media, autostart: autostart, seekPosition: position)
+        let state = LoadingMediaState(context: context, media: media, autostart: autostart, position: position)
         context.changeState(state: state)
     }
     

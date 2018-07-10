@@ -36,7 +36,7 @@ final class LoadingMediaState: PlayerState {
     
     var type: ModernAVPlayer.State = .loading
     private var autostart: Bool
-    private var seekPosition: Double?
+    private var position: Double?
     private var itemStatusObserving: ModernAVPLayerItemStatusObservingService?
     private var interruptionAudioService: ModernAVPlayerInterruptionAudioService
 
@@ -45,13 +45,13 @@ final class LoadingMediaState: PlayerState {
     init(context: PlayerContext,
          media: PlayerMedia,
          autostart: Bool,
-         seekPosition: Double? = nil,
+         position: Double? = nil,
          interruptionAudioService: ModernAVPlayerInterruptionAudioService = ModernAVPlayerInterruptionAudioService()) {
         LoggerInHouse.instance.log(message: "Entering loading state", event: .info)
         
         self.context = context
         self.autostart = autostart
-        self.seekPosition = seekPosition
+        self.position = position
         self.interruptionAudioService = interruptionAudioService
         
         /*
@@ -78,7 +78,7 @@ final class LoadingMediaState: PlayerState {
     // MARK: - Shared actions
 
     func load(media: PlayerMedia, autostart: Bool, position: Double? = nil) {
-        seekPosition = position
+        self.position = position
         self.autostart = autostart
         createReplaceItem(media: media)
     }
@@ -162,9 +162,9 @@ final class LoadingMediaState: PlayerState {
             context.changeState(state: FailedState(context: context, error: .loadingFailed))
         case .readyToPlay:
             context.itemDuration = context.player.currentItem?.duration.seconds
-            guard let position = seekPosition else { moveToLoadedState(); return }
-            let cmtimePosition = CMTime(seconds: position, preferredTimescale: context.config.preferedTimeScale)
-            context.player.seek(to: cmtimePosition) { completed in
+            guard let position = self.position else { moveToLoadedState(); return }
+            let seekPosition = CMTime(seconds: position, preferredTimescale: context.config.preferedTimeScale)
+            context.player.seek(to: seekPosition) { completed in
                 guard completed else { return }
                 self.moveToLoadedState()
             }

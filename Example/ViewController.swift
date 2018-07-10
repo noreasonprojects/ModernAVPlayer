@@ -92,6 +92,11 @@ final class ViewController: UIViewController {
         player.updateNowPlayingInfo(metadata: newMetadata)
     }
     
+    @IBAction func loadMediaWithPosition(_ sender: UIButton) {
+        let media = Data.medias[sender.tag % 3]
+        loadMedia(media, autostart: true, position: 42.0)
+        currentMedia.text = player.currentMedia?.description
+    }
 
     @IBAction func loadMedia(_ sender: UIButton) {
         let media = Data.medias[sender.tag % 3]
@@ -152,8 +157,8 @@ final class ViewController: UIViewController {
         player.seek(position: position)
     }
     
-    private func loadMedia(_ media: PlayerMedia, autostart: Bool) {
-        player.loadMedia(media: media, autostart: autostart)
+    private func loadMedia(_ media: PlayerMedia, autostart: Bool, position: Double? = nil) {
+        player.loadMedia(media: media, autostart: autostart, position: position)
     }
 
     private func isPlayerWorking(state: ModernAVPlayer.State) -> Bool {

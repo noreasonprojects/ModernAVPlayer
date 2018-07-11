@@ -31,6 +31,7 @@ final class FailedState: PlayerState {
     // MARK: - Input
 
     unowned var context: PlayerContext
+    private let error: PlayerError
     
     // MARK: - Variable
     
@@ -41,7 +42,10 @@ final class FailedState: PlayerState {
     init(context: PlayerContext, error: PlayerError) {
         LoggerInHouse.instance.log(message: "Entering failed state (\(error.localizedDescription))", event: .info)
         self.context = context
-        
+        self.error = error
+    }
+    
+    func contextUpdated() {
         context.plugins.forEach { $0.didFailed(error: error) }
     }
 

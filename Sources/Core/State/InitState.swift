@@ -45,6 +45,9 @@ struct InitState: PlayerState {
         if #available(iOS 10, *) {
             context.player.automaticallyWaitsToMinimizeStalling = false
         }
+    }
+    
+    func contextUpdated() {
         context.plugins.forEach { $0.didInit(player: context.player) }
     }
     

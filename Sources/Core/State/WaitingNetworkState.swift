@@ -48,13 +48,15 @@ final class WaitingNetworkState: PlayerState {
         self.context = context
         self.reachability = reachabilityService ?? ModernAVPlayerReachabilityService(config: context.config)
         setupReachabilityCallbacks(autostart: autostart, urlToReload: urlToReload, error: error)
-        reachability.start()
-        
-        context.plugins.forEach { $0.didStartWaitingForNetwork() }
     }
     
     deinit {
         LoggerInHouse.instance.log(message: "Deinit", event: .debug)
+    }
+    
+    func contextUpdated() {
+        reachability.start()
+        context.plugins.forEach { $0.didStartWaitingForNetwork() }
     }
     
     // MARK: - Reachability

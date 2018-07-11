@@ -27,29 +27,21 @@
 import Foundation
 import MediaPlayer
 
-/// CommanderCenter
-///
-/// Adopt this protocol to add control center custom command
-///
-public protocol CommandCenter {
-    var remote: MPRemoteCommandCenter { get }
+struct ModernAVPlayerRemoteCommandCenter {
     
-    init(remote: MPRemoteCommandCenter)
+    // MARK: Input
     
-    ///
-    /// Enable and set callback commands
-    /// - parameter player: player used in th project
-    func configure(player: MediaPlayer)
-}
-
-struct ModernAVPlayerCommandCenter: CommandCenter {
     let remote: MPRemoteCommandCenter
     
-    init(remote: MPRemoteCommandCenter = MPRemoteCommandCenter.shared()) {
+    // MARK: Init
+    
+    @discardableResult
+    init(player: MediaPlayer, remote: MPRemoteCommandCenter = MPRemoteCommandCenter.shared()) {
         self.remote = remote
+        configure(player: player)
     }
     
-    func configure(player: MediaPlayer) {
+    private func configure(player: MediaPlayer) {
         enableCommands()
         setPlayCommandCallback(player: player)
         setPauseCommandCallback(player: player)

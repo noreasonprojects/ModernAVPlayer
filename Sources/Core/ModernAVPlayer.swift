@@ -56,7 +56,6 @@ public final class ModernAVPlayer: NSObject, MediaPlayer {
     // MARK: - Variables
     
     private let context: ModernAVPlayerContext
-    private let commandCenter: CommandCenter
     
     // MARK: - Init
     
@@ -65,19 +64,22 @@ public final class ModernAVPlayer: NSObject, MediaPlayer {
     ///
     /// - parameter config: setup player configuration
     /// - parameter plugins: array of plugin
-    /// - parameter commandCenter: setup control center custom control
     ///
     public init(config: PlayerConfiguration = ModernAVPlayerConfiguration(),
-                plugins: [PlayerPlugin] = [],
-                commandCenter: CommandCenter? = nil) {
+                plugins: [PlayerPlugin] = []) {
         context = ModernAVPlayerContext(player: AVPlayer(),
                                         config: config,
                                         nowPlaying: ModernAVPlayerNowPlayingService(),
                                         audioSessionType: ModernAVPlayerAudioSessionService.self,
                                         plugins: plugins)
-        self.commandCenter = commandCenter ?? ModernAVPlayerCommandCenter()
         super.init()
         context.delegate = self
+        
+        defer {
+            if config.useDefaultRemoteCommandCenter {
+                ModernAVPlayerRemoteCommandCenter(player: self)
+            }
+        }
     }
     
     // MARK: - Actions
@@ -109,9 +111,6 @@ public final class ModernAVPlayer: NSObject, MediaPlayer {
     /// - parameter position: seek position
     ///
     public func loadMedia(media: PlayerMedia, autostart: Bool, position: Double? = nil) {
-        if autostart {
-            commandCenter.configure(player: self)
-        }
         context.loadMedia(media: media, autostart: autostart, position: position)
     }
    
@@ -126,7 +125,6 @@ public final class ModernAVPlayer: NSObject, MediaPlayer {
     
     /// Begins playback of the current item
     public func play() {
-        commandCenter.configure(player: self)
         context.play()
     }
 }

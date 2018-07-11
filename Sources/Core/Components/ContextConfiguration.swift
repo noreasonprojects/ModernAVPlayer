@@ -28,29 +28,34 @@ import AVFoundation
 
 public protocol PlayerConfiguration {
 
-    /** Rate Observing Service
-     When buffering, a timer is set to observe current item rate:
-     */
+    /// Rate Observing Service
+    /// When buffering, a timer is set to observe current item rate:
+    ///
     var rateObservingTimeout: TimeInterval { get }
     var rateObservingTickTime: TimeInterval { get }
 
-    /** General Audio preferences
-     - all CMTime created use the specific preferedTimeScale
-     - currentTime and control center elapsed playback time attributes are set in the periodic block.
-     */
+    /// General Audio preferences
+    /// all CMTime created use the specific preferedTimeScale
+    /// currentTime and control center elapsed playback time attributes are set in the periodic block.
+    ///
     var preferedTimeScale: CMTimeScale { get }
     var periodicPlayingTime: CMTime { get }
     var audioSessionCategory: String { get }
 
-    /** Reachability Service
-     When buffering or playing and playback stop unexpectedly, a timer is set to check connectivity via URLSession
-     */
+    /// Reachability Service
+    /// When buffering or playing and playback stop unexpectedly, a timer is set to check connectivity via URLSession
+    ///
     var reachabilityURLSessionTimeout: TimeInterval { get }
     var reachabilityNetworkTestingURL: URL { get }
     var reachabilityNetworkTestingTickTime: TimeInterval { get }
     var reachabilityNetworkTestingIteration: UInt { get }
     
-    // Logger
+    /// Remote Command Center
+    ///
+    var useDefaultRemoteCommandCenter: Bool { get }
+    
+    /// Logger
+    ///
     var loggerLevelFilter: LoggerInHouse.LogEvent { get }
 }
 
@@ -72,6 +77,8 @@ public struct ModernAVPlayerConfiguration: PlayerConfiguration {
     public let reachabilityNetworkTestingTickTime: TimeInterval = 3
     public let reachabilityNetworkTestingIteration: UInt = 10
 
+    public var useDefaultRemoteCommandCenter = true
+    
     public var loggerLevelFilter: LoggerInHouse.LogEvent = .info
     
     public init() {

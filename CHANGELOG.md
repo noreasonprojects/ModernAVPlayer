@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 
 ---
-## [X.X.X]
+## [0.9.6]
 * Features:
 	* Expose currentMedia attribute
 	* Expose player errors

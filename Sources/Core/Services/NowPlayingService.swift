@@ -79,9 +79,9 @@ final class ModernAVPlayerNowPlayingService: NowPlaying {
     }
 
     private func updateDictionnary(with metadata: PlayerMediaMetadata?) {
-        infos[MPMediaItemPropertyTitle] = metadata?.title ?? " "
-        infos[MPMediaItemPropertyArtist] = metadata?.artist ?? " "
-        infos[MPMediaItemPropertyAlbumTitle] = metadata?.albumTitle ?? " "
+        infos[MPMediaItemPropertyTitle] = metadata?.title ?? ""
+        infos[MPMediaItemPropertyArtist] = metadata?.artist ?? ""
+        infos[MPMediaItemPropertyAlbumTitle] = metadata?.albumTitle ?? ""
         infos[MPNowPlayingInfoPropertyPlaybackRate] = 1.0
         
         if let imageName = metadata?.localPlaceHolderImageName, let image = UIImage(named: imageName) {

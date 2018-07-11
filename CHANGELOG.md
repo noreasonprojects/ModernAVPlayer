@@ -17,6 +17,7 @@ All notable changes to this project will be documented in this file.
 	* Reset currentTime when loading media
 	* Item duration fetch using simulator device
 	* Plugin method description
+	* Remove useless space in now playing center default values
 
 ## [0.9.5]
 * Features:

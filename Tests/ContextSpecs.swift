@@ -138,6 +138,18 @@ final class ContextSpecs: QuickSpec {
                 // ASSERT
                 expect(self.tested.state).to(beIdenticalTo(newState))
             }
+            
+            it("should call state updateContext() method") {
+                
+                // ARRANGE
+                let newState = MockPlayerState(context: self.tested)
+                
+                // ACT
+                self.tested.changeState(state: newState)
+                
+                // ASSERT
+                expect(newState.contextUpdatedCallCount).to(equal(1))
+            }
         }
 
 

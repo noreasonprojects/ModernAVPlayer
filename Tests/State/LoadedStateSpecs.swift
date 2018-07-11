@@ -36,13 +36,15 @@ final class LoadedStateSpecs: QuickSpec {
     private var mockPlayer: MockCustomPlayer!
     private let playerMedia = MockPlayerMedia(url: URL(string: "x")!, type: .clip)
     private var tested: ModernAVPlayerContext!
+    private let plugins = [MockPlayerPlugin(), MockPlayerPlugin()]
     
     override func spec() {
         
         beforeEach {
             self.mockPlayer = MockCustomPlayer.createOne(url: "foo")
-            self.tested = ModernAVPlayerContext(player: self.mockPlayer, audioSessionType: MockAudioSession.self)
+            self.tested = ModernAVPlayerContext(player: self.mockPlayer, audioSessionType: MockAudioSession.self, plugins: self.plugins)
             self.tested.currentMedia = self.playerMedia
+            self.tested.itemDuration = 42
             self.loadedState = LoadedState(context: self.tested)
             self.tested.state = self.loadedState
         }
@@ -50,21 +52,14 @@ final class LoadedStateSpecs: QuickSpec {
         context("init") {
             it("should execute didLoad plugin method") {
                 
-                // ARRANGE
-                let plugins = [MockPlayerPlugin(), MockPlayerPlugin()]
-                let context = ModernAVPlayerContext(player: self.mockPlayer, audioSessionType: MockAudioSession.self, plugins: plugins)
-                context.currentMedia = self.playerMedia
-                context.itemDuration = 42
-                _ = LoadedState(context: context)
-                
                 // ASSERT
-                expect(plugins[0].didLoadCallCount).to(equal(1))
-                expect(plugins[0].didLoadLastMediaParam).to(equal(self.playerMedia))
-                expect(plugins[0].didLoadLastDurationParam).to(equal(42))
+                expect(self.plugins[0].didLoadCallCount).to(equal(1))
+                expect(self.plugins[0].didLoadLastMediaParam).to(equal(self.playerMedia))
+                expect(self.plugins[0].didLoadLastDurationParam).to(equal(42))
                 
-                expect(plugins[1].didLoadCallCount).to(equal(1))
-                expect(plugins[1].didLoadLastMediaParam).to(equal(self.playerMedia))
-                expect(plugins[1].didLoadLastDurationParam).to(equal(42))
+                expect(self.plugins[1].didLoadCallCount).to(equal(1))
+                expect(self.plugins[1].didLoadLastMediaParam).to(equal(self.playerMedia))
+                expect(self.plugins[1].didLoadLastDurationParam).to(equal(42))
             }
         }
         

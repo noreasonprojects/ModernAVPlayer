@@ -52,9 +52,13 @@ struct LoadedState: PlayerState {
         context.nowPlaying.update(metadata: media.getMetadata(),
                                   duration: context.player.currentItem?.duration.seconds,
                                   isLive: media.isLive())
-        context.plugins.forEach { $0.didLoad(media: media, duration: context.itemDuration) }
     }
 
+    func contextUpdated() {
+        guard let media = context.currentMedia else { assertionFailure(); return }
+        context.plugins.forEach { $0.didLoad(media: media, duration: context.itemDuration) }
+    }
+    
     // MARK: - Command Center
 
     @available(iOS 9.1, *)

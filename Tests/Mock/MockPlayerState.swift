@@ -38,6 +38,11 @@ final class MockPlayerState: PlayerState {
         self.type = state
     }
     
+    private(set) var contextUpdatedCallCount = 0
+    func contextUpdated() {
+        contextUpdatedCallCount += 1
+    }
+    
     var loadMedialCallCount = 0
     var lastLoadAutostartParam: Bool?
     var lastLoadPositionParam: Double?

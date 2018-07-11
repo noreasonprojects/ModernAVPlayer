@@ -35,6 +35,7 @@ final class LoadingMediaState: PlayerState {
     // MARK: - Variables
     
     var type: ModernAVPlayer.State = .loading
+    private let media: PlayerMedia
     private var autostart: Bool
     private var position: Double?
     private var itemStatusObserving: ModernAVPLayerItemStatusObservingService?
@@ -50,6 +51,7 @@ final class LoadingMediaState: PlayerState {
         LoggerInHouse.instance.log(message: "Entering loading state", event: .info)
         
         self.context = context
+        self.media = media
         self.autostart = autostart
         self.position = position
         self.interruptionAudioService = interruptionAudioService
@@ -60,11 +62,24 @@ final class LoadingMediaState: PlayerState {
          */
         context.player.pause()
         
+        /*
+         It seems to be a good idea to reset player current item
+         Fix side effect when coming from failed state
+         */
+        context.player.replaceCurrentItem(with: nil)
+        
+        context.itemDuration = nil
+        context.currentTime = nil
         context.audioSessionType.activate()
         
         setupInterruptionCallback()
         startBgTask(context: context)
+    }
+    
+    func contextUpdated() {
+        context.plugins.forEach { $0.willStartLoading() }
         createReplaceItem(media: media)
+        context.plugins.forEach { $0.didStartLoading() }
     }
 
     deinit {
@@ -120,24 +135,12 @@ final class LoadingMediaState: PlayerState {
     }
 
     private func createReplaceItem(media: PlayerMedia) {
-        context.plugins.forEach { $0.willStartLoading() }
-        
-        /*
-         It seems to be a good idea to reset player current item
-         Fix side effect when coming from failed state
-         */
-        context.player.replaceCurrentItem(with: nil)
-        
-        context.itemDuration = nil
-        context.currentTime = nil
-        
         let item = createItem(with: media.url)
         
         startObservingItemStatus(item: item)
         context.currentItem = item
         context.player.replaceCurrentItem(with: item)
         context.currentMedia = media
-        context.plugins.forEach { $0.didStartLoading() }
     }
     
     private func startObservingItemStatus(item: AVPlayerItem) {

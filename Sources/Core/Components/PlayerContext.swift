@@ -83,7 +83,10 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
         didSet { delegate?.playerContext(didItemDurationChange: itemDuration) }
     }
     var state: PlayerState! {
-        didSet { delegate?.playerContext(didStateChange: state.type) }
+        didSet {
+            state.contextUpdated()
+            delegate?.playerContext(didStateChange: state.type)
+        }
     }
     var debugMessage: String? {
         didSet { delegate?.playerContext(debugMessage: debugMessage) }
@@ -106,7 +109,10 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
         setupLogger()
         LoggerInHouse.instance.log(message: "Init", event: .debug)
         audioSessionType.setCategory(config.audioSessionCategory)
-        state = InitState(context: self)
+        
+        defer {
+            state = InitState(context: self)
+        }
     }
 
     deinit {

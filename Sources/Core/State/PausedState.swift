@@ -51,7 +51,9 @@ final class PausedState: PlayerState {
         self.context = context
         self.context.player.pause()
         self.interruptionAudioService = interruptionAudioService
-        
+    }
+    
+    func contextUpdated() {
         context.plugins.forEach { $0.didPaused() }
     }
     

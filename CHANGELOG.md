@@ -19,6 +19,7 @@ All notable changes to this project will be documented in this file.
 	* Plugin method description
 	* Plugin methods are called at the right time
 	* Remove useless space in now playing center default values
+	* Remove duplicate command center command
 
 ## [0.9.5]
 * Features:

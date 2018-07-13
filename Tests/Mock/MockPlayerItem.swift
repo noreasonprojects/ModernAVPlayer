@@ -28,14 +28,25 @@ import AVFoundation
 
 final class MockPlayerItem: AVPlayerItem {
 
+    convenience init(url: URL, duration: CMTime? = nil, status: AVPlayerItemStatus? = nil) {
+        self.init(url: url)
+        overrideDuration = duration
+        overrideStatus = status
+    }
+    
     var overrideStatus: AVPlayerItemStatus?
     override var status: AVPlayerItemStatus {
-        return overrideStatus ?? AVPlayerItemStatus.unknown
+        return overrideStatus ?? .unknown
     }
     
     private(set) var cancelPendingSeeksCallCount = 0
     override func cancelPendingSeeks() {
         cancelPendingSeeksCallCount += 1
+    }
+    
+    var overrideDuration: CMTime?
+    override var duration: CMTime {
+        return overrideDuration ?? kCMTimeZero
     }
 }
 

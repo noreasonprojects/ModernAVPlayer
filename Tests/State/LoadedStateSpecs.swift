@@ -24,7 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import Foundation
+import AVFoundation
 import Quick
 import Nimble
 @testable
@@ -37,14 +37,16 @@ final class LoadedStateSpecs: QuickSpec {
     private let playerMedia = MockPlayerMedia(url: URL(string: "x")!, type: .clip)
     private var tested: ModernAVPlayerContext!
     private let plugins = [MockPlayerPlugin(), MockPlayerPlugin()]
+    private var item: AVPlayerItem!
     
     override func spec() {
         
         beforeEach {
-            self.mockPlayer = MockCustomPlayer.createOne(url: "foo")
+            self.item = MockPlayerItem(url: URL(string: "foo")!, duration: CMTime(seconds: 42, preferredTimescale: 1))
+            self.mockPlayer = MockCustomPlayer()
+            self.mockPlayer.overrideCurrentItem = self.item
             self.tested = ModernAVPlayerContext(player: self.mockPlayer, audioSessionType: MockAudioSession.self, plugins: self.plugins)
             self.tested.currentMedia = self.playerMedia
-            self.tested.itemDuration = 42
             self.loadedState = LoadedState(context: self.tested)
             self.tested.state = self.loadedState
         }

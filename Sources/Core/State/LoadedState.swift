@@ -56,6 +56,8 @@ struct LoadedState: PlayerState {
 
     func contextUpdated() {
         guard let media = context.currentMedia else { assertionFailure(); return }
+        
+        context.delegate?.playerContext(didItemDurationChange: context.itemDuration)
         context.plugins.forEach { $0.didLoad(media: media, duration: context.itemDuration) }
     }
     

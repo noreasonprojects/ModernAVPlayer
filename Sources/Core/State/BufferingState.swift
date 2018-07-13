@@ -45,7 +45,7 @@ final class BufferingState: NSObject, PlayerState {
          interruptionAudioService: ModernAVPlayerInterruptionAudioService = ModernAVPlayerInterruptionAudioService()) {
         LoggerInHouse.instance.log(message: "Entering buffering state", event: .info)
         
-        guard let item = context.player.currentItem else { fatalError("item should exist") }
+        guard let item = context.currentItem else { fatalError("item should exist") }
         
         self.context = context
         self.rateObservingService = rateObservingService ?? ModernAVPlayerRateObservingService(config: context.config, item: item)
@@ -68,7 +68,7 @@ final class BufferingState: NSObject, PlayerState {
     
     private func setupRateObservingCallback() {
         rateObservingService.onTimeout = { [context] in
-            guard let url = (context.player.currentItem?.asset as? AVURLAsset)?.url
+            guard let url = (context.currentItem?.asset as? AVURLAsset)?.url
                 else { return }
             
             let waitingState = WaitingNetworkState(context: context,
@@ -95,7 +95,7 @@ final class BufferingState: NSObject, PlayerState {
     }
 
     func seekCommand(position: Double) {
-        context.player.currentItem?.cancelPendingSeeks()
+        context.currentItem?.cancelPendingSeeks()
         let time = CMTime(seconds: position, preferredTimescale: context.config.preferedTimeScale)
         context.player.seek(to: time) { if $0 { self.playCommand() } }
     }
@@ -129,7 +129,7 @@ final class BufferingState: NSObject, PlayerState {
     
     private func changeState(_ state: PlayerState) {
         rateObservingService.stop(clearCallbacks: true)
-        context.player.currentItem?.cancelPendingSeeks()
+        context.currentItem?.cancelPendingSeeks()
         context.changeState(state: state)
     }
 }

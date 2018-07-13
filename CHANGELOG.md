@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 
 ---
+## [X.X.X]
+* Breaking Change:
+	* Remove useless item url delegate method
+
 ## [0.9.6]
 * Features:
 	* Expose currentMedia attribute

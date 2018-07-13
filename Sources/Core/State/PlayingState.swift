@@ -132,7 +132,7 @@ final class PlayingState: PlayerState {
     }
     
     private func redirectToWaitingForNetworkState() {
-        guard let url = (context.player.currentItem?.asset as? AVURLAsset)?.url
+        guard let url = (context.currentItem?.asset as? AVURLAsset)?.url
             else { assertionFailure(); return }
         
         startBgTask(context: context)

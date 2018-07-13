@@ -123,9 +123,8 @@ final class LoadingMediaState: PlayerState {
     // MARK: - Private actions
     
     private func cancelMediaLoading() {
-        context.player.currentItem?.asset.cancelLoading()
-        context.player.currentItem?.cancelPendingSeeks()
-        context.currentItem = nil
+        context.currentItem?.asset.cancelLoading()
+        context.currentItem?.cancelPendingSeeks()
         context.player.replaceCurrentItem(with: nil)
     }
     
@@ -138,7 +137,6 @@ final class LoadingMediaState: PlayerState {
         let item = createItem(with: media.url)
         
         startObservingItemStatus(item: item)
-        context.currentItem = item
         context.player.replaceCurrentItem(with: item)
         context.currentMedia = media
     }
@@ -164,7 +162,7 @@ final class LoadingMediaState: PlayerState {
         case .failed:
             context.changeState(state: FailedState(context: context, error: .loadingFailed))
         case .readyToPlay:
-            context.itemDuration = context.player.currentItem?.duration.seconds
+            context.itemDuration = context.currentItem?.duration.seconds
             guard let position = self.position else { moveToLoadedState(); return }
             let seekPosition = CMTime(seconds: position, preferredTimescale: context.config.preferedTimeScale)
             context.player.seek(to: seekPosition) { completed in

@@ -75,7 +75,7 @@ final class PausedState: PlayerState {
     }
 
     func play() {
-        if context.player.currentItem?.status == .readyToPlay {
+        if context.currentItem?.status == .readyToPlay {
             let state = BufferingState(context: context)
             context.changeState(state: state)
             state.playCommand()

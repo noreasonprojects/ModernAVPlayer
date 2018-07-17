@@ -28,8 +28,14 @@ import AVFoundation
 
 final class MockPlayerItem: AVPlayerItem {
 
-    convenience init(url: URL, duration: CMTime? = nil, status: AVPlayerItemStatus? = nil) {
+    convenience init(url: URL, duration: CMTime?, status: AVPlayerItemStatus?) {
         self.init(url: url)
+        overrideDuration = duration
+        overrideStatus = status
+    }
+    
+    convenience init(asset: AVAsset, duration: CMTime?, status: AVPlayerItemStatus?) {
+        self.init(asset: asset)
         overrideDuration = duration
         overrideStatus = status
     }
@@ -44,7 +50,7 @@ final class MockPlayerItem: AVPlayerItem {
         cancelPendingSeeksCallCount += 1
     }
     
-    var overrideDuration: CMTime?
+    private(set) var overrideDuration: CMTime?
     override var duration: CMTime {
         return overrideDuration ?? kCMTimeZero
     }
@@ -52,14 +58,14 @@ final class MockPlayerItem: AVPlayerItem {
 
 extension MockPlayerItem {
     
-    static func createOne(url: String) -> MockPlayerItem {
+    static func createOne(url: String, duration: CMTime? = nil, status: AVPlayerItemStatus? = nil) -> MockPlayerItem {
         let url = URL(string: url)!
-        return MockPlayerItem(url: url)
+        return MockPlayerItem(url: url, duration: duration, status: status)
     }
     
-    static func createOnUsingAsset(url: String) -> MockPlayerItem {
+    static func createOnUsingAsset(url: String, duration: CMTime? = nil, status: AVPlayerItemStatus? = nil) -> MockPlayerItem {
         let url = URL(string: url)!
         let asset = MockAVAsset(url: url)
-        return MockPlayerItem(asset: asset)
+        return MockPlayerItem(asset: asset, duration: duration, status: status)
     }
 }

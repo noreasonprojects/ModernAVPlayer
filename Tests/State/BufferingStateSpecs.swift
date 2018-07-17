@@ -31,10 +31,10 @@ import Nimble
 
 final class BufferingStateSpecs: QuickSpec {
 
-    private let playerMedia = MockPlayerMedia(url: URL(string: "x")!, type: .clip)
+    private let playerMedia = MockPlayerMedia(url: URL(string: "foo")!, type: .clip)
     private var bufferingState: BufferingState!
     private var mockPlayer: MockCustomPlayer!
-    private var mockItem: MockPlayerItem!
+    private var item: MockPlayerItem!
     private var mockRateService: MockObservingRateService!
     private var tested: ModernAVPlayerContext!
     private var plugin: MockPlayerPlugin!
@@ -42,12 +42,11 @@ final class BufferingStateSpecs: QuickSpec {
     override func spec() {
         beforeEach {
             self.plugin = MockPlayerPlugin()
-            self.mockItem = MockPlayerItem.createOne(url: "HELLO")
-            self.mockPlayer = MockCustomPlayer()
-            self.mockPlayer.overrideCurrentItem = self.mockItem
+            self.item = MockPlayerItem.createOne(url: "foo")
+            self.mockPlayer = MockCustomPlayer(overrideCurrentItem: self.item)
             self.tested = ModernAVPlayerContext(player: self.mockPlayer, audioSessionType: MockAudioSession.self, plugins: [self.plugin])
             self.tested.currentMedia = self.playerMedia
-            self.mockRateService = MockObservingRateService(config: self.tested.config, item: self.mockItem)
+            self.mockRateService = MockObservingRateService(config: self.tested.config, item: self.item)
             self.bufferingState = BufferingState(context: self.tested, rateObservingService: self.mockRateService)
             self.tested.changeState(state: self.bufferingState)
         }
@@ -76,7 +75,7 @@ final class BufferingStateSpecs: QuickSpec {
                 self.bufferingState.load(media: self.playerMedia, autostart: true)
                 
                 // ASSERT
-                expect(self.mockItem.cancelPendingSeeksCallCount).to(equal(1))
+                expect(self.item.cancelPendingSeeksCallCount).to(equal(1))
             }
             
             it("should update state context to LoadingMedia") {
@@ -158,7 +157,7 @@ final class BufferingStateSpecs: QuickSpec {
                 self.bufferingState.stop()
                 
                 // ASSERT
-                expect(self.mockItem.cancelPendingSeeksCallCount).to(equal(1))
+                expect(self.item.cancelPendingSeeksCallCount).to(equal(1))
             }
             
             it("should update state context to Stopped") {
@@ -187,7 +186,7 @@ final class BufferingStateSpecs: QuickSpec {
                 self.bufferingState.pause()
                 
                 // ASSERT
-                expect(self.mockItem.cancelPendingSeeksCallCount).to(equal(1))
+                expect(self.item.cancelPendingSeeksCallCount).to(equal(1))
             }
             
             it("should update state context to Paused") {
@@ -207,7 +206,7 @@ final class BufferingStateSpecs: QuickSpec {
                 self.bufferingState.seek(position: kCMTimeZero.seconds)
                 
                 // ASSERT
-                expect(self.mockItem.cancelPendingSeeksCallCount).to(equal(1))
+                expect(self.item.cancelPendingSeeksCallCount).to(equal(1))
             }
             
             it("should call player seek command") {

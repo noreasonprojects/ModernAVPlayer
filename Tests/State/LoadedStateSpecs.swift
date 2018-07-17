@@ -42,9 +42,8 @@ final class LoadedStateSpecs: QuickSpec {
     override func spec() {
         
         beforeEach {
-            self.item = MockPlayerItem(url: URL(string: "foo")!, duration: CMTime(seconds: 42, preferredTimescale: 1))
-            self.mockPlayer = MockCustomPlayer()
-            self.mockPlayer.overrideCurrentItem = self.item
+            self.item = MockPlayerItem.createOne(url: "foo", duration: CMTime(seconds: 42, preferredTimescale: 1))
+            self.mockPlayer = MockCustomPlayer(overrideCurrentItem: self.item)
             self.tested = ModernAVPlayerContext(player: self.mockPlayer, audioSessionType: MockAudioSession.self, plugins: self.plugins)
             self.tested.currentMedia = self.playerMedia
             self.loadedState = LoadedState(context: self.tested)

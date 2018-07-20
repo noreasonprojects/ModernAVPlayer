@@ -52,8 +52,4 @@ public extension Reactive where Base: ModernAVPlayer {
     var debugMessage: Observable<String?> {
         return RxPlayerContextDelegateProxy.proxy(for: base).debugMessageSubject.asObservable()
     }
-    
-    var currentItemUrl: Observable<URL?> {
-        return RxPlayerContextDelegateProxy.proxy(for: base).currentItemUrlSubject.asObservable()
-    }
 }

@@ -50,7 +50,7 @@ struct LoadedState: PlayerState {
             updateRemoteCommandCenter(mediaType: media.type)
         }
         context.nowPlaying.update(metadata: media.getMetadata(),
-                                  duration: context.player.currentItem?.duration.seconds,
+                                  duration: context.currentItem?.duration.seconds,
                                   isLive: media.isLive())
     }
 

@@ -31,7 +31,6 @@ protocol PlayerContextDelegate: class {
     func playerContext(didCurrentMediaChange media: PlayerMedia?)
     func playerContext(didCurrentTimeChange currentTime: Double?)
     func playerContext(didItemDurationChange itemDuration: Double?)
-    func playerContext(didCurrentItemUrlChange currentItemUrl: URL?)
     func playerContext(debugMessage: String?)
 }
 
@@ -40,7 +39,7 @@ protocol PlayerContext: class, MediaPlayer {
     var bgToken: UIBackgroundTaskIdentifier? { get set }
     var config: PlayerConfiguration { get }
     var currentMedia: PlayerMedia? { get set }
-    var currentItem: AVPlayerItem? { get set }
+    var currentItem: AVPlayerItem? { get }
     var currentTime: Double? { get set }
     var debugMessage: String? { get set }
     var itemDuration: Double? { get set }
@@ -68,10 +67,7 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
     
     var bgToken: UIBackgroundTaskIdentifier?
     var currentItem: AVPlayerItem? {
-        didSet {
-            let url = (currentItem?.asset as? AVURLAsset)?.url
-            delegate?.playerContext(didCurrentItemUrlChange: url)
-        }
+        return player.currentItem
     }
     var currentMedia: PlayerMedia? {
         didSet { delegate?.playerContext(didCurrentMediaChange: currentMedia) }

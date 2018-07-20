@@ -52,7 +52,6 @@ ModernAVPlayerDelegate {
     lazy var currentTimeSubject = PublishSubject<Double?>()
     lazy var itemDurationSubject = PublishSubject<Double?>()
     lazy var debugMessageSubject = PublishSubject<String?>()
-    lazy var currentItemUrlSubject = PublishSubject<URL?>()
     
     // MARK: - ModernAVPlayerDelegate
     
@@ -74,9 +73,5 @@ ModernAVPlayerDelegate {
     
     public func modernAVPlayer(_ player: ModernAVPlayer, debugMessage: String?) {
         debugMessageSubject.onNext(debugMessage)
-    }
-    
-    public func modernAVPlayer(_ player: ModernAVPlayer, didCurrentItemUrlChange currentItemUrl: URL?) {
-        currentItemUrlSubject.onNext(currentItemUrl)
     }
 }

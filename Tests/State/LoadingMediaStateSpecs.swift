@@ -72,18 +72,6 @@ final class LoadingMediaStateSpecs: QuickSpec {
            it("should active audio session") {
                 expect(MockAudioSession.activateCallCount).to(equal(1))
             }
-            
-            it("should reset item duration value") {
-                
-                // ARRANGE
-                let context = ModernAVPlayerContext(player: self.player, audioSessionType: MockAudioSession.self)
-                context.currentMedia = self.playerMedia
-                context.itemDuration = 42
-                _ = LoadingMediaState(context: context, media: self.playerMedia, autostart: true)
-                
-                //ASSERT
-                expect(context.itemDuration).to(beNil())
-            }
         }
         
         context("loadMedia") {

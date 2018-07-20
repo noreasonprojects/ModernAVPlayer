@@ -31,6 +31,11 @@ import Nimble
 
 final class MockCustomPlayer: AVPlayer {
 
+    init(overrideCurrentItem item: AVPlayerItem? = nil) {
+        super.init()
+        overrideCurrentItem = item
+    }
+    
     var overrideCurrentItem: AVPlayerItem?
     override var currentItem: AVPlayerItem? {
         return overrideCurrentItem
@@ -87,15 +92,12 @@ final class MockCustomPlayer: AVPlayer {
     }
     
     static func createOne(url: String) -> MockCustomPlayer {
-        let player = MockCustomPlayer()
-        player.overrideCurrentItem = MockPlayerItem.createOne(url: url)
-        return player
+        let item = MockPlayerItem.createOne(url: url)
+        return MockCustomPlayer(overrideCurrentItem: item)
     }
     
     static func createOnUsingAsset(url: String) -> MockCustomPlayer {
-        let player = MockCustomPlayer()
-        player.overrideCurrentItem = MockPlayerItem.createOnUsingAsset(url: url)
-        return player
+        let item = MockPlayerItem.createOnUsingAsset(url: url)
+        return MockCustomPlayer(overrideCurrentItem: item)
     }
-
 }

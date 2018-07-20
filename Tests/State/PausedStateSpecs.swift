@@ -34,16 +34,19 @@ import Nimble
 final class PausedStateSpecs: QuickSpec {
     
     private var tested: PausedState!
-    private var mockPlayer = MockCustomPlayer()
+    private var mockPlayer: MockCustomPlayer!
     private var media: PlayerMedia!
     private var playerContext: ModernAVPlayerContext!
     private var plugin: MockPlayerPlugin!
+    private var item: MockPlayerItem!
 
     override func spec() {
 
         beforeEach {
+            self.item = MockPlayerItem.createOne(url: "foo", status: .unknown)
             self.media = MockPlayerMedia(url: URL(string: "foo")!, type: .clip)
             self.plugin = MockPlayerPlugin()
+            self.mockPlayer = MockCustomPlayer(overrideCurrentItem: self.item)
             self.playerContext = ModernAVPlayerContext(player: self.mockPlayer, audioSessionType: MockAudioSession.self, plugins: [self.plugin])
             self.playerContext.currentMedia = self.media
             self.tested = PausedState(context: self.playerContext)
@@ -80,9 +83,7 @@ final class PausedStateSpecs: QuickSpec {
                 it("should update state context to Buffering") {
 
                     // ARRANGE
-                    let item = MockPlayerItem.createOne(url: "foo")
-                    item.overrideStatus = .readyToPlay
-                    self.mockPlayer.overrideCurrentItem = item
+                    self.item.overrideStatus = .readyToPlay
 
                     // ACT
                     self.tested.play()
@@ -92,17 +93,29 @@ final class PausedStateSpecs: QuickSpec {
                 }
             }
 
-            context("when item status is not readyToPlay") {
+            context("when item status is unknown") {
                 it("should not update state context") {
 
                     // ARRANGE
-                    let item = MockPlayerItem.createOne(url: "foo")
-                    item.overrideStatus = .unknown
-                    self.mockPlayer.overrideCurrentItem = item
+                    self.item.overrideStatus = .unknown
 
                     // ACT
                     self.tested.play()
 
+                    // ASSERT
+                    expect(self.playerContext.state).to(beAnInstanceOf(PausedState.self))
+                }
+            }
+            
+            context("when item status is failed") {
+                it("should not update state context") {
+                    
+                    // ARRANGE
+                    self.item.overrideStatus = .failed
+                    
+                    // ACT
+                    self.tested.play()
+                    
                     // ASSERT
                     expect(self.playerContext.state).to(beAnInstanceOf(PausedState.self))
                 }

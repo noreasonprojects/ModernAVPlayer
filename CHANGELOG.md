@@ -5,6 +5,8 @@ All notable changes to this project will be documented in this file.
 ## [X.X.X]
 * Breaking Change:
 	* Remove useless item url delegate method
+* Improvement:
+	* Set & fetch context item duration
 
 ## [0.9.6]
 * Features:

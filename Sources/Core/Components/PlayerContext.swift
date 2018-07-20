@@ -42,7 +42,8 @@ protocol PlayerContext: class, MediaPlayer {
     var currentItem: AVPlayerItem? { get }
     var currentTime: Double? { get set }
     var debugMessage: String? { get set }
-    var itemDuration: Double? { get set }
+    var delegate: PlayerContextDelegate? { get }
+    var itemDuration: Double? { get }
     var nowPlaying: NowPlaying { get }
     var player: AVPlayer { get }
     var plugins: [PlayerPlugin] { get }
@@ -76,7 +77,7 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
         didSet { delegate?.playerContext(didCurrentTimeChange: currentTime) }
     }
     var itemDuration: Double? {
-        didSet { delegate?.playerContext(didItemDurationChange: itemDuration) }
+        return currentItem?.duration.seconds
     }
     var state: PlayerState! {
         didSet {

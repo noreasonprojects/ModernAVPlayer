@@ -65,7 +65,11 @@ final class FailedState: PlayerState {
     }
 
     func play() {
-        sendDebugMessage("Unable to play, load a media first")
+        guard let media = context.lastMediaToPlay
+            else { assertionFailure("should not possible to be in failed state without load any media"); return }
+        
+        let state = LoadingMediaState(context: context, media: media, autostart: true)
+        context.changeState(state: state)
     }
 
     func seek(position: Double) {

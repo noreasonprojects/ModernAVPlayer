@@ -67,6 +67,9 @@ struct StoppedState: PlayerState {
             let state = BufferingState(context: context)
             context.changeState(state: state)
             state.playCommand()
+        } else if let media = context.lastMediaToPlay {
+            let state = LoadingMediaState(context: context, media: media, autostart: true)
+            context.changeState(state: state)
         } else {
             let debug = "Please load item before playing"
             context.debugMessage = debug

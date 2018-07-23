@@ -43,7 +43,7 @@ final class ContextSpecs: QuickSpec {
             self.mockState = MockPlayerState(context: self.tested)
         }
         
-        context("init context") {
+        context("init") {
             it("should have init state") {
                 
                 // ASSERT
@@ -51,7 +51,7 @@ final class ContextSpecs: QuickSpec {
             }
         }
         
-        context("pause context") {
+        context("pause") {
             it("should call pause state") {
 
                 // ARRANGE
@@ -65,7 +65,7 @@ final class ContextSpecs: QuickSpec {
             }
         }
 
-        context("play context") {
+        context("play") {
             it("should call play state") {
 
                 // ARRANGE
@@ -79,7 +79,7 @@ final class ContextSpecs: QuickSpec {
             }
         }
 
-        context("stop context") {
+        context("stop") {
             it("should call stop state") {
 
                 // ARRANGE
@@ -93,7 +93,7 @@ final class ContextSpecs: QuickSpec {
             }
         }
 
-        context("seek context") {
+        context("seek") {
             it("should call seek state") {
 
                 // ARRANGE
@@ -108,17 +108,29 @@ final class ContextSpecs: QuickSpec {
             }
         }
 
-        context("call loadMedia context") {
-            it("should call loadMedia state") {
+        context("loadMedia") {
+            it("should save media") {
 
+                // ARRANGE
+                let media: PlayerMedia = MockPlayerMedia(url: URL(string: "foo")!, type: .clip)
+                
+                // ACT
+                self.tested.loadMedia(media: media, autostart: false, position: nil)
+
+                // ASSERT
+                expect(self.tested.lastMediaToPlay?.url).to(equal(media.url))
+            }
+            
+            it("should call loadMedia state") {
+                
                 // ARRANGE
                 self.tested.changeState(state: self.mockState)
                 let media = MockPlayerMedia(url: URL(string: "foo")!, type: .clip)
                 let position = 42.0
-
+                
                 // ACT
                 self.tested.loadMedia(media: media, autostart: false, position: position)
-
+                
                 // ASSERT
                 expect(self.mockState.loadMedialCallCount).to(equal(1))
                 expect(self.mockState.lastLoadAutostartParam).to(beFalse())
@@ -151,7 +163,5 @@ final class ContextSpecs: QuickSpec {
                 expect(newState.contextUpdatedCallCount).to(equal(1))
             }
         }
-
-
     }
 }

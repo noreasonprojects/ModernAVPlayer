@@ -44,6 +44,7 @@ protocol PlayerContext: class, MediaPlayer {
     var debugMessage: String? { get set }
     var delegate: PlayerContextDelegate? { get }
     var itemDuration: Double? { get }
+    var lastMediaToPlay: PlayerMedia? { get }
     var nowPlaying: NowPlaying { get }
     var player: AVPlayer { get }
     var plugins: [PlayerPlugin] { get }
@@ -79,6 +80,7 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
     var itemDuration: Double? {
         return currentItem?.duration.seconds
     }
+    var lastMediaToPlay: PlayerMedia?
     var state: PlayerState! {
         didSet {
             state.contextUpdated()
@@ -139,6 +141,7 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
     }
 
     func loadMedia(media: PlayerMedia, autostart: Bool, position: Double?) {
+        lastMediaToPlay = media
         state.load(media: media, autostart: autostart, position: position)
     }
     

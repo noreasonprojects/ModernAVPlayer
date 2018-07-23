@@ -137,7 +137,6 @@ final class LoadingMediaState: PlayerState {
         
         startObservingItemStatus(item: item)
         context.player.replaceCurrentItem(with: item)
-        context.currentMedia = media
     }
     
     private func startObservingItemStatus(item: AVPlayerItem) {

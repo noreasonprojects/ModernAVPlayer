@@ -5,6 +5,9 @@ All notable changes to this project will be documented in this file.
 ## [X.X.X]
 * Breaking Change:
 	* Remove useless item url delegate method
+* Features:
+	* Play current media from Failed state
+	* Play not already loaded media from Paused / Stopped states 
 * Improvement:
 	* Set & fetch context item duration
 

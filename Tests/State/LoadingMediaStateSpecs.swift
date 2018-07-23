@@ -84,18 +84,6 @@ final class LoadingMediaStateSpecs: QuickSpec {
                 expect(self.tested.state).to(beIdenticalTo(self.state))
             }
             
-            it("should set context currentMedia") {
-                
-                // ARRANGE
-                let newMedia = MockPlayerMedia(url: URL(string: "newMediaFoo")!, type: .clip)
-                
-                // ACT
-                self.state.load(media: newMedia, autostart: false)
-                
-                // ASSERT
-                expect(self.tested.currentMedia as? MockPlayerMedia).to(equal(newMedia))
-            }
-            
             it("should execute plugin method") {
                 
                 // ASSERT

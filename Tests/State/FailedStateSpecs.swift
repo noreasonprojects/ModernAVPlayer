@@ -92,13 +92,13 @@ final class FailedStateSpecs: QuickSpec {
         }
         
         context("play") {
-            it("should not update state context") {
+            it("should update state context to Loading") {
                 
                 // ACT
                 self.state.play()
                 
                 // ASSERT
-                expect(self.tested.state).to(beIdenticalTo(self.state))
+                expect(self.tested.state).to(beAnInstanceOf(LoadingMediaState.self))
             }
         }
         

@@ -80,7 +80,7 @@ player.loadMedia(media: media, autostart: true)
 | Paused  | O | O | X | O | O
 | Stopped  | O | O | O | X | O
 | WaitingNetwork  | O | X | O | O | X
-| Failed  | O | X | X | X | X
+| Failed  | O | O | X | X | X
 
 ### Plugin
 

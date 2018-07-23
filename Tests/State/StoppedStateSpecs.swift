@@ -100,7 +100,7 @@ final class StoppedStateSpecs: QuickSpec {
             }
 
             context("when item status is unknow") {
-                it("should not update state context") {
+                it("should update state context to Loading") {
 
                     // ARRANGE
                     self.item.overrideStatus = .unknown
@@ -109,12 +109,12 @@ final class StoppedStateSpecs: QuickSpec {
                     self.tested.play()
 
                     // ASSERT
-                    expect(self.playerContext.state).to(beAnInstanceOf(StoppedState.self))
+                    expect(self.playerContext.state).to(beAnInstanceOf(LoadingMediaState.self))
                 }
             }
             
             context("when item status is failed") {
-                it("should not update state context") {
+                it("should update state context to Loading") {
                     
                     // ARRANGE
                     self.item.overrideStatus = .unknown
@@ -123,9 +123,25 @@ final class StoppedStateSpecs: QuickSpec {
                     self.tested.play()
                     
                     // ASSERT
+                    expect(self.playerContext.state).to(beAnInstanceOf(LoadingMediaState.self))
+                }
+            }
+            
+            context("when current item & media are not set") {
+                it("should not update state context") {
+                    
+                    // ARRANGE
+                    self.mockPlayer.overrideCurrentItem = nil
+                    self.playerContext.currentMedia = nil
+                    
+                    // ACT
+                    self.tested.play()
+                    
+                    // ASSERT
                     expect(self.playerContext.state).to(beAnInstanceOf(StoppedState.self))
                 }
             }
+
         }
 
         context("stop") {

@@ -45,7 +45,7 @@ final class PlayingState: PlayerState {
     // MARK: - Lifecycle
 
     init(context: PlayerContext,
-         itemPlaybackObservingService: PlaybackObservingService = ModernAVPlayerPlaybackObservingService(),
+         itemPlaybackObservingService: PlaybackObservingService,
          routeAudioService: ModernAVPlayerRouteAudioService = ModernAVPlayerRouteAudioService(),
          interruptionAudioService: ModernAVPlayerInterruptionAudioService = ModernAVPlayerInterruptionAudioService(),
          audioSession: AVAudioSession = AVAudioSession.sharedInstance()) {

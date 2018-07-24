@@ -31,46 +31,82 @@ import Nimble
 
 final class ItemPlaybackObservingServiceTests: QuickSpec {
 
-    var tested: ModernAVPlayerPlaybackObservingService!
-    var wasPlaybackStalledCalled = false
-    var wasPlayToEndTimeCalled = false
+    private var tested: ModernAVPlayerPlaybackObservingService!
+    private var wasPlaybackStalledCalled: Bool!
+    private var wasPlayToEndTimeCalled: Bool!
+    private var wasFailedToPlayToEndTime: Bool!
+    private var player: MockCustomPlayer!
+    private var item: MockPlayerItem!
 
     override func spec() {
         
         beforeEach {
+            self.item = MockPlayerItem.createOne(url: "foo", duration: CMTime(seconds: 100, preferredTimescale: 1), status: .readyToPlay)
+            self.player = MockCustomPlayer(overrideCurrentItem: self.item)
             self.wasPlaybackStalledCalled = false
             self.wasPlayToEndTimeCalled = false
-            self.tested = ModernAVPlayerPlaybackObservingService()
+            self.wasFailedToPlayToEndTime = false
+            self.tested = ModernAVPlayerPlaybackObservingService(player: self.player)
             self.tested.onPlaybackStalled = { [weak self] in self?.wasPlaybackStalledCalled = true }
             self.tested.onPlayToEndTime = { [weak self] in self?.wasPlayToEndTimeCalled = true }
+            self.tested.onFailedToPlayToEndTime = { [weak self] in self?.wasFailedToPlayToEndTime = true }
         }
         
-        context("init") {
-            it("should register to AVPlayerItemPlaybackStalled notification") {
+        context("trig AVPlayerItemPlaybackStalled notification") {
+            it("should call associated callback") {
+                
                 // ACT
                 NotificationCenter.default.post(Notification.init(name: NSNotification.Name.AVPlayerItemPlaybackStalled))
                 
                 // ASSERT
                 expect(self.wasPlaybackStalledCalled).to(beTrue())
                 expect(self.wasPlayToEndTimeCalled).to(beFalse())
+                expect(self.wasFailedToPlayToEndTime).to(beFalse())
             }
+        }
             
-            it("should register to AVPlayerItemDidPlayToEndTime notification") {
+        context("trig AVPlayerItemDidPlayToEndTime but item has reached his end time") {
+            it("should call onPlayToEndTime callback") {
+            
+                // ARRANGE
+                self.player.overrideCurrentTime = CMTime(seconds: 100, preferredTimescale: 1)
+                
                 // ACT
                 NotificationCenter.default.post(Notification.init(name: NSNotification.Name.AVPlayerItemDidPlayToEndTime))
                 
                 // ASSERT
                 expect(self.wasPlaybackStalledCalled).to(beFalse())
                 expect(self.wasPlayToEndTimeCalled).to(beTrue())
+                expect(self.wasFailedToPlayToEndTime).to(beFalse())
             }
+        }
+        
+        context("trig AVPlayerItemDidPlayToEndTime but item has not reached his end time") {
+            it("should call onFailedToPlayToEndTime callback") {
+                
+                // ARRANGE
+                self.player.overrideCurrentTime = CMTime(seconds: 42, preferredTimescale: 1)
+                
+                // ACT
+                NotificationCenter.default.post(Notification.init(name: NSNotification.Name.AVPlayerItemDidPlayToEndTime))
+                
+                // ASSERT
+                expect(self.wasPlaybackStalledCalled).to(beFalse())
+                expect(self.wasPlayToEndTimeCalled).to(beFalse())
+                expect(self.wasFailedToPlayToEndTime).to(beTrue())
+            }
+        }
             
-            it("should register to AVPlayerItemFailedToPlayToEndTime notification") {
+        context("trig AVPlayerItemFailedToPlayToEndTime notification") {
+            it("should call associated callback") {
+                
                 // ACT
                 NotificationCenter.default.post(Notification.init(name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime))
                 
                 // ASSERT
                 expect(self.wasPlaybackStalledCalled).to(beFalse())
                 expect(self.wasPlayToEndTimeCalled).to(beFalse())
+                expect(self.wasFailedToPlayToEndTime).to(beTrue())
             }
         }
     }

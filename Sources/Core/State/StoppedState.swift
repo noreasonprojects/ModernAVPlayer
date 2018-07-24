@@ -43,8 +43,9 @@ struct StoppedState: PlayerState {
         
         self.context = context
         self.context.player.pause()
-        self.context.player.seek(to: kCMTimeZero)
-        self.context.currentTime = 0
+        self.context.player.seek(to: kCMTimeZero) { [context] completed in
+            if completed { context.delegate?.playerContext(didCurrentTimeChange: kCMTimeZero.seconds) }
+        }
     }
 
     func contextUpdated() {
@@ -80,7 +81,9 @@ struct StoppedState: PlayerState {
     func seek(position: Double) {
         let time = CMTime(seconds: position, preferredTimescale: context.config.preferedTimeScale)
         context.player.seek(to: time) { [context] completed in
-            if completed { context.currentTime = position }
+            if completed {
+                context.delegate?.playerContext(didCurrentTimeChange: position)
+            }
         }
     }
 

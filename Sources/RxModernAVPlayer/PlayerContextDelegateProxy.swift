@@ -49,7 +49,7 @@ ModernAVPlayerDelegate {
     
     lazy var stateSubject = PublishSubject<ModernAVPlayer.State>()
     lazy var currentMediaSubject = PublishSubject<PlayerMedia?>()
-    lazy var currentTimeSubject = PublishSubject<Double?>()
+    lazy var currentTimeSubject = PublishSubject<Double>()
     lazy var itemDurationSubject = PublishSubject<Double?>()
     lazy var debugMessageSubject = PublishSubject<String?>()
     
@@ -63,7 +63,7 @@ ModernAVPlayerDelegate {
         currentMediaSubject.onNext(media)
     }
     
-    public func modernAVPlayer(_ player: ModernAVPlayer, didCurrentTimeChange currentTime: Double?) {
+    public func modernAVPlayer(_ player: ModernAVPlayer, didCurrentTimeChange currentTime: Double) {
         currentTimeSubject.onNext(currentTime)
     }
     

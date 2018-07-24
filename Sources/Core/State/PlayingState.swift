@@ -168,7 +168,7 @@ final class PlayingState: PlayerState {
     private func setTimerObserver() {
         timerObserver = context.player.addPeriodicTimeObserver(forInterval: context.config.periodicPlayingTime,
                                                                queue: nil) { [context] time in
-            context.currentTime = time.seconds
+            context.delegate?.playerContext(didCurrentTimeChange: time.seconds)
             context.nowPlaying.overrideInfoCenter(for: MPNowPlayingInfoPropertyElapsedPlaybackTime,
                                                   value: time.seconds)
         }

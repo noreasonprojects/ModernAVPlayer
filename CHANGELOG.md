@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 	* Play not already loaded media from Paused / Stopped states 
 * Improvement:
 	* Set & fetch context item duration
+	* Fetch current time from player directly
 
 ## [0.9.6]
 * Features:

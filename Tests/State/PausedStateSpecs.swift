@@ -164,7 +164,6 @@ final class PausedStateSpecs: QuickSpec {
                 
                 // ARRANGE
                 let position = CMTime(seconds: 42, preferredTimescale: 1)
-                self.playerContext.currentTime = 0
                 
                 // ACT
                 self.tested.seek(position: position.seconds)
@@ -175,15 +174,6 @@ final class PausedStateSpecs: QuickSpec {
                 expect(self.mockPlayer.seekCompletionCallCount).to(equal(1))
                 expect(self.mockPlayer.lastSeekCompletionParam?.seconds).to(equal(42))
 
-            }
-            
-            it("should update context current time if completed") {
-                
-                // ACT
-                self.mockPlayer.lastCompletionParam?(true)
-                
-                // ASSERT
-                expect(self.playerContext.currentTime).to(equal(42))
             }
             
             it("should not update context current time if cancelled") {

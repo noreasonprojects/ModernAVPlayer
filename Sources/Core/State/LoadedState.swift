@@ -42,7 +42,6 @@ struct LoadedState: PlayerState {
     init(context: PlayerContext) {
         LoggerInHouse.instance.log(message: "Entering loaded state", event: .info)
         self.context = context
-        self.context.currentTime = 0
         
         guard let media = context.currentMedia else { assertionFailure(); return }
         
@@ -89,7 +88,9 @@ struct LoadedState: PlayerState {
     func seek(position: Double) {
         let time = CMTime(seconds: position, preferredTimescale: context.config.preferedTimeScale)
         context.player.seek(to: time) { [context] completed in
-            if completed { context.currentTime = position }
+            if completed {
+                context.delegate?.playerContext(didCurrentTimeChange: position)
+            }
         }
     }
 

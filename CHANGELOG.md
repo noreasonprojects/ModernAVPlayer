@@ -11,6 +11,8 @@ All notable changes to this project will be documented in this file.
 * Improvement:
 	* Set & fetch context item duration
 	* Fetch current time from player directly
+* Fix:
+	* Try to play when receive wrong end time notification
 
 ## [0.9.6]
 * Features:

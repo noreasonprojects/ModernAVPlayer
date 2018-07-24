@@ -24,7 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import Foundation
+import AVFoundation
 
 protocol PlaybackObservingService {
     var onPlaybackStalled: (() -> Void)? { get set }
@@ -34,6 +34,10 @@ protocol PlaybackObservingService {
 
 final class ModernAVPlayerPlaybackObservingService: PlaybackObservingService {
     
+    // MARK: - Input
+    
+    private let player: AVPlayer
+    
     // MARK: - Outputs
     
     var onPlaybackStalled: (() -> Void)?
@@ -42,8 +46,9 @@ final class ModernAVPlayerPlaybackObservingService: PlaybackObservingService {
     
     // MARK: - Init
     
-    init() {
+    init(player: AVPlayer) {
         LoggerInHouse.instance.log(message: "Init", event: .debug)
+        self.player = player
         NotificationCenter.default.addObserver(self, selector: #selector(ModernAVPlayerPlaybackObservingService.itemPlaybackStalled),
                                                name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(ModernAVPlayerPlaybackObservingService.itemPlayToEndTime),
@@ -65,14 +70,32 @@ final class ModernAVPlayerPlaybackObservingService: PlaybackObservingService {
                                                   object: nil)
     }
     
+    private func hasReallyReachedEndTime(player: AVPlayer) -> Bool {
+        guard
+            let duration = player.currentItem?.duration.seconds
+            else { return false }
+        
+        /// item current time when receive end time notification
+        /// is not so accurate according to duration
+        /// added +1 make sure about the computation
+        let currentTime = player.currentTime().seconds + 1
+        return currentTime >= duration
+    }
+    
     @objc
     private func itemPlaybackStalled() {
         LoggerInHouse.instance.log(message: "Item playback stalled notification", event: .debug)
         onPlaybackStalled?()
     }
     
+    ///
+    ///  AVPlayerItemDidPlayToEndTime notification can be triggered when buffer is empty and network is out.
+    ///  We manually check if item has really reached his end time.
+    ///
     @objc
     private func itemPlayToEndTime() {
+        guard hasReallyReachedEndTime(player: player) else { itemFailedToPlayToEndTime(); return }
+        
         LoggerInHouse.instance.log(message: "Item play to end time notification", event: .debug)
         onPlayToEndTime?()
     }

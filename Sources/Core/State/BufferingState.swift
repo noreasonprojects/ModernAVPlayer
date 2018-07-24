@@ -79,7 +79,8 @@ final class BufferingState: NSObject, PlayerState {
         }
         
         rateObservingService.onPlaying = { [context] in
-            context.changeState(state: PlayingState(context: context))
+            let playbackService = ModernAVPlayerPlaybackObservingService(player: context.player)
+            context.changeState(state: PlayingState(context: context, itemPlaybackObservingService: playbackService))
         }
     }
     

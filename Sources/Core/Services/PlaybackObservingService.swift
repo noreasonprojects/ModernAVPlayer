@@ -75,6 +75,9 @@ final class ModernAVPlayerPlaybackObservingService: PlaybackObservingService {
             let duration = player.currentItem?.duration.seconds
             else { return false }
         
+        /// item current time when receive end time notification
+        /// is not so accurate according to duration
+        /// added +1 make sure about the computation
         let currentTime = player.currentTime().seconds + 1
         return currentTime >= duration
     }

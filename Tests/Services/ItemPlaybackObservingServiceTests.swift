@@ -52,7 +52,7 @@ final class ItemPlaybackObservingServiceTests: QuickSpec {
             self.tested.onFailedToPlayToEndTime = { [weak self] in self?.wasFailedToPlayToEndTime = true }
         }
         
-        context("trig AVPlayerItemPlaybackStalled notification") {
+        context("trigger AVPlayerItemPlaybackStalled notification") {
             it("should call associated callback") {
                 
                 // ACT
@@ -65,7 +65,7 @@ final class ItemPlaybackObservingServiceTests: QuickSpec {
             }
         }
             
-        context("trig AVPlayerItemDidPlayToEndTime but item has reached his end time") {
+        context("trigger AVPlayerItemDidPlayToEndTime but item has reached his end time") {
             it("should call onPlayToEndTime callback") {
             
                 // ARRANGE
@@ -81,7 +81,7 @@ final class ItemPlaybackObservingServiceTests: QuickSpec {
             }
         }
         
-        context("trig AVPlayerItemDidPlayToEndTime but item has not reached his end time") {
+        context("trigger AVPlayerItemDidPlayToEndTime but item has not reached his end time") {
             it("should call onFailedToPlayToEndTime callback") {
                 
                 // ARRANGE
@@ -97,7 +97,7 @@ final class ItemPlaybackObservingServiceTests: QuickSpec {
             }
         }
             
-        context("trig AVPlayerItemFailedToPlayToEndTime notification") {
+        context("trigger AVPlayerItemFailedToPlayToEndTime notification") {
             it("should call associated callback") {
                 
                 // ACT

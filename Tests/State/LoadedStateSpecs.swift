@@ -130,32 +130,6 @@ final class LoadedStateSpecs: QuickSpec {
                 // ASSERT
                 expect(self.mockPlayer.seekCompletionCallCount).to(equal(1))
             }
-            
-            context("seek completion failed") {
-                it("should not update context current time") {
-                    let position: Double = 42
-                    
-                    // ACT
-                    self.loadedState.seek(position: position)
-                    self.mockPlayer.lastCompletionParam?(false)
-                    
-                    // ASSERT
-                    expect(self.tested.currentTime).to(equal(0))
-                }
-            }
-            
-            context("seek completion succeed") {
-                it("should update context current time") {
-                    let position: Double = 42
-                    
-                    // ACT
-                    self.loadedState.seek(position: position)
-                    self.mockPlayer.lastCompletionParam?(true)
-                    
-                    // ASSERT
-                    expect(self.tested.currentTime).to(equal(position))
-                }
-            }
         }
     }
 }

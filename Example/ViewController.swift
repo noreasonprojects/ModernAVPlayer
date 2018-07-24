@@ -247,11 +247,10 @@ extension ViewController {
                 let (_, state) = args
                 return state == .playing || state == .stopped
             }
-            .filter { args, duration -> Bool in
-                let (current, _) = args
-                return current != nil && duration != nil
+            .filter { _, duration -> Bool in
+                return duration != nil
             }
-            .map { return ($0.0.0!, $0.1!) } //unwrap current time & duration
+            .map { return ($0.0.0, $0.1!) } //unwrap current time & duration
             .map(setSliderPosition)
             .bind(to: slider.rx.value)
             .disposed(by: disposeBag)

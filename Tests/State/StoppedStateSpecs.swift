@@ -64,8 +64,8 @@ final class StoppedStateSpecs: QuickSpec {
 
                 // ASSERT
                 expect(self.mockPlayer.pauseCallCount).to(equal(1))
-                expect(self.mockPlayer.seekCallCount).to(equal(1))
-                expect(self.mockPlayer.lastSeekParam).to(equal(kCMTimeZero))
+                expect(self.mockPlayer.seekCompletionCallCount).to(equal(1))
+                expect(self.mockPlayer.lastSeekCompletionParam).to(equal(kCMTimeZero))
             }
         }
 
@@ -175,25 +175,18 @@ final class StoppedStateSpecs: QuickSpec {
                 // ACT
                 self.tested.seek(position: position.seconds)
             }
+            
             it("should forward seek to player") {
 
                 // ASSERT
-                expect(self.mockPlayer.seekCompletionCallCount).to(equal(1))
+                expect(self.mockPlayer.seekCompletionCallCount).to(equal(2))
                 expect(self.mockPlayer.lastSeekCompletionParam?.seconds).to(equal(42))
             }
+            
             it("should not update state context") {
                 
                 // ASSERT
                 expect(self.playerContext.state).to(beAnInstanceOf(StoppedState.self))
-            }
-            
-            it("should update context current time if completed") {
-                
-                // ACT
-                self.mockPlayer.lastCompletionParam?(true)
-                
-                // ASSERT
-                expect(self.playerContext.currentTime).to(equal(42))
             }
             
             it("should not update context current time if cancelled") {

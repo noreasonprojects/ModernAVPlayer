@@ -61,13 +61,6 @@ final class MockCustomPlayer: AVPlayer {
         playCallCount += 1
     }
     
-    var seekCallCount = 0
-    var lastSeekParam: CMTime?
-    override func seek(to time: CMTime) {
-        seekCallCount += 1
-        lastSeekParam = time
-    }
-    
     var seekCompletionCallCount = 0
     var lastSeekCompletionParam: CMTime?
     var lastCompletionParam: ((Bool) -> Void)?

@@ -29,7 +29,7 @@ import AVFoundation
 protocol PlayerContextDelegate: class {
     func playerContext(didStateChange state: ModernAVPlayer.State)
     func playerContext(didCurrentMediaChange media: PlayerMedia?)
-    func playerContext(didCurrentTimeChange currentTime: Double?)
+    func playerContext(didCurrentTimeChange currentTime: Double)
     func playerContext(didItemDurationChange itemDuration: Double?)
     func playerContext(debugMessage: String?)
 }
@@ -40,7 +40,7 @@ protocol PlayerContext: class, MediaPlayer {
     var config: PlayerConfiguration { get }
     var currentMedia: PlayerMedia? { get set }
     var currentItem: AVPlayerItem? { get }
-    var currentTime: Double? { get set }
+    var currentTime: Double { get }
     var debugMessage: String? { get set }
     var delegate: PlayerContextDelegate? { get }
     var itemDuration: Double? { get }
@@ -73,8 +73,8 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
     var currentMedia: PlayerMedia? {
         didSet { delegate?.playerContext(didCurrentMediaChange: currentMedia) }
     }
-    var currentTime: Double? {
-        didSet { delegate?.playerContext(didCurrentTimeChange: currentTime) }
+    var currentTime: Double {
+        return player.currentTime().seconds
     }
     var itemDuration: Double? {
         return currentItem?.duration.seconds

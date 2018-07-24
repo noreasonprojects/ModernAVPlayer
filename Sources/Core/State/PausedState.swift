@@ -92,7 +92,9 @@ final class PausedState: PlayerState {
     func seek(position: Double) {
         let time = CMTime(seconds: position, preferredTimescale: context.config.preferedTimeScale)
         context.player.seek(to: time) { [context] completed in
-            if completed { context.currentTime = position }
+            if completed {
+                context.delegate?.playerContext(didCurrentTimeChange: position)
+            }
         }
     }
 

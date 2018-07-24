@@ -67,8 +67,7 @@ final class LoadingMediaState: PlayerState {
          Fix side effect when coming from failed state
          */
         context.player.replaceCurrentItem(with: nil)
-        
-        context.currentTime = nil
+
         context.audioSessionType.activate()
         
         setupInterruptionCallback()
@@ -137,6 +136,7 @@ final class LoadingMediaState: PlayerState {
         
         startObservingItemStatus(item: item)
         context.player.replaceCurrentItem(with: item)
+        context.delegate?.playerContext(didCurrentTimeChange: 0)
     }
     
     private func startObservingItemStatus(item: AVPlayerItem) {

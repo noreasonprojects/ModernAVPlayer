@@ -57,6 +57,8 @@ public protocol PlayerConfiguration {
     /// Logger
     ///
     var loggerLevelFilter: LoggerInHouse.LogEvent { get }
+    var loggerDomains: [LoggerDomain] { get }
+    var loggerDateFormat: String { get }
 }
 
 public struct ModernAVPlayerConfiguration: PlayerConfiguration {
@@ -80,6 +82,8 @@ public struct ModernAVPlayerConfiguration: PlayerConfiguration {
     public var useDefaultRemoteCommandCenter = true
     
     public var loggerLevelFilter: LoggerInHouse.LogEvent = .info
+    public var loggerDomains: [LoggerDomain] = [.state]
+    public var loggerDateFormat = "hh:mm:ssSSS"
     
     public init() {
         periodicPlayingTime = CMTime(seconds: 1, preferredTimescale: preferedTimeScale)

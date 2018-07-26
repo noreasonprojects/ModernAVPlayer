@@ -378,6 +378,7 @@
 		E14FDEE83830F0CA66E996B5D48D87CD /* Platform.Linux.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFC838184A35DC95BF86AEB295EAC5A /* Platform.Linux.swift */; };
 		E18B5A749AC6F667FF26E95D90F85C3C /* RxCocoa-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A712AD88B075D331FFB4543FAB5F1F3 /* RxCocoa-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E1947337491C576B49D499E6C834FA73 /* ItemStatusObservingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3FCED4CFDD05B561421984D07614913 /* ItemStatusObservingService.swift */; };
+		E1C98A232109EEF3008D423F /* ModernAVPlayerLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C98A222109EEF3008D423F /* ModernAVPlayerLogger.swift */; };
 		E27B3D5AE70BE2A91510B8D1CFCFDE9B /* DefaultIfEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = D224348BD0E0D84AFD3378849AFA01CA /* DefaultIfEmpty.swift */; };
 		E292581E6314CDE34DBC338020A1BC58 /* CombineLatest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCA4F61B4A29D2C4AF9F4BA20527CD1 /* CombineLatest.swift */; };
 		E2F590A5848E058EF502464DDD6ED322 /* QuickSpecBase.m in Sources */ = {isa = PBXBuildFile; fileRef = F67520EFE838E5FD00432D6BE61DD5B9 /* QuickSpecBase.m */; };
@@ -900,6 +901,7 @@
 		E1153CE520D0217300ABCCD0 /* ModernAVPlayerCommandCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModernAVPlayerCommandCenter.swift; sourceTree = "<group>"; };
 		E14C73CF1F1CEF6BB20B7549563F61E5 /* SectionedViewDataSourceType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SectionedViewDataSourceType.swift; path = RxCocoa/Common/SectionedViewDataSourceType.swift; sourceTree = "<group>"; };
 		E1BF20DBFE95791C9E65A1F124E736E6 /* BehaviorRelay.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BehaviorRelay.swift; path = RxCocoa/Traits/BehaviorRelay.swift; sourceTree = "<group>"; };
+		E1C98A222109EEF3008D423F /* ModernAVPlayerLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModernAVPlayerLogger.swift; sourceTree = "<group>"; };
 		E247714B83331315EB23EC56E5F34E59 /* EndWith.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EndWith.swift; path = Sources/Nimble/Matchers/EndWith.swift; sourceTree = "<group>"; };
 		E27CB74D86AED9807DAD9668AC66BAF3 /* CombineLatest+arity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "CombineLatest+arity.swift"; path = "RxSwift/Observables/CombineLatest+arity.swift"; sourceTree = "<group>"; };
 		E28B58A274DAAE0A01075ADF2D8288AE /* Driver.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Driver.swift; path = RxCocoa/Traits/Driver/Driver.swift; sourceTree = "<group>"; };
@@ -1580,6 +1582,7 @@
 				D4E0F841B81ABD20CB51316F82505C28 /* InterruptionAudioService.swift */,
 				C3FCED4CFDD05B561421984D07614913 /* ItemStatusObservingService.swift */,
 				2586FA5B10FBAC62B54119503E8274AA /* LoggerInHouse.swift */,
+				E1C98A222109EEF3008D423F /* ModernAVPlayerLogger.swift */,
 				A7D9981123132062543F9F90DF53A05F /* NowPlayingService.swift */,
 				D7FF3CE20353B2B7E74373EFE478D9A1 /* PlaybackObservingService.swift */,
 				F29732146338A8A4572E4BF56583181B /* RateObservingService.swift */,
@@ -1973,6 +1976,7 @@
 				E1153CE620D0217300ABCCD0 /* ModernAVPlayerCommandCenter.swift in Sources */,
 				97F716F9D2B8787055981CDBD759E07B /* ModernAVPlayer.swift in Sources */,
 				456BF31420D01F4D0029577E /* PlayerMediaMetadata.swift in Sources */,
+				E1C98A232109EEF3008D423F /* ModernAVPlayerLogger.swift in Sources */,
 				F1FFF940DC931C9C01A66A3F47235434 /* NowPlayingService.swift in Sources */,
 				129ECA565CBE10F86D5EE9765DE717DD /* PausedState.swift in Sources */,
 				321302284B6B3FE6E738D84FF484736F /* PlaybackObservingService.swift in Sources */,

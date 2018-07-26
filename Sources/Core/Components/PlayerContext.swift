@@ -104,7 +104,7 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
         super.init()
 
         setupLogger()
-        LoggerInHouse.instance.log(message: "Init", event: .debug)
+        ModernAVPlayerLogger.instance.log(message: "Init", domain: .lifecycleState)
         audioSessionType.setCategory(config.audioSessionCategory)
         
         defer {
@@ -113,11 +113,11 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
     }
 
     deinit {
-        LoggerInHouse.instance.log(message: "Deinit", event: .debug)
+        ModernAVPlayerLogger.instance.log(message: "Deinit", domain: .lifecycleState)
     }
     
     private func setupLogger() {
-        LoggerInHouse.instance.levelFilter = config.loggerLevelFilter
+        ModernAVPlayerLogger.setup.config = config
     }
     
     func changeState(state: PlayerState) {

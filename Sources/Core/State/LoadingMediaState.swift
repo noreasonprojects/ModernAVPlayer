@@ -136,7 +136,9 @@ final class LoadingMediaState: PlayerState {
         
         startObservingItemStatus(item: item)
         context.player.replaceCurrentItem(with: item)
-        context.delegate?.playerContext(didCurrentTimeChange: 0)
+        
+        guard position == nil else { return }
+        context.delegate?.playerContext(didCurrentTimeChange: context.currentTime)
     }
     
     private func startObservingItemStatus(item: AVPlayerItem) {
@@ -162,7 +164,8 @@ final class LoadingMediaState: PlayerState {
         case .readyToPlay:
             guard let position = self.position else { moveToLoadedState(); return }
             let seekPosition = CMTime(seconds: position, preferredTimescale: context.config.preferedTimeScale)
-            context.player.seek(to: seekPosition) { completed in
+            context.player.seek(to: seekPosition) { [context] completed in
+                context.delegate?.playerContext(didCurrentTimeChange: context.currentTime)
                 guard completed else { return }
                 self.moveToLoadedState()
             }

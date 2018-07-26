@@ -160,5 +160,16 @@ final class LoadingMediaStateSpecs: QuickSpec {
                 expect(asset?.cancelLoadingCallCount).to(equal(1))
             }
         }
+        
+        context("seek") {
+            it("should not update state context") {
+                
+                // ACT
+                self.state.seek(position: 42)
+                
+                // ASSERT
+                expect(self.tested.state).to(beIdenticalTo(self.state))
+            }
+        }
     }
 }

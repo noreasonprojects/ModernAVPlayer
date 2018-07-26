@@ -98,7 +98,11 @@ final class BufferingState: NSObject, PlayerState {
     func seekCommand(position: Double) {
         context.currentItem?.cancelPendingSeeks()
         let time = CMTime(seconds: position, preferredTimescale: context.config.preferedTimeScale)
-        context.player.seek(to: time) { if $0 { self.playCommand() } }
+        context.player.seek(to: time) { [context] completed in
+            guard completed else { return }
+            context.delegate?.playerContext(didCurrentTimeChange: context.currentTime)
+            self.playCommand()
+        }
     }
 
     // MARK: - Shared actions

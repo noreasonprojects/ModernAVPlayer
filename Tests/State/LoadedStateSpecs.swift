@@ -38,13 +38,16 @@ final class LoadedStateSpecs: QuickSpec {
     private var tested: ModernAVPlayerContext!
     private let plugins = [MockPlayerPlugin(), MockPlayerPlugin()]
     private var item: AVPlayerItem!
+    private var delegate: MockPlayerContextDelegate!
     
     override func spec() {
         
         beforeEach {
             self.item = MockPlayerItem.createOne(url: "foo", duration: CMTime(seconds: 42, preferredTimescale: 1))
             self.mockPlayer = MockCustomPlayer(overrideCurrentItem: self.item)
+            self.delegate = MockPlayerContextDelegate()
             self.tested = ModernAVPlayerContext(player: self.mockPlayer, audioSessionType: MockAudioSession.self, plugins: self.plugins)
+            self.tested.delegate = self.delegate
             self.tested.currentMedia = self.playerMedia
             self.loadedState = LoadedState(context: self.tested)
             self.tested.state = self.loadedState
@@ -120,15 +123,47 @@ final class LoadedStateSpecs: QuickSpec {
             }
         }
         
-        context("seek") {
-            it("should call seek on player") {
-                let position: Double = 42
+        context("seek completed") {
+            beforeEach {
+                // ARRANGE
+                self.mockPlayer.seekCompletionHandlerReturn = true
                 
                 // ACT
-                self.loadedState.seek(position: position)
+                self.loadedState.seek(position: 42)
+            }
+            
+            it("should call seek on player") {
                 
                 // ASSERT
                 expect(self.mockPlayer.seekCompletionCallCount).to(equal(1))
+            }
+            
+            it("should call didCurrentMediaChange delegate method") {
+                
+                // ASSERT
+                expect(self.delegate.didCurrentTimeChangeCallCount).to(equal(1))
+            }
+        }
+        
+        context("seek cancelled") {
+            beforeEach {
+                // ARRANGE
+                self.mockPlayer.seekCompletionHandlerReturn = false
+                
+                // ACT
+                self.loadedState.seek(position: 42)
+            }
+            
+            it("should call seek on player") {
+                
+                // ASSERT
+                expect(self.mockPlayer.seekCompletionCallCount).to(equal(1))
+            }
+            
+            it("should not call didCurrentTimeChange delegate method") {
+                
+                // ASSERT
+                expect(self.delegate.didCurrentTimeChangeCallCount).to(equal(0))
             }
         }
     }

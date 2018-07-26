@@ -13,6 +13,7 @@ All notable changes to this project will be documented in this file.
 	* Fetch current time from player directly
 * Fix:
 	* Try to play when receive wrong end time notification
+	* Adjust didCurrentTimeChange delegate method
 
 ## [0.9.6]
 * Features:

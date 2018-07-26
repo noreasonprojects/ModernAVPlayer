@@ -39,15 +39,18 @@ final class PausedStateSpecs: QuickSpec {
     private var playerContext: ModernAVPlayerContext!
     private var plugin: MockPlayerPlugin!
     private var item: MockPlayerItem!
+    private var delegate: MockPlayerContextDelegate!
 
     override func spec() {
 
         beforeEach {
+            self.delegate = MockPlayerContextDelegate()
             self.item = MockPlayerItem.createOne(url: "foo", status: .unknown)
             self.media = MockPlayerMedia(url: URL(string: "foo")!, type: .clip)
             self.plugin = MockPlayerPlugin()
             self.mockPlayer = MockCustomPlayer(overrideCurrentItem: self.item)
             self.playerContext = ModernAVPlayerContext(player: self.mockPlayer, audioSessionType: MockAudioSession.self, plugins: [self.plugin])
+            self.playerContext.delegate = self.delegate
             self.playerContext.currentMedia = self.media
             self.tested = PausedState(context: self.playerContext)
             self.playerContext.state = self.tested
@@ -159,32 +162,50 @@ final class PausedStateSpecs: QuickSpec {
             }
         }
 
-        context("seek to 42") {
+        context("seek completed to 42") {
             beforeEach {
                 
                 // ARRANGE
                 let position = CMTime(seconds: 42, preferredTimescale: 1)
+                self.mockPlayer.seekCompletionHandlerReturn = true
                 
                 // ACT
                 self.tested.seek(position: position.seconds)
             }
-            it("should not update state context") {
+            
+            it("should call player seek") {
 
                 // ASSERT
                 expect(self.mockPlayer.seekCompletionCallCount).to(equal(1))
-                expect(self.mockPlayer.lastSeekCompletionParam?.seconds).to(equal(42))
-
+                expect(self.mockPlayer.seekCompletionLastParam?.seconds).to(equal(42))
             }
             
-            it("should not update context current time if cancelled") {
+            it("should call didCurrenTimeChange") {
+                expect(self.delegate.didCurrentTimeChangeCallCount).to(equal(1))
+            }
+        }
+        
+        context("seek cancelled") {
+            beforeEach {
+                
+                // ARRANGE
+                let position = CMTime(seconds: 42, preferredTimescale: 1)
+                self.mockPlayer.seekCompletionHandlerReturn = false
                 
                 // ACT
-                self.mockPlayer.lastCompletionParam?(false)
-                
-                // ASSERT
-                expect(self.playerContext.currentTime).to(equal(0))
+                self.tested.seek(position: position.seconds)
             }
             
+            it("should call player seek") {
+                
+                // ASSERT
+                expect(self.mockPlayer.seekCompletionCallCount).to(equal(1))
+                expect(self.mockPlayer.seekCompletionLastParam?.seconds).to(equal(42))
+            }
+            
+            it("should call didCurrenTimeChange") {
+                expect(self.delegate.didCurrentTimeChangeCallCount).to(equal(0))
+            }
         }
     }
 }

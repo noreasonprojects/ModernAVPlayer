@@ -37,6 +37,7 @@ struct ModernAVPlayerRemoteCommandCenter {
     
     @discardableResult
     init(player: MediaPlayer, remote: MPRemoteCommandCenter = MPRemoteCommandCenter.shared()) {
+        ModernAVPlayerLogger.instance.log(message: "Init (struct)", domain: .lifecycleService)
         self.remote = remote
         configure(player: player)
     }
@@ -67,7 +68,7 @@ struct ModernAVPlayerRemoteCommandCenter {
     
     private func setPlayCommandCallback(player: MediaPlayer) {
         remote.playCommand.addTarget { [player] _ -> MPRemoteCommandHandlerStatus in
-            LoggerInHouse.instance.log(message: "Remote command: play", event: .info)
+            ModernAVPlayerLogger.instance.log(message: "Remote command: play", domain: .service)
             player.play()
             return .success
         }
@@ -75,7 +76,7 @@ struct ModernAVPlayerRemoteCommandCenter {
     
     private func setPauseCommandCallback(player: MediaPlayer) {
         remote.pauseCommand.addTarget { [player] _ -> MPRemoteCommandHandlerStatus in
-            LoggerInHouse.instance.log(message: "Remote command: pause", event: .info)
+            ModernAVPlayerLogger.instance.log(message: "Remote command: pause", domain: .service)
             player.pause()
             return .success
         }
@@ -88,7 +89,7 @@ struct ModernAVPlayerRemoteCommandCenter {
                 else { return .commandFailed }
             
             let position = e.positionTime
-            LoggerInHouse.instance.log(message: "Remote command: seek to \(position)", event: .info)
+            ModernAVPlayerLogger.instance.log(message: "Remote command: seek to \(position)", domain: .service)
             player.seek(position: position)
             return .success
         }

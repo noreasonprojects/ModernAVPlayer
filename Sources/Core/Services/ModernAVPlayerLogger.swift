@@ -30,9 +30,9 @@ public enum LoggerDomain: CustomStringConvertible {
     case state
     case service
     case error
-    case warning
     case lifecycleService
     case lifecycleState
+    case unavailableCommand
     
     public var description: String {
         switch self {
@@ -46,7 +46,7 @@ public enum LoggerDomain: CustomStringConvertible {
             return "[🔈]"
         case .lifecycleState:
             return "[🔈 🚥]"
-        case .warning:
+        case .unavailableCommand:
             return "[🙅‍♂️]"
         }
     }
@@ -58,32 +58,24 @@ final class LoggerParamSetup {
 
 final class ModernAVPlayerLogger {
     
-    static let setup = LoggerParamSetup()
-    
-    // MARK: Singleton
+    // MARK: Singletons
     
     static let instance = ModernAVPlayerLogger()
+    static let setup = LoggerParamSetup()
     
     // MARK: Input
     
-    var domains: [LoggerDomain]!
-    
-    // MARK: Private variables
-    
-    private let dateFormat = "hh:mm:ssSSS"
-    
+    private var domains: [LoggerDomain] = []
     private let formatter = DateFormatter()
     
     // MARK: Init
     
     private init() {
-        let param = ModernAVPlayerLogger.setup.config
-        
-        guard let configuration = param
+        guard let config = ModernAVPlayerLogger.setup.config
             else { assertionFailure("should provide configuration to logger"); return }
         
-        domains = configuration.loggerDomains
-        setupDateFormatter(dateFormat: configuration.loggerDateFormat)
+        domains = config.loggerDomains
+        setupDateFormatter(dateFormat: config.loggerDateFormat)
     }
     
     private func setupDateFormatter(dateFormat: String) {

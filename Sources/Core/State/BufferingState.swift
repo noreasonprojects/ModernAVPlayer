@@ -43,7 +43,7 @@ final class BufferingState: NSObject, PlayerState {
     init(context: PlayerContext,
          rateObservingService: RateObservingService? = nil,
          interruptionAudioService: ModernAVPlayerInterruptionAudioService = ModernAVPlayerInterruptionAudioService()) {
-        LoggerInHouse.instance.log(message: "Entering buffering state", event: .info)
+        ModernAVPlayerLogger.instance.log(message: "Init", domain: .lifecycleState)
         
         guard let item = context.currentItem else { fatalError("item should exist") }
         
@@ -61,7 +61,7 @@ final class BufferingState: NSObject, PlayerState {
     }
     
     deinit {
-        LoggerInHouse.instance.log(message: "Deinit", event: .debug)
+        ModernAVPlayerLogger.instance.log(message: "Deinit", domain: .lifecycleState)
     }
     
     // MARK: - Setup
@@ -115,7 +115,7 @@ final class BufferingState: NSObject, PlayerState {
     func play() {
         let debug = "Already trying to play"
         context.debugMessage = debug
-        LoggerInHouse.instance.log(message: "Already trying to play", event: .warning)
+        ModernAVPlayerLogger.instance.log(message: "Already trying to play", domain: .unavailableCommand)
     }
 
     func seek(position: Double) {

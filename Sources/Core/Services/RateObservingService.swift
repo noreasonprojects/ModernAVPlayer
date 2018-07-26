@@ -56,7 +56,7 @@ final class ModernAVPlayerRateObservingService: RateObservingService {
     // MARK: - Lifecycle
     
     init(config: PlayerConfiguration, item: AVPlayerItem, timerFactory: TimerFactory = ModernAVPlayerTimerFactory()) {
-        LoggerInHouse.instance.log(message: "Init", event: .debug)
+        ModernAVPlayerLogger.instance.log(message: "Init", domain: .lifecycleService)
         timeInterval = config.rateObservingTickTime
         timeout = config.rateObservingTimeout
         self.timerFactory = timerFactory
@@ -65,13 +65,13 @@ final class ModernAVPlayerRateObservingService: RateObservingService {
     
     deinit {
         timer?.invalidate()
-        LoggerInHouse.instance.log(message: "Deinit", event: .debug)
+        ModernAVPlayerLogger.instance.log(message: "Deinit", domain: .lifecycleService)
     }
     
     // MARK: - Rate Service
     
     func start() {
-        LoggerInHouse.instance.log(message: "Item: \(item)", event: .verbose)
+        ModernAVPlayerLogger.instance.log(message: "Item: \(item)", domain: .service)
         remainingTime = timeout
         timer?.invalidate()
         DispatchQueue.main.async {
@@ -102,7 +102,7 @@ final class ModernAVPlayerRateObservingService: RateObservingService {
             timer?.invalidate()
             onTimeout?()
         } else {
-            LoggerInHouse.instance.log(message: "Remaining time: \(remainingTime)", event: .verbose)
+            ModernAVPlayerLogger.instance.log(message: "Remaining time: \(remainingTime)", domain: .service)
         }
     }
 }

@@ -39,7 +39,7 @@ final class ModernAVPlayerRouteAudioService {
     // MARK: - Init
     
     init() {
-        LoggerInHouse.instance.log(message: "Init", event: .debug)
+        ModernAVPlayerLogger.instance.log(message: "Init", domain: .lifecycleService)
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(audioRouteChanged),
                                                name: notificationName,
@@ -47,13 +47,13 @@ final class ModernAVPlayerRouteAudioService {
     }
     
     deinit {
-        LoggerInHouse.instance.log(message: "Deinit", event: .debug)
+        ModernAVPlayerLogger.instance.log(message: "Deinit", domain: .lifecycleService)
         NotificationCenter.default.removeObserver(self, name: notificationName, object: nil)
     }
     
     @objc
     private func audioRouteChanged(notification: Notification) {
-        LoggerInHouse.instance.log(message: "Update audio route detected", event: .info)
+        ModernAVPlayerLogger.instance.log(message: "Update audio route detected", domain: .service)
         guard
             let info = notification.userInfo,
             let reasonInt = info[AVAudioSessionRouteChangeReasonKey] as? UInt,

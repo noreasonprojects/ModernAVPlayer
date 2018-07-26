@@ -47,7 +47,7 @@ final class ModernAVPlayerPlaybackObservingService: PlaybackObservingService {
     // MARK: - Init
     
     init(player: AVPlayer) {
-        LoggerInHouse.instance.log(message: "Init", event: .debug)
+        ModernAVPlayerLogger.instance.log(message: "Init", domain: .lifecycleService)
         self.player = player
         NotificationCenter.default.addObserver(self, selector: #selector(ModernAVPlayerPlaybackObservingService.itemPlaybackStalled),
                                                name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: nil)
@@ -58,7 +58,7 @@ final class ModernAVPlayerPlaybackObservingService: PlaybackObservingService {
     }
     
     deinit {
-        LoggerInHouse.instance.log(message: "Deinit", event: .debug)
+        ModernAVPlayerLogger.instance.log(message: "Deinit", domain: .lifecycleService)
         NotificationCenter.default.removeObserver(self,
                                                   name: NSNotification.Name.AVPlayerItemPlaybackStalled,
                                                   object: nil)
@@ -84,7 +84,7 @@ final class ModernAVPlayerPlaybackObservingService: PlaybackObservingService {
     
     @objc
     private func itemPlaybackStalled() {
-        LoggerInHouse.instance.log(message: "Item playback stalled notification", event: .debug)
+        ModernAVPlayerLogger.instance.log(message: "Item playback stalled notification", domain: .service)
         onPlaybackStalled?()
     }
     
@@ -95,14 +95,13 @@ final class ModernAVPlayerPlaybackObservingService: PlaybackObservingService {
     @objc
     private func itemPlayToEndTime() {
         guard hasReallyReachedEndTime(player: player) else { itemFailedToPlayToEndTime(); return }
-        
-        LoggerInHouse.instance.log(message: "Item play to end time notification", event: .debug)
+        ModernAVPlayerLogger.instance.log(message: "Item play to end time notification", domain: .service)
         onPlayToEndTime?()
     }
     
     @objc
     private func itemFailedToPlayToEndTime() {
-        LoggerInHouse.instance.log(message: "Item failed to play endtime notification", event: .debug)
+        ModernAVPlayerLogger.instance.log(message: "Item failed to play endtime notification", domain: .service)
         onFailedToPlayToEndTime?()
     }
 }

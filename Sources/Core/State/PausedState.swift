@@ -47,7 +47,7 @@ final class PausedState: PlayerState {
     
     init(context: PlayerContext,
          interruptionAudioService: ModernAVPlayerInterruptionAudioService = ModernAVPlayerInterruptionAudioService()) {
-        LoggerInHouse.instance.log(message: "Entering paused state", event: .info)
+        ModernAVPlayerLogger.instance.log(message: "Init", domain: .lifecycleState)
         self.context = context
         self.context.player.pause()
         self.interruptionAudioService = interruptionAudioService
@@ -58,7 +58,7 @@ final class PausedState: PlayerState {
     }
     
     deinit {
-        LoggerInHouse.instance.log(message: "Deinit", event: .debug)
+        ModernAVPlayerLogger.instance.log(message: "Deinit", domain: .lifecycleState)
     }
     
     // MARK: - Shared actions
@@ -71,7 +71,7 @@ final class PausedState: PlayerState {
     func pause() {
         let debug = "Already paused"
         context.debugMessage = debug
-        LoggerInHouse.instance.log(message: debug, event: .warning)
+        ModernAVPlayerLogger.instance.log(message: debug, domain: .unavailableCommand)
     }
 
     func play() {
@@ -85,7 +85,7 @@ final class PausedState: PlayerState {
         } else {
             let debug = "Please load item before playing"
             context.debugMessage = debug
-            LoggerInHouse.instance.log(message: debug, event: .warning)
+            ModernAVPlayerLogger.instance.log(message: debug, domain: .unavailableCommand)
         }
     }
 

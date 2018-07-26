@@ -81,6 +81,7 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
     }
     var state: PlayerState! {
         didSet {
+            ModernAVPlayerLogger.instance.log(message: state.type.description, domain: .state)
             state.contextUpdated()
             delegate?.playerContext(didStateChange: state.type)
         }

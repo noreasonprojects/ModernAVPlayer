@@ -33,7 +33,6 @@
 		101C1BABD01341301E4877ED919AE133 /* AsyncLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86055119D7F7D13E1B53C1C44136E74D /* AsyncLock.swift */; };
 		10B272C2D4788ABB0511905D73A6090E /* VirtualTimeScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF12346E0F66C636F66FB4F783309BF /* VirtualTimeScheduler.swift */; };
 		10BC5D6A86D36DFBC9E192CC201D8146 /* UISlider+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC49DA13538D6B3BC99C6175EC00C45 /* UISlider+Rx.swift */; };
-		11FE0E9945C20570FB380CF3A422D35B /* LoggerInHouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2586FA5B10FBAC62B54119503E8274AA /* LoggerInHouse.swift */; };
 		11FFC5B80E5A4C2F83B52585CB0B31A7 /* RxMutableBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0BEA930911374CBE30D894A68903AD /* RxMutableBox.swift */; };
 		1217FE347CA9C9425B13C45B340625BD /* InitState.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1FDB66F4CF8429F461250ECA7A58A6 /* InitState.swift */; };
 		124154C80F22F64EDD989B0C77F4E13C /* RxSwift-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F870883A4A97A4A9C10DA188948F403 /* RxSwift-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -562,7 +561,6 @@
 		230B28D0FA9D1C8848694BF8ED1F94BC /* QuickTestSuite.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = QuickTestSuite.swift; path = Sources/Quick/QuickTestSuite.swift; sourceTree = "<group>"; };
 		235B70D6A0F7F9FF3942C193F1E01C38 /* AsSingle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AsSingle.swift; path = RxSwift/Observables/AsSingle.swift; sourceTree = "<group>"; };
 		247206810BA58B280CD78B3BE2D547B0 /* PausedState.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PausedState.swift; sourceTree = "<group>"; };
-		2586FA5B10FBAC62B54119503E8274AA /* LoggerInHouse.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LoggerInHouse.swift; sourceTree = "<group>"; };
 		2587E77F399C123F0692E6D77C7F2E5A /* Buffer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Buffer.swift; path = RxSwift/Observables/Buffer.swift; sourceTree = "<group>"; };
 		285CFA98561DD41366E35A146D99348A /* Quick.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Quick.xcconfig; sourceTree = "<group>"; };
 		286C455178CC01FD0B4AEB933A75B7C9 /* AnonymousDisposable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AnonymousDisposable.swift; path = RxSwift/Disposables/AnonymousDisposable.swift; sourceTree = "<group>"; };
@@ -1581,7 +1579,6 @@
 				987EFAA04CCB41C590E5A4A40AD6315F /* AudioSessionService.swift */,
 				D4E0F841B81ABD20CB51316F82505C28 /* InterruptionAudioService.swift */,
 				C3FCED4CFDD05B561421984D07614913 /* ItemStatusObservingService.swift */,
-				2586FA5B10FBAC62B54119503E8274AA /* LoggerInHouse.swift */,
 				E1C98A222109EEF3008D423F /* ModernAVPlayerLogger.swift */,
 				A7D9981123132062543F9F90DF53A05F /* NowPlayingService.swift */,
 				D7FF3CE20353B2B7E74373EFE478D9A1 /* PlaybackObservingService.swift */,
@@ -1970,7 +1967,6 @@
 				E1947337491C576B49D499E6C834FA73 /* ItemStatusObservingService.swift in Sources */,
 				4442CC6BC1ABC790F54973A6B5B58CC8 /* LoadedState.swift in Sources */,
 				059A3D4E9938573CF39226AECEB6AF25 /* LoadingMediaState.swift in Sources */,
-				11FE0E9945C20570FB380CF3A422D35B /* LoggerInHouse.swift in Sources */,
 				0A9B751CA9ABB08A4BF7DE5D4C833570 /* MediaType.swift in Sources */,
 				007828AFEC669C3BD88BB4CF74ECFCEC /* ModernAVPlayer-dummy.m in Sources */,
 				E1153CE620D0217300ABCCD0 /* ModernAVPlayerCommandCenter.swift in Sources */,

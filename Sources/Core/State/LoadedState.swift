@@ -40,7 +40,7 @@ struct LoadedState: PlayerState {
     // MARK: - Init
 
     init(context: PlayerContext) {
-        LoggerInHouse.instance.log(message: "Entering loaded state", event: .info)
+        ModernAVPlayerLogger.instance.log(message: "Init (struct)", domain: .lifecycleState)
         self.context = context
         
         guard let media = context.currentMedia else { assertionFailure(); return }

@@ -39,6 +39,7 @@ final class StoppedStateSpecs: QuickSpec {
     private var playerContext: ModernAVPlayerContext!
     private var plugin: MockPlayerPlugin!
     private var item: MockPlayerItem!
+    private var delegate: MockPlayerContextDelegate!
 
     override func spec() {
 
@@ -47,13 +48,17 @@ final class StoppedStateSpecs: QuickSpec {
             self.media = MockPlayerMedia(url: URL(string: "foo")!, type: .clip)
             self.plugin = MockPlayerPlugin()
             self.mockPlayer = MockCustomPlayer(overrideCurrentItem: self.item)
+            self.mockPlayer.seekCompletionHandlerReturn = true
+            self.delegate = MockPlayerContextDelegate()
             self.playerContext = ModernAVPlayerContext(player: self.mockPlayer, audioSessionType: MockAudioSession.self, plugins: [self.plugin])
+            self.playerContext.delegate = self.delegate
             self.playerContext.currentMedia = self.media
             self.tested = StoppedState(context: self.playerContext)
             self.playerContext.state = self.tested
         }
 
         context("init") {
+            
             it("should execute plugin method") {
                 
                 // ASSERT
@@ -65,7 +70,13 @@ final class StoppedStateSpecs: QuickSpec {
                 // ASSERT
                 expect(self.mockPlayer.pauseCallCount).to(equal(1))
                 expect(self.mockPlayer.seekCompletionCallCount).to(equal(1))
-                expect(self.mockPlayer.lastSeekCompletionParam).to(equal(kCMTimeZero))
+                expect(self.mockPlayer.seekCompletionLastParam).to(equal(kCMTimeZero))
+            }
+            
+            it("should call didCurrentTimeChange delegate method") {
+                
+                // ASSERT
+                expect(self.delegate.didCurrentTimeChangeCallCount).to(equal(1))
             }
         }
 
@@ -180,7 +191,7 @@ final class StoppedStateSpecs: QuickSpec {
 
                 // ASSERT
                 expect(self.mockPlayer.seekCompletionCallCount).to(equal(2))
-                expect(self.mockPlayer.lastSeekCompletionParam?.seconds).to(equal(42))
+                expect(self.mockPlayer.seekCompletionLastParam?.seconds).to(equal(42))
             }
             
             it("should not update state context") {
@@ -189,13 +200,10 @@ final class StoppedStateSpecs: QuickSpec {
                 expect(self.playerContext.state).to(beAnInstanceOf(StoppedState.self))
             }
             
-            it("should not update context current time if cancelled") {
-                
-                // ACT
-                self.mockPlayer.lastCompletionParam?(false)
+            it("should call didCurrentTimeChange delegate method") {
                 
                 // ASSERT
-                expect(self.playerContext.currentTime).to(equal(0))
+                expect(self.delegate.didCurrentTimeChangeCallCount).to(equal(2))
             }
         }
     }

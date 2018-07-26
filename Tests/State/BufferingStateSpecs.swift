@@ -38,13 +38,16 @@ final class BufferingStateSpecs: QuickSpec {
     private var mockRateService: MockObservingRateService!
     private var tested: ModernAVPlayerContext!
     private var plugin: MockPlayerPlugin!
+    private var delegate: MockPlayerContextDelegate!
 
     override func spec() {
         beforeEach {
             self.plugin = MockPlayerPlugin()
             self.item = MockPlayerItem.createOne(url: "foo")
             self.mockPlayer = MockCustomPlayer(overrideCurrentItem: self.item)
+            self.delegate = MockPlayerContextDelegate()
             self.tested = ModernAVPlayerContext(player: self.mockPlayer, audioSessionType: MockAudioSession.self, plugins: [self.plugin])
+            self.tested.delegate = self.delegate
             self.tested.currentMedia = self.playerMedia
             self.mockRateService = MockObservingRateService(config: self.tested.config, item: self.item)
             self.bufferingState = BufferingState(context: self.tested, rateObservingService: self.mockRateService)
@@ -140,7 +143,53 @@ final class BufferingStateSpecs: QuickSpec {
                 }
             }
         }
-
+        
+        context("seek command completed") {
+            beforeEach {
+                
+                // ARRANGE
+                self.mockPlayer.seekCompletionHandlerReturn = true
+                
+                // ACT
+                self.bufferingState.seekCommand(position: 42)
+            }
+            
+            it("should call didCurrentTimeChange delegate method") {
+                
+                // ASSERT
+                expect(self.delegate.didCurrentTimeChangeCallCount).to(equal(1))
+            }
+            
+            it("should play then") {
+                
+                // ASSERT
+                expect(self.mockPlayer.playCallCount).to(equal(1))
+            }
+        }
+        
+        context("seek command cancelled") {
+            beforeEach {
+                
+                // ARRANGE
+                self.mockPlayer.seekCompletionHandlerReturn = false
+                
+                // ACT
+                self.bufferingState.seekCommand(position: 42)
+            }
+            
+            it("should not call didCurrentTimeChange delegate method") {
+                
+                // ASSERT
+                expect(self.delegate.didCurrentTimeChangeCallCount).to(equal(0))
+            }
+            
+            it("should not play") {
+                
+                // ASSERT
+                expect(self.mockPlayer.playCallCount).to(equal(0))
+            }
+        }
+        
         context("stop") {
             it("should stop observing rate service") {
                 

@@ -62,12 +62,14 @@ final class MockCustomPlayer: AVPlayer {
     }
     
     var seekCompletionCallCount = 0
-    var lastSeekCompletionParam: CMTime?
-    var lastCompletionParam: ((Bool) -> Void)?
+    var seekCompletionLastParam: CMTime?
+    var seekCompletionHandlerReturn: Bool?
     override func seek(to time: CMTime, completionHandler: @escaping (Bool) -> Void) {
         seekCompletionCallCount += 1
-        lastSeekCompletionParam = time
-        lastCompletionParam = completionHandler
+        seekCompletionLastParam = time
+        
+        guard let completion = seekCompletionHandlerReturn else { return }
+        completionHandler(completion)
     }
     
     var replaceCurrentItemCallCount = 0

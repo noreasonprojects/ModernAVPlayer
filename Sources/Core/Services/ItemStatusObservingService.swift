@@ -36,7 +36,7 @@ final class ModernAVPLayerItemStatusObservingService: NSObject {
     // MARK: - Init
     
     init(item: AVPlayerItem, callback: @escaping (AVPlayerItemStatus) -> Void) {
-        LoggerInHouse.instance.log(message: "Init", event: .debug)
+        ModernAVPlayerLogger.instance.log(message: "Init", domain: .lifecycleService)
         self.item = item
         self.itemStatusCallback = callback
         super.init()
@@ -45,7 +45,7 @@ final class ModernAVPLayerItemStatusObservingService: NSObject {
     }
     
     deinit {
-        LoggerInHouse.instance.log(message: "Deinit", event: .debug)
+        ModernAVPlayerLogger.instance.log(message: "Deinit", domain: .lifecycleService)
         item.removeObserver(self, forKeyPath: #keyPath(AVPlayerItem.status))
     }
 

@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 * Features:
 	* Play current media from Failed state
 	* Play not already loaded media from Paused / Stopped states 
+	* Log by domain
 * Improvement:
 	* Set & fetch context item duration
 	* Fetch current time from player directly

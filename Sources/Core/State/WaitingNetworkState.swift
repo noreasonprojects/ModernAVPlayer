@@ -44,14 +44,15 @@ final class WaitingNetworkState: PlayerState {
          autostart: Bool,
          error: PlayerError,
          reachabilityService: ReachabilityService? = nil) {
-        LoggerInHouse.instance.log(message: "Entering waiting for network state", event: .info)
+        
+        ModernAVPlayerLogger.instance.log(message: "Init", domain: .lifecycleState)
         self.context = context
         self.reachability = reachabilityService ?? ModernAVPlayerReachabilityService(config: context.config)
         setupReachabilityCallbacks(autostart: autostart, urlToReload: urlToReload, error: error)
     }
     
     deinit {
-        LoggerInHouse.instance.log(message: "Deinit", event: .debug)
+        ModernAVPlayerLogger.instance.log(message: "Deinit", domain: .lifecycleState)
     }
     
     func contextUpdated() {
@@ -100,13 +101,13 @@ final class WaitingNetworkState: PlayerState {
     func play() {
         let debug = "Unable to play, reload a media first"
         context.debugMessage = debug
-        LoggerInHouse.instance.log(message: "Unable to play, reload a media first", event: .warning)
+        ModernAVPlayerLogger.instance.log(message: debug, domain: .unavailableCommand)
     }
     
     func seek(position: Double) {
         let debug = "Unable to seek, load a media first"
         context.debugMessage = debug
-        LoggerInHouse.instance.log(message: "Unable to seek, load a media first", event: .warning)
+        ModernAVPlayerLogger.instance.log(message: debug, domain: .unavailableCommand)
     }
     
     func stop() {

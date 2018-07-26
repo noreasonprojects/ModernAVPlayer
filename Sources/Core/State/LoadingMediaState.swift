@@ -48,7 +48,7 @@ final class LoadingMediaState: PlayerState {
          autostart: Bool,
          position: Double? = nil,
          interruptionAudioService: ModernAVPlayerInterruptionAudioService = ModernAVPlayerInterruptionAudioService()) {
-        LoggerInHouse.instance.log(message: "Entering loading state", event: .info)
+        ModernAVPlayerLogger.instance.log(message: "Init", domain: .lifecycleState)
         
         self.context = context
         self.media = media
@@ -81,7 +81,7 @@ final class LoadingMediaState: PlayerState {
     }
 
     deinit {
-        LoggerInHouse.instance.log(message: "Deinit", event: .debug)
+        ModernAVPlayerLogger.instance.log(message: "Deinit", domain: .lifecycleState)
     }
     
     private func setupInterruptionCallback() {
@@ -104,13 +104,13 @@ final class LoadingMediaState: PlayerState {
     func play() {
         let debug = "Please wait to be loaded"
         context.debugMessage = debug
-        LoggerInHouse.instance.log(message: debug, event: .warning)
+        ModernAVPlayerLogger.instance.log(message: debug, domain: .unavailableCommand)
     }
 
     func seek(position: Double) {
         let debug = "Unable to seek, wait the media to be loaded"
         context.debugMessage = debug
-        LoggerInHouse.instance.log(message: debug, event: .warning)
+        ModernAVPlayerLogger.instance.log(message: debug, domain: .unavailableCommand)
     }
 
     func stop() {
@@ -152,7 +152,7 @@ final class LoadingMediaState: PlayerState {
             if let token = context.bgToken { UIApplication.shared.endBackgroundTask(token) }
             context.bgToken = nil
         }
-        LoggerInHouse.instance.log(message: "StartBgTask create: \(String(describing: context.bgToken))", event: .debug)
+        ModernAVPlayerLogger.instance.log(message: "StartBgTask create: \(String(describing: context.bgToken))", domain: .service)
     }
 
     private func moveToNextState(with status: AVPlayerItemStatus) {

@@ -64,7 +64,7 @@ final class ModernAVPlayerReachabilityService: ReachabilityService {
     init(config: PlayerConfiguration,
          dataTaskFactory: URLSessionDataTaskFactory = ModernAVPlayerURLSessionDataTaskFactory(),
          timerFactory: TimerFactory = ModernAVPlayerTimerFactory()) {
-        LoggerInHouse.instance.log(message: "Init", event: .debug)
+        ModernAVPlayerLogger.instance.log(message: "Init", domain: .lifecycleService)
         
         self.dataTaskFactory = dataTaskFactory
         self.timerFactory = timerFactory
@@ -75,7 +75,7 @@ final class ModernAVPlayerReachabilityService: ReachabilityService {
     }
 
     deinit {
-        LoggerInHouse.instance.log(message: "Deinit", event: .debug)
+        ModernAVPlayerLogger.instance.log(message: "Deinit", domain: .lifecycleService)
         cancelTasks()
     }
 
@@ -102,7 +102,7 @@ final class ModernAVPlayerReachabilityService: ReachabilityService {
                 error == nil,
                 let r = response as? HTTPURLResponse,
                 r.statusCode >= 200 && r.statusCode < 300
-                else { LoggerInHouse.instance.log(message: "Unreachable network", event: .debug); return }
+                else { ModernAVPlayerLogger.instance.log(message: "Unreachable network", domain: .service); return }
             
             self?.timer?.invalidate()
             self?.isReachable?()

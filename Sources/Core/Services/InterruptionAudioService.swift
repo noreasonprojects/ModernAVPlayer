@@ -40,7 +40,7 @@ final class ModernAVPlayerInterruptionAudioService {
     // MARK: - Init
     
     init() {
-        LoggerInHouse.instance.log(message: "Init", event: .debug)
+        ModernAVPlayerLogger.instance.log(message: "Init", domain: .lifecycleService)
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(incomingInterruption),
                                                name: notificationName,
@@ -48,13 +48,13 @@ final class ModernAVPlayerInterruptionAudioService {
     }
     
     deinit {
-        LoggerInHouse.instance.log(message: "Deinit", event: .debug)
+        ModernAVPlayerLogger.instance.log(message: "Deinit", domain: .lifecycleService)
         NotificationCenter.default.removeObserver(self, name: notificationName, object: nil)
     }
     
     @objc
     private func incomingInterruption(notification: Notification) {
-        LoggerInHouse.instance.log(message: "Audio interruption detected", event: .info)
+        ModernAVPlayerLogger.instance.log(message: "Audio interruption detected", domain: .service)
         
         guard
             let userInfo = notification.userInfo,

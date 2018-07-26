@@ -40,7 +40,7 @@ final class FailedState: PlayerState {
     // MARK: - Init
     
     init(context: PlayerContext, error: PlayerError) {
-        LoggerInHouse.instance.log(message: "Entering failed state (\(error.localizedDescription))", event: .info)
+        ModernAVPlayerLogger.instance.log(message: "Init", domain: .lifecycleState)
         self.context = context
         self.error = error
     }
@@ -50,7 +50,7 @@ final class FailedState: PlayerState {
     }
 
     deinit {
-        LoggerInHouse.instance.log(message: "Deinit", event: .debug)
+        ModernAVPlayerLogger.instance.log(message: "Deinit", domain: .lifecycleState)
     }
 
     // MARK: - Shared actions
@@ -82,6 +82,6 @@ final class FailedState: PlayerState {
     
     private func sendDebugMessage(_ debugMessage: String) {
         context.debugMessage = debugMessage
-        LoggerInHouse.instance.log(message: debugMessage, event: .warning)
+        ModernAVPlayerLogger.instance.log(message: debugMessage, domain: .unavailableCommand)
     }
 }

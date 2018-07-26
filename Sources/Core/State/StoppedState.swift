@@ -39,7 +39,7 @@ struct StoppedState: PlayerState {
     // MARK: - Init
 
     init(context: PlayerContext) {
-        LoggerInHouse.instance.log(message: "Entering stopped state", event: .info)
+        ModernAVPlayerLogger.instance.log(message: "Init (struct)", domain: .lifecycleState)
         
         self.context = context
         self.context.player.pause()
@@ -75,7 +75,7 @@ struct StoppedState: PlayerState {
         } else {
             let debug = "Please load item before playing"
             context.debugMessage = debug
-            LoggerInHouse.instance.log(message: debug, event: .warning)
+            ModernAVPlayerLogger.instance.log(message: debug, domain: .unavailableCommand)
         }
     }
 
@@ -90,6 +90,6 @@ struct StoppedState: PlayerState {
     func stop() {
         let debug = "Already stopped"
         context.debugMessage = debug
-        LoggerInHouse.instance.log(message: debug, event: .warning)
+        ModernAVPlayerLogger.instance.log(message: debug, domain: .unavailableCommand)
     }
 }

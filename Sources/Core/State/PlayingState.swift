@@ -50,7 +50,7 @@ final class PlayingState: PlayerState {
          interruptionAudioService: ModernAVPlayerInterruptionAudioService = ModernAVPlayerInterruptionAudioService(),
          audioSession: AVAudioSession = AVAudioSession.sharedInstance()) {
         
-        LoggerInHouse.instance.log(message: "Entering playing state", event: .info)
+        ModernAVPlayerLogger.instance.log(message: "Init", domain: .lifecycleState)
         self.context = context
         self.itemPlaybackObservingService = itemPlaybackObservingService
         self.routeAudioService = routeAudioService
@@ -69,7 +69,7 @@ final class PlayingState: PlayerState {
     }
     
     deinit {
-        LoggerInHouse.instance.log(message: "Deinit", event: .debug)
+        ModernAVPlayerLogger.instance.log(message: "Deinit", domain: .lifecycleState)
         if let to = timerObserver { context.player.removeTimeObserver(to) }
     }
 
@@ -82,13 +82,13 @@ final class PlayingState: PlayerState {
             }
             context.bgToken = nil
         }
-        LoggerInHouse.instance.log(message: "StartBgTask create: \(String(describing: context.bgToken))", event: .debug)
+        ModernAVPlayerLogger.instance.log(message: "StartBgTask create: \(String(describing: context.bgToken))", domain: .service)
     }
 
     private func stopBgTask(context: PlayerContext) {
         guard let token = context.bgToken else { return }
 
-        LoggerInHouse.instance.log(message: "StopBgTask: \(token)", event: .debug)
+        ModernAVPlayerLogger.instance.log(message: "StopBgTask: \(token)", domain: .service)
         UIApplication.shared.endBackgroundTask(token)
         context.bgToken = nil
     }
@@ -107,7 +107,7 @@ final class PlayingState: PlayerState {
     func play() {
         let debug = "Already playing"
         context.debugMessage = debug
-        LoggerInHouse.instance.log(message: debug, event: .warning)
+        ModernAVPlayerLogger.instance.log(message: debug, domain: .unavailableCommand)
     }
 
     func seek(position: Double) {

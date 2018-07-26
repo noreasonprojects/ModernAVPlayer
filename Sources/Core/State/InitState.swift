@@ -39,7 +39,7 @@ struct InitState: PlayerState {
     // MARK: - Init
 
     init(context: PlayerContext) {
-        LoggerInHouse.instance.log(message: "Entering init state", event: .info)
+        ModernAVPlayerLogger.instance.log(message: "Init (struct)", domain: .lifecycleState)
         self.context = context
         
         if #available(iOS 10, *) {
@@ -65,13 +65,13 @@ struct InitState: PlayerState {
     func play() {
         let debug = "Load item before playing"
         context.debugMessage = debug
-        LoggerInHouse.instance.log(message: debug, event: .warning)
+        ModernAVPlayerLogger.instance.log(message: debug, domain: .unavailableCommand)
     }
     
     func seek(position: Double) {
         let debug = "Unable to seek, load a media first"
         context.debugMessage = debug
-        LoggerInHouse.instance.log(message: debug, event: .warning)
+        ModernAVPlayerLogger.instance.log(message: debug, domain: .unavailableCommand)
     }
     
     func stop() {

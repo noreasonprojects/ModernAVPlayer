@@ -3,8 +3,8 @@
 // ModernAVPlayer
 // Copyright (c) 2018 Raphael Ankierman <raphael.ankierman@radiofrance.com>
 //
-// AudioSessionService.swift
-// Created by raphael ankierman on 21/03/2018.
+// ModernAVPlayerLoggerDomain.swift
+// Created by raphael ankierman on 26/07/2018.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,34 +24,30 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import AVFoundation
+import Foundation
 
-protocol AudioSessionService {
-    static func activate()
-    static func setCategory(_ category: String)
-}
-
-struct ModernAVPlayerAudioSessionService: AudioSessionService {
-
-    static func activate() {
-        DispatchQueue.global(qos: .userInitiated).async {
-            do {
-                try AVAudioSession.sharedInstance().setActive(true)
-                ModernAVPlayerLogger.instance.log(message: "Active audio session", domain: .service)
-
-            } catch {
-                ModernAVPlayerLogger.instance.log(message: "Active audio session: \(error.localizedDescription)", domain: .error)
-            }
+public enum ModernAVPlayerLoggerDomain: CustomStringConvertible {
+    case state
+    case service
+    case error
+    case lifecycleService
+    case lifecycleState
+    case unavailableCommand
+    
+    public var description: String {
+        switch self {
+        case .error:
+            return "[💉]"
+        case .service:
+            return "[🔬]"
+        case .lifecycleService:
+            return "[🔬 🚥]"
+        case .state:
+            return "[🔈]"
+        case .lifecycleState:
+            return "[🔈 🚥]"
+        case .unavailableCommand:
+            return "[🙅‍♂️]"
         }
     }
-
-    static func setCategory(_ category: String) {
-        do {
-            try AVAudioSession.sharedInstance().setCategory(category)
-            ModernAVPlayerLogger.instance.log(message: "Set audio session category to: \(category)", domain: .service)
-        } catch let error {
-            ModernAVPlayerLogger.instance.log(message: "Set \(category) category: \(error.localizedDescription)", domain: .error)
-        }
-    }
-
 }

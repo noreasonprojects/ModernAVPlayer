@@ -2,9 +2,10 @@
 All notable changes to this project will be documented in this file.
 
 ---
-## [X.X.X]
+## [0.10.0]
 * Breaking Change:
 	* Remove useless item url delegate method
+	* Remove loggerLevelFilter configuration variable 
 * Features:
 	* Play current media from Failed state
 	* Play not already loaded media from Paused / Stopped states 

@@ -65,7 +65,9 @@ public final class ModernAVPlayer: NSObject, MediaPlayer {
     /// - parameter plugins: array of plugin
     ///
     public init(config: PlayerConfiguration = ModernAVPlayerConfiguration(),
-                plugins: [PlayerPlugin] = []) {
+                plugins: [PlayerPlugin] = [],
+                loggerDomains: [ModernAVPlayerLoggerDomain] = []) {
+        ModernAVPlayerLogger.setup.domains = loggerDomains
         context = ModernAVPlayerContext(player: AVPlayer(),
                                         config: config,
                                         nowPlaying: ModernAVPlayerNowPlayingService(),

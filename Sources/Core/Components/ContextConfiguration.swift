@@ -53,11 +53,6 @@ public protocol PlayerConfiguration {
     /// Remote Command Center
     ///
     var useDefaultRemoteCommandCenter: Bool { get }
-    
-    /// Logger
-    ///
-    var loggerDomains: [LoggerDomain] { get }
-    var loggerDateFormat: String { get }
 }
 
 public struct ModernAVPlayerConfiguration: PlayerConfiguration {
@@ -79,9 +74,6 @@ public struct ModernAVPlayerConfiguration: PlayerConfiguration {
     public let reachabilityNetworkTestingIteration: UInt = 10
 
     public var useDefaultRemoteCommandCenter = true
-    
-    public var loggerDomains: [LoggerDomain] = [.state, .unavailableCommand, .error]
-    public var loggerDateFormat = "hh:mm:ssSSS"
     
     public init() {
         periodicPlayingTime = CMTime(seconds: 1, preferredTimescale: preferedTimeScale)

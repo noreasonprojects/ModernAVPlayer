@@ -118,7 +118,7 @@ final class ViewController: UIViewController {
     
     // MARK: - Variables
 
-    let player = ModernAVPlayer(plugins: [CustomTrackerPlugin()])
+    let player = ModernAVPlayer(plugins: [CustomTrackerPlugin()], loggerDomains: [.state, .error, .unavailableCommand])
     
     // MARK: - Observables
     

@@ -104,7 +104,6 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
         self.plugins = plugins
         super.init()
 
-        setupLogger()
         ModernAVPlayerLogger.instance.log(message: "Init", domain: .lifecycleState)
         audioSessionType.setCategory(config.audioSessionCategory)
         
@@ -115,10 +114,6 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
 
     deinit {
         ModernAVPlayerLogger.instance.log(message: "Deinit", domain: .lifecycleState)
-    }
-    
-    private func setupLogger() {
-        ModernAVPlayerLogger.setup.config = config
     }
     
     func changeState(state: PlayerState) {

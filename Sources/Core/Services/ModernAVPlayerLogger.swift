@@ -26,34 +26,8 @@
 
 import Foundation
 
-public enum LoggerDomain: CustomStringConvertible {
-    case state
-    case service
-    case error
-    case lifecycleService
-    case lifecycleState
-    case unavailableCommand
-    
-    public var description: String {
-        switch self {
-        case .error:
-            return "[💉]"
-        case .service:
-            return "[🔬]"
-        case .lifecycleService:
-            return "[🔬 🚥]"
-        case .state:
-            return "[🔈]"
-        case .lifecycleState:
-            return "[🔈 🚥]"
-        case .unavailableCommand:
-            return "[🙅‍♂️]"
-        }
-    }
-}
-
-final class LoggerParamSetup {
-    var config: PlayerConfiguration?
+final class ModernAVPlayerLoggerInputParam {
+    var domains: [ModernAVPlayerLoggerDomain]?
 }
 
 final class ModernAVPlayerLogger {
@@ -61,24 +35,25 @@ final class ModernAVPlayerLogger {
     // MARK: Singletons
     
     static let instance = ModernAVPlayerLogger()
-    static let setup = LoggerParamSetup()
+    static let setup = ModernAVPlayerLoggerInputParam()
     
     // MARK: Input
     
-    private var domains: [LoggerDomain] = []
+    private var domains: [ModernAVPlayerLoggerDomain] = []
     private let formatter = DateFormatter()
+    private let dateFormat = "hh:mm:ssSSS"
     
     // MARK: Init
     
     private init() {
-        guard let config = ModernAVPlayerLogger.setup.config
+        guard let domains = ModernAVPlayerLogger.setup.domains
             else { assertionFailure("should provide configuration to logger"); return }
         
-        domains = config.loggerDomains
-        setupDateFormatter(dateFormat: config.loggerDateFormat)
+        self.domains = domains
+        setupDateFormatter()
     }
     
-    private func setupDateFormatter(dateFormat: String) {
+    private func setupDateFormatter() {
         formatter.dateFormat = dateFormat
         formatter.locale = Locale.current
         formatter.timeZone = TimeZone.current
@@ -90,7 +65,7 @@ final class ModernAVPlayerLogger {
     }
     
     func log(message: String,
-             domain: LoggerDomain,
+             domain: ModernAVPlayerLoggerDomain,
              fileName: String = #file,
              line: Int = #line,
              funcName: String = #function) {

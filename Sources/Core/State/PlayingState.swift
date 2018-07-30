@@ -127,6 +127,7 @@ final class PlayingState: PlayerState {
         itemPlaybackObservingService.onFailedToPlayToEndTime = { [weak self] in self?.redirectToWaitingForNetworkState() }
         itemPlaybackObservingService.onPlayToEndTime = { [weak self, context] in
             context.delegate?.playerContext(didItemPlayToEndTime: context.currentTime)
+            context.plugins.forEach { $0.didItemPlayToEndTime(endTime: context.currentTime) }
             context.nowPlaying.overrideInfoCenter(for: MPNowPlayingInfoPropertyElapsedPlaybackTime, value: NSNumber(value: 0))
             self?.redirectToStoppedState()
         }

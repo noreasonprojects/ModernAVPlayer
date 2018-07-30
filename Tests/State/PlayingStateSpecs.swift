@@ -40,6 +40,7 @@ final class PlayingStateSpecs: QuickSpec {
     private var tested: ModernAVPlayerContext!
     private var routeAudioService: ModernAVPlayerRouteAudioService!
     private var plugin: MockPlayerPlugin!
+    private var delegate: MockPlayerContextDelegate!
 
     override func spec() {
 
@@ -49,7 +50,9 @@ final class PlayingStateSpecs: QuickSpec {
             self.mockPlayer = MockCustomPlayer.createOne(url: "foo")
             self.media = MockPlayerMedia(url: URL(string: "foo")!, type: .clip)
             self.itemPlaybackObservingService = MockItemPlaybackObservingService()
+            self.delegate = MockPlayerContextDelegate()
             self.tested = ModernAVPlayerContext(player: self.mockPlayer, plugins: [self.plugin])
+            self.tested.delegate = self.delegate
             self.tested.currentMedia = self.media
             self.playingState = PlayingState(context: self.tested,
                                              itemPlaybackObservingService: self.itemPlaybackObservingService,
@@ -160,6 +163,24 @@ final class PlayingStateSpecs: QuickSpec {
                 
                 // ASSERT
                 expect(self.tested.state).to(beAnInstanceOf(StoppedState.self))
+            }
+            
+            it("should call associated delegate method") {
+                
+                // ACT
+                self.itemPlaybackObservingService.onPlayToEndTime?()
+                
+                // ASSERT
+                expect(self.delegate.didItemPlayToEndTimeCallCount).to(equal(1))
+            }
+            
+            it("should call associated plugin method") {
+                
+                // ACT
+                self.itemPlaybackObservingService.onPlayToEndTime?()
+                
+                // ASSERT
+                expect(self.plugin.didItemPlayToEndTimeCallCount).to(equal(1))
             }
         }
         

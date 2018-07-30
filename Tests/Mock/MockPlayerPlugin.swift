@@ -65,6 +65,13 @@ final class MockPlayerPlugin: PlayerPlugin {
         didStartWaitingCallCount += 1
     }
     
+    private(set) var didItemPlayToEndTimeCallCount = 0
+    private(set) var didItemPlayToEndTimeLastParam: Double?
+    func didItemPlayToEndTime(endTime: Double) {
+        didItemPlayToEndTimeCallCount += 1
+        didItemPlayToEndTimeLastParam = endTime
+    }
+    
     private(set) var didFailedCallCount = 0
     private(set) var didFailedLastParam: PlayerError?
     func didFailed(error: PlayerError) {

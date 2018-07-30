@@ -20,7 +20,7 @@ final class CustomTrackerPlugin: PlayerPlugin {
             else { assertionFailure(); return }
         print("~~~ PLUGIN: customAttribute=\(attr)")
     }
-    
+    func didChangeMedia(_ media: PlayerMedia, previousMedia: PlayerMedia?) { }
     func didInit(player: AVPlayer) { }
     func willStartLoading() { }
     func didStartLoading() { }

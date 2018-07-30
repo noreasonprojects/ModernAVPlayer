@@ -296,5 +296,12 @@ extension ViewController {
             .asDriver(onErrorJustReturn: "error")
             .drive(playerStateLabel.rx.text)
             .disposed(by: disposeBag)
+        
+        // End Time
+        player.rx.itemPlayToEndTime
+            .subscribe(onNext: { [weak self] endTime in
+                self?.setDebugMessage("end time: \(endTime)")
+            })
+            .disposed(by: disposeBag)
     }
 }

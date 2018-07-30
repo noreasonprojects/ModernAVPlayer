@@ -10,7 +10,7 @@ import Foundation
 @testable import ModernAVPlayer
 
 final class MockPlayerContextDelegate: PlayerContextDelegate {
-    
+
     private (set) var didStateChangeCallCount = 0
     private (set) var didStateChangeLastParam: ModernAVPlayer.State?
     func playerContext(didStateChange state: ModernAVPlayer.State) {
@@ -31,6 +31,9 @@ final class MockPlayerContextDelegate: PlayerContextDelegate {
         didCurrentTimeChangeCallCount += 1
         didCurrentTimeChangeLastParam = currentTime
     }
+    func didChangeMedia(_ media: PlayerMedia, previousMedia: PlayerMedia?) { }
+    
+    func playerContext(didItemPlayToEndTime endTime: Double) { }
     
     private (set) var didItemDurationChangeCallCount = 0
     private (set) var didItemDurationChangeLastParam: Double?

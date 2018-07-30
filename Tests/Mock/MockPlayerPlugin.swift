@@ -94,4 +94,8 @@ final class MockPlayerPlugin: PlayerPlugin {
         didLoadLastMediaParam = media as? MockPlayerMedia
         didLoadLastDurationParam = duration
     }
+    
+    func didChangeMedia(_ media: PlayerMedia, previousMedia: PlayerMedia?) { }
+    
+    func didItemPlayToEndTime(endTime: Double) { }
 }

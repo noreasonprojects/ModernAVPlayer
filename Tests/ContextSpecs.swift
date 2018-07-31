@@ -34,12 +34,14 @@ import ModernAVPlayer
 final class ContextSpecs: QuickSpec {
     
     var tested: PlayerContext!
+    var plugin: MockPlayerPlugin!
     var mockState: MockPlayerState!
     
     override func spec() {
         
         beforeEach {
-            self.tested = ModernAVPlayerContext()
+            self.plugin = MockPlayerPlugin()
+            self.tested = ModernAVPlayerContext(plugins: [self.plugin])
             self.mockState = MockPlayerState(context: self.tested)
         }
         
@@ -135,6 +137,18 @@ final class ContextSpecs: QuickSpec {
                 expect(self.mockState.loadMedialCallCount).to(equal(1))
                 expect(self.mockState.lastLoadAutostartParam).to(beFalse())
                 expect(self.mockState.lastLoadPositionParam).to(be(position))
+            }
+            
+            it("should execute plugin method") {
+
+                // ARRANGE
+                let media = MockPlayerMedia(url: URL(string: "foo")!, type: .clip)
+                
+                // ACT
+                self.tested.loadMedia(media: media, autostart: false, position: nil)
+
+                // ASSERT
+                expect(self.plugin.didChangeMediaCallCount).to(equal(1))
             }
         }
 

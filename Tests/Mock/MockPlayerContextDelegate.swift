@@ -31,10 +31,7 @@ final class MockPlayerContextDelegate: PlayerContextDelegate {
         didCurrentTimeChangeCallCount += 1
         didCurrentTimeChangeLastParam = currentTime
     }
-    func didChangeMedia(_ media: PlayerMedia, previousMedia: PlayerMedia?) { }
-    
-    func playerContext(didItemPlayToEndTime endTime: Double) { }
-    
+
     private (set) var didItemDurationChangeCallCount = 0
     private (set) var didItemDurationChangeLastParam: Double?
     func playerContext(didItemDurationChange itemDuration: Double?) {

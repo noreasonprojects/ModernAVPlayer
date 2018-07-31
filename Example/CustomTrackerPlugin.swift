@@ -30,5 +30,5 @@ final class CustomTrackerPlugin: PlayerPlugin {
     func didStopped() { }
     func didStartWaitingForNetwork() { }
     func didFailed(error: PlayerError) { }
-    
+    func didItemPlayToEndTime(endTime: Double) { }
 }

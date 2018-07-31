@@ -52,6 +52,7 @@ ModernAVPlayerDelegate {
     lazy var currentTimeSubject = PublishSubject<Double>()
     lazy var itemDurationSubject = PublishSubject<Double?>()
     lazy var debugMessageSubject = PublishSubject<String?>()
+    lazy var itemPlayToEndTimeSubject = PublishSubject<Double>()
     
     // MARK: - ModernAVPlayerDelegate
     
@@ -73,5 +74,9 @@ ModernAVPlayerDelegate {
     
     public func modernAVPlayer(_ player: ModernAVPlayer, debugMessage: String?) {
         debugMessageSubject.onNext(debugMessage)
+    }
+    
+    public func modernAVPlayer(_ player: ModernAVPlayer, didItemPlayToEndTime endTime: Double) {
+        itemPlayToEndTimeSubject.onNext(endTime)
     }
 }

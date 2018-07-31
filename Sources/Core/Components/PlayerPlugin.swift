@@ -64,4 +64,7 @@ public protocol PlayerPlugin {
     
     /// Called when the media failed
     func didFailed(error: PlayerError)
+    
+    /// Called when media play to his end time
+    func didItemPlayToEndTime(endTime: Double)
 }

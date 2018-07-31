@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 
 ---
+## [X.X.X]
+* Feature:
+	* Add item to play end time information to delegate and plugin
+
 ## [0.10.0]
 * Breaking Change:
 	* Remove useless item url delegate method

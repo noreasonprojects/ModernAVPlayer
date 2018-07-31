@@ -40,4 +40,11 @@ final class MockPlayerContextDelegate: PlayerContextDelegate {
     }
     
     func playerContext(debugMessage: String?) { }
+    
+    private (set) var didItemPlayToEndTimeCallCount = 0
+    private (set) var didItemPlayToEndTimeLastParam: Double?
+    func playerContext(didItemPlayToEndTime endTime: Double) {
+        didItemPlayToEndTimeCallCount += 1
+        didItemPlayToEndTimeLastParam = endTime
+    }
 }

@@ -32,6 +32,7 @@ protocol PlayerContextDelegate: class {
     func playerContext(didCurrentTimeChange currentTime: Double)
     func playerContext(didItemDurationChange itemDuration: Double?)
     func playerContext(debugMessage: String?)
+    func playerContext(didItemPlayToEndTime endTime: Double)
 }
 
 protocol PlayerContext: class, MediaPlayer {

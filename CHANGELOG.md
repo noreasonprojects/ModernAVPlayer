@@ -2,9 +2,10 @@
 All notable changes to this project will be documented in this file.
 
 ---
-## [X.X.X]
+## [0.11.0]
 * Feature:
 	* Add item to play end time information to delegate and plugin
+	* Add did change media information to plugin
 
 ## [0.10.0]
 * Breaking Change:

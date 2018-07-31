@@ -94,4 +94,13 @@ final class MockPlayerPlugin: PlayerPlugin {
         didLoadLastMediaParam = media as? MockPlayerMedia
         didLoadLastDurationParam = duration
     }
+    
+    private(set) var didMediaChangedCallCount = 0
+    private(set) var didMediaChangedLastParam: MockPlayerMedia?
+    private(set) var didMediaChangedLastPreviousParam: MockPlayerMedia?
+    func didMediaChanged(_ media: PlayerMedia, previousMedia: PlayerMedia?) {
+        didMediaChangedCallCount += 1
+        didMediaChangedLastParam = media as? MockPlayerMedia
+        didMediaChangedLastPreviousParam = previousMedia as? MockPlayerMedia
+    }
 }

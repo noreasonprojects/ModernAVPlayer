@@ -138,7 +138,7 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
     func loadMedia(media: PlayerMedia, autostart: Bool, position: Double?) {
         let previousMedia = currentMedia
         currentMedia = media
-        plugins.forEach { $0.didChangeMedia(media, previousMedia: previousMedia) }
+        plugins.forEach { $0.didMediaChanged(media, previousMedia: previousMedia) }
         state.load(media: media, autostart: autostart, position: position)
     }
     

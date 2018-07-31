@@ -51,12 +51,12 @@ public protocol PlayerPlugin {
     func didLoad(media: PlayerMedia, duration: Double?)
     
     ///
-    /// Called when the media change
+    /// Called when the media has changed
     /// - parameters:
     ///    - media: PlayerMedia just loaded
     ///    - previousMedia: PlayerMedia loaded before
     ///
-    func didChangeMedia(_ media: PlayerMedia, previousMedia: PlayerMedia?)
+    func didMediaChanged(_ media: PlayerMedia, previousMedia: PlayerMedia?)
     
     /// Called when the media is playing
     func didStartPlaying()

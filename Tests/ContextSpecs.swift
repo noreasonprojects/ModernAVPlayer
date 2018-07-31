@@ -142,13 +142,17 @@ final class ContextSpecs: QuickSpec {
             it("should execute plugin method") {
 
                 // ARRANGE
-                let media = MockPlayerMedia(url: URL(string: "foo")!, type: .clip)
+                let currentMedia = MockPlayerMedia(url: URL(string: "xxx")!, type: .stream(isLive: false))
+                let newMedia = MockPlayerMedia(url: URL(string: "foo")!, type: .clip)
                 
                 // ACT
-                self.tested.loadMedia(media: media, autostart: false, position: nil)
-
+                self.tested.currentMedia = currentMedia
+                self.tested.loadMedia(media: newMedia, autostart: false, position: nil)
+                
                 // ASSERT
-                expect(self.plugin.didChangeMediaCallCount).to(equal(1))
+                expect(self.plugin.didMediaChangedCallCount).to(equal(1))
+                expect(self.plugin.didMediaChangedLastParam).to(equal(newMedia))
+                expect(self.plugin.didMediaChangedLastPreviousParam).to(equal(currentMedia))
             }
         }
 

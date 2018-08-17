@@ -31,32 +31,34 @@ struct ModernAVPlayerRemoteCommandCenter {
     
     // MARK: Input
     
-    let remote: MPRemoteCommandCenter
+    private let remote: MPRemoteCommandCenter
+    private let player: ModernAVPlayerExposable
     
     // MARK: Init
     
     @discardableResult
-    init(player: MediaPlayer, remote: MPRemoteCommandCenter = MPRemoteCommandCenter.shared()) {
+    init(player: ModernAVPlayerExposable, remote: MPRemoteCommandCenter = MPRemoteCommandCenter.shared()) {
         ModernAVPlayerLogger.instance.log(message: "Init (struct)", domain: .lifecycleService)
         self.remote = remote
-        configure(player: player)
+        self.player = player
+        configure()
     }
     
-    private func configure(player: MediaPlayer) {
+    private func configure() {
         enableCommands()
-        setPlayCommandCallback(player: player)
-        setPauseCommandCallback(player: player)
+        setPlayCommandCallback()
+        setPauseCommandCallback()
+        setTogglePlayPauseCommandCallback()
         
-        if #available(iOS 9.1, *) {
-            setChangePlaybackPositionCommandCallback(player: player)
-        }
+        guard #available(iOS 9.1, *) else { return }
+        setChangePlaybackPositionCommandCallback()
     }
     
     private func enableCommands() {
         remote.playCommand.isEnabled = true
         remote.pauseCommand.isEnabled = true
         remote.togglePlayPauseCommand.isEnabled = true
-        
+
         remote.stopCommand.isEnabled = false
         remote.previousTrackCommand.isEnabled = false
         remote.nextTrackCommand.isEnabled = false
@@ -66,7 +68,7 @@ struct ModernAVPlayerRemoteCommandCenter {
         }
     }
     
-    private func setPlayCommandCallback(player: MediaPlayer) {
+    private func setPlayCommandCallback() {
         remote.playCommand.addTarget { [player] _ -> MPRemoteCommandHandlerStatus in
             ModernAVPlayerLogger.instance.log(message: "Remote command: play", domain: .service)
             player.play()
@@ -74,7 +76,7 @@ struct ModernAVPlayerRemoteCommandCenter {
         }
     }
     
-    private func setPauseCommandCallback(player: MediaPlayer) {
+    private func setPauseCommandCallback() {
         remote.pauseCommand.addTarget { [player] _ -> MPRemoteCommandHandlerStatus in
             ModernAVPlayerLogger.instance.log(message: "Remote command: pause", domain: .service)
             player.pause()
@@ -82,8 +84,28 @@ struct ModernAVPlayerRemoteCommandCenter {
         }
     }
     
+    private func setTogglePlayPauseCommandCallback() {
+        remote.togglePlayPauseCommand.addTarget { [player] _ -> MPRemoteCommandHandlerStatus in
+            ModernAVPlayerLogger.instance.log(message: "Remote command: toggle play pause", domain: .service)
+            guard let isResting = self.isPlayerResting() else { return .noSuchContent }
+            isResting ? player.play() : player.pause()
+            return .success
+        }
+    }
+    
+    private func isPlayerResting() -> Bool? {
+        switch player.state {
+        case .buffering, .loading, .playing, .waitingForNetwork:
+            return false
+        case .failed, .loaded, .paused, .stopped:
+            return true
+        case .initialization:
+            return nil
+        }
+    }
+    
     @available(iOS 9.1, *)
-    private func setChangePlaybackPositionCommandCallback(player: MediaPlayer) {
+    private func setChangePlaybackPositionCommandCallback() {
         remote.changePlaybackPositionCommand.addTarget { [player] event -> MPRemoteCommandHandlerStatus in
             guard let e = event as? MPChangePlaybackPositionCommandEvent
                 else { return .commandFailed }

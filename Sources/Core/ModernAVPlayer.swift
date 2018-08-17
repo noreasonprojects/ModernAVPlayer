@@ -35,20 +35,16 @@ public protocol ModernAVPlayerDelegate: class {
     func modernAVPlayer(_ player: ModernAVPlayer, didItemPlayToEndTime endTime: Double)
 }
 
-public protocol MediaPlayer {
-    func loadMedia(media: PlayerMedia, autostart: Bool, position: Double?)
-    func pause()
-    func play()
-    func seek(position: Double)
-    func stop()
-    func updateNowPlayingInfo(metadata: PlayerMediaMetadata)
-}
-
-public final class ModernAVPlayer: NSObject, MediaPlayer {
+public final class ModernAVPlayer: NSObject, ModernAVPlayerExposable {
     
     // MARK: - Output
     
     public weak var delegate: ModernAVPlayerDelegate?
+    
+    /// Current player state
+    public var state: ModernAVPlayer.State {
+        return context.state.type
+    }
     
     /// Last media requested to be load
     public var currentMedia: PlayerMedia?

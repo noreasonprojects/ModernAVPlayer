@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 
 ---
+## [X.X.X]
+* Fix:
+	* Headphone toggle play pause command
+
 ## [0.11.0]
 * Feature:
 	* Add item to play end time information to delegate and plugin

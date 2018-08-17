@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 
 ---
-## [X.X.X]
+## [0.11.1]
 * Fix:
 	* Headphone toggle play pause command
 

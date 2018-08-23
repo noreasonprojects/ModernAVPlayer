@@ -72,7 +72,12 @@ final class ModernAVPlayerNowPlayingService: NowPlaying {
         task = session.dataTask(with: url) { [weak self] data, _, _ in
             guard let imageData = data, let image = UIImage(data: imageData) else { return }
 
-            let artwork = MPMediaItemArtwork(image: image)
+            let artwork: MPMediaItemArtwork
+            if #available(iOS 10.0, *) {
+                artwork = MPMediaItemArtwork(boundsSize: image.size) { _ in image }
+            } else {
+                artwork = MPMediaItemArtwork(image: image)
+            }
             self?.overrideInfoCenter(for: MPMediaItemPropertyArtwork, value: artwork)
         }
         task?.resume()
@@ -85,7 +90,12 @@ final class ModernAVPlayerNowPlayingService: NowPlaying {
         infos[MPNowPlayingInfoPropertyPlaybackRate] = 1.0
         
         if let imageName = metadata?.localPlaceHolderImageName, let image = UIImage(named: imageName) {
-            let artwork = MPMediaItemArtwork(image: image)
+            let artwork: MPMediaItemArtwork
+            if #available(iOS 10.0, *) {
+                artwork = MPMediaItemArtwork(boundsSize: image.size) { _ in image }
+            } else {
+                artwork = MPMediaItemArtwork(image: image)
+            }
             infos[MPMediaItemPropertyArtwork] = artwork
         }
         

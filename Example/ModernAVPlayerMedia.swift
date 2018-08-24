@@ -11,13 +11,13 @@ import ModernAVPlayer
 public struct ModernAVPlayerMedia: PlayerMedia {
     public let url: URL
     public let type: MediaType
-    public let headerFields: [String: Any]?
+    public let assetOptions: [String: Any]?
     public let metadata: ModernAVPlayerMediaMetadata?
 
-    init(url: URL, type: MediaType, headerFields: [String: Any]? = nil, metadata: ModernAVPlayerMediaMetadata?) {
+    init(url: URL, type: MediaType, assetOptions: [String: Any]? = nil, metadata: ModernAVPlayerMediaMetadata?) {
         self.url = url
         self.type = type
-        self.headerFields = headerFields
+        self.assetOptions = assetOptions
         self.metadata = metadata
     }
     

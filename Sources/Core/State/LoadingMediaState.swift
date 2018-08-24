@@ -127,13 +127,7 @@ final class LoadingMediaState: PlayerState {
     }
     
     private func createItem(with media: PlayerMedia) -> AVPlayerItem {
-        let asset: AVAsset
-        if let headerFields = media.headerFields {
-            let options = ["AVURLAssetHTTPHeaderFieldsKey": headerFields]
-            asset = AVURLAsset(url: media.url, options: options)
-        } else {
-            asset = AVAsset(url: media.url)
-        }
+        let asset = AVURLAsset(url: media.url, options: media.assetOptions)
         return AVPlayerItem(asset: asset, automaticallyLoadedAssetKeys: ["playable", "duration"])
     }
 

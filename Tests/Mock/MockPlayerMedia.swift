@@ -12,11 +12,13 @@ import Foundation
 struct MockPlayerMedia: PlayerMedia, Equatable {
     let url: URL
     let type: MediaType
+    let assetOptions: [String: Any]?
     let metadata: MockPlayerMediaMetadata?
     
-    init(url: URL, type: MediaType, metadata: MockPlayerMediaMetadata? = nil) {
+    init(url: URL, type: MediaType, assetOptions: [String: Any]? = nil, metadata: MockPlayerMediaMetadata? = nil) {
         self.url = url
         self.type = type
+        self.assetOptions = assetOptions
         self.metadata = metadata
     }
     

@@ -29,6 +29,7 @@ import AVFoundation
 public protocol PlayerMedia: CustomStringConvertible {
     var url: URL { get }
     var type: MediaType { get }
+    var assetOptions: [String: Any]? { get }
     
     func isLive() -> Bool
     func getMetadata() -> PlayerMediaMetadata?

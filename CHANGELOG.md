@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file.
 
 ---
+## [x.x.x]
+* Feature:
+	* Allow setting custom HTTP header fields
+* Fixes:
+	* Use the `$(inherited)` flag for PODS_PODFILE_DIR_PATH in example
+	* Update deprecated MPMediaItemArtwork initializer
+
 ## [0.11.1]
 * Fix:
 	* Headphone toggle play pause command
@@ -14,10 +21,10 @@ All notable changes to this project will be documented in this file.
 ## [0.10.0]
 * Breaking Change:
 	* Remove useless item url delegate method
-	* Remove loggerLevelFilter configuration variable 
+	* Remove loggerLevelFilter configuration variable
 * Features:
 	* Play current media from Failed state
-	* Play not already loaded media from Paused / Stopped states 
+	* Play not already loaded media from Paused / Stopped states
 	* Log by domain
 * Improvement:
 	* Set & fetch context item duration
@@ -34,7 +41,7 @@ All notable changes to this project will be documented in this file.
 	* Add willStartLoading plugin method
 	* Accept to load media from a specific position
 * Breaking Change:
-	* Update PlayerMedia protocol: getMetadata() replace metadata attribute 
+	* Update PlayerMedia protocol: getMetadata() replace metadata attribute
 	* Remove useless optional media attribute in plugin loadMedia method
 * Fix:
 	* Refactor context protocol
@@ -47,10 +54,10 @@ All notable changes to this project will be documented in this file.
 
 ## [0.9.5]
 * Features:
-	* Add plugin methods to reflet all player's states
+	* Add plugin methods to reflect all player's states
 	* Remove useless MediaPlayer delegate attribute
 * Fix:
-	* Reset item duration when loading media 
+	* Reset item duration when loading media
 
 ## [0.9.4]
 * Feature:
@@ -75,7 +82,7 @@ All notable changes to this project will be documented in this file.
 	* Display coherent live stream duration
 	* Manage live stream audio cut
 	* Improve log readability
-	* End reach notification 
+	* End reach notification
 
 ## [0.9.1]
 * Features:
@@ -98,4 +105,4 @@ All notable changes to this project will be documented in this file.
 	* Protocol and implementation naming
 	* Paused state leak
 	* Timer leaks
-	* Unwanted state whhen buffering in buffering sate
+	* Unwanted state when buffering in buffering sate

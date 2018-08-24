@@ -126,13 +126,13 @@ final class LoadingMediaState: PlayerState {
         context.player.replaceCurrentItem(with: nil)
     }
     
-    private func createItem(with url: URL) -> AVPlayerItem {
-        let asset = AVAsset(url: url)
+    private func createItem(with media: PlayerMedia) -> AVPlayerItem {
+        let asset = AVURLAsset(url: media.url, options: media.assetOptions)
         return AVPlayerItem(asset: asset, automaticallyLoadedAssetKeys: ["playable", "duration"])
     }
 
     private func createReplaceItem(media: PlayerMedia) {
-        let item = createItem(with: media.url)
+        let item = createItem(with: media)
         
         startObservingItemStatus(item: item)
         context.player.replaceCurrentItem(with: item)

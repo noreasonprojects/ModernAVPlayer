@@ -67,12 +67,17 @@ final class ModernAVPlayerNowPlayingService: NowPlaying {
         ModernAVPlayerLogger.instance.log(message: "Update nowPlayingInfo \(key):\(value)", domain: .service)
     }
 
+    private func getArtwork(image: UIImage) -> MPMediaItemArtwork {
+        guard #available(iOS 10.0, *) else {
+            return MPMediaItemArtwork(image: image)
+        }
+        return MPMediaItemArtwork(boundsSize: image.size) { _ in image }
+    }
+
     private func updateRemoteImage(url: URL) {
         task?.cancel()
         task = session.dataTask(with: url) { [weak self] data, _, _ in
-            guard let imageData = data, let image = UIImage(data: imageData) else { return }
-
-            let artwork = MPMediaItemArtwork(image: image)
+            guard let imageData = data, let image = UIImage(data: imageData), let artwork = self?.getArtwork(image: image) else { return }
             self?.overrideInfoCenter(for: MPMediaItemPropertyArtwork, value: artwork)
         }
         task?.resume()
@@ -85,7 +90,7 @@ final class ModernAVPlayerNowPlayingService: NowPlaying {
         infos[MPNowPlayingInfoPropertyPlaybackRate] = 1.0
         
         if let imageName = metadata?.localPlaceHolderImageName, let image = UIImage(named: imageName) {
-            let artwork = MPMediaItemArtwork(image: image)
+            let artwork = getArtwork(image: image)
             infos[MPMediaItemPropertyArtwork] = artwork
         }
         

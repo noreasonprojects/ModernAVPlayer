@@ -8,6 +8,8 @@ All notable changes to this project will be documented in this file.
 * Fixes:
 	* Use the `$(inherited)` flag for PODS_PODFILE_DIR_PATH in example
 	* Update deprecated MPMediaItemArtwork initializer
+* Dependency:
+	* [gem][cocoapods] -> 1.5.3
 
 ## [0.11.1]
 * Fix:

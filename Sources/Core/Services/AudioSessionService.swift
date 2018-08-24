@@ -28,7 +28,7 @@ import AVFoundation
 
 protocol AudioSessionService {
     static func activate()
-    static func setCategory(_ category: String)
+    static func setCategory(_ category: String, with options: AVAudioSessionCategoryOptions)
 }
 
 struct ModernAVPlayerAudioSessionService: AudioSessionService {
@@ -45,9 +45,9 @@ struct ModernAVPlayerAudioSessionService: AudioSessionService {
         }
     }
 
-    static func setCategory(_ category: String) {
+    static func setCategory(_ category: String, with options: AVAudioSessionCategoryOptions) {
         do {
-            try AVAudioSession.sharedInstance().setCategory(category)
+            try AVAudioSession.sharedInstance().setCategory(category, with: options)
             ModernAVPlayerLogger.instance.log(message: "Set audio session category to: \(category)", domain: .service)
         } catch let error {
             ModernAVPlayerLogger.instance.log(message: "Set \(category) category: \(error.localizedDescription)", domain: .error)

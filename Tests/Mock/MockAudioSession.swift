@@ -24,6 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+import AVFoundation
 import Foundation
 @testable import ModernAVPlayer
 
@@ -31,6 +32,7 @@ final class MockAudioSession: AudioSessionService {
     static func resetCallsCount() {
         activateCallCount = 0
         setCategoryCallCount = 0
+        setCategoryOptionsCallCount = 0
     }
     
     static var activateCallCount = 0
@@ -39,7 +41,9 @@ final class MockAudioSession: AudioSessionService {
     }
     
     static var setCategoryCallCount = 0
-    static func setCategory(_ category: String) {
+    static var setCategoryOptionsCallCount = 0
+    static func setCategory(_ category: String, with options: AVAudioSessionCategoryOptions) {
         setCategoryCallCount += 1
+        setCategoryOptionsCallCount += 1
     }
 }

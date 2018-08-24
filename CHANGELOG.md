@@ -3,8 +3,9 @@ All notable changes to this project will be documented in this file.
 
 ---
 ## [x.x.x]
-* Feature:
+* Features:
 	* Allow setting custom HTTP header fields
+	* Allow setting audio session category with options
 * Fixes:
 	* Use the `$(inherited)` flag for PODS_PODFILE_DIR_PATH in example
 	* Update deprecated MPMediaItemArtwork initializer

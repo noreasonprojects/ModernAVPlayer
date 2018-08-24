@@ -68,9 +68,14 @@ final class LoadingMediaStateSpecs: QuickSpec {
                 expect(self.player.replaceCurrentItemCallCount).to(equal(2))
                 expect(newItemUrl).to(equal(URL(string: "x")!))
             }
-            
-           it("should active audio session") {
+
+            it("should active audio session") {
                 expect(MockAudioSession.activateCallCount).to(equal(1))
+            }
+
+            it("should set audio session category with options") {
+                expect(MockAudioSession.setCategoryCallCount).to(equal(1))
+                expect(MockAudioSession.setCategoryOptionsCallCount).to(equal(1))
             }
         }
         

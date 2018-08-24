@@ -106,7 +106,7 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
         super.init()
 
         ModernAVPlayerLogger.instance.log(message: "Init", domain: .lifecycleState)
-        audioSessionType.setCategory(config.audioSessionCategory)
+        audioSessionType.setCategory(config.audioSessionCategory, with: config.audioSessionCategoryOptions)
         
         defer {
             state = InitState(context: self)

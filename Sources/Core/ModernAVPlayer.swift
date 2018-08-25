@@ -65,10 +65,7 @@ public final class ModernAVPlayer: NSObject, ModernAVPlayerExposable {
                 plugins: [PlayerPlugin] = [],
                 loggerDomains: [ModernAVPlayerLoggerDomain] = []) {
         ModernAVPlayerLogger.setup.domains = loggerDomains
-        context = ModernAVPlayerContext(player: AVPlayer(),
-                                        config: config,
-                                        nowPlaying: ModernAVPlayerNowPlayingService(),
-                                        plugins: plugins)
+        context = ModernAVPlayerContext(config: config, plugins: plugins)
         super.init()
         context.delegate = self
         

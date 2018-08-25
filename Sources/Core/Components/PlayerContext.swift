@@ -36,7 +36,7 @@ protocol PlayerContextDelegate: class {
 }
 
 protocol PlayerContext: class, MediaPlayer {
-    var audioSessionType: AudioSessionService.Type { get }
+    var audioSession: AudioSessionService { get }
     var bgToken: UIBackgroundTaskIdentifier? { get set }
     var config: PlayerConfiguration { get }
     var currentMedia: PlayerMedia? { get set }
@@ -57,7 +57,7 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
     
     // MARK: - Inputs
     
-    let audioSessionType: AudioSessionService.Type
+    let audioSession: AudioSessionService
     let config: PlayerConfiguration
     let nowPlaying: NowPlaying
     let player: AVPlayer
@@ -96,18 +96,17 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
     init(player: AVPlayer = AVPlayer(),
          config: PlayerConfiguration = ModernAVPlayerConfiguration(),
          nowPlaying: NowPlaying = ModernAVPlayerNowPlayingService(),
-         audioSessionType: AudioSessionService.Type = ModernAVPlayerAudioSessionService.self,
+         audioSession: AudioSessionService = ModernAVPlayerAudioSessionService(),
          plugins: [PlayerPlugin] = []) {
         self.player = player
         self.config = config
         self.nowPlaying = nowPlaying
-        self.audioSessionType = audioSessionType
+        self.audioSession = audioSession
         self.plugins = plugins
         super.init()
 
         ModernAVPlayerLogger.instance.log(message: "Init", domain: .lifecycleState)
-        audioSessionType.setCategory(config.audioSessionCategory)
-        
+        setAudioSessionCategory()
         defer {
             state = InitState(context: self)
         }
@@ -115,6 +114,10 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
 
     deinit {
         ModernAVPlayerLogger.instance.log(message: "Deinit", domain: .lifecycleState)
+    }
+
+    private func setAudioSessionCategory() {
+        audioSession.setCategory(config.audioSessionCategory)
     }
     
     func changeState(state: PlayerState) {

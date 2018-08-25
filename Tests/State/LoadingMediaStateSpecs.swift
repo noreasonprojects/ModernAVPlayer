@@ -32,7 +32,8 @@ import Nimble
 import ModernAVPlayer
 
 final class LoadingMediaStateSpecs: QuickSpec {
-    
+
+    private var audioSession: MockAudioSession!
     private var state: LoadingMediaState!
     private var item: AVPlayerItem!
     private var player: MockCustomPlayer!
@@ -45,11 +46,16 @@ final class LoadingMediaStateSpecs: QuickSpec {
         
         beforeEach {
             self.plugin = MockPlayerPlugin()
-            MockAudioSession.resetCallsCount()
+            self.audioSession = MockAudioSession()
             self.player = MockCustomPlayer.createOnUsingAsset(url: "foo")
-            self.tested = ModernAVPlayerContext(player: self.player, audioSessionType: MockAudioSession.self, plugins: [self.plugin])
+            self.tested = ModernAVPlayerContext(player: self.player,
+                                                audioSession: self.audioSession,
+                                                plugins: [self.plugin])
             self.tested.currentMedia = self.playerMedia
-            self.state = LoadingMediaState(context: self.tested, media: self.playerMedia, autostart: true, position: self.seekPosition)
+            self.state = LoadingMediaState(context: self.tested,
+                                           media: self.playerMedia,
+                                           autostart: true,
+                                           position: self.seekPosition)
             self.tested.state = self.state
         }
 
@@ -70,7 +76,7 @@ final class LoadingMediaStateSpecs: QuickSpec {
             }
             
            it("should active audio session") {
-                expect(MockAudioSession.activateCallCount).to(equal(1))
+                expect(self.audioSession.activateCallCount).to(equal(1))
             }
         }
         

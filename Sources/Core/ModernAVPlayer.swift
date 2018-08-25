@@ -68,7 +68,6 @@ public final class ModernAVPlayer: NSObject, ModernAVPlayerExposable {
         context = ModernAVPlayerContext(player: AVPlayer(),
                                         config: config,
                                         nowPlaying: ModernAVPlayerNowPlayingService(),
-                                        audioSessionType: ModernAVPlayerAudioSessionService.self,
                                         plugins: plugins)
         super.init()
         context.delegate = self

@@ -27,27 +27,32 @@
 import AVFoundation
 
 protocol AudioSessionService {
-    static func activate()
-    static func setCategory(_ category: String)
+    func activate()
+    func setCategory(_ category: String)
 }
 
 struct ModernAVPlayerAudioSessionService: AudioSessionService {
 
-    static func activate() {
+    private let audioSession: CustomAudioSession
+
+    init(audioSession: CustomAudioSession = AVAudioSession.sharedInstance()) {
+        self.audioSession = audioSession
+    }
+
+    func activate() {
         DispatchQueue.global(qos: .userInitiated).async {
             do {
-                try AVAudioSession.sharedInstance().setActive(true)
+                try self.audioSession.setActive(true)
                 ModernAVPlayerLogger.instance.log(message: "Active audio session", domain: .service)
-
             } catch {
                 ModernAVPlayerLogger.instance.log(message: "Active audio session: \(error.localizedDescription)", domain: .error)
             }
         }
     }
 
-    static func setCategory(_ category: String) {
+    func setCategory(_ category: String) {
         do {
-            try AVAudioSession.sharedInstance().setCategory(category)
+            try audioSession.setCategory(category)
             ModernAVPlayerLogger.instance.log(message: "Set audio session category to: \(category)", domain: .service)
         } catch let error {
             ModernAVPlayerLogger.instance.log(message: "Set \(category) category: \(error.localizedDescription)", domain: .error)

@@ -31,7 +31,8 @@ import Nimble
 import ModernAVPlayer
 
 final class LoadedStateSpecs: QuickSpec {
-    
+
+    private var audioSession: MockAudioSession!
     private var loadedState: PlayerState!
     private var mockPlayer: MockCustomPlayer!
     private let playerMedia = MockPlayerMedia(url: URL(string: "x")!, type: .clip)
@@ -43,10 +44,13 @@ final class LoadedStateSpecs: QuickSpec {
     override func spec() {
         
         beforeEach {
+            self.audioSession = MockAudioSession()
             self.item = MockPlayerItem.createOne(url: "foo", duration: CMTime(seconds: 42, preferredTimescale: 1))
             self.mockPlayer = MockCustomPlayer(overrideCurrentItem: self.item)
             self.delegate = MockPlayerContextDelegate()
-            self.tested = ModernAVPlayerContext(player: self.mockPlayer, audioSessionType: MockAudioSession.self, plugins: self.plugins)
+            self.tested = ModernAVPlayerContext(player: self.mockPlayer,
+                                                audioSession: self.audioSession,
+                                                plugins: self.plugins)
             self.tested.delegate = self.delegate
             self.tested.currentMedia = self.playerMedia
             self.loadedState = LoadedState(context: self.tested)

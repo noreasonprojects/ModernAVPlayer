@@ -31,6 +31,7 @@ import Nimble
 
 final class BufferingStateSpecs: QuickSpec {
 
+    private var audioSession: MockAudioSession!
     private let playerMedia = MockPlayerMedia(url: URL(string: "foo")!, type: .clip)
     private var bufferingState: BufferingState!
     private var mockPlayer: MockCustomPlayer!
@@ -42,11 +43,14 @@ final class BufferingStateSpecs: QuickSpec {
 
     override func spec() {
         beforeEach {
+            self.audioSession = MockAudioSession()
             self.plugin = MockPlayerPlugin()
             self.item = MockPlayerItem.createOne(url: "foo")
             self.mockPlayer = MockCustomPlayer(overrideCurrentItem: self.item)
             self.delegate = MockPlayerContextDelegate()
-            self.tested = ModernAVPlayerContext(player: self.mockPlayer, audioSessionType: MockAudioSession.self, plugins: [self.plugin])
+            self.tested = ModernAVPlayerContext(player: self.mockPlayer,
+                                                audioSession: self.audioSession,
+                                                plugins: [self.plugin])
             self.tested.delegate = self.delegate
             self.tested.currentMedia = self.playerMedia
             self.mockRateService = MockObservingRateService(config: self.tested.config, item: self.item)

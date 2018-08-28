@@ -68,7 +68,7 @@ final class LoadingMediaState: PlayerState {
          */
         context.player.replaceCurrentItem(with: nil)
 
-        context.audioSessionType.activate()
+        context.audioSession.activate()
         
         setupInterruptionCallback()
         startBgTask(context: context)

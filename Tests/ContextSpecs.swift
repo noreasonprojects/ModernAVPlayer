@@ -32,16 +32,19 @@ import AVFoundation
 import ModernAVPlayer
 
 final class ContextSpecs: QuickSpec {
-    
-    var tested: PlayerContext!
-    var plugin: MockPlayerPlugin!
-    var mockState: MockPlayerState!
+
+    private var audioSession: MockAudioSession!
+    private var tested: PlayerContext!
+    private var plugin: MockPlayerPlugin!
+    private var mockState: MockPlayerState!
     
     override func spec() {
         
         beforeEach {
+            self.audioSession = MockAudioSession()
             self.plugin = MockPlayerPlugin()
-            self.tested = ModernAVPlayerContext(plugins: [self.plugin])
+            self.tested = ModernAVPlayerContext(audioSession: self.audioSession,
+                                                plugins: [self.plugin])
             self.mockState = MockPlayerState(context: self.tested)
         }
         
@@ -50,6 +53,13 @@ final class ContextSpecs: QuickSpec {
                 
                 // ASSERT
                 expect(self.tested.state).to(beAnInstanceOf(InitState.self))
+            }
+
+            it("should set category") {
+
+                // ASSERT
+                expect(self.audioSession.setCategoryCallCount).to(equal(1))
+                expect(self.audioSession.setCategoryLastParam).to(equal(self.tested.config.audioSessionCategory))
             }
         }
         

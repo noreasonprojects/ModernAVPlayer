@@ -24,7 +24,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import AVFoundation 
 import ModernAVPlayer
 import RxSwift
 import RxCocoa
@@ -52,59 +51,6 @@ struct Data {
             ModernAVPlayerMedia(url: localClip, type: .clip, metadata: meta2)
         ]
     }()
-}
-
-struct MyPlugin: PlayerPlugin {
-
-    func didInit(player: AVPlayer) { }
-
-    func willStartLoading(media: PlayerMedia) {
-        print("~~~ [Plugin] WillStartLoading \(media.description)")
-    }
-
-    func didStartLoading(media: PlayerMedia) {
-        print("~~~ [Plugin] DidStartLoading \(media.description)")
-    }
-
-    func didStartBuffering(media: PlayerMedia) {
-        print("~~~ [Plugin] DidStartBuffering \(media.description)")
-    }
-
-    func didLoad(media: PlayerMedia, duration: Double?) {
-        print("~~~ [Plugin] DidLoad \(media.description)")
-    }
-
-    func didMediaChanged(_ media: PlayerMedia, previousMedia: PlayerMedia?) {
-        print("~~~ [Plugin] DidMediaChanged \(media.description) | \(String(describing: previousMedia?.description))")
-    }
-
-    func willStartPlaying(media: PlayerMedia, position: Double) {
-        print("~~~ [Plugin] WillStartPlaying \(media.description) | \(position)")
-    }
-
-    func didStartPlaying(media: PlayerMedia) {
-        print("~~~ [Plugin] DidStartPlaying \(media.description)")
-    }
-
-    func didPaused(media: PlayerMedia, position: Double) {
-        print("~~~ [Plugin] DidPaused \(media.description) | \(position)")
-    }
-
-    func didStopped(media: PlayerMedia, position: Double) {
-        print("~~~ [Plugin] DidStop \(media.description) | \(position)")
-    }
-
-    func didStartWaitingForNetwork(media: PlayerMedia) {
-        print("~~~ [Plugin] DidWaiting \(media.description)")
-    }
-
-    func didFailed(media: PlayerMedia, error: PlayerError) {
-        print("~~~ [Plugin] DidFailed \(media.description) | \(error.localizedDescription)")
-    }
-
-    func didItemPlayToEndTime(media: PlayerMedia, endTime: Double) {
-        print("~~~ [Plugin] DidPaused \(media.description) | \(endTime)")
-    }
 }
 
 final class ViewController: UIViewController {
@@ -181,8 +127,7 @@ final class ViewController: UIViewController {
     
     // MARK: - Input
 
-    private let player = ModernAVPlayer(plugins: [MyPlugin()],
-                                        loggerDomains: [.state, .error, .unavailableCommand])
+    private let player = ModernAVPlayer(loggerDomains: [.state, .error, .unavailableCommand])
     
     // MARK: - Observables
     

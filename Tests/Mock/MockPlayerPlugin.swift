@@ -31,50 +31,50 @@ import ModernAVPlayer
 final class MockPlayerPlugin: PlayerPlugin {
     
     private(set) var willStartLoadingCallCount = 0
-    func willStartLoading() {
+    func willStartLoading(media: PlayerMedia) {
         willStartLoadingCallCount += 1
     }
     
     private(set) var didStartLoadingCallCount = 0
-    func didStartLoading() {
+    func didStartLoading(media: PlayerMedia) {
         didStartLoadingCallCount += 1
     }
-    
+
     private(set) var didStartBufferingCallCount = 0
-    func didStartBuffering() {
+    func didStartBuffering(media: PlayerMedia) {
         didStartBufferingCallCount += 1
     }
     
     private(set) var didStartPlayingCallCount = 0
-    func didStartPlaying() {
+    func didStartPlaying(media: PlayerMedia) {
         didStartPlayingCallCount += 1
     }
     
     private(set) var didPausedCallCount = 0
-    func didPaused() {
+    func didPaused(media: PlayerMedia, position: Double) {
         didPausedCallCount += 1
     }
     
     private(set) var didStoppedCallCount = 0
-    func didStopped() {
+    func didStopped(media: PlayerMedia, position: Double) {
         didStoppedCallCount += 1
     }
     
     private(set) var didStartWaitingCallCount = 0
-    func didStartWaitingForNetwork() {
+    func didStartWaitingForNetwork(media: PlayerMedia) {
         didStartWaitingCallCount += 1
     }
     
     private(set) var didItemPlayToEndTimeCallCount = 0
     private(set) var didItemPlayToEndTimeLastParam: Double?
-    func didItemPlayToEndTime(endTime: Double) {
+    func didItemPlayToEndTime(media: PlayerMedia, endTime: Double) {
         didItemPlayToEndTimeCallCount += 1
         didItemPlayToEndTimeLastParam = endTime
     }
     
     private(set) var didFailedCallCount = 0
     private(set) var didFailedLastParam: PlayerError?
-    func didFailed(error: PlayerError) {
+    func didFailed(media: PlayerMedia, error: PlayerError) {
         didFailedCallCount += 1
         didFailedLastParam = error
     }

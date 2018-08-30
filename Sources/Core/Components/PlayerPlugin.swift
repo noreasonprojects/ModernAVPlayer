@@ -79,3 +79,20 @@ public protocol PlayerPlugin {
     /// Called when media play to his end time
     func didItemPlayToEndTime(media: PlayerMedia, endTime: Double)
 }
+
+/// Make method optional
+public extension PlayerPlugin {
+    func didInit(player: AVPlayer) { }
+    func willStartLoading(media: PlayerMedia) { }
+    func didStartLoading(media: PlayerMedia) { }
+    func didStartBuffering(media: PlayerMedia) { }
+    func didLoad(media: PlayerMedia, duration: Double?) { }
+    func didMediaChanged(_ media: PlayerMedia, previousMedia: PlayerMedia?) { }
+    func willStartPlaying(media: PlayerMedia, position: Double) { }
+    func didStartPlaying(media: PlayerMedia) { }
+    func didPaused(media: PlayerMedia, position: Double) { }
+    func didStopped(media: PlayerMedia, position: Double) { }
+    func didStartWaitingForNetwork(media: PlayerMedia) { }
+    func didFailed(media: PlayerMedia, error: PlayerError) { }
+    func didItemPlayToEndTime(media: PlayerMedia, endTime: Double) { }
+}

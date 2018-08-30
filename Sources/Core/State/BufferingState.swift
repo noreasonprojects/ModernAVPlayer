@@ -33,6 +33,7 @@ final class BufferingState: NSObject, PlayerState {
     unowned var context: PlayerContext
     private var rateObservingService: RateObservingService
     private var interruptionAudioService: ModernAVPlayerInterruptionAudioService
+    private var playerCurrentTime: Double { return context.currentTime }
     
     // MARK: - Variable
 
@@ -57,7 +58,9 @@ final class BufferingState: NSObject, PlayerState {
     }
     
     func contextUpdated() {
-        context.plugins.forEach { $0.didStartBuffering() }
+        guard let media = context.currentMedia
+            else { assertionFailure("media should exist"); return }
+        context.plugins.forEach { $0.didStartBuffering(media: media) }
     }
     
     deinit {
@@ -77,8 +80,12 @@ final class BufferingState: NSObject, PlayerState {
                                                    error: .bufferingFailed)
             context.changeState(state: waitingState)
         }
-        
-        rateObservingService.onPlaying = { [context] in
+
+        guard let media = context.currentMedia
+            else { assertionFailure("media should exist"); return }
+
+        rateObservingService.onPlaying = { [context, playerCurrentTime] in
+            context.plugins.forEach { $0.willStartPlaying(media: media, position: playerCurrentTime) }
             let playbackService = ModernAVPlayerPlaybackObservingService(player: context.player)
             context.changeState(state: PlayingState(context: context, itemPlaybackObservingService: playbackService))
         }

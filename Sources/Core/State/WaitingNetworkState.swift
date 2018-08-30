@@ -57,7 +57,9 @@ final class WaitingNetworkState: PlayerState {
     
     func contextUpdated() {
         reachability.start()
-        context.plugins.forEach { $0.didStartWaitingForNetwork() }
+        guard let media = context.currentMedia
+            else { assertionFailure("media should exist"); return }
+        context.plugins.forEach { $0.didStartWaitingForNetwork(media: media) }
     }
     
     // MARK: - Reachability

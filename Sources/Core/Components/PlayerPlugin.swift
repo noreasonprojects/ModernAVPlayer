@@ -35,13 +35,13 @@ public protocol PlayerPlugin {
     func didInit(player: AVPlayer)
     
     /// Called when the media will start loading
-    func willStartLoading()
+    func willStartLoading(media: PlayerMedia)
     
     /// Called when the media has started loading
-    func didStartLoading()
+    func didStartLoading(media: PlayerMedia)
     
     /// Called before buffering media
-    func didStartBuffering()
+    func didStartBuffering(media: PlayerMedia)
     
     ///
     /// Called when the media is loaded
@@ -57,22 +57,25 @@ public protocol PlayerPlugin {
     ///    - previousMedia: PlayerMedia loaded before
     ///
     func didMediaChanged(_ media: PlayerMedia, previousMedia: PlayerMedia?)
-    
+
     /// Called when the media is playing
-    func didStartPlaying()
+    func willStartPlaying(media: PlayerMedia, position: Double)
+
+    /// Called when the media is playing
+    func didStartPlaying(media: PlayerMedia)
     
     /// Called when the media is paused
-    func didPaused()
+    func didPaused(media: PlayerMedia, position: Double)
     
     /// Called when the media is stopped
-    func didStopped()
+    func didStopped(media: PlayerMedia, position: Double)
     
     /// Called when player check network access
-    func didStartWaitingForNetwork()
+    func didStartWaitingForNetwork(media: PlayerMedia)
     
     /// Called when the media failed
-    func didFailed(error: PlayerError)
+    func didFailed(media: PlayerMedia, error: PlayerError)
     
     /// Called when media play to his end time
-    func didItemPlayToEndTime(endTime: Double)
+    func didItemPlayToEndTime(media: PlayerMedia, endTime: Double)
 }

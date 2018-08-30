@@ -65,7 +65,9 @@ final class PlayingState: PlayerState {
     }
     
     func contextUpdated() {
-        context.plugins.forEach { $0.didStartPlaying() }
+        guard let media = context.currentMedia
+            else { assertionFailure("media should exist"); return }
+        context.plugins.forEach { $0.didStartPlaying(media: media) }
     }
     
     deinit {
@@ -123,11 +125,14 @@ final class PlayingState: PlayerState {
     // MARK: - Playback Observing Service
     
     private func setupPlaybackObservingCallback() {
+        guard let media = context.currentMedia
+            else { assertionFailure("media should exist"); return }
+
         itemPlaybackObservingService.onPlaybackStalled = { [weak self] in self?.redirectToWaitingForNetworkState() }
         itemPlaybackObservingService.onFailedToPlayToEndTime = { [weak self] in self?.redirectToWaitingForNetworkState() }
         itemPlaybackObservingService.onPlayToEndTime = { [weak self, context] in
             context.delegate?.playerContext(didItemPlayToEndTime: context.currentTime)
-            context.plugins.forEach { $0.didItemPlayToEndTime(endTime: context.currentTime) }
+            context.plugins.forEach { $0.didItemPlayToEndTime(media: media, endTime: context.currentTime) }
             self?.redirectToStoppedState()
         }
     }

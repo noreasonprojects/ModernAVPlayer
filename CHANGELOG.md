@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file.
 	* Add audio session category test
 	* Use the `$(inherited)` flag for PODS_PODFILE_DIR_PATH in example
 	* Update deprecated MPMediaItemArtwork initializer
+	* Move back ModernAVPlayerMedia & Metadata to library
 * Dependency:
 	* [gem][cocoapods] -> 1.5.3
 

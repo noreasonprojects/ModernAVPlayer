@@ -38,9 +38,9 @@ struct Data {
             else { assertionFailure(); return [] }
         
         let localClip = URL(fileURLWithPath: file)
-        let meta0 = ModernAVPlayerMediaMetadata(title: "Le live", albumTitle: "Album0", artist: "Artist0", localImageName: "sennaLive", customAttribute: "attribute0")
-        let meta1 = ModernAVPlayerMediaMetadata(title: "Remote clip", albumTitle: "Album1", artist: "Artist1", localImageName: "sennaClip", customAttribute: "attribute1")
-        let meta2 = ModernAVPlayerMediaMetadata(title: "Local clip", albumTitle: "Album2", artist: "Artist2", localImageName: "ankierman", remoteImageUrl: URL(string: "https://goo.gl/U4QoQj"), customAttribute: "attribute2")
+        let meta0 = ModernAVPlayerMediaMetadata(title: "Le live", albumTitle: "Album0", artist: "Artist0", localImageName: "sennaLive")
+        let meta1 = ModernAVPlayerMediaMetadata(title: "Remote clip", albumTitle: "Album1", artist: "Artist1", localImageName: "sennaClip")
+        let meta2 = ModernAVPlayerMediaMetadata(title: "Local clip", albumTitle: "Album2", artist: "Artist2", localImageName: "ankierman", remoteImageUrl: URL(string: "https://goo.gl/U4QoQj"))
         let assetOptions = ["AVURLAssetHTTPHeaderFieldsKey": ["User-Agent": "ModernAVPlayer"]]
         return [
             ModernAVPlayerMedia(url: liveUrl, type: .stream(isLive: true), assetOptions: assetOptions, metadata: meta0),
@@ -119,7 +119,7 @@ final class ViewController: UIViewController {
     
     // MARK: - Variables
 
-    let player = ModernAVPlayer(plugins: [CustomTrackerPlugin()], loggerDomains: [.state, .error, .unavailableCommand])
+    let player = ModernAVPlayer(loggerDomains: [.state, .error, .unavailableCommand])
     
     // MARK: - Observables
     

@@ -43,9 +43,6 @@
 		E186A1812126D2F0002B1455 /* MockMPRemoteCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = E186A1802126D2F0002B1455 /* MockMPRemoteCommand.swift */; };
 		E186A1852126F136002B1455 /* MockModernAVPlayerExposable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E186A1842126F136002B1455 /* MockModernAVPlayerExposable.swift */; };
 		E187F8F720BECD8300B1D832 /* MockPlayerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = E187F8F620BECD8300B1D832 /* MockPlayerPlugin.swift */; };
-		E19285A020E23F5200EF927F /* ModernAVPlayerMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = E192859F20E23F5200EF927F /* ModernAVPlayerMedia.swift */; };
-		E19285A220E23F7F00EF927F /* ModernAVPlayerMediaMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19285A120E23F7F00EF927F /* ModernAVPlayerMediaMetadata.swift */; };
-		E19285A420E2415A00EF927F /* CustomTrackerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19285A320E2415A00EF927F /* CustomTrackerPlugin.swift */; };
 		E19C9D672109B4D900FDA0D7 /* MockPlayerContextDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19C9D662109B4D900FDA0D7 /* MockPlayerContextDelegate.swift */; };
 		E1A308AD20B5C032007ED482 /* noreason.txt in Resources */ = {isa = PBXBuildFile; fileRef = E1A308AC20B5C032007ED482 /* noreason.txt */; };
 		E1A4C32E209B06F1000580F5 /* RouteAudioServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A4C32D209B06F1000580F5 /* RouteAudioServiceTests.swift */; };
@@ -107,9 +104,6 @@
 		E186A1802126D2F0002B1455 /* MockMPRemoteCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMPRemoteCommand.swift; sourceTree = "<group>"; };
 		E186A1842126F136002B1455 /* MockModernAVPlayerExposable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockModernAVPlayerExposable.swift; sourceTree = "<group>"; };
 		E187F8F620BECD8300B1D832 /* MockPlayerPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPlayerPlugin.swift; sourceTree = "<group>"; };
-		E192859F20E23F5200EF927F /* ModernAVPlayerMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModernAVPlayerMedia.swift; sourceTree = "<group>"; };
-		E19285A120E23F7F00EF927F /* ModernAVPlayerMediaMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModernAVPlayerMediaMetadata.swift; sourceTree = "<group>"; };
-		E19285A320E2415A00EF927F /* CustomTrackerPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTrackerPlugin.swift; sourceTree = "<group>"; };
 		E19C9D662109B4D900FDA0D7 /* MockPlayerContextDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPlayerContextDelegate.swift; sourceTree = "<group>"; };
 		E1A308AC20B5C032007ED482 /* noreason.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = noreason.txt; sourceTree = "<group>"; };
 		E1A4C32D209B06F1000580F5 /* RouteAudioServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteAudioServiceTests.swift; sourceTree = "<group>"; };
@@ -174,9 +168,6 @@
 			children = (
 				E112DB462079364900DB69E8 /* Resources */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
-				E19285A320E2415A00EF927F /* CustomTrackerPlugin.swift */,
-				E192859F20E23F5200EF927F /* ModernAVPlayerMedia.swift */,
-				E19285A120E23F7F00EF927F /* ModernAVPlayerMediaMetadata.swift */,
 				E12D8B5520792AE300A84A5E /* ViewController.swift */,
 				E112DB442079359D00DB69E8 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
@@ -499,11 +490,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E19285A020E23F5200EF927F /* ModernAVPlayerMedia.swift in Sources */,
 				E12D8B5620792AE300A84A5E /* ViewController.swift in Sources */,
-				E19285A220E23F7F00EF927F /* ModernAVPlayerMediaMetadata.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
-				E19285A420E2415A00EF927F /* CustomTrackerPlugin.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

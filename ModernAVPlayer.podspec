@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'ModernAVPlayer'
-  s.version          = '0.11.1'
+  s.version          = '0.12.0'
   s.summary          = 'ModernAVPlayer is an audio persistence AVPlayer wrapper'
   s.description      = <<-DESC
 ModernAVPlayer is an ongoing project that aims to create a more usable audio video player with readable status and network persistence option.

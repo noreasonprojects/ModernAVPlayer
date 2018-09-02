@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 
 ---
-## [X.X.X]
+## [0.12.0]
 * Features:
 	* Allow media setting custom HTTP header fields
 	* Expose AVPlayer instance

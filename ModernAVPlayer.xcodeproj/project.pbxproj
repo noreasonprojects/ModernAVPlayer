@@ -43,6 +43,7 @@
 		E186A1812126D2F0002B1455 /* MockMPRemoteCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = E186A1802126D2F0002B1455 /* MockMPRemoteCommand.swift */; };
 		E186A1852126F136002B1455 /* MockModernAVPlayerExposable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E186A1842126F136002B1455 /* MockModernAVPlayerExposable.swift */; };
 		E187F8F720BECD8300B1D832 /* MockPlayerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = E187F8F620BECD8300B1D832 /* MockPlayerPlugin.swift */; };
+		E18E3D29213BF3E600FF4E63 /* MockNowPlayingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18E3D28213BF3E600FF4E63 /* MockNowPlayingService.swift */; };
 		E19C9D672109B4D900FDA0D7 /* MockPlayerContextDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19C9D662109B4D900FDA0D7 /* MockPlayerContextDelegate.swift */; };
 		E1A308AD20B5C032007ED482 /* noreason.txt in Resources */ = {isa = PBXBuildFile; fileRef = E1A308AC20B5C032007ED482 /* noreason.txt */; };
 		E1A4C32E209B06F1000580F5 /* RouteAudioServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A4C32D209B06F1000580F5 /* RouteAudioServiceTests.swift */; };
@@ -104,6 +105,7 @@
 		E186A1802126D2F0002B1455 /* MockMPRemoteCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMPRemoteCommand.swift; sourceTree = "<group>"; };
 		E186A1842126F136002B1455 /* MockModernAVPlayerExposable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockModernAVPlayerExposable.swift; sourceTree = "<group>"; };
 		E187F8F620BECD8300B1D832 /* MockPlayerPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPlayerPlugin.swift; sourceTree = "<group>"; };
+		E18E3D28213BF3E600FF4E63 /* MockNowPlayingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNowPlayingService.swift; sourceTree = "<group>"; };
 		E19C9D662109B4D900FDA0D7 /* MockPlayerContextDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPlayerContextDelegate.swift; sourceTree = "<group>"; };
 		E1A308AC20B5C032007ED482 /* noreason.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = noreason.txt; sourceTree = "<group>"; };
 		E1A4C32D209B06F1000580F5 /* RouteAudioServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteAudioServiceTests.swift; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 				E186A1842126F136002B1455 /* MockModernAVPlayerExposable.swift */,
 				E186A1802126D2F0002B1455 /* MockMPRemoteCommand.swift */,
 				E1616A3E2126FC860067D3F5 /* MockMPRemoteCommandCenter.swift */,
+				E18E3D28213BF3E600FF4E63 /* MockNowPlayingService.swift */,
 				E19C9D662109B4D900FDA0D7 /* MockPlayerContextDelegate.swift */,
 				E152D519207A459500E0347C /* MockPlayerItem.swift */,
 				E167A06920E38EAD00B9FA3D /* MockPlayerMedia.swift */,
@@ -513,6 +516,7 @@
 				E1EFA9AC20B449FF002605A9 /* MockReachabilityService.swift in Sources */,
 				E152D52C207A472500E0347C /* StoppedStateSpecs.swift in Sources */,
 				E1616A3F2126FC860067D3F5 /* MockMPRemoteCommandCenter.swift in Sources */,
+				E18E3D29213BF3E600FF4E63 /* MockNowPlayingService.swift in Sources */,
 				E152D532207A472500E0347C /* FailedStateSpecs.swift in Sources */,
 				E187F8F720BECD8300B1D832 /* MockPlayerPlugin.swift in Sources */,
 				E16368B62097654E00E69DAB /* MockTimer.swift in Sources */,

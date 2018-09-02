@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 import AVFoundation
+import MediaPlayer
 
 struct StoppedState: PlayerState {
 
@@ -46,6 +47,8 @@ struct StoppedState: PlayerState {
         self.context.player.seek(to: kCMTimeZero) { [context] completed in
             guard completed else { return }
             context.delegate?.playerContext(didCurrentTimeChange: context.currentTime)
+            context.nowPlaying.overrideInfoCenter(for: MPNowPlayingInfoPropertyElapsedPlaybackTime,
+                                                  value: NSNumber(value: 0))
         }
     }
 

@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 
 ---
+## [X.X.X]
+* Fix:
+	* Update NowPlayingInfo time at the right moment when item play reach end time
+
 ## [0.12.0]
 * Features:
 	* Allow media setting custom HTTP header fields

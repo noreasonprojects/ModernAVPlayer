@@ -49,6 +49,7 @@ final class BufferingStateSpecs: QuickSpec {
             self.mockPlayer = MockCustomPlayer(overrideCurrentItem: self.item)
             self.delegate = MockPlayerContextDelegate()
             self.tested = ModernAVPlayerContext(player: self.mockPlayer,
+                                                config: ModernAVPlayerConfiguration(),
                                                 audioSession: self.audioSession,
                                                 plugins: [self.plugin])
             self.tested.delegate = self.delegate

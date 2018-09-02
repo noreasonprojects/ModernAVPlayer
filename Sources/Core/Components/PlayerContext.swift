@@ -46,7 +46,6 @@ protocol PlayerContext: class, MediaPlayer {
     var delegate: PlayerContextDelegate? { get }
     var itemDuration: Double? { get }
     var nowPlaying: NowPlaying { get }
-    var player: AVPlayer { get }
     var plugins: [PlayerPlugin] { get }
     var state: PlayerState! { get }
     
@@ -93,11 +92,11 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
 
     // MARK: - LifeCycle
 
-    init(player: AVPlayer = AVPlayer(),
-         config: PlayerConfiguration = ModernAVPlayerConfiguration(),
+    init(player: AVPlayer,
+         config: PlayerConfiguration,
          nowPlaying: NowPlaying = ModernAVPlayerNowPlayingService(),
          audioSession: AudioSessionService = ModernAVPlayerAudioSessionService(),
-         plugins: [PlayerPlugin] = []) {
+         plugins: [PlayerPlugin]) {
         self.player = player
         self.config = config
         self.nowPlaying = nowPlaying

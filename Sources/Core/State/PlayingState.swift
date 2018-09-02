@@ -143,7 +143,7 @@ final class PlayingState: PlayerState {
                                                        autostart: true,
                                                        error: .playbackStalled))
     }
-    
+
     private func redirectToStoppedState() {
         context.changeState(state: StoppedState(context: context))
     }

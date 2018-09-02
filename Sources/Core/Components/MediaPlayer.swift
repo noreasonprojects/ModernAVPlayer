@@ -24,9 +24,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import Foundation
+import AVFoundation
 
 public protocol MediaPlayer {
+    var player: AVPlayer { get }
+
     func loadMedia(media: PlayerMedia, autostart: Bool, position: Double?)
     func pause()
     func play()

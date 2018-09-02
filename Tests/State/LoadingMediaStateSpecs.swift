@@ -49,6 +49,7 @@ final class LoadingMediaStateSpecs: QuickSpec {
             self.audioSession = MockAudioSession()
             self.player = MockCustomPlayer.createOnUsingAsset(url: "foo")
             self.tested = ModernAVPlayerContext(player: self.player,
+                                                config: ModernAVPlayerConfiguration(),
                                                 audioSession: self.audioSession,
                                                 plugins: [self.plugin])
             self.tested.currentMedia = self.playerMedia

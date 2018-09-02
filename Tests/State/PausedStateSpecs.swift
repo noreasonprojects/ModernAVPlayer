@@ -52,6 +52,7 @@ final class PausedStateSpecs: QuickSpec {
             self.plugin = MockPlayerPlugin()
             self.mockPlayer = MockCustomPlayer(overrideCurrentItem: self.item)
             self.playerContext = ModernAVPlayerContext(player: self.mockPlayer,
+                                                       config: ModernAVPlayerConfiguration(),
                                                        audioSession: self.audioSession,
                                                        plugins: [self.plugin])
             self.playerContext.delegate = self.delegate

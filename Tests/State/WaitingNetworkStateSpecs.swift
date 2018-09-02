@@ -45,7 +45,9 @@ final class WaitingNetworkStateSpecs: QuickSpec {
             self.plugin = MockPlayerPlugin()
             self.mockReachability = MockReachability()
             self.url = URL(string: "foo")!
-            self.tested = ModernAVPlayerContext(player: self.mockPlayer, plugins: [self.plugin])
+            self.tested = ModernAVPlayerContext(player: self.mockPlayer,
+                                                config: ModernAVPlayerConfiguration(),
+                                                plugins: [self.plugin])
             self.tested.currentMedia = self.playerMedia
             self.state = WaitingNetworkState(context: self.tested,
                                              urlToReload: self.url,

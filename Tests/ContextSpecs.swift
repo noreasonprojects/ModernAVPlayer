@@ -37,13 +37,16 @@ final class ContextSpecs: QuickSpec {
     private var tested: PlayerContext!
     private var plugin: MockPlayerPlugin!
     private var mockState: MockPlayerState!
+    private let player = MockCustomPlayer()
     
     override func spec() {
         
         beforeEach {
             self.audioSession = MockAudioSession()
             self.plugin = MockPlayerPlugin()
-            self.tested = ModernAVPlayerContext(audioSession: self.audioSession,
+            self.tested = ModernAVPlayerContext(player: self.player,
+                                                config: ModernAVPlayerConfiguration(),
+                                                audioSession: self.audioSession,
                                                 plugins: [self.plugin])
             self.mockState = MockPlayerState(context: self.tested)
         }

@@ -2,9 +2,10 @@
 All notable changes to this project will be documented in this file.
 
 ---
-## [x.x.x]
-* Feature:
+## [X.X.X]
+* Features:
 	* Allow media setting custom HTTP header fields
+	* Expose AVPlayer instance
 * Fixes:
 	* Add audio session category test
 	* Use the `$(inherited)` flag for PODS_PODFILE_DIR_PATH in example

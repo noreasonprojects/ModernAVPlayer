@@ -51,6 +51,7 @@ final class StoppedStateSpecs: QuickSpec {
             self.mockPlayer.seekCompletionHandlerReturn = true
             self.delegate = MockPlayerContextDelegate()
             self.playerContext = ModernAVPlayerContext(player: self.mockPlayer,
+                                                       config: ModernAVPlayerConfiguration(),
                                                        audioSession: MockAudioSession(),
                                                        plugins: [self.plugin])
             self.playerContext.delegate = self.delegate

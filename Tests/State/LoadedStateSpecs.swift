@@ -49,6 +49,7 @@ final class LoadedStateSpecs: QuickSpec {
             self.mockPlayer = MockCustomPlayer(overrideCurrentItem: self.item)
             self.delegate = MockPlayerContextDelegate()
             self.tested = ModernAVPlayerContext(player: self.mockPlayer,
+                                                config: ModernAVPlayerConfiguration(),
                                                 audioSession: self.audioSession,
                                                 plugins: self.plugins)
             self.tested.delegate = self.delegate

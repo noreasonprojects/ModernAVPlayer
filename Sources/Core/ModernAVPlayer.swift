@@ -37,10 +37,13 @@ public protocol ModernAVPlayerDelegate: class {
 
 public final class ModernAVPlayer: NSObject, ModernAVPlayerExposable {
     
-    // MARK: - Output
-    
+    // MARK: - Outputs
+
     public weak var delegate: ModernAVPlayerDelegate?
-    
+
+    /// AVPlayer in use
+    public var player: AVPlayer
+
     /// Current player state
     public var state: ModernAVPlayer.State {
         return context.state.type
@@ -49,7 +52,7 @@ public final class ModernAVPlayer: NSObject, ModernAVPlayerExposable {
     /// Last media requested to be load
     public var currentMedia: PlayerMedia?
     
-    // MARK: - Variables
+    // MARK: - Input
     
     private let context: ModernAVPlayerContext
     
@@ -58,14 +61,18 @@ public final class ModernAVPlayer: NSObject, ModernAVPlayerExposable {
     ///
     /// ModernAVPlayer initialisation
     ///
+    /// - parameter player: AVPlayer instance in use
     /// - parameter config: setup player configuration
-    /// - parameter plugins: array of plugin
+    /// - parameter plugins: plugin in use
+    /// - parameter loggerDomains: enable logger domains
     ///
-    public init(config: PlayerConfiguration = ModernAVPlayerConfiguration(),
+    public init(player: AVPlayer = AVPlayer(),
+                config: PlayerConfiguration = ModernAVPlayerConfiguration(),
                 plugins: [PlayerPlugin] = [],
                 loggerDomains: [ModernAVPlayerLoggerDomain] = []) {
+        self.player = player
         ModernAVPlayerLogger.setup.domains = loggerDomains
-        context = ModernAVPlayerContext(config: config, plugins: plugins)
+        context = ModernAVPlayerContext(player: player, config: config, plugins: plugins)
         super.init()
         context.delegate = self
         

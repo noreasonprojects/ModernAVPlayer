@@ -51,7 +51,9 @@ final class PlayingStateSpecs: QuickSpec {
             self.media = MockPlayerMedia(url: URL(string: "foo")!, type: .clip)
             self.itemPlaybackObservingService = MockItemPlaybackObservingService()
             self.delegate = MockPlayerContextDelegate()
-            self.tested = ModernAVPlayerContext(player: self.mockPlayer, plugins: [self.plugin])
+            self.tested = ModernAVPlayerContext(player: self.mockPlayer,
+                                                config: ModernAVPlayerConfiguration(),
+                                                plugins: [self.plugin])
             self.tested.delegate = self.delegate
             self.tested.currentMedia = self.media
             self.playingState = PlayingState(context: self.tested,

@@ -43,7 +43,10 @@ struct Data {
         let meta2 = ModernAVPlayerMediaMetadata(title: "Local clip", albumTitle: "Album2", artist: "Artist2", localImageName: "ankierman", remoteImageUrl: URL(string: "https://goo.gl/U4QoQj"))
         let assetOptions = ["AVURLAssetHTTPHeaderFieldsKey": ["User-Agent": "ModernAVPlayer"]]
         return [
-            ModernAVPlayerMedia(url: liveUrl, type: .stream(isLive: true), assetOptions: assetOptions, metadata: meta0),
+            ModernAVPlayerMedia(url: liveUrl,
+                                type: .stream(isLive: true),
+                                metadata: meta0,
+                                assetOptions: assetOptions),
             ModernAVPlayerMedia(url: remoteClip, type: .clip, metadata: meta1),
             ModernAVPlayerMedia(url: localClip, type: .clip, metadata: meta2)
         ]

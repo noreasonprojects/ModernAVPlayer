@@ -58,7 +58,7 @@ $ pod install
 
 > Create a media
 ```swift
-let media = ModernAVPlayerMedia(url: liveUrl, type: .stream, isLive: true)
+let media = ModernAVPlayerMedia(url: liveUrl, type: .stream, isLive: true, metadata: nil)
 ```
 > Instanciate the wrapper
 ```swift

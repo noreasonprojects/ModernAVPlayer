@@ -27,17 +27,17 @@
 public struct ModernAVPlayerMedia: PlayerMedia {
     public let url: URL
     public let type: MediaType
-    public let assetOptions: [String: Any]?
     public let metadata: ModernAVPlayerMediaMetadata?
+    public let assetOptions: [String: Any]?
 
     public init(url: URL,
                 type: MediaType,
-                assetOptions: [String: Any]? = nil,
-                metadata: ModernAVPlayerMediaMetadata?) {
+                metadata: ModernAVPlayerMediaMetadata?,
+                assetOptions: [String: Any]? = nil) {
         self.url = url
         self.type = type
-        self.assetOptions = assetOptions
         self.metadata = metadata
+        self.assetOptions = assetOptions
     }
     
     public func getMetadata() -> PlayerMediaMetadata? {

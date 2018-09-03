@@ -53,7 +53,10 @@ struct StoppedState: PlayerState {
     }
 
     func contextUpdated() {
-        context.plugins.forEach { $0.didStopped() }
+        guard let media = context.currentMedia
+            else { assertionFailure("media should exist"); return }
+        let position = context.currentTime
+        context.plugins.forEach { $0.didStopped(media: media, position: position) }
     }
     
     // MARK: - Shared actions

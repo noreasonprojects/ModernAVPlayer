@@ -46,7 +46,9 @@ final class FailedState: PlayerState {
     }
     
     func contextUpdated() {
-        context.plugins.forEach { $0.didFailed(error: error) }
+        guard let media = context.currentMedia
+            else { assertionFailure("media should exist"); return }
+        context.plugins.forEach { $0.didFailed(media: media, error: error) }
     }
 
     deinit {

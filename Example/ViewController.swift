@@ -24,6 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+import AVFoundation 
 import ModernAVPlayer
 import RxSwift
 import RxCocoa
@@ -90,9 +91,9 @@ final class ViewController: UIViewController {
         formatter.dateFormat = "HH:mm:ss"
         let timeStamp = formatter.string(from: Date())
         let newMetadata = ModernAVPlayerMediaMetadata(title: timeStamp,
-                                                 albumTitle: "Updated album",
-                                                 artist: "Updated artist",
-                                                localImageName: "ankierman")
+                                                      albumTitle: "Updated album",
+                                                      artist: "Updated artist",
+                                                      localImageName: "ankierman")
         player.updateNowPlayingInfo(metadata: newMetadata)
     }
     
@@ -120,9 +121,9 @@ final class ViewController: UIViewController {
         loadMedia(media, autostart: true)
     }
     
-    // MARK: - Variables
+    // MARK: - Input
 
-    let player = ModernAVPlayer(loggerDomains: [.state, .error, .unavailableCommand])
+    private let player = ModernAVPlayer(loggerDomains: [.state, .error, .unavailableCommand])
     
     // MARK: - Observables
     

@@ -69,6 +69,11 @@ let player = ModernAVPlayer()
 player.loadMedia(media: media, autostart: true)
 ```
 
+> Track on repeat
+```swift
+player.loopMode = true
+```
+
 ### Available Commands
 | ↓ State / Command → | loadMedia | play | pause | stop | seek |
 |:---------|:---------:|:--------:|:--------:|:--------:|:--------:|

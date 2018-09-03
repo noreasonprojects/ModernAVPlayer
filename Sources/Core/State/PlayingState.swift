@@ -128,7 +128,11 @@ final class PlayingState: PlayerState {
         itemPlaybackObservingService.onPlayToEndTime = { [weak self, context] in
             context.delegate?.playerContext(didItemPlayToEndTime: context.currentTime)
             context.plugins.forEach { $0.didItemPlayToEndTime(endTime: context.currentTime) }
-            self?.redirectToStoppedState()
+            if context.loopMode {
+                self?.seek(position: 0)
+            } else {
+                self?.redirectToStoppedState()
+            }
         }
     }
     

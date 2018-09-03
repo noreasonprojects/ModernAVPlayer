@@ -27,6 +27,7 @@
 import AVFoundation
 import Foundation
 import Quick
+import MediaPlayer
 @testable
 import ModernAVPlayer
 import Nimble
@@ -40,10 +41,12 @@ final class StoppedStateSpecs: QuickSpec {
     private var plugin: MockPlayerPlugin!
     private var item: MockPlayerItem!
     private var delegate: MockPlayerContextDelegate!
+    private var nowPlaying: MockNowPlayingService!
 
     override func spec() {
 
         beforeEach {
+            self.nowPlaying = MockNowPlayingService()
             self.item = MockPlayerItem.createOne(url: "foo")
             self.media = MockPlayerMedia(url: URL(string: "foo")!, type: .clip)
             self.plugin = MockPlayerPlugin()
@@ -52,6 +55,7 @@ final class StoppedStateSpecs: QuickSpec {
             self.delegate = MockPlayerContextDelegate()
             self.playerContext = ModernAVPlayerContext(player: self.mockPlayer,
                                                        config: ModernAVPlayerConfiguration(),
+                                                       nowPlaying: self.nowPlaying,
                                                        audioSession: MockAudioSession(),
                                                        plugins: [self.plugin])
             self.playerContext.delegate = self.delegate
@@ -74,6 +78,16 @@ final class StoppedStateSpecs: QuickSpec {
                 expect(self.mockPlayer.pauseCallCount).to(equal(1))
                 expect(self.mockPlayer.seekCompletionCallCount).to(equal(1))
                 expect(self.mockPlayer.seekCompletionLastParam).to(equal(kCMTimeZero))
+            }
+
+            it("should set nowPlaying time parameter to 0") {
+
+                // ASSERT
+                expect(self.nowPlaying.overrideInfoCenterCallCount).to(equal(1))
+                expect(self.nowPlaying.overrideInfoCenterLastValueParam as? NSNumber)
+                    .to(equal(NSNumber(value: 0)))
+                expect(self.nowPlaying.overrideInfoCenterLastKeyParam)
+                    .to(equal(MPNowPlayingInfoPropertyElapsedPlaybackTime))
             }
             
             it("should call didCurrentTimeChange delegate method") {

@@ -3,6 +3,8 @@ All notable changes to this project will be documented in this file.
 
 ---
 ## [X.X.X]
+* Feature:
+	* Enable/Disable loop mode on current media 
 * Fix:
 	* Update NowPlayingInfo time at the right moment when item play reach end time
 	* Update init media documentation 

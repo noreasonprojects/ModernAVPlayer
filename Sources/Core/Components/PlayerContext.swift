@@ -61,7 +61,8 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
     let nowPlaying: NowPlaying
     let player: AVPlayer
     let plugins: [PlayerPlugin]
-    
+    var loopMode = false
+
     weak var delegate: PlayerContextDelegate?
     
     // MARK: - Variables

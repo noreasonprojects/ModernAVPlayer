@@ -28,13 +28,15 @@ import AVFoundation
 @testable import ModernAVPlayer
 
 final class MockModernAVPlayerExposable: ModernAVPlayerExposable {
+
     var player: AVPlayer
-    
+    var loopMode: Bool
     var state: ModernAVPlayer.State
     
-    init(player: AVPlayer, state: ModernAVPlayer.State) {
+    init(player: AVPlayer, state: ModernAVPlayer.State, loopMode: Bool) {
         self.player = player
         self.state = state
+        self.loopMode = loopMode
     }
     
     private(set) var loadMediaCallCount = 0

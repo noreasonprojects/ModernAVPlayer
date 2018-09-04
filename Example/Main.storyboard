@@ -271,6 +271,13 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Khp-HV-pPz">
+                                <rect key="frame" x="148.5" y="364" width="77" height="30"/>
+                                <state key="normal" title="Loop mode"/>
+                                <connections>
+                                    <action selector="toggleLoopMode:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bHe-Ye-ceN"/>
+                                </connections>
+                            </button>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="KVE-RP-I9x">
                                 <rect key="frame" x="38" y="410" width="299" height="31"/>
                             </slider>
@@ -318,11 +325,13 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="7Gy-B6-gKR" secondAttribute="trailing" constant="10" id="eD0-hu-w1B"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="7Gy-B6-gKR" secondAttribute="bottom" constant="10" id="fSQ-Np-U6l"/>
                             <constraint firstItem="DLZ-YT-GWw" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fTb-45-u2p"/>
+                            <constraint firstItem="KVE-RP-I9x" firstAttribute="top" secondItem="Khp-HV-pPz" secondAttribute="bottom" constant="16" id="kPN-VZ-7H0"/>
+                            <constraint firstItem="Khp-HV-pPz" firstAttribute="top" secondItem="DLZ-YT-GWw" secondAttribute="bottom" constant="14" id="nFc-Tf-BNH"/>
                             <constraint firstItem="HC6-AH-Aas" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="qxW-mJ-01q"/>
                             <constraint firstItem="occ-dY-JEv" firstAttribute="leading" secondItem="KVE-RP-I9x" secondAttribute="leading" id="uMz-4n-kl4"/>
-                            <constraint firstItem="KVE-RP-I9x" firstAttribute="top" secondItem="DLZ-YT-GWw" secondAttribute="bottom" constant="60" id="ueW-Zg-vID"/>
                             <constraint firstItem="occ-dY-JEv" firstAttribute="trailing" secondItem="KVE-RP-I9x" secondAttribute="trailing" id="w1r-FY-sk0"/>
                             <constraint firstItem="jRa-DP-PJB" firstAttribute="top" secondItem="yda-Pn-Lut" secondAttribute="bottom" constant="60" id="wsn-J3-pkf"/>
+                            <constraint firstItem="Khp-HV-pPz" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="zUX-Xu-mlu"/>
                             <constraint firstItem="7Gy-B6-gKR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="ze9-wL-1BD"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -332,6 +341,7 @@
                         <outlet property="debugMessage" destination="HC6-AH-Aas" id="h5S-3b-Xho"/>
                         <outlet property="durationLabel" destination="KRz-I4-0Ph" id="tmC-JR-VaH"/>
                         <outlet property="indicatorView" destination="hOt-Ep-6tZ" id="aey-8w-ecu"/>
+                        <outlet property="loopMode" destination="Khp-HV-pPz" id="xXT-At-czx"/>
                         <outlet property="playerStateLabel" destination="Zzn-sM-nLM" id="sKb-zj-tM4"/>
                         <outlet property="slider" destination="KVE-RP-I9x" id="tjO-w4-AWQ"/>
                         <outlet property="timingLabel" destination="ZvH-SF-VsK" id="8YV-dI-kd9"/>

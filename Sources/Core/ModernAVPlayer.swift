@@ -36,7 +36,7 @@ public protocol ModernAVPlayerDelegate: class {
 }
 
 public final class ModernAVPlayer: NSObject, ModernAVPlayerExposable {
-    
+
     // MARK: - Outputs
 
     public weak var delegate: ModernAVPlayerDelegate?
@@ -51,7 +51,13 @@ public final class ModernAVPlayer: NSObject, ModernAVPlayerExposable {
     
     /// Last media requested to be load
     public var currentMedia: PlayerMedia?
-    
+
+    /// Enable/Disable loop on the current media
+    public var loopMode: Bool {
+        get { return context.loopMode }
+        set { context.loopMode = newValue }
+    }
+
     // MARK: - Input
     
     private let context: ModernAVPlayerContext

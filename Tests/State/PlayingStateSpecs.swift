@@ -158,15 +158,6 @@ final class PlayingStateSpecs: QuickSpec {
         }
         
         context("observing item onPlayToEndTime") {
-            it("should update state context to Stopped") {
-                
-                // ACT
-                self.itemPlaybackObservingService.onPlayToEndTime?()
-                
-                // ASSERT
-                expect(self.tested.state).to(beAnInstanceOf(StoppedState.self))
-            }
-            
             it("should call associated delegate method") {
                 
                 // ACT
@@ -183,6 +174,32 @@ final class PlayingStateSpecs: QuickSpec {
                 
                 // ASSERT
                 expect(self.plugin.didItemPlayToEndTimeCallCount).to(equal(1))
+            }
+
+            context("loop mode disable") {
+                it("should update state context to Stopped") {
+                    // ARRANGE
+                    self.tested.loopMode = false
+
+                    // ACT
+                    self.itemPlaybackObservingService.onPlayToEndTime?()
+
+                    // ASSERT
+                    expect(self.tested.state).to(beAnInstanceOf(StoppedState.self))
+                }
+            }
+
+            context("loop mode enable") {
+                it("should update state context to Buffering") {
+                    // ARRANGE
+                    self.tested.loopMode = true
+
+                    // ACT
+                    self.itemPlaybackObservingService.onPlayToEndTime?()
+
+                    // ASSERT
+                    expect(self.tested.state).to(beAnInstanceOf(BufferingState.self))
+                }
             }
         }
         

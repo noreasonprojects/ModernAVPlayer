@@ -70,8 +70,13 @@ final class ViewController: UIViewController {
     @IBOutlet weak private var indicatorView: UIActivityIndicatorView!
     @IBOutlet weak private var debugMessage: UILabel!
     @IBOutlet weak private var currentMedia: UILabel!
-    
+    @IBOutlet weak private var loopMode: UIButton!
+
     // MARK: - Player Commands
+    @IBAction func toggleLoopMode(_ sender: UIButton) {
+        player.loopMode = !player.loopMode
+        loopMode.isSelected = player.loopMode
+    }
 
     @IBAction func pause(_ sender: UIButton) {
         player.pause()

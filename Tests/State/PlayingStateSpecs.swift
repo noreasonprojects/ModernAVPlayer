@@ -190,7 +190,7 @@ final class PlayingStateSpecs: QuickSpec {
             }
 
             context("loop mode enable") {
-                it("should update state context to Bueffering") {
+                it("should update state context to Buffering") {
                     // ARRANGE
                     self.tested.loopMode = true
 

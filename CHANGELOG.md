@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 
 ---
-## [X.X.X]
+## [0.13.0]
 * Feature:
 	* Enable/Disable loop mode on current media 
 * Fix:

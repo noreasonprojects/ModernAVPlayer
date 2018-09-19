@@ -11,8 +11,8 @@ ModernAVPlayer is an ongoing project that aims to create a more usable audio vid
   s.source           = { :git => 'https://github.com/raphrel/ModernAVPlayer.git', :tag => s.version.to_s }
   s.default_subspec  = 'Core'
 
-  s.ios.deployment_target = '9.0'
-  s.swift_version = '4.0'
+  s.ios.deployment_target = '10.0'
+  s.swift_version = '4.2'
 
   s.subspec 'Core' do |core|
     core.source_files = 'Sources/Core/**/*'

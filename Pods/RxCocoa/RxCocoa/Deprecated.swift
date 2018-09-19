@@ -355,8 +355,13 @@ extension Reactive where Base: UIImageView {
                 if image != nil {
                     let transition = CATransition()
                     transition.duration = 0.25
-                    transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-                    transition.type = transitionType
+                    #if swift(>=4.2)
+                        transition.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+                        transition.type = CATransitionType(rawValue: transitionType)
+                    #else
+                        transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+                        transition.type = transitionType
+                    #endif
                     imageView.layer.add(transition, forKey: kCATransition)
                 }
             }
@@ -365,6 +370,13 @@ extension Reactive where Base: UIImageView {
             }
             imageView.image = image
         }
+    }
+}
+    
+extension Reactive where Base: UISegmentedControl {
+    @available(*, deprecated, renamed: "enabledForSegment(at:)")
+    public func enabled(forSegmentAt segmentAt: Int) -> Binder<Bool> {
+        return enabledForSegment(at: segmentAt)
     }
 }
 #endif

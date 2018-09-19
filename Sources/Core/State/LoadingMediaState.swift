@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 import AVFoundation
+import UIKit
 
 final class LoadingMediaState: PlayerState {
     

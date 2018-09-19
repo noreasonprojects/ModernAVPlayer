@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 import AVFoundation
+import UIKit
 
 protocol PlayerContextDelegate: class {
     func playerContext(didStateChange state: ModernAVPlayer.State)

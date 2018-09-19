@@ -679,7 +679,7 @@
 				PROVISIONING_PROFILE = "21b8b1c8-c049-48d1-88bb-946996492507";
 				PROVISIONING_PROFILE_SPECIFIER = ModernAVPlayer;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -700,7 +700,7 @@
 				PROVISIONING_PROFILE = "21b8b1c8-c049-48d1-88bb-946996492507";
 				PROVISIONING_PROFILE_SPECIFIER = ModernAVPlayer;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -723,7 +723,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ModernAVPlayer_Example.app/ModernAVPlayer_Example";
 			};
 			name = Debug;
@@ -742,7 +742,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ModernAVPlayer_Example.app/ModernAVPlayer_Example";
 			};
 			name = Release;

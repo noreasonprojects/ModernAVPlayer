@@ -77,7 +77,7 @@ final class StoppedStateSpecs: QuickSpec {
                 // ASSERT
                 expect(self.mockPlayer.pauseCallCount).to(equal(1))
                 expect(self.mockPlayer.seekCompletionCallCount).to(equal(1))
-                expect(self.mockPlayer.seekCompletionLastParam).to(equal(kCMTimeZero))
+                expect(self.mockPlayer.seekCompletionLastParam).to(equal(CMTime.zero))
             }
 
             it("should set nowPlaying time parameter to 0") {

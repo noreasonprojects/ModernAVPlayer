@@ -33,7 +33,7 @@ import Nimble
 final class InterruptionAudioServiceTests: QuickSpec {
     
     var tested: ModernAVPlayerInterruptionAudioService!
-    var interruptionType: AVAudioSessionInterruptionType?
+    var interruptionType: AVAudioSession.InterruptionType?
     
     override func spec() {
         
@@ -49,9 +49,9 @@ final class InterruptionAudioServiceTests: QuickSpec {
                 it("should register to interruption notification") {
                     
                     // ARRANGE
-                    let interruptionType = AVAudioSessionInterruptionType.began
+                    let interruptionType = AVAudioSession.InterruptionType.began
                     let info: [String: UInt] = [AVAudioSessionInterruptionTypeKey: interruptionType.rawValue]
-                    var notif = Notification(name: NSNotification.Name.AVAudioSessionInterruption)
+                    var notif = Notification(name: AVAudioSession.interruptionNotification)
                     notif.userInfo = info
                     
                     // ACT
@@ -66,9 +66,9 @@ final class InterruptionAudioServiceTests: QuickSpec {
                 it("should register to interruption notification") {
                     
                     // ARRANGE
-                    let interruptionType = AVAudioSessionInterruptionType.ended
+                    let interruptionType = AVAudioSession.InterruptionType.ended
                     let info: [String: UInt] = [AVAudioSessionInterruptionTypeKey: interruptionType.rawValue]
-                    var notif = Notification(name: NSNotification.Name.AVAudioSessionInterruption)
+                    var notif = Notification(name: AVAudioSession.interruptionNotification)
                     notif.userInfo = info
                     
                     // ACT
@@ -83,7 +83,7 @@ final class InterruptionAudioServiceTests: QuickSpec {
                 it("should not execute interruption") {
                     
                     // ARRANGE
-                    let notif = Notification(name: NSNotification.Name.AVAudioSessionInterruption)
+                    let notif = Notification(name: AVAudioSession.interruptionNotification)
                     
                     // ACT
                     NotificationCenter.default.post(notif)
@@ -98,7 +98,7 @@ final class InterruptionAudioServiceTests: QuickSpec {
                     
                     // ARRANGE
                     let info: [String: String] = [AVAudioSessionInterruptionTypeKey: "3"]
-                    var notif = Notification(name: NSNotification.Name.AVAudioSessionInterruption)
+                    var notif = Notification(name: AVAudioSession.interruptionNotification)
                     notif.userInfo = info
                     
                     // ACT

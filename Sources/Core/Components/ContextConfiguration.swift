@@ -40,7 +40,8 @@ public protocol PlayerConfiguration {
     ///
     var preferedTimeScale: CMTimeScale { get }
     var periodicPlayingTime: CMTime { get }
-    var audioSessionCategory: String { get }
+    var audioSessionCategory: AVAudioSession.Category { get }
+    var audioSessionCategoryOptions: AVAudioSession.CategoryOptions { get }
 
     /// Reachability Service
     /// When buffering or playing and playback stop unexpectedly, a timer is set to check connectivity via URLSession
@@ -64,7 +65,8 @@ public struct ModernAVPlayerConfiguration: PlayerConfiguration {
     // General Audio preferences
     public let preferedTimeScale: CMTimeScale = 1
     public let periodicPlayingTime: CMTime
-    public let audioSessionCategory = AVAudioSessionCategoryPlayback
+    public let audioSessionCategory: AVAudioSession.Category = .playback
+    public let audioSessionCategoryOptions: AVAudioSession.CategoryOptions = []
 
     // Reachability Service
     public let reachabilityURLSessionTimeout: TimeInterval = 3

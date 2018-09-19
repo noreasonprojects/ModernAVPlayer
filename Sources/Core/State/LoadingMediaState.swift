@@ -155,7 +155,7 @@ final class LoadingMediaState: PlayerState {
         ModernAVPlayerLogger.instance.log(message: "StartBgTask create: \(String(describing: context.bgToken))", domain: .service)
     }
 
-    private func moveToNextState(with status: AVPlayerItemStatus) {
+    private func moveToNextState(with status: AVPlayerItem.Status) {
         switch status {
         case .unknown:
             assertionFailure()

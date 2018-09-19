@@ -31,11 +31,11 @@ final class ModernAVPLayerItemStatusObservingService: NSObject {
     // MARK: - Inputs
     
     private let item: AVPlayerItem
-    private let itemStatusCallback: (AVPlayerItemStatus) -> Void
+    private let itemStatusCallback: (AVPlayerItem.Status) -> Void
     
     // MARK: - Init
     
-    init(item: AVPlayerItem, callback: @escaping (AVPlayerItemStatus) -> Void) {
+    init(item: AVPlayerItem, callback: @escaping (AVPlayerItem.Status) -> Void) {
         ModernAVPlayerLogger.instance.log(message: "Init", domain: .lifecycleService)
         self.item = item
         self.itemStatusCallback = callback
@@ -63,7 +63,7 @@ final class ModernAVPLayerItemStatusObservingService: NSObject {
         guard
             let change = change,
             let rawStatus = change[.newKey] as? Int,
-            let status = AVPlayerItemStatus(rawValue: rawStatus)
+            let status = AVPlayerItem.Status(rawValue: rawStatus)
             else { return }
         
         itemStatusCallback(status)

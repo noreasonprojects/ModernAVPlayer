@@ -6,7 +6,7 @@ PODS:
     - RxSwift (~> 4.0)
   - Nimble (7.0.3)
   - Quick (1.2.0)
-  - RxCocoa (4.1.2):
+  - RxCocoa (4.3.0):
     - RxSwift (~> 4.0)
   - RxSwift (4.3.0)
   - SwiftLint (0.27.0)
@@ -33,7 +33,7 @@ SPEC CHECKSUMS:
   ModernAVPlayer: 2c4f8ba0151fa102191164999ce9d80d004c25ca
   Nimble: 7f5a9c447a33002645a071bddafbfb24ea70e0ac
   Quick: 58d203b1c5e27fff7229c4c1ae445ad7069a7a08
-  RxCocoa: d88ba0f1f6abf040011a9eb4b539324fc426843a
+  RxCocoa: 71b9cce833fbcb89a8eec11816dd225830c2bd3c
   RxSwift: a9717a34df3179fe63563f76e046ad345078dd3a
   SwiftLint: 3207c1faa2240bf8973b191820a116113cd11073
 

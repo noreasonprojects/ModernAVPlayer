@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ---
 ## [X.X.X]
+* Features:
+	* Make example swift 4.2 compliant
+	* Make tests swift 4.2 compliant
+	* Make pod dependencies swift 4.2 compliant
 * Dependencies:
 	* [pod] Quick -> 1.3.1
 	* [pod] Nimble -> 7.3.0

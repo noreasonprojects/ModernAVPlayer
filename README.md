@@ -8,8 +8,12 @@
 ## Requirements
 
 - iOS 9.0+
-- Xcode 9.3+
+- Xcode 10.0+
 - Swift 4.0+
+
+## Swift 4.2 note
+AVAudioSession lost setCategory method on iOS 9. to be still compatible with iOS 9, the library is not convert for now
+source: http://www.openradar.me/42382075
 
 ## Installation
 

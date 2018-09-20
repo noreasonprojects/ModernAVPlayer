@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 ---
 ## [X.X.X]
 * Dependency:
+	* [pod] RxSwift -> 4.3.0
 	* [pod] SwiftLint -> 0.27.0
 
 ## [0.13.0]

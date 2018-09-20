@@ -3,7 +3,9 @@ All notable changes to this project will be documented in this file.
 
 ---
 ## [X.X.X]
-* Dependency:
+* Dependencies:
+	* [pod] Quick -> 1.3.1
+	* [pod] Nimble -> 7.3.0
 	* [pod] RxCocoa -> 4.3.0
 	* [pod] RxSwift -> 4.3.0
 	* [pod] SwiftLint -> 0.27.0

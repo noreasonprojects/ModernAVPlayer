@@ -3,7 +3,7 @@ use_frameworks!
 
 target 'ModernAVPlayer_Example' do
   pod 'ModernAVPlayer/RxSwift', :path => '.'
-  pod 'SwiftLint', '0.25.0'
+  pod 'SwiftLint', '0.27.0'
 
   target 'ModernAVPlayer_Tests' do
     inherit! :search_paths

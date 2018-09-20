@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 
 ---
+## [X.X.X]
+* Dependency:
+	* [pod] SwiftLint -> 0.27.0
+
 ## [0.13.0]
 * Feature:
 	* Enable/Disable loop mode on current media 

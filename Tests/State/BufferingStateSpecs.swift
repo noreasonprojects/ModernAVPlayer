@@ -257,7 +257,7 @@ final class BufferingStateSpecs: QuickSpec {
             it("should cancel pending seek") {
                 
                 // ACT
-                self.bufferingState.seek(position: kCMTimeZero.seconds)
+                self.bufferingState.seek(position: CMTime.zero.seconds)
                 
                 // ASSERT
                 expect(self.item.cancelPendingSeeksCallCount).to(equal(1))
@@ -266,7 +266,7 @@ final class BufferingStateSpecs: QuickSpec {
             it("should call player seek command") {
                 
                 // ACT
-                self.bufferingState.seek(position: kCMTimeZero.seconds)
+                self.bufferingState.seek(position: CMTime.zero.seconds)
                 
                 // ASSERT
                 expect(self.mockPlayer.seekCompletionCallCount).to(equal(1))

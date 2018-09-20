@@ -4,18 +4,18 @@ PODS:
     - ModernAVPlayer/Core
     - RxCocoa (~> 4.0)
     - RxSwift (~> 4.0)
-  - Nimble (7.0.3)
-  - Quick (1.2.0)
-  - RxCocoa (4.1.2):
+  - Nimble (7.3.0)
+  - Quick (1.3.1)
+  - RxCocoa (4.3.0):
     - RxSwift (~> 4.0)
-  - RxSwift (4.2.0)
-  - SwiftLint (0.25.0)
+  - RxSwift (4.3.0)
+  - SwiftLint (0.27.0)
 
 DEPENDENCIES:
   - ModernAVPlayer/RxSwift (from `.`)
-  - Nimble (= 7.0.3)
-  - Quick (= 1.2.0)
-  - SwiftLint (= 0.25.0)
+  - Nimble (= 7.3.0)
+  - Quick (= 1.3.1)
+  - SwiftLint (= 0.27.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -31,12 +31,12 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   ModernAVPlayer: 2c4f8ba0151fa102191164999ce9d80d004c25ca
-  Nimble: 7f5a9c447a33002645a071bddafbfb24ea70e0ac
-  Quick: 58d203b1c5e27fff7229c4c1ae445ad7069a7a08
-  RxCocoa: d88ba0f1f6abf040011a9eb4b539324fc426843a
-  RxSwift: 99e10317ddfcc7fbe01356aafd118fde4a0be104
-  SwiftLint: e14651157288e9e01d6e1a71db7014fb5744a8ea
+  Nimble: c8d6a1f463701921c46de965c673e13cafa09196
+  Quick: d17304d58d0d169dd0bd1c6e5c28e3318de32a1a
+  RxCocoa: 71b9cce833fbcb89a8eec11816dd225830c2bd3c
+  RxSwift: a9717a34df3179fe63563f76e046ad345078dd3a
+  SwiftLint: 3207c1faa2240bf8973b191820a116113cd11073
 
-PODFILE CHECKSUM: 39a3c51cfc7011b61bf96a8c38053b00ef42c157
+PODFILE CHECKSUM: d26c5fc553bee1a184a986595c5ed9531574024c
 
 COCOAPODS: 1.5.3

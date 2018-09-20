@@ -41,8 +41,8 @@ final class MockCustomPlayer: AVPlayer {
         return overrideCurrentItem
     }
 
-    var overrideStatus = AVPlayerStatus.unknown
-    override var status: AVPlayerStatus {
+    var overrideStatus = AVPlayer.Status.unknown
+    override var status: AVPlayer.Status {
         return overrideStatus
     }
     

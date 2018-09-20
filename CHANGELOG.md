@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 
 ---
-## [X.X.X]
+## [0.14.0]
 * Features:
 	* Make example swift 4.2 compliant
 	* Make tests swift 4.2 compliant

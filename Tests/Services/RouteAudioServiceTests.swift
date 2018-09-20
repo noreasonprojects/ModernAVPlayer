@@ -33,7 +33,7 @@ import Nimble
 final class RouteAudioServiceTests: QuickSpec {
     
     var tested: ModernAVPlayerRouteAudioService!
-    var routeChangedReason: AVAudioSessionRouteChangeReason?
+    var routeChangedReason: AVAudioSession.RouteChangeReason?
     
     override func spec() {
         
@@ -49,14 +49,14 @@ final class RouteAudioServiceTests: QuickSpec {
                     
                     // ARRANGE
                     let info: [String: UInt] = [AVAudioSessionRouteChangeReasonKey: 2]
-                    var notif = Notification(name: NSNotification.Name.AVAudioSessionRouteChange)
+                    var notif = Notification(name: AVAudioSession.routeChangeNotification)
                     notif.userInfo = info
                     
                     // ACT
                     NotificationCenter.default.post(notif)
                     
                     // ASSERT
-                    expect(self.routeChangedReason).to(equal(AVAudioSessionRouteChangeReason.oldDeviceUnavailable))
+                    expect(self.routeChangedReason).to(equal(AVAudioSession.RouteChangeReason.oldDeviceUnavailable))
                 }
             }
             
@@ -64,7 +64,7 @@ final class RouteAudioServiceTests: QuickSpec {
                 it("should not update route changed") {
                     
                     // ARRANGE
-                    var notif = Notification(name: NSNotification.Name.AVAudioSessionRouteChange)
+                    var notif = Notification(name: AVAudioSession.routeChangeNotification)
                     notif.userInfo = nil
                     
                     // ACT
@@ -80,7 +80,7 @@ final class RouteAudioServiceTests: QuickSpec {
                     
                     // ARRANGE
                     let info: [String: String] = [AVAudioSessionRouteChangeReasonKey: "42"]
-                    var notif = Notification(name: NSNotification.Name.AVAudioSessionRouteChange)
+                    var notif = Notification(name: AVAudioSession.routeChangeNotification)
                     notif.userInfo = info
                     
                     // ACT

@@ -208,8 +208,8 @@ final class PlayingStateSpecs: QuickSpec {
                 it("should pause the player") {
                     
                     // ARRANGE
-                    let info: [String: UInt] = [AVAudioSessionRouteChangeReasonKey: AVAudioSessionRouteChangeReason.oldDeviceUnavailable.rawValue]
-                    var notif = Notification(name: NSNotification.Name.AVAudioSessionRouteChange)
+                    let info: [String: UInt] = [AVAudioSessionRouteChangeReasonKey: AVAudioSession.RouteChangeReason.oldDeviceUnavailable.rawValue]
+                    var notif = Notification(name: AVAudioSession.routeChangeNotification)
                     notif.userInfo = info
                     
                     // ACT
@@ -224,8 +224,8 @@ final class PlayingStateSpecs: QuickSpec {
                 it("should pause the player") {
                     
                     // ARRANGE
-                    let info: [String: UInt] = [AVAudioSessionRouteChangeReasonKey: AVAudioSessionRouteChangeReason.unknown.rawValue]
-                    var notif = Notification(name: NSNotification.Name.AVAudioSessionRouteChange)
+                    let info: [String: UInt] = [AVAudioSessionRouteChangeReasonKey: AVAudioSession.RouteChangeReason.unknown.rawValue]
+                    var notif = Notification(name: AVAudioSession.routeChangeNotification)
                     notif.userInfo = info
                     
                     // ACT
@@ -240,8 +240,8 @@ final class PlayingStateSpecs: QuickSpec {
                 it("should stay in playing mode") {
                     
                     // ARRANGE
-                    let info: [String: UInt] = [AVAudioSessionRouteChangeReasonKey: AVAudioSessionRouteChangeReason.newDeviceAvailable.rawValue]
-                    var notif = Notification(name: NSNotification.Name.AVAudioSessionRouteChange)
+                    let info: [String: UInt] = [AVAudioSessionRouteChangeReasonKey: AVAudioSession.RouteChangeReason.newDeviceAvailable.rawValue]
+                    var notif = Notification(name: AVAudioSession.routeChangeNotification)
                     notif.userInfo = info
                     
                     // ACT
@@ -256,8 +256,8 @@ final class PlayingStateSpecs: QuickSpec {
                 it("should stay in playing mode") {
                     
                     // ARRANGE
-                    let info: [String: UInt] = [AVAudioSessionRouteChangeReasonKey: AVAudioSessionRouteChangeReason.categoryChange.rawValue]
-                    var notif = Notification(name: NSNotification.Name.AVAudioSessionRouteChange)
+                    let info: [String: UInt] = [AVAudioSessionRouteChangeReasonKey: AVAudioSession.RouteChangeReason.categoryChange.rawValue]
+                    var notif = Notification(name: AVAudioSession.routeChangeNotification)
                     notif.userInfo = info
                     
                     // ACT

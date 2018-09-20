@@ -28,20 +28,20 @@ import AVFoundation
 
 final class MockPlayerItem: AVPlayerItem {
 
-    convenience init(url: URL, duration: CMTime?, status: AVPlayerItemStatus?) {
+    convenience init(url: URL, duration: CMTime?, status: AVPlayerItem.Status?) {
         self.init(url: url)
         overrideDuration = duration
         overrideStatus = status
     }
     
-    convenience init(asset: AVAsset, duration: CMTime?, status: AVPlayerItemStatus?) {
+    convenience init(asset: AVAsset, duration: CMTime?, status: AVPlayerItem.Status?) {
         self.init(asset: asset)
         overrideDuration = duration
         overrideStatus = status
     }
     
-    var overrideStatus: AVPlayerItemStatus?
-    override var status: AVPlayerItemStatus {
+    var overrideStatus: AVPlayerItem.Status?
+    override var status: AVPlayerItem.Status {
         return overrideStatus ?? .unknown
     }
     
@@ -52,18 +52,18 @@ final class MockPlayerItem: AVPlayerItem {
     
     private(set) var overrideDuration: CMTime?
     override var duration: CMTime {
-        return overrideDuration ?? kCMTimeZero
+        return overrideDuration ?? CMTime.zero
     }
 }
 
 extension MockPlayerItem {
     
-    static func createOne(url: String, duration: CMTime? = nil, status: AVPlayerItemStatus? = nil) -> MockPlayerItem {
+    static func createOne(url: String, duration: CMTime? = nil, status: AVPlayerItem.Status? = nil) -> MockPlayerItem {
         let url = URL(string: url)!
         return MockPlayerItem(url: url, duration: duration, status: status)
     }
     
-    static func createOnUsingAsset(url: String, duration: CMTime? = nil, status: AVPlayerItemStatus? = nil) -> MockPlayerItem {
+    static func createOnUsingAsset(url: String, duration: CMTime? = nil, status: AVPlayerItem.Status? = nil) -> MockPlayerItem {
         let url = URL(string: url)!
         let asset = MockAVAsset(url: url)
         return MockPlayerItem(asset: asset, duration: duration, status: status)

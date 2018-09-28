@@ -156,6 +156,6 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
             return
         }
         media.setMetadata(metadata)
-        nowPlaying.update(metadata: metadata)
+        nowPlaying.update(metadata: metadata, duration: nil, isLive: nil)
     }
 }

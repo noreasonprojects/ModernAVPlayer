@@ -235,7 +235,7 @@ final class ContextSpecs: QuickSpec {
 
                 // ASSERT
                 expect(self.nowPlaying.updateCallCount).to(equal(1))
-                let expectedMetadata = MockPlayerMediaMetadata.convert(self.nowPlaying.updateLastParam!)
+                let expectedMetadata = MockPlayerMediaMetadata.convert(self.nowPlaying.updateLastMetadataParam!)
                 expect(expectedMetadata).to(equal(metadata))
             }
         }
@@ -275,7 +275,9 @@ final class ContextSpecs: QuickSpec {
 
                 // ASSERT
                 expect(self.nowPlaying.updateCallCount).to(equal(0))
-                expect(self.nowPlaying.updateLastParam).to(beNil())
+                expect(self.nowPlaying.updateLastMetadataParam).to(beNil())
+                expect(self.nowPlaying.updateLastDurationParam).to(beNil())
+                expect(self.nowPlaying.updateLastIsLiveParam).to(beNil())
             }
         }
     }

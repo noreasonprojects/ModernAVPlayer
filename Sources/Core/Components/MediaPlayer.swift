@@ -35,5 +35,5 @@ public protocol MediaPlayer {
     func play()
     func seek(position: Double)
     func stop()
-    func updateNowPlayingInfo(metadata: PlayerMediaMetadata)
+    func updateMetadata(_ metadata: PlayerMediaMetadata)
 }

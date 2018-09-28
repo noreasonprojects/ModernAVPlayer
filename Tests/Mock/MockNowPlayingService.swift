@@ -14,7 +14,12 @@ final class MockNowPlayingService: NowPlaying {
 
     func update(metadata: PlayerMediaMetadata?, duration: Double?, isLive: Bool) { }
 
-    func update(metadata: PlayerMediaMetadata) { }
+    private(set) var updateCallCount = 0
+    private(set) var updateLastParam: PlayerMediaMetadata?
+    func update(metadata: PlayerMediaMetadata) {
+        updateCallCount += 1
+        updateLastParam = metadata
+    }
 
     private(set) var overrideInfoCenterCallCount = 0
     private(set) var overrideInfoCenterLastKeyParam: String?

@@ -95,10 +95,10 @@ final class ViewController: UIViewController {
         formatter.dateFormat = "HH:mm:ss"
         let timeStamp = formatter.string(from: Date())
         let newMetadata = ModernAVPlayerMediaMetadata(title: timeStamp,
-                                                 albumTitle: "Updated album",
-                                                 artist: "Updated artist",
-                                                localImageName: "ankierman")
-        player.updateNowPlayingInfo(metadata: newMetadata)
+                                                      albumTitle: "Updated album",
+                                                      artist: "Updated artist",
+                                                      localImageName: "ankierman")
+        player.updateMetadata(newMetadata)
     }
     
     @IBAction func loadMediaWithPosition(_ sender: UIButton) {

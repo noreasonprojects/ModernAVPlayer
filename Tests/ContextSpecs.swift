@@ -190,7 +190,7 @@ final class ContextSpecs: QuickSpec {
                 let metadata = MockPlayerMediaMetadata(title: "title",
                                                        albumTitle: "album",
                                                        artist: "artist",
-                                                       localImageName: nil,
+                                                       image: nil,
                                                        remoteImageUrl: nil)
 
                 // ACT
@@ -209,7 +209,7 @@ final class ContextSpecs: QuickSpec {
                 let metadata = MockPlayerMediaMetadata(title: "title",
                                                        albumTitle: "album",
                                                        artist: "artist",
-                                                       localImageName: nil,
+                                                       image: nil,
                                                        remoteImageUrl: nil)
 
                 // ACT
@@ -230,7 +230,7 @@ final class ContextSpecs: QuickSpec {
                 let metadata = MockPlayerMediaMetadata(title: "title",
                                                        albumTitle: "album",
                                                        artist: "artist",
-                                                       localImageName: nil,
+                                                       image: nil,
                                                        remoteImageUrl: nil)
 
                 // ACT
@@ -249,7 +249,7 @@ final class ContextSpecs: QuickSpec {
                 let metadata = MockPlayerMediaMetadata(title: "title",
                                                        albumTitle: "album",
                                                        artist: "artist",
-                                                       localImageName: nil,
+                                                       image: nil,
                                                        remoteImageUrl: nil)
 
                 // ACT

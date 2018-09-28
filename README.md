@@ -132,7 +132,6 @@ let state: Observable<ModernAVPlayer.State> = player.rx.state
 ## Todo
 - [ ] Make remote command center configurable
 - [ ] Make a prettier audio and video example
-- [ ] Add missing parameter to plugin protocol method
 - [ ] Separate background task to a service
 - [ ] Make log message available to multiple domain
 

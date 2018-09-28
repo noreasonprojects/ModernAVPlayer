@@ -28,26 +28,18 @@ public struct ModernAVPlayerMediaMetadata: PlayerMediaMetadata, Equatable {
     public let title: String?
     public let albumTitle: String?
     public let artist: String?
-    public let localPlaceHolderImageName: String?
+    public let image: Data?
     public let remoteImageUrl: URL?
     
     public init(title: String? = nil,
                 albumTitle: String? = nil,
                 artist: String? = nil,
-                localImageName: String? = nil,
+                image: Data? = nil,
                 remoteImageUrl: URL? = nil) {
         self.title = title
         self.albumTitle = albumTitle
         self.artist = artist
-        self.localPlaceHolderImageName = localImageName
+        self.image = image
         self.remoteImageUrl = remoteImageUrl
     }
-}
-
-public func == (lhs: ModernAVPlayerMediaMetadata, rhs: ModernAVPlayerMediaMetadata) -> Bool {
-    return lhs.title == rhs.title &&
-        lhs.albumTitle == rhs.albumTitle &&
-        lhs.artist == rhs.artist &&
-        lhs.localPlaceHolderImageName == rhs.localPlaceHolderImageName &&
-        lhs.remoteImageUrl == rhs.remoteImageUrl
 }

@@ -38,15 +38,24 @@ struct Data {
             else { assertionFailure(); return [] }
         
         let localClip = URL(fileURLWithPath: file)
-        let meta0 = ModernAVPlayerMediaMetadata(title: "Le live", albumTitle: "Album0", artist: "Artist0", localImageName: "sennaLive")
-        let meta1 = ModernAVPlayerMediaMetadata(title: "Remote clip", albumTitle: "Album1", artist: "Artist1", localImageName: "sennaClip")
-        let meta2 = ModernAVPlayerMediaMetadata(title: "Local clip", albumTitle: "Album2", artist: "Artist2", localImageName: "ankierman", remoteImageUrl: URL(string: "https://goo.gl/U4QoQj"))
-        let assetOptions = ["AVURLAssetHTTPHeaderFieldsKey": ["User-Agent": "ModernAVPlayer"]]
+
+        let meta0 = ModernAVPlayerMediaMetadata(title: "Le live",
+                                                albumTitle: "Album0",
+                                                artist: "Artist0",
+                                                image: UIImage(named: "sennaLive")?.jpegData(compressionQuality: 1.0))
+
+        let meta1 = ModernAVPlayerMediaMetadata(title: "Remote clip",
+                                                albumTitle: "Album1",
+                                                artist: "Artist1",
+                                                image: nil)
+
+        let meta2 = ModernAVPlayerMediaMetadata(title: "Local clip",
+                                                albumTitle: "Album2",
+                                                artist: "Artist2",
+                                                image: UIImage(named: "ankierman")?.jpegData(compressionQuality: 1.0),
+                                                remoteImageUrl: URL(string: "https://goo.gl/U4QoQj"))
         return [
-            ModernAVPlayerMedia(url: liveUrl,
-                                type: .stream(isLive: true),
-                                metadata: meta0,
-                                assetOptions: assetOptions),
+            ModernAVPlayerMedia(url: liveUrl, type: .stream(isLive: true), metadata: meta0),
             ModernAVPlayerMedia(url: remoteClip, type: .clip, metadata: meta1),
             ModernAVPlayerMedia(url: localClip, type: .clip, metadata: meta2)
         ]
@@ -94,10 +103,11 @@ final class ViewController: UIViewController {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm:ss"
         let timeStamp = formatter.string(from: Date())
+        let image = UIImage(named: "ankierman")?.jpegData(compressionQuality: 1.0)
         let newMetadata = ModernAVPlayerMediaMetadata(title: timeStamp,
                                                       albumTitle: "Updated album",
                                                       artist: "Updated artist",
-                                                      localImageName: "ankierman")
+                                                      image: image)
         player.updateMetadata(newMetadata)
     }
     

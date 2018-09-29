@@ -26,6 +26,12 @@
 
 import Foundation
 
+///
+/// `MediaType` should be used as this:
+/// - clip: media with fixed duration,
+/// - stream: media with non-fixed duration
+///           isLive parameter represent direct stream
+///
 public enum MediaType {
     case clip
     case stream(isLive: Bool)

@@ -26,12 +26,24 @@
 
 import AVFoundation
 
+///
+/// `PlayerMedia` is an object use to create the item for the player to
+/// be used. `AVPlayerItem` used by `ModernAVPlayer` is init with an AVURLAsset.
+///
 public protocol PlayerMedia: CustomStringConvertible {
+
+    /// URL set to the AVURLAsset
     var url: URL { get }
+
+    /// Type of the media
     var type: MediaType { get }
+
+    /// Asset options use by AVURLAsset
     var assetOptions: [String: Any]? { get }
-    
+
+    /// Returns stream media isLive parameter
     func isLive() -> Bool
+
     func getMetadata() -> PlayerMediaMetadata?
     func setMetadata(_ metadata: PlayerMediaMetadata)
 }

@@ -120,14 +120,14 @@ public final class ModernAVPlayer: NSObject, ModernAVPlayerExposable {
     public func loadMedia(media: PlayerMedia, autostart: Bool, position: Double? = nil) {
         context.loadMedia(media: media, autostart: autostart, position: position)
     }
-   
+
     ///
-    /// Replaces the current item metadata with the new metadata
+    /// Replaces the current item metadata and updates now playing info
     ///
     /// - parameter metadata: metadata to load
     ///
-    public func updateNowPlayingInfo(metadata: PlayerMediaMetadata) {
-        context.updateNowPlayingInfo(metadata: metadata)
+    public func updateMetadata(_ metadata: PlayerMediaMetadata) {
+        context.updateMetadata(metadata)
     }
     
     /// Begins playback of the current item

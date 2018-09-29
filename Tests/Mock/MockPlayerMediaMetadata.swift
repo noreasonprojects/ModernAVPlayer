@@ -9,10 +9,38 @@
 import Foundation
 @testable import ModernAVPlayer
 
-struct MockPlayerMediaMetadata: PlayerMediaMetadata {
+final class MockPlayerMediaMetadata: PlayerMediaMetadata, Equatable {
     let title: String?
     let albumTitle: String?
     let artist: String?
     let localPlaceHolderImageName: String?
     let remoteImageUrl: URL?
+
+    init(title: String? = nil,
+         albumTitle: String? = nil,
+         artist: String? = nil,
+         localImageName: String? = nil,
+         remoteImageUrl: URL? = nil) {
+        self.title = title
+        self.albumTitle = albumTitle
+        self.artist = artist
+        self.localPlaceHolderImageName = localImageName
+        self.remoteImageUrl = remoteImageUrl
+    }
+
+    static func convert(_ metadata: PlayerMediaMetadata) -> MockPlayerMediaMetadata {
+        return MockPlayerMediaMetadata(title: metadata.title,
+                                       albumTitle: metadata.albumTitle,
+                                       artist: metadata.artist,
+                                       localImageName: metadata.localPlaceHolderImageName,
+                                       remoteImageUrl: metadata.remoteImageUrl)
+    }
+}
+
+func == (lhs: MockPlayerMediaMetadata, rhs: MockPlayerMediaMetadata) -> Bool {
+    return lhs.title == rhs.title &&
+        lhs.albumTitle == rhs.albumTitle &&
+        lhs.artist == rhs.artist &&
+        lhs.localPlaceHolderImageName == rhs.localPlaceHolderImageName &&
+        lhs.remoteImageUrl == rhs.remoteImageUrl
 }

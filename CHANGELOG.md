@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file.
 
 ---
+## [X.X.X]
+* Breaking change:
+	* `updateNowPlayingInfo(metadata:)` was replaced by `updateMetadata(_:)`
+* Fix:
+	* Update medatata replace current media metadata and update now playing info
+
 ## [0.14.0]
 * Features:
 	* Make example swift 4.2 compliant

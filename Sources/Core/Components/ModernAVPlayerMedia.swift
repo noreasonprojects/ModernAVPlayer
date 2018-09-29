@@ -24,10 +24,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-public struct ModernAVPlayerMedia: PlayerMedia {
+public class ModernAVPlayerMedia: PlayerMedia {
+
     public let url: URL
     public let type: MediaType
-    public let metadata: ModernAVPlayerMediaMetadata?
+    public var metadata: ModernAVPlayerMediaMetadata?
     public let assetOptions: [String: Any]?
 
     public init(url: URL,
@@ -42,5 +43,9 @@ public struct ModernAVPlayerMedia: PlayerMedia {
     
     public func getMetadata() -> PlayerMediaMetadata? {
         return metadata
+    }
+
+    public func setMetadata(_ metadata: PlayerMediaMetadata) {
+        self.metadata = metadata as? ModernAVPlayerMediaMetadata
     }
 }

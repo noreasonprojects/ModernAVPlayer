@@ -64,8 +64,8 @@ final class MockModernAVPlayerExposable: ModernAVPlayerExposable {
         stopCallCount += 1
     }
     
-    private(set) var updateNowPlayingInfoCallCount = 0
-    func updateNowPlayingInfo(metadata: PlayerMediaMetadata) {
-        updateNowPlayingInfoCallCount += 1
+    private(set) var updateMetadataCallCount = 0
+    func updateMetadata(_ metadata: PlayerMediaMetadata) {
+        updateMetadataCallCount += 1
     }
 }

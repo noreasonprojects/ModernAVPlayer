@@ -37,6 +37,8 @@ final class ContextSpecs: QuickSpec {
     private var tested: PlayerContext!
     private var plugin: MockPlayerPlugin!
     private var mockState: MockPlayerState!
+    private var media: MockPlayerMedia!
+    private var nowPlaying: MockNowPlayingService!
     private let player = MockCustomPlayer()
     
     override func spec() {
@@ -44,11 +46,14 @@ final class ContextSpecs: QuickSpec {
         beforeEach {
             self.audioSession = MockAudioSession()
             self.plugin = MockPlayerPlugin()
+            self.nowPlaying = MockNowPlayingService()
             self.tested = ModernAVPlayerContext(player: self.player,
                                                 config: ModernAVPlayerConfiguration(),
+                                                nowPlaying: self.nowPlaying,
                                                 audioSession: self.audioSession,
                                                 plugins: [self.plugin])
             self.mockState = MockPlayerState(context: self.tested)
+            self.media = MockPlayerMedia(url: URL(string: "foo")!, type: .clip)
         }
         
         context("init") {
@@ -192,6 +197,87 @@ final class ContextSpecs: QuickSpec {
                 
                 // ASSERT
                 expect(newState.contextUpdatedCallCount).to(equal(1))
+            }
+        }
+
+        context("update metadata when current media is set") {
+            it("should call setMetadata media method") {
+
+                // ARRANGE
+                self.tested.currentMedia = self.media
+                let metadata = MockPlayerMediaMetadata(title: "title",
+                                                       albumTitle: "album",
+                                                       artist: "artist",
+                                                       localImageName: nil,
+                                                       remoteImageUrl: nil)
+
+                // ACT
+                self.tested.updateMetadata(metadata)
+
+                // ASSERT
+                expect(self.media.setMetadataCallCount).to(equal(1))
+                let m = MockPlayerMediaMetadata.convert(self.media.setMetadataLastParam!)
+                expect(m).to(equal(metadata))
+            }
+
+            it("should update now playing info") {
+
+                // ARRANGE
+                self.tested.currentMedia = self.media
+                let metadata = MockPlayerMediaMetadata(title: "title",
+                                                       albumTitle: "album",
+                                                       artist: "artist",
+                                                       localImageName: nil,
+                                                       remoteImageUrl: nil)
+
+                // ACT
+                self.tested.updateMetadata(metadata)
+
+                // ASSERT
+                expect(self.nowPlaying.updateCallCount).to(equal(1))
+                let expectedMetadata = MockPlayerMediaMetadata.convert(self.nowPlaying.updateLastMetadataParam!)
+                expect(expectedMetadata).to(equal(metadata))
+            }
+        }
+
+        context("update metadata when current media is not set") {
+            it("shouldn't call media setMetadata") {
+
+                // ARRANGE
+                self.tested.currentMedia = nil
+                let metadata = MockPlayerMediaMetadata(title: "title",
+                                                       albumTitle: "album",
+                                                       artist: "artist",
+                                                       localImageName: nil,
+                                                       remoteImageUrl: nil)
+
+                // ACT
+                self.tested.updateMetadata(metadata)
+
+                // ASSERT
+                expect(self.media.setMetadataCallCount).to(equal(0))
+                expect(self.media.setMetadataLastParam).to(beNil())
+
+            }
+
+            it("shouldn't update now pLaying") {
+
+                // ARRANGE
+                self.tested.currentMedia = nil
+                let metadata = MockPlayerMediaMetadata(title: "title",
+                                                       albumTitle: "album",
+                                                       artist: "artist",
+                                                       localImageName: nil,
+                                                       remoteImageUrl: nil)
+
+                // ACT
+                self.tested.updateMetadata(metadata)
+
+                // ASSERT
+                expect(self.nowPlaying.updateCallCount).to(equal(0))
+                expect(self.nowPlaying.updateLastMetadataParam).to(beNil())
+                expect(self.nowPlaying.updateLastDurationParam).to(beNil())
+                expect(self.nowPlaying.updateLastIsLiveParam).to(beNil())
             }
         }
     }

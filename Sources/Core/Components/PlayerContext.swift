@@ -149,7 +149,13 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
         state.play()
     }
     
-    func updateNowPlayingInfo(metadata: PlayerMediaMetadata) {
-        nowPlaying.update(metadata: metadata)
+    func updateMetadata(_ metadata: PlayerMediaMetadata) {
+        guard let media = currentMedia else {
+            ModernAVPlayerLogger.instance.log(message: "Load a media before update metadata",
+                                              domain: .unavailableCommand)
+            return
+        }
+        media.setMetadata(metadata)
+        nowPlaying.update(metadata: metadata, duration: nil, isLive: nil)
     }
 }

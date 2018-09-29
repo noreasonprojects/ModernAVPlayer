@@ -9,7 +9,8 @@
 import Foundation
 @testable import ModernAVPlayer
 
-struct MockPlayerMedia: PlayerMedia, Equatable {
+final class MockPlayerMedia: PlayerMedia, Equatable {
+
     let url: URL
     let type: MediaType
     let assetOptions: [String: Any]?
@@ -24,6 +25,13 @@ struct MockPlayerMedia: PlayerMedia, Equatable {
     
     func getMetadata() -> PlayerMediaMetadata? {
         return metadata
+    }
+
+    private(set) var setMetadataCallCount = 0
+    private(set) var setMetadataLastParam: PlayerMediaMetadata?
+    func setMetadata(_ metadata: PlayerMediaMetadata) {
+        setMetadataCallCount += 1
+        setMetadataLastParam = metadata
     }
 }
 

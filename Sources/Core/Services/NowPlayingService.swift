@@ -32,8 +32,7 @@ import MediaPlayer
  */
 
 protocol NowPlaying {
-    func update(metadata: PlayerMediaMetadata?, duration: Double?, isLive: Bool)
-    func update(metadata: PlayerMediaMetadata)
+    func update(metadata: PlayerMediaMetadata?, duration: Double?, isLive: Bool?)
     func overrideInfoCenter(for key: String, value: Any)
 }
 
@@ -43,22 +42,32 @@ final class ModernAVPlayerNowPlayingService: NowPlaying {
     private var session: URLSession { return URLSession.shared }
     private var task: URLSessionTask?
 
-    func update(metadata: PlayerMediaMetadata?, duration: Double?, isLive: Bool) {
-        if #available(iOS 10, *) {
+    func update(metadata: PlayerMediaMetadata?, duration: Double?, isLive: Bool?) {
+        infos[MPMediaItemPropertyTitle] = metadata?.title ?? ""
+        infos[MPMediaItemPropertyArtist] = metadata?.artist ?? ""
+        infos[MPMediaItemPropertyAlbumTitle] = metadata?.albumTitle ?? ""
+        infos[MPNowPlayingInfoPropertyPlaybackRate] = 1.0
+
+        if let imageName = metadata?.localPlaceHolderImageName, let image = UIImage(named: imageName) {
+            let artwork = getArtwork(image: image)
+            infos[MPMediaItemPropertyArtwork] = artwork
+        }
+
+        if let imageUrl = metadata?.remoteImageUrl {
+            updateRemoteImage(url: imageUrl)
+        }
+
+        if #available(iOS 10, *), let isLive = isLive {
             infos[MPNowPlayingInfoPropertyIsLiveStream] = isLive
         }
+
         if let duration = duration, duration.isNormal {
             infos[MPMediaItemPropertyPlaybackDuration] = duration
         }
-        updateDictionnary(with: metadata)
-        let debug = "Update nowPlayingInfo metadata: \(metadata?.description ?? "nil") | duration: \(duration?.description ?? "nil")"
-                    + " | isLive: \(isLive.description))"
-        ModernAVPlayerLogger.instance.log(message: debug, domain: .service)
-    }
 
-    func update(metadata: PlayerMediaMetadata) {
-        updateDictionnary(with: metadata)
-        ModernAVPlayerLogger.instance.log(message: "Update nowPlayingInfo metadata: \(metadata.description)", domain: .service)
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = infos
+
+        ModernAVPlayerLogger.instance.log(message: "Update now playing dictionnary", domain: .service)
     }
     
     func overrideInfoCenter(for key: String, value: Any) {
@@ -81,22 +90,5 @@ final class ModernAVPlayerNowPlayingService: NowPlaying {
             self?.overrideInfoCenter(for: MPMediaItemPropertyArtwork, value: artwork)
         }
         task?.resume()
-    }
-
-    private func updateDictionnary(with metadata: PlayerMediaMetadata?) {
-        infos[MPMediaItemPropertyTitle] = metadata?.title ?? ""
-        infos[MPMediaItemPropertyArtist] = metadata?.artist ?? ""
-        infos[MPMediaItemPropertyAlbumTitle] = metadata?.albumTitle ?? ""
-        infos[MPNowPlayingInfoPropertyPlaybackRate] = 1.0
-        
-        if let imageName = metadata?.localPlaceHolderImageName, let image = UIImage(named: imageName) {
-            let artwork = getArtwork(image: image)
-            infos[MPMediaItemPropertyArtwork] = artwork
-        }
-        
-        if let imageUrl = metadata?.remoteImageUrl {
-            updateRemoteImage(url: imageUrl)
-        }
-        MPNowPlayingInfoCenter.default().nowPlayingInfo = infos
     }
 }

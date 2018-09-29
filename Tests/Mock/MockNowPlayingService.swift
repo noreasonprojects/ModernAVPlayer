@@ -12,9 +12,16 @@ import ModernAVPlayer
 
 final class MockNowPlayingService: NowPlaying {
 
-    func update(metadata: PlayerMediaMetadata?, duration: Double?, isLive: Bool) { }
-
-    func update(metadata: PlayerMediaMetadata) { }
+    private(set) var updateCallCount = 0
+    private(set) var updateLastMetadataParam: PlayerMediaMetadata?
+    private(set) var updateLastDurationParam: Double?
+    private(set) var updateLastIsLiveParam: Bool?
+    func update(metadata: PlayerMediaMetadata?, duration: Double?, isLive: Bool?) {
+        updateCallCount += 1
+        updateLastMetadataParam = metadata
+        updateLastDurationParam = duration
+        updateLastIsLiveParam = isLive
+    }
 
     private(set) var overrideInfoCenterCallCount = 0
     private(set) var overrideInfoCenterLastKeyParam: String?

@@ -16,11 +16,11 @@ final class MockPlayerMediaMetadata: PlayerMediaMetadata, Equatable {
     let localPlaceHolderImageName: String?
     let remoteImageUrl: URL?
 
-    init(title: String?,
-         albumTitle: String?,
-         artist: String?,
-         localImageName: String?,
-         remoteImageUrl: URL?) {
+    init(title: String? = nil,
+         albumTitle: String? = nil,
+         artist: String? = nil,
+         localImageName: String? = nil,
+         remoteImageUrl: URL? = nil) {
         self.title = title
         self.albumTitle = albumTitle
         self.artist = artist

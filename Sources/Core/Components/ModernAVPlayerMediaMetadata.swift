@@ -24,7 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-public struct ModernAVPlayerMediaMetadata: PlayerMediaMetadata {
+public struct ModernAVPlayerMediaMetadata: PlayerMediaMetadata, Equatable {
     public let title: String?
     public let albumTitle: String?
     public let artist: String?
@@ -42,4 +42,12 @@ public struct ModernAVPlayerMediaMetadata: PlayerMediaMetadata {
         self.localPlaceHolderImageName = localImageName
         self.remoteImageUrl = remoteImageUrl
     }
+}
+
+public func == (lhs: ModernAVPlayerMediaMetadata, rhs: ModernAVPlayerMediaMetadata) -> Bool {
+    return lhs.title == rhs.title &&
+        lhs.albumTitle == rhs.albumTitle &&
+        lhs.artist == rhs.artist &&
+        lhs.localPlaceHolderImageName == rhs.localPlaceHolderImageName &&
+        lhs.remoteImageUrl == rhs.remoteImageUrl
 }

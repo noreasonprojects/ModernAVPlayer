@@ -1,6 +1,6 @@
 PODS:
-  - ModernAVPlayer/Core (0.14.0)
-  - ModernAVPlayer/RxSwift (0.14.0):
+  - ModernAVPlayer/Core (0.15.0)
+  - ModernAVPlayer/RxSwift (0.15.0):
     - ModernAVPlayer/Core
     - RxCocoa (~> 4.0)
     - RxSwift (~> 4.0)
@@ -30,7 +30,7 @@ EXTERNAL SOURCES:
     :path: "."
 
 SPEC CHECKSUMS:
-  ModernAVPlayer: 7c6cacca986f8c23bf8e9ea68923551bb6854e99
+  ModernAVPlayer: 48b9b58838c6fe9abd43b4e6abe98c3bb7a341bd
   Nimble: c8d6a1f463701921c46de965c673e13cafa09196
   Quick: d17304d58d0d169dd0bd1c6e5c28e3318de32a1a
   RxCocoa: 71b9cce833fbcb89a8eec11816dd225830c2bd3c

@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 
 ---
+## [X.X.X]
+* Feature:
+	* Improve readme
+
 ## [0.15.0]
 * Breaking change:
 	* `updateNowPlayingInfo(metadata:)` was replaced by `updateMetadata(_:)`

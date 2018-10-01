@@ -5,15 +5,42 @@
 
 ``ModernAVPlayer`` is an audio persistence ``AVPlayer`` wrapper
 
+#### ++ Cool features ++
+- Get 9 nice and revelant player states (playing, buffering, loading, loaded...)
+- Persistence player to resume playback after bad network connection even in background mode
+- Manage headphone interactions, call & siri interruptions, now playing informations
+- Add your own plug-in to manage tracking, events...
+- RxSwift compatible
+- Loop mode
+- Log available by domain
+***
+
+#### ** Swift 4.2 note **
+AVAudioSession lost setCategory method on iOS 9. to be still compatible with iOS 9, the library is not convert for now
+source: http://www.openradar.me/42382075
+***
+
+## Menu
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Getting started](#getting-started)
+- [Advanced](#advanced)
+- [Todo](#todo)
+- [Communication](#communication)
+
 ## Requirements
 
 - iOS 9.0+
 - Xcode 10.0+
 - Swift 4.0+
 
-## Swift 4.2 note
-AVAudioSession lost setCategory method on iOS 9. to be still compatible with iOS 9, the library is not convert for now
-source: http://www.openradar.me/42382075
+> In order to support background mode, append the following to your ``Info.plist``:
+```
+<key>UIBackgroundModes</key>
+<array>
+    <string>audio</string>
+</array>
+```
 
 ## Installation
 
@@ -45,20 +72,7 @@ Then, run the following command:
 $ pod install
 ```
 
-### Prerequisites
-
-* In order to support background mode, append the following to your ``Info.plist``:
-
-```
-<key>UIBackgroundModes</key>
-<array>
-    <string>audio</string>
-</array>
-```
-
-### Getting started
-
-* Play your first audio source:
+## Getting started
 
 > Create a media
 ```swift
@@ -78,7 +92,6 @@ player.loadMedia(media: media, autostart: true)
 player.loopMode = true
 ```
 
-### Available Commands
 | ↓ State / Command → | loadMedia | play | pause | stop | seek |
 |:---------|:---------:|:--------:|:--------:|:--------:|:--------:|
 | Init  | O | X | O | O | X
@@ -91,25 +104,37 @@ player.loopMode = true
 | WaitingNetwork  | O | X | O | O | X
 | Failed  | O | O | X | X | X
 
-### Plugin
-
-Use `PlayerPlugin` protocol to create your own plugin system. 
+## Advanced 
 
 ### Configuration
 
 All player configuration are available from `ContextConfiguration` protocol.  
 A default implementation `ModernAVPlayerConfig` is provided with documentation
 
+### Plugin
+
+Use `PlayerPlugin` protocol to create your own plugin system, like tracking Plugin.
+
 ### RxSwift
 
 Instead of using delegate pattern, you can use rx to bind player attributes.
+
 > Setup
-Use ``pod 'ModernAVPlayer/RxSwift'`` in the Podfile
+
+Use `pod 'ModernAVPlayer/RxSwift'` in the Podfile
+
 > Usage
 ```swift
 let player = ModernAVPlayer()
 let state: Observable<ModernAVPlayer.State> = player.rx.state
 ```
+
+## Todo
+- [ ] Make remote command center configurable
+- [ ] Make a prettier audio and video example
+- [ ] Add missing parameter to plugin protocol method
+- [ ] Separate background task to a service
+- [ ] Make log message available to multiple domain
 
 ## Communication
 

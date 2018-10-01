@@ -30,57 +30,92 @@ public protocol PlayerPlugin {
     ///
     /// Called when Player enters Initialization state
     /// - parameters:
-    ///    - player: instance of AVPlayer used
+    ///     - player: current AVPlayer instance in use
     ///
     func didInit(player: AVPlayer)
     
-    /// Called when the media will start loading
+    /// Called when loading will start
+    /// - parameters:
+    ///    - media: current media in use
+    ///
     func willStartLoading(media: PlayerMedia)
     
-    /// Called when the media has started loading
+    /// Called when loading has started
+    /// - parameters:
+    ///    - media: current media in use
+    ///
     func didStartLoading(media: PlayerMedia)
     
-    /// Called before buffering media
+    /// Called when buffering has started
+    /// - parameters:
+    ///    - media: current media in use
+    ///
     func didStartBuffering(media: PlayerMedia)
     
     ///
     /// Called when the media is loaded
     /// - parameters:
-    ///    - media: PlayerMedia just loaded
+    ///    - media: current media in use
     ///
     func didLoad(media: PlayerMedia, duration: Double?)
     
     ///
     /// Called when the media has changed
     /// - parameters:
-    ///    - media: PlayerMedia just loaded
-    ///    - previousMedia: PlayerMedia loaded before
+    ///    - media: current media in use
+    ///    - previousMedia: previous media in use
     ///
     func didMediaChanged(_ media: PlayerMedia, previousMedia: PlayerMedia?)
 
-    /// Called when the media is playing
+    /// Called when the media will start playing
+    /// - parameters:
+    ///     - media: current media in use
+    ///     - position: play position
+    ///
     func willStartPlaying(media: PlayerMedia, position: Double)
 
     /// Called when the media is playing
+    /// - parameters:
+    ///    - media: current media in use
+    ///
     func didStartPlaying(media: PlayerMedia)
     
     /// Called when the media is paused
+    /// - parameters:
+    ///     - media: current media in use
+    ///     - position: pause position
+    ///
     func didPaused(media: PlayerMedia, position: Double)
     
     /// Called when the media is stopped
+    /// - parameters:
+    ///     - media: current media in use
+    ///     - position: stop position
+    ///
     func didStopped(media: PlayerMedia, position: Double)
     
     /// Called when player check network access
+    /// - parameters:
+    ///    - media: current media in use
+    ///
     func didStartWaitingForNetwork(media: PlayerMedia)
     
     /// Called when the media failed
+    /// - parameters:
+    ///     - media: current media in use
+    ///     - error: reason to failed
+    ///
     func didFailed(media: PlayerMedia, error: PlayerError)
     
     /// Called when media play to his end time
+    /// - parameters:
+    ///     - media: current media in use
+    ///     - endTime: end time position
+    ///
     func didItemPlayToEndTime(media: PlayerMedia, endTime: Double)
 }
 
-/// Make method optional
+/// Optional methods
 public extension PlayerPlugin {
     func didInit(player: AVPlayer) { }
     func willStartLoading(media: PlayerMedia) { }

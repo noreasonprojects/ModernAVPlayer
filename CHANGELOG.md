@@ -5,6 +5,8 @@ All notable changes to this project will be documented in this file.
 ## [X.X.X]
 * Feature:
 	* Improve readme
+* Dependency:
+	* [pod] SwiftyMocky -> 3.0.0
 
 ## [0.15.0]
 * Breaking change:

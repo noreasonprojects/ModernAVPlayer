@@ -5,6 +5,7 @@
 
 ##Custom
 .DS_Store
+*.generated.swift
 
 ## Build generated
 build/

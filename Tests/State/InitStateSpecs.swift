@@ -35,27 +35,17 @@ final class InitStateSpecs: QuickSpec {
 
     private var state: PlayerState!
     private var tested: ModernAVPlayerContext!
-    private var plugin: PlayerPluginMock!
     private let player = MockCustomPlayer()
     private let media = MockPlayerMedia(url: URL(string: "foo")!, type: .stream(isLive: false))
 
     override func spec() {
 
         beforeEach {
-            self.plugin = PlayerPluginMock()
             self.tested = ModernAVPlayerContext(player: self.player,
                                                 config: ModernAVPlayerConfiguration(),
-                                                plugins: [self.plugin])
+                                                plugins: [])
             self.tested.currentMedia = self.media
             self.state = self.tested.state
-        }
-        
-        context("init") {
-            it("should execute plugin method") {
-                
-                // ASSERT
-                Verify(self.plugin, 1, .didInit(player: .value(self.player)))
-            }
         }
 
         context("pause") {

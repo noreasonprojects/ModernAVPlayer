@@ -39,7 +39,6 @@ final class PausedStateSpecs: QuickSpec {
     private var mockPlayer: MockCustomPlayer!
     private var media: MockPlayerMedia!
     private var playerContext: ModernAVPlayerContext!
-    private var plugin: PlayerPluginMock!
     private var item: MockPlayerItem!
     private var delegate: MockPlayerContextDelegate!
     private let position = CMTime(seconds: 42.0, preferredTimescale: CMTimeScale(1.0))
@@ -51,13 +50,12 @@ final class PausedStateSpecs: QuickSpec {
             self.delegate = MockPlayerContextDelegate()
             self.item = MockPlayerItem.createOne(url: "foo", status: .unknown)
             self.media = MockPlayerMedia(url: URL(string: "foo")!, type: .clip)
-            self.plugin = PlayerPluginMock()
             self.mockPlayer = MockCustomPlayer(overrideCurrentItem: self.item)
             self.mockPlayer.overrideCurrentTime = self.position
             self.playerContext = ModernAVPlayerContext(player: self.mockPlayer,
                                                        config: ModernAVPlayerConfiguration(),
                                                        audioSession: self.audioSession,
-                                                       plugins: [self.plugin])
+                                                       plugins: [])
             self.playerContext.delegate = self.delegate
             self.playerContext.currentMedia = self.media
             self.tested = PausedState(context: self.playerContext)
@@ -69,13 +67,6 @@ final class PausedStateSpecs: QuickSpec {
 
                 // ASSERT
                 expect(self.mockPlayer.pauseCallCount).to(equal(1))
-            }
-            
-            it("should execute plugin method") {
-
-                // ASSERT
-                Verify(self.plugin, 1, .didPaused(media: .matching { $0.url == self.media.url },
-                                                  position: .value(self.position.seconds)))
             }
         }
 

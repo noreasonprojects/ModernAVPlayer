@@ -29,6 +29,7 @@ import Quick
 @testable
 import ModernAVPlayer
 import Nimble
+import SwiftyMocky
 
 final class WaitingNetworkStateSpecs: QuickSpec {
     
@@ -38,11 +39,11 @@ final class WaitingNetworkStateSpecs: QuickSpec {
     private var playerMedia = MockPlayerMedia(url: URL(string: "x")!, type: .clip)
     private var mockReachability: MockReachability!
     private var tested: ModernAVPlayerContext!
-    private var plugin: MockPlayerPlugin!
+    private var plugin: PlayerPluginMock!
     
     override func spec() {
         beforeEach {
-            self.plugin = MockPlayerPlugin()
+            self.plugin = PlayerPluginMock()
             self.mockReachability = MockReachability()
             self.url = URL(string: "foo")!
             self.tested = ModernAVPlayerContext(player: self.mockPlayer,
@@ -61,7 +62,7 @@ final class WaitingNetworkStateSpecs: QuickSpec {
             it("should execute plugin method") {
                 
                 // ASSERT
-                expect(self.plugin.didStartWaitingCallCount).to(equal(1))
+                Verify(self.plugin, 1, .didStartWaitingForNetwork(media: .any))
             }
             
             it("should start reachability service") {

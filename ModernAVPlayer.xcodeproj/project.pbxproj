@@ -20,6 +20,7 @@
 		E112DB452079359D00DB69E8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E112DB442079359D00DB69E8 /* Main.storyboard */; };
 		E112DB482079365B00DB69E8 /* AllNew.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E112DB472079365B00DB69E8 /* AllNew.mp3 */; };
 		E1272948209B6721007583DB /* InterruptionAudioServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1272947209B6721007583DB /* InterruptionAudioServiceTests.swift */; };
+		E12CC731216AE7F800109A16 /* Mock.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12CC730216AE7F800109A16 /* Mock.generated.swift */; };
 		E12D8B5620792AE300A84A5E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12D8B5520792AE300A84A5E /* ViewController.swift */; };
 		E14B4CF9215F5BA300E02DE1 /* PlayerMediaSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14B4CF8215F5BA300E02DE1 /* PlayerMediaSpecs.swift */; };
 		E152D51F207A45A100E0347C /* MockPlayerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E152D517207A459500E0347C /* MockPlayerState.swift */; };
@@ -43,7 +44,6 @@
 		E1683B1C2099F48D0041B0F8 /* MockURLSessionDataTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1683B1B2099F48D0041B0F8 /* MockURLSessionDataTask.swift */; };
 		E186A1812126D2F0002B1455 /* MockMPRemoteCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = E186A1802126D2F0002B1455 /* MockMPRemoteCommand.swift */; };
 		E186A1852126F136002B1455 /* MockModernAVPlayerExposable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E186A1842126F136002B1455 /* MockModernAVPlayerExposable.swift */; };
-		E187F8F720BECD8300B1D832 /* MockPlayerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = E187F8F620BECD8300B1D832 /* MockPlayerPlugin.swift */; };
 		E18E3D29213BF3E600FF4E63 /* MockNowPlayingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18E3D28213BF3E600FF4E63 /* MockNowPlayingService.swift */; };
 		E19C9D672109B4D900FDA0D7 /* MockPlayerContextDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19C9D662109B4D900FDA0D7 /* MockPlayerContextDelegate.swift */; };
 		E1A308AD20B5C032007ED482 /* noreason.txt in Resources */ = {isa = PBXBuildFile; fileRef = E1A308AC20B5C032007ED482 /* noreason.txt */; };
@@ -83,6 +83,7 @@
 		E112DB442079359D00DB69E8 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		E112DB472079365B00DB69E8 /* AllNew.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = AllNew.mp3; sourceTree = "<group>"; };
 		E1272947209B6721007583DB /* InterruptionAudioServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterruptionAudioServiceTests.swift; sourceTree = "<group>"; };
+		E12CC730216AE7F800109A16 /* Mock.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mock.generated.swift; sourceTree = "<group>"; };
 		E12D8B5520792AE300A84A5E /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		E14B4CF8215F5BA300E02DE1 /* PlayerMediaSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerMediaSpecs.swift; sourceTree = "<group>"; };
 		E152D517207A459500E0347C /* MockPlayerState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockPlayerState.swift; sourceTree = "<group>"; };
@@ -106,7 +107,6 @@
 		E1683B1B2099F48D0041B0F8 /* MockURLSessionDataTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLSessionDataTask.swift; sourceTree = "<group>"; };
 		E186A1802126D2F0002B1455 /* MockMPRemoteCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMPRemoteCommand.swift; sourceTree = "<group>"; };
 		E186A1842126F136002B1455 /* MockModernAVPlayerExposable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockModernAVPlayerExposable.swift; sourceTree = "<group>"; };
-		E187F8F620BECD8300B1D832 /* MockPlayerPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPlayerPlugin.swift; sourceTree = "<group>"; };
 		E18E3D28213BF3E600FF4E63 /* MockNowPlayingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNowPlayingService.swift; sourceTree = "<group>"; };
 		E19C9D662109B4D900FDA0D7 /* MockPlayerContextDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPlayerContextDelegate.swift; sourceTree = "<group>"; };
 		E1A308AC20B5C032007ED482 /* noreason.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = noreason.txt; sourceTree = "<group>"; };
@@ -193,6 +193,7 @@
 		607FACE81AFB9204008FA782 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				E12CC72F216AE7F800109A16 /* Generated */,
 				E1050F75207A44B100A7F540 /* ContextSpecs.swift */,
 				E14B4CFA215F61C500E02DE1 /* Components */,
 				E152D516207A459500E0347C /* Mock */,
@@ -240,6 +241,14 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		E12CC72F216AE7F800109A16 /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				E12CC730216AE7F800109A16 /* Mock.generated.swift */,
+			);
+			path = Generated;
+			sourceTree = "<group>";
+		};
 		E14B4CFA215F61C500E02DE1 /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -265,7 +274,6 @@
 				E152D519207A459500E0347C /* MockPlayerItem.swift */,
 				E167A06920E38EAD00B9FA3D /* MockPlayerMedia.swift */,
 				E167A06B20E38EE000B9FA3D /* MockPlayerMediaMetadata.swift */,
-				E187F8F620BECD8300B1D832 /* MockPlayerPlugin.swift */,
 				E152D517207A459500E0347C /* MockPlayerState.swift */,
 				E1EFA9AB20B449FF002605A9 /* MockReachabilityService.swift */,
 				E16368B52097654E00E69DAB /* MockTimer.swift */,
@@ -550,7 +558,6 @@
 				E1616A3F2126FC860067D3F5 /* MockMPRemoteCommandCenter.swift in Sources */,
 				E18E3D29213BF3E600FF4E63 /* MockNowPlayingService.swift in Sources */,
 				E152D532207A472500E0347C /* FailedStateSpecs.swift in Sources */,
-				E187F8F720BECD8300B1D832 /* MockPlayerPlugin.swift in Sources */,
 				E16368B62097654E00E69DAB /* MockTimer.swift in Sources */,
 				E152D52E207A472500E0347C /* LoadingMediaStateSpecs.swift in Sources */,
 				E167A06C20E38EE000B9FA3D /* MockPlayerMediaMetadata.swift in Sources */,
@@ -563,6 +570,7 @@
 				E14B4CF9215F5BA300E02DE1 /* PlayerMediaSpecs.swift in Sources */,
 				E1A4C32E209B06F1000580F5 /* RouteAudioServiceTests.swift in Sources */,
 				E152D522207A45A100E0347C /* MockCustomPlayer.swift in Sources */,
+				E12CC731216AE7F800109A16 /* Mock.generated.swift in Sources */,
 				E152D533207A472500E0347C /* InitStateSpecs.swift in Sources */,
 				E16368B42097610900E69DAB /* MockDataTaskFactory.swift in Sources */,
 				E1050F76207A44B100A7F540 /* ContextSpecs.swift in Sources */,

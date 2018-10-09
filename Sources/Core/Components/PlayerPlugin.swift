@@ -26,6 +26,7 @@
 
 import AVFoundation
 
+//sourcery: AutoMockable
 public protocol PlayerPlugin {
     ///
     /// Called when Player enters Initialization state

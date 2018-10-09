@@ -29,19 +29,20 @@ import Quick
 @testable
 import ModernAVPlayer
 import Nimble
+import SwiftyMocky
 
 final class InitStateSpecs: QuickSpec {
 
     private var state: PlayerState!
     private var tested: ModernAVPlayerContext!
-    private var plugin: MockPlayerPlugin!
+    private var plugin: PlayerPluginMock!
     private let player = MockCustomPlayer()
     private let media = MockPlayerMedia(url: URL(string: "foo")!, type: .stream(isLive: false))
 
     override func spec() {
 
         beforeEach {
-            self.plugin = MockPlayerPlugin()
+            self.plugin = PlayerPluginMock()
             self.tested = ModernAVPlayerContext(player: self.player,
                                                 config: ModernAVPlayerConfiguration(),
                                                 plugins: [self.plugin])
@@ -53,14 +54,7 @@ final class InitStateSpecs: QuickSpec {
             it("should execute plugin method") {
                 
                 // ASSERT
-                expect(self.plugin.didInitLastParam).to(beIdenticalTo(self.tested.player))
-                expect(self.plugin.didInitCallCount).to(equal(1))
-            }
-            
-            it("should not execute didLoad plugin method") {
-                
-                // ASSERT
-                expect(self.plugin.didLoadCallCount).to(equal(0))
+                Verify(self.plugin, 1, .didInit(player: .value(self.player)))
             }
         }
 

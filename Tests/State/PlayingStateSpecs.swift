@@ -30,6 +30,7 @@ import Quick
 @testable
 import ModernAVPlayer
 import Nimble
+import SwiftyMocky
 
 final class PlayingStateSpecs: QuickSpec {
 
@@ -39,13 +40,13 @@ final class PlayingStateSpecs: QuickSpec {
     private var mockPlayer: MockCustomPlayer!
     private var tested: ModernAVPlayerContext!
     private var routeAudioService: ModernAVPlayerRouteAudioService!
-    private var plugin: MockPlayerPlugin!
+    private var plugin: PlayerPluginMock!
     private var delegate: MockPlayerContextDelegate!
 
     override func spec() {
 
         beforeEach {
-            self.plugin = MockPlayerPlugin()
+            self.plugin = PlayerPluginMock()
             self.routeAudioService = ModernAVPlayerRouteAudioService()
             self.mockPlayer = MockCustomPlayer.createOne(url: "foo")
             self.media = MockPlayerMedia(url: URL(string: "foo")!, type: .clip)
@@ -66,7 +67,7 @@ final class PlayingStateSpecs: QuickSpec {
             it("should execute plugin method") {
                 
                 // ASSERT
-                expect(self.plugin.didStartPlayingCallCount).to(equal(1))
+                Verify(self.plugin, 1, .didStartPlaying(media: .any))
             }
             
             it("should set itemPlaybackObservingService callbacks") {
@@ -168,12 +169,15 @@ final class PlayingStateSpecs: QuickSpec {
             }
             
             it("should call associated plugin method") {
-                
+                // ARRANGE
+                let endTime = CMTime(seconds: 42.0, preferredTimescale: CMTimeScale(1.0))
+                self.mockPlayer.overrideCurrentTime = endTime
+
                 // ACT
                 self.itemPlaybackObservingService.onPlayToEndTime?()
                 
                 // ASSERT
-                expect(self.plugin.didItemPlayToEndTimeCallCount).to(equal(1))
+                Verify(self.plugin, 1, .didItemPlayToEndTime(media: .any, endTime: .value(endTime.seconds)))
             }
 
             context("loop mode disable") {

@@ -28,6 +28,7 @@ import AVFoundation
 import Quick
 @testable import ModernAVPlayer
 import Nimble
+import SwiftyMocky
 
 final class BufferingStateSpecs: QuickSpec {
 
@@ -38,13 +39,13 @@ final class BufferingStateSpecs: QuickSpec {
     private var item: MockPlayerItem!
     private var mockRateService: MockObservingRateService!
     private var tested: ModernAVPlayerContext!
-    private var plugin: MockPlayerPlugin!
+    private var plugin: PlayerPluginMock!
     private var delegate: MockPlayerContextDelegate!
 
     override func spec() {
         beforeEach {
             self.audioSession = MockAudioSession()
-            self.plugin = MockPlayerPlugin()
+            self.plugin = PlayerPluginMock()
             self.item = MockPlayerItem.createOne(url: "foo")
             self.mockPlayer = MockCustomPlayer(overrideCurrentItem: self.item)
             self.delegate = MockPlayerContextDelegate()
@@ -63,7 +64,7 @@ final class BufferingStateSpecs: QuickSpec {
             it("should execute plugin method") {
                 
                 // ASSERT
-                expect(self.plugin.didStartBufferingCallCount).to(equal(1))
+                Verify(self.plugin, 1, .didStartBuffering(media: .any))
             }
         }
 

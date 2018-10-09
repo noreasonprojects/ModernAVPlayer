@@ -25,11 +25,11 @@
 // THE SOFTWARE.
 
 import AVFoundation
-import Foundation
 import Quick
-import Nimble
 @testable
 import ModernAVPlayer
+import Nimble
+import SwiftyMocky
 
 final class LoadingMediaStateSpecs: QuickSpec {
 
@@ -38,14 +38,14 @@ final class LoadingMediaStateSpecs: QuickSpec {
     private var item: AVPlayerItem!
     private var player: MockCustomPlayer!
     private var tested: ModernAVPlayerContext!
-    private var plugin: MockPlayerPlugin!
+    private var plugin: PlayerPluginMock!
     private let playerMedia = MockPlayerMedia(url: URL(string: "x")!, type: .clip)
     private let seekPosition = 42.0
     
     override func spec() {
         
         beforeEach {
-            self.plugin = MockPlayerPlugin()
+            self.plugin = PlayerPluginMock()
             self.audioSession = MockAudioSession()
             self.player = MockCustomPlayer.createOnUsingAsset(url: "foo")
             self.tested = ModernAVPlayerContext(player: self.player,
@@ -64,8 +64,8 @@ final class LoadingMediaStateSpecs: QuickSpec {
             it("should execute plugin method") {
                 
                 // ASSERT
-                expect(self.plugin.willStartLoadingCallCount).to(equal(1))
-                expect(self.plugin.didStartLoadingCallCount).to(equal(1))
+                Verify(self.plugin, 1, .willStartLoading(media: .any))
+                Verify(self.plugin, 1, .didStartLoading(media: .any))
             }
             
             it("should replace current item") {
@@ -94,8 +94,8 @@ final class LoadingMediaStateSpecs: QuickSpec {
             it("should execute plugin method") {
                 
                 // ASSERT
-                expect(self.plugin.willStartLoadingCallCount).to(equal(1))
-                expect(self.plugin.didStartLoadingCallCount).to(equal(1))
+                Verify(self.plugin, 1, .willStartLoading(media: .any))
+                Verify(self.plugin, 1, .didStartLoading(media: .any))
             }
         }
         

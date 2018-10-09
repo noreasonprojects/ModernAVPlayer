@@ -24,18 +24,18 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import Foundation
-import Nimble
-import Quick
 import AVFoundation
+import Quick
 @testable
 import ModernAVPlayer
+import Nimble
+import SwiftyMocky
 
 final class ContextSpecs: QuickSpec {
 
     private var audioSession: MockAudioSession!
     private var tested: PlayerContext!
-    private var plugin: MockPlayerPlugin!
+    private var plugin: PlayerPluginMock!
     private var mockState: MockPlayerState!
     private var media: MockPlayerMedia!
     private var nowPlaying: MockNowPlayingService!
@@ -45,7 +45,7 @@ final class ContextSpecs: QuickSpec {
         
         beforeEach {
             self.audioSession = MockAudioSession()
-            self.plugin = MockPlayerPlugin()
+            self.plugin = PlayerPluginMock()
             self.nowPlaying = MockNowPlayingService()
             self.tested = ModernAVPlayerContext(player: self.player,
                                                 config: ModernAVPlayerConfiguration(),
@@ -168,9 +168,8 @@ final class ContextSpecs: QuickSpec {
                 self.tested.loadMedia(media: newMedia, autostart: false, position: nil)
                 
                 // ASSERT
-                expect(self.plugin.didMediaChangedCallCount).to(equal(1))
-                expect(self.plugin.didMediaChangedLastParam).to(equal(newMedia))
-                expect(self.plugin.didMediaChangedLastPreviousParam).to(equal(currentMedia))
+
+                Verify(self.plugin, 1, .didMediaChanged(.any, previousMedia: .any))
             }
         }
 

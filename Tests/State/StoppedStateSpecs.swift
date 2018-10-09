@@ -31,6 +31,7 @@ import MediaPlayer
 @testable
 import ModernAVPlayer
 import Nimble
+import SwiftyMocky
 
 final class StoppedStateSpecs: QuickSpec {
     
@@ -38,10 +39,11 @@ final class StoppedStateSpecs: QuickSpec {
     private var media: PlayerMedia!
     private var mockPlayer: MockCustomPlayer!
     private var playerContext: ModernAVPlayerContext!
-    private var plugin: MockPlayerPlugin!
+    private var plugin: PlayerPluginMock!
     private var item: MockPlayerItem!
     private var delegate: MockPlayerContextDelegate!
     private var nowPlaying: MockNowPlayingService!
+    private let endTime = CMTime(seconds: 42.0, preferredTimescale: CMTimeScale(1.0))
 
     override func spec() {
 
@@ -49,9 +51,10 @@ final class StoppedStateSpecs: QuickSpec {
             self.nowPlaying = MockNowPlayingService()
             self.item = MockPlayerItem.createOne(url: "foo")
             self.media = MockPlayerMedia(url: URL(string: "foo")!, type: .clip)
-            self.plugin = MockPlayerPlugin()
+            self.plugin = PlayerPluginMock()
             self.mockPlayer = MockCustomPlayer(overrideCurrentItem: self.item)
             self.mockPlayer.seekCompletionHandlerReturn = true
+            self.mockPlayer.overrideCurrentTime = self.endTime
             self.delegate = MockPlayerContextDelegate()
             self.playerContext = ModernAVPlayerContext(player: self.mockPlayer,
                                                        config: ModernAVPlayerConfiguration(),
@@ -67,9 +70,10 @@ final class StoppedStateSpecs: QuickSpec {
         context("init") {
             
             it("should execute plugin method") {
-                
+                // ARRANGE
+
                 // ASSERT
-                expect(self.plugin.didStoppedCallCount).to(equal(1))
+                Verify(self.plugin, 1, .didStopped(media: .any, position: .value(self.endTime.seconds)))
             }
             
             it("should play the player and seek to 0") {

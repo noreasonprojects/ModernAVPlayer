@@ -23,6 +23,7 @@
 		E11EE8CA216CF43400ABF06B /* MatchPlayerMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11EE8C9216CF43400ABF06B /* MatchPlayerMedia.swift */; };
 		E11EE8CE216CF79E00ABF06B /* PluginStopppedState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11EE8CD216CF79E00ABF06B /* PluginStopppedState.swift */; };
 		E11EE8D0216CF9D800ABF06B /* PluginInitStateSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11EE8CF216CF9D800ABF06B /* PluginInitStateSpecs.swift */; };
+		E11EE8D2216D011700ABF06B /* PluginWaitingNetworkStateSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11EE8D1216D011700ABF06B /* PluginWaitingNetworkStateSpecs.swift */; };
 		E1272948209B6721007583DB /* InterruptionAudioServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1272947209B6721007583DB /* InterruptionAudioServiceTests.swift */; };
 		E12CC731216AE7F800109A16 /* Mock.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12CC730216AE7F800109A16 /* Mock.generated.swift */; };
 		E12D8B5620792AE300A84A5E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12D8B5520792AE300A84A5E /* ViewController.swift */; };
@@ -90,6 +91,7 @@
 		E11EE8C9216CF43400ABF06B /* MatchPlayerMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchPlayerMedia.swift; sourceTree = "<group>"; };
 		E11EE8CD216CF79E00ABF06B /* PluginStopppedState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginStopppedState.swift; sourceTree = "<group>"; };
 		E11EE8CF216CF9D800ABF06B /* PluginInitStateSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginInitStateSpecs.swift; sourceTree = "<group>"; };
+		E11EE8D1216D011700ABF06B /* PluginWaitingNetworkStateSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginWaitingNetworkStateSpecs.swift; sourceTree = "<group>"; };
 		E1272947209B6721007583DB /* InterruptionAudioServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterruptionAudioServiceTests.swift; sourceTree = "<group>"; };
 		E12CC730216AE7F800109A16 /* Mock.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mock.generated.swift; sourceTree = "<group>"; };
 		E12D8B5520792AE300A84A5E /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -265,6 +267,7 @@
 				E11EE8CF216CF9D800ABF06B /* PluginInitStateSpecs.swift */,
 				E11EE8C6216CEA8200ABF06B /* PluginPausedStateSpecs.swift */,
 				E11EE8CD216CF79E00ABF06B /* PluginStopppedState.swift */,
+				E11EE8D1216D011700ABF06B /* PluginWaitingNetworkStateSpecs.swift */,
 			);
 			path = Plugins;
 			sourceTree = "<group>";
@@ -572,6 +575,7 @@
 			files = (
 				E16368B22097572E00E69DAB /* ReachabilityServiceTests.swift in Sources */,
 				E11EE8C8216CEA8600ABF06B /* PluginPausedStateSpecs.swift in Sources */,
+				E11EE8D2216D011700ABF06B /* PluginWaitingNetworkStateSpecs.swift in Sources */,
 				E152D51F207A45A100E0347C /* MockPlayerState.swift in Sources */,
 				45D49A6320936CC100F63ACF /* MockItemPlaybackObservingService.swift in Sources */,
 				E152D530207A472500E0347C /* PlayingStateSpecs.swift in Sources */,

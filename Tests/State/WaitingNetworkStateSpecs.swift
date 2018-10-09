@@ -39,16 +39,14 @@ final class WaitingNetworkStateSpecs: QuickSpec {
     private var playerMedia = MockPlayerMedia(url: URL(string: "x")!, type: .clip)
     private var mockReachability: MockReachability!
     private var tested: ModernAVPlayerContext!
-    private var plugin: PlayerPluginMock!
     
     override func spec() {
         beforeEach {
-            self.plugin = PlayerPluginMock()
             self.mockReachability = MockReachability()
             self.url = URL(string: "foo")!
             self.tested = ModernAVPlayerContext(player: self.mockPlayer,
                                                 config: ModernAVPlayerConfiguration(),
-                                                plugins: [self.plugin])
+                                                plugins: [])
             self.tested.currentMedia = self.playerMedia
             self.state = WaitingNetworkState(context: self.tested,
                                              urlToReload: self.url,
@@ -59,12 +57,6 @@ final class WaitingNetworkStateSpecs: QuickSpec {
         }
         
         context("init") {
-            it("should execute plugin method") {
-                
-                // ASSERT
-                Verify(self.plugin, 1, .didStartWaitingForNetwork(media: .any))
-            }
-            
             it("should start reachability service") {
                 
                 // ASSERT

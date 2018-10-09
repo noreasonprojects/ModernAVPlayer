@@ -1,18 +1,18 @@
 //
-//  PluginPausedStateSpecs.swift
-//  ModernAVPlayer_Example
+//  PluginStopppedState.swift
+//  ModernAVPlayer_Tests
 //
 //  Created by ankierman on 09/10/2018.
 //  Copyright © 2018 CocoaPods. All rights reserved.
 //
 
-import AVFoundation
+import Foundation
 @testable
 import ModernAVPlayer
 import SwiftyMocky
 import XCTest
 
-final class PluginPausedStateSPecs: XCTestCase {
+final class PluginStopppedState: XCTestCase {
 
     private var context: PlayerContextMock!
     private var media: PlayerMediaMock!
@@ -33,22 +33,22 @@ final class PluginPausedStateSPecs: XCTestCase {
         Given(context, .plugins(getter: [plugin]))
     }
 
-    func testInitState_DidPausedPluginShouldNotBeCall() {
+    func testInitState_DidStoppedPluginShouldNotBeCall() {
         // ACT
-        _ = PausedState(context: context)
+        _ = StoppedState(context: context)
 
         // EXPECT
-        Verify(plugin, 0, .didPaused(media: .any, position: .any))
+        Verify(plugin, 0, .didStopped(media: .any, position: .any))
     }
 
-    func testWhenContextUpdated_DidPausedPluginShouldBeCall() {
+    func testWhenContextUpdated_DidStoppedPluginShouldBeCall() {
         // ARRANGE
-        let state = PausedState(context: context)
+        let state = StoppedState(context: context)
 
         // ACT
         state.contextUpdated()
 
         // EXPECT
-        Verify(plugin, 1, .didPaused(media: .value(media), position: .value(position)))
+        Verify(plugin, 1, .didStopped(media: .value(media), position: .value(position)))
     }
 }

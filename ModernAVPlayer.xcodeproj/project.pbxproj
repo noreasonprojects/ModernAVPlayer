@@ -21,6 +21,7 @@
 		E112DB482079365B00DB69E8 /* AllNew.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E112DB472079365B00DB69E8 /* AllNew.mp3 */; };
 		E11EE8C8216CEA8600ABF06B /* PluginPausedStateSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11EE8C6216CEA8200ABF06B /* PluginPausedStateSpecs.swift */; };
 		E11EE8CA216CF43400ABF06B /* MatchPlayerMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11EE8C9216CF43400ABF06B /* MatchPlayerMedia.swift */; };
+		E11EE8CE216CF79E00ABF06B /* PluginStopppedState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11EE8CD216CF79E00ABF06B /* PluginStopppedState.swift */; };
 		E1272948209B6721007583DB /* InterruptionAudioServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1272947209B6721007583DB /* InterruptionAudioServiceTests.swift */; };
 		E12CC731216AE7F800109A16 /* Mock.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12CC730216AE7F800109A16 /* Mock.generated.swift */; };
 		E12D8B5620792AE300A84A5E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12D8B5520792AE300A84A5E /* ViewController.swift */; };
@@ -86,6 +87,7 @@
 		E112DB472079365B00DB69E8 /* AllNew.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = AllNew.mp3; sourceTree = "<group>"; };
 		E11EE8C6216CEA8200ABF06B /* PluginPausedStateSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginPausedStateSpecs.swift; sourceTree = "<group>"; };
 		E11EE8C9216CF43400ABF06B /* MatchPlayerMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchPlayerMedia.swift; sourceTree = "<group>"; };
+		E11EE8CD216CF79E00ABF06B /* PluginStopppedState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginStopppedState.swift; sourceTree = "<group>"; };
 		E1272947209B6721007583DB /* InterruptionAudioServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterruptionAudioServiceTests.swift; sourceTree = "<group>"; };
 		E12CC730216AE7F800109A16 /* Mock.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mock.generated.swift; sourceTree = "<group>"; };
 		E12D8B5520792AE300A84A5E /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 			isa = PBXGroup;
 			children = (
 				E11EE8C6216CEA8200ABF06B /* PluginPausedStateSpecs.swift */,
+				E11EE8CD216CF79E00ABF06B /* PluginStopppedState.swift */,
 			);
 			path = Plugins;
 			sourceTree = "<group>";
@@ -596,6 +599,7 @@
 				E152D522207A45A100E0347C /* MockCustomPlayer.swift in Sources */,
 				E12CC731216AE7F800109A16 /* Mock.generated.swift in Sources */,
 				E152D533207A472500E0347C /* InitStateSpecs.swift in Sources */,
+				E11EE8CE216CF79E00ABF06B /* PluginStopppedState.swift in Sources */,
 				E16368B42097610900E69DAB /* MockDataTaskFactory.swift in Sources */,
 				E1050F76207A44B100A7F540 /* ContextSpecs.swift in Sources */,
 				E19C9D672109B4D900FDA0D7 /* MockPlayerContextDelegate.swift in Sources */,

@@ -36,31 +36,21 @@ final class FailedStateSpecs: QuickSpec {
     private var state: FailedState!
     private var mockPlayer = MockCustomPlayer()
     private var url: URL!
-    private var plugin: PlayerPluginMock!
     private var playerMedia = MockPlayerMedia(url: URL(string: "x")!, type: .clip)
     private var tested: ModernAVPlayerContext!
     private let error = PlayerError.loadingFailed
 
     override func spec() {
         beforeEach {
-            self.plugin = PlayerPluginMock()
             self.url = URL(string: "foo")!
             self.tested = ModernAVPlayerContext(player: self.mockPlayer,
                                                 config: ModernAVPlayerConfiguration(),
-                                                plugins: [self.plugin])
+                                                plugins: [])
             self.tested.currentMedia = self.playerMedia
             self.state = FailedState(context: self.tested, error: self.error)
             self.tested.state = self.state
         }
-        
-        context("init") {
-            it("should execute plugin method") {
-                
-                // ASSERT
-                Verify(self.plugin, 1, .didFailed(media: .any, error: .value(self.error)))
-            }
-        }
-        
+
         context("loadMedia") {
             it("should update state context to LoadingMedia") {
 

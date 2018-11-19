@@ -12,7 +12,7 @@ import ModernAVPlayer
 import SwiftyMocky
 import XCTest
 
-final class PluginStopppedState: XCTestCase {
+final class PluginStopppedStateSpecs: XCTestCase {
 
     private var context: PlayerContextMock!
     private var media: PlayerMediaMock!

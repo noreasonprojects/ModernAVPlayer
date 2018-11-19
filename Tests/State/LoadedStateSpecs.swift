@@ -38,7 +38,6 @@ final class LoadedStateSpecs: QuickSpec {
     private var mockPlayer: MockCustomPlayer!
     private let playerMedia = MockPlayerMedia(url: URL(string: "x")!, type: .clip)
     private var tested: ModernAVPlayerContext!
-    private let plugin = PlayerPluginMock()
     private var item: AVPlayerItem!
     private var delegate: MockPlayerContextDelegate!
     private let duration = CMTime(seconds: 42, preferredTimescale: 1)
@@ -53,21 +52,13 @@ final class LoadedStateSpecs: QuickSpec {
             self.tested = ModernAVPlayerContext(player: self.mockPlayer,
                                                 config: ModernAVPlayerConfiguration(),
                                                 audioSession: self.audioSession,
-                                                plugins: [self.plugin])
+                                                plugins: [])
             self.tested.delegate = self.delegate
             self.tested.currentMedia = self.playerMedia
             self.loadedState = LoadedState(context: self.tested)
             self.tested.state = self.loadedState
         }
-        
-        context("init") {
-            it("should execute didLoad plugin method") {
-                
-                // ASSERT
-                Verify(self.plugin, 1, .didLoad(media: .any, duration: .value(self.duration.seconds)))
-            }
-        }
-        
+
         context("loadMedia") {
             it("should update state context to LoadingMedia") {
                 

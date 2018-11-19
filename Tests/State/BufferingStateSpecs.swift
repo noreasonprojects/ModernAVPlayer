@@ -39,20 +39,18 @@ final class BufferingStateSpecs: QuickSpec {
     private var item: MockPlayerItem!
     private var mockRateService: MockObservingRateService!
     private var tested: ModernAVPlayerContext!
-    private var plugin: PlayerPluginMock!
     private var delegate: MockPlayerContextDelegate!
 
     override func spec() {
         beforeEach {
             self.audioSession = MockAudioSession()
-            self.plugin = PlayerPluginMock()
             self.item = MockPlayerItem.createOne(url: "foo")
             self.mockPlayer = MockCustomPlayer(overrideCurrentItem: self.item)
             self.delegate = MockPlayerContextDelegate()
             self.tested = ModernAVPlayerContext(player: self.mockPlayer,
                                                 config: ModernAVPlayerConfiguration(),
                                                 audioSession: self.audioSession,
-                                                plugins: [self.plugin])
+                                                plugins: [])
             self.tested.delegate = self.delegate
             self.tested.currentMedia = self.playerMedia
             self.mockRateService = MockObservingRateService(config: self.tested.config, item: self.item)
@@ -60,14 +58,6 @@ final class BufferingStateSpecs: QuickSpec {
             self.tested.changeState(state: self.bufferingState)
         }
         
-        context("init") {
-            it("should execute plugin method") {
-                
-                // ASSERT
-                Verify(self.plugin, 1, .didStartBuffering(media: .any))
-            }
-        }
-
         context("loadMedia") {
             it("should stop observing rate service") {
                 

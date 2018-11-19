@@ -40,13 +40,11 @@ final class PlayingStateSpecs: QuickSpec {
     private var mockPlayer: MockCustomPlayer!
     private var tested: ModernAVPlayerContext!
     private var routeAudioService: ModernAVPlayerRouteAudioService!
-    private var plugin: PlayerPluginMock!
     private var delegate: MockPlayerContextDelegate!
 
     override func spec() {
 
         beforeEach {
-            self.plugin = PlayerPluginMock()
             self.routeAudioService = ModernAVPlayerRouteAudioService()
             self.mockPlayer = MockCustomPlayer.createOne(url: "foo")
             self.media = MockPlayerMedia(url: URL(string: "foo")!, type: .clip)
@@ -54,7 +52,7 @@ final class PlayingStateSpecs: QuickSpec {
             self.delegate = MockPlayerContextDelegate()
             self.tested = ModernAVPlayerContext(player: self.mockPlayer,
                                                 config: ModernAVPlayerConfiguration(),
-                                                plugins: [self.plugin])
+                                                plugins: [])
             self.tested.delegate = self.delegate
             self.tested.currentMedia = self.media
             self.playingState = PlayingState(context: self.tested,
@@ -64,12 +62,6 @@ final class PlayingStateSpecs: QuickSpec {
         }
 
         context("init") {
-            it("should execute plugin method") {
-                
-                // ASSERT
-                Verify(self.plugin, 1, .didStartPlaying(media: .any))
-            }
-            
             it("should set itemPlaybackObservingService callbacks") {
                 
                 // ASSERT
@@ -166,18 +158,6 @@ final class PlayingStateSpecs: QuickSpec {
                 
                 // ASSERT
                 expect(self.delegate.didItemPlayToEndTimeCallCount).to(equal(1))
-            }
-            
-            it("should call associated plugin method") {
-                // ARRANGE
-                let endTime = CMTime(seconds: 42.0, preferredTimescale: CMTimeScale(1.0))
-                self.mockPlayer.overrideCurrentTime = endTime
-
-                // ACT
-                self.itemPlaybackObservingService.onPlayToEndTime?()
-                
-                // ASSERT
-                Verify(self.plugin, 1, .didItemPlayToEndTime(media: .any, endTime: .value(endTime.seconds)))
             }
 
             context("loop mode disable") {

@@ -5,6 +5,9 @@ All notable changes to this project will be documented in this file.
 ## [X.X.X]
 * Feature:
 	* Improve readme
+	* Add usefull plugin method parameters
+* Breaking change:
+	* almost all plugin method parameters (PlayerPlugin.swift)
 * Dependency:
 	* [pod] SwiftyMocky -> 3.0.0
 

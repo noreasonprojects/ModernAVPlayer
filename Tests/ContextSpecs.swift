@@ -35,7 +35,6 @@ final class ContextSpecs: QuickSpec {
 
     private var audioSession: MockAudioSession!
     private var tested: PlayerContext!
-    private var plugin: PlayerPluginMock!
     private var mockState: MockPlayerState!
     private var media: MockPlayerMedia!
     private var nowPlaying: MockNowPlayingService!
@@ -45,13 +44,12 @@ final class ContextSpecs: QuickSpec {
         
         beforeEach {
             self.audioSession = MockAudioSession()
-            self.plugin = PlayerPluginMock()
             self.nowPlaying = MockNowPlayingService()
             self.tested = ModernAVPlayerContext(player: self.player,
                                                 config: ModernAVPlayerConfiguration(),
                                                 nowPlaying: self.nowPlaying,
                                                 audioSession: self.audioSession,
-                                                plugins: [self.plugin])
+                                                plugins: [])
             self.mockState = MockPlayerState(context: self.tested)
             self.media = MockPlayerMedia(url: URL(string: "foo")!, type: .clip)
         }
@@ -155,21 +153,6 @@ final class ContextSpecs: QuickSpec {
                 expect(self.mockState.loadMedialCallCount).to(equal(1))
                 expect(self.mockState.lastLoadAutostartParam).to(beFalse())
                 expect(self.mockState.lastLoadPositionParam).to(be(position))
-            }
-            
-            it("should execute plugin method") {
-
-                // ARRANGE
-                let currentMedia = MockPlayerMedia(url: URL(string: "xxx")!, type: .stream(isLive: false))
-                let newMedia = MockPlayerMedia(url: URL(string: "foo")!, type: .clip)
-                
-                // ACT
-                self.tested.currentMedia = currentMedia
-                self.tested.loadMedia(media: newMedia, autostart: false, position: nil)
-                
-                // ASSERT
-
-                Verify(self.plugin, 1, .didMediaChanged(.any, previousMedia: .any))
             }
         }
 

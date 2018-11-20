@@ -30,6 +30,8 @@ import AVFoundation
 /// `PlayerMedia` is an object use to create the item for the player to
 /// be used. `AVPlayerItem` used by `ModernAVPlayer` is init with an AVURLAsset.
 ///
+
+// sourcery: AutoMockable
 public protocol PlayerMedia: CustomStringConvertible {
 
     /// URL set to the AVURLAsset

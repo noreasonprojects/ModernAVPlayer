@@ -26,53 +26,109 @@
 
 import AVFoundation
 
+//sourcery: AutoMockable
 public protocol PlayerPlugin {
     ///
     /// Called when Player enters Initialization state
     /// - parameters:
-    ///    - player: instance of AVPlayer used
+    ///     - player: current AVPlayer instance in use
     ///
     func didInit(player: AVPlayer)
     
-    /// Called when the media will start loading
-    func willStartLoading()
+    /// Called when loading will start
+    /// - parameters:
+    ///    - media: current media in use
+    ///
+    func willStartLoading(media: PlayerMedia)
     
-    /// Called when the media has started loading
-    func didStartLoading()
+    /// Called when loading has started
+    /// - parameters:
+    ///    - media: current media in use
+    ///
+    func didStartLoading(media: PlayerMedia)
     
-    /// Called before buffering media
-    func didStartBuffering()
+    /// Called when buffering has started
+    /// - parameters:
+    ///    - media: current media in use
+    ///
+    func didStartBuffering(media: PlayerMedia)
     
     ///
     /// Called when the media is loaded
     /// - parameters:
-    ///    - media: PlayerMedia just loaded
+    ///    - media: current media in use
     ///
     func didLoad(media: PlayerMedia, duration: Double?)
     
     ///
     /// Called when the media has changed
     /// - parameters:
-    ///    - media: PlayerMedia just loaded
-    ///    - previousMedia: PlayerMedia loaded before
+    ///    - media: current media in use
+    ///    - previousMedia: previous media in use
     ///
     func didMediaChanged(_ media: PlayerMedia, previousMedia: PlayerMedia?)
-    
+
+    /// Called when the media will start playing
+    /// - parameters:
+    ///     - media: current media in use
+    ///     - position: play position
+    ///
+    func willStartPlaying(media: PlayerMedia, position: Double)
+
     /// Called when the media is playing
-    func didStartPlaying()
+    /// - parameters:
+    ///    - media: current media in use
+    ///
+    func didStartPlaying(media: PlayerMedia)
     
     /// Called when the media is paused
-    func didPaused()
+    /// - parameters:
+    ///     - media: current media in use
+    ///     - position: pause position
+    ///
+    func didPaused(media: PlayerMedia, position: Double)
     
     /// Called when the media is stopped
-    func didStopped()
+    /// - parameters:
+    ///     - media: current media in use
+    ///     - position: stop position
+    ///
+    func didStopped(media: PlayerMedia, position: Double)
     
     /// Called when player check network access
-    func didStartWaitingForNetwork()
+    /// - parameters:
+    ///    - media: current media in use
+    ///
+    func didStartWaitingForNetwork(media: PlayerMedia)
     
     /// Called when the media failed
-    func didFailed(error: PlayerError)
+    /// - parameters:
+    ///     - media: current media in use
+    ///     - error: reason to failed
+    ///
+    func didFailed(media: PlayerMedia, error: PlayerError)
     
     /// Called when media play to his end time
-    func didItemPlayToEndTime(endTime: Double)
+    /// - parameters:
+    ///     - media: current media in use
+    ///     - endTime: end time position
+    ///
+    func didItemPlayToEndTime(media: PlayerMedia, endTime: Double)
+}
+
+/// Optional methods
+public extension PlayerPlugin {
+    func didInit(player: AVPlayer) { }
+    func willStartLoading(media: PlayerMedia) { }
+    func didStartLoading(media: PlayerMedia) { }
+    func didStartBuffering(media: PlayerMedia) { }
+    func didLoad(media: PlayerMedia, duration: Double?) { }
+    func didMediaChanged(_ media: PlayerMedia, previousMedia: PlayerMedia?) { }
+    func willStartPlaying(media: PlayerMedia, position: Double) { }
+    func didStartPlaying(media: PlayerMedia) { }
+    func didPaused(media: PlayerMedia, position: Double) { }
+    func didStopped(media: PlayerMedia, position: Double) { }
+    func didStartWaitingForNetwork(media: PlayerMedia) { }
+    func didFailed(media: PlayerMedia, error: PlayerError) { }
+    func didItemPlayToEndTime(media: PlayerMedia, endTime: Double) { }
 }

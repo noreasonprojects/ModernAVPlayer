@@ -26,6 +26,7 @@
 
 import AVFoundation
 
+//sourcery: AutoMockable
 protocol PlaybackObservingService {
     var onPlaybackStalled: (() -> Void)? { get set }
     var onPlayToEndTime: (() -> Void)? { get set }

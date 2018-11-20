@@ -1,0 +1,17 @@
+sources:
+  include:
+    - ./Sources
+templates:
+  - ./Pods/SwiftyMocky/Sources/Templates
+output:
+  ./Tests/Generated
+args:
+  testable:
+    - ModernAVPlayer
+  import:
+    - AVFoundation
+  excludedSwiftLintRules:
+    - force_cast
+    - function_body_length
+    - line_length
+    - vertical_whitespace

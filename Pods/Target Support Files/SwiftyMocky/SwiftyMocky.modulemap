@@ -1,0 +1,6 @@
+framework module SwiftyMocky {
+  umbrella header "SwiftyMocky-umbrella.h"
+
+  export *
+  module * { export * }
+}

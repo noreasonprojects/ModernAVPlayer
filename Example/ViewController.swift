@@ -125,9 +125,9 @@ final class ViewController: UIViewController {
         loadMedia(media, autostart: true)
     }
     
-    // MARK: - Variables
+    // MARK: - Input
 
-    let player = ModernAVPlayer(loggerDomains: [.state, .error, .unavailableCommand])
+    private let player = ModernAVPlayer(loggerDomains: [.state, .error, .unavailableCommand])
     
     // MARK: - Observables
     

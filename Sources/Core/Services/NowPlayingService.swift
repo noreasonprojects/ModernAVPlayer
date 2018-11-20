@@ -27,14 +27,14 @@
 import Foundation
 import MediaPlayer
 
-/*
- Because of race condition, we have to share infos property when updating
- */
-
 protocol NowPlaying {
     func update(metadata: PlayerMediaMetadata?, duration: Double?, isLive: Bool?)
     func overrideInfoCenter(for key: String, value: Any)
 }
+
+/*
+ Because of race condition, we have to share infos property when updating
+ */
 
 final class ModernAVPlayerNowPlayingService: NowPlaying {
 

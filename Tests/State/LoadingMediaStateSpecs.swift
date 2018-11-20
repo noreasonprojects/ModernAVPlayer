@@ -25,11 +25,11 @@
 // THE SOFTWARE.
 
 import AVFoundation
-import Foundation
 import Quick
-import Nimble
 @testable
 import ModernAVPlayer
+import Nimble
+import SwiftyMocky
 
 final class LoadingMediaStateSpecs: QuickSpec {
 
@@ -38,20 +38,18 @@ final class LoadingMediaStateSpecs: QuickSpec {
     private var item: AVPlayerItem!
     private var player: MockCustomPlayer!
     private var tested: ModernAVPlayerContext!
-    private var plugin: MockPlayerPlugin!
     private let playerMedia = MockPlayerMedia(url: URL(string: "x")!, type: .clip)
     private let seekPosition = 42.0
     
     override func spec() {
         
         beforeEach {
-            self.plugin = MockPlayerPlugin()
             self.audioSession = MockAudioSession()
             self.player = MockCustomPlayer.createOnUsingAsset(url: "foo")
             self.tested = ModernAVPlayerContext(player: self.player,
                                                 config: ModernAVPlayerConfiguration(),
                                                 audioSession: self.audioSession,
-                                                plugins: [self.plugin])
+                                                plugins: [])
             self.tested.currentMedia = self.playerMedia
             self.state = LoadingMediaState(context: self.tested,
                                            media: self.playerMedia,
@@ -61,13 +59,6 @@ final class LoadingMediaStateSpecs: QuickSpec {
         }
 
         context("init") {
-            it("should execute plugin method") {
-                
-                // ASSERT
-                expect(self.plugin.willStartLoadingCallCount).to(equal(1))
-                expect(self.plugin.didStartLoadingCallCount).to(equal(1))
-            }
-            
             it("should replace current item") {
                 
                 // ASSERT
@@ -89,13 +80,6 @@ final class LoadingMediaStateSpecs: QuickSpec {
                 
                 // ASSERT
                 expect(self.tested.state).to(beIdenticalTo(self.state))
-            }
-            
-            it("should execute plugin method") {
-                
-                // ASSERT
-                expect(self.plugin.willStartLoadingCallCount).to(equal(1))
-                expect(self.plugin.didStartLoadingCallCount).to(equal(1))
             }
         }
         

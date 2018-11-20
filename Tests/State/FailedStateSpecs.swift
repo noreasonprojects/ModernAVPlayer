@@ -29,37 +29,28 @@ import Quick
 @testable
 import ModernAVPlayer
 import Nimble
+import SwiftyMocky
 
 final class FailedStateSpecs: QuickSpec {
     
     private var state: FailedState!
     private var mockPlayer = MockCustomPlayer()
     private var url: URL!
-    private var plugin: MockPlayerPlugin!
     private var playerMedia = MockPlayerMedia(url: URL(string: "x")!, type: .clip)
     private var tested: ModernAVPlayerContext!
+    private let error = PlayerError.loadingFailed
 
     override func spec() {
         beforeEach {
-            self.plugin = MockPlayerPlugin()
             self.url = URL(string: "foo")!
             self.tested = ModernAVPlayerContext(player: self.mockPlayer,
                                                 config: ModernAVPlayerConfiguration(),
-                                                plugins: [self.plugin])
+                                                plugins: [])
             self.tested.currentMedia = self.playerMedia
-            self.state = FailedState(context: self.tested, error: PlayerError.loadingFailed)
+            self.state = FailedState(context: self.tested, error: self.error)
             self.tested.state = self.state
         }
-        
-        context("init") {
-            it("should execute plugin method") {
-                
-                // ASSERT
-                expect(self.plugin.didFailedCallCount).to(equal(1))
-                expect(self.plugin.didFailedLastParam).to(equal(.loadingFailed))
-            }
-        }
-        
+
         context("loadMedia") {
             it("should update state context to LoadingMedia") {
 

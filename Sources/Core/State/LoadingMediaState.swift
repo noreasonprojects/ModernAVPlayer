@@ -75,9 +75,11 @@ final class LoadingMediaState: PlayerState {
     }
     
     func contextUpdated() {
-        context.plugins.forEach { $0.willStartLoading() }
+        guard let media = context.currentMedia
+            else { assertionFailure("media should exist"); return }
+        context.plugins.forEach { $0.willStartLoading(media: media) }
         createReplaceItem(media: media)
-        context.plugins.forEach { $0.didStartLoading() }
+        context.plugins.forEach { $0.didStartLoading(media: media) }
     }
 
     deinit {

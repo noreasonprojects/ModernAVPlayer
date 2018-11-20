@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 
 ---
-## [X.X.X]
+## [0.16.0]
 * Feature:
 	* Improve readme
 	* Add usefull plugin method parameters

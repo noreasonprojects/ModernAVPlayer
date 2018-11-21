@@ -48,9 +48,11 @@ final class ModernAVPlayerNowPlayingService: NowPlaying {
         infos[MPMediaItemPropertyAlbumTitle] = metadata?.albumTitle ?? ""
         infos[MPNowPlayingInfoPropertyPlaybackRate] = 1.0
 
-        if let imageName = metadata?.localPlaceHolderImageName, let image = UIImage(named: imageName) {
+        if let imageData = metadata?.image, let image = UIImage(data: imageData) {
             let artwork = getArtwork(image: image)
             infos[MPMediaItemPropertyArtwork] = artwork
+        } else {
+            infos.removeValue(forKey: MPMediaItemPropertyArtwork)
         }
 
         if let imageUrl = metadata?.remoteImageUrl {
@@ -63,6 +65,8 @@ final class ModernAVPlayerNowPlayingService: NowPlaying {
 
         if let duration = duration, duration.isNormal {
             infos[MPMediaItemPropertyPlaybackDuration] = duration
+        } else {
+            infos.removeValue(forKey: MPMediaItemPropertyPlaybackDuration)
         }
 
         MPNowPlayingInfoCenter.default().nowPlayingInfo = infos

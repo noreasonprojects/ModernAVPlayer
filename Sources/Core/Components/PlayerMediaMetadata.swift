@@ -30,14 +30,14 @@ public protocol PlayerMediaMetadata: CustomStringConvertible {
     var title: String? { get }
     var artist: String? { get }
     var albumTitle: String? { get }
-    var localPlaceHolderImageName: String? { get }
+    var image: Data? { get }
     var remoteImageUrl: URL? { get }
 }
 
 public extension PlayerMediaMetadata {
     var description: String {
         let debug = "title: \(title ?? "nil") | album: \(albumTitle ?? "nil") | artist: \(artist ?? "nil") | "
-            + "localImage: \(localPlaceHolderImageName ?? "nil") | remoteImage: \(remoteImageUrl?.description ?? "nil")"
+            + "image: \(image?.description ?? "nil") | remoteImage: \(remoteImageUrl?.description ?? "nil")"
         return debug
     }
 }

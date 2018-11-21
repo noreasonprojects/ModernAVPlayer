@@ -403,7 +403,7 @@
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = 95Y7JDW7K4;
+						DevelopmentTeam = UNDCF9JXB2;
 						LastSwiftMigration = 1000;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
@@ -770,12 +770,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = 95Y7JDW7K4;
+				DEVELOPMENT_TEAM = UNDCF9JXB2;
 				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PODS_PODFILE_DIR_PATH = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.radiofrance.modernavplayer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.noreason.modernavplayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "21b8b1c8-c049-48d1-88bb-946996492507";
 				PROVISIONING_PROFILE_SPECIFIER = ModernAVPlayer;
@@ -795,7 +795,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PODS_PODFILE_DIR_PATH = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.radiofrance.modernavplayer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.noreason.modernavplayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "21b8b1c8-c049-48d1-88bb-946996492507";
 				PROVISIONING_PROFILE_SPECIFIER = ModernAVPlayer;

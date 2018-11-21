@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file.
 
 ---
+## [X.X.X]
+* Breaking change:
+	* `ModernAVPlayerMediaMetadata` take image data instead of localImageName path name
+* Feature:
+	* Accept metadata image data instead of image path name
+
 ## [0.16.0]
 * Feature:
 	* Improve readme
@@ -42,7 +48,7 @@ All notable changes to this project will be documented in this file.
 	* Expose AVPlayer instance
 * Fixes:
 	* Add audio session category test
-	* Use the `$(inherited)` flag for PODS_PODFILE_DIR_PATH in example
+	* Use the `$(inherited)` flag for `PODS_PODFILE_DIR_PATH` in example
 	* Update deprecated MPMediaItemArtwork initializer
 	* Move back ModernAVPlayerMedia & Metadata to library
 * Dependency:

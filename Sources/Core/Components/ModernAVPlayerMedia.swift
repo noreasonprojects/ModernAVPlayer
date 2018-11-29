@@ -33,7 +33,7 @@ public class ModernAVPlayerMedia: PlayerMedia {
 
     public init(url: URL,
                 type: MediaType,
-                metadata: ModernAVPlayerMediaMetadata?,
+                metadata: ModernAVPlayerMediaMetadata? = nil,
                 assetOptions: [String: Any]? = nil) {
         self.url = url
         self.type = type

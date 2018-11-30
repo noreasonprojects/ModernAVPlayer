@@ -1,6 +1,6 @@
 {
   "name": "ModernAVPlayer",
-  "version": "0.16.0",
+  "version": "0.17.0",
   "summary": "ModernAVPlayer is an audio persistence AVPlayer wrapper",
   "description": "ModernAVPlayer is an ongoing project that aims to create a more usable audio video player with readable status and network persistence option.",
   "homepage": "https://github.com/raphrel/ModernAVPlayer",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/raphrel/ModernAVPlayer.git",
-    "tag": "0.16.0"
+    "tag": "0.17.0"
   },
   "default_subspecs": "Core",
   "platforms": {

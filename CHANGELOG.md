@@ -2,10 +2,10 @@
 All notable changes to this project will be documented in this file.
 
 ---
-## [X.X.X]
+## [0.17.0]
 * Breaking change:
 	* `ModernAVPlayerMediaMetadata` take image data instead of localImageName path name
-* Feature:
+* Features:
 	* Accept metadata image data instead of image path name
 	* Make metadata optional on `ModernAVPlayerMedia` init
 

@@ -76,7 +76,7 @@ $ pod install
 
 > Create a media
 ```swift
-let media = ModernAVPlayerMedia(url: liveUrl, type: .stream, isLive: true, metadata: nil)
+let media = ModernAVPlayerMedia(url: url, type: .clip)
 ```
 > Instanciate the wrapper
 ```swift
@@ -86,7 +86,6 @@ let player = ModernAVPlayer()
 ```swift
 player.loadMedia(media: media, autostart: true)
 ```
-
 > Track on repeat
 ```swift
 player.loopMode = true

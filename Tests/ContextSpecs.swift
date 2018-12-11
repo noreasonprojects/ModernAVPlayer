@@ -33,7 +33,7 @@ import SwiftyMocky
 
 final class ContextSpecs: QuickSpec {
 
-    private var audioSession: MockAudioSession!
+    private var audioSession: AudioSessionServiceMock!
     private var tested: PlayerContext!
     private var mockState: MockPlayerState!
     private var media: MockPlayerMedia!
@@ -43,7 +43,7 @@ final class ContextSpecs: QuickSpec {
     override func spec() {
         
         beforeEach {
-            self.audioSession = MockAudioSession()
+            self.audioSession = AudioSessionServiceMock()
             self.nowPlaying = MockNowPlayingService()
             self.tested = ModernAVPlayerContext(player: self.player,
                                                 config: ModernAVPlayerConfiguration(),
@@ -64,8 +64,7 @@ final class ContextSpecs: QuickSpec {
             it("should set category") {
 
                 // ASSERT
-                expect(self.audioSession.setCategoryCallCount).to(equal(1))
-                expect(self.audioSession.setCategoryLastParam).to(equal(self.tested.config.audioSessionCategory))
+                Verify(self.audioSession, 1, .setCategory(.value(self.tested.config.audioSessionCategory)))
             }
         }
         

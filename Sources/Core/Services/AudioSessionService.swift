@@ -26,6 +26,7 @@
 
 import AVFoundation
 
+//sourcery: AutoMockable
 protocol AudioSessionService {
     func activate()
     func setCategory(_ category: AVAudioSession.Category)

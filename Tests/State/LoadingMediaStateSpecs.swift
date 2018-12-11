@@ -33,7 +33,7 @@ import SwiftyMocky
 
 final class LoadingMediaStateSpecs: QuickSpec {
 
-    private var audioSession: MockAudioSession!
+    private var audioSession: AudioSessionServiceMock!
     private var state: LoadingMediaState!
     private var item: AVPlayerItem!
     private var player: MockCustomPlayer!
@@ -44,7 +44,7 @@ final class LoadingMediaStateSpecs: QuickSpec {
     override func spec() {
         
         beforeEach {
-            self.audioSession = MockAudioSession()
+            self.audioSession = AudioSessionServiceMock()
             self.player = MockCustomPlayer.createOnUsingAsset(url: "foo")
             self.tested = ModernAVPlayerContext(player: self.player,
                                                 config: ModernAVPlayerConfiguration(),
@@ -68,7 +68,7 @@ final class LoadingMediaStateSpecs: QuickSpec {
             }
             
            it("should active audio session") {
-                expect(self.audioSession.activateCallCount).to(equal(1))
+                Verify(self.audioSession, 1, .activate())
             }
         }
         

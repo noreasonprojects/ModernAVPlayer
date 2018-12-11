@@ -30,9 +30,9 @@ source: http://www.openradar.me/42382075
 
 ## Requirements
 
-- iOS 9.0+
-- Xcode 10.0+
-- Swift 4.0+
+- iOS 10.0+
+- Xcode 10.1+
+- Swift 4.2+
 
 > In order to support background mode, append the following to your ``Info.plist``:
 ```
@@ -84,7 +84,7 @@ let player = ModernAVPlayer()
 ```
 > Load and play the media
 ```swift
-player.loadMedia(media: media, autostart: true)
+player.load(media: media, autostart: true)
 ```
 > Track on repeat
 ```swift

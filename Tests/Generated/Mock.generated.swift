@@ -251,11 +251,11 @@ class PlayerContextMock: PlayerContext, Mock {
 	}
 	private var __p_audioSession: (AudioSessionService)?
 
-    var bgToken: Int? {
+    var bgToken: UIBackgroundTaskIdentifier? {
 		get {	invocations.append(.p_bgToken_get); return __p_bgToken ?? optionalGivenGetterValue(.p_bgToken_get, "PlayerContextMock - stub value for bgToken was not defined") }
 		set {	invocations.append(.p_bgToken_set(.value(newValue))); __p_bgToken = newValue }
 	}
-	private var __p_bgToken: (Int)?
+	private var __p_bgToken: (UIBackgroundTaskIdentifier)?
 
     var config: PlayerConfiguration {
 		get {	invocations.append(.p_config_get); return __p_config ?? givenGetterValue(.p_config_get, "PlayerContextMock - stub value for config was not defined") }
@@ -395,7 +395,7 @@ class PlayerContextMock: PlayerContext, Mock {
         case m_stop
         case p_audioSession_get
         case p_bgToken_get
-		case p_bgToken_set(Parameter<Int?>)
+		case p_bgToken_set(Parameter<UIBackgroundTaskIdentifier?>)
         case p_config_get
         case p_currentMedia_get
 		case p_currentMedia_set(Parameter<PlayerMedia?>)
@@ -436,7 +436,7 @@ class PlayerContextMock: PlayerContext, Mock {
                 return true 
             case (.p_audioSession_get,.p_audioSession_get): return true
             case (.p_bgToken_get,.p_bgToken_get): return true
-			case (.p_bgToken_set(let left),.p_bgToken_set(let right)): return Parameter<Int?>.compare(lhs: left, rhs: right, with: matcher)
+			case (.p_bgToken_set(let left),.p_bgToken_set(let right)): return Parameter<UIBackgroundTaskIdentifier?>.compare(lhs: left, rhs: right, with: matcher)
             case (.p_config_get,.p_config_get): return true
             case (.p_currentMedia_get,.p_currentMedia_get): return true
 			case (.p_currentMedia_set(let left),.p_currentMedia_set(let right)): return Parameter<PlayerMedia?>.compare(lhs: left, rhs: right, with: matcher)
@@ -498,7 +498,7 @@ class PlayerContextMock: PlayerContext, Mock {
         static func audioSession(getter defaultValue: AudioSessionService...) -> PropertyStub {
             return Given(method: .p_audioSession_get, products: defaultValue.map({ Product.return($0) }))
         }
-        static func bgToken(getter defaultValue: Int?...) -> PropertyStub {
+        static func bgToken(getter defaultValue: UIBackgroundTaskIdentifier?...) -> PropertyStub {
             return Given(method: .p_bgToken_get, products: defaultValue.map({ Product.return($0) }))
         }
         static func config(getter defaultValue: PlayerConfiguration...) -> PropertyStub {
@@ -554,7 +554,7 @@ class PlayerContextMock: PlayerContext, Mock {
         static func stop() -> Verify { return Verify(method: .m_stop)}
         static var audioSession: Verify { return Verify(method: .p_audioSession_get) }
         static var bgToken: Verify { return Verify(method: .p_bgToken_get) }
-		static func bgToken(set newValue: Parameter<Int?>) -> Verify { return Verify(method: .p_bgToken_set(newValue)) }
+		static func bgToken(set newValue: Parameter<UIBackgroundTaskIdentifier?>) -> Verify { return Verify(method: .p_bgToken_set(newValue)) }
         static var config: Verify { return Verify(method: .p_config_get) }
         static var currentMedia: Verify { return Verify(method: .p_currentMedia_get) }
 		static func currentMedia(set newValue: Parameter<PlayerMedia?>) -> Verify { return Verify(method: .p_currentMedia_set(newValue)) }

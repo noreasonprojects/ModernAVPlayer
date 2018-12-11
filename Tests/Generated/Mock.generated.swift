@@ -348,9 +348,15 @@ class PlayerContextMock: PlayerContext, Mock {
 		perform?(`state`)
     }
 
-    func loadMedia(media: PlayerMedia, autostart: Bool, position: Double?) {
-        addInvocation(.m_loadMedia__media_mediaautostart_autostartposition_position(Parameter<PlayerMedia>.value(`media`), Parameter<Bool>.value(`autostart`), Parameter<Double?>.value(`position`)))
-		let perform = methodPerformValue(.m_loadMedia__media_mediaautostart_autostartposition_position(Parameter<PlayerMedia>.value(`media`), Parameter<Bool>.value(`autostart`), Parameter<Double?>.value(`position`))) as? (PlayerMedia, Bool, Double?) -> Void
+    func updateMetadata(_ metadata: PlayerMediaMetadata) {
+        addInvocation(.m_updateMetadata__metadata(Parameter<PlayerMediaMetadata>.value(`metadata`)))
+		let perform = methodPerformValue(.m_updateMetadata__metadata(Parameter<PlayerMediaMetadata>.value(`metadata`))) as? (PlayerMediaMetadata) -> Void
+		perform?(`metadata`)
+    }
+
+    func load(media: PlayerMedia, autostart: Bool, position: Double?) {
+        addInvocation(.m_load__media_mediaautostart_autostartposition_position(Parameter<PlayerMedia>.value(`media`), Parameter<Bool>.value(`autostart`), Parameter<Double?>.value(`position`)))
+		let perform = methodPerformValue(.m_load__media_mediaautostart_autostartposition_position(Parameter<PlayerMedia>.value(`media`), Parameter<Bool>.value(`autostart`), Parameter<Double?>.value(`position`))) as? (PlayerMedia, Bool, Double?) -> Void
 		perform?(`media`, `autostart`, `position`)
     }
 
@@ -378,21 +384,15 @@ class PlayerContextMock: PlayerContext, Mock {
 		perform?()
     }
 
-    func updateMetadata(_ metadata: PlayerMediaMetadata) {
-        addInvocation(.m_updateMetadata__metadata(Parameter<PlayerMediaMetadata>.value(`metadata`)))
-		let perform = methodPerformValue(.m_updateMetadata__metadata(Parameter<PlayerMediaMetadata>.value(`metadata`))) as? (PlayerMediaMetadata) -> Void
-		perform?(`metadata`)
-    }
-
 
     fileprivate enum MethodType {
         case m_changeState__state_state(Parameter<PlayerState>)
-        case m_loadMedia__media_mediaautostart_autostartposition_position(Parameter<PlayerMedia>, Parameter<Bool>, Parameter<Double?>)
+        case m_updateMetadata__metadata(Parameter<PlayerMediaMetadata>)
+        case m_load__media_mediaautostart_autostartposition_position(Parameter<PlayerMedia>, Parameter<Bool>, Parameter<Double?>)
         case m_pause
         case m_play
         case m_seek__position_position(Parameter<Double>)
         case m_stop
-        case m_updateMetadata__metadata(Parameter<PlayerMediaMetadata>)
         case p_audioSession_get
         case p_bgToken_get
 		case p_bgToken_set(Parameter<Int?>)
@@ -417,7 +417,10 @@ class PlayerContextMock: PlayerContext, Mock {
             case (.m_changeState__state_state(let lhsState), .m_changeState__state_state(let rhsState)):
                 guard Parameter.compare(lhs: lhsState, rhs: rhsState, with: matcher) else { return false } 
                 return true 
-            case (.m_loadMedia__media_mediaautostart_autostartposition_position(let lhsMedia, let lhsAutostart, let lhsPosition), .m_loadMedia__media_mediaautostart_autostartposition_position(let rhsMedia, let rhsAutostart, let rhsPosition)):
+            case (.m_updateMetadata__metadata(let lhsMetadata), .m_updateMetadata__metadata(let rhsMetadata)):
+                guard Parameter.compare(lhs: lhsMetadata, rhs: rhsMetadata, with: matcher) else { return false } 
+                return true 
+            case (.m_load__media_mediaautostart_autostartposition_position(let lhsMedia, let lhsAutostart, let lhsPosition), .m_load__media_mediaautostart_autostartposition_position(let rhsMedia, let rhsAutostart, let rhsPosition)):
                 guard Parameter.compare(lhs: lhsMedia, rhs: rhsMedia, with: matcher) else { return false } 
                 guard Parameter.compare(lhs: lhsAutostart, rhs: rhsAutostart, with: matcher) else { return false } 
                 guard Parameter.compare(lhs: lhsPosition, rhs: rhsPosition, with: matcher) else { return false } 
@@ -430,9 +433,6 @@ class PlayerContextMock: PlayerContext, Mock {
                 guard Parameter.compare(lhs: lhsPosition, rhs: rhsPosition, with: matcher) else { return false } 
                 return true 
             case (.m_stop, .m_stop):
-                return true 
-            case (.m_updateMetadata__metadata(let lhsMetadata), .m_updateMetadata__metadata(let rhsMetadata)):
-                guard Parameter.compare(lhs: lhsMetadata, rhs: rhsMetadata, with: matcher) else { return false } 
                 return true 
             case (.p_audioSession_get,.p_audioSession_get): return true
             case (.p_bgToken_get,.p_bgToken_get): return true
@@ -459,12 +459,12 @@ class PlayerContextMock: PlayerContext, Mock {
         func intValue() -> Int {
             switch self {
             case let .m_changeState__state_state(p0): return p0.intValue
-            case let .m_loadMedia__media_mediaautostart_autostartposition_position(p0, p1, p2): return p0.intValue + p1.intValue + p2.intValue
+            case let .m_updateMetadata__metadata(p0): return p0.intValue
+            case let .m_load__media_mediaautostart_autostartposition_position(p0, p1, p2): return p0.intValue + p1.intValue + p2.intValue
             case .m_pause: return 0
             case .m_play: return 0
             case let .m_seek__position_position(p0): return p0.intValue
             case .m_stop: return 0
-            case let .m_updateMetadata__metadata(p0): return p0.intValue
             case .p_audioSession_get: return 0
             case .p_bgToken_get: return 0
 			case .p_bgToken_set(let newValue): return newValue.intValue
@@ -544,14 +544,14 @@ class PlayerContextMock: PlayerContext, Mock {
         fileprivate var method: MethodType
 
         static func changeState(state: Parameter<PlayerState>) -> Verify { return Verify(method: .m_changeState__state_state(`state`))}
-        static func loadMedia(media: Parameter<PlayerMedia>, autostart: Parameter<Bool>, position: Parameter<Double?>) -> Verify { return Verify(method: .m_loadMedia__media_mediaautostart_autostartposition_position(`media`, `autostart`, `position`))}
+        static func updateMetadata(_ metadata: Parameter<PlayerMediaMetadata>) -> Verify { return Verify(method: .m_updateMetadata__metadata(`metadata`))}
+        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `metadata` label")
+		static func updateMetadata(metadata: Parameter<PlayerMediaMetadata>) -> Verify { return Verify(method: .m_updateMetadata__metadata(`metadata`))}
+        static func load(media: Parameter<PlayerMedia>, autostart: Parameter<Bool>, position: Parameter<Double?>) -> Verify { return Verify(method: .m_load__media_mediaautostart_autostartposition_position(`media`, `autostart`, `position`))}
         static func pause() -> Verify { return Verify(method: .m_pause)}
         static func play() -> Verify { return Verify(method: .m_play)}
         static func seek(position: Parameter<Double>) -> Verify { return Verify(method: .m_seek__position_position(`position`))}
         static func stop() -> Verify { return Verify(method: .m_stop)}
-        static func updateMetadata(_ metadata: Parameter<PlayerMediaMetadata>) -> Verify { return Verify(method: .m_updateMetadata__metadata(`metadata`))}
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `metadata` label")
-		static func updateMetadata(metadata: Parameter<PlayerMediaMetadata>) -> Verify { return Verify(method: .m_updateMetadata__metadata(`metadata`))}
         static var audioSession: Verify { return Verify(method: .p_audioSession_get) }
         static var bgToken: Verify { return Verify(method: .p_bgToken_get) }
 		static func bgToken(set newValue: Parameter<Int?>) -> Verify { return Verify(method: .p_bgToken_set(newValue)) }
@@ -579,8 +579,15 @@ class PlayerContextMock: PlayerContext, Mock {
         static func changeState(state: Parameter<PlayerState>, perform: @escaping (PlayerState) -> Void) -> Perform {
             return Perform(method: .m_changeState__state_state(`state`), performs: perform)
         }
-        static func loadMedia(media: Parameter<PlayerMedia>, autostart: Parameter<Bool>, position: Parameter<Double?>, perform: @escaping (PlayerMedia, Bool, Double?) -> Void) -> Perform {
-            return Perform(method: .m_loadMedia__media_mediaautostart_autostartposition_position(`media`, `autostart`, `position`), performs: perform)
+        static func updateMetadata(_ metadata: Parameter<PlayerMediaMetadata>, perform: @escaping (PlayerMediaMetadata) -> Void) -> Perform {
+            return Perform(method: .m_updateMetadata__metadata(`metadata`), performs: perform)
+        }
+        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `metadata` label")
+		static func updateMetadata(metadata: Parameter<PlayerMediaMetadata>, perform: @escaping (PlayerMediaMetadata) -> Void) -> Perform {
+            return Perform(method: .m_updateMetadata__metadata(`metadata`), performs: perform)
+        }
+        static func load(media: Parameter<PlayerMedia>, autostart: Parameter<Bool>, position: Parameter<Double?>, perform: @escaping (PlayerMedia, Bool, Double?) -> Void) -> Perform {
+            return Perform(method: .m_load__media_mediaautostart_autostartposition_position(`media`, `autostart`, `position`), performs: perform)
         }
         static func pause(perform: @escaping () -> Void) -> Perform {
             return Perform(method: .m_pause, performs: perform)
@@ -593,13 +600,6 @@ class PlayerContextMock: PlayerContext, Mock {
         }
         static func stop(perform: @escaping () -> Void) -> Perform {
             return Perform(method: .m_stop, performs: perform)
-        }
-        static func updateMetadata(_ metadata: Parameter<PlayerMediaMetadata>, perform: @escaping (PlayerMediaMetadata) -> Void) -> Perform {
-            return Perform(method: .m_updateMetadata__metadata(`metadata`), performs: perform)
-        }
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `metadata` label")
-		static func updateMetadata(metadata: Parameter<PlayerMediaMetadata>, perform: @escaping (PlayerMediaMetadata) -> Void) -> Perform {
-            return Perform(method: .m_updateMetadata__metadata(`metadata`), performs: perform)
         }
     }
 

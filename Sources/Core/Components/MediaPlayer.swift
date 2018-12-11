@@ -26,14 +26,9 @@
 
 import AVFoundation
 
-public protocol MediaPlayer {
+public protocol MediaPlayer: PlayerAction {
     var player: AVPlayer { get }
     var loopMode: Bool { get set }
 
-    func loadMedia(media: PlayerMedia, autostart: Bool, position: Double?)
-    func pause()
-    func play()
-    func seek(position: Double)
-    func stop()
     func updateMetadata(_ metadata: PlayerMediaMetadata)
 }

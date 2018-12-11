@@ -1,10 +1,10 @@
 // The MIT License (MIT)
 //
 // ModernAVPlayer
-// Copyright (c) 2018 Raphael Ankierman <raphael.ankierman@radiofrance.com>
+// Copyright (c) 2018 Raphael Ankierman <raphrel@gmail.com>
 //
-// PlayerState.swift
-// Created by raphael ankierman on 21/02/2018.
+// PlayerAction.swift
+// Created by raphael ankierman on 11/12/2018.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,9 +26,10 @@
 
 import Foundation
 
-protocol PlayerState: PlayerAction {
-    var context: PlayerContext { get }
-    var type: ModernAVPlayer.State { get }
-    
-    func contextUpdated()
+public protocol PlayerAction {
+    func load(media: PlayerMedia, autostart: Bool, position: Double?)
+    func pause()
+    func play()
+    func seek(position: Double)
+    func stop()
 }

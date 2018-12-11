@@ -133,7 +133,7 @@ final class ContextSpecs: QuickSpec {
                 let media = MockPlayerMedia(url: URL(string: "foo")!, type: .clip)
                 
                 // ACT
-                self.tested.loadMedia(media: media, autostart: false, position: nil)
+                self.tested.load(media: media, autostart: false, position: nil)
 
                 // ASSERT
                 expect(self.tested.currentMedia as? MockPlayerMedia).to(equal(media))
@@ -147,7 +147,7 @@ final class ContextSpecs: QuickSpec {
                 let position = 42.0
 
                 // ACT
-                self.tested.loadMedia(media: media, autostart: false, position: position)
+                self.tested.load(media: media, autostart: false, position: position)
 
                 // ASSERT
                 expect(self.mockState.loadMedialCallCount).to(equal(1))

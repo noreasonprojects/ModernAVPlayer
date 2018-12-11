@@ -40,7 +40,7 @@ final class MockModernAVPlayerExposable: ModernAVPlayerExposable {
     }
     
     private(set) var loadMediaCallCount = 0
-    func loadMedia(media: PlayerMedia, autostart: Bool, position: Double?) {
+    func load(media: PlayerMedia, autostart: Bool, position: Double?) {
         loadMediaCallCount += 1
     }
     

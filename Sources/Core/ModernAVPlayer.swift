@@ -117,8 +117,8 @@ public final class ModernAVPlayer: NSObject, ModernAVPlayerExposable {
     /// - parameter autostart: play after media is loaded
     /// - parameter position: seek position
     ///
-    public func loadMedia(media: PlayerMedia, autostart: Bool, position: Double? = nil) {
-        context.loadMedia(media: media, autostart: autostart, position: position)
+    public func load(media: PlayerMedia, autostart: Bool, position: Double? = nil) {
+        context.load(media: media, autostart: autostart, position: position)
     }
 
     ///

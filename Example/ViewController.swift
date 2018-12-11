@@ -177,7 +177,7 @@ final class ViewController: UIViewController {
     }
     
     private func loadMedia(_ media: PlayerMedia, autostart: Bool, position: Double? = nil) {
-        player.loadMedia(media: media, autostart: autostart, position: position)
+        player.load(media: media, autostart: autostart, position: position)
     }
 
     private func isPlayerWorking(state: ModernAVPlayer.State) -> Bool {

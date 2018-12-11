@@ -33,7 +33,7 @@ final class PluginPlayerContextSpecs: XCTestCase {
         Given(newMedia, .url(getter: URL(string: "foo")!))
 
         // ACT
-        context.loadMedia(media: newMedia, autostart: false, position: nil)
+        context.load(media: newMedia, autostart: false, position: nil)
 
         // ASSERT
         Verify(plugin, 1, .didMediaChanged(.value(newMedia), previousMedia: .any))

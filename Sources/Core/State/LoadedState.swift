@@ -35,7 +35,7 @@ struct LoadedState: PlayerState {
     
     // MARK: - Variable
     
-    var type: ModernAVPlayer.State = .loaded
+    let type: ModernAVPlayer.State = .loaded
 
     // MARK: - Init
 

@@ -34,7 +34,7 @@ final class LoadingMediaState: PlayerState {
     
     // MARK: - Variables
     
-    var type: ModernAVPlayer.State = .loading
+    let type: ModernAVPlayer.State = .loading
     private let media: PlayerMedia
     private var autostart: Bool
     private var position: Double?

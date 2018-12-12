@@ -39,7 +39,7 @@ final class PlayingState: PlayerState {
     
     // MARK: - Variables
     
-    var type: ModernAVPlayer.State = .playing
+    let type: ModernAVPlayer.State = .playing
     private var timerObserver: Any?
     
     // MARK: - Lifecycle

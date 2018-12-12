@@ -49,8 +49,6 @@ struct ModernAVPlayerRemoteCommandCenter {
         setPlayCommandCallback()
         setPauseCommandCallback()
         setTogglePlayPauseCommandCallback()
-        
-        guard #available(iOS 9.1, *) else { return }
         setChangePlaybackPositionCommandCallback()
     }
     
@@ -63,9 +61,7 @@ struct ModernAVPlayerRemoteCommandCenter {
         remote.previousTrackCommand.isEnabled = false
         remote.nextTrackCommand.isEnabled = false
         
-        if #available(iOS 9.1, *) {
-            remote.changePlaybackPositionCommand.isEnabled = true
-        }
+        remote.changePlaybackPositionCommand.isEnabled = true
     }
     
     private func setPlayCommandCallback() {
@@ -104,7 +100,6 @@ struct ModernAVPlayerRemoteCommandCenter {
         }
     }
     
-    @available(iOS 9.1, *)
     private func setChangePlaybackPositionCommandCallback() {
         remote.changePlaybackPositionCommand.addTarget { [player] event -> MPRemoteCommandHandlerStatus in
             guard let e = event as? MPChangePlaybackPositionCommandEvent

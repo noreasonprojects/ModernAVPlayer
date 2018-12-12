@@ -44,10 +44,8 @@ struct LoadedState: PlayerState {
         self.context = context
         
         guard let media = context.currentMedia else { assertionFailure(); return }
-        
-        if #available(iOS 9.1, *) {
-            updateRemoteCommandCenter(mediaType: media.type)
-        }
+
+        updateRemoteCommandCenter(mediaType: media.type)
         context.nowPlaying.update(metadata: media.getMetadata(),
                                   duration: context.currentItem?.duration.seconds,
                                   isLive: media.isLive())
@@ -62,7 +60,6 @@ struct LoadedState: PlayerState {
     
     // MARK: - Command Center
 
-    @available(iOS 9.1, *)
     private func updateRemoteCommandCenter(mediaType: MediaType) {
         let remote = MPRemoteCommandCenter.shared()
         remote.changePlaybackPositionCommand.isEnabled = mediaType == .clip

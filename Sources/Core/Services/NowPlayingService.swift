@@ -59,7 +59,7 @@ final class ModernAVPlayerNowPlayingService: NowPlaying {
             updateRemoteImage(url: imageUrl)
         }
 
-        if #available(iOS 10, *), let isLive = isLive {
+        if let isLive = isLive {
             infos[MPNowPlayingInfoPropertyIsLiveStream] = isLive
         }
 
@@ -81,9 +81,6 @@ final class ModernAVPlayerNowPlayingService: NowPlaying {
     }
 
     private func getArtwork(image: UIImage) -> MPMediaItemArtwork {
-        guard #available(iOS 10.0, *) else {
-            return MPMediaItemArtwork(image: image)
-        }
         return MPMediaItemArtwork(boundsSize: image.size) { _ in image }
     }
 

@@ -41,10 +41,7 @@ struct InitState: PlayerState {
     init(context: PlayerContext) {
         ModernAVPlayerLogger.instance.log(message: "Init (struct)", domain: .lifecycleState)
         self.context = context
-        
-        if #available(iOS 10, *) {
-            context.player.automaticallyWaitsToMinimizeStalling = false
-        }
+        context.player.automaticallyWaitsToMinimizeStalling = false
     }
     
     func contextUpdated() {

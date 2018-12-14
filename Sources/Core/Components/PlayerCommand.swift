@@ -26,7 +26,7 @@
 
 import Foundation
 
-public protocol PlayerAction {
+public protocol PlayerCommand {
     func load(media: PlayerMedia, autostart: Bool, position: Double?)
     func pause()
     func play()

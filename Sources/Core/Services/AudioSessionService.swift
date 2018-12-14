@@ -53,7 +53,7 @@ struct ModernAVPlayerAudioSessionService: AudioSessionService {
 
     func setCategory(_ category: AVAudioSession.Category) {
         do {
-            try audioSession.setCategory(category, mode: AVAudioSession.Mode.default, options: [])
+            try audioSession.setCategory(category, mode: .default, options: [])
             ModernAVPlayerLogger.instance.log(message: "Set audio session category to: \(category)", domain: .service)
         } catch let error {
             ModernAVPlayerLogger.instance.log(message: "Set \(category) category: \(error.localizedDescription)", domain: .error)

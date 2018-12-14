@@ -1,10 +1,10 @@
 // The MIT License (MIT)
 //
 // ModernAVPlayer
-// Copyright (c) 2018 Raphael Ankierman <raphael.ankierman@radiofrance.com>
+// Copyright (c) 2018 Raphael Ankierman <raphrel@gmail.com>
 //
-// MockAudioSession.swift
-// Created by Jean-Charles Dessaint on 18/04/2018.
+// PlayerAction.swift
+// Created by raphael ankierman on 11/12/2018.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,19 +25,11 @@
 // THE SOFTWARE.
 
 import Foundation
-@testable import ModernAVPlayer
 
-final class MockAudioSession: AudioSessionService {
-
-    private(set) var activateCallCount = 0
-    func activate() {
-        activateCallCount += 1
-    }
-
-    private(set) var setCategoryCallCount = 0
-    private(set) var setCategoryLastParam: String?
-    func setCategory(_ category: String) {
-        setCategoryCallCount += 1
-        setCategoryLastParam = category
-    }
+public protocol PlayerCommand {
+    func load(media: PlayerMedia, autostart: Bool, position: Double?)
+    func pause()
+    func play()
+    func seek(position: Double)
+    func stop()
 }

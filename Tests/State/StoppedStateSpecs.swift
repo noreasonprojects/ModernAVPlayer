@@ -57,7 +57,6 @@ final class StoppedStateSpecs: QuickSpec {
             self.playerContext = ModernAVPlayerContext(player: self.mockPlayer,
                                                        config: ModernAVPlayerConfiguration(),
                                                        nowPlaying: self.nowPlaying,
-                                                       audioSession: MockAudioSession(),
                                                        plugins: [])
             self.playerContext.delegate = self.delegate
             self.playerContext.currentMedia = self.media

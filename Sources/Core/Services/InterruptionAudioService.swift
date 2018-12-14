@@ -35,7 +35,7 @@ final class ModernAVPlayerInterruptionAudioService {
     
     // MARK: - Variables
     
-    private let notificationName = Notification.Name.AVAudioSessionInterruption
+    private let notificationName = AVAudioSession.interruptionNotification
     
     // MARK: - Init
     
@@ -59,7 +59,7 @@ final class ModernAVPlayerInterruptionAudioService {
         guard
             let userInfo = notification.userInfo,
             let rawInterruptionType = userInfo[AVAudioSessionInterruptionTypeKey] as? UInt,
-            let interruptionType = AVAudioSessionInterruptionType(rawValue: rawInterruptionType)
+            let interruptionType = AVAudioSession.InterruptionType(rawValue: rawInterruptionType)
             else { return }
         switch interruptionType {
         case .began:

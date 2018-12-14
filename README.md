@@ -15,11 +15,6 @@
 - Log available by domain
 ***
 
-#### ** Swift 4.2 note **
-AVAudioSession lost setCategory method on iOS 9. to be still compatible with iOS 9, the library is not convert for now
-source: http://www.openradar.me/42382075
-***
-
 ## Menu
 - [Requirements](#requirements)
 - [Installation](#installation)
@@ -30,9 +25,9 @@ source: http://www.openradar.me/42382075
 
 ## Requirements
 
-- iOS 9.0+
-- Xcode 10.0+
-- Swift 4.0+
+- iOS 10.0+
+- Xcode 10.1+
+- Swift 4.2+
 
 > In order to support background mode, append the following to your ``Info.plist``:
 ```
@@ -58,7 +53,7 @@ To integrate ``ModernAVPlayer`` into your Xcode project using CocoaPods, specify
 
 ```ruby
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '9.0'
+platform :ios, '10.0'
 use_frameworks!
 
 target '<Your Target Name>' do
@@ -84,7 +79,7 @@ let player = ModernAVPlayer()
 ```
 > Load and play the media
 ```swift
-player.loadMedia(media: media, autostart: true)
+player.load(media: media, autostart: true)
 ```
 > Track on repeat
 ```swift

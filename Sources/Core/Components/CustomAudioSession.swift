@@ -27,8 +27,8 @@
 import AVFoundation
 
 protocol CustomAudioSession {
-    func setActive(_ active: Bool) throws
-    func setCategory(_ category: String) throws
+    func setActive(_ active: Bool, options: AVAudioSession.SetActiveOptions) throws
+    func setCategory(_ category: AVAudioSession.Category, mode: AVAudioSession.Mode, options: AVAudioSession.CategoryOptions) throws
 }
 
 extension AVAudioSession: CustomAudioSession { }

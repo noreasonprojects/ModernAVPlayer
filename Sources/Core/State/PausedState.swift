@@ -41,7 +41,7 @@ final class PausedState: PlayerState {
     
     // MARK: - Variable
     
-    var type: ModernAVPlayer.State = .paused
+    let type: ModernAVPlayer.State = .paused
 
     // MARK: Init
     

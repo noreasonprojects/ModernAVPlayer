@@ -30,11 +30,11 @@ final class ModernAVPlayerRouteAudioService {
  
     // MARK: - Output
     
-    var onRouteChanged: ((AVAudioSessionRouteChangeReason) -> Void)?
+    var onRouteChanged: ((AVAudioSession.RouteChangeReason) -> Void)?
     
     // MARK: - Variable
     
-    private let notificationName = NSNotification.Name.AVAudioSessionRouteChange
+    private let notificationName = AVAudioSession.routeChangeNotification
     
     // MARK: - Init
     
@@ -57,7 +57,7 @@ final class ModernAVPlayerRouteAudioService {
         guard
             let info = notification.userInfo,
             let reasonInt = info[AVAudioSessionRouteChangeReasonKey] as? UInt,
-            let reason = AVAudioSessionRouteChangeReason(rawValue: reasonInt)
+            let reason = AVAudioSession.RouteChangeReason(rawValue: reasonInt)
             else { return }
         
         onRouteChanged?(reason)

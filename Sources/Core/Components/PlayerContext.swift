@@ -38,7 +38,7 @@ protocol PlayerContextDelegate: class {
 //sourcery: AutoMockable
 protocol PlayerContext: class, MediaPlayer {
     var audioSession: AudioSessionService { get }
-    var bgToken: Int? { get set }
+    var bgToken: UIBackgroundTaskIdentifier? { get set }
     var config: PlayerConfiguration { get }
     var currentMedia: PlayerMedia? { get set }
     var currentItem: AVPlayerItem? { get }
@@ -68,7 +68,7 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
     
     // MARK: - Variables
     
-    var bgToken: Int?
+    var bgToken: UIBackgroundTaskIdentifier?
     var currentItem: AVPlayerItem? {
         return player.currentItem
     }

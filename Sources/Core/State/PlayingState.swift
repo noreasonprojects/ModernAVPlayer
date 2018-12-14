@@ -39,7 +39,7 @@ final class PlayingState: PlayerState {
     
     // MARK: - Variables
     
-    var type: ModernAVPlayer.State = .playing
+    let type: ModernAVPlayer.State = .playing
     private var timerObserver: Any?
     
     // MARK: - Lifecycle
@@ -184,7 +184,7 @@ final class PlayingState: PlayerState {
         }
     }
     
-    private func routeAudioChanged(reason: AVAudioSessionRouteChangeReason) {
+    private func routeAudioChanged(reason: AVAudioSession.RouteChangeReason) {
         switch reason {
         case .oldDeviceUnavailable, .unknown:
             context.changeState(state: PausedState(context: context))

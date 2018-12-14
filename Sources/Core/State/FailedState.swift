@@ -35,7 +35,7 @@ final class FailedState: PlayerState {
     
     // MARK: - Variable
     
-    var type: ModernAVPlayer.State = .failed
+    let type: ModernAVPlayer.State = .failed
     
     // MARK: - Init
     

@@ -35,7 +35,7 @@ struct StoppedState: PlayerState {
     
     // MARK: - Variable
     
-    var type: ModernAVPlayer.State = .stopped
+    let type: ModernAVPlayer.State = .stopped
 
     // MARK: - Init
 
@@ -44,7 +44,7 @@ struct StoppedState: PlayerState {
         
         self.context = context
         self.context.player.pause()
-        self.context.player.seek(to: kCMTimeZero) { [context] completed in
+        self.context.player.seek(to: CMTime.zero) { [context] completed in
             guard completed else { return }
             context.delegate?.playerContext(didCurrentTimeChange: context.currentTime)
             context.nowPlaying.overrideInfoCenter(for: MPNowPlayingInfoPropertyElapsedPlaybackTime,

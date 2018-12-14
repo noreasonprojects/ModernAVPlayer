@@ -34,7 +34,7 @@ final class LoadingMediaState: PlayerState {
     
     // MARK: - Variables
     
-    var type: ModernAVPlayer.State = .loading
+    let type: ModernAVPlayer.State = .loading
     private let media: PlayerMedia
     private var autostart: Bool
     private var position: Double?
@@ -157,7 +157,7 @@ final class LoadingMediaState: PlayerState {
         ModernAVPlayerLogger.instance.log(message: "StartBgTask create: \(String(describing: context.bgToken))", domain: .service)
     }
 
-    private func moveToNextState(with status: AVPlayerItemStatus) {
+    private func moveToNextState(with status: AVPlayerItem.Status) {
         switch status {
         case .unknown:
             assertionFailure()

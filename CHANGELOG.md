@@ -3,8 +3,11 @@ All notable changes to this project will be documented in this file.
 
 ---
 ## [X.X.X]
-* Breaking change:
+* Breaking changes:
 	* `load(media:autostart:position:)` replaces `loadMedia(media:autostart:position:)`
+	* iOS 10.0+ requirement 
+* Feature:
+	* Update to swift 4.2
 * Improvement:
 	* Extract and refacto player actions
 

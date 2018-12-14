@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		45494C7B209378B3005C3DE2 /* ItemPlaybackObservingServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45494C7A209378B2005C3DE2 /* ItemPlaybackObservingServiceTests.swift */; };
-		45D49A5920935F8800F63ACF /* MockAudioSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D49A5720935EEB00F63ACF /* MockAudioSession.swift */; };
 		45D49A5F2093656100F63ACF /* MockObservingRateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D49A5E2093656100F63ACF /* MockObservingRateService.swift */; };
 		45D49A6320936CC100F63ACF /* MockItemPlaybackObservingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D49A6220936CC100F63ACF /* MockItemPlaybackObservingService.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
@@ -77,7 +76,6 @@
 		05C29EE3AE856D902F8DD65C /* Pods_ModernAVPlayer_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ModernAVPlayer_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		28D8BFE828C5572A0312B9F9 /* Pods-ModernAVPlayer_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ModernAVPlayer_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ModernAVPlayer_Tests/Pods-ModernAVPlayer_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		45494C7A209378B2005C3DE2 /* ItemPlaybackObservingServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemPlaybackObservingServiceTests.swift; sourceTree = "<group>"; };
-		45D49A5720935EEB00F63ACF /* MockAudioSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockAudioSession.swift; sourceTree = "<group>"; };
 		45D49A5E2093656100F63ACF /* MockObservingRateService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockObservingRateService.swift; sourceTree = "<group>"; };
 		45D49A6220936CC100F63ACF /* MockItemPlaybackObservingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockItemPlaybackObservingService.swift; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* ModernAVPlayer_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ModernAVPlayer_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -309,7 +307,6 @@
 		E152D516207A459500E0347C /* Mock */ = {
 			isa = PBXGroup;
 			children = (
-				45D49A5720935EEB00F63ACF /* MockAudioSession.swift */,
 				E152D518207A459500E0347C /* MockAVAsset.swift */,
 				E152D51A207A459500E0347C /* MockCustomPlayer.swift */,
 				E16368B32097610900E69DAB /* MockDataTaskFactory.swift */,
@@ -635,7 +632,6 @@
 				E16368B42097610900E69DAB /* MockDataTaskFactory.swift in Sources */,
 				E1050F76207A44B100A7F540 /* ContextSpecs.swift in Sources */,
 				E19C9D672109B4D900FDA0D7 /* MockPlayerContextDelegate.swift in Sources */,
-				45D49A5920935F8800F63ACF /* MockAudioSession.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -708,7 +704,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -756,7 +752,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

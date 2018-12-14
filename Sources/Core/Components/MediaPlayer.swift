@@ -26,7 +26,7 @@
 
 import AVFoundation
 
-public protocol MediaPlayer: PlayerAction {
+public protocol MediaPlayer: PlayerCommand {
     var player: AVPlayer { get }
     var loopMode: Bool { get set }
 

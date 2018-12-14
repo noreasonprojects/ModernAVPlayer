@@ -26,7 +26,7 @@
 
 import Foundation
 
-protocol PlayerState: PlayerAction {
+protocol PlayerState: PlayerCommand {
     var context: PlayerContext { get }
     var type: ModernAVPlayer.State { get }
     

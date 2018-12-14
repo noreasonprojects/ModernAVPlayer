@@ -34,7 +34,6 @@ import SwiftyMocky
 
 final class PausedStateSpecs: QuickSpec {
 
-    private var audioSession: MockAudioSession!
     private var tested: PausedState!
     private var mockPlayer: MockCustomPlayer!
     private var media: MockPlayerMedia!
@@ -46,7 +45,6 @@ final class PausedStateSpecs: QuickSpec {
     override func spec() {
 
         beforeEach {
-            self.audioSession = MockAudioSession()
             self.delegate = MockPlayerContextDelegate()
             self.item = MockPlayerItem.createOne(url: "foo", status: .unknown)
             self.media = MockPlayerMedia(url: URL(string: "foo")!, type: .clip)
@@ -54,7 +52,6 @@ final class PausedStateSpecs: QuickSpec {
             self.mockPlayer.overrideCurrentTime = self.position
             self.playerContext = ModernAVPlayerContext(player: self.mockPlayer,
                                                        config: ModernAVPlayerConfiguration(),
-                                                       audioSession: self.audioSession,
                                                        plugins: [])
             self.playerContext.delegate = self.delegate
             self.playerContext.currentMedia = self.media

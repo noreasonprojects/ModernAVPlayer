@@ -110,6 +110,7 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
         setAudioSessionCategory()
         defer {
             state = InitState(context: self)
+            plugins.forEach { $0.didInit(player: player) }
         }
     }
 

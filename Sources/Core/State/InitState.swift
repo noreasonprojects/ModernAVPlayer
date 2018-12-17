@@ -44,9 +44,7 @@ struct InitState: PlayerState {
         context.player.automaticallyWaitsToMinimizeStalling = false
     }
     
-    func contextUpdated() {
-        context.plugins.forEach { $0.didInit(player: context.player) }
-    }
+    func contextUpdated() { }
     
     // MARK: - Shared actions
 

@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 
 ---
+## [X.X.X]
+	* Improvement:
+		* Move `didInit(player:)` plugin method
+
 ## [1.0.0]
 * Breaking changes:
 	* `load(media:autostart:position:)` replaces `loadMedia(media:autostart:position:)`

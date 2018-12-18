@@ -3,8 +3,9 @@ All notable changes to this project will be documented in this file.
 
 ---
 ## [X.X.X]
-	* Improvement:
-		* Move `didInit(player:)` plugin method
+* Improvement:
+	* Move `didInit(player:)` plugin method
+	* Unite `ModernAVPlayer` variable returns
 
 ## [1.0.0]
 * Breaking changes:

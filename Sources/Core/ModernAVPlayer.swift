@@ -42,7 +42,9 @@ public final class ModernAVPlayer: NSObject, ModernAVPlayerExposable {
     public weak var delegate: ModernAVPlayerDelegate?
 
     /// AVPlayer in use
-    public var player: AVPlayer
+    public var player: AVPlayer {
+        return context.player
+    }
 
     /// Current player state
     public var state: ModernAVPlayer.State {
@@ -50,7 +52,9 @@ public final class ModernAVPlayer: NSObject, ModernAVPlayerExposable {
     }
     
     /// Last media requested to be load
-    public var currentMedia: PlayerMedia?
+    public var currentMedia: PlayerMedia? {
+        return context.currentMedia
+    }
 
     /// Enable/Disable loop on the current media
     public var loopMode: Bool {
@@ -76,14 +80,13 @@ public final class ModernAVPlayer: NSObject, ModernAVPlayerExposable {
                 config: PlayerConfiguration = ModernAVPlayerConfiguration(),
                 plugins: [PlayerPlugin] = [],
                 loggerDomains: [ModernAVPlayerLoggerDomain] = []) {
-        self.player = player
         ModernAVPlayerLogger.setup.domains = loggerDomains
         context = ModernAVPlayerContext(player: player, config: config, plugins: plugins)
         super.init()
         context.delegate = self
         
         defer {
-            if config.useDefaultRemoteCommandCenter {
+            if config.useDefaultRemoteCommand {
                 ModernAVPlayerRemoteCommandCenter(player: self)
             }
         }
@@ -165,7 +168,6 @@ extension ModernAVPlayer: PlayerContextDelegate {
     }
     
     func playerContext(didCurrentMediaChange media: PlayerMedia?) {
-        currentMedia = media
         delegate?.modernAVPlayer(self, didCurrentMediaChange: media)
     }
     

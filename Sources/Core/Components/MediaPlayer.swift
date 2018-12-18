@@ -27,8 +27,10 @@
 import AVFoundation
 
 public protocol MediaPlayer: PlayerCommand {
-    var player: AVPlayer { get }
+    var currentTime: Double { get }
     var loopMode: Bool { get set }
+    var player: AVPlayer { get }
+    var remoteCommands: [ModernAVPlayerRemoteCommand]? { get }
 
     func updateMetadata(_ metadata: PlayerMediaMetadata)
 }

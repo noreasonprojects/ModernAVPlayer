@@ -5,9 +5,10 @@ All notable changes to this project will be documented in this file.
 ## [X.X.X]
 * Feature:
 	* Add swift version badge
-* Fix:
+* Fixes:
 	* Update build travis badge url
-* Improvement:
+	* Set custom remote command
+* Improvements:
 	* Move `didInit(player:)` plugin method
 	* Unite `ModernAVPlayer` variable returns
 

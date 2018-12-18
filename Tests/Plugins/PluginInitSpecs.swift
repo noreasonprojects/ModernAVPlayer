@@ -23,7 +23,6 @@ final class PluginInitSpecs: QuickSpec {
         self.plugin = PlayerPluginMock()
     }
 
-
     func testWhenInitContext_DidInitPluginShouldBeCall() {
         // ACT
         _ = ModernAVPlayerContext(player: self.player,

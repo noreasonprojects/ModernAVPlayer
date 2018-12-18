@@ -56,10 +56,24 @@ public final class ModernAVPlayer: NSObject, ModernAVPlayerExposable {
         return context.currentMedia
     }
 
+    /// Player's current time
+    public var currentTime: Double {
+        return context.currentTime
+    }
+
     /// Enable/Disable loop on the current media
     public var loopMode: Bool {
         get { return context.loopMode }
         set { context.loopMode = newValue }
+    }
+
+    /// Remote command preset
+    public var remoteCommands: [ModernAVPlayerRemoteCommand]? {
+        get { return context.remoteCommands }
+        set {
+            ModernAVPlayerLogger.instance.log(message: "Set \(newValue?.count ?? 0) remote command(s)", domain: .state)
+            context.remoteCommands = newValue
+        }
     }
 
     // MARK: - Input
@@ -87,7 +101,7 @@ public final class ModernAVPlayer: NSObject, ModernAVPlayerExposable {
         
         defer {
             if config.useDefaultRemoteCommand {
-                ModernAVPlayerRemoteCommandCenter(player: self)
+                remoteCommands = ModernAVPlayerRemoteCommandFactory(player: self).getDefaultCommands()
             }
         }
     }

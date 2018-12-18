@@ -437,13 +437,6 @@ class PlayerContextMock: PlayerContext, Mock {
 	}
 	private var __p_currentItem: (AVPlayerItem)?
 
-    var currentTime: Double {
-		get {	invocations.append(.p_currentTime_get); return __p_currentTime ?? givenGetterValue(.p_currentTime_get, "PlayerContextMock - stub value for currentTime was not defined") }
-		@available(*, deprecated, message: "Using setters on readonly variables is deprecated, and will be removed in 3.1. Use Given to define stubbed property return value.")
-		set {	__p_currentTime = newValue }
-	}
-	private var __p_currentTime: (Double)?
-
     var debugMessage: String? {
 		get {	invocations.append(.p_debugMessage_get); return __p_debugMessage ?? optionalGivenGetterValue(.p_debugMessage_get, "PlayerContextMock - stub value for debugMessage was not defined") }
 		set {	invocations.append(.p_debugMessage_set(.value(newValue))); __p_debugMessage = newValue }
@@ -485,6 +478,19 @@ class PlayerContextMock: PlayerContext, Mock {
 	}
 	private var __p_state: (PlayerState)?
 
+    var currentTime: Double {
+		get {	invocations.append(.p_currentTime_get); return __p_currentTime ?? givenGetterValue(.p_currentTime_get, "PlayerContextMock - stub value for currentTime was not defined") }
+		@available(*, deprecated, message: "Using setters on readonly variables is deprecated, and will be removed in 3.1. Use Given to define stubbed property return value.")
+		set {	__p_currentTime = newValue }
+	}
+	private var __p_currentTime: (Double)?
+
+    var loopMode: Bool {
+		get {	invocations.append(.p_loopMode_get); return __p_loopMode ?? givenGetterValue(.p_loopMode_get, "PlayerContextMock - stub value for loopMode was not defined") }
+		set {	invocations.append(.p_loopMode_set(.value(newValue))); __p_loopMode = newValue }
+	}
+	private var __p_loopMode: (Bool)?
+
     var player: AVPlayer {
 		get {	invocations.append(.p_player_get); return __p_player ?? givenGetterValue(.p_player_get, "PlayerContextMock - stub value for player was not defined") }
 		@available(*, deprecated, message: "Using setters on readonly variables is deprecated, and will be removed in 3.1. Use Given to define stubbed property return value.")
@@ -492,11 +498,12 @@ class PlayerContextMock: PlayerContext, Mock {
 	}
 	private var __p_player: (AVPlayer)?
 
-    var loopMode: Bool {
-		get {	invocations.append(.p_loopMode_get); return __p_loopMode ?? givenGetterValue(.p_loopMode_get, "PlayerContextMock - stub value for loopMode was not defined") }
-		set {	invocations.append(.p_loopMode_set(.value(newValue))); __p_loopMode = newValue }
+    var remoteCommands: [ModernAVPlayerRemoteCommand]? {
+		get {	invocations.append(.p_remoteCommands_get); return __p_remoteCommands ?? optionalGivenGetterValue(.p_remoteCommands_get, "PlayerContextMock - stub value for remoteCommands was not defined") }
+		@available(*, deprecated, message: "Using setters on readonly variables is deprecated, and will be removed in 3.1. Use Given to define stubbed property return value.")
+		set {	__p_remoteCommands = newValue }
 	}
-	private var __p_loopMode: (Bool)?
+	private var __p_remoteCommands: ([ModernAVPlayerRemoteCommand])?
 
 
 
@@ -560,7 +567,6 @@ class PlayerContextMock: PlayerContext, Mock {
         case p_currentMedia_get
 		case p_currentMedia_set(Parameter<PlayerMedia?>)
         case p_currentItem_get
-        case p_currentTime_get
         case p_debugMessage_get
 		case p_debugMessage_set(Parameter<String?>)
         case p_delegate_get
@@ -568,9 +574,11 @@ class PlayerContextMock: PlayerContext, Mock {
         case p_nowPlaying_get
         case p_plugins_get
         case p_state_get
-        case p_player_get
+        case p_currentTime_get
         case p_loopMode_get
 		case p_loopMode_set(Parameter<Bool>)
+        case p_player_get
+        case p_remoteCommands_get
 
         static func compareParameters(lhs: MethodType, rhs: MethodType, matcher: Matcher) -> Bool {
             switch (lhs, rhs) {
@@ -601,7 +609,6 @@ class PlayerContextMock: PlayerContext, Mock {
             case (.p_currentMedia_get,.p_currentMedia_get): return true
 			case (.p_currentMedia_set(let left),.p_currentMedia_set(let right)): return Parameter<PlayerMedia?>.compare(lhs: left, rhs: right, with: matcher)
             case (.p_currentItem_get,.p_currentItem_get): return true
-            case (.p_currentTime_get,.p_currentTime_get): return true
             case (.p_debugMessage_get,.p_debugMessage_get): return true
 			case (.p_debugMessage_set(let left),.p_debugMessage_set(let right)): return Parameter<String?>.compare(lhs: left, rhs: right, with: matcher)
             case (.p_delegate_get,.p_delegate_get): return true
@@ -609,9 +616,11 @@ class PlayerContextMock: PlayerContext, Mock {
             case (.p_nowPlaying_get,.p_nowPlaying_get): return true
             case (.p_plugins_get,.p_plugins_get): return true
             case (.p_state_get,.p_state_get): return true
-            case (.p_player_get,.p_player_get): return true
+            case (.p_currentTime_get,.p_currentTime_get): return true
             case (.p_loopMode_get,.p_loopMode_get): return true
 			case (.p_loopMode_set(let left),.p_loopMode_set(let right)): return Parameter<Bool>.compare(lhs: left, rhs: right, with: matcher)
+            case (.p_player_get,.p_player_get): return true
+            case (.p_remoteCommands_get,.p_remoteCommands_get): return true
             default: return false
             }
         }
@@ -632,7 +641,6 @@ class PlayerContextMock: PlayerContext, Mock {
             case .p_currentMedia_get: return 0
 			case .p_currentMedia_set(let newValue): return newValue.intValue
             case .p_currentItem_get: return 0
-            case .p_currentTime_get: return 0
             case .p_debugMessage_get: return 0
 			case .p_debugMessage_set(let newValue): return newValue.intValue
             case .p_delegate_get: return 0
@@ -640,9 +648,11 @@ class PlayerContextMock: PlayerContext, Mock {
             case .p_nowPlaying_get: return 0
             case .p_plugins_get: return 0
             case .p_state_get: return 0
-            case .p_player_get: return 0
+            case .p_currentTime_get: return 0
             case .p_loopMode_get: return 0
 			case .p_loopMode_set(let newValue): return newValue.intValue
+            case .p_player_get: return 0
+            case .p_remoteCommands_get: return 0
             }
         }
     }
@@ -670,9 +680,6 @@ class PlayerContextMock: PlayerContext, Mock {
         static func currentItem(getter defaultValue: AVPlayerItem?...) -> PropertyStub {
             return Given(method: .p_currentItem_get, products: defaultValue.map({ Product.return($0) }))
         }
-        static func currentTime(getter defaultValue: Double...) -> PropertyStub {
-            return Given(method: .p_currentTime_get, products: defaultValue.map({ Product.return($0) }))
-        }
         static func debugMessage(getter defaultValue: String?...) -> PropertyStub {
             return Given(method: .p_debugMessage_get, products: defaultValue.map({ Product.return($0) }))
         }
@@ -691,11 +698,17 @@ class PlayerContextMock: PlayerContext, Mock {
         static func state(getter defaultValue: PlayerState?...) -> PropertyStub {
             return Given(method: .p_state_get, products: defaultValue.map({ Product.return($0) }))
         }
-        static func player(getter defaultValue: AVPlayer...) -> PropertyStub {
-            return Given(method: .p_player_get, products: defaultValue.map({ Product.return($0) }))
+        static func currentTime(getter defaultValue: Double...) -> PropertyStub {
+            return Given(method: .p_currentTime_get, products: defaultValue.map({ Product.return($0) }))
         }
         static func loopMode(getter defaultValue: Bool...) -> PropertyStub {
             return Given(method: .p_loopMode_get, products: defaultValue.map({ Product.return($0) }))
+        }
+        static func player(getter defaultValue: AVPlayer...) -> PropertyStub {
+            return Given(method: .p_player_get, products: defaultValue.map({ Product.return($0) }))
+        }
+        static func remoteCommands(getter defaultValue: [ModernAVPlayerRemoteCommand]?...) -> PropertyStub {
+            return Given(method: .p_remoteCommands_get, products: defaultValue.map({ Product.return($0) }))
         }
 
     }
@@ -719,7 +732,6 @@ class PlayerContextMock: PlayerContext, Mock {
         static var currentMedia: Verify { return Verify(method: .p_currentMedia_get) }
 		static func currentMedia(set newValue: Parameter<PlayerMedia?>) -> Verify { return Verify(method: .p_currentMedia_set(newValue)) }
         static var currentItem: Verify { return Verify(method: .p_currentItem_get) }
-        static var currentTime: Verify { return Verify(method: .p_currentTime_get) }
         static var debugMessage: Verify { return Verify(method: .p_debugMessage_get) }
 		static func debugMessage(set newValue: Parameter<String?>) -> Verify { return Verify(method: .p_debugMessage_set(newValue)) }
         static var delegate: Verify { return Verify(method: .p_delegate_get) }
@@ -727,9 +739,11 @@ class PlayerContextMock: PlayerContext, Mock {
         static var nowPlaying: Verify { return Verify(method: .p_nowPlaying_get) }
         static var plugins: Verify { return Verify(method: .p_plugins_get) }
         static var state: Verify { return Verify(method: .p_state_get) }
-        static var player: Verify { return Verify(method: .p_player_get) }
+        static var currentTime: Verify { return Verify(method: .p_currentTime_get) }
         static var loopMode: Verify { return Verify(method: .p_loopMode_get) }
 		static func loopMode(set newValue: Parameter<Bool>) -> Verify { return Verify(method: .p_loopMode_set(newValue)) }
+        static var player: Verify { return Verify(method: .p_player_get) }
+        static var remoteCommands: Verify { return Verify(method: .p_remoteCommands_get) }
     }
 
     struct Perform {

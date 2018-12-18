@@ -61,6 +61,7 @@ final class BufferingState: NSObject, PlayerState {
         guard let media = context.currentMedia
             else { assertionFailure("media should exist"); return }
         context.plugins.forEach { $0.didStartBuffering(media: media) }
+        context.remoteCommands?.forEach { $0.reference.isEnabled = $0.isEnabled(media.type) }
     }
     
     deinit {

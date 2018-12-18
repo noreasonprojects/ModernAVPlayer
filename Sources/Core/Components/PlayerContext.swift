@@ -42,7 +42,6 @@ protocol PlayerContext: class, MediaPlayer {
     var config: PlayerConfiguration { get }
     var currentMedia: PlayerMedia? { get set }
     var currentItem: AVPlayerItem? { get }
-    var currentTime: Double { get }
     var debugMessage: String? { get set }
     var delegate: PlayerContextDelegate? { get }
     var itemDuration: Double? { get }
@@ -81,6 +80,7 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
     var itemDuration: Double? {
         return currentItem?.duration.seconds
     }
+    var remoteCommands: [ModernAVPlayerRemoteCommand]?
     var state: PlayerState! {
         didSet {
             ModernAVPlayerLogger.instance.log(message: state.type.description, domain: .state)
@@ -108,6 +108,7 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
 
         ModernAVPlayerLogger.instance.log(message: "Init", domain: .lifecycleState)
         setAudioSessionCategory()
+        
         defer {
             state = InitState(context: self)
             plugins.forEach { $0.didInit(player: player) }

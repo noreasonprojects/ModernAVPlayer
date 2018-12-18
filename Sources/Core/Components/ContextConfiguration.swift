@@ -52,7 +52,7 @@ public protocol PlayerConfiguration {
     
     /// Remote Command Center
     ///
-    var useDefaultRemoteCommandCenter: Bool { get }
+    var useDefaultRemoteCommand: Bool { get }
 }
 
 public struct ModernAVPlayerConfiguration: PlayerConfiguration {
@@ -73,7 +73,7 @@ public struct ModernAVPlayerConfiguration: PlayerConfiguration {
     public let reachabilityNetworkTestingTickTime: TimeInterval = 3
     public let reachabilityNetworkTestingIteration: UInt = 10
 
-    public var useDefaultRemoteCommandCenter = true
+    public var useDefaultRemoteCommand = true
     
     public init() {
         periodicPlayingTime = CMTime(seconds: 1, preferredTimescale: preferedTimeScale)

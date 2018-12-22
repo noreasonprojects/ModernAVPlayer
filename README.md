@@ -1,5 +1,6 @@
 # ModernAVPlayer
-[![Build Status](https://travis-ci.org/noreasonprojects/ModernAVPlayer.svg?branch=develop)](https://travis-ci.org/noreasonprojects/ModernAVPlayer)
+![Swift 4.2](https://img.shields.io/badge/Swift-4.2-orange.svg)
+[![Build Status](https://travis-ci.org/noreasonprojects/ModernAVPlayer.svg?branch=develop)](https://travis-ci.com/noreasonprojects/ModernAVPlayer)
 ![CocoaPods](https://img.shields.io/cocoapods/v/ModernAVPlayer.svg)
 ![CocoaPods](https://img.shields.io/cocoapods/l/ModernAVPlayer.svg)
 

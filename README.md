@@ -101,10 +101,29 @@ player.loopMode = true
 
 ## Advanced 
 
-### Configuration
+### Custom Configuration
 
-All player configuration are available from `ContextConfiguration` protocol.  
-A default implementation `ModernAVPlayerConfig` is provided with documentation
+All player configuration are available from `PlayerConfiguration` protocol.  
+A default implementation `ModernAVPlayerConfiguration` is provided with documentation
+
+### Remote command
+
+If using default configuration file (`useDefaultRemoteCommand = true`), ModernAVPlayer use **automatically** all commands created by `ModernAVPlayerRemoteCommandFactory` class
+Documention available in  `ModernAVPlayerRemoteCommandFactory.swift` file
+
+#### Custom command
+
+* Use your own `PlayerConfiguration` implementation with
+> `...`
+> `useDefaultRemoteCommand = false`
+> `...`
+
+* Create an array of  commands conforming to  `ModernAVPlayerRemoteCommand` protocol. 
+> `let player = ModernAVPlayer(config: YourConfigImplementation())`
+> `let commands: [ModernAVPlayerRemoteCommand] = YourRemoteCommandFactory.commands`
+> `player.remoteCommands = commands`
+
+You can use existant command from public `ModernAVPlayerRemoteCommandFactory` class.
 
 ### Plugin
 

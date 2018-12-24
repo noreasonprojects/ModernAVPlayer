@@ -101,7 +101,7 @@ public final class ModernAVPlayer: NSObject, ModernAVPlayerExposable {
         
         defer {
             if config.useDefaultRemoteCommand {
-                remoteCommands = ModernAVPlayerRemoteCommandFactory(player: self).getDefaultCommands()
+                remoteCommands = ModernAVPlayerRemoteCommandFactory(player: self).defaultCommands
             }
         }
     }

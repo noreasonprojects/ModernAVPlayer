@@ -12,10 +12,20 @@ import ModernAVPlayer
 
 public struct RemoteCommandFactoryExample {
 
+    // MARK: - Output
+
+    /// Return all factory commands
+    ///
+    public var getDefaultCommands: [ModernAVPlayerRemoteCommand] {
+        return [playCommand(), pauseCommand(), stopCommand(), togglePlayPauseCommand(),
+                changePositionCommand(), skipBackwardCommand(), skipForwardCommand()
+        ]
+    }
+
     // MARK: - Inputs
 
-    let player: ModernAVPlayerExposable
-    let commandCenter: MPRemoteCommandCenter
+    private let player: ModernAVPlayerExposable
+    private let commandCenter: MPRemoteCommandCenter
 
     // MARK: - Init
 
@@ -25,24 +35,10 @@ public struct RemoteCommandFactoryExample {
         self.commandCenter = commandCenter
     }
 
-    // MARK: - Commands
-
-    /// Return all factory commands
-    public func getDefaultCommands() -> [ModernAVPlayerRemoteCommand] {
-        return [
-            playCommand(),
-            pauseCommand(),
-            stopCommand(),
-            togglePlayPauseCommand(),
-            changePositionCommand(),
-            skipBackwardCommand(),
-            skipForwardCommand()
-        ]
-    }
-
     // MARK: - Playback Commands
 
     /// Default play command
+    ///
     public func playCommand() -> ModernAVPlayerRemoteCommand {
         let command = commandCenter.playCommand
         let isEnabled: (MediaType) -> Bool = { _ in true }
@@ -59,6 +55,7 @@ public struct RemoteCommandFactoryExample {
     }
 
     /// Default toggle play pause command
+    ///
     public func togglePlayPauseCommand() -> ModernAVPlayerRemoteCommand {
         let command = commandCenter.togglePlayPauseCommand
         let isEnabled: (MediaType) -> Bool = { _ in true }
@@ -78,6 +75,7 @@ public struct RemoteCommandFactoryExample {
     }
 
     /// Default pause command
+    ///
     public func pauseCommand() -> ModernAVPlayerRemoteCommand {
         let command = commandCenter.pauseCommand
         let isEnabled: (MediaType) -> Bool = {
@@ -93,6 +91,7 @@ public struct RemoteCommandFactoryExample {
     }
 
     /// Default stop command
+    ///
     public func stopCommand() -> ModernAVPlayerRemoteCommand {
         let command = commandCenter.stopCommand
         let isEnabled: (MediaType) -> Bool = {
@@ -111,6 +110,7 @@ public struct RemoteCommandFactoryExample {
     // MARK: - Navigating a track's contents
 
     /// Default change position command
+    ///
     public func changePositionCommand() -> ModernAVPlayerRemoteCommand {
         let command = commandCenter.changePlaybackPositionCommand
         let isEnabled: (MediaType) -> Bool = { $0 == .clip }

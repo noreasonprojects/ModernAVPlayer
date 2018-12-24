@@ -29,6 +29,16 @@ import MediaPlayer
 
 public struct ModernAVPlayerRemoteCommandFactory {
 
+    // MARK: - Output
+
+    /// Return all factory commands
+    ///
+    public var defaultCommands: [ModernAVPlayerRemoteCommand] {
+        return [playCommand(), pauseCommand(), stopCommand(), togglePlayPauseCommand(),
+                prevTrackCommand(), nextTrackCommand(), repeatModeCommand(), changePositionCommand(),
+                shuffleModeCommand(), skipBackwardCommand(), skipForwardCommand()]
+    }
+
     // MARK: - Inputs
 
     private let player: ModernAVPlayerExposable
@@ -40,16 +50,6 @@ public struct ModernAVPlayerRemoteCommandFactory {
                 commandCenter: MPRemoteCommandCenter = MPRemoteCommandCenter.shared()) {
         self.player = player
         self.commandCenter = commandCenter
-    }
-
-    // MARK: - Commands
-
-    /// Return all factory commands
-    ///
-    public func getDefaultCommands() -> [ModernAVPlayerRemoteCommand] {
-        return [playCommand(), pauseCommand(), stopCommand(), togglePlayPauseCommand(),
-                prevTrackCommand(), nextTrackCommand(), repeatModeCommand(), changePositionCommand(),
-                shuffleModeCommand(), skipBackwardCommand(), skipForwardCommand()]
     }
 
     // MARK: - Playback Commands

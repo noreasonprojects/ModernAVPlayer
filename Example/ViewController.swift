@@ -162,7 +162,7 @@ final class ViewController: UIViewController {
     }
 
     private func setupRemoteCustomRemoteCommand() {
-        let commands = RemoteCommandFactoryExample(player: player).getDefaultCommands()
+        let commands = RemoteCommandFactoryExample(player: player).getDefaultCommands
         player.remoteCommands = commands
     }
 

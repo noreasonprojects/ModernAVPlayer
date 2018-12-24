@@ -9,6 +9,10 @@
 import AVFoundation
 import ModernAVPlayer
 
+///
+/// Documentation provided in PlayerConfiguration.swift
+///
+
 public struct PlayerConfigurationExample: PlayerConfiguration {
 
     // Buffering State

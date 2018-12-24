@@ -21,6 +21,10 @@
 - [Installation](#installation)
 - [Getting started](#getting-started)
 - [Advanced](#advanced)
+    - [Custom Configuration](#custom-configuration)
+    - [Remote Command](#remote-command)
+    - [Plugin](#plugin)
+    - [RxSwift](#rxswift)
 - [Todo](#todo)
 - [Communication](#communication)
 
@@ -101,10 +105,12 @@ player.loopMode = true
 
 ## Advanced 
 
-### Custom Configuration
+### Custom configuration
 
 All player configuration are available from `PlayerConfiguration` protocol.  
 A default implementation `ModernAVPlayerConfiguration` is provided with documentation
+
+---
 
 ### Remote command
 
@@ -125,9 +131,13 @@ Documention available in  `ModernAVPlayerRemoteCommandFactory.swift` file
 
 You can use existant command from public `ModernAVPlayerRemoteCommandFactory` class.
 
+---
+
 ### Plugin
 
 Use `PlayerPlugin` protocol to create your own plugin system, like tracking Plugin.
+
+---
 
 ### RxSwift
 

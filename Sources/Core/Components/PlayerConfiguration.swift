@@ -1,9 +1,9 @@
 // The MIT License (MIT)
 //
 // ModernAVPlayer
-// Copyright (c) 2018 Raphael Ankierman <raphael.ankierman@radiofrance.com>
+// Copyright (c) 2018 Raphael Ankierman <raphrel@gmail.com>
 //
-// ContextConfiguration.swift
+// PlayerConfiguration.swift
 // Created by raphael ankierman on 12/03/2018.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -51,31 +51,8 @@ public protocol PlayerConfiguration {
     var reachabilityNetworkTestingIteration: UInt { get }
     
     /// Remote Command Center
+    /// If true, all commands are automatically set from `ModernAVPlayerRemoteCommandFactory`
+    /// If false, you have to set player.remoteCommands by yourself if needed.
     ///
     var useDefaultRemoteCommand: Bool { get }
-}
-
-public struct ModernAVPlayerConfiguration: PlayerConfiguration {
-    
-    // Buffering State
-    public let rateObservingTimeout: TimeInterval = 3
-    public let rateObservingTickTime: TimeInterval = 0.3
-
-    // General Audio preferences
-    public let preferedTimeScale: CMTimeScale = 1
-    public let periodicPlayingTime: CMTime
-    public let audioSessionCategory = AVAudioSession.Category.playback
-
-    // Reachability Service
-    public let reachabilityURLSessionTimeout: TimeInterval = 3
-    //swiftlint:disable:next force_unwrapping
-    public let reachabilityNetworkTestingURL = URL(string: "https://www.google.com")!
-    public let reachabilityNetworkTestingTickTime: TimeInterval = 3
-    public let reachabilityNetworkTestingIteration: UInt = 10
-
-    public var useDefaultRemoteCommand = true
-    
-    public init() {
-        periodicPlayingTime = CMTime(seconds: 1, preferredTimescale: preferedTimeScale)
-    }
 }

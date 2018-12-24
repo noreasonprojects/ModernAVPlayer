@@ -16,7 +16,7 @@ public struct RemoteCommandFactoryExample {
 
     /// Return all factory commands
     ///
-    public var getDefaultCommands: [ModernAVPlayerRemoteCommand] {
+    public var defaultCommands: [ModernAVPlayerRemoteCommand] {
         return [playCommand(), pauseCommand(), stopCommand(), togglePlayPauseCommand(),
                 changePositionCommand(), skipBackwardCommand(), skipForwardCommand()
         ]

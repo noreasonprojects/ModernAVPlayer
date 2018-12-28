@@ -1,0 +1,20 @@
+fastlane_version "2.112.0"
+
+default_platform :ios
+
+UPDATE_USAGE = "usage: fastlane deploy bump_type:[major|minor|patch]"
+
+platform :ios do
+
+  desc UPDATE_USAGE
+  lane :update_version_number do |options|
+	if ["major", "minor", "patch"].include?(options[:bump_type])
+		version = version_bump_podspec(bump_type: options[:bump_type])
+		increment_version_number(version_number: "#{version}")
+		sh("sed -i '' 's/X.X.X/#{version}/g' ../CHANGELOG.md")
+		cocoapods
+	else
+		UI.user_error!(UPDATE_USAGE)
+	end
+  end
+end

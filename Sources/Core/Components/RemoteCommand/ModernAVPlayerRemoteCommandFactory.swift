@@ -75,7 +75,9 @@ public struct ModernAVPlayerRemoteCommandFactory {
             return .success
         }
         command.addTarget(handler: handler)
-        return ModernAVPlayerRemoteCommand(reference: command, isEnabled: isEnabled)
+        return ModernAVPlayerRemoteCommand(reference: command,
+                                           debugDescription: "Play",
+                                           isEnabled: isEnabled)
     }
     
     /// Toggle play pause command
@@ -113,7 +115,9 @@ public struct ModernAVPlayerRemoteCommandFactory {
             return .success
         }
         command.addTarget(handler: handler)
-        return ModernAVPlayerRemoteCommand(reference: command, isEnabled: isEnabled)
+        return ModernAVPlayerRemoteCommand(reference: command,
+                                           debugDescription: "Toggle play/pause",
+                                           isEnabled: isEnabled)
     }
 
     /// Stop command
@@ -130,7 +134,9 @@ public struct ModernAVPlayerRemoteCommandFactory {
             return .success
         }
         command.addTarget(handler: handler)
-        return ModernAVPlayerRemoteCommand(reference: command, isEnabled: isEnabled)
+        return ModernAVPlayerRemoteCommand(reference: command,
+                                           debugDescription: "Stop",
+                                           isEnabled: isEnabled)
     }
     
     // MARK: - Navigating between tracks
@@ -141,7 +147,9 @@ public struct ModernAVPlayerRemoteCommandFactory {
     public func prevTrackCommand() -> ModernAVPlayerRemoteCommand {
         let command = commandCenter.previousTrackCommand
         let isEnabled: (MediaType) -> Bool = { _ in false }
-        return ModernAVPlayerRemoteCommand(reference: command, isEnabled: isEnabled)
+        return ModernAVPlayerRemoteCommand(reference: command,
+                                           debugDescription: "Prev track",
+                                           isEnabled: isEnabled)
     }
 
     /// Next Track Command
@@ -150,7 +158,9 @@ public struct ModernAVPlayerRemoteCommandFactory {
     public func nextTrackCommand() -> ModernAVPlayerRemoteCommand {
         let command = commandCenter.nextTrackCommand
         let isEnabled: (MediaType) -> Bool = { _ in false }
-        return ModernAVPlayerRemoteCommand(reference: command, isEnabled: isEnabled)
+        return ModernAVPlayerRemoteCommand(reference: command,
+                                           debugDescription: "Next track",
+                                           isEnabled: isEnabled)
     }
 
     /// Change Repeat Mode Command
@@ -159,7 +169,9 @@ public struct ModernAVPlayerRemoteCommandFactory {
     public func repeatModeCommand() -> ModernAVPlayerRemoteCommand {
         let command = commandCenter.changeRepeatModeCommand
         let isEnabled: (MediaType) -> Bool = { _ in false }
-        return ModernAVPlayerRemoteCommand(reference: command, isEnabled: isEnabled)
+        return ModernAVPlayerRemoteCommand(reference: command,
+                                           debugDescription: "Repeat mode",
+                                           isEnabled: isEnabled)
     }
 
     /// Change Shuffle Mode Command
@@ -168,7 +180,9 @@ public struct ModernAVPlayerRemoteCommandFactory {
     public func shuffleModeCommand() -> ModernAVPlayerRemoteCommand {
         let command = commandCenter.changeShuffleModeCommand
         let isEnabled: (MediaType) -> Bool = { _ in false }
-        return ModernAVPlayerRemoteCommand(reference: command, isEnabled: isEnabled)
+        return ModernAVPlayerRemoteCommand(reference: command,
+                                           debugDescription: "Shuffle mode",
+                                           isEnabled: isEnabled)
     }
 
     // MARK: - Navigating a track's contents
@@ -193,7 +207,9 @@ public struct ModernAVPlayerRemoteCommandFactory {
             return .success
         }
         command.addTarget(handler: handler)
-        return ModernAVPlayerRemoteCommand(reference: command, isEnabled: isEnabled)
+        return ModernAVPlayerRemoteCommand(reference: command,
+                                           debugDescription: "Change position",
+                                           isEnabled: isEnabled)
     }
 
     /// Skip Backward command
@@ -218,7 +234,9 @@ public struct ModernAVPlayerRemoteCommandFactory {
             return .success
         }
         command.addTarget(handler: handler)
-        return ModernAVPlayerRemoteCommand(reference: command, isEnabled: isEnabled)
+        return ModernAVPlayerRemoteCommand(reference: command,
+                                           debugDescription: "Skip backward",
+                                           isEnabled: isEnabled)
     }
 
     /// Skip Forward command
@@ -244,6 +262,8 @@ public struct ModernAVPlayerRemoteCommandFactory {
             return .success
         }
         command.addTarget(handler: handler)
-        return ModernAVPlayerRemoteCommand(reference: command, isEnabled: isEnabled)
+        return ModernAVPlayerRemoteCommand(reference: command,
+                                           debugDescription: "Skip forward",
+                                           isEnabled: isEnabled)
     }
 }

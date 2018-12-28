@@ -129,7 +129,7 @@ Documention available in  `ModernAVPlayerRemoteCommandFactory.swift` file
 > `let commands: [ModernAVPlayerRemoteCommand] = YourRemoteCommandFactory.commands`
 > `player.remoteCommands = commands`
 
-You can use existant command from public `ModernAVPlayerRemoteCommandFactory` class.
+You can use existing commands from public `ModernAVPlayerRemoteCommandFactory` class.
 
 ---
 

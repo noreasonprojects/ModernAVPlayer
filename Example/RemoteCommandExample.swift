@@ -51,7 +51,9 @@ public struct RemoteCommandFactoryExample {
             return .success
         }
         command.addTarget(handler: handler)
-        return ModernAVPlayerRemoteCommand(reference: command, isEnabled: isEnabled)
+        return ModernAVPlayerRemoteCommand(reference: command,
+                                           debugDescription: "Play",
+                                           isEnabled: isEnabled)
     }
 
     /// Default toggle play pause command
@@ -71,7 +73,9 @@ public struct RemoteCommandFactoryExample {
             return .success
         }
         command.addTarget(handler: handler)
-        return ModernAVPlayerRemoteCommand(reference: command, isEnabled: isEnabled)
+        return ModernAVPlayerRemoteCommand(reference: command,
+                                           debugDescription: "Toggle play/pause",
+                                           isEnabled: isEnabled)
     }
 
     /// Default pause command
@@ -87,7 +91,9 @@ public struct RemoteCommandFactoryExample {
             return .success
         }
         command.addTarget(handler: handler)
-        return ModernAVPlayerRemoteCommand(reference: command, isEnabled: isEnabled)
+        return ModernAVPlayerRemoteCommand(reference: command,
+                                           debugDescription: "Pause",
+                                           isEnabled: isEnabled)
     }
 
     /// Default stop command
@@ -103,7 +109,9 @@ public struct RemoteCommandFactoryExample {
             return .success
         }
         command.addTarget(handler: handler)
-        return ModernAVPlayerRemoteCommand(reference: command, isEnabled: isEnabled)
+        return ModernAVPlayerRemoteCommand(reference: command,
+                                           debugDescription: "Stop",
+                                           isEnabled: isEnabled)
     }
 
 
@@ -122,7 +130,9 @@ public struct RemoteCommandFactoryExample {
             return .success
         }
         command.addTarget(handler: handler)
-        return ModernAVPlayerRemoteCommand(reference: command, isEnabled: isEnabled)
+        return ModernAVPlayerRemoteCommand(reference: command,
+                                           debugDescription: "Change positions",
+                                           isEnabled: isEnabled)
     }
 
     public func skipBackwardCommand(preferredIntervals: [NSNumber] = [15]) -> ModernAVPlayerRemoteCommand {
@@ -139,7 +149,9 @@ public struct RemoteCommandFactoryExample {
             return .success
         }
         command.addTarget(handler: handler)
-        return ModernAVPlayerRemoteCommand(reference: command, isEnabled: isEnabled)
+        return ModernAVPlayerRemoteCommand(reference: command,
+                                           debugDescription: "Skip backward",
+                                           isEnabled: isEnabled)
     }
 
     public func skipForwardCommand(preferredIntervals: [NSNumber] = [30]) -> ModernAVPlayerRemoteCommand {
@@ -156,7 +168,9 @@ public struct RemoteCommandFactoryExample {
             return .success
         }
         command.addTarget(handler: handler)
-        return ModernAVPlayerRemoteCommand(reference: command, isEnabled: isEnabled)
+        return ModernAVPlayerRemoteCommand(reference: command,
+                                           debugDescription: "Skip forward",
+                                           isEnabled: isEnabled)
     }
 
 }

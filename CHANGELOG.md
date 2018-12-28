@@ -3,8 +3,11 @@ All notable changes to this project will be documented in this file.
 
 ---
 ## [X.X.X]
-* Feature:
+* Breaking change:
+	* Add `remoteCommand` case to `ModernAVPlayerLoggerDomain` enum
+* Features:
 	* Add swift version badge
+	* Add `remoteCommand` logs
 * Fixes:
 	* Update build travis badge url
 	* Set custom remote command

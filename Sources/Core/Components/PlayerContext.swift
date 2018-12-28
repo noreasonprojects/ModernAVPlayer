@@ -80,7 +80,13 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
     var itemDuration: Double? {
         return currentItem?.duration.seconds
     }
-    var remoteCommands: [ModernAVPlayerRemoteCommand]?
+    var remoteCommands: [ModernAVPlayerRemoteCommand]? {
+        didSet {
+            let msg = "Set \(remoteCommands?.count ?? 0) remote command(s)"
+            ModernAVPlayerLogger.instance.log(message: msg, domain: .remoteCommand)
+        }
+    }
+
     var state: PlayerState! {
         didSet {
             ModernAVPlayerLogger.instance.log(message: state.type.description, domain: .state)

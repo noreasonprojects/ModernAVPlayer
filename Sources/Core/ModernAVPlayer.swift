@@ -70,10 +70,7 @@ public final class ModernAVPlayer: NSObject, ModernAVPlayerExposable {
     /// Remote command preset
     public var remoteCommands: [ModernAVPlayerRemoteCommand]? {
         get { return context.remoteCommands }
-        set {
-            ModernAVPlayerLogger.instance.log(message: "Set \(newValue?.count ?? 0) remote command(s)", domain: .state)
-            context.remoteCommands = newValue
-        }
+        set { context.remoteCommands = newValue }
     }
 
     // MARK: - Input

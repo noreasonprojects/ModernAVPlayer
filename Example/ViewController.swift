@@ -137,7 +137,8 @@ final class ViewController: UIViewController {
     
     // MARK: - Input
 
-    private let player = ModernAVPlayer(config: PlayerConfigurationExample(), loggerDomains: [.state, .error, .unavailableCommand])
+    private let player = ModernAVPlayer(config: PlayerConfigurationExample(),
+                                        loggerDomains: [.state, .error, .unavailableCommand, .remoteCommand])
     
     // MARK: - Observables
     

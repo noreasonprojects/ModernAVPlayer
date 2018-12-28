@@ -27,17 +27,22 @@
 import Foundation
 import MediaPlayer
 
-public struct ModernAVPlayerRemoteCommand: AVPlayerRemoteCommand {
+public struct ModernAVPlayerRemoteCommand: AVPlayerRemoteCommand, CustomDebugStringConvertible {
 
-    // MARK: - Inputs
+    // MARK: - Outputs
 
     public let reference: MPRemoteCommand
     public let isEnabled: (MediaType) -> Bool
+    public let debugDescription: String
 
     // MARK: - Init
 
-    public init(reference: MPRemoteCommand, isEnabled: @escaping (MediaType) -> Bool) {
+    public init(reference: MPRemoteCommand, debugDescription: String? = nil, isEnabled: @escaping (MediaType) -> Bool) {
         self.reference = reference
         self.isEnabled = isEnabled
+
+        guard let description = debugDescription
+            else { self.debugDescription = "Missing command name"; return }
+        self.debugDescription = description + " command"
     }
 }

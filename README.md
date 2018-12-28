@@ -114,20 +114,24 @@ A default implementation `ModernAVPlayerConfiguration` is provided with document
 
 ### Remote command
 
-If using default configuration file (`useDefaultRemoteCommand = true`), ModernAVPlayer use **automatically** all commands created by `ModernAVPlayerRemoteCommandFactory` class
+If using default configuration file ( `swift useDefaultRemoteCommand = true`), ModernAVPlayer use **automatically** all commands created by `ModernAVPlayerRemoteCommandFactory` class
 Documention available in  `ModernAVPlayerRemoteCommandFactory.swift` file
 
 #### Custom command
 
-* Use your own `PlayerConfiguration` implementation with
-> `...`
-> `useDefaultRemoteCommand = false`
-> `...`
+> Use your own `PlayerConfiguration` implementation with 
+```swift
+...
+useDefaultRemoteCommand = false
+...
+```
 
-* Create an array of  commands conforming to  `ModernAVPlayerRemoteCommand` protocol. 
-> `let player = ModernAVPlayer(config: YourConfigImplementation())`
-> `let commands: [ModernAVPlayerRemoteCommand] = YourRemoteCommandFactory.commands`
-> `player.remoteCommands = commands`
+> Create an array of  commands conforming to  `ModernAVPlayerRemoteCommand` protocol. 
+```swift
+let player = ModernAVPlayer(config: YourConfigImplementation())
+let commands: [ModernAVPlayerRemoteCommand] = YourRemoteCommandFactory.commands
+player.remoteCommands = commands
+```
 
 You can use existing commands from public `ModernAVPlayerRemoteCommandFactory` class.
 
@@ -154,7 +158,8 @@ let state: Observable<ModernAVPlayer.State> = player.rx.state
 ```
 
 ## Todo
-- [ ] Make remote command center configurable
+- [x] Make remote command center configurable
+- [ ] Remove useless Init state
 - [ ] Make a prettier audio and video example
 - [ ] Separate background task to a service
 - [ ] Make log message available to multiple domain

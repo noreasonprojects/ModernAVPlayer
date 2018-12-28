@@ -61,6 +61,11 @@ final class BufferingState: NSObject, PlayerState {
         guard let media = context.currentMedia
             else { assertionFailure("media should exist"); return }
         context.plugins.forEach { $0.didStartBuffering(media: media) }
+        context.remoteCommands?.forEach {
+            let isEnabled = $0.isEnabled(media.type)
+            $0.reference.isEnabled = isEnabled
+            ModernAVPlayerLogger.instance.log(message: "Set \($0) to \(isEnabled)", domain: .remoteCommand)
+        }
     }
     
     deinit {

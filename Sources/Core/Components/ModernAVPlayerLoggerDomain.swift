@@ -32,6 +32,7 @@ public enum ModernAVPlayerLoggerDomain: CustomStringConvertible {
     case error
     case lifecycleService
     case lifecycleState
+    case remoteCommand
     case unavailableCommand
     
     public var description: String {
@@ -46,6 +47,8 @@ public enum ModernAVPlayerLoggerDomain: CustomStringConvertible {
             return "[🔈]"
         case .lifecycleState:
             return "[🔈 🚥]"
+        case .remoteCommand:
+            return "[▶️]"
         case .unavailableCommand:
             return "[🙅‍♂️]"
         }

@@ -137,7 +137,8 @@ final class ViewController: UIViewController {
     
     // MARK: - Input
 
-    private let player = ModernAVPlayer(loggerDomains: [.state, .error, .unavailableCommand])
+    private let player = ModernAVPlayer(config: PlayerConfigurationExample(),
+                                        loggerDomains: [.state, .error, .unavailableCommand, .remoteCommand])
     
     // MARK: - Observables
     
@@ -156,10 +157,16 @@ final class ViewController: UIViewController {
         
         debugMessage.text = nil
         currentMedia.text = nil
+        setupRemoteCustomRemoteCommand()
         initSliderObservables()
         bindPlayerRxAttibutes()
     }
-    
+
+    private func setupRemoteCustomRemoteCommand() {
+        let commands = RemoteCommandFactoryExample(player: player).defaultCommands
+        player.remoteCommands = commands
+    }
+
     private func initSliderObservables() {
         sliderEvents = [
             slider.rx.controlEvent(.valueChanged).map { return true },

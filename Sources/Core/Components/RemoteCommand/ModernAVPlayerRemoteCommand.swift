@@ -1,10 +1,10 @@
 // The MIT License (MIT)
 //
 // ModernAVPlayer
-// Copyright (c) 2018 Raphael Ankierman <raphael.ankierman@radiofrance.com>
+// Copyright (c) 2018 Raphael Ankierman <raphrel@gmail.com>
 //
-// ModernAVPlayerExposable.swift
-// Created by raphael ankierman on 17/08/2018.
+// ModernPlayCommand.swift
+// Created by raphael ankierman on 10/09/2018.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,5 +25,24 @@
 // THE SOFTWARE.
 
 import Foundation
+import MediaPlayer
 
-public typealias ModernAVPlayerExposable = ModernAVPlayerCurrentState & MediaPlayer & ModernAVPlayerCurrentMedia
+public struct ModernAVPlayerRemoteCommand: AVPlayerRemoteCommand, CustomDebugStringConvertible {
+
+    // MARK: - Outputs
+
+    public let reference: MPRemoteCommand
+    public let isEnabled: (MediaType) -> Bool
+    public let debugDescription: String
+
+    // MARK: - Init
+
+    public init(reference: MPRemoteCommand, debugDescription: String? = nil, isEnabled: @escaping (MediaType) -> Bool) {
+        self.reference = reference
+        self.isEnabled = isEnabled
+
+        guard let description = debugDescription
+            else { self.debugDescription = "Missing command name"; return }
+        self.debugDescription = description + " command"
+    }
+}

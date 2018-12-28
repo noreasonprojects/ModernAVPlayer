@@ -1,10 +1,10 @@
 // The MIT License (MIT)
 //
 // ModernAVPlayer
-// Copyright (c) 2018 Raphael Ankierman <raphael.ankierman@radiofrance.com>
+// Copyright (c) 2018 Raphael Ankierman <raphrel@gmail.com>
 //
-// ModernAVPlayerExposable.swift
-// Created by raphael ankierman on 17/08/2018.
+// AVPlayerRemoteCommand.swift
+// Created by raphael ankierman on 19/012/2018.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,5 +25,9 @@
 // THE SOFTWARE.
 
 import Foundation
+import MediaPlayer
 
-public typealias ModernAVPlayerExposable = ModernAVPlayerCurrentState & MediaPlayer & ModernAVPlayerCurrentMedia
+public protocol AVPlayerRemoteCommand {
+    var reference: MPRemoteCommand { get }
+    var isEnabled: (MediaType) -> Bool { get }
+}

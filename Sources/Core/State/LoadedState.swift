@@ -45,7 +45,6 @@ struct LoadedState: PlayerState {
         
         guard let media = context.currentMedia else { assertionFailure(); return }
 
-        updateRemoteCommandCenter(mediaType: media.type)
         context.nowPlaying.update(metadata: media.getMetadata(),
                                   duration: context.currentItem?.duration.seconds,
                                   isLive: media.isLive())
@@ -56,13 +55,6 @@ struct LoadedState: PlayerState {
         
         context.delegate?.playerContext(didItemDurationChange: context.itemDuration)
         context.plugins.forEach { $0.didLoad(media: media, duration: context.itemDuration) }
-    }
-    
-    // MARK: - Command Center
-
-    private func updateRemoteCommandCenter(mediaType: MediaType) {
-        let remote = MPRemoteCommandCenter.shared()
-        remote.changePlaybackPositionCommand.isEnabled = mediaType == .clip
     }
 
     // MARK: - Shared actions

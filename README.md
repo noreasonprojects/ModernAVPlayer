@@ -160,6 +160,8 @@ let state: Observable<ModernAVPlayer.State> = player.rx.state
 ## Todo
 - [x] Make remote command center configurable
 - [ ] Remove useless Init state
+- [ ] Add TvOS example to check compatibility
+- [ ] Merge  Pause / Stop intern states
 - [ ] Make a prettier audio and video example
 - [ ] Separate background task to a service
 - [ ] Make log message available to multiple domain

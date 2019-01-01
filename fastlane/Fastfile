@@ -1,0 +1,23 @@
+fastlane_version "2.112.0"
+
+default_platform :ios
+
+UPDATE_USAGE = "usage: fastlane update_version bump_type:[major|minor|patch]"
+
+platform :ios do
+
+  desc UPDATE_USAGE
+  lane :update_version do |options|
+	if !["major", "minor", "patch"].include?(options[:bump_type])
+		UI.user_error!(UPDATE_USAGE)
+	elseif sh("grep -r X.X.X ../CHANGELOG.md | wc -l | tr -d ' \n\r'") != "1"
+		UI.user_error!("Changelog must have only one intermediate version: [X.X.X]")
+	else
+		version = version_bump_podspec(bump_type: options[:bump_type])
+		increment_version_number(version_number: "#{version}")
+		increment_build_number(build_number: Time.new.strftime("%Y%m%d.%H%M"))
+		sh("sed -i '' 's/X.X.X/#{version}/g' ../CHANGELOG.md")
+		cocoapods
+	end
+  end
+end

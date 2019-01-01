@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file.
 
 ---
+## [X.X.X]
+* Improvement:
+	* Automate update project version number
+* Dependency:
+	* [gem] Fastlane -> 2.112.0
+
 ## [1.1.0]
 * Breaking change:
 	* Add `remoteCommand` case to `ModernAVPlayerLoggerDomain` enum

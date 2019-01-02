@@ -15,16 +15,14 @@ import XCTest
 final class PluginPausedStateSPecs: XCTestCase {
 
     private var context: PlayerContextMock!
-    private var media: PlayerMediaMock!
-    private var plugin: PlayerPluginMock!
+    private var media: MockPlayerMedia!
+    private var plugin: MockPlayerPlugin!
     private let position: Double = 42
 
     override func setUp() {
-        media = PlayerMediaMock()
-        media.matcher.register(PlayerMedia.self, match: matchPlayerMedia)
-        Given(media, .url(getter: URL(string: "foo")!))
+        media = MockPlayerMedia(url: URL(string: "foo")!, type: .clip)
 
-        plugin = PlayerPluginMock()
+        plugin = MockPlayerPlugin()
 
         context = PlayerContextMock()
         Given(context, .currentMedia(getter: media))
@@ -38,7 +36,7 @@ final class PluginPausedStateSPecs: XCTestCase {
         _ = PausedState(context: context)
 
         // EXPECT
-        Verify(plugin, 0, .didPaused(media: .any, position: .any))
+        XCTAssertEqual(plugin.didPausedCallCount, 0)
     }
 
     func testWhenContextUpdated_DidPausedPluginShouldBeCall() {
@@ -49,6 +47,8 @@ final class PluginPausedStateSPecs: XCTestCase {
         state.contextUpdated()
 
         // EXPECT
-        Verify(plugin, 1, .didPaused(media: .value(media), position: .value(position)))
+        XCTAssertEqual(plugin.didPausedCallCount, 1)
+        XCTAssertEqual(plugin.didPausedLastParams?.media as? MockPlayerMedia, media)
+        XCTAssertEqual(plugin.didPausedLastParams?.position, position)
     }
 }

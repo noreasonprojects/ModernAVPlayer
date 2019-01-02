@@ -53,8 +53,7 @@ struct StoppedState: PlayerState {
     }
 
     func contextUpdated() {
-        guard let media = context.currentMedia
-            else { assertionFailure("media should exist"); return }
+        let media = context.currentMedia
         let position = context.currentTime
         context.plugins.forEach { $0.didStopped(media: media, position: position) }
     }

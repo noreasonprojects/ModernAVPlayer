@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 
 ---
 ## [X.X.X]
+* Breaking changes:
+	* didPaused(media:position) plugin method accept optional `PlayerMedia`
+	* didStopped(media:position) plugin method accept optional `PlayerMedia`
+* Fix:
+	* Crash when pause / stop and current media is nil
 * Improvement:
 	* Automate update project version number
 * Dependency:

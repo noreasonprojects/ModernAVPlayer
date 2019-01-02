@@ -7,7 +7,7 @@
 ``ModernAVPlayer`` is an audio persistence ``AVPlayer`` wrapper
 
 #### ++ Cool features ++
-- Get 9 nice and revelant player states (playing, buffering, loading, loaded...)
+- Get 9 nice and relevant player states (playing, buffering, loading, loaded...)
 - Persistence player to resume playback after bad network connection even in background mode
 - Manage headphone interactions, call & siri interruptions, now playing informations
 - Add your own plug-in to manage tracking, events...

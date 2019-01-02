@@ -15,16 +15,14 @@ import XCTest
 final class PluginStopppedStateSpecs: XCTestCase {
 
     private var context: PlayerContextMock!
-    private var media: PlayerMediaMock!
-    private var plugin: PlayerPluginMock!
+    private var media: MockPlayerMedia!
+    private var plugin: MockPlayerPlugin!
     private let position: Double = 42
 
     override func setUp() {
-        media = PlayerMediaMock()
-        media.matcher.register(PlayerMedia.self, match: matchPlayerMedia)
-        Given(media, .url(getter: URL(string: "foo")!))
+        media = MockPlayerMedia(url: URL(string: "foo")!, type: .clip)
 
-        plugin = PlayerPluginMock()
+        plugin = MockPlayerPlugin()
 
         context = PlayerContextMock()
         Given(context, .currentMedia(getter: media))
@@ -38,7 +36,7 @@ final class PluginStopppedStateSpecs: XCTestCase {
         _ = StoppedState(context: context)
 
         // EXPECT
-        Verify(plugin, 0, .didStopped(media: .any, position: .any))
+        XCTAssertEqual(plugin.didStoppedCallCount, 0)
     }
 
     func testWhenContextUpdated_DidStoppedPluginShouldBeCall() {
@@ -49,6 +47,8 @@ final class PluginStopppedStateSpecs: XCTestCase {
         state.contextUpdated()
 
         // EXPECT
-        Verify(plugin, 1, .didStopped(media: .value(media), position: .value(position)))
+        XCTAssertEqual(plugin.didStoppedCallCount, 1)
+        XCTAssertEqual(plugin.didStoppedLastMediaParam as? MockPlayerMedia, media)
+        XCTAssertEqual(plugin.didStoppedLastPositionParam, position)
     }
 }

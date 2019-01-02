@@ -86,14 +86,14 @@ public protocol PlayerPlugin {
     ///     - media: current media in use
     ///     - position: pause position
     ///
-    func didPaused(media: PlayerMedia, position: Double)
+    func didPaused(media: PlayerMedia?, position: Double)
     
     /// Called when the media is stopped
     /// - parameters:
     ///     - media: current media in use
     ///     - position: stop position
     ///
-    func didStopped(media: PlayerMedia, position: Double)
+    func didStopped(media: PlayerMedia?, position: Double)
     
     /// Called when player check network access
     /// - parameters:
@@ -126,8 +126,8 @@ public extension PlayerPlugin {
     func didMediaChanged(_ media: PlayerMedia, previousMedia: PlayerMedia?) { }
     func willStartPlaying(media: PlayerMedia, position: Double) { }
     func didStartPlaying(media: PlayerMedia) { }
-    func didPaused(media: PlayerMedia, position: Double) { }
-    func didStopped(media: PlayerMedia, position: Double) { }
+    func didPaused(media: PlayerMedia?, position: Double) { }
+    func didStopped(media: PlayerMedia?, position: Double) { }
     func didStartWaitingForNetwork(media: PlayerMedia) { }
     func didFailed(media: PlayerMedia, error: PlayerError) { }
     func didItemPlayToEndTime(media: PlayerMedia, endTime: Double) { }

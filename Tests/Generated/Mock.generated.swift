@@ -1178,15 +1178,15 @@ class PlayerPluginMock: PlayerPlugin, Mock {
 		perform?(`media`)
     }
 
-    func didPaused(media: PlayerMedia, position: Double) {
-        addInvocation(.m_didPaused__media_mediaposition_position(Parameter<PlayerMedia>.value(`media`), Parameter<Double>.value(`position`)))
-		let perform = methodPerformValue(.m_didPaused__media_mediaposition_position(Parameter<PlayerMedia>.value(`media`), Parameter<Double>.value(`position`))) as? (PlayerMedia, Double) -> Void
+    func didPaused(media: PlayerMedia?, position: Double) {
+        addInvocation(.m_didPaused__media_mediaposition_position(Parameter<PlayerMedia?>.value(`media`), Parameter<Double>.value(`position`)))
+		let perform = methodPerformValue(.m_didPaused__media_mediaposition_position(Parameter<PlayerMedia?>.value(`media`), Parameter<Double>.value(`position`))) as? (PlayerMedia?, Double) -> Void
 		perform?(`media`, `position`)
     }
 
-    func didStopped(media: PlayerMedia, position: Double) {
-        addInvocation(.m_didStopped__media_mediaposition_position(Parameter<PlayerMedia>.value(`media`), Parameter<Double>.value(`position`)))
-		let perform = methodPerformValue(.m_didStopped__media_mediaposition_position(Parameter<PlayerMedia>.value(`media`), Parameter<Double>.value(`position`))) as? (PlayerMedia, Double) -> Void
+    func didStopped(media: PlayerMedia?, position: Double) {
+        addInvocation(.m_didStopped__media_mediaposition_position(Parameter<PlayerMedia?>.value(`media`), Parameter<Double>.value(`position`)))
+		let perform = methodPerformValue(.m_didStopped__media_mediaposition_position(Parameter<PlayerMedia?>.value(`media`), Parameter<Double>.value(`position`))) as? (PlayerMedia?, Double) -> Void
 		perform?(`media`, `position`)
     }
 
@@ -1218,8 +1218,8 @@ class PlayerPluginMock: PlayerPlugin, Mock {
         case m_didMediaChanged__mediapreviousMedia_previousMedia(Parameter<PlayerMedia>, Parameter<PlayerMedia?>)
         case m_willStartPlaying__media_mediaposition_position(Parameter<PlayerMedia>, Parameter<Double>)
         case m_didStartPlaying__media_media(Parameter<PlayerMedia>)
-        case m_didPaused__media_mediaposition_position(Parameter<PlayerMedia>, Parameter<Double>)
-        case m_didStopped__media_mediaposition_position(Parameter<PlayerMedia>, Parameter<Double>)
+        case m_didPaused__media_mediaposition_position(Parameter<PlayerMedia?>, Parameter<Double>)
+        case m_didStopped__media_mediaposition_position(Parameter<PlayerMedia?>, Parameter<Double>)
         case m_didStartWaitingForNetwork__media_media(Parameter<PlayerMedia>)
         case m_didFailed__media_mediaerror_error(Parameter<PlayerMedia>, Parameter<PlayerError>)
         case m_didItemPlayToEndTime__media_mediaendTime_endTime(Parameter<PlayerMedia>, Parameter<Double>)
@@ -1319,8 +1319,8 @@ class PlayerPluginMock: PlayerPlugin, Mock {
 		static func didMediaChanged(media: Parameter<PlayerMedia>, previousMedia: Parameter<PlayerMedia?>) -> Verify { return Verify(method: .m_didMediaChanged__mediapreviousMedia_previousMedia(`media`, `previousMedia`))}
         static func willStartPlaying(media: Parameter<PlayerMedia>, position: Parameter<Double>) -> Verify { return Verify(method: .m_willStartPlaying__media_mediaposition_position(`media`, `position`))}
         static func didStartPlaying(media: Parameter<PlayerMedia>) -> Verify { return Verify(method: .m_didStartPlaying__media_media(`media`))}
-        static func didPaused(media: Parameter<PlayerMedia>, position: Parameter<Double>) -> Verify { return Verify(method: .m_didPaused__media_mediaposition_position(`media`, `position`))}
-        static func didStopped(media: Parameter<PlayerMedia>, position: Parameter<Double>) -> Verify { return Verify(method: .m_didStopped__media_mediaposition_position(`media`, `position`))}
+        static func didPaused(media: Parameter<PlayerMedia?>, position: Parameter<Double>) -> Verify { return Verify(method: .m_didPaused__media_mediaposition_position(`media`, `position`))}
+        static func didStopped(media: Parameter<PlayerMedia?>, position: Parameter<Double>) -> Verify { return Verify(method: .m_didStopped__media_mediaposition_position(`media`, `position`))}
         static func didStartWaitingForNetwork(media: Parameter<PlayerMedia>) -> Verify { return Verify(method: .m_didStartWaitingForNetwork__media_media(`media`))}
         static func didFailed(media: Parameter<PlayerMedia>, error: Parameter<PlayerError>) -> Verify { return Verify(method: .m_didFailed__media_mediaerror_error(`media`, `error`))}
         static func didItemPlayToEndTime(media: Parameter<PlayerMedia>, endTime: Parameter<Double>) -> Verify { return Verify(method: .m_didItemPlayToEndTime__media_mediaendTime_endTime(`media`, `endTime`))}
@@ -1358,10 +1358,10 @@ class PlayerPluginMock: PlayerPlugin, Mock {
         static func didStartPlaying(media: Parameter<PlayerMedia>, perform: @escaping (PlayerMedia) -> Void) -> Perform {
             return Perform(method: .m_didStartPlaying__media_media(`media`), performs: perform)
         }
-        static func didPaused(media: Parameter<PlayerMedia>, position: Parameter<Double>, perform: @escaping (PlayerMedia, Double) -> Void) -> Perform {
+        static func didPaused(media: Parameter<PlayerMedia?>, position: Parameter<Double>, perform: @escaping (PlayerMedia?, Double) -> Void) -> Perform {
             return Perform(method: .m_didPaused__media_mediaposition_position(`media`, `position`), performs: perform)
         }
-        static func didStopped(media: Parameter<PlayerMedia>, position: Parameter<Double>, perform: @escaping (PlayerMedia, Double) -> Void) -> Perform {
+        static func didStopped(media: Parameter<PlayerMedia?>, position: Parameter<Double>, perform: @escaping (PlayerMedia?, Double) -> Void) -> Perform {
             return Perform(method: .m_didStopped__media_mediaposition_position(`media`, `position`), performs: perform)
         }
         static func didStartWaitingForNetwork(media: Parameter<PlayerMedia>, perform: @escaping (PlayerMedia) -> Void) -> Perform {

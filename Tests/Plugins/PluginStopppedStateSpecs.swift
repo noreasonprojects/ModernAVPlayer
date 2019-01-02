@@ -48,7 +48,7 @@ final class PluginStopppedStateSpecs: XCTestCase {
 
         // EXPECT
         XCTAssertEqual(plugin.didStoppedCallCount, 1)
-        XCTAssertEqual(plugin.didStoppedLastMediaParam as? MockPlayerMedia, media)
-        XCTAssertEqual(plugin.didStoppedLastPositionParam, position)
+        XCTAssertEqual(plugin.didStoppedLastParams?.media as? MockPlayerMedia, media)
+        XCTAssertEqual(plugin.didStoppedLastParams?.position, position)
     }
 }

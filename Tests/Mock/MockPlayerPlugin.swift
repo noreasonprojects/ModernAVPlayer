@@ -17,20 +17,16 @@ import Foundation
 final class MockPlayerPlugin: PlayerPlugin {
 
     private(set) var didPausedCallCount = 0
-    var didPausedLastMediaParam: PlayerMedia?
-    var didPausedLastPositionParam: Double?
+    private(set) var didPausedLastParams: (media: PlayerMedia?, position: Double?)?
     func didPaused(media: PlayerMedia?, position: Double) {
         didPausedCallCount += 1
-        didPausedLastMediaParam = media
-        didPausedLastPositionParam = position
+        didPausedLastParams = (media: media, position: position)
     }
 
     private(set) var didStoppedCallCount = 0
-    var didStoppedLastMediaParam: PlayerMedia?
-    var didStoppedLastPositionParam: Double?
+    private(set) var didStoppedLastParams: (media: PlayerMedia?, position: Double?)?
     func didStopped(media: PlayerMedia?, position: Double) {
         didStoppedCallCount += 1
-        didStoppedLastMediaParam = media
-        didStoppedLastPositionParam = position
+        didStoppedLastParams = (media: media, position: position)
     }
 }

@@ -35,7 +35,7 @@ import SwiftyMocky
 
 final class StoppedStateSpecs: QuickSpec {
     
-    private var tested: PausedState!
+    private var tested: StoppedState!
     private var media: PlayerMedia!
     private var mockPlayer: MockCustomPlayer!
     private var playerContext: ModernAVPlayerContext!
@@ -60,7 +60,7 @@ final class StoppedStateSpecs: QuickSpec {
                                                        plugins: [])
             self.playerContext.delegate = self.delegate
             self.playerContext.currentMedia = self.media
-            self.tested = PausedState(context: self.playerContext, position: 0)
+            self.tested = StoppedState(context: self.playerContext)
             self.playerContext.state = self.tested
         }
 
@@ -183,7 +183,7 @@ final class StoppedStateSpecs: QuickSpec {
                 self.tested.pause()
 
                 // ASSERT
-                expect(self.playerContext.state.type).to(equal(ModernAVPlayer.State.paused))
+                expect(self.playerContext.state).to(beAnInstanceOf(PausedState.self))
             }
         }
 

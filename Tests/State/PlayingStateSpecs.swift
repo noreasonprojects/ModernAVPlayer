@@ -99,7 +99,7 @@ final class PlayingStateSpecs: QuickSpec {
                 self.playingState.stop()
 
                 // ASSERT
-                expect(self.tested.state.type).to(equal(ModernAVPlayer.State.stopped))
+                expect(self.tested.state).to(beAnInstanceOf(StoppedState.self))
             }
         }
 
@@ -169,7 +169,7 @@ final class PlayingStateSpecs: QuickSpec {
                     self.itemPlaybackObservingService.onPlayToEndTime?()
 
                     // ASSERT
-                    expect(self.tested.state.type).to(equal(ModernAVPlayer.State.stopped))
+                    expect(self.tested.state).to(beAnInstanceOf(StoppedState.self))
                 }
             }
 

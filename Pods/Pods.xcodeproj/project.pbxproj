@@ -408,6 +408,7 @@
 		DF7CF1941236840A89D99B233E4DC086 /* BeginWith.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD281649E5719206AAF5A289357BAAD2 /* BeginWith.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		E0C740563CECE20677A210282EB3763B /* SchedulerServices+Emulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB799D1CA5D8E7E50D39CD11A0A5076 /* SchedulerServices+Emulation.swift */; };
 		E125415BDE93106A38B543D935CDEDAC /* Skip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0F73288D8A07E03FDE09DBF3F5434B /* Skip.swift */; };
+		E1C8C98921DE55B2003FE00C /* StoppedState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C8C98821DE55B2003FE00C /* StoppedState.swift */; };
 		E454528E8D39931207848DACBB617A4C /* Expression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965D96C404C9B7D4F6DA72012CE2E3A4 /* Expression.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		E49975DFD089DB80EC6AD07BF6D46E14 /* UITextView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31F0D10ADB47640904DE9EC95D16FBF /* UITextView+Rx.swift */; };
 		E4C4366FB9809E63A731868F5AABAC7B /* SectionedViewDataSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAD47590A788C6B83909AE8B399E39D /* SectionedViewDataSourceType.swift */; };
@@ -961,6 +962,7 @@
 		E103EA10E1770701DBCC8B952B7B254D /* Signal.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Signal.swift; path = RxCocoa/Traits/Signal/Signal.swift; sourceTree = "<group>"; };
 		E14EFFFB0BA76F85019BBA10A753E86B /* PlayerMedia.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PlayerMedia.swift; sourceTree = "<group>"; };
 		E1A9D117404BA068C009725399BD8635 /* RouteAudioService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RouteAudioService.swift; sourceTree = "<group>"; };
+		E1C8C98821DE55B2003FE00C /* StoppedState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoppedState.swift; sourceTree = "<group>"; };
 		E2083A97A720E9D9A4DE8DF31966FFA6 /* Errors.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Errors.swift; path = RxSwift/Errors.swift; sourceTree = "<group>"; };
 		E25C9860D9191F3D58AF51EC3F625B6C /* UIApplication+Rx.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIApplication+Rx.swift"; path = "RxCocoa/iOS/UIApplication+Rx.swift"; sourceTree = "<group>"; };
 		E25DBD3B982AA8D8A4CACE310BB2DA0D /* NSLayoutConstraint+Rx.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NSLayoutConstraint+Rx.swift"; path = "RxCocoa/Common/NSLayoutConstraint+Rx.swift"; sourceTree = "<group>"; };
@@ -1429,6 +1431,7 @@
 				6EC5E7598AC65748B789D378AAAC30A6 /* LoadingMediaState.swift */,
 				5C6A41753BB8379A151DCDBA3EB7E9E3 /* PausedState.swift */,
 				472E2C8ECA8B7CE84E5CDA5E56AA9572 /* PlayingState.swift */,
+				E1C8C98821DE55B2003FE00C /* StoppedState.swift */,
 				901F8493427CCA7401DFB6FD2F4AF48D /* WaitingNetworkState.swift */,
 			);
 			name = State;
@@ -2651,6 +2654,7 @@
 				B925FB622F91FDBF8F9F48E124423EBD /* PlayerContextDelegateProxy.swift in Sources */,
 				D098F56FA57DC992CE63E6C3602D5D7E /* PlayerError.swift in Sources */,
 				70989D63FB7B35ED3C33DCEF5F875F75 /* PlayerMedia.swift in Sources */,
+				E1C8C98921DE55B2003FE00C /* StoppedState.swift in Sources */,
 				C36E3B96512A8CD27E443BBD4175F553 /* PlayerMediaMetadata.swift in Sources */,
 				FD0DAAD57C2FB1165CA0E06B890566F9 /* PlayerPlugin.swift in Sources */,
 				A575F57A0615DD1C697EFBC75DE75D7A /* PlayerState.swift in Sources */,

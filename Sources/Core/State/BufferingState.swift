@@ -139,7 +139,7 @@ final class BufferingState: NSObject, PlayerState {
     }
 
     func stop() {
-        changeState(PausedState(context: context, position: 0))
+        changeState(StoppedState(context: context))
     }
     
     // MARK: - Private

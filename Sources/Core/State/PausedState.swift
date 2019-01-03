@@ -27,12 +27,12 @@
 import AVFoundation
 import MediaPlayer
 
-final class PausedState: PlayerState {
+class PausedState: PlayerState {
     
-    // MARK: - Input
+    // MARK: - Inputs
     
-    unowned var context: PlayerContext
-    private var interruptionAudioService: ModernAVPlayerInterruptionAudioService
+    unowned let context: PlayerContext
+    private let interruptionAudioService: ModernAVPlayerInterruptionAudioService
 
     // MARK: - Output
     
@@ -42,32 +42,23 @@ final class PausedState: PlayerState {
     
     // MARK: - Variable
     
-    var type: ModernAVPlayer.State
+    let type: ModernAVPlayer.State
 
     // MARK: Init
     
     init(context: PlayerContext,
-         position: Double? = nil,
+         type: ModernAVPlayer.State = .paused,
          interruptionAudioService: ModernAVPlayerInterruptionAudioService = ModernAVPlayerInterruptionAudioService()) {
         ModernAVPlayerLogger.instance.log(message: "Init", domain: .lifecycleState)
         self.context = context
+        self.type = type
         self.interruptionAudioService = interruptionAudioService
-        type = position == 0 ? .stopped : .paused
         self.context.player.pause()
-
-        guard let position = position else { return }
-        seek(position: position)
     }
     
     func contextUpdated() {
         context.plugins.forEach {
-            if type == .paused {
-                $0.didPaused(media: context.currentMedia, position: context.currentTime)
-            } else if type == .stopped {
-                $0.didStopped(media: context.currentMedia, position: context.currentTime)
-            } else {
-                assertionFailure()
-            }
+            $0.didPaused(media: context.currentMedia, position: context.currentTime)
         }
     }
     
@@ -83,8 +74,6 @@ final class PausedState: PlayerState {
     }
 
     func pause() {
-        guard type == .paused
-            else { context.changeState(state: PausedState(context: context)); return }
         let debug = "Already paused"
         context.debugMessage = debug
         ModernAVPlayerLogger.instance.log(message: debug, domain: .unavailableCommand)
@@ -116,10 +105,6 @@ final class PausedState: PlayerState {
     }
 
     func stop() {
-        guard type == .stopped
-            else { context.changeState(state: PausedState(context: context, position: 0)); return }
-        let debug = "Already stopped"
-        context.debugMessage = debug
-        ModernAVPlayerLogger.instance.log(message: debug, domain: .unavailableCommand)
+        context.changeState(state: StoppedState(context: context))
     }
 }

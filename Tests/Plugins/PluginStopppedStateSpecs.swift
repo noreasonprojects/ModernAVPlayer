@@ -34,7 +34,7 @@ final class PluginStopppedStateSpecs: XCTestCase {
 
     func testInitState_DidStoppedPluginShouldNotBeCall() {
         // ACT
-        _ = PausedState(context: context, position: 0)
+        _ = StoppedState(context: context)
 
         // EXPECT
         XCTAssertEqual(plugin.didStoppedCallCount, 0)
@@ -42,7 +42,7 @@ final class PluginStopppedStateSpecs: XCTestCase {
 
     func testWhenContextUpdated_DidStoppedPluginShouldBeCall() {
         // ARRANGE
-        let state = PausedState(context: context, position: 0)
+        let state = StoppedState(context: context)
 
         // ACT
         state.contextUpdated()

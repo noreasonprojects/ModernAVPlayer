@@ -66,7 +66,7 @@ final class InitStateSpecs: QuickSpec {
                 self.state.stop()
 
                 // ASSERT
-                expect(self.tested.state.type).to(equal(ModernAVPlayer.State.stopped))
+                expect(self.tested.state).to(beAnInstanceOf(StoppedState.self))
             }
         }
 

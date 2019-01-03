@@ -1,10 +1,10 @@
 // The MIT License (MIT)
 //
 // ModernAVPlayer
-// Copyright (c) 2018 Raphael Ankierman <raphael.ankierman@radiofrance.com>
+// Copyright (c) 2018 Raphael Ankierman <raphrel@gmail.com>
 //
-// InitState.swift
-// Created by raphael ankierman on 28/02/2018.
+// StoppedState.swift
+// Created by raphael ankierman on 03/01/2019.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,51 +25,33 @@
 // THE SOFTWARE.
 
 import AVFoundation
+import MediaPlayer
 
-struct InitState: PlayerState {
+final class StoppedState: PausedState {
 
-    // MARK: - Input
-
-    unowned var context: PlayerContext
-    
-    // MARK: - Variable
-    
-    let type: ModernAVPlayer.State = .initialization
-    
-    // MARK: - Init
+    // MARK: Init
 
     init(context: PlayerContext) {
-        ModernAVPlayerLogger.instance.log(message: "Init (struct)", domain: .lifecycleState)
-        self.context = context
-        context.player.automaticallyWaitsToMinimizeStalling = false
+        super.init(context: context, type: .stopped)
+
+        seek(position: 0)
     }
-    
-    func contextUpdated() { }
-    
+
+    override func contextUpdated() {
+        context.plugins.forEach {
+            $0.didStopped(media: context.currentMedia, position: context.currentTime)
+        }
+    }
+
     // MARK: - Shared actions
 
-    func load(media: PlayerMedia, autostart: Bool, position: Double? = nil) {
-        let state = LoadingMediaState(context: context, media: media, autostart: autostart, position: position)
-        context.changeState(state: state)
-    }
-    
-    func pause() {
+    override func pause() {
         context.changeState(state: PausedState(context: context))
     }
-    
-    func play() {
-        let debug = "Load item before playing"
+
+    override func stop() {
+        let debug = "Already stopped"
         context.debugMessage = debug
         ModernAVPlayerLogger.instance.log(message: debug, domain: .unavailableCommand)
-    }
-    
-    func seek(position: Double) {
-        let debug = "Unable to seek, load a media first"
-        context.debugMessage = debug
-        ModernAVPlayerLogger.instance.log(message: debug, domain: .unavailableCommand)
-    }
-    
-    func stop() {
-        context.changeState(state: StoppedState(context: context))
     }
 }

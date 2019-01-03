@@ -144,7 +144,7 @@ final class PausedStateSpecs: QuickSpec {
                 self.tested.stop()
 
                 // ASSERT
-                expect(self.playerContext.state.type).to(equal(ModernAVPlayer.State.stopped))
+                expect(self.playerContext.state).to(beAnInstanceOf(StoppedState.self))
             }
         }
 

@@ -31,7 +31,7 @@ struct LoadedState: PlayerState {
 
     // MARK: - Input
 
-    unowned var context: PlayerContext
+    unowned let context: PlayerContext
     
     // MARK: - Variable
     

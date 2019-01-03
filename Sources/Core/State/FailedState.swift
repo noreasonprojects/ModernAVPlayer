@@ -30,7 +30,7 @@ final class FailedState: PlayerState {
 
     // MARK: - Input
 
-    unowned var context: PlayerContext
+    unowned let context: PlayerContext
     private let error: PlayerError
     
     // MARK: - Variable

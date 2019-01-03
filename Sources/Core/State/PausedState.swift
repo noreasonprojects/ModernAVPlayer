@@ -29,10 +29,10 @@ import MediaPlayer
 
 final class PausedState: PlayerState {
     
-    // MARK: - Input
+    // MARK: - Inputs
     
-    unowned var context: PlayerContext
-    private var interruptionAudioService: ModernAVPlayerInterruptionAudioService
+    unowned let context: PlayerContext
+    private let interruptionAudioService: ModernAVPlayerInterruptionAudioService
 
     // MARK: - Output
     

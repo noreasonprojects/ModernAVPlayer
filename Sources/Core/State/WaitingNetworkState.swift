@@ -30,7 +30,7 @@ final class WaitingNetworkState: PlayerState {
     
     // MARK: - Inputs
     
-    unowned var context: PlayerContext
+    unowned let context: PlayerContext
     private var reachability: ReachabilityService
     
     // MARK: - Variable

@@ -25,6 +25,7 @@ final class PluginStopppedStateSpecs: XCTestCase {
         plugin = MockPlayerPlugin()
 
         context = PlayerContextMock()
+        Given(context, .config(getter: ModernAVPlayerConfiguration()))
         Given(context, .currentMedia(getter: media))
         Given(context, .currentTime(getter: position))
         Given(context, .player(getter: MockCustomPlayer()))
@@ -33,7 +34,7 @@ final class PluginStopppedStateSpecs: XCTestCase {
 
     func testInitState_DidStoppedPluginShouldNotBeCall() {
         // ACT
-        _ = StoppedState(context: context)
+        _ = PausedState(context: context, position: 0)
 
         // EXPECT
         XCTAssertEqual(plugin.didStoppedCallCount, 0)
@@ -41,7 +42,7 @@ final class PluginStopppedStateSpecs: XCTestCase {
 
     func testWhenContextUpdated_DidStoppedPluginShouldBeCall() {
         // ARRANGE
-        let state = StoppedState(context: context)
+        let state = PausedState(context: context, position: 0)
 
         // ACT
         state.contextUpdated()

@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 import AVFoundation
+import MediaPlayer
 
 final class PausedState: PlayerState {
     
@@ -41,22 +42,33 @@ final class PausedState: PlayerState {
     
     // MARK: - Variable
     
-    let type: ModernAVPlayer.State = .paused
+    var type: ModernAVPlayer.State
 
     // MARK: Init
     
     init(context: PlayerContext,
+         position: Double? = nil,
          interruptionAudioService: ModernAVPlayerInterruptionAudioService = ModernAVPlayerInterruptionAudioService()) {
         ModernAVPlayerLogger.instance.log(message: "Init", domain: .lifecycleState)
         self.context = context
-        self.context.player.pause()
         self.interruptionAudioService = interruptionAudioService
+        type = position == 0 ? .stopped : .paused
+        self.context.player.pause()
+
+        guard let position = position else { return }
+        seek(position: position)
     }
     
     func contextUpdated() {
-        let media = context.currentMedia
-        let position = context.currentTime
-        context.plugins.forEach { $0.didPaused(media: media, position: position) }
+        context.plugins.forEach {
+            if type == .paused {
+                $0.didPaused(media: context.currentMedia, position: context.currentTime)
+            } else if type == .stopped {
+                $0.didStopped(media: context.currentMedia, position: context.currentTime)
+            } else {
+                assertionFailure()
+            }
+        }
     }
     
     deinit {
@@ -71,6 +83,8 @@ final class PausedState: PlayerState {
     }
 
     func pause() {
+        guard type == .paused
+            else { context.changeState(state: PausedState(context: context)); return }
         let debug = "Already paused"
         context.debugMessage = debug
         ModernAVPlayerLogger.instance.log(message: debug, domain: .unavailableCommand)
@@ -96,10 +110,16 @@ final class PausedState: PlayerState {
         context.player.seek(to: time) { [context] completed in
             guard completed else { return }
             context.delegate?.playerContext(didCurrentTimeChange: context.currentTime)
+            context.nowPlaying.overrideInfoCenter(for: MPNowPlayingInfoPropertyElapsedPlaybackTime,
+                                                  value: NSNumber(value: context.currentTime))
         }
     }
 
     func stop() {
-        context.changeState(state: StoppedState(context: context))
+        guard type == .stopped
+            else { context.changeState(state: PausedState(context: context, position: 0)); return }
+        let debug = "Already stopped"
+        context.debugMessage = debug
+        ModernAVPlayerLogger.instance.log(message: debug, domain: .unavailableCommand)
     }
 }

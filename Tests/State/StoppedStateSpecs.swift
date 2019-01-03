@@ -35,14 +35,14 @@ import SwiftyMocky
 
 final class StoppedStateSpecs: QuickSpec {
     
-    private var tested: StoppedState!
+    private var tested: PausedState!
     private var media: PlayerMedia!
     private var mockPlayer: MockCustomPlayer!
     private var playerContext: ModernAVPlayerContext!
     private var item: MockPlayerItem!
     private var delegate: MockPlayerContextDelegate!
     private var nowPlaying: MockNowPlayingService!
-    private let endTime = CMTime(seconds: 42.0, preferredTimescale: CMTimeScale(1.0))
+    private let currentTime = CMTime(seconds: 42.0, preferredTimescale: CMTimeScale(1.0))
 
     override func spec() {
 
@@ -52,7 +52,7 @@ final class StoppedStateSpecs: QuickSpec {
             self.media = MockPlayerMedia(url: URL(string: "foo")!, type: .clip)
             self.mockPlayer = MockCustomPlayer(overrideCurrentItem: self.item)
             self.mockPlayer.seekCompletionHandlerReturn = true
-            self.mockPlayer.overrideCurrentTime = self.endTime
+            self.mockPlayer.overrideCurrentTime = self.currentTime
             self.delegate = MockPlayerContextDelegate()
             self.playerContext = ModernAVPlayerContext(player: self.mockPlayer,
                                                        config: ModernAVPlayerConfiguration(),
@@ -60,12 +60,12 @@ final class StoppedStateSpecs: QuickSpec {
                                                        plugins: [])
             self.playerContext.delegate = self.delegate
             self.playerContext.currentMedia = self.media
-            self.tested = StoppedState(context: self.playerContext)
+            self.tested = PausedState(context: self.playerContext, position: 0)
             self.playerContext.state = self.tested
         }
 
         context("init") {
-            it("should play the player and seek to 0") {
+            it("should pause the player and seek to 0") {
 
                 // ASSERT
                 expect(self.mockPlayer.pauseCallCount).to(equal(1))
@@ -159,7 +159,7 @@ final class StoppedStateSpecs: QuickSpec {
                     self.tested.play()
                     
                     // ASSERT
-                    expect(self.playerContext.state).to(beAnInstanceOf(StoppedState.self))
+                    expect(self.playerContext.state).to(beIdenticalTo(self.tested))
                 }
             }
 
@@ -172,7 +172,7 @@ final class StoppedStateSpecs: QuickSpec {
                 self.tested.stop()
 
                 // ASSERT
-                expect(self.playerContext.state).to(beAnInstanceOf(StoppedState.self))
+                expect(self.playerContext.state).to(beIdenticalTo(self.tested))
             }
         }
 
@@ -183,7 +183,7 @@ final class StoppedStateSpecs: QuickSpec {
                 self.tested.pause()
 
                 // ASSERT
-                expect(self.playerContext.state).to(beAnInstanceOf(PausedState.self))
+                expect(self.playerContext.state.type).to(equal(ModernAVPlayer.State.paused))
             }
         }
 
@@ -207,7 +207,7 @@ final class StoppedStateSpecs: QuickSpec {
             it("should not update state context") {
                 
                 // ASSERT
-                expect(self.playerContext.state).to(beAnInstanceOf(StoppedState.self))
+                expect(self.playerContext.state).to(beIdenticalTo(self.tested))
             }
             
             it("should call didCurrentTimeChange delegate method") {

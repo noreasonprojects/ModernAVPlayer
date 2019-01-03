@@ -117,7 +117,7 @@ final class LoadingMediaState: PlayerState {
 
     func stop() {
         cancelMediaLoading()
-        context.changeState(state: StoppedState(context: context))
+        context.changeState(state: PausedState(context: context, position: 0))
     }
 
     // MARK: - Private actions

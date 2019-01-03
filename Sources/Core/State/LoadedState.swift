@@ -83,6 +83,6 @@ struct LoadedState: PlayerState {
     }
 
     func stop() {
-        context.changeState(state: StoppedState(context: context))
+        context.changeState(state: PausedState(context: context, position: 0))
     }
 }

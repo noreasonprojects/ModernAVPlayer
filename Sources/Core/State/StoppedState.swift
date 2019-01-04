@@ -48,7 +48,7 @@ struct StoppedState: PlayerState {
             guard completed else { return }
             context.delegate?.playerContext(didCurrentTimeChange: context.currentTime)
             context.nowPlaying.overrideInfoCenter(for: MPNowPlayingInfoPropertyElapsedPlaybackTime,
-                                                  value: NSNumber(value: 0))
+                                                  value: context.currentTime)
         }
     }
 

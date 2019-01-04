@@ -98,7 +98,7 @@ final class PausedState: PlayerState {
             guard completed else { return }
             context.delegate?.playerContext(didCurrentTimeChange: context.currentTime)
             context.nowPlaying.overrideInfoCenter(for: MPNowPlayingInfoPropertyElapsedPlaybackTime,
-                                                  value: NSNumber(value: context.currentTime))
+                                                  value: context.currentTime)
         }
     }
 

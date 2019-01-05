@@ -29,6 +29,7 @@ import Foundation
 import Quick
 @testable
 import ModernAVPlayer
+import MediaPlayer
 import Nimble
 import SwiftyMocky
 
@@ -40,6 +41,7 @@ final class PausedStateSpecs: QuickSpec {
     private var playerContext: ModernAVPlayerContext!
     private var item: MockPlayerItem!
     private var delegate: MockPlayerContextDelegate!
+    private var nowPlaying: NowPlayingMock!
     private let position = CMTime(seconds: 42.0, preferredTimescale: CMTimeScale(1.0))
 
     override func spec() {
@@ -50,8 +52,10 @@ final class PausedStateSpecs: QuickSpec {
             self.media = MockPlayerMedia(url: URL(string: "foo")!, type: .clip)
             self.mockPlayer = MockCustomPlayer(overrideCurrentItem: self.item)
             self.mockPlayer.overrideCurrentTime = self.position
+            self.nowPlaying = NowPlayingMock()
             self.playerContext = ModernAVPlayerContext(player: self.mockPlayer,
                                                        config: ModernAVPlayerConfiguration(),
+                                                       nowPlaying: self.nowPlaying,
                                                        plugins: [])
             self.playerContext.delegate = self.delegate
             self.playerContext.currentMedia = self.media
@@ -163,22 +167,32 @@ final class PausedStateSpecs: QuickSpec {
             beforeEach {
                 
                 // ARRANGE
-                let position = CMTime(seconds: 42, preferredTimescale: 1)
                 self.mockPlayer.seekCompletionHandlerReturn = true
                 
                 // ACT
-                self.tested.seek(position: position.seconds)
+                self.tested.seek(position: self.position.seconds)
             }
             
             it("should call player seek") {
 
                 // ASSERT
                 expect(self.mockPlayer.seekCompletionCallCount).to(equal(1))
-                expect(self.mockPlayer.seekCompletionLastParam?.seconds).to(equal(42))
+                expect(self.mockPlayer.seekCompletionLastParam?.seconds).to(equal(self.position.seconds))
+            }
+
+            it("should not update state context") {
+
+                // ASSERT
+                expect(self.playerContext.state).to(beIdenticalTo(self.tested))
             }
             
             it("should call didCurrenTimeChange") {
                 expect(self.delegate.didCurrentTimeChangeCallCount).to(equal(1))
+            }
+
+            it("should override NowPlayingInfo elapsedPlaybackTime") {
+                Verify(self.nowPlaying, 1,
+                       .overrideInfoCenter(for: .value(MPNowPlayingInfoPropertyElapsedPlaybackTime), value: .any))
             }
         }
         
@@ -186,11 +200,10 @@ final class PausedStateSpecs: QuickSpec {
             beforeEach {
                 
                 // ARRANGE
-                let position = CMTime(seconds: 42, preferredTimescale: 1)
                 self.mockPlayer.seekCompletionHandlerReturn = false
                 
                 // ACT
-                self.tested.seek(position: position.seconds)
+                self.tested.seek(position: self.position.seconds)
             }
             
             it("should call player seek") {
@@ -200,8 +213,12 @@ final class PausedStateSpecs: QuickSpec {
                 expect(self.mockPlayer.seekCompletionLastParam?.seconds).to(equal(42))
             }
             
-            it("should call didCurrenTimeChange") {
+            it("should not call didCurrenTimeChange") {
                 expect(self.delegate.didCurrentTimeChangeCallCount).to(equal(0))
+            }
+
+            it("should not override NowPlayingInfo elapsedPlaybackTime") {
+                Verify(self.nowPlaying, 0, .overrideInfoCenter(for: .any, value: .any))
             }
         }
     }

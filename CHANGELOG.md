@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 
 ---
+## [X.X.X]
+* Fix:
+	* Update `nowPlayingInfo` playbackTime when seeking
+
 ## [1.1.1]
 * Breaking changes:
 	* didPaused(media:position) plugin method accept optional `PlayerMedia`

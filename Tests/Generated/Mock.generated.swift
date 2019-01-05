@@ -200,6 +200,164 @@ class AudioSessionServiceMock: AudioSessionService, Mock {
     }
 }
 
+// MARK: - NowPlaying
+class NowPlayingMock: NowPlaying, Mock {
+    init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
+        self.sequencingPolicy = sequencingPolicy
+        self.stubbingPolicy = stubbingPolicy
+        self.file = file
+        self.line = line
+    }
+
+    var matcher: Matcher = Matcher.default
+    var stubbingPolicy: StubbingPolicy = .wrap
+    var sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst
+    private var invocations: [MethodType] = []
+    private var methodReturnValues: [Given] = []
+    private var methodPerformValues: [Perform] = []
+    private var file: StaticString?
+    private var line: UInt?
+
+    typealias PropertyStub = Given
+    typealias MethodStub = Given
+    typealias SubscriptStub = Given
+
+    /// Convenience method - call setupMock() to extend debug information when failure occurs
+    public func setupMock(file: StaticString = #file, line: UInt = #line) {
+        self.file = file
+        self.line = line
+    }
+
+
+
+
+
+    func update(metadata: PlayerMediaMetadata?, duration: Double?, isLive: Bool?) {
+        addInvocation(.m_update__metadata_metadataduration_durationisLive_isLive(Parameter<PlayerMediaMetadata?>.value(`metadata`), Parameter<Double?>.value(`duration`), Parameter<Bool?>.value(`isLive`)))
+		let perform = methodPerformValue(.m_update__metadata_metadataduration_durationisLive_isLive(Parameter<PlayerMediaMetadata?>.value(`metadata`), Parameter<Double?>.value(`duration`), Parameter<Bool?>.value(`isLive`))) as? (PlayerMediaMetadata?, Double?, Bool?) -> Void
+		perform?(`metadata`, `duration`, `isLive`)
+    }
+
+    func overrideInfoCenter(for key: String, value: Any) {
+        addInvocation(.m_overrideInfoCenter__for_keyvalue_value(Parameter<String>.value(`key`), Parameter<Any>.value(`value`)))
+		let perform = methodPerformValue(.m_overrideInfoCenter__for_keyvalue_value(Parameter<String>.value(`key`), Parameter<Any>.value(`value`))) as? (String, Any) -> Void
+		perform?(`key`, `value`)
+    }
+
+
+    fileprivate enum MethodType {
+        case m_update__metadata_metadataduration_durationisLive_isLive(Parameter<PlayerMediaMetadata?>, Parameter<Double?>, Parameter<Bool?>)
+        case m_overrideInfoCenter__for_keyvalue_value(Parameter<String>, Parameter<Any>)
+
+        static func compareParameters(lhs: MethodType, rhs: MethodType, matcher: Matcher) -> Bool {
+            switch (lhs, rhs) {
+            case (.m_update__metadata_metadataduration_durationisLive_isLive(let lhsMetadata, let lhsDuration, let lhsIslive), .m_update__metadata_metadataduration_durationisLive_isLive(let rhsMetadata, let rhsDuration, let rhsIslive)):
+                guard Parameter.compare(lhs: lhsMetadata, rhs: rhsMetadata, with: matcher) else { return false } 
+                guard Parameter.compare(lhs: lhsDuration, rhs: rhsDuration, with: matcher) else { return false } 
+                guard Parameter.compare(lhs: lhsIslive, rhs: rhsIslive, with: matcher) else { return false } 
+                return true 
+            case (.m_overrideInfoCenter__for_keyvalue_value(let lhsKey, let lhsValue), .m_overrideInfoCenter__for_keyvalue_value(let rhsKey, let rhsValue)):
+                guard Parameter.compare(lhs: lhsKey, rhs: rhsKey, with: matcher) else { return false } 
+                guard Parameter.compare(lhs: lhsValue, rhs: rhsValue, with: matcher) else { return false } 
+                return true 
+            default: return false
+            }
+        }
+
+        func intValue() -> Int {
+            switch self {
+            case let .m_update__metadata_metadataduration_durationisLive_isLive(p0, p1, p2): return p0.intValue + p1.intValue + p2.intValue
+            case let .m_overrideInfoCenter__for_keyvalue_value(p0, p1): return p0.intValue + p1.intValue
+            }
+        }
+    }
+
+    class Given: StubbedMethod {
+        fileprivate var method: MethodType
+
+        private init(method: MethodType, products: [Product]) {
+            self.method = method
+            super.init(products)
+        }
+
+
+    }
+
+    struct Verify {
+        fileprivate var method: MethodType
+
+        static func update(metadata: Parameter<PlayerMediaMetadata?>, duration: Parameter<Double?>, isLive: Parameter<Bool?>) -> Verify { return Verify(method: .m_update__metadata_metadataduration_durationisLive_isLive(`metadata`, `duration`, `isLive`))}
+        static func overrideInfoCenter(for key: Parameter<String>, value: Parameter<Any>) -> Verify { return Verify(method: .m_overrideInfoCenter__for_keyvalue_value(`key`, `value`))}
+    }
+
+    struct Perform {
+        fileprivate var method: MethodType
+        var performs: Any
+
+        static func update(metadata: Parameter<PlayerMediaMetadata?>, duration: Parameter<Double?>, isLive: Parameter<Bool?>, perform: @escaping (PlayerMediaMetadata?, Double?, Bool?) -> Void) -> Perform {
+            return Perform(method: .m_update__metadata_metadataduration_durationisLive_isLive(`metadata`, `duration`, `isLive`), performs: perform)
+        }
+        static func overrideInfoCenter(for key: Parameter<String>, value: Parameter<Any>, perform: @escaping (String, Any) -> Void) -> Perform {
+            return Perform(method: .m_overrideInfoCenter__for_keyvalue_value(`key`, `value`), performs: perform)
+        }
+    }
+
+    public func given(_ method: Given) {
+        methodReturnValues.append(method)
+    }
+
+    public func perform(_ method: Perform) {
+        methodPerformValues.append(method)
+        methodPerformValues.sort { $0.method.intValue() < $1.method.intValue() }
+    }
+
+    public func verify(_ method: Verify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
+        let invocations = matchingCalls(method.method)
+        MockyAssert(count.matches(invocations.count), "Expeced: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+    }
+
+    private func addInvocation(_ call: MethodType) {
+        invocations.append(call)
+    }
+    private func methodReturnValue(_ method: MethodType) throws -> Product {
+        let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
+        let matched = candidates.first(where: { $0.isValid && MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
+        guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
+        return product
+    }
+    private func methodPerformValue(_ method: MethodType) -> Any? {
+        let matched = methodPerformValues.reversed().first { MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) }
+        return matched?.performs
+    }
+    private func matchingCalls(_ method: MethodType) -> [MethodType] {
+        return invocations.filter { MethodType.compareParameters(lhs: $0, rhs: method, matcher: matcher) }
+    }
+    private func matchingCalls(_ method: Verify) -> Int {
+        return matchingCalls(method.method).count
+    }
+    private func givenGetterValue<T>(_ method: MethodType, _ message: String) -> T {
+        do {
+            return try methodReturnValue(method).casted()
+        } catch {
+            onFatalFailure(message)
+            Failure(message)
+        }
+    }
+    private func optionalGivenGetterValue<T>(_ method: MethodType, _ message: String) -> T? {
+        do {
+            return try methodReturnValue(method).casted()
+        } catch {
+            return nil
+        }
+    }
+    private func onFatalFailure(_ message: String) {
+        #if Mocky
+        guard let file = self.file, let line = self.line else { return } // Let if fail if cannot handle gratefully
+        SwiftyMockyTestObserver.handleMissingStubError(message: message, file: file, line: line)
+        #endif
+    }
+}
+
 // MARK: - PlaybackObservingService
 class PlaybackObservingServiceMock: PlaybackObservingService, Mock {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {

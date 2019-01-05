@@ -31,7 +31,7 @@ struct StoppedState: PlayerState {
 
     // MARK: - Input
 
-    unowned var context: PlayerContext
+    unowned let context: PlayerContext
     
     // MARK: - Variable
     
@@ -48,7 +48,7 @@ struct StoppedState: PlayerState {
             guard completed else { return }
             context.delegate?.playerContext(didCurrentTimeChange: context.currentTime)
             context.nowPlaying.overrideInfoCenter(for: MPNowPlayingInfoPropertyElapsedPlaybackTime,
-                                                  value: NSNumber(value: 0))
+                                                  value: context.currentTime)
         }
     }
 
@@ -89,6 +89,8 @@ struct StoppedState: PlayerState {
         context.player.seek(to: time) { [context] completed in
             guard completed else { return }
             context.delegate?.playerContext(didCurrentTimeChange: context.currentTime)
+            context.nowPlaying.overrideInfoCenter(for: MPNowPlayingInfoPropertyElapsedPlaybackTime,
+                                                  value: context.currentTime)
         }
     }
 

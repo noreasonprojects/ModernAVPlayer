@@ -29,7 +29,7 @@ import MediaPlayer
 
 final class PlayingState: PlayerState {
     
-    // MARK: - Input
+    // MARK: - Inputs
     
     unowned let context: PlayerContext
     private var itemPlaybackObservingService: PlaybackObservingService

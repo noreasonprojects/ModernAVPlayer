@@ -25,13 +25,14 @@
 // THE SOFTWARE.
 
 import AVFoundation
+import MediaPlayer
 
 final class PausedState: PlayerState {
     
-    // MARK: - Input
+    // MARK: - Inputs
     
-    unowned var context: PlayerContext
-    private var interruptionAudioService: ModernAVPlayerInterruptionAudioService
+    unowned let context: PlayerContext
+    private let interruptionAudioService: ModernAVPlayerInterruptionAudioService
 
     // MARK: - Output
     
@@ -96,6 +97,8 @@ final class PausedState: PlayerState {
         context.player.seek(to: time) { [context] completed in
             guard completed else { return }
             context.delegate?.playerContext(didCurrentTimeChange: context.currentTime)
+            context.nowPlaying.overrideInfoCenter(for: MPNowPlayingInfoPropertyElapsedPlaybackTime,
+                                                  value: context.currentTime)
         }
     }
 

@@ -31,7 +31,7 @@ struct LoadedState: PlayerState {
 
     // MARK: - Input
 
-    unowned var context: PlayerContext
+    unowned let context: PlayerContext
     
     // MARK: - Variable
     
@@ -79,6 +79,8 @@ struct LoadedState: PlayerState {
         context.player.seek(to: time) { [context] completed in
             guard completed else { return }
             context.delegate?.playerContext(didCurrentTimeChange: context.currentTime)
+            context.nowPlaying.overrideInfoCenter(for: MPNowPlayingInfoPropertyElapsedPlaybackTime,
+                                                  value: context.currentTime)
         }
     }
 

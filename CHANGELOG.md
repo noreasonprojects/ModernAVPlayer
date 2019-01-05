@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 ---
 ## [X.X.X]
 * Fix:
-	* Update `nowPlayingInfo` playbackTime when seek in Paused state
+	* Update `nowPlayingInfo` playbackTime when seek
 * Improvement:
 	* Delete duplicate code by merging Paused / Stopped states
 

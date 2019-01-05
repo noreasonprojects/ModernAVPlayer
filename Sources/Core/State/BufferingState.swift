@@ -30,7 +30,7 @@ final class BufferingState: NSObject, PlayerState {
     
     // MARK: - Inputs
     
-    unowned var context: PlayerContext
+    unowned let context: PlayerContext
     private var rateObservingService: RateObservingService
     private var interruptionAudioService: ModernAVPlayerInterruptionAudioService
     private var playerCurrentTime: Double { return context.currentTime }

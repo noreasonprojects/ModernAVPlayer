@@ -25,6 +25,7 @@ final class PluginStopppedStateSpecs: XCTestCase {
         plugin = MockPlayerPlugin()
 
         context = PlayerContextMock()
+        Given(context, .config(getter: ModernAVPlayerConfiguration()))
         Given(context, .currentMedia(getter: media))
         Given(context, .currentTime(getter: position))
         Given(context, .player(getter: MockCustomPlayer()))

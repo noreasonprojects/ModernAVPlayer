@@ -1,10 +1,10 @@
 // The MIT License (MIT)
 //
 // ModernAVPlayer
-// Copyright (c) 2018 Raphael Ankierman <raphael.ankierman@radiofrance.com>
+// Copyright (c) 2018 Raphael Ankierman <raphrel@gmail.com>
 //
 // StoppedState.swift
-// Created by raphael ankierman on 23/02/2018.
+// Created by raphael ankierman on 03/01/2019.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -27,74 +27,29 @@
 import AVFoundation
 import MediaPlayer
 
-struct StoppedState: PlayerState {
+final class StoppedState: PausedState {
 
-    // MARK: - Input
-
-    unowned let context: PlayerContext
-    
-    // MARK: - Variable
-    
-    let type: ModernAVPlayer.State = .stopped
-
-    // MARK: - Init
+    // MARK: Init
 
     init(context: PlayerContext) {
-        ModernAVPlayerLogger.instance.log(message: "Init (struct)", domain: .lifecycleState)
-        
-        self.context = context
-        self.context.player.pause()
-        self.context.player.seek(to: CMTime.zero) { [context] completed in
-            guard completed else { return }
-            context.delegate?.playerContext(didCurrentTimeChange: context.currentTime)
-            context.nowPlaying.overrideInfoCenter(for: MPNowPlayingInfoPropertyElapsedPlaybackTime,
-                                                  value: context.currentTime)
+        super.init(context: context, type: .stopped)
+
+        seek(position: 0)
+    }
+
+    override func contextUpdated() {
+        context.plugins.forEach {
+            $0.didStopped(media: context.currentMedia, position: context.currentTime)
         }
     }
 
-    func contextUpdated() {
-        let media = context.currentMedia
-        let position = context.currentTime
-        context.plugins.forEach { $0.didStopped(media: media, position: position) }
-    }
-    
     // MARK: - Shared actions
-    
-    func load(media: PlayerMedia, autostart: Bool, position: Double? = nil) {
-        let state = LoadingMediaState(context: context, media: media, autostart: autostart, position: position)
-        context.changeState(state: state)
-    }
 
-    func pause() {
+    override func pause() {
         context.changeState(state: PausedState(context: context))
     }
 
-    func play() {
-        if context.currentItem?.status == .readyToPlay {
-            let state = BufferingState(context: context)
-            context.changeState(state: state)
-            state.playCommand()
-        } else if let media = context.currentMedia {
-            let state = LoadingMediaState(context: context, media: media, autostart: true)
-            context.changeState(state: state)
-        } else {
-            let debug = "Please load item before playing"
-            context.debugMessage = debug
-            ModernAVPlayerLogger.instance.log(message: debug, domain: .unavailableCommand)
-        }
-    }
-
-    func seek(position: Double) {
-        let time = CMTime(seconds: position, preferredTimescale: context.config.preferedTimeScale)
-        context.player.seek(to: time) { [context] completed in
-            guard completed else { return }
-            context.delegate?.playerContext(didCurrentTimeChange: context.currentTime)
-            context.nowPlaying.overrideInfoCenter(for: MPNowPlayingInfoPropertyElapsedPlaybackTime,
-                                                  value: context.currentTime)
-        }
-    }
-
-    func stop() {
+    override func stop() {
         let debug = "Already stopped"
         context.debugMessage = debug
         ModernAVPlayerLogger.instance.log(message: debug, domain: .unavailableCommand)

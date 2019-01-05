@@ -65,7 +65,7 @@ final class StoppedStateSpecs: QuickSpec {
         }
 
         context("init") {
-            it("should play the player and seek to 0") {
+            it("should pause the player and seek to 0") {
 
                 // ASSERT
                 expect(self.mockPlayer.pauseCallCount).to(equal(1))
@@ -156,7 +156,7 @@ final class StoppedStateSpecs: QuickSpec {
                     self.tested.play()
                     
                     // ASSERT
-                    expect(self.playerContext.state).to(beAnInstanceOf(StoppedState.self))
+                    expect(self.playerContext.state).to(beIdenticalTo(self.tested))
                 }
             }
 
@@ -169,7 +169,7 @@ final class StoppedStateSpecs: QuickSpec {
                 self.tested.stop()
 
                 // ASSERT
-                expect(self.playerContext.state).to(beAnInstanceOf(StoppedState.self))
+                expect(self.playerContext.state).to(beIdenticalTo(self.tested))
             }
         }
 
@@ -204,7 +204,7 @@ final class StoppedStateSpecs: QuickSpec {
             it("should not update state context") {
                 
                 // ASSERT
-                expect(self.playerContext.state).to(beAnInstanceOf(StoppedState.self))
+                expect(self.playerContext.state).to(beIdenticalTo(self.tested))
             }
             
             it("should call didCurrentTimeChange delegate method") {

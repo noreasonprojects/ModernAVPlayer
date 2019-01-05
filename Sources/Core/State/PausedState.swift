@@ -27,7 +27,7 @@
 import AVFoundation
 import MediaPlayer
 
-final class PausedState: PlayerState {
+class PausedState: PlayerState {
     
     // MARK: - Inputs
     
@@ -42,22 +42,24 @@ final class PausedState: PlayerState {
     
     // MARK: - Variable
     
-    let type: ModernAVPlayer.State = .paused
+    let type: ModernAVPlayer.State
 
     // MARK: Init
     
     init(context: PlayerContext,
+         type: ModernAVPlayer.State = .paused,
          interruptionAudioService: ModernAVPlayerInterruptionAudioService = ModernAVPlayerInterruptionAudioService()) {
         ModernAVPlayerLogger.instance.log(message: "Init", domain: .lifecycleState)
         self.context = context
-        self.context.player.pause()
+        self.type = type
         self.interruptionAudioService = interruptionAudioService
+        self.context.player.pause()
     }
     
     func contextUpdated() {
-        let media = context.currentMedia
-        let position = context.currentTime
-        context.plugins.forEach { $0.didPaused(media: media, position: position) }
+        context.plugins.forEach {
+            $0.didPaused(media: context.currentMedia, position: context.currentTime)
+        }
     }
     
     deinit {

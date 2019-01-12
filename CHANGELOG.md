@@ -2,11 +2,13 @@
 All notable changes to this project will be documented in this file.
 
 ---
-## [X.X.X]
+## [1.1.2]
 * Fix:
 	* Update `nowPlayingInfo` playbackTime when seek
 * Improvement:
-	* Delete duplicate code by merging Paused / Stopped states
+	* Delete duplicate code by merging internal Paused / Stopped states
+* Dependency:
+	* [gem] Fastlane -> 2.113.0
 
 ## [1.1.1]
 * Breaking changes:

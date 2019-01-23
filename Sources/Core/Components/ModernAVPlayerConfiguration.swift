@@ -50,7 +50,7 @@ public struct ModernAVPlayerConfiguration: PlayerConfiguration {
 
     public var useDefaultRemoteCommand = true
     
-    public var allowsExternalPlayback = false
+    public let allowsExternalPlayback = false
 
     public init() {
         periodicPlayingTime = CMTime(seconds: 1, preferredTimescale: preferedTimeScale)

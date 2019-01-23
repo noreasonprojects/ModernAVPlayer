@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 ---
 ## [x.x.x]
 * Improvement:
-	* Set allowsExternalPlayback to false to avoid black screen when using AirPlay on Apple TV
+	* Disable external playback to avoid black screen when using AirPlay on Apple TV
 
 ## [1.1.2]
 * Fix:

@@ -91,7 +91,6 @@ public final class ModernAVPlayer: NSObject, ModernAVPlayerExposable {
                 config: PlayerConfiguration = ModernAVPlayerConfiguration(),
                 plugins: [PlayerPlugin] = [],
                 loggerDomains: [ModernAVPlayerLoggerDomain] = []) {
-        player.allowsExternalPlayback = false
         ModernAVPlayerLogger.setup.domains = loggerDomains
         context = ModernAVPlayerContext(player: player, config: config, plugins: plugins)
         super.init()

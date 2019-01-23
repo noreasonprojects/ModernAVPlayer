@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 
 ---
+## [x.x.x]
+* Improvement:
+	* Disable external playback to avoid black screen when using AirPlay on Apple TV
+
 ## [1.1.2]
 * Fix:
 	* Update `nowPlayingInfo` playbackTime when seek

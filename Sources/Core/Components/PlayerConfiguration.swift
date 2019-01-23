@@ -55,4 +55,8 @@ public protocol PlayerConfiguration {
     /// If false, you have to set player.remoteCommands by yourself if needed.
     ///
     var useDefaultRemoteCommand: Bool { get }
+    
+    /// Set allowsExternalPlayback to false to avoid black screen when using AirPlay on Apple TV
+    ///
+    var allowsExternalPlayback: Bool { get }
 }

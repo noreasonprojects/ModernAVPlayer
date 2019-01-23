@@ -114,6 +114,7 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
 
         ModernAVPlayerLogger.instance.log(message: "Init", domain: .lifecycleState)
         setAudioSessionCategory()
+        setAllowsExternalPlayback()
         
         defer {
             state = InitState(context: self)
@@ -127,6 +128,10 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
 
     private func setAudioSessionCategory() {
         audioSession.setCategory(config.audioSessionCategory)
+    }
+    
+    private func setAllowsExternalPlayback() {
+        player.allowsExternalPlayback = config.allowsExternalPlayback
     }
     
     func changeState(state: PlayerState) {

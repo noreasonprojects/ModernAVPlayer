@@ -33,6 +33,8 @@ public struct PlayerConfigurationExample: PlayerConfiguration {
 
     // RemoteCommandExample is used for example
     public var useDefaultRemoteCommand = false
+    
+    public let allowsExternalPlayback = false
 
     public init() {
         periodicPlayingTime = CMTime(seconds: 1, preferredTimescale: preferedTimeScale)

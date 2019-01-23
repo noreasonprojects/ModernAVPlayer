@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 
 ---
-## [X.X.X]
+## [1.1.3]
 * Improvement:
 	* Disable external playback to avoid black screen when using AirPlay on Apple TV
 

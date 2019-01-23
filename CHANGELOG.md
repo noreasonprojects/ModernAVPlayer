@@ -5,6 +5,8 @@ All notable changes to this project will be documented in this file.
 ## [1.1.3]
 * Improvement:
 	* Disable external playback to avoid black screen when using AirPlay on Apple TV
+* Dependency:
+	* [gem] Fastlane -> 2.114.0
 
 ## [1.1.2]
 * Fix:

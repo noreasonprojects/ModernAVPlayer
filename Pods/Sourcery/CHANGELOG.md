@@ -1,6 +1,21 @@
 # Sourcery CHANGELOG
 
 ---
+## 0.16.0
+
+- Replaces environment variables inside .yml configurations (like ${PROJECT_NAME}), if a value is set.
+- Fixes warning in generated AutoMockable methods that have implicit optional return values
+- Support for `optional` methods in ObjC protocols
+- Support for parsing lazy vars into Variable's attributes.
+- Updated Stencil to 0.13.1 and SwiftStencilKit to 2.7.0
+- In Swift templates CLI arguments should now be accessed via `argument` instead of `arguments`, to be consistent with Stencil and JS templates.
+- Now in swift templates you can define types, extensions and use other Swift features that require file scope, without using separate files. All templates code is now placed at the top level of the template executable code, instead of being placed inside an extension of `TemplateContext` type.
+- Fixed missing generated code annotated with `inline` annotation when corresponding annotation in sources are missing. This generated code will be now present in `*.generated.swift` file.  
+- Updated AutoHashable template to use Swift 4.2's `hash(into:)` method from `Hashable`, and enable support for inheritance.
+- Record all method invocations in the `AutoMockable` template.
+- Replace `swiftc` with the Swift Package Manager to build Swift templates
+- Swift templates can now be used when using a SPM build of Sourcery.
+
 ## 0.15.0
 
 ### New Features

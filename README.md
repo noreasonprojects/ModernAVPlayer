@@ -31,8 +31,8 @@
 ## Requirements
 
 - iOS 10.0+
-- Xcode 10.1+
-- Swift 4.2+
+- Xcode 10.2+
+- Swift 5.0+
 
 > In order to support background mode, append the following to your ``Info.plist``:
 ```

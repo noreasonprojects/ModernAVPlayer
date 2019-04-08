@@ -1,6 +1,33 @@
 # Changelog
 
 All changes to SwiftyMocky project will be documented in this file.
+
+-----
+
+## __3.2.0__ / 2019
+
+#### Added:
+* Fixed issues with naming, as internal name `Product` tend to conflict with Mocked classes
+* Swift 5.0 support, fixes for optional types casting
+* Integrated Sourcery 0.16.0, fixed issues resulting in breaking with newest Sourcery
+
+#### Removed:
+* __No more support for Swift 3.x__
+* All Given methods, that were marked as `deprecated` in SwiftyMocky 3.x, are now __unavailable)).
+
+-----
+
+## __3.1.0__ / 2019
+
+#### Added:
+* Parameter convenience constructing as `.notNil`, when Parameter wraps an optional type
+* Convenience `Count.once` as syntactic sugar for `1` for `Verify`
+* Proper integration with projects that already use Sourcery (@laxmorek)
+
+#### Fixed:
+* Fixed generating mocks for methods that are throwing, and returning Self in the same time
+* Fixed associated types protocols generation, when methods generic constrained
+
 -----
 
 ## __3.0.0__ / 2018

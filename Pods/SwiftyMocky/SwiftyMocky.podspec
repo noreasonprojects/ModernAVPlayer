@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SwiftyMocky'
-  s.version          = '3.0.0'
+  s.version          = '3.2.0'
   s.summary          = 'Unit testing library for Swift, with mock generation. Adds a set of handy methods, simplifying testing.'
   s.description      = <<-DESC
 Library that uses metaprogramming technique to generate mocks based on sources, that makes testing for Swift Mockito-like.
@@ -22,34 +22,59 @@ Library that uses metaprogramming technique to generate mocks based on sources, 
 
   s.ios.deployment_target = '8.0'
   s.tvos.deployment_target = '9.0'
-  s.macos.deployment_target = '10.9'
+  s.macos.deployment_target = '10.10'
   s.default_subspec  = "Core"
   s.preserve_paths = '*'
+  s.swift_version = '4.0'
 
   s.subspec 'Core' do |core|
-      core.source_files = 'Sources/Classes/**/*'
-      core.resources = '{Sources/Templates/*,get_sourcery.sh}'
-      core.xcconfig = { 'OTHER_SWIFT_FLAGS' => '-DMocky' }
-      core.frameworks = 'Foundation'
-      core.weak_framework = "XCTest"
-      core.dependency 'Sourcery'
-      core.pod_target_xcconfig = {
+    core.source_files = 'Sources/Classes/**/*'
+    core.resources = '{Sources/Templates/*,get_sourcery.sh}'
+    core.xcconfig = { 'OTHER_SWIFT_FLAGS' => '-DMocky' }
+    core.frameworks = 'Foundation'
+    core.weak_framework = "XCTest"
+    core.dependency 'Sourcery', '> 0.16'
+    core.pod_target_xcconfig = {
         'APPLICATION_EXTENSION_API_ONLY' => 'YES',
         'ENABLE_BITCODE' => 'NO',
         'OTHER_LDFLAGS' => '$(inherited) -weak-lswiftXCTest -Xlinker -no_application_extension',
         'OTHER_SWIFT_FLAGS' => '$(inherited) -suppress-warnings',
         'FRAMEWORK_SEARCH_PATHS' => '$(inherited) "$(PLATFORM_DIR)/Developer/Library/Frameworks"',
-      }
+        'DEFINES_MODULE' => 'YES'
+    }
+    core.user_target_xcconfig = { 'FRAMEWORK_SEARCH_PATHS' => '$(PLATFORM_DIR)/Developer/Library/Frameworks' }
   end
 
-  s.subspec 'Custom' do |custom|
-      custom.source_files = 'Sources/Classes/**/*'
-      custom.exclude_files = [
-          "Sources/Classes/CustomAssertions.swift"
-      ]
-      custom.resources = '{Sources/Templates/*,get_sourcery.sh}'
-      custom.xcconfig = { 'OTHER_SWIFT_FLAGS' => '-DMockyCustom' }
-      custom.frameworks = 'Foundation'
-      custom.dependency 'Sourcery'
+  s.subspec 'StaticLibrary' do |spec|
+    spec.dependency 'SwiftyMocky/Core'
+    spec.exclude_files = [
+        "Sources/Classes/MockySetup.{h,m}",
+    ]
+  end
+
+  s.subspec 'Custom' do |spec|
+    spec.source_files = 'Sources/Classes/**/*'
+    spec.exclude_files = [
+        "Sources/Classes/CustomAssertions.swift",
+        "Sources/Classes/SwiftyMockyTestObserver.swift",
+        "Sources/Classes/MockySetup.{h,m}",
+    ]
+    spec.resources = '{Sources/Templates/*,get_sourcery.sh}'
+    spec.xcconfig = { 'OTHER_SWIFT_FLAGS' => '-DMockyCustom' }
+    spec.frameworks = 'Foundation'
+    spec.dependency 'Sourcery'
+  end
+
+  s.subspec 'Prototyping' do |spec|
+    spec.source_files = 'Sources/Classes/**/*'
+    spec.exclude_files = [
+      "Sources/Classes/CustomAssertions.swift",
+      "Sources/Classes/SwiftyMockyTestObserver.swift",
+      "Sources/Classes/MockySetup.{h,m}",
+    ]
+    spec.resources = '{Sources/Templates/*,get_sourcery.sh}'
+    spec.xcconfig = { 'OTHER_SWIFT_FLAGS' => '-DMockyCustom' }
+    spec.frameworks = 'Foundation'
+    spec.dependency 'Sourcery'
   end
 end

@@ -2,6 +2,16 @@
 All notable changes to this project will be documented in this file.
 
 ---
+## [X.X.X]
+* Feature:
+	* Support swift 5
+* Dependencies:
+	* [pod] Quick -> 2.0.0
+	* [pod] Nimble -> 8.0.1
+	* [pod] RxSwift -> 4.5.0
+	* [pod] RxSwift -> 4.5.0
+	* [pod] SwiftyMocky -> 3.2.0
+
 ## [1.1.3]
 * Improvement:
 	* Disable external playback to avoid black screen when using AirPlay on Apple TV

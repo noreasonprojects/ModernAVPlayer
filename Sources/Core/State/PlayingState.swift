@@ -188,7 +188,7 @@ final class PlayingState: PlayerState {
         switch reason {
         case .oldDeviceUnavailable, .unknown:
             context.changeState(state: PausedState(context: context))
-        case .newDeviceAvailable, .wakeFromSleep, .override, .noSuitableRouteForCategory, .routeConfigurationChange, .categoryChange:
+        default:
             break
         }
     }

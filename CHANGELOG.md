@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 
 ---
-## [X.X.X]
+## [1.2.0]
 * Feature:
 	* Support swift 5
 * Dependencies:

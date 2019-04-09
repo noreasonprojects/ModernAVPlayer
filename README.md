@@ -1,5 +1,5 @@
 # ModernAVPlayer
-![Swift 4.2](https://img.shields.io/badge/Swift-4.2-orange.svg)
+![Swift 4.2](https://img.shields.io/badge/Swift-5-orange.svg)
 [![Build Status](https://travis-ci.org/noreasonprojects/ModernAVPlayer.svg?branch=develop)](https://travis-ci.com/noreasonprojects/ModernAVPlayer)
 ![CocoaPods](https://img.shields.io/cocoapods/v/ModernAVPlayer.svg)
 ![CocoaPods](https://img.shields.io/cocoapods/l/ModernAVPlayer.svg)
@@ -31,8 +31,8 @@
 ## Requirements
 
 - iOS 10.0+
-- Xcode 10.1+
-- Swift 4.2+
+- Xcode 10.2+
+- Swift 5.0+
 
 > In order to support background mode, append the following to your ``Info.plist``:
 ```

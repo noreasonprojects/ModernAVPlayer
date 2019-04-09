@@ -19,7 +19,7 @@
   "platforms": {
     "ios": "10.0"
   },
-  "swift_version": "4.2",
+  "swift_version": "5.0",
   "subspecs": [
     {
       "name": "Core",
@@ -32,10 +32,10 @@
 
         ],
         "RxSwift": [
-          "~> 4.0"
+          "~> 4.5"
         ],
         "RxCocoa": [
-          "~> 4.0"
+          "~> 4.5"
         ]
       },
       "source_files": "Sources/RxModernAVPlayer/**/*"

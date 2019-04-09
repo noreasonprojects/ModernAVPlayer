@@ -45,10 +45,30 @@ public enum Parameter<ValueType> {
     }
 }
 
+// MARK: - Optionality checks
+public protocol OptionalType: ExpressibleByNilLiteral {
+    var isNotNil: Bool { get }
+}
+
+extension Optional: OptionalType {
+    public var isNotNil: Bool {
+        switch self {
+        case .some: return true
+        case .none: return false
+        }
+    }
+}
+
+public extension Parameter where ValueType: OptionalType {
+    static var notNil: Parameter<ValueType> {
+        return Parameter.matching { $0.isNotNil }
+    }
+}
+
 // MARK: - Order
 public extension Parameter where ValueType: GenericAttributeType {
     /// Used for invocations sorting purpose.
-    public var intValue: Int {
+    var intValue: Int {
         switch self {
         case ._: return 0
         case let .value(generic): return generic.intValue
@@ -59,7 +79,7 @@ public extension Parameter where ValueType: GenericAttributeType {
 
 public extension Parameter {
     /// Used for invocations sorting purpose.
-    public var intValue: Int {
+    var intValue: Int {
         switch self {
         case ._: return 0
         case .value: return 1
@@ -81,7 +101,7 @@ public extension Parameter {
     ///   - rhs: Second parameter
     ///   - matcher: Matcher instance
     /// - Returns: true, if first is matching second
-    public static func compare(lhs: Parameter<ValueType>, rhs: Parameter<ValueType>, with matcher: Matcher) -> Bool {
+    static func compare(lhs: Parameter<ValueType>, rhs: Parameter<ValueType>, with matcher: Matcher) -> Bool {
         switch (lhs, rhs) {
         case (._, _): return true
         case (_, ._): return true
@@ -100,7 +120,7 @@ public extension Parameter {
     /// [Internal] Wraps as generic Parameter instance. Should not be ever called directly.
     ///
     /// - Returns: Wrapped parameter
-    public func wrapAsGeneric() -> Parameter<GenericAttribute> {
+    func wrapAsGeneric() -> Parameter<GenericAttribute> {
         switch self {
         case ._:
             let attribute = GenericAttribute(Mirror(reflecting: ValueType.self), intValue, { (l, r, m) -> Bool in
@@ -156,7 +176,7 @@ public extension Parameter where ValueType: GenericAttributeType {
     ///   - rhs: other
     ///   - matcher: Matcher instance used for comparison
     /// - Returns: true if they are matching, false otherwise
-    public static func compare(lhs: Parameter<ValueType>, rhs: Parameter<ValueType>, with matcher: Matcher) -> Bool {
+    static func compare(lhs: Parameter<ValueType>, rhs: Parameter<ValueType>, with matcher: Matcher) -> Bool {
         switch (lhs, rhs) {
         case (._, _): return true
         case (_, ._): return true
@@ -166,7 +186,7 @@ public extension Parameter where ValueType: GenericAttributeType {
     }
 }
 
-public extension Parameter where ValueType: Equatable {
+public extension Parameter where ValueType: Sequence, ValueType: Equatable {
     /// [Internal] Compare two parameters
     ///
     /// - Parameters:
@@ -174,7 +194,7 @@ public extension Parameter where ValueType: Equatable {
     ///   - rhs: other
     ///   - matcher: Matcher instance used for comparison
     /// - Returns: true if they are matching, false otherwise
-    public static func compare(lhs: Parameter<ValueType>, rhs: Parameter<ValueType>, with matcher: Matcher) -> Bool {
+    static func compare(lhs: Parameter<ValueType>, rhs: Parameter<ValueType>, with matcher: Matcher) -> Bool {
         switch (lhs, rhs) {
         case (._, _): return true
         case (_, ._): return true
@@ -186,14 +206,7 @@ public extension Parameter where ValueType: Equatable {
     }
 }
 
-public extension Parameter where ValueType: Sequence {
-#if swift(>=3.2)
-    /// Element
-    typealias Element = ValueType.Element
-#else
-    /// Element
-    typealias Element = ValueType.Iterator.Element
-#endif
+public extension Parameter where ValueType: Sequence, ValueType.Element: Equatable {
     /// [Internal] Compare two parameters
     ///
     /// - Parameters:
@@ -201,7 +214,7 @@ public extension Parameter where ValueType: Sequence {
     ///   - rhs: other
     ///   - matcher: Matcher instance used for comparison
     /// - Returns: true if they are matching, false otherwise
-    public static func compare(lhs: Parameter<ValueType>, rhs: Parameter<ValueType>, with matcher: Matcher) -> Bool {
+    static func compare(lhs: Parameter<ValueType>, rhs: Parameter<ValueType>, with matcher: Matcher) -> Bool {
         switch (lhs, rhs) {
         case (._, _): return true
         case (_, ._): return true
@@ -214,8 +227,65 @@ public extension Parameter where ValueType: Sequence {
             guard leftArray.count == rightArray.count else { return false }
 
             let values = (0..<leftArray.count)
-            .map { i -> (Element, Element) in
+            .map { i -> (ValueType.Element, ValueType.Element) in
                 return ((leftArray[i]),(rightArray[i]))
+            }
+
+            for (left,right) in values {
+                guard left == right else { return false }
+            }
+
+            return true
+        default: return false
+        }
+    }
+}
+
+public extension Parameter where ValueType: Sequence, ValueType.Element: Equatable, ValueType: Equatable {
+    /// [Internal] Compare two parameters
+    ///
+    /// - Parameters:
+    ///   - lhs: one
+    ///   - rhs: other
+    ///   - matcher: Matcher instance used for comparison
+    /// - Returns: true if they are matching, false otherwise
+    static func compare(lhs: Parameter<ValueType>, rhs: Parameter<ValueType>, with matcher: Matcher) -> Bool {
+        switch (lhs, rhs) {
+        case (._, _): return true
+        case (_, ._): return true
+        case (.matching(let match), .value(let value)): return match(value)
+        case (.value(let value), .matching(let match)): return match(value)
+        case let (.value(left), .value(right)): return left == right
+        default: return false
+        }
+    }
+}
+
+public extension Parameter where ValueType: Sequence {
+    /// Element
+    typealias Element = ValueType.Element
+    /// [Internal] Compare two parameters
+    ///
+    /// - Parameters:
+    ///   - lhs: one
+    ///   - rhs: other
+    ///   - matcher: Matcher instance used for comparison
+    /// - Returns: true if they are matching, false otherwise
+    static func compare(lhs: Parameter<ValueType>, rhs: Parameter<ValueType>, with matcher: Matcher) -> Bool {
+        switch (lhs, rhs) {
+        case (._, _): return true
+        case (_, ._): return true
+        case (.matching(let match), .value(let value)): return match(value)
+        case (.value(let value), .matching(let match)): return match(value)
+        case (.value(let lhsSequence), .value(let rhsSequence)):
+            let leftArray = lhsSequence.map { $0 }
+            let rightArray = rhsSequence.map { $0 }
+
+            guard leftArray.count == rightArray.count else { return false }
+
+            let values = (0..<leftArray.count)
+                .map { i -> (Element, Element) in
+                    return ((leftArray[i]),(rightArray[i]))
             }
 
             guard let comparator = matcher.comparator(for: Element.self) else {
@@ -237,7 +307,7 @@ public extension Parameter where ValueType: Sequence {
     /// [Internal] Wraps as generic Parameter instance. Should not be ever called directly.
     ///
     /// - Returns: Wrapped parameter
-    public func wrapAsGeneric() -> Parameter<GenericAttribute> {
+    func wrapAsGeneric() -> Parameter<GenericAttribute> {
         switch self {
         case ._:
             let attribute = GenericAttribute(Mirror(reflecting: ValueType.self), intValue, { (l, r, m) -> Bool in
@@ -285,9 +355,7 @@ public extension Parameter where ValueType: Sequence {
     }
 }
 
-#if swift(>=3.2)
-#if swift(>=4.1)
-public extension Parameter where ValueType: Sequence, ValueType: Equatable {
+public extension Parameter where ValueType: Equatable {
     /// [Internal] Compare two parameters
     ///
     /// - Parameters:
@@ -295,7 +363,7 @@ public extension Parameter where ValueType: Sequence, ValueType: Equatable {
     ///   - rhs: other
     ///   - matcher: Matcher instance used for comparison
     /// - Returns: true if they are matching, false otherwise
-    public static func compare(lhs: Parameter<ValueType>, rhs: Parameter<ValueType>, with matcher: Matcher) -> Bool {
+    static func compare(lhs: Parameter<ValueType>, rhs: Parameter<ValueType>, with matcher: Matcher) -> Bool {
         switch (lhs, rhs) {
         case (._, _): return true
         case (_, ._): return true
@@ -306,115 +374,3 @@ public extension Parameter where ValueType: Sequence, ValueType: Equatable {
         }
     }
 }
-#else
-public extension Parameter where ValueType: Sequence, ValueType.Element: Equatable {
-    /// [Internal] Compare two parameters
-    ///
-    /// - Parameters:
-    ///   - lhs: one
-    ///   - rhs: other
-    ///   - matcher: Matcher instance used for comparison
-    /// - Returns: true if they are matching, false otherwise
-    public static func compare(lhs: Parameter<ValueType>, rhs: Parameter<ValueType>, with matcher: Matcher) -> Bool {
-        switch (lhs, rhs) {
-        case (._, _): return true
-        case (_, ._): return true
-        case (.matching(let match), .value(let value)): return match(value)
-        case (.value(let value), .matching(let match)): return match(value)
-        case (.value(let lhsSequence), .value(let rhsSequence)):
-            let leftArray = lhsSequence.map { $0 }
-            let rightArray = rhsSequence.map { $0 }
-
-            guard leftArray.count == rightArray.count else { return false }
-
-            let values = (0..<leftArray.count)
-            .map { i -> (ValueType.Element, ValueType.Element) in
-                return ((leftArray[i]),(rightArray[i]))
-            }
-
-            for (left,right) in values {
-                guard left == right else { return false }
-            }
-
-            return true
-        default: return false
-        }
-    }
-}
-
-public extension Parameter where ValueType: Sequence, ValueType.Element: Equatable, ValueType: Equatable {
-    /// [Internal] Compare two parameters
-    ///
-    /// - Parameters:
-    ///   - lhs: one
-    ///   - rhs: other
-    ///   - matcher: Matcher instance used for comparison
-    /// - Returns: true if they are matching, false otherwise
-    public static func compare(lhs: Parameter<ValueType>, rhs: Parameter<ValueType>, with matcher: Matcher) -> Bool {
-        switch (lhs, rhs) {
-        case (._, _): return true
-        case (_, ._): return true
-        case (.matching(let match), .value(let value)): return match(value)
-        case (.value(let value), .matching(let match)): return match(value)
-        case let (.value(left), .value(right)): return left == right
-        default: return false
-        }
-    }
-}
-#endif
-#else
-public extension Parameter where ValueType: Sequence, ValueType.Iterator.Element: Equatable {
-    /// [Internal] Compare two parameters
-    ///
-    /// - Parameters:
-    ///   - lhs: one
-    ///   - rhs: other
-    ///   - matcher: Matcher instance used for comparison
-    /// - Returns: true if they are matching, false otherwise
-    public static func compare(lhs: Parameter<ValueType>, rhs: Parameter<ValueType>, with matcher: Matcher) -> Bool {
-        switch (lhs, rhs) {
-        case (._, _): return true
-        case (_, ._): return true
-        case (.matching(let match), .value(let value)): return match(value)
-        case (.value(let value), .matching(let match)): return match(value)
-        case (.value(let lhsSequence), .value(let rhsSequence)):
-            let leftArray = lhsSequence.map { $0 }
-            let rightArray = rhsSequence.map { $0 }
-
-            guard leftArray.count == rightArray.count else { return false }
-
-            let values = (0..<leftArray.count)
-            .map { i -> (ValueType.Iterator.Element, ValueType.Iterator.Element) in
-                return ((leftArray[i]),(rightArray[i]))
-            }
-
-            for (left,right) in values {
-                guard left == right else { return false }
-            }
-
-            return true
-        default: return false
-        }
-    }
-}
-
-public extension Parameter where ValueType: Sequence, ValueType.Iterator.Element: Equatable, ValueType: Equatable {
-    /// [Internal] Compare two parameters
-    ///
-    /// - Parameters:
-    ///   - lhs: one
-    ///   - rhs: other
-    ///   - matcher: Matcher instance used for comparison
-    /// - Returns: true if they are matching, false otherwise
-    public static func compare(lhs: Parameter<ValueType>, rhs: Parameter<ValueType>, with matcher: Matcher) -> Bool {
-        switch (lhs, rhs) {
-        case (._, _): return true
-        case (_, ._): return true
-        case (.matching(let match), .value(let value)): return match(value)
-        case (.value(let value), .matching(let match)): return match(value)
-        case let (.value(left), .value(right)): return left == right
-        default: return false
-        }
-    }
-}
-#endif

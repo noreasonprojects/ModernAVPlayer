@@ -171,6 +171,8 @@ final class LoadingMediaState: PlayerState {
                 guard completed else { return }
                 self.moveToLoadedState()
             }
+        @unknown default:
+            ModernAVPlayerLogger.instance.log(message: "Unknown PlayerItem Status case", domain: .error)
         }
     }
 

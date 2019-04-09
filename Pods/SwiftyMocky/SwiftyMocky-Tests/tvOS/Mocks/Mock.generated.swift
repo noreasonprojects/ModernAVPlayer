@@ -1,4 +1,4 @@
-// Generated using Sourcery 0.15.0 — https://github.com/krzysztofzablocki/Sourcery
+// Generated using Sourcery 0.16.0 — https://github.com/krzysztofzablocki/Sourcery
 // DO NOT EDIT
 
 
@@ -9,7 +9,6 @@
 
 #if MockyCustom
 import SwiftyMocky
-@testable import Mocky_Example_tvOS
 
     public final class MockyAssertion {
         public static var handler: ((Bool, String, StaticString, UInt) -> Void)?
@@ -37,7 +36,7 @@ import SourceryRuntime
 #endif
 
 // MARK: - AMassiveTestProtocol
-class AMassiveTestProtocolMock: AMassiveTestProtocol, Mock, StaticMock {
+open class AMassiveTestProtocolMock: AMassiveTestProtocol, Mock, StaticMock {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
         self.sequencingPolicy = sequencingPolicy
         self.stubbingPolicy = stubbingPolicy
@@ -54,9 +53,9 @@ class AMassiveTestProtocolMock: AMassiveTestProtocol, Mock, StaticMock {
     private var file: StaticString?
     private var line: UInt?
 
-    typealias PropertyStub = Given
-    typealias MethodStub = Given
-    typealias SubscriptStub = Given
+    public typealias PropertyStub = Given
+    public typealias MethodStub = Given
+    public typealias SubscriptStub = Given
 
     /// Convenience method - call setupMock() to extend debug information when failure occurs
     public func setupMock(file: StaticString = #file, line: UInt = #line) {
@@ -69,34 +68,34 @@ class AMassiveTestProtocolMock: AMassiveTestProtocol, Mock, StaticMock {
     static private var invocations: [StaticMethodType] = []
     static private var methodReturnValues: [StaticGiven] = []
     static private var methodPerformValues: [StaticPerform] = []
-    typealias StaticPropertyStub = StaticGiven
-    typealias StaticMethodStub = StaticGiven
-    static func clear() {
+    public typealias StaticPropertyStub = StaticGiven
+    public typealias StaticMethodStub = StaticGiven
+    public static func clear() {
         invocations = []
         methodReturnValues = []
         methodPerformValues = []
     }
 
-    var nonOptionalClosure: () -> Void {
+    public var nonOptionalClosure: () -> Void {
 		get {	invocations.append(.p_nonOptionalClosure_get); return __p_nonOptionalClosure ?? givenGetterValue(.p_nonOptionalClosure_get, "AMassiveTestProtocolMock - stub value for nonOptionalClosure was not defined") }
 		set {	invocations.append(.p_nonOptionalClosure_set(.value(newValue))); __p_nonOptionalClosure = newValue }
 	}
 	private var __p_nonOptionalClosure: (() -> Void)?
 
-    var optionalClosure: (() -> Int)? {
+    public var optionalClosure: (() -> Int)? {
 		get {	invocations.append(.p_optionalClosure_get); return __p_optionalClosure ?? optionalGivenGetterValue(.p_optionalClosure_get, "AMassiveTestProtocolMock - stub value for optionalClosure was not defined") }
 		set {	invocations.append(.p_optionalClosure_set(.value(newValue))); __p_optionalClosure = newValue }
 	}
 	private var __p_optionalClosure: (() -> Int)?
 
-    var implicitelyUnwrappedClosure: (() -> Void)! {
+    public var implicitelyUnwrappedClosure: (() -> Void)! {
 		get {	invocations.append(.p_implicitelyUnwrappedClosure_get); return __p_implicitelyUnwrappedClosure ?? optionalGivenGetterValue(.p_implicitelyUnwrappedClosure_get, "AMassiveTestProtocolMock - stub value for implicitelyUnwrappedClosure was not defined") }
 		set {	invocations.append(.p_implicitelyUnwrappedClosure_set(.value(newValue))); __p_implicitelyUnwrappedClosure = newValue }
 	}
 	private var __p_implicitelyUnwrappedClosure: (() -> Void)?
 
 
-    static var optionalClosure: (() -> Int)? {
+    public static var optionalClosure: (() -> Int)? {
 		get {	AMassiveTestProtocolMock.invocations.append(.p_optionalClosure_get); return AMassiveTestProtocolMock.__p_optionalClosure ?? optionalGivenGetterValue(.p_optionalClosure_get, "AMassiveTestProtocolMock - stub value for optionalClosure was not defined") }
 		set {	AMassiveTestProtocolMock.invocations.append(.p_optionalClosure_set(.value(newValue))); AMassiveTestProtocolMock.__p_optionalClosure = newValue }
 	}
@@ -105,7 +104,7 @@ class AMassiveTestProtocolMock: AMassiveTestProtocol, Mock, StaticMock {
 
 
 
-    static func methodThatThrows() throws {
+    public static func methodThatThrows() throws {
         addInvocation(.sm_methodThatThrows)
 		let perform = methodPerformValue(.sm_methodThatThrows) as? () -> Void
 		perform?()
@@ -118,7 +117,7 @@ class AMassiveTestProtocolMock: AMassiveTestProtocol, Mock, StaticMock {
 		}
     }
 
-    static func methodThatReturnsAndThrows(param: String) throws -> Int {
+    public static func methodThatReturnsAndThrows(param: String) throws -> Int {
         addInvocation(.sm_methodThatReturnsAndThrows__param_param(Parameter<String>.value(`param`)))
 		let perform = methodPerformValue(.sm_methodThatReturnsAndThrows__param_param(Parameter<String>.value(`param`))) as? (String) -> Void
 		perform?(`param`)
@@ -133,7 +132,7 @@ class AMassiveTestProtocolMock: AMassiveTestProtocol, Mock, StaticMock {
 		return __value
     }
 
-    static func methodThatRethrows(param: (String) throws -> Int) rethrows -> Int {
+    public static func methodThatRethrows(param: (String) throws -> Int) rethrows -> Int {
         addInvocation(.sm_methodThatRethrows__param_param(Parameter<(String) throws -> Int>.any))
 		let perform = methodPerformValue(.sm_methodThatRethrows__param_param(Parameter<(String) throws -> Int>.any)) as? ((String) throws -> Int) -> Void
 		perform?(`param`)
@@ -146,11 +145,11 @@ class AMassiveTestProtocolMock: AMassiveTestProtocol, Mock, StaticMock {
 		return __value
     }
 
-    required init() { }
+    public required init() { }
 
-    required init(_ sth: Int) { }
+    public required init(_ sth: Int) { }
 
-    func methodThatThrows() throws {
+    open func methodThatThrows() throws {
         addInvocation(.m_methodThatThrows)
 		let perform = methodPerformValue(.m_methodThatThrows) as? () -> Void
 		perform?()
@@ -163,7 +162,7 @@ class AMassiveTestProtocolMock: AMassiveTestProtocol, Mock, StaticMock {
 		}
     }
 
-    func methodThatReturnsAndThrows(param: String) throws -> Int {
+    open func methodThatReturnsAndThrows(param: String) throws -> Int {
         addInvocation(.m_methodThatReturnsAndThrows__param_param(Parameter<String>.value(`param`)))
 		let perform = methodPerformValue(.m_methodThatReturnsAndThrows__param_param(Parameter<String>.value(`param`))) as? (String) -> Void
 		perform?(`param`)
@@ -179,7 +178,7 @@ class AMassiveTestProtocolMock: AMassiveTestProtocol, Mock, StaticMock {
 		return __value
     }
 
-    func methodThatRethrows(param: (String) throws -> Int) rethrows -> Int {
+    open func methodThatRethrows(param: (String) throws -> Int) rethrows -> Int {
         addInvocation(.m_methodThatRethrows__param_param(Parameter<(String) throws -> Int>.any))
 		let perform = methodPerformValue(.m_methodThatRethrows__param_param(Parameter<(String) throws -> Int>.any)) as? ((String) throws -> Int) -> Void
 		perform?(`param`)
@@ -227,77 +226,77 @@ class AMassiveTestProtocolMock: AMassiveTestProtocol, Mock, StaticMock {
         }
     }
 
-    class StaticGiven: StubbedMethod {
+    open class StaticGiven: StubbedMethod {
         fileprivate var method: StaticMethodType
 
-        private init(method: StaticMethodType, products: [Product]) {
+        private init(method: StaticMethodType, products: [StubProduct]) {
             self.method = method
             super.init(products)
         }
 
-        static func optionalClosure(getter defaultValue: (() -> Int)?...) -> StaticPropertyStub {
-            return StaticGiven(method: .p_optionalClosure_get, products: defaultValue.map({ Product.return($0) }))
+        public static func optionalClosure(getter defaultValue: (() -> Int)?...) -> StaticPropertyStub {
+            return StaticGiven(method: .p_optionalClosure_get, products: defaultValue.map({ StubProduct.return($0 as Any) }))
         }
 
-        static func methodThatReturnsAndThrows(param: Parameter<String>, willReturn: Int...) -> StaticMethodStub {
-            return StaticGiven(method: .sm_methodThatReturnsAndThrows__param_param(`param`), products: willReturn.map({ Product.return($0) }))
+        public static func methodThatReturnsAndThrows(param: Parameter<String>, willReturn: Int...) -> StaticMethodStub {
+            return StaticGiven(method: .sm_methodThatReturnsAndThrows__param_param(`param`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func methodThatRethrows(param: Parameter<(String) throws -> Int>, willReturn: Int...) -> StaticMethodStub {
-            return StaticGiven(method: .sm_methodThatRethrows__param_param(`param`), products: willReturn.map({ Product.return($0) }))
+        public static func methodThatRethrows(param: Parameter<(String) throws -> Int>, willReturn: Int...) -> StaticMethodStub {
+            return StaticGiven(method: .sm_methodThatRethrows__param_param(`param`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func methodThatThrows(willThrow: Error...) -> StaticMethodStub {
-            return StaticGiven(method: .sm_methodThatThrows, products: willThrow.map({ Product.throw($0) }))
+        public static func methodThatThrows(willThrow: Error...) -> StaticMethodStub {
+            return StaticGiven(method: .sm_methodThatThrows, products: willThrow.map({ StubProduct.throw($0) }))
         }
-        static func methodThatThrows(willProduce: (StubberThrows<Void>) -> Void) -> StaticMethodStub {
+        public static func methodThatThrows(willProduce: (StubberThrows<Void>) -> Void) -> StaticMethodStub {
             let willThrow: [Error] = []
-			let given: StaticGiven = { return StaticGiven(method: .sm_methodThatThrows, products: willThrow.map({ Product.throw($0) })) }()
+			let given: StaticGiven = { return StaticGiven(method: .sm_methodThatThrows, products: willThrow.map({ StubProduct.throw($0) })) }()
 			let stubber = given.stubThrows(for: (Void).self)
 			willProduce(stubber)
 			return given
         }
-        static func methodThatReturnsAndThrows(param: Parameter<String>, willThrow: Error...) -> StaticMethodStub {
-            return StaticGiven(method: .sm_methodThatReturnsAndThrows__param_param(`param`), products: willThrow.map({ Product.throw($0) }))
+        public static func methodThatReturnsAndThrows(param: Parameter<String>, willThrow: Error...) -> StaticMethodStub {
+            return StaticGiven(method: .sm_methodThatReturnsAndThrows__param_param(`param`), products: willThrow.map({ StubProduct.throw($0) }))
         }
-        static func methodThatReturnsAndThrows(param: Parameter<String>, willProduce: (StubberThrows<Int>) -> Void) -> StaticMethodStub {
+        public static func methodThatReturnsAndThrows(param: Parameter<String>, willProduce: (StubberThrows<Int>) -> Void) -> StaticMethodStub {
             let willThrow: [Error] = []
-			let given: StaticGiven = { return StaticGiven(method: .sm_methodThatReturnsAndThrows__param_param(`param`), products: willThrow.map({ Product.throw($0) })) }()
+			let given: StaticGiven = { return StaticGiven(method: .sm_methodThatReturnsAndThrows__param_param(`param`), products: willThrow.map({ StubProduct.throw($0) })) }()
 			let stubber = given.stubThrows(for: (Int).self)
 			willProduce(stubber)
 			return given
         }
-        static func methodThatRethrows(param: Parameter<(String) throws -> Int>, willThrow: Error...) -> StaticMethodStub {
-            return StaticGiven(method: .sm_methodThatRethrows__param_param(`param`), products: willThrow.map({ Product.throw($0) }))
+        public static func methodThatRethrows(param: Parameter<(String) throws -> Int>, willThrow: Error...) -> StaticMethodStub {
+            return StaticGiven(method: .sm_methodThatRethrows__param_param(`param`), products: willThrow.map({ StubProduct.throw($0) }))
         }
-        static func methodThatRethrows(param: Parameter<(String) throws -> Int>, willProduce: (StubberThrows<Int>) -> Void) -> StaticMethodStub {
+        public static func methodThatRethrows(param: Parameter<(String) throws -> Int>, willProduce: (StubberThrows<Int>) -> Void) -> StaticMethodStub {
             let willThrow: [Error] = []
-			let given: StaticGiven = { return StaticGiven(method: .sm_methodThatRethrows__param_param(`param`), products: willThrow.map({ Product.throw($0) })) }()
+			let given: StaticGiven = { return StaticGiven(method: .sm_methodThatRethrows__param_param(`param`), products: willThrow.map({ StubProduct.throw($0) })) }()
 			let stubber = given.stubThrows(for: (Int).self)
 			willProduce(stubber)
 			return given
         }
     }
 
-    struct StaticVerify {
+    public struct StaticVerify {
         fileprivate var method: StaticMethodType
 
-        static func methodThatThrows() -> StaticVerify { return StaticVerify(method: .sm_methodThatThrows)}
-        static func methodThatReturnsAndThrows(param: Parameter<String>) -> StaticVerify { return StaticVerify(method: .sm_methodThatReturnsAndThrows__param_param(`param`))}
-        static func methodThatRethrows(param: Parameter<(String) throws -> Int>) -> StaticVerify { return StaticVerify(method: .sm_methodThatRethrows__param_param(`param`))}
-        static var optionalClosure: StaticVerify { return StaticVerify(method: .p_optionalClosure_get) }
-		static func optionalClosure(set newValue: Parameter<(() -> Int)?>) -> StaticVerify { return StaticVerify(method: .p_optionalClosure_set(newValue)) }
+        public static func methodThatThrows() -> StaticVerify { return StaticVerify(method: .sm_methodThatThrows)}
+        public static func methodThatReturnsAndThrows(param: Parameter<String>) -> StaticVerify { return StaticVerify(method: .sm_methodThatReturnsAndThrows__param_param(`param`))}
+        public static func methodThatRethrows(param: Parameter<(String) throws -> Int>) -> StaticVerify { return StaticVerify(method: .sm_methodThatRethrows__param_param(`param`))}
+        public static var optionalClosure: StaticVerify { return StaticVerify(method: .p_optionalClosure_get) }
+		public static func optionalClosure(set newValue: Parameter<(() -> Int)?>) -> StaticVerify { return StaticVerify(method: .p_optionalClosure_set(newValue)) }
     }
 
-    struct StaticPerform {
+    public struct StaticPerform {
         fileprivate var method: StaticMethodType
         var performs: Any
 
-        static func methodThatThrows(perform: @escaping () -> Void) -> StaticPerform {
+        public static func methodThatThrows(perform: @escaping () -> Void) -> StaticPerform {
             return StaticPerform(method: .sm_methodThatThrows, performs: perform)
         }
-        static func methodThatReturnsAndThrows(param: Parameter<String>, perform: @escaping (String) -> Void) -> StaticPerform {
+        public static func methodThatReturnsAndThrows(param: Parameter<String>, perform: @escaping (String) -> Void) -> StaticPerform {
             return StaticPerform(method: .sm_methodThatReturnsAndThrows__param_param(`param`), performs: perform)
         }
-        static func methodThatRethrows(param: Parameter<(String) throws -> Int>, perform: @escaping ((String) throws -> Int) -> Void) -> StaticPerform {
+        public static func methodThatRethrows(param: Parameter<(String) throws -> Int>, perform: @escaping ((String) throws -> Int) -> Void) -> StaticPerform {
             return StaticPerform(method: .sm_methodThatRethrows__param_param(`param`), performs: perform)
         }
     }
@@ -349,87 +348,87 @@ class AMassiveTestProtocolMock: AMassiveTestProtocol, Mock, StaticMock {
         }
     }
 
-    class Given: StubbedMethod {
+    open class Given: StubbedMethod {
         fileprivate var method: MethodType
 
-        private init(method: MethodType, products: [Product]) {
+        private init(method: MethodType, products: [StubProduct]) {
             self.method = method
             super.init(products)
         }
 
-        static func nonOptionalClosure(getter defaultValue: () -> Void...) -> PropertyStub {
-            return Given(method: .p_nonOptionalClosure_get, products: defaultValue.map({ Product.return($0) }))
+        public static func nonOptionalClosure(getter defaultValue: () -> Void...) -> PropertyStub {
+            return Given(method: .p_nonOptionalClosure_get, products: defaultValue.map({ StubProduct.return($0 as Any) }))
         }
-        static func optionalClosure(getter defaultValue: (() -> Int)?...) -> PropertyStub {
-            return Given(method: .p_optionalClosure_get, products: defaultValue.map({ Product.return($0) }))
+        public static func optionalClosure(getter defaultValue: (() -> Int)?...) -> PropertyStub {
+            return Given(method: .p_optionalClosure_get, products: defaultValue.map({ StubProduct.return($0 as Any) }))
         }
-        static func implicitelyUnwrappedClosure(getter defaultValue: (() -> Void)?...) -> PropertyStub {
-            return Given(method: .p_implicitelyUnwrappedClosure_get, products: defaultValue.map({ Product.return($0) }))
+        public static func implicitelyUnwrappedClosure(getter defaultValue: (() -> Void)?...) -> PropertyStub {
+            return Given(method: .p_implicitelyUnwrappedClosure_get, products: defaultValue.map({ StubProduct.return($0 as Any) }))
         }
 
-        static func methodThatReturnsAndThrows(param: Parameter<String>, willReturn: Int...) -> MethodStub {
-            return Given(method: .m_methodThatReturnsAndThrows__param_param(`param`), products: willReturn.map({ Product.return($0) }))
+        public static func methodThatReturnsAndThrows(param: Parameter<String>, willReturn: Int...) -> MethodStub {
+            return Given(method: .m_methodThatReturnsAndThrows__param_param(`param`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func methodThatRethrows(param: Parameter<(String) throws -> Int>, willReturn: Int...) -> MethodStub {
-            return Given(method: .m_methodThatRethrows__param_param(`param`), products: willReturn.map({ Product.return($0) }))
+        public static func methodThatRethrows(param: Parameter<(String) throws -> Int>, willReturn: Int...) -> MethodStub {
+            return Given(method: .m_methodThatRethrows__param_param(`param`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func methodThatThrows(willThrow: Error...) -> MethodStub {
-            return Given(method: .m_methodThatThrows, products: willThrow.map({ Product.throw($0) }))
+        public static func methodThatThrows(willThrow: Error...) -> MethodStub {
+            return Given(method: .m_methodThatThrows, products: willThrow.map({ StubProduct.throw($0) }))
         }
-        static func methodThatThrows(willProduce: (StubberThrows<Void>) -> Void) -> MethodStub {
+        public static func methodThatThrows(willProduce: (StubberThrows<Void>) -> Void) -> MethodStub {
             let willThrow: [Error] = []
-			let given: Given = { return Given(method: .m_methodThatThrows, products: willThrow.map({ Product.throw($0) })) }()
+			let given: Given = { return Given(method: .m_methodThatThrows, products: willThrow.map({ StubProduct.throw($0) })) }()
 			let stubber = given.stubThrows(for: (Void).self)
 			willProduce(stubber)
 			return given
         }
-        static func methodThatReturnsAndThrows(param: Parameter<String>, willThrow: Error...) -> MethodStub {
-            return Given(method: .m_methodThatReturnsAndThrows__param_param(`param`), products: willThrow.map({ Product.throw($0) }))
+        public static func methodThatReturnsAndThrows(param: Parameter<String>, willThrow: Error...) -> MethodStub {
+            return Given(method: .m_methodThatReturnsAndThrows__param_param(`param`), products: willThrow.map({ StubProduct.throw($0) }))
         }
-        static func methodThatReturnsAndThrows(param: Parameter<String>, willProduce: (StubberThrows<Int>) -> Void) -> MethodStub {
+        public static func methodThatReturnsAndThrows(param: Parameter<String>, willProduce: (StubberThrows<Int>) -> Void) -> MethodStub {
             let willThrow: [Error] = []
-			let given: Given = { return Given(method: .m_methodThatReturnsAndThrows__param_param(`param`), products: willThrow.map({ Product.throw($0) })) }()
+			let given: Given = { return Given(method: .m_methodThatReturnsAndThrows__param_param(`param`), products: willThrow.map({ StubProduct.throw($0) })) }()
 			let stubber = given.stubThrows(for: (Int).self)
 			willProduce(stubber)
 			return given
         }
-        static func methodThatRethrows(param: Parameter<(String) throws -> Int>, willThrow: Error...) -> MethodStub {
-            return Given(method: .m_methodThatRethrows__param_param(`param`), products: willThrow.map({ Product.throw($0) }))
+        public static func methodThatRethrows(param: Parameter<(String) throws -> Int>, willThrow: Error...) -> MethodStub {
+            return Given(method: .m_methodThatRethrows__param_param(`param`), products: willThrow.map({ StubProduct.throw($0) }))
         }
-        static func methodThatRethrows(param: Parameter<(String) throws -> Int>, willProduce: (StubberThrows<Int>) -> Void) -> MethodStub {
+        public static func methodThatRethrows(param: Parameter<(String) throws -> Int>, willProduce: (StubberThrows<Int>) -> Void) -> MethodStub {
             let willThrow: [Error] = []
-			let given: Given = { return Given(method: .m_methodThatRethrows__param_param(`param`), products: willThrow.map({ Product.throw($0) })) }()
+			let given: Given = { return Given(method: .m_methodThatRethrows__param_param(`param`), products: willThrow.map({ StubProduct.throw($0) })) }()
 			let stubber = given.stubThrows(for: (Int).self)
 			willProduce(stubber)
 			return given
         }
     }
 
-    struct Verify {
+    public struct Verify {
         fileprivate var method: MethodType
 
-        static func methodThatThrows() -> Verify { return Verify(method: .m_methodThatThrows)}
-        static func methodThatReturnsAndThrows(param: Parameter<String>) -> Verify { return Verify(method: .m_methodThatReturnsAndThrows__param_param(`param`))}
-        static func methodThatRethrows(param: Parameter<(String) throws -> Int>) -> Verify { return Verify(method: .m_methodThatRethrows__param_param(`param`))}
-        static var nonOptionalClosure: Verify { return Verify(method: .p_nonOptionalClosure_get) }
-		static func nonOptionalClosure(set newValue: Parameter<() -> Void>) -> Verify { return Verify(method: .p_nonOptionalClosure_set(newValue)) }
-        static var optionalClosure: Verify { return Verify(method: .p_optionalClosure_get) }
-		static func optionalClosure(set newValue: Parameter<(() -> Int)?>) -> Verify { return Verify(method: .p_optionalClosure_set(newValue)) }
-        static var implicitelyUnwrappedClosure: Verify { return Verify(method: .p_implicitelyUnwrappedClosure_get) }
-		static func implicitelyUnwrappedClosure(set newValue: Parameter<(() -> Void)?>) -> Verify { return Verify(method: .p_implicitelyUnwrappedClosure_set(newValue)) }
+        public static func methodThatThrows() -> Verify { return Verify(method: .m_methodThatThrows)}
+        public static func methodThatReturnsAndThrows(param: Parameter<String>) -> Verify { return Verify(method: .m_methodThatReturnsAndThrows__param_param(`param`))}
+        public static func methodThatRethrows(param: Parameter<(String) throws -> Int>) -> Verify { return Verify(method: .m_methodThatRethrows__param_param(`param`))}
+        public static var nonOptionalClosure: Verify { return Verify(method: .p_nonOptionalClosure_get) }
+		public static func nonOptionalClosure(set newValue: Parameter<() -> Void>) -> Verify { return Verify(method: .p_nonOptionalClosure_set(newValue)) }
+        public static var optionalClosure: Verify { return Verify(method: .p_optionalClosure_get) }
+		public static func optionalClosure(set newValue: Parameter<(() -> Int)?>) -> Verify { return Verify(method: .p_optionalClosure_set(newValue)) }
+        public static var implicitelyUnwrappedClosure: Verify { return Verify(method: .p_implicitelyUnwrappedClosure_get) }
+		public static func implicitelyUnwrappedClosure(set newValue: Parameter<(() -> Void)?>) -> Verify { return Verify(method: .p_implicitelyUnwrappedClosure_set(newValue)) }
     }
 
-    struct Perform {
+    public struct Perform {
         fileprivate var method: MethodType
         var performs: Any
 
-        static func methodThatThrows(perform: @escaping () -> Void) -> Perform {
+        public static func methodThatThrows(perform: @escaping () -> Void) -> Perform {
             return Perform(method: .m_methodThatThrows, performs: perform)
         }
-        static func methodThatReturnsAndThrows(param: Parameter<String>, perform: @escaping (String) -> Void) -> Perform {
+        public static func methodThatReturnsAndThrows(param: Parameter<String>, perform: @escaping (String) -> Void) -> Perform {
             return Perform(method: .m_methodThatReturnsAndThrows__param_param(`param`), performs: perform)
         }
-        static func methodThatRethrows(param: Parameter<(String) throws -> Int>, perform: @escaping ((String) throws -> Int) -> Void) -> Perform {
+        public static func methodThatRethrows(param: Parameter<(String) throws -> Int>, perform: @escaping ((String) throws -> Int) -> Void) -> Perform {
             return Perform(method: .m_methodThatRethrows__param_param(`param`), performs: perform)
         }
     }
@@ -445,13 +444,13 @@ class AMassiveTestProtocolMock: AMassiveTestProtocol, Mock, StaticMock {
 
     public func verify(_ method: Verify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
         let invocations = matchingCalls(method.method)
-        MockyAssert(count.matches(invocations.count), "Expeced: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
     }
 
     private func addInvocation(_ call: MethodType) {
         invocations.append(call)
     }
-    private func methodReturnValue(_ method: MethodType) throws -> Product {
+    private func methodReturnValue(_ method: MethodType) throws -> StubProduct {
         let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
         let matched = candidates.first(where: { $0.isValid && MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
         guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
@@ -500,13 +499,13 @@ class AMassiveTestProtocolMock: AMassiveTestProtocol, Mock, StaticMock {
 
     static public func verify(_ method: StaticVerify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
         let invocations = matchingCalls(method.method)
-        MockyAssert(count.matches(invocations.count), "Expeced: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
     }
 
     static private func addInvocation(_ call: StaticMethodType) {
         invocations.append(call)
     }
-    static private func methodReturnValue(_ method: StaticMethodType) throws -> Product {
+    static private func methodReturnValue(_ method: StaticMethodType) throws -> StubProduct {
         let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
         let matched = candidates.first(where: { $0.isValid && StaticMethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
         guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
@@ -539,7 +538,7 @@ class AMassiveTestProtocolMock: AMassiveTestProtocol, Mock, StaticMock {
 }
 
 // MARK: - AVeryAssociatedProtocol
-class AVeryAssociatedProtocolMock<T1,T2>: AVeryAssociatedProtocol, Mock where T1: Sequence, T2: Comparable, T2: EmptyProtocol {
+open class AVeryAssociatedProtocolMock<T1,T2>: AVeryAssociatedProtocol, Mock where T1: Sequence, T2: Comparable, T2: EmptyProtocol {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
         self.sequencingPolicy = sequencingPolicy
         self.stubbingPolicy = stubbingPolicy
@@ -556,9 +555,9 @@ class AVeryAssociatedProtocolMock<T1,T2>: AVeryAssociatedProtocol, Mock where T1
     private var file: StaticString?
     private var line: UInt?
 
-    typealias PropertyStub = Given
-    typealias MethodStub = Given
-    typealias SubscriptStub = Given
+    public typealias PropertyStub = Given
+    public typealias MethodStub = Given
+    public typealias SubscriptStub = Given
 
     /// Convenience method - call setupMock() to extend debug information when failure occurs
     public func setupMock(file: StaticString = #file, line: UInt = #line) {
@@ -570,7 +569,7 @@ class AVeryAssociatedProtocolMock<T1,T2>: AVeryAssociatedProtocol, Mock where T1
 
 
 
-    func fetch(for value: T2) -> T1 {
+    open func fetch(for value: T2) -> T1 {
         addInvocation(.m_fetch__for_value(Parameter<T2>.value(`value`)))
 		let perform = methodPerformValue(.m_fetch__for_value(Parameter<T2>.value(`value`))) as? (T2) -> Void
 		perform?(`value`)
@@ -603,38 +602,38 @@ class AVeryAssociatedProtocolMock<T1,T2>: AVeryAssociatedProtocol, Mock where T1
         }
     }
 
-    class Given: StubbedMethod {
+    open class Given: StubbedMethod {
         fileprivate var method: MethodType
 
-        private init(method: MethodType, products: [Product]) {
+        private init(method: MethodType, products: [StubProduct]) {
             self.method = method
             super.init(products)
         }
 
 
-        static func fetch(for value: Parameter<T2>, willReturn: T1...) -> MethodStub {
-            return Given(method: .m_fetch__for_value(`value`), products: willReturn.map({ Product.return($0) }))
+        public static func fetch(for value: Parameter<T2>, willReturn: T1...) -> MethodStub {
+            return Given(method: .m_fetch__for_value(`value`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func fetch(for value: Parameter<T2>, willProduce: (Stubber<T1>) -> Void) -> MethodStub {
+        public static func fetch(for value: Parameter<T2>, willProduce: (Stubber<T1>) -> Void) -> MethodStub {
             let willReturn: [T1] = []
-			let given: Given = { return Given(method: .m_fetch__for_value(`value`), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_fetch__for_value(`value`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (T1).self)
 			willProduce(stubber)
 			return given
         }
     }
 
-    struct Verify {
+    public struct Verify {
         fileprivate var method: MethodType
 
-        static func fetch(for value: Parameter<T2>) -> Verify { return Verify(method: .m_fetch__for_value(`value`))}
+        public static func fetch(for value: Parameter<T2>) -> Verify { return Verify(method: .m_fetch__for_value(`value`))}
     }
 
-    struct Perform {
+    public struct Perform {
         fileprivate var method: MethodType
         var performs: Any
 
-        static func fetch(for value: Parameter<T2>, perform: @escaping (T2) -> Void) -> Perform {
+        public static func fetch(for value: Parameter<T2>, perform: @escaping (T2) -> Void) -> Perform {
             return Perform(method: .m_fetch__for_value(`value`), performs: perform)
         }
     }
@@ -650,13 +649,13 @@ class AVeryAssociatedProtocolMock<T1,T2>: AVeryAssociatedProtocol, Mock where T1
 
     public func verify(_ method: Verify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
         let invocations = matchingCalls(method.method)
-        MockyAssert(count.matches(invocations.count), "Expeced: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
     }
 
     private func addInvocation(_ call: MethodType) {
         invocations.append(call)
     }
-    private func methodReturnValue(_ method: MethodType) throws -> Product {
+    private func methodReturnValue(_ method: MethodType) throws -> StubProduct {
         let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
         let matched = candidates.first(where: { $0.isValid && MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
         guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
@@ -696,7 +695,7 @@ class AVeryAssociatedProtocolMock<T1,T2>: AVeryAssociatedProtocol, Mock where T1
 }
 
 // MARK: - AVeryGenericProtocol
-class AVeryGenericProtocolMock: AVeryGenericProtocol, Mock, StaticMock {
+open class AVeryGenericProtocolMock: AVeryGenericProtocol, Mock, StaticMock {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
         self.sequencingPolicy = sequencingPolicy
         self.stubbingPolicy = stubbingPolicy
@@ -713,9 +712,9 @@ class AVeryGenericProtocolMock: AVeryGenericProtocol, Mock, StaticMock {
     private var file: StaticString?
     private var line: UInt?
 
-    typealias PropertyStub = Given
-    typealias MethodStub = Given
-    typealias SubscriptStub = Given
+    public typealias PropertyStub = Given
+    public typealias MethodStub = Given
+    public typealias SubscriptStub = Given
 
     /// Convenience method - call setupMock() to extend debug information when failure occurs
     public func setupMock(file: StaticString = #file, line: UInt = #line) {
@@ -728,9 +727,9 @@ class AVeryGenericProtocolMock: AVeryGenericProtocol, Mock, StaticMock {
     static private var invocations: [StaticMethodType] = []
     static private var methodReturnValues: [StaticGiven] = []
     static private var methodPerformValues: [StaticPerform] = []
-    typealias StaticPropertyStub = StaticGiven
-    typealias StaticMethodStub = StaticGiven
-    static func clear() {
+    public typealias StaticPropertyStub = StaticGiven
+    public typealias StaticMethodStub = StaticGiven
+    public static func clear() {
         invocations = []
         methodReturnValues = []
         methodPerformValues = []
@@ -740,7 +739,7 @@ class AVeryGenericProtocolMock: AVeryGenericProtocol, Mock, StaticMock {
 
 
 
-    static func generic<Q>(lhs: Q, rhs: Q) -> Bool where Q: Equatable {
+    public static func generic<Q>(lhs: Q, rhs: Q) -> Bool where Q: Equatable {
         addInvocation(.sm_generic__lhs_lhsrhs_rhs(Parameter<Q>.value(`lhs`).wrapAsGeneric(), Parameter<Q>.value(`rhs`).wrapAsGeneric()))
 		let perform = methodPerformValue(.sm_generic__lhs_lhsrhs_rhs(Parameter<Q>.value(`lhs`).wrapAsGeneric(), Parameter<Q>.value(`rhs`).wrapAsGeneric())) as? (Q, Q) -> Void
 		perform?(`lhs`, `rhs`)
@@ -753,7 +752,7 @@ class AVeryGenericProtocolMock: AVeryGenericProtocol, Mock, StaticMock {
 		return __value
     }
 
-    static func veryConstrained<Q: Sequence>(lhs: Q, rhs: Q) -> Bool where Q: Equatable {
+    public static func veryConstrained<Q: Sequence>(lhs: Q, rhs: Q) -> Bool where Q: Equatable {
         addInvocation(.sm_veryConstrained__lhs_lhsrhs_rhs(Parameter<Q>.value(`lhs`).wrapAsGeneric(), Parameter<Q>.value(`rhs`).wrapAsGeneric()))
 		let perform = methodPerformValue(.sm_veryConstrained__lhs_lhsrhs_rhs(Parameter<Q>.value(`lhs`).wrapAsGeneric(), Parameter<Q>.value(`rhs`).wrapAsGeneric())) as? (Q, Q) -> Void
 		perform?(`lhs`, `rhs`)
@@ -766,9 +765,9 @@ class AVeryGenericProtocolMock: AVeryGenericProtocol, Mock, StaticMock {
 		return __value
     }
 
-    required init<V>(value: V) { }
+    public required init<V>(value: V) { }
 
-    func methodConstrained<A,B,C>(param: A) -> (B,C) {
+    open func methodConstrained<A,B,C>(param: A) -> (B,C) {
         addInvocation(.m_methodConstrained__param_param(Parameter<A>.value(`param`).wrapAsGeneric()))
 		let perform = methodPerformValue(.m_methodConstrained__param_param(Parameter<A>.value(`param`).wrapAsGeneric())) as? (A) -> Void
 		perform?(`param`)
@@ -808,52 +807,52 @@ class AVeryGenericProtocolMock: AVeryGenericProtocol, Mock, StaticMock {
         }
     }
 
-    class StaticGiven: StubbedMethod {
+    open class StaticGiven: StubbedMethod {
         fileprivate var method: StaticMethodType
 
-        private init(method: StaticMethodType, products: [Product]) {
+        private init(method: StaticMethodType, products: [StubProduct]) {
             self.method = method
             super.init(products)
         }
 
 
-        static func generic<Q>(lhs: Parameter<Q>, rhs: Parameter<Q>, willReturn: Bool...) -> StaticMethodStub {
-            return StaticGiven(method: .sm_generic__lhs_lhsrhs_rhs(`lhs`.wrapAsGeneric(), `rhs`.wrapAsGeneric()), products: willReturn.map({ Product.return($0) }))
+        public static func generic<Q>(lhs: Parameter<Q>, rhs: Parameter<Q>, willReturn: Bool...) -> StaticMethodStub {
+            return StaticGiven(method: .sm_generic__lhs_lhsrhs_rhs(`lhs`.wrapAsGeneric(), `rhs`.wrapAsGeneric()), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func veryConstrained<Q: Sequence>(lhs: Parameter<Q>, rhs: Parameter<Q>, willReturn: Bool...) -> StaticMethodStub {
-            return StaticGiven(method: .sm_veryConstrained__lhs_lhsrhs_rhs(`lhs`.wrapAsGeneric(), `rhs`.wrapAsGeneric()), products: willReturn.map({ Product.return($0) }))
+        public static func veryConstrained<Q: Sequence>(lhs: Parameter<Q>, rhs: Parameter<Q>, willReturn: Bool...) -> StaticMethodStub {
+            return StaticGiven(method: .sm_veryConstrained__lhs_lhsrhs_rhs(`lhs`.wrapAsGeneric(), `rhs`.wrapAsGeneric()), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func generic<Q>(lhs: Parameter<Q>, rhs: Parameter<Q>, willProduce: (Stubber<Bool>) -> Void) -> StaticMethodStub {
+        public static func generic<Q>(lhs: Parameter<Q>, rhs: Parameter<Q>, willProduce: (Stubber<Bool>) -> Void) -> StaticMethodStub {
             let willReturn: [Bool] = []
-			let given: StaticGiven = { return StaticGiven(method: .sm_generic__lhs_lhsrhs_rhs(`lhs`.wrapAsGeneric(), `rhs`.wrapAsGeneric()), products: willReturn.map({ Product.return($0) })) }()
+			let given: StaticGiven = { return StaticGiven(method: .sm_generic__lhs_lhsrhs_rhs(`lhs`.wrapAsGeneric(), `rhs`.wrapAsGeneric()), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (Bool).self)
 			willProduce(stubber)
 			return given
         }
-        static func veryConstrained<Q: Sequence>(lhs: Parameter<Q>, rhs: Parameter<Q>, willProduce: (Stubber<Bool>) -> Void) -> StaticMethodStub {
+        public static func veryConstrained<Q: Sequence>(lhs: Parameter<Q>, rhs: Parameter<Q>, willProduce: (Stubber<Bool>) -> Void) -> StaticMethodStub {
             let willReturn: [Bool] = []
-			let given: StaticGiven = { return StaticGiven(method: .sm_veryConstrained__lhs_lhsrhs_rhs(`lhs`.wrapAsGeneric(), `rhs`.wrapAsGeneric()), products: willReturn.map({ Product.return($0) })) }()
+			let given: StaticGiven = { return StaticGiven(method: .sm_veryConstrained__lhs_lhsrhs_rhs(`lhs`.wrapAsGeneric(), `rhs`.wrapAsGeneric()), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (Bool).self)
 			willProduce(stubber)
 			return given
         }
     }
 
-    struct StaticVerify {
+    public struct StaticVerify {
         fileprivate var method: StaticMethodType
 
-        static func generic<Q>(lhs: Parameter<Q>, rhs: Parameter<Q>) -> StaticVerify { return StaticVerify(method: .sm_generic__lhs_lhsrhs_rhs(`lhs`.wrapAsGeneric(), `rhs`.wrapAsGeneric()))}
-        static func veryConstrained<Q>(lhs: Parameter<Q>, rhs: Parameter<Q>) -> StaticVerify { return StaticVerify(method: .sm_veryConstrained__lhs_lhsrhs_rhs(`lhs`.wrapAsGeneric(), `rhs`.wrapAsGeneric()))}
+        public static func generic<Q>(lhs: Parameter<Q>, rhs: Parameter<Q>) -> StaticVerify { return StaticVerify(method: .sm_generic__lhs_lhsrhs_rhs(`lhs`.wrapAsGeneric(), `rhs`.wrapAsGeneric()))}
+        public static func veryConstrained<Q>(lhs: Parameter<Q>, rhs: Parameter<Q>) -> StaticVerify where Q:Sequence { return StaticVerify(method: .sm_veryConstrained__lhs_lhsrhs_rhs(`lhs`.wrapAsGeneric(), `rhs`.wrapAsGeneric()))}
     }
 
-    struct StaticPerform {
+    public struct StaticPerform {
         fileprivate var method: StaticMethodType
         var performs: Any
 
-        static func generic<Q>(lhs: Parameter<Q>, rhs: Parameter<Q>, perform: @escaping (Q, Q) -> Void) -> StaticPerform {
+        public static func generic<Q>(lhs: Parameter<Q>, rhs: Parameter<Q>, perform: @escaping (Q, Q) -> Void) -> StaticPerform {
             return StaticPerform(method: .sm_generic__lhs_lhsrhs_rhs(`lhs`.wrapAsGeneric(), `rhs`.wrapAsGeneric()), performs: perform)
         }
-        static func veryConstrained<Q>(lhs: Parameter<Q>, rhs: Parameter<Q>, perform: @escaping (Q, Q) -> Void) -> StaticPerform {
+        public static func veryConstrained<Q>(lhs: Parameter<Q>, rhs: Parameter<Q>, perform: @escaping (Q, Q) -> Void) -> StaticPerform where Q:Sequence {
             return StaticPerform(method: .sm_veryConstrained__lhs_lhsrhs_rhs(`lhs`.wrapAsGeneric(), `rhs`.wrapAsGeneric()), performs: perform)
         }
     }
@@ -877,38 +876,38 @@ class AVeryGenericProtocolMock: AVeryGenericProtocol, Mock, StaticMock {
         }
     }
 
-    class Given: StubbedMethod {
+    open class Given: StubbedMethod {
         fileprivate var method: MethodType
 
-        private init(method: MethodType, products: [Product]) {
+        private init(method: MethodType, products: [StubProduct]) {
             self.method = method
             super.init(products)
         }
 
 
-        static func methodConstrained<A,B,C>(param: Parameter<A>, willReturn: (B,C)...) -> MethodStub {
-            return Given(method: .m_methodConstrained__param_param(`param`.wrapAsGeneric()), products: willReturn.map({ Product.return($0) }))
+        public static func methodConstrained<A,B,C>(param: Parameter<A>, willReturn: (B,C)...) -> MethodStub {
+            return Given(method: .m_methodConstrained__param_param(`param`.wrapAsGeneric()), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func methodConstrained<A,B,C>(param: Parameter<A>, willProduce: (Stubber<(B,C)>) -> Void) -> MethodStub {
+        public static func methodConstrained<A,B,C>(param: Parameter<A>, willProduce: (Stubber<(B,C)>) -> Void) -> MethodStub {
             let willReturn: [(B,C)] = []
-			let given: Given = { return Given(method: .m_methodConstrained__param_param(`param`.wrapAsGeneric()), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_methodConstrained__param_param(`param`.wrapAsGeneric()), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: ((B,C)).self)
 			willProduce(stubber)
 			return given
         }
     }
 
-    struct Verify {
+    public struct Verify {
         fileprivate var method: MethodType
 
-        static func methodConstrained<A>(param: Parameter<A>) -> Verify { return Verify(method: .m_methodConstrained__param_param(`param`.wrapAsGeneric()))}
+        public static func methodConstrained<A>(param: Parameter<A>) -> Verify { return Verify(method: .m_methodConstrained__param_param(`param`.wrapAsGeneric()))}
     }
 
-    struct Perform {
+    public struct Perform {
         fileprivate var method: MethodType
         var performs: Any
 
-        static func methodConstrained<A>(param: Parameter<A>, perform: @escaping (A) -> Void) -> Perform {
+        public static func methodConstrained<A>(param: Parameter<A>, perform: @escaping (A) -> Void) -> Perform {
             return Perform(method: .m_methodConstrained__param_param(`param`.wrapAsGeneric()), performs: perform)
         }
     }
@@ -924,13 +923,13 @@ class AVeryGenericProtocolMock: AVeryGenericProtocol, Mock, StaticMock {
 
     public func verify(_ method: Verify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
         let invocations = matchingCalls(method.method)
-        MockyAssert(count.matches(invocations.count), "Expeced: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
     }
 
     private func addInvocation(_ call: MethodType) {
         invocations.append(call)
     }
-    private func methodReturnValue(_ method: MethodType) throws -> Product {
+    private func methodReturnValue(_ method: MethodType) throws -> StubProduct {
         let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
         let matched = candidates.first(where: { $0.isValid && MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
         guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
@@ -979,13 +978,13 @@ class AVeryGenericProtocolMock: AVeryGenericProtocol, Mock, StaticMock {
 
     static public func verify(_ method: StaticVerify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
         let invocations = matchingCalls(method.method)
-        MockyAssert(count.matches(invocations.count), "Expeced: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
     }
 
     static private func addInvocation(_ call: StaticMethodType) {
         invocations.append(call)
     }
-    static private func methodReturnValue(_ method: StaticMethodType) throws -> Product {
+    static private func methodReturnValue(_ method: StaticMethodType) throws -> StubProduct {
         let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
         let matched = candidates.first(where: { $0.isValid && StaticMethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
         guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
@@ -1018,7 +1017,7 @@ class AVeryGenericProtocolMock: AVeryGenericProtocol, Mock, StaticMock {
 }
 
 // MARK: - AllLiteralsContainer
-class AllLiteralsContainerMock: AllLiteralsContainer, Mock {
+open class AllLiteralsContainerMock: AllLiteralsContainer, Mock {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
         self.sequencingPolicy = sequencingPolicy
         self.stubbingPolicy = stubbingPolicy
@@ -1035,9 +1034,9 @@ class AllLiteralsContainerMock: AllLiteralsContainer, Mock {
     private var file: StaticString?
     private var line: UInt?
 
-    typealias PropertyStub = Given
-    typealias MethodStub = Given
-    typealias SubscriptStub = Given
+    public typealias PropertyStub = Given
+    public typealias MethodStub = Given
+    public typealias SubscriptStub = Given
 
     /// Convenience method - call setupMock() to extend debug information when failure occurs
     public func setupMock(file: StaticString = #file, line: UInt = #line) {
@@ -1049,7 +1048,7 @@ class AllLiteralsContainerMock: AllLiteralsContainer, Mock {
 
 
 
-    func methodWithStringParameter(p: String) -> Int {
+    open func methodWithStringParameter(p: String) -> Int {
         addInvocation(.m_methodWithStringParameter__p_p(Parameter<String>.value(`p`)))
 		let perform = methodPerformValue(.m_methodWithStringParameter__p_p(Parameter<String>.value(`p`))) as? (String) -> Void
 		perform?(`p`)
@@ -1063,7 +1062,7 @@ class AllLiteralsContainerMock: AllLiteralsContainer, Mock {
 		return __value
     }
 
-    func methodWithOtionalStringParameter(p: String?) -> Int {
+    open func methodWithOtionalStringParameter(p: String?) -> Int {
         addInvocation(.m_methodWithOtionalStringParameter__p_p(Parameter<String?>.value(`p`)))
 		let perform = methodPerformValue(.m_methodWithOtionalStringParameter__p_p(Parameter<String?>.value(`p`))) as? (String?) -> Void
 		perform?(`p`)
@@ -1077,7 +1076,7 @@ class AllLiteralsContainerMock: AllLiteralsContainer, Mock {
 		return __value
     }
 
-    func methodWithCustomStringParameter(p: CustomString) -> Int {
+    open func methodWithCustomStringParameter(p: CustomString) -> Int {
         addInvocation(.m_methodWithCustomStringParameter__p_p(Parameter<CustomString>.value(`p`)))
 		let perform = methodPerformValue(.m_methodWithCustomStringParameter__p_p(Parameter<CustomString>.value(`p`))) as? (CustomString) -> Void
 		perform?(`p`)
@@ -1091,7 +1090,7 @@ class AllLiteralsContainerMock: AllLiteralsContainer, Mock {
 		return __value
     }
 
-    func methodWithCustomOptionalStringParameter(p: CustomString?) -> Int {
+    open func methodWithCustomOptionalStringParameter(p: CustomString?) -> Int {
         addInvocation(.m_methodWithCustomOptionalStringParameter__p_p(Parameter<CustomString?>.value(`p`)))
 		let perform = methodPerformValue(.m_methodWithCustomOptionalStringParameter__p_p(Parameter<CustomString?>.value(`p`))) as? (CustomString?) -> Void
 		perform?(`p`)
@@ -1105,7 +1104,7 @@ class AllLiteralsContainerMock: AllLiteralsContainer, Mock {
 		return __value
     }
 
-    func methodWithIntParameter(p: Int) -> Int {
+    open func methodWithIntParameter(p: Int) -> Int {
         addInvocation(.m_methodWithIntParameter__p_p(Parameter<Int>.value(`p`)))
 		let perform = methodPerformValue(.m_methodWithIntParameter__p_p(Parameter<Int>.value(`p`))) as? (Int) -> Void
 		perform?(`p`)
@@ -1119,7 +1118,7 @@ class AllLiteralsContainerMock: AllLiteralsContainer, Mock {
 		return __value
     }
 
-    func methodWithCustomOptionalIntParameter(p: CustomInt?) -> Int {
+    open func methodWithCustomOptionalIntParameter(p: CustomInt?) -> Int {
         addInvocation(.m_methodWithCustomOptionalIntParameter__p_p(Parameter<CustomInt?>.value(`p`)))
 		let perform = methodPerformValue(.m_methodWithCustomOptionalIntParameter__p_p(Parameter<CustomInt?>.value(`p`))) as? (CustomInt?) -> Void
 		perform?(`p`)
@@ -1133,7 +1132,7 @@ class AllLiteralsContainerMock: AllLiteralsContainer, Mock {
 		return __value
     }
 
-    func methodWithBool(p: Bool?) -> Int {
+    open func methodWithBool(p: Bool?) -> Int {
         addInvocation(.m_methodWithBool__p_p(Parameter<Bool?>.value(`p`)))
 		let perform = methodPerformValue(.m_methodWithBool__p_p(Parameter<Bool?>.value(`p`))) as? (Bool?) -> Void
 		perform?(`p`)
@@ -1147,7 +1146,7 @@ class AllLiteralsContainerMock: AllLiteralsContainer, Mock {
 		return __value
     }
 
-    func methodWithFloat(p: Float?) -> Int {
+    open func methodWithFloat(p: Float?) -> Int {
         addInvocation(.m_methodWithFloat__p_p(Parameter<Float?>.value(`p`)))
 		let perform = methodPerformValue(.m_methodWithFloat__p_p(Parameter<Float?>.value(`p`))) as? (Float?) -> Void
 		perform?(`p`)
@@ -1161,7 +1160,7 @@ class AllLiteralsContainerMock: AllLiteralsContainer, Mock {
 		return __value
     }
 
-    func methodWithDouble(p: Double?) -> Int {
+    open func methodWithDouble(p: Double?) -> Int {
         addInvocation(.m_methodWithDouble__p_p(Parameter<Double?>.value(`p`)))
 		let perform = methodPerformValue(.m_methodWithDouble__p_p(Parameter<Double?>.value(`p`))) as? (Double?) -> Void
 		perform?(`p`)
@@ -1175,7 +1174,7 @@ class AllLiteralsContainerMock: AllLiteralsContainer, Mock {
 		return __value
     }
 
-    func methodWithArrayOfInt(p: [Int]) -> Int {
+    open func methodWithArrayOfInt(p: [Int]) -> Int {
         addInvocation(.m_methodWithArrayOfInt__p_p(Parameter<[Int]>.value(`p`)))
 		let perform = methodPerformValue(.m_methodWithArrayOfInt__p_p(Parameter<[Int]>.value(`p`))) as? ([Int]) -> Void
 		perform?(`p`)
@@ -1189,7 +1188,7 @@ class AllLiteralsContainerMock: AllLiteralsContainer, Mock {
 		return __value
     }
 
-    func methodWithArrayOfOther(p: [SomeClass]) -> Int {
+    open func methodWithArrayOfOther(p: [SomeClass]) -> Int {
         addInvocation(.m_methodWithArrayOfOther__p_p(Parameter<[SomeClass]>.value(`p`)))
 		let perform = methodPerformValue(.m_methodWithArrayOfOther__p_p(Parameter<[SomeClass]>.value(`p`))) as? ([SomeClass]) -> Void
 		perform?(`p`)
@@ -1203,7 +1202,7 @@ class AllLiteralsContainerMock: AllLiteralsContainer, Mock {
 		return __value
     }
 
-    func methodWithDict(p: [String: SomeClass]) -> Int {
+    open func methodWithDict(p: [String: SomeClass]) -> Int {
         addInvocation(.m_methodWithDict__p_p(Parameter<[String: SomeClass]>.value(`p`)))
 		let perform = methodPerformValue(.m_methodWithDict__p_p(Parameter<[String: SomeClass]>.value(`p`))) as? ([String: SomeClass]) -> Void
 		perform?(`p`)
@@ -1292,192 +1291,192 @@ class AllLiteralsContainerMock: AllLiteralsContainer, Mock {
         }
     }
 
-    class Given: StubbedMethod {
+    open class Given: StubbedMethod {
         fileprivate var method: MethodType
 
-        private init(method: MethodType, products: [Product]) {
+        private init(method: MethodType, products: [StubProduct]) {
             self.method = method
             super.init(products)
         }
 
 
-        static func methodWithStringParameter(p: Parameter<String>, willReturn: Int...) -> MethodStub {
-            return Given(method: .m_methodWithStringParameter__p_p(`p`), products: willReturn.map({ Product.return($0) }))
+        public static func methodWithStringParameter(p: Parameter<String>, willReturn: Int...) -> MethodStub {
+            return Given(method: .m_methodWithStringParameter__p_p(`p`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func methodWithOtionalStringParameter(p: Parameter<String?>, willReturn: Int...) -> MethodStub {
-            return Given(method: .m_methodWithOtionalStringParameter__p_p(`p`), products: willReturn.map({ Product.return($0) }))
+        public static func methodWithOtionalStringParameter(p: Parameter<String?>, willReturn: Int...) -> MethodStub {
+            return Given(method: .m_methodWithOtionalStringParameter__p_p(`p`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func methodWithCustomStringParameter(p: Parameter<CustomString>, willReturn: Int...) -> MethodStub {
-            return Given(method: .m_methodWithCustomStringParameter__p_p(`p`), products: willReturn.map({ Product.return($0) }))
+        public static func methodWithCustomStringParameter(p: Parameter<CustomString>, willReturn: Int...) -> MethodStub {
+            return Given(method: .m_methodWithCustomStringParameter__p_p(`p`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func methodWithCustomOptionalStringParameter(p: Parameter<CustomString?>, willReturn: Int...) -> MethodStub {
-            return Given(method: .m_methodWithCustomOptionalStringParameter__p_p(`p`), products: willReturn.map({ Product.return($0) }))
+        public static func methodWithCustomOptionalStringParameter(p: Parameter<CustomString?>, willReturn: Int...) -> MethodStub {
+            return Given(method: .m_methodWithCustomOptionalStringParameter__p_p(`p`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func methodWithIntParameter(p: Parameter<Int>, willReturn: Int...) -> MethodStub {
-            return Given(method: .m_methodWithIntParameter__p_p(`p`), products: willReturn.map({ Product.return($0) }))
+        public static func methodWithIntParameter(p: Parameter<Int>, willReturn: Int...) -> MethodStub {
+            return Given(method: .m_methodWithIntParameter__p_p(`p`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func methodWithCustomOptionalIntParameter(p: Parameter<CustomInt?>, willReturn: Int...) -> MethodStub {
-            return Given(method: .m_methodWithCustomOptionalIntParameter__p_p(`p`), products: willReturn.map({ Product.return($0) }))
+        public static func methodWithCustomOptionalIntParameter(p: Parameter<CustomInt?>, willReturn: Int...) -> MethodStub {
+            return Given(method: .m_methodWithCustomOptionalIntParameter__p_p(`p`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func methodWithBool(p: Parameter<Bool?>, willReturn: Int...) -> MethodStub {
-            return Given(method: .m_methodWithBool__p_p(`p`), products: willReturn.map({ Product.return($0) }))
+        public static func methodWithBool(p: Parameter<Bool?>, willReturn: Int...) -> MethodStub {
+            return Given(method: .m_methodWithBool__p_p(`p`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func methodWithFloat(p: Parameter<Float?>, willReturn: Int...) -> MethodStub {
-            return Given(method: .m_methodWithFloat__p_p(`p`), products: willReturn.map({ Product.return($0) }))
+        public static func methodWithFloat(p: Parameter<Float?>, willReturn: Int...) -> MethodStub {
+            return Given(method: .m_methodWithFloat__p_p(`p`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func methodWithDouble(p: Parameter<Double?>, willReturn: Int...) -> MethodStub {
-            return Given(method: .m_methodWithDouble__p_p(`p`), products: willReturn.map({ Product.return($0) }))
+        public static func methodWithDouble(p: Parameter<Double?>, willReturn: Int...) -> MethodStub {
+            return Given(method: .m_methodWithDouble__p_p(`p`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func methodWithArrayOfInt(p: Parameter<[Int]>, willReturn: Int...) -> MethodStub {
-            return Given(method: .m_methodWithArrayOfInt__p_p(`p`), products: willReturn.map({ Product.return($0) }))
+        public static func methodWithArrayOfInt(p: Parameter<[Int]>, willReturn: Int...) -> MethodStub {
+            return Given(method: .m_methodWithArrayOfInt__p_p(`p`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func methodWithArrayOfOther(p: Parameter<[SomeClass]>, willReturn: Int...) -> MethodStub {
-            return Given(method: .m_methodWithArrayOfOther__p_p(`p`), products: willReturn.map({ Product.return($0) }))
+        public static func methodWithArrayOfOther(p: Parameter<[SomeClass]>, willReturn: Int...) -> MethodStub {
+            return Given(method: .m_methodWithArrayOfOther__p_p(`p`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func methodWithDict(p: Parameter<[String: SomeClass]>, willReturn: Int...) -> MethodStub {
-            return Given(method: .m_methodWithDict__p_p(`p`), products: willReturn.map({ Product.return($0) }))
+        public static func methodWithDict(p: Parameter<[String: SomeClass]>, willReturn: Int...) -> MethodStub {
+            return Given(method: .m_methodWithDict__p_p(`p`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func methodWithStringParameter(p: Parameter<String>, willProduce: (Stubber<Int>) -> Void) -> MethodStub {
+        public static func methodWithStringParameter(p: Parameter<String>, willProduce: (Stubber<Int>) -> Void) -> MethodStub {
             let willReturn: [Int] = []
-			let given: Given = { return Given(method: .m_methodWithStringParameter__p_p(`p`), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_methodWithStringParameter__p_p(`p`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (Int).self)
 			willProduce(stubber)
 			return given
         }
-        static func methodWithOtionalStringParameter(p: Parameter<String?>, willProduce: (Stubber<Int>) -> Void) -> MethodStub {
+        public static func methodWithOtionalStringParameter(p: Parameter<String?>, willProduce: (Stubber<Int>) -> Void) -> MethodStub {
             let willReturn: [Int] = []
-			let given: Given = { return Given(method: .m_methodWithOtionalStringParameter__p_p(`p`), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_methodWithOtionalStringParameter__p_p(`p`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (Int).self)
 			willProduce(stubber)
 			return given
         }
-        static func methodWithCustomStringParameter(p: Parameter<CustomString>, willProduce: (Stubber<Int>) -> Void) -> MethodStub {
+        public static func methodWithCustomStringParameter(p: Parameter<CustomString>, willProduce: (Stubber<Int>) -> Void) -> MethodStub {
             let willReturn: [Int] = []
-			let given: Given = { return Given(method: .m_methodWithCustomStringParameter__p_p(`p`), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_methodWithCustomStringParameter__p_p(`p`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (Int).self)
 			willProduce(stubber)
 			return given
         }
-        static func methodWithCustomOptionalStringParameter(p: Parameter<CustomString?>, willProduce: (Stubber<Int>) -> Void) -> MethodStub {
+        public static func methodWithCustomOptionalStringParameter(p: Parameter<CustomString?>, willProduce: (Stubber<Int>) -> Void) -> MethodStub {
             let willReturn: [Int] = []
-			let given: Given = { return Given(method: .m_methodWithCustomOptionalStringParameter__p_p(`p`), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_methodWithCustomOptionalStringParameter__p_p(`p`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (Int).self)
 			willProduce(stubber)
 			return given
         }
-        static func methodWithIntParameter(p: Parameter<Int>, willProduce: (Stubber<Int>) -> Void) -> MethodStub {
+        public static func methodWithIntParameter(p: Parameter<Int>, willProduce: (Stubber<Int>) -> Void) -> MethodStub {
             let willReturn: [Int] = []
-			let given: Given = { return Given(method: .m_methodWithIntParameter__p_p(`p`), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_methodWithIntParameter__p_p(`p`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (Int).self)
 			willProduce(stubber)
 			return given
         }
-        static func methodWithCustomOptionalIntParameter(p: Parameter<CustomInt?>, willProduce: (Stubber<Int>) -> Void) -> MethodStub {
+        public static func methodWithCustomOptionalIntParameter(p: Parameter<CustomInt?>, willProduce: (Stubber<Int>) -> Void) -> MethodStub {
             let willReturn: [Int] = []
-			let given: Given = { return Given(method: .m_methodWithCustomOptionalIntParameter__p_p(`p`), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_methodWithCustomOptionalIntParameter__p_p(`p`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (Int).self)
 			willProduce(stubber)
 			return given
         }
-        static func methodWithBool(p: Parameter<Bool?>, willProduce: (Stubber<Int>) -> Void) -> MethodStub {
+        public static func methodWithBool(p: Parameter<Bool?>, willProduce: (Stubber<Int>) -> Void) -> MethodStub {
             let willReturn: [Int] = []
-			let given: Given = { return Given(method: .m_methodWithBool__p_p(`p`), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_methodWithBool__p_p(`p`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (Int).self)
 			willProduce(stubber)
 			return given
         }
-        static func methodWithFloat(p: Parameter<Float?>, willProduce: (Stubber<Int>) -> Void) -> MethodStub {
+        public static func methodWithFloat(p: Parameter<Float?>, willProduce: (Stubber<Int>) -> Void) -> MethodStub {
             let willReturn: [Int] = []
-			let given: Given = { return Given(method: .m_methodWithFloat__p_p(`p`), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_methodWithFloat__p_p(`p`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (Int).self)
 			willProduce(stubber)
 			return given
         }
-        static func methodWithDouble(p: Parameter<Double?>, willProduce: (Stubber<Int>) -> Void) -> MethodStub {
+        public static func methodWithDouble(p: Parameter<Double?>, willProduce: (Stubber<Int>) -> Void) -> MethodStub {
             let willReturn: [Int] = []
-			let given: Given = { return Given(method: .m_methodWithDouble__p_p(`p`), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_methodWithDouble__p_p(`p`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (Int).self)
 			willProduce(stubber)
 			return given
         }
-        static func methodWithArrayOfInt(p: Parameter<[Int]>, willProduce: (Stubber<Int>) -> Void) -> MethodStub {
+        public static func methodWithArrayOfInt(p: Parameter<[Int]>, willProduce: (Stubber<Int>) -> Void) -> MethodStub {
             let willReturn: [Int] = []
-			let given: Given = { return Given(method: .m_methodWithArrayOfInt__p_p(`p`), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_methodWithArrayOfInt__p_p(`p`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (Int).self)
 			willProduce(stubber)
 			return given
         }
-        static func methodWithArrayOfOther(p: Parameter<[SomeClass]>, willProduce: (Stubber<Int>) -> Void) -> MethodStub {
+        public static func methodWithArrayOfOther(p: Parameter<[SomeClass]>, willProduce: (Stubber<Int>) -> Void) -> MethodStub {
             let willReturn: [Int] = []
-			let given: Given = { return Given(method: .m_methodWithArrayOfOther__p_p(`p`), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_methodWithArrayOfOther__p_p(`p`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (Int).self)
 			willProduce(stubber)
 			return given
         }
-        static func methodWithDict(p: Parameter<[String: SomeClass]>, willProduce: (Stubber<Int>) -> Void) -> MethodStub {
+        public static func methodWithDict(p: Parameter<[String: SomeClass]>, willProduce: (Stubber<Int>) -> Void) -> MethodStub {
             let willReturn: [Int] = []
-			let given: Given = { return Given(method: .m_methodWithDict__p_p(`p`), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_methodWithDict__p_p(`p`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (Int).self)
 			willProduce(stubber)
 			return given
         }
     }
 
-    struct Verify {
+    public struct Verify {
         fileprivate var method: MethodType
 
-        static func methodWithStringParameter(p: Parameter<String>) -> Verify { return Verify(method: .m_methodWithStringParameter__p_p(`p`))}
-        static func methodWithOtionalStringParameter(p: Parameter<String?>) -> Verify { return Verify(method: .m_methodWithOtionalStringParameter__p_p(`p`))}
-        static func methodWithCustomStringParameter(p: Parameter<CustomString>) -> Verify { return Verify(method: .m_methodWithCustomStringParameter__p_p(`p`))}
-        static func methodWithCustomOptionalStringParameter(p: Parameter<CustomString?>) -> Verify { return Verify(method: .m_methodWithCustomOptionalStringParameter__p_p(`p`))}
-        static func methodWithIntParameter(p: Parameter<Int>) -> Verify { return Verify(method: .m_methodWithIntParameter__p_p(`p`))}
-        static func methodWithCustomOptionalIntParameter(p: Parameter<CustomInt?>) -> Verify { return Verify(method: .m_methodWithCustomOptionalIntParameter__p_p(`p`))}
-        static func methodWithBool(p: Parameter<Bool?>) -> Verify { return Verify(method: .m_methodWithBool__p_p(`p`))}
-        static func methodWithFloat(p: Parameter<Float?>) -> Verify { return Verify(method: .m_methodWithFloat__p_p(`p`))}
-        static func methodWithDouble(p: Parameter<Double?>) -> Verify { return Verify(method: .m_methodWithDouble__p_p(`p`))}
-        static func methodWithArrayOfInt(p: Parameter<[Int]>) -> Verify { return Verify(method: .m_methodWithArrayOfInt__p_p(`p`))}
-        static func methodWithArrayOfOther(p: Parameter<[SomeClass]>) -> Verify { return Verify(method: .m_methodWithArrayOfOther__p_p(`p`))}
-        static func methodWithDict(p: Parameter<[String: SomeClass]>) -> Verify { return Verify(method: .m_methodWithDict__p_p(`p`))}
+        public static func methodWithStringParameter(p: Parameter<String>) -> Verify { return Verify(method: .m_methodWithStringParameter__p_p(`p`))}
+        public static func methodWithOtionalStringParameter(p: Parameter<String?>) -> Verify { return Verify(method: .m_methodWithOtionalStringParameter__p_p(`p`))}
+        public static func methodWithCustomStringParameter(p: Parameter<CustomString>) -> Verify { return Verify(method: .m_methodWithCustomStringParameter__p_p(`p`))}
+        public static func methodWithCustomOptionalStringParameter(p: Parameter<CustomString?>) -> Verify { return Verify(method: .m_methodWithCustomOptionalStringParameter__p_p(`p`))}
+        public static func methodWithIntParameter(p: Parameter<Int>) -> Verify { return Verify(method: .m_methodWithIntParameter__p_p(`p`))}
+        public static func methodWithCustomOptionalIntParameter(p: Parameter<CustomInt?>) -> Verify { return Verify(method: .m_methodWithCustomOptionalIntParameter__p_p(`p`))}
+        public static func methodWithBool(p: Parameter<Bool?>) -> Verify { return Verify(method: .m_methodWithBool__p_p(`p`))}
+        public static func methodWithFloat(p: Parameter<Float?>) -> Verify { return Verify(method: .m_methodWithFloat__p_p(`p`))}
+        public static func methodWithDouble(p: Parameter<Double?>) -> Verify { return Verify(method: .m_methodWithDouble__p_p(`p`))}
+        public static func methodWithArrayOfInt(p: Parameter<[Int]>) -> Verify { return Verify(method: .m_methodWithArrayOfInt__p_p(`p`))}
+        public static func methodWithArrayOfOther(p: Parameter<[SomeClass]>) -> Verify { return Verify(method: .m_methodWithArrayOfOther__p_p(`p`))}
+        public static func methodWithDict(p: Parameter<[String: SomeClass]>) -> Verify { return Verify(method: .m_methodWithDict__p_p(`p`))}
     }
 
-    struct Perform {
+    public struct Perform {
         fileprivate var method: MethodType
         var performs: Any
 
-        static func methodWithStringParameter(p: Parameter<String>, perform: @escaping (String) -> Void) -> Perform {
+        public static func methodWithStringParameter(p: Parameter<String>, perform: @escaping (String) -> Void) -> Perform {
             return Perform(method: .m_methodWithStringParameter__p_p(`p`), performs: perform)
         }
-        static func methodWithOtionalStringParameter(p: Parameter<String?>, perform: @escaping (String?) -> Void) -> Perform {
+        public static func methodWithOtionalStringParameter(p: Parameter<String?>, perform: @escaping (String?) -> Void) -> Perform {
             return Perform(method: .m_methodWithOtionalStringParameter__p_p(`p`), performs: perform)
         }
-        static func methodWithCustomStringParameter(p: Parameter<CustomString>, perform: @escaping (CustomString) -> Void) -> Perform {
+        public static func methodWithCustomStringParameter(p: Parameter<CustomString>, perform: @escaping (CustomString) -> Void) -> Perform {
             return Perform(method: .m_methodWithCustomStringParameter__p_p(`p`), performs: perform)
         }
-        static func methodWithCustomOptionalStringParameter(p: Parameter<CustomString?>, perform: @escaping (CustomString?) -> Void) -> Perform {
+        public static func methodWithCustomOptionalStringParameter(p: Parameter<CustomString?>, perform: @escaping (CustomString?) -> Void) -> Perform {
             return Perform(method: .m_methodWithCustomOptionalStringParameter__p_p(`p`), performs: perform)
         }
-        static func methodWithIntParameter(p: Parameter<Int>, perform: @escaping (Int) -> Void) -> Perform {
+        public static func methodWithIntParameter(p: Parameter<Int>, perform: @escaping (Int) -> Void) -> Perform {
             return Perform(method: .m_methodWithIntParameter__p_p(`p`), performs: perform)
         }
-        static func methodWithCustomOptionalIntParameter(p: Parameter<CustomInt?>, perform: @escaping (CustomInt?) -> Void) -> Perform {
+        public static func methodWithCustomOptionalIntParameter(p: Parameter<CustomInt?>, perform: @escaping (CustomInt?) -> Void) -> Perform {
             return Perform(method: .m_methodWithCustomOptionalIntParameter__p_p(`p`), performs: perform)
         }
-        static func methodWithBool(p: Parameter<Bool?>, perform: @escaping (Bool?) -> Void) -> Perform {
+        public static func methodWithBool(p: Parameter<Bool?>, perform: @escaping (Bool?) -> Void) -> Perform {
             return Perform(method: .m_methodWithBool__p_p(`p`), performs: perform)
         }
-        static func methodWithFloat(p: Parameter<Float?>, perform: @escaping (Float?) -> Void) -> Perform {
+        public static func methodWithFloat(p: Parameter<Float?>, perform: @escaping (Float?) -> Void) -> Perform {
             return Perform(method: .m_methodWithFloat__p_p(`p`), performs: perform)
         }
-        static func methodWithDouble(p: Parameter<Double?>, perform: @escaping (Double?) -> Void) -> Perform {
+        public static func methodWithDouble(p: Parameter<Double?>, perform: @escaping (Double?) -> Void) -> Perform {
             return Perform(method: .m_methodWithDouble__p_p(`p`), performs: perform)
         }
-        static func methodWithArrayOfInt(p: Parameter<[Int]>, perform: @escaping ([Int]) -> Void) -> Perform {
+        public static func methodWithArrayOfInt(p: Parameter<[Int]>, perform: @escaping ([Int]) -> Void) -> Perform {
             return Perform(method: .m_methodWithArrayOfInt__p_p(`p`), performs: perform)
         }
-        static func methodWithArrayOfOther(p: Parameter<[SomeClass]>, perform: @escaping ([SomeClass]) -> Void) -> Perform {
+        public static func methodWithArrayOfOther(p: Parameter<[SomeClass]>, perform: @escaping ([SomeClass]) -> Void) -> Perform {
             return Perform(method: .m_methodWithArrayOfOther__p_p(`p`), performs: perform)
         }
-        static func methodWithDict(p: Parameter<[String: SomeClass]>, perform: @escaping ([String: SomeClass]) -> Void) -> Perform {
+        public static func methodWithDict(p: Parameter<[String: SomeClass]>, perform: @escaping ([String: SomeClass]) -> Void) -> Perform {
             return Perform(method: .m_methodWithDict__p_p(`p`), performs: perform)
         }
     }
@@ -1493,13 +1492,186 @@ class AllLiteralsContainerMock: AllLiteralsContainer, Mock {
 
     public func verify(_ method: Verify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
         let invocations = matchingCalls(method.method)
-        MockyAssert(count.matches(invocations.count), "Expeced: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
     }
 
     private func addInvocation(_ call: MethodType) {
         invocations.append(call)
     }
-    private func methodReturnValue(_ method: MethodType) throws -> Product {
+    private func methodReturnValue(_ method: MethodType) throws -> StubProduct {
+        let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
+        let matched = candidates.first(where: { $0.isValid && MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
+        guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
+        return product
+    }
+    private func methodPerformValue(_ method: MethodType) -> Any? {
+        let matched = methodPerformValues.reversed().first { MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) }
+        return matched?.performs
+    }
+    private func matchingCalls(_ method: MethodType) -> [MethodType] {
+        return invocations.filter { MethodType.compareParameters(lhs: $0, rhs: method, matcher: matcher) }
+    }
+    private func matchingCalls(_ method: Verify) -> Int {
+        return matchingCalls(method.method).count
+    }
+    private func givenGetterValue<T>(_ method: MethodType, _ message: String) -> T {
+        do {
+            return try methodReturnValue(method).casted()
+        } catch {
+            onFatalFailure(message)
+            Failure(message)
+        }
+    }
+    private func optionalGivenGetterValue<T>(_ method: MethodType, _ message: String) -> T? {
+        do {
+            return try methodReturnValue(method).casted()
+        } catch {
+            return nil
+        }
+    }
+    private func onFatalFailure(_ message: String) {
+        #if Mocky
+        guard let file = self.file, let line = self.line else { return } // Let if fail if cannot handle gratefully
+        SwiftyMockyTestObserver.handleMissingStubError(message: message, file: file, line: line)
+        #endif
+    }
+}
+
+// MARK: - AnotherProtocol
+open class AnotherProtocolMock: AnotherProtocol, Mock {
+    init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
+        self.sequencingPolicy = sequencingPolicy
+        self.stubbingPolicy = stubbingPolicy
+        self.file = file
+        self.line = line
+    }
+
+    var matcher: Matcher = Matcher.default
+    var stubbingPolicy: StubbingPolicy = .wrap
+    var sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst
+    private var invocations: [MethodType] = []
+    private var methodReturnValues: [Given] = []
+    private var methodPerformValues: [Perform] = []
+    private var file: StaticString?
+    private var line: UInt?
+
+    public typealias PropertyStub = Given
+    public typealias MethodStub = Given
+    public typealias SubscriptStub = Given
+
+    /// Convenience method - call setupMock() to extend debug information when failure occurs
+    public func setupMock(file: StaticString = #file, line: UInt = #line) {
+        self.file = file
+        self.line = line
+    }
+
+
+
+
+
+    open func doSomething<T: ProtocolWithAssociatedType2>(type: T) -> T.ValueType? {
+        addInvocation(.m_doSomething__type_type(Parameter<T>.value(`type`).wrapAsGeneric()))
+		let perform = methodPerformValue(.m_doSomething__type_type(Parameter<T>.value(`type`).wrapAsGeneric())) as? (T) -> Void
+		perform?(`type`)
+		var __value: T.ValueType? = nil
+		do {
+		    __value = try methodReturnValue(.m_doSomething__type_type(Parameter<T>.value(`type`).wrapAsGeneric())).casted()
+		} catch {
+			// do nothing
+		}
+		return __value
+    }
+
+    open func doSomething2<T: ProtocolWithAssociatedType2>(type: T, withValue: T.ValueType?) {
+        addInvocation(.m_doSomething2__type_typewithValue_withValue(Parameter<T>.value(`type`).wrapAsGeneric(), Parameter<T.ValueType?>.value(`withValue`).wrapAsGeneric()))
+		let perform = methodPerformValue(.m_doSomething2__type_typewithValue_withValue(Parameter<T>.value(`type`).wrapAsGeneric(), Parameter<T.ValueType?>.value(`withValue`).wrapAsGeneric())) as? (T, T.ValueType?) -> Void
+		perform?(`type`, `withValue`)
+    }
+
+
+    fileprivate enum MethodType {
+        case m_doSomething__type_type(Parameter<GenericAttribute>)
+        case m_doSomething2__type_typewithValue_withValue(Parameter<GenericAttribute>, Parameter<GenericAttribute>)
+
+        static func compareParameters(lhs: MethodType, rhs: MethodType, matcher: Matcher) -> Bool {
+            switch (lhs, rhs) {
+            case (.m_doSomething__type_type(let lhsType), .m_doSomething__type_type(let rhsType)):
+                guard Parameter.compare(lhs: lhsType, rhs: rhsType, with: matcher) else { return false } 
+                return true 
+            case (.m_doSomething2__type_typewithValue_withValue(let lhsType, let lhsWithvalue), .m_doSomething2__type_typewithValue_withValue(let rhsType, let rhsWithvalue)):
+                guard Parameter.compare(lhs: lhsType, rhs: rhsType, with: matcher) else { return false } 
+                guard Parameter.compare(lhs: lhsWithvalue, rhs: rhsWithvalue, with: matcher) else { return false } 
+                return true 
+            default: return false
+            }
+        }
+
+        func intValue() -> Int {
+            switch self {
+            case let .m_doSomething__type_type(p0): return p0.intValue
+            case let .m_doSomething2__type_typewithValue_withValue(p0, p1): return p0.intValue + p1.intValue
+            }
+        }
+    }
+
+    open class Given: StubbedMethod {
+        fileprivate var method: MethodType
+
+        private init(method: MethodType, products: [StubProduct]) {
+            self.method = method
+            super.init(products)
+        }
+
+
+        public static func doSomething<T: ProtocolWithAssociatedType2>(type: Parameter<T>, willReturn: T.ValueType?...) -> MethodStub {
+            return Given(method: .m_doSomething__type_type(`type`.wrapAsGeneric()), products: willReturn.map({ StubProduct.return($0 as Any) }))
+        }
+        public static func doSomething<T: ProtocolWithAssociatedType2>(type: Parameter<T>, willProduce: (Stubber<T.ValueType?>) -> Void) -> MethodStub {
+            let willReturn: [T.ValueType?] = []
+			let given: Given = { return Given(method: .m_doSomething__type_type(`type`.wrapAsGeneric()), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
+			let stubber = given.stub(for: (T.ValueType?).self)
+			willProduce(stubber)
+			return given
+        }
+    }
+
+    public struct Verify {
+        fileprivate var method: MethodType
+
+        public static func doSomething<T>(type: Parameter<T>) -> Verify where T:ProtocolWithAssociatedType2 { return Verify(method: .m_doSomething__type_type(`type`.wrapAsGeneric()))}
+        public static func doSomething2<T>(type: Parameter<T>, withValue: Parameter<T.ValueType?>) -> Verify where T:ProtocolWithAssociatedType2 { return Verify(method: .m_doSomething2__type_typewithValue_withValue(`type`.wrapAsGeneric(), `withValue`.wrapAsGeneric()))}
+    }
+
+    public struct Perform {
+        fileprivate var method: MethodType
+        var performs: Any
+
+        public static func doSomething<T>(type: Parameter<T>, perform: @escaping (T) -> Void) -> Perform where T:ProtocolWithAssociatedType2 {
+            return Perform(method: .m_doSomething__type_type(`type`.wrapAsGeneric()), performs: perform)
+        }
+        public static func doSomething2<T>(type: Parameter<T>, withValue: Parameter<T.ValueType?>, perform: @escaping (T, T.ValueType?) -> Void) -> Perform where T:ProtocolWithAssociatedType2 {
+            return Perform(method: .m_doSomething2__type_typewithValue_withValue(`type`.wrapAsGeneric(), `withValue`.wrapAsGeneric()), performs: perform)
+        }
+    }
+
+    public func given(_ method: Given) {
+        methodReturnValues.append(method)
+    }
+
+    public func perform(_ method: Perform) {
+        methodPerformValues.append(method)
+        methodPerformValues.sort { $0.method.intValue() < $1.method.intValue() }
+    }
+
+    public func verify(_ method: Verify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
+        let invocations = matchingCalls(method.method)
+        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+    }
+
+    private func addInvocation(_ call: MethodType) {
+        invocations.append(call)
+    }
+    private func methodReturnValue(_ method: MethodType) throws -> StubProduct {
         let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
         let matched = candidates.first(where: { $0.isValid && MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
         guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
@@ -1539,7 +1711,7 @@ class AllLiteralsContainerMock: AllLiteralsContainer, Mock {
 }
 
 // MARK: - ComplicatedServiceType
-class ComplicatedServiceTypeMock: ComplicatedServiceType, Mock {
+open class ComplicatedServiceTypeMock: ComplicatedServiceType, Mock {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
         self.sequencingPolicy = sequencingPolicy
         self.stubbingPolicy = stubbingPolicy
@@ -1556,9 +1728,9 @@ class ComplicatedServiceTypeMock: ComplicatedServiceType, Mock {
     private var file: StaticString?
     private var line: UInt?
 
-    typealias PropertyStub = Given
-    typealias MethodStub = Given
-    typealias SubscriptStub = Given
+    public typealias PropertyStub = Given
+    public typealias MethodStub = Given
+    public typealias SubscriptStub = Given
 
     /// Convenience method - call setupMock() to extend debug information when failure occurs
     public func setupMock(file: StaticString = #file, line: UInt = #line) {
@@ -1566,7 +1738,7 @@ class ComplicatedServiceTypeMock: ComplicatedServiceType, Mock {
         self.line = line
     }
 
-    var youCouldOnlyGetThis: String {
+    public var youCouldOnlyGetThis: String {
 		get {	invocations.append(.p_youCouldOnlyGetThis_get); return __p_youCouldOnlyGetThis ?? givenGetterValue(.p_youCouldOnlyGetThis_get, "ComplicatedServiceTypeMock - stub value for youCouldOnlyGetThis was not defined") }
 		@available(*, deprecated, message: "Using setters on readonly variables is deprecated, and will be removed in 3.1. Use Given to define stubbed property return value.")
 		set {	__p_youCouldOnlyGetThis = newValue }
@@ -1577,7 +1749,7 @@ class ComplicatedServiceTypeMock: ComplicatedServiceType, Mock {
 
 
 
-    func serviceName() -> String {
+    open func serviceName() -> String {
         addInvocation(.m_serviceName)
 		let perform = methodPerformValue(.m_serviceName) as? () -> Void
 		perform?()
@@ -1591,13 +1763,13 @@ class ComplicatedServiceTypeMock: ComplicatedServiceType, Mock {
 		return __value
     }
 
-    func aNewWayToSayHooray() {
+    open func aNewWayToSayHooray() {
         addInvocation(.m_aNewWayToSayHooray)
 		let perform = methodPerformValue(.m_aNewWayToSayHooray) as? () -> Void
 		perform?()
     }
 
-    func getPoint(from point: Point) -> Point {
+    open func getPoint(from point: Point) -> Point {
         addInvocation(.m_getPoint__from_point(Parameter<Point>.value(`point`)))
 		let perform = methodPerformValue(.m_getPoint__from_point(Parameter<Point>.value(`point`))) as? (Point) -> Void
 		perform?(`point`)
@@ -1611,7 +1783,7 @@ class ComplicatedServiceTypeMock: ComplicatedServiceType, Mock {
 		return __value
     }
 
-    func getPoint(from tuple: (Float,Float)) -> Point {
+    open func getPoint(from tuple: (Float,Float)) -> Point {
         addInvocation(.m_getPoint__from_tuple(Parameter<(Float,Float)>.value(`tuple`)))
 		let perform = methodPerformValue(.m_getPoint__from_tuple(Parameter<(Float,Float)>.value(`tuple`))) as? ((Float,Float)) -> Void
 		perform?(`tuple`)
@@ -1625,7 +1797,7 @@ class ComplicatedServiceTypeMock: ComplicatedServiceType, Mock {
 		return __value
     }
 
-    func similarMethodThatDiffersOnType(_ value: Float) -> Bool {
+    open func similarMethodThatDiffersOnType(_ value: Float) -> Bool {
         addInvocation(.m_similarMethodThatDiffersOnType__value_1(Parameter<Float>.value(`value`)))
 		let perform = methodPerformValue(.m_similarMethodThatDiffersOnType__value_1(Parameter<Float>.value(`value`))) as? (Float) -> Void
 		perform?(`value`)
@@ -1639,7 +1811,7 @@ class ComplicatedServiceTypeMock: ComplicatedServiceType, Mock {
 		return __value
     }
 
-    func similarMethodThatDiffersOnType(_ value: Point) -> Bool {
+    open func similarMethodThatDiffersOnType(_ value: Point) -> Bool {
         addInvocation(.m_similarMethodThatDiffersOnType__value_2(Parameter<Point>.value(`value`)))
 		let perform = methodPerformValue(.m_similarMethodThatDiffersOnType__value_2(Parameter<Point>.value(`value`))) as? (Point) -> Void
 		perform?(`value`)
@@ -1653,13 +1825,13 @@ class ComplicatedServiceTypeMock: ComplicatedServiceType, Mock {
 		return __value
     }
 
-    func methodWithTypedef(_ scalar: Scalar) {
+    open func methodWithTypedef(_ scalar: Scalar) {
         addInvocation(.m_methodWithTypedef__scalar(Parameter<Scalar>.value(`scalar`)))
 		let perform = methodPerformValue(.m_methodWithTypedef__scalar(Parameter<Scalar>.value(`scalar`))) as? (Scalar) -> Void
 		perform?(`scalar`)
     }
 
-    func methodWithClosures(success function: LinearFunction) -> ClosureFabric {
+    open func methodWithClosures(success function: LinearFunction) -> ClosureFabric {
         addInvocation(.m_methodWithClosures__success_function_1(Parameter<LinearFunction>.value(`function`)))
 		let perform = methodPerformValue(.m_methodWithClosures__success_function_1(Parameter<LinearFunction>.value(`function`))) as? (LinearFunction) -> Void
 		perform?(`function`)
@@ -1673,7 +1845,7 @@ class ComplicatedServiceTypeMock: ComplicatedServiceType, Mock {
 		return __value
     }
 
-    func methodWithClosures(success function: ((Scalar,Scalar) -> Scalar)?) -> ((Int) -> Void) {
+    open func methodWithClosures(success function: ((Scalar,Scalar) -> Scalar)?) -> ((Int) -> Void) {
         addInvocation(.m_methodWithClosures__success_function_2(Parameter<((Scalar,Scalar) -> Scalar)?>.value(`function`)))
 		let perform = methodPerformValue(.m_methodWithClosures__success_function_2(Parameter<((Scalar,Scalar) -> Scalar)?>.value(`function`))) as? (((Scalar,Scalar) -> Scalar)?) -> Void
 		perform?(`function`)
@@ -1748,160 +1920,134 @@ class ComplicatedServiceTypeMock: ComplicatedServiceType, Mock {
         }
     }
 
-    class Given: StubbedMethod {
+    open class Given: StubbedMethod {
         fileprivate var method: MethodType
 
-        private init(method: MethodType, products: [Product]) {
+        private init(method: MethodType, products: [StubProduct]) {
             self.method = method
             super.init(products)
         }
 
-        static func youCouldOnlyGetThis(getter defaultValue: String...) -> PropertyStub {
-            return Given(method: .p_youCouldOnlyGetThis_get, products: defaultValue.map({ Product.return($0) }))
+        public static func youCouldOnlyGetThis(getter defaultValue: String...) -> PropertyStub {
+            return Given(method: .p_youCouldOnlyGetThis_get, products: defaultValue.map({ StubProduct.return($0 as Any) }))
         }
 
-        static func serviceName(willReturn: String...) -> MethodStub {
-            return Given(method: .m_serviceName, products: willReturn.map({ Product.return($0) }))
+        public static func serviceName(willReturn: String...) -> MethodStub {
+            return Given(method: .m_serviceName, products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func getPoint(from point: Parameter<Point>, willReturn: Point...) -> MethodStub {
-            return Given(method: .m_getPoint__from_point(`point`), products: willReturn.map({ Product.return($0) }))
+        public static func getPoint(from point: Parameter<Point>, willReturn: Point...) -> MethodStub {
+            return Given(method: .m_getPoint__from_point(`point`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func getPoint(from tuple: Parameter<(Float,Float)>, willReturn: Point...) -> MethodStub {
-            return Given(method: .m_getPoint__from_tuple(`tuple`), products: willReturn.map({ Product.return($0) }))
+        public static func getPoint(from tuple: Parameter<(Float,Float)>, willReturn: Point...) -> MethodStub {
+            return Given(method: .m_getPoint__from_tuple(`tuple`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func similarMethodThatDiffersOnType(_ value: Parameter<Float>, willReturn: Bool...) -> MethodStub {
-            return Given(method: .m_similarMethodThatDiffersOnType__value_1(`value`), products: willReturn.map({ Product.return($0) }))
+        public static func similarMethodThatDiffersOnType(_ value: Parameter<Float>, willReturn: Bool...) -> MethodStub {
+            return Given(method: .m_similarMethodThatDiffersOnType__value_1(`value`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `value` label")
-		static func similarMethodThatDiffersOnType(value: Parameter<Float>, willReturn: Bool...) -> MethodStub {
-            return Given(method: .m_similarMethodThatDiffersOnType__value_1(`value`), products: willReturn.map({ Product.return($0) }))
+        public static func similarMethodThatDiffersOnType(_ value: Parameter<Point>, willReturn: Bool...) -> MethodStub {
+            return Given(method: .m_similarMethodThatDiffersOnType__value_2(`value`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func similarMethodThatDiffersOnType(_ value: Parameter<Point>, willReturn: Bool...) -> MethodStub {
-            return Given(method: .m_similarMethodThatDiffersOnType__value_2(`value`), products: willReturn.map({ Product.return($0) }))
+        public static func methodWithClosures(success function: Parameter<LinearFunction>, willReturn: ClosureFabric...) -> MethodStub {
+            return Given(method: .m_methodWithClosures__success_function_1(`function`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `value` label")
-		static func similarMethodThatDiffersOnType(value: Parameter<Point>, willReturn: Bool...) -> MethodStub {
-            return Given(method: .m_similarMethodThatDiffersOnType__value_2(`value`), products: willReturn.map({ Product.return($0) }))
+        public static func methodWithClosures(success function: Parameter<((Scalar,Scalar) -> Scalar)?>, willReturn: (Int) -> Void...) -> MethodStub {
+            return Given(method: .m_methodWithClosures__success_function_2(`function`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func methodWithClosures(success function: Parameter<LinearFunction>, willReturn: ClosureFabric...) -> MethodStub {
-            return Given(method: .m_methodWithClosures__success_function_1(`function`), products: willReturn.map({ Product.return($0) }))
-        }
-        static func methodWithClosures(success function: Parameter<((Scalar,Scalar) -> Scalar)?>, willReturn: (Int) -> Void...) -> MethodStub {
-            return Given(method: .m_methodWithClosures__success_function_2(`function`), products: willReturn.map({ Product.return($0) }))
-        }
-        static func serviceName(willProduce: (Stubber<String>) -> Void) -> MethodStub {
+        public static func serviceName(willProduce: (Stubber<String>) -> Void) -> MethodStub {
             let willReturn: [String] = []
-			let given: Given = { return Given(method: .m_serviceName, products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_serviceName, products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (String).self)
 			willProduce(stubber)
 			return given
         }
-        static func getPoint(from point: Parameter<Point>, willProduce: (Stubber<Point>) -> Void) -> MethodStub {
+        public static func getPoint(from point: Parameter<Point>, willProduce: (Stubber<Point>) -> Void) -> MethodStub {
             let willReturn: [Point] = []
-			let given: Given = { return Given(method: .m_getPoint__from_point(`point`), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_getPoint__from_point(`point`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (Point).self)
 			willProduce(stubber)
 			return given
         }
-        static func getPoint(from tuple: Parameter<(Float,Float)>, willProduce: (Stubber<Point>) -> Void) -> MethodStub {
+        public static func getPoint(from tuple: Parameter<(Float,Float)>, willProduce: (Stubber<Point>) -> Void) -> MethodStub {
             let willReturn: [Point] = []
-			let given: Given = { return Given(method: .m_getPoint__from_tuple(`tuple`), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_getPoint__from_tuple(`tuple`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (Point).self)
 			willProduce(stubber)
 			return given
         }
-        static func similarMethodThatDiffersOnType(_ value: Parameter<Float>, willProduce: (Stubber<Bool>) -> Void) -> MethodStub {
+        public static func similarMethodThatDiffersOnType(_ value: Parameter<Float>, willProduce: (Stubber<Bool>) -> Void) -> MethodStub {
             let willReturn: [Bool] = []
-			let given: Given = { return Given(method: .m_similarMethodThatDiffersOnType__value_1(`value`), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_similarMethodThatDiffersOnType__value_1(`value`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (Bool).self)
 			willProduce(stubber)
 			return given
         }
-        static func similarMethodThatDiffersOnType(_ value: Parameter<Point>, willProduce: (Stubber<Bool>) -> Void) -> MethodStub {
+        public static func similarMethodThatDiffersOnType(_ value: Parameter<Point>, willProduce: (Stubber<Bool>) -> Void) -> MethodStub {
             let willReturn: [Bool] = []
-			let given: Given = { return Given(method: .m_similarMethodThatDiffersOnType__value_2(`value`), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_similarMethodThatDiffersOnType__value_2(`value`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (Bool).self)
 			willProduce(stubber)
 			return given
         }
-        static func methodWithClosures(success function: Parameter<LinearFunction>, willProduce: (Stubber<ClosureFabric>) -> Void) -> MethodStub {
+        public static func methodWithClosures(success function: Parameter<LinearFunction>, willProduce: (Stubber<ClosureFabric>) -> Void) -> MethodStub {
             let willReturn: [ClosureFabric] = []
-			let given: Given = { return Given(method: .m_methodWithClosures__success_function_1(`function`), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_methodWithClosures__success_function_1(`function`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (ClosureFabric).self)
 			willProduce(stubber)
 			return given
         }
-        static func methodWithClosures(success function: Parameter<((Scalar,Scalar) -> Scalar)?>, willProduce: (Stubber<(Int) -> Void>) -> Void) -> MethodStub {
+        public static func methodWithClosures(success function: Parameter<((Scalar,Scalar) -> Scalar)?>, willProduce: (Stubber<(Int) -> Void>) -> Void) -> MethodStub {
             let willReturn: [(Int) -> Void] = []
-			let given: Given = { return Given(method: .m_methodWithClosures__success_function_2(`function`), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_methodWithClosures__success_function_2(`function`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: ((Int) -> Void).self)
 			willProduce(stubber)
 			return given
         }
     }
 
-    struct Verify {
+    public struct Verify {
         fileprivate var method: MethodType
 
-        static func serviceName() -> Verify { return Verify(method: .m_serviceName)}
-        static func aNewWayToSayHooray() -> Verify { return Verify(method: .m_aNewWayToSayHooray)}
-        static func getPoint(from point: Parameter<Point>) -> Verify { return Verify(method: .m_getPoint__from_point(`point`))}
-        static func getPoint(from tuple: Parameter<(Float,Float)>) -> Verify { return Verify(method: .m_getPoint__from_tuple(`tuple`))}
-        static func similarMethodThatDiffersOnType(_ value: Parameter<Float>) -> Verify { return Verify(method: .m_similarMethodThatDiffersOnType__value_1(`value`))}
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `value` label")
-		static func similarMethodThatDiffersOnType(value: Parameter<Float>) -> Verify { return Verify(method: .m_similarMethodThatDiffersOnType__value_1(`value`))}
-        static func similarMethodThatDiffersOnType(_ value: Parameter<Point>) -> Verify { return Verify(method: .m_similarMethodThatDiffersOnType__value_2(`value`))}
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `value` label")
-		static func similarMethodThatDiffersOnType(value: Parameter<Point>) -> Verify { return Verify(method: .m_similarMethodThatDiffersOnType__value_2(`value`))}
-        static func methodWithTypedef(_ scalar: Parameter<Scalar>) -> Verify { return Verify(method: .m_methodWithTypedef__scalar(`scalar`))}
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `scalar` label")
-		static func methodWithTypedef(scalar: Parameter<Scalar>) -> Verify { return Verify(method: .m_methodWithTypedef__scalar(`scalar`))}
-        static func methodWithClosures(success function: Parameter<LinearFunction>) -> Verify { return Verify(method: .m_methodWithClosures__success_function_1(`function`))}
-        static func methodWithClosures(success function: Parameter<((Scalar,Scalar) -> Scalar)?>) -> Verify { return Verify(method: .m_methodWithClosures__success_function_2(`function`))}
-        static var youCouldOnlyGetThis: Verify { return Verify(method: .p_youCouldOnlyGetThis_get) }
+        public static func serviceName() -> Verify { return Verify(method: .m_serviceName)}
+        public static func aNewWayToSayHooray() -> Verify { return Verify(method: .m_aNewWayToSayHooray)}
+        public static func getPoint(from point: Parameter<Point>) -> Verify { return Verify(method: .m_getPoint__from_point(`point`))}
+        public static func getPoint(from tuple: Parameter<(Float,Float)>) -> Verify { return Verify(method: .m_getPoint__from_tuple(`tuple`))}
+        public static func similarMethodThatDiffersOnType(_ value: Parameter<Float>) -> Verify { return Verify(method: .m_similarMethodThatDiffersOnType__value_1(`value`))}
+        public static func similarMethodThatDiffersOnType(_ value: Parameter<Point>) -> Verify { return Verify(method: .m_similarMethodThatDiffersOnType__value_2(`value`))}
+        public static func methodWithTypedef(_ scalar: Parameter<Scalar>) -> Verify { return Verify(method: .m_methodWithTypedef__scalar(`scalar`))}
+        public static func methodWithClosures(success function: Parameter<LinearFunction>) -> Verify { return Verify(method: .m_methodWithClosures__success_function_1(`function`))}
+        public static func methodWithClosures(success function: Parameter<((Scalar,Scalar) -> Scalar)?>) -> Verify { return Verify(method: .m_methodWithClosures__success_function_2(`function`))}
+        public static var youCouldOnlyGetThis: Verify { return Verify(method: .p_youCouldOnlyGetThis_get) }
     }
 
-    struct Perform {
+    public struct Perform {
         fileprivate var method: MethodType
         var performs: Any
 
-        static func serviceName(perform: @escaping () -> Void) -> Perform {
+        public static func serviceName(perform: @escaping () -> Void) -> Perform {
             return Perform(method: .m_serviceName, performs: perform)
         }
-        static func aNewWayToSayHooray(perform: @escaping () -> Void) -> Perform {
+        public static func aNewWayToSayHooray(perform: @escaping () -> Void) -> Perform {
             return Perform(method: .m_aNewWayToSayHooray, performs: perform)
         }
-        static func getPoint(from point: Parameter<Point>, perform: @escaping (Point) -> Void) -> Perform {
+        public static func getPoint(from point: Parameter<Point>, perform: @escaping (Point) -> Void) -> Perform {
             return Perform(method: .m_getPoint__from_point(`point`), performs: perform)
         }
-        static func getPoint(from tuple: Parameter<(Float,Float)>, perform: @escaping ((Float,Float)) -> Void) -> Perform {
+        public static func getPoint(from tuple: Parameter<(Float,Float)>, perform: @escaping ((Float,Float)) -> Void) -> Perform {
             return Perform(method: .m_getPoint__from_tuple(`tuple`), performs: perform)
         }
-        static func similarMethodThatDiffersOnType(_ value: Parameter<Float>, perform: @escaping (Float) -> Void) -> Perform {
+        public static func similarMethodThatDiffersOnType(_ value: Parameter<Float>, perform: @escaping (Float) -> Void) -> Perform {
             return Perform(method: .m_similarMethodThatDiffersOnType__value_1(`value`), performs: perform)
         }
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `value` label")
-		static func similarMethodThatDiffersOnType(value: Parameter<Float>, perform: @escaping (Float) -> Void) -> Perform {
-            return Perform(method: .m_similarMethodThatDiffersOnType__value_1(`value`), performs: perform)
-        }
-        static func similarMethodThatDiffersOnType(_ value: Parameter<Point>, perform: @escaping (Point) -> Void) -> Perform {
+        public static func similarMethodThatDiffersOnType(_ value: Parameter<Point>, perform: @escaping (Point) -> Void) -> Perform {
             return Perform(method: .m_similarMethodThatDiffersOnType__value_2(`value`), performs: perform)
         }
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `value` label")
-		static func similarMethodThatDiffersOnType(value: Parameter<Point>, perform: @escaping (Point) -> Void) -> Perform {
-            return Perform(method: .m_similarMethodThatDiffersOnType__value_2(`value`), performs: perform)
-        }
-        static func methodWithTypedef(_ scalar: Parameter<Scalar>, perform: @escaping (Scalar) -> Void) -> Perform {
+        public static func methodWithTypedef(_ scalar: Parameter<Scalar>, perform: @escaping (Scalar) -> Void) -> Perform {
             return Perform(method: .m_methodWithTypedef__scalar(`scalar`), performs: perform)
         }
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `scalar` label")
-		static func methodWithTypedef(scalar: Parameter<Scalar>, perform: @escaping (Scalar) -> Void) -> Perform {
-            return Perform(method: .m_methodWithTypedef__scalar(`scalar`), performs: perform)
-        }
-        static func methodWithClosures(success function: Parameter<LinearFunction>, perform: @escaping (LinearFunction) -> Void) -> Perform {
+        public static func methodWithClosures(success function: Parameter<LinearFunction>, perform: @escaping (LinearFunction) -> Void) -> Perform {
             return Perform(method: .m_methodWithClosures__success_function_1(`function`), performs: perform)
         }
-        static func methodWithClosures(success function: Parameter<((Scalar,Scalar) -> Scalar)?>, perform: @escaping (((Scalar,Scalar) -> Scalar)?) -> Void) -> Perform {
+        public static func methodWithClosures(success function: Parameter<((Scalar,Scalar) -> Scalar)?>, perform: @escaping (((Scalar,Scalar) -> Scalar)?) -> Void) -> Perform {
             return Perform(method: .m_methodWithClosures__success_function_2(`function`), performs: perform)
         }
     }
@@ -1917,13 +2063,13 @@ class ComplicatedServiceTypeMock: ComplicatedServiceType, Mock {
 
     public func verify(_ method: Verify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
         let invocations = matchingCalls(method.method)
-        MockyAssert(count.matches(invocations.count), "Expeced: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
     }
 
     private func addInvocation(_ call: MethodType) {
         invocations.append(call)
     }
-    private func methodReturnValue(_ method: MethodType) throws -> Product {
+    private func methodReturnValue(_ method: MethodType) throws -> StubProduct {
         let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
         let matched = candidates.first(where: { $0.isValid && MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
         guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
@@ -1963,7 +2109,7 @@ class ComplicatedServiceTypeMock: ComplicatedServiceType, Mock {
 }
 
 // MARK: - DateSortable
-class DateSortableMock: DateSortable, Mock {
+open class DateSortableMock: DateSortable, Mock {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
         self.sequencingPolicy = sequencingPolicy
         self.stubbingPolicy = stubbingPolicy
@@ -1980,9 +2126,9 @@ class DateSortableMock: DateSortable, Mock {
     private var file: StaticString?
     private var line: UInt?
 
-    typealias PropertyStub = Given
-    typealias MethodStub = Given
-    typealias SubscriptStub = Given
+    public typealias PropertyStub = Given
+    public typealias MethodStub = Given
+    public typealias SubscriptStub = Given
 
     /// Convenience method - call setupMock() to extend debug information when failure occurs
     public func setupMock(file: StaticString = #file, line: UInt = #line) {
@@ -1990,7 +2136,7 @@ class DateSortableMock: DateSortable, Mock {
         self.line = line
     }
 
-    var date: Date {
+    public var date: Date {
 		get {	invocations.append(.p_date_get); return __p_date ?? givenGetterValue(.p_date_get, "DateSortableMock - stub value for date was not defined") }
 		@available(*, deprecated, message: "Using setters on readonly variables is deprecated, and will be removed in 3.1. Use Given to define stubbed property return value.")
 		set {	__p_date = newValue }
@@ -2018,27 +2164,27 @@ class DateSortableMock: DateSortable, Mock {
         }
     }
 
-    class Given: StubbedMethod {
+    open class Given: StubbedMethod {
         fileprivate var method: MethodType
 
-        private init(method: MethodType, products: [Product]) {
+        private init(method: MethodType, products: [StubProduct]) {
             self.method = method
             super.init(products)
         }
 
-        static func date(getter defaultValue: Date...) -> PropertyStub {
-            return Given(method: .p_date_get, products: defaultValue.map({ Product.return($0) }))
+        public static func date(getter defaultValue: Date...) -> PropertyStub {
+            return Given(method: .p_date_get, products: defaultValue.map({ StubProduct.return($0 as Any) }))
         }
 
     }
 
-    struct Verify {
+    public struct Verify {
         fileprivate var method: MethodType
 
-        static var date: Verify { return Verify(method: .p_date_get) }
+        public static var date: Verify { return Verify(method: .p_date_get) }
     }
 
-    struct Perform {
+    public struct Perform {
         fileprivate var method: MethodType
         var performs: Any
 
@@ -2055,13 +2201,13 @@ class DateSortableMock: DateSortable, Mock {
 
     public func verify(_ method: Verify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
         let invocations = matchingCalls(method.method)
-        MockyAssert(count.matches(invocations.count), "Expeced: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
     }
 
     private func addInvocation(_ call: MethodType) {
         invocations.append(call)
     }
-    private func methodReturnValue(_ method: MethodType) throws -> Product {
+    private func methodReturnValue(_ method: MethodType) throws -> StubProduct {
         let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
         let matched = candidates.first(where: { $0.isValid && MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
         guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
@@ -2101,7 +2247,7 @@ class DateSortableMock: DateSortable, Mock {
 }
 
 // MARK: - EdgeCasesGenericsProtocol
-class EdgeCasesGenericsProtocolMock: EdgeCasesGenericsProtocol, Mock {
+open class EdgeCasesGenericsProtocolMock: EdgeCasesGenericsProtocol, Mock {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
         self.sequencingPolicy = sequencingPolicy
         self.stubbingPolicy = stubbingPolicy
@@ -2118,9 +2264,9 @@ class EdgeCasesGenericsProtocolMock: EdgeCasesGenericsProtocol, Mock {
     private var file: StaticString?
     private var line: UInt?
 
-    typealias PropertyStub = Given
-    typealias MethodStub = Given
-    typealias SubscriptStub = Given
+    public typealias PropertyStub = Given
+    public typealias MethodStub = Given
+    public typealias SubscriptStub = Given
 
     /// Convenience method - call setupMock() to extend debug information when failure occurs
     public func setupMock(file: StaticString = #file, line: UInt = #line) {
@@ -2132,13 +2278,13 @@ class EdgeCasesGenericsProtocolMock: EdgeCasesGenericsProtocol, Mock {
 
 
 
-    func sorted<Key, Value>(by key: Mytest<Key, Value>) {
+    open func sorted<Key, Value>(by key: Mytest<Key, Value>) {
         addInvocation(.m_sorted__by_key(Parameter<Mytest<Key, Value>>.value(`key`).wrapAsGeneric()))
 		let perform = methodPerformValue(.m_sorted__by_key(Parameter<Mytest<Key, Value>>.value(`key`).wrapAsGeneric())) as? (Mytest<Key, Value>) -> Void
 		perform?(`key`)
     }
 
-    func getter<K,V: Sequence,T>(swapped key: Mytest<K,V>) -> T {
+    open func getter<K,V: Sequence,T>(swapped key: Mytest<K,V>) -> T {
         addInvocation(.m_getter__swapped_key(Parameter<Mytest<K,V>>.value(`key`).wrapAsGeneric()))
 		let perform = methodPerformValue(.m_getter__swapped_key(Parameter<Mytest<K,V>>.value(`key`).wrapAsGeneric())) as? (Mytest<K,V>) -> Void
 		perform?(`key`)
@@ -2177,42 +2323,42 @@ class EdgeCasesGenericsProtocolMock: EdgeCasesGenericsProtocol, Mock {
         }
     }
 
-    class Given: StubbedMethod {
+    open class Given: StubbedMethod {
         fileprivate var method: MethodType
 
-        private init(method: MethodType, products: [Product]) {
+        private init(method: MethodType, products: [StubProduct]) {
             self.method = method
             super.init(products)
         }
 
 
-        static func getter<K,V: Sequence,T>(swapped key: Parameter<Mytest<K,V>>, willReturn: T...) -> MethodStub {
-            return Given(method: .m_getter__swapped_key(`key`.wrapAsGeneric()), products: willReturn.map({ Product.return($0) }))
+        public static func getter<K,V: Sequence,T>(swapped key: Parameter<Mytest<K,V>>, willReturn: T...) -> MethodStub {
+            return Given(method: .m_getter__swapped_key(`key`.wrapAsGeneric()), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func getter<K,V: Sequence,T>(swapped key: Parameter<Mytest<K,V>>, willProduce: (Stubber<T>) -> Void) -> MethodStub {
+        public static func getter<K,V: Sequence,T>(swapped key: Parameter<Mytest<K,V>>, willProduce: (Stubber<T>) -> Void) -> MethodStub {
             let willReturn: [T] = []
-			let given: Given = { return Given(method: .m_getter__swapped_key(`key`.wrapAsGeneric()), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_getter__swapped_key(`key`.wrapAsGeneric()), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (T).self)
 			willProduce(stubber)
 			return given
         }
     }
 
-    struct Verify {
+    public struct Verify {
         fileprivate var method: MethodType
 
-        static func sorted<Key,Value>(by key: Parameter<Mytest<Key, Value>>) -> Verify { return Verify(method: .m_sorted__by_key(`key`.wrapAsGeneric()))}
-        static func getter<K,V>(swapped key: Parameter<Mytest<K,V>>) -> Verify { return Verify(method: .m_getter__swapped_key(`key`.wrapAsGeneric()))}
+        public static func sorted<Key,Value>(by key: Parameter<Mytest<Key, Value>>) -> Verify { return Verify(method: .m_sorted__by_key(`key`.wrapAsGeneric()))}
+        public static func getter<K,V>(swapped key: Parameter<Mytest<K,V>>) -> Verify where V:Sequence { return Verify(method: .m_getter__swapped_key(`key`.wrapAsGeneric()))}
     }
 
-    struct Perform {
+    public struct Perform {
         fileprivate var method: MethodType
         var performs: Any
 
-        static func sorted<Key,Value>(by key: Parameter<Mytest<Key, Value>>, perform: @escaping (Mytest<Key, Value>) -> Void) -> Perform {
+        public static func sorted<Key,Value>(by key: Parameter<Mytest<Key, Value>>, perform: @escaping (Mytest<Key, Value>) -> Void) -> Perform {
             return Perform(method: .m_sorted__by_key(`key`.wrapAsGeneric()), performs: perform)
         }
-        static func getter<K,V>(swapped key: Parameter<Mytest<K,V>>, perform: @escaping (Mytest<K,V>) -> Void) -> Perform {
+        public static func getter<K,V>(swapped key: Parameter<Mytest<K,V>>, perform: @escaping (Mytest<K,V>) -> Void) -> Perform where V:Sequence {
             return Perform(method: .m_getter__swapped_key(`key`.wrapAsGeneric()), performs: perform)
         }
     }
@@ -2228,13 +2374,13 @@ class EdgeCasesGenericsProtocolMock: EdgeCasesGenericsProtocol, Mock {
 
     public func verify(_ method: Verify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
         let invocations = matchingCalls(method.method)
-        MockyAssert(count.matches(invocations.count), "Expeced: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
     }
 
     private func addInvocation(_ call: MethodType) {
         invocations.append(call)
     }
-    private func methodReturnValue(_ method: MethodType) throws -> Product {
+    private func methodReturnValue(_ method: MethodType) throws -> StubProduct {
         let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
         let matched = candidates.first(where: { $0.isValid && MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
         guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
@@ -2274,7 +2420,7 @@ class EdgeCasesGenericsProtocolMock: EdgeCasesGenericsProtocol, Mock {
 }
 
 // MARK: - EmptyProtocol
-class EmptyProtocolMock: EmptyProtocol, Mock {
+open class EmptyProtocolMock: EmptyProtocol, Mock {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
         self.sequencingPolicy = sequencingPolicy
         self.stubbingPolicy = stubbingPolicy
@@ -2291,9 +2437,9 @@ class EmptyProtocolMock: EmptyProtocol, Mock {
     private var file: StaticString?
     private var line: UInt?
 
-    typealias PropertyStub = Given
-    typealias MethodStub = Given
-    typealias SubscriptStub = Given
+    public typealias PropertyStub = Given
+    public typealias MethodStub = Given
+    public typealias SubscriptStub = Given
 
     /// Convenience method - call setupMock() to extend debug information when failure occurs
     public func setupMock(file: StaticString = #file, line: UInt = #line) {
@@ -2311,10 +2457,10 @@ class EmptyProtocolMock: EmptyProtocol, Mock {
         func intValue() -> Int { return 0 }
     }
 
-    class Given: StubbedMethod {
+    open class Given: StubbedMethod {
         fileprivate var method: MethodType
 
-        private init(method: MethodType, products: [Product]) {
+        private init(method: MethodType, products: [StubProduct]) {
             self.method = method
             super.init(products)
         }
@@ -2322,12 +2468,12 @@ class EmptyProtocolMock: EmptyProtocol, Mock {
 
     }
 
-    struct Verify {
+    public struct Verify {
         fileprivate var method: MethodType
 
     }
 
-    struct Perform {
+    public struct Perform {
         fileprivate var method: MethodType
         var performs: Any
 
@@ -2344,13 +2490,13 @@ class EmptyProtocolMock: EmptyProtocol, Mock {
 
     public func verify(_ method: Verify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
         let invocations = matchingCalls(method.method)
-        MockyAssert(count.matches(invocations.count), "Expeced: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
     }
 
     private func addInvocation(_ call: MethodType) {
         invocations.append(call)
     }
-    private func methodReturnValue(_ method: MethodType) throws -> Product {
+    private func methodReturnValue(_ method: MethodType) throws -> StubProduct {
         let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
         let matched = candidates.first(where: { $0.isValid && MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
         guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
@@ -2390,7 +2536,7 @@ class EmptyProtocolMock: EmptyProtocol, Mock {
 }
 
 // MARK: - FailsWithKeywordArguments
-class FailsWithKeywordArgumentsMock: FailsWithKeywordArguments, Mock {
+open class FailsWithKeywordArgumentsMock: FailsWithKeywordArguments, Mock {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
         self.sequencingPolicy = sequencingPolicy
         self.stubbingPolicy = stubbingPolicy
@@ -2407,9 +2553,9 @@ class FailsWithKeywordArgumentsMock: FailsWithKeywordArguments, Mock {
     private var file: StaticString?
     private var line: UInt?
 
-    typealias PropertyStub = Given
-    typealias MethodStub = Given
-    typealias SubscriptStub = Given
+    public typealias PropertyStub = Given
+    public typealias MethodStub = Given
+    public typealias SubscriptStub = Given
 
     /// Convenience method - call setupMock() to extend debug information when failure occurs
     public func setupMock(file: StaticString = #file, line: UInt = #line) {
@@ -2417,7 +2563,7 @@ class FailsWithKeywordArgumentsMock: FailsWithKeywordArguments, Mock {
         self.line = line
     }
 
-    var `throw`: Error {
+    public var `throw`: Error {
 		get {	invocations.append(.p_throw_get); return __p_throw ?? givenGetterValue(.p_throw_get, "FailsWithKeywordArgumentsMock - stub value for `throw` was not defined") }
 		set {	invocations.append(.p_throw_set(.value(newValue))); __p_throw = newValue }
 	}
@@ -2427,13 +2573,13 @@ class FailsWithKeywordArgumentsMock: FailsWithKeywordArguments, Mock {
 
 
 
-    func foo(for: String) {
+    open func foo(for: String) {
         addInvocation(.m_foo__for_for(Parameter<String>.value(`for`)))
 		let perform = methodPerformValue(.m_foo__for_for(Parameter<String>.value(`for`))) as? (String) -> Void
 		perform?(`for`)
     }
 
-    func `throw`(while: String) -> Error {
+    open func `throw`(while: String) -> Error {
         addInvocation(.m_throw__while_while(Parameter<String>.value(`while`)))
 		let perform = methodPerformValue(.m_throw__while_while(Parameter<String>.value(`while`))) as? (String) -> Void
 		perform?(`while`)
@@ -2447,7 +2593,7 @@ class FailsWithKeywordArgumentsMock: FailsWithKeywordArguments, Mock {
 		return __value
     }
 
-    func `return`(do while: String) -> Bool {
+    open func `return`(do while: String) -> Bool {
         addInvocation(.m_return__do_while(Parameter<String>.value(`while`)))
 		let perform = methodPerformValue(.m_return__do_while(Parameter<String>.value(`while`))) as? (String) -> Void
 		perform?(`while`)
@@ -2461,7 +2607,7 @@ class FailsWithKeywordArgumentsMock: FailsWithKeywordArguments, Mock {
 		return __value
     }
 
-    subscript (_ return: Int) -> Bool {
+    public subscript (_ return: Int) -> Bool {
 		get {
 			addInvocation(.subscript_get_return(Parameter<Int>.value(`return`)))
 			do {
@@ -2521,66 +2667,66 @@ class FailsWithKeywordArgumentsMock: FailsWithKeywordArguments, Mock {
         }
     }
 
-    class Given: StubbedMethod {
+    open class Given: StubbedMethod {
         fileprivate var method: MethodType
 
-        private init(method: MethodType, products: [Product]) {
+        private init(method: MethodType, products: [StubProduct]) {
             self.method = method
             super.init(products)
         }
 
-        static func `throw`(getter defaultValue: Error...) -> PropertyStub {
-            return Given(method: .p_throw_get, products: defaultValue.map({ Product.return($0) }))
+        public static func `throw`(getter defaultValue: Error...) -> PropertyStub {
+            return Given(method: .p_throw_get, products: defaultValue.map({ StubProduct.return($0 as Any) }))
         }
 
-        static func `throw`(while: Parameter<String>, willReturn: Error...) -> MethodStub {
-            return Given(method: .m_throw__while_while(`while`), products: willReturn.map({ Product.return($0) }))
+        public static func `throw`(while: Parameter<String>, willReturn: Error...) -> MethodStub {
+            return Given(method: .m_throw__while_while(`while`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func `return`(do while: Parameter<String>, willReturn: Bool...) -> MethodStub {
-            return Given(method: .m_return__do_while(`while`), products: willReturn.map({ Product.return($0) }))
+        public static func `return`(do while: Parameter<String>, willReturn: Bool...) -> MethodStub {
+            return Given(method: .m_return__do_while(`while`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func `throw`(while: Parameter<String>, willProduce: (Stubber<Error>) -> Void) -> MethodStub {
+        public static func `throw`(while: Parameter<String>, willProduce: (Stubber<Error>) -> Void) -> MethodStub {
             let willReturn: [Error] = []
-			let given: Given = { return Given(method: .m_throw__while_while(`while`), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_throw__while_while(`while`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (Error).self)
 			willProduce(stubber)
 			return given
         }
-        static func `return`(do while: Parameter<String>, willProduce: (Stubber<Bool>) -> Void) -> MethodStub {
+        public static func `return`(do while: Parameter<String>, willProduce: (Stubber<Bool>) -> Void) -> MethodStub {
             let willReturn: [Bool] = []
-			let given: Given = { return Given(method: .m_return__do_while(`while`), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_return__do_while(`while`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (Bool).self)
 			willProduce(stubber)
 			return given
         }
-        static func `subscript`(_ return: Parameter<Int>, willReturn: Bool...) -> SubscriptStub {
-            return Given(method: .subscript_get_return(`return`), products: willReturn.map({ Product.return($0) }))
+        public static func `subscript`(_ return: Parameter<Int>, willReturn: Bool...) -> SubscriptStub {
+            return Given(method: .subscript_get_return(`return`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
     }
 
-    struct Verify {
+    public struct Verify {
         fileprivate var method: MethodType
 
-        static func foo(for: Parameter<String>) -> Verify { return Verify(method: .m_foo__for_for(`for`))}
-        static func `throw`(while: Parameter<String>) -> Verify { return Verify(method: .m_throw__while_while(`while`))}
-        static func `return`(do while: Parameter<String>) -> Verify { return Verify(method: .m_return__do_while(`while`))}
-        static var `throw`: Verify { return Verify(method: .p_throw_get) }
-		static func `throw`(set newValue: Parameter<Error>) -> Verify { return Verify(method: .p_throw_set(newValue)) }
-        static func `subscript`(_ return: Parameter<Int>) -> Verify { return Verify(method: .subscript_get_return(`return`))}
-        static func `subscript`(_ return: Parameter<Int>, set newValue: Parameter<Bool>) -> Verify { return Verify(method: .subscript_set_return(`return`, newValue))}
+        public static func foo(for: Parameter<String>) -> Verify { return Verify(method: .m_foo__for_for(`for`))}
+        public static func `throw`(while: Parameter<String>) -> Verify { return Verify(method: .m_throw__while_while(`while`))}
+        public static func `return`(do while: Parameter<String>) -> Verify { return Verify(method: .m_return__do_while(`while`))}
+        public static var `throw`: Verify { return Verify(method: .p_throw_get) }
+		public static func `throw`(set newValue: Parameter<Error>) -> Verify { return Verify(method: .p_throw_set(newValue)) }
+        public static func `subscript`(_ return: Parameter<Int>) -> Verify { return Verify(method: .subscript_get_return(`return`))}
+        public static func `subscript`(_ return: Parameter<Int>, set newValue: Parameter<Bool>) -> Verify { return Verify(method: .subscript_set_return(`return`, newValue))}
     }
 
-    struct Perform {
+    public struct Perform {
         fileprivate var method: MethodType
         var performs: Any
 
-        static func foo(for: Parameter<String>, perform: @escaping (String) -> Void) -> Perform {
+        public static func foo(for: Parameter<String>, perform: @escaping (String) -> Void) -> Perform {
             return Perform(method: .m_foo__for_for(`for`), performs: perform)
         }
-        static func `throw`(while: Parameter<String>, perform: @escaping (String) -> Void) -> Perform {
+        public static func `throw`(while: Parameter<String>, perform: @escaping (String) -> Void) -> Perform {
             return Perform(method: .m_throw__while_while(`while`), performs: perform)
         }
-        static func `return`(do while: Parameter<String>, perform: @escaping (String) -> Void) -> Perform {
+        public static func `return`(do while: Parameter<String>, perform: @escaping (String) -> Void) -> Perform {
             return Perform(method: .m_return__do_while(`while`), performs: perform)
         }
     }
@@ -2596,13 +2742,13 @@ class FailsWithKeywordArgumentsMock: FailsWithKeywordArguments, Mock {
 
     public func verify(_ method: Verify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
         let invocations = matchingCalls(method.method)
-        MockyAssert(count.matches(invocations.count), "Expeced: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
     }
 
     private func addInvocation(_ call: MethodType) {
         invocations.append(call)
     }
-    private func methodReturnValue(_ method: MethodType) throws -> Product {
+    private func methodReturnValue(_ method: MethodType) throws -> StubProduct {
         let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
         let matched = candidates.first(where: { $0.isValid && MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
         guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
@@ -2642,7 +2788,7 @@ class FailsWithKeywordArgumentsMock: FailsWithKeywordArguments, Mock {
 }
 
 // MARK: - FailsWithUntagged
-class FailsWithUntaggedMock: FailsWithUntagged, Mock {
+open class FailsWithUntaggedMock: FailsWithUntagged, Mock {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
         self.sequencingPolicy = sequencingPolicy
         self.stubbingPolicy = stubbingPolicy
@@ -2659,9 +2805,9 @@ class FailsWithUntaggedMock: FailsWithUntagged, Mock {
     private var file: StaticString?
     private var line: UInt?
 
-    typealias PropertyStub = Given
-    typealias MethodStub = Given
-    typealias SubscriptStub = Given
+    public typealias PropertyStub = Given
+    public typealias MethodStub = Given
+    public typealias SubscriptStub = Given
 
     /// Convenience method - call setupMock() to extend debug information when failure occurs
     public func setupMock(file: StaticString = #file, line: UInt = #line) {
@@ -2673,9 +2819,9 @@ class FailsWithUntaggedMock: FailsWithUntagged, Mock {
 
 
 
-    required init<T>(with t: T) { }
+    public required init<T>(with t: T) { }
 
-    func foo<T>(_: T, bar : String) where T: Sequence {
+    open func foo<T>(_: T, bar : String) where T: Sequence {
         addInvocation(.m_foo__barbar(Parameter<String>.value(`bar`)))
 		let perform = methodPerformValue(.m_foo__barbar(Parameter<String>.value(`bar`))) as? (String) -> Void
 		perform?(`bar`)
@@ -2700,10 +2846,10 @@ class FailsWithUntaggedMock: FailsWithUntagged, Mock {
         }
     }
 
-    class Given: StubbedMethod {
+    open class Given: StubbedMethod {
         fileprivate var method: MethodType
 
-        private init(method: MethodType, products: [Product]) {
+        private init(method: MethodType, products: [StubProduct]) {
             self.method = method
             super.init(products)
         }
@@ -2711,17 +2857,17 @@ class FailsWithUntaggedMock: FailsWithUntagged, Mock {
 
     }
 
-    struct Verify {
+    public struct Verify {
         fileprivate var method: MethodType
 
-        static func foo(bar: Parameter<String>) -> Verify { return Verify(method: .m_foo__barbar(`bar`))}
+        public static func foo(bar: Parameter<String>) -> Verify { return Verify(method: .m_foo__barbar(`bar`))}
     }
 
-    struct Perform {
+    public struct Perform {
         fileprivate var method: MethodType
         var performs: Any
 
-        static func foo(bar: Parameter<String>, perform: @escaping (String) -> Void) -> Perform {
+        public static func foo(bar: Parameter<String>, perform: @escaping (String) -> Void) -> Perform {
             return Perform(method: .m_foo__barbar(`bar`), performs: perform)
         }
     }
@@ -2737,13 +2883,13 @@ class FailsWithUntaggedMock: FailsWithUntagged, Mock {
 
     public func verify(_ method: Verify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
         let invocations = matchingCalls(method.method)
-        MockyAssert(count.matches(invocations.count), "Expeced: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
     }
 
     private func addInvocation(_ call: MethodType) {
         invocations.append(call)
     }
-    private func methodReturnValue(_ method: MethodType) throws -> Product {
+    private func methodReturnValue(_ method: MethodType) throws -> StubProduct {
         let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
         let matched = candidates.first(where: { $0.isValid && MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
         guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
@@ -2783,7 +2929,7 @@ class FailsWithUntaggedMock: FailsWithUntagged, Mock {
 }
 
 // MARK: - GenericProtocolWithTypeConstraint
-class GenericProtocolWithTypeConstraintMock: GenericProtocolWithTypeConstraint, Mock {
+open class GenericProtocolWithTypeConstraintMock: GenericProtocolWithTypeConstraint, Mock {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
         self.sequencingPolicy = sequencingPolicy
         self.stubbingPolicy = stubbingPolicy
@@ -2800,9 +2946,9 @@ class GenericProtocolWithTypeConstraintMock: GenericProtocolWithTypeConstraint, 
     private var file: StaticString?
     private var line: UInt?
 
-    typealias PropertyStub = Given
-    typealias MethodStub = Given
-    typealias SubscriptStub = Given
+    public typealias PropertyStub = Given
+    public typealias MethodStub = Given
+    public typealias SubscriptStub = Given
 
     /// Convenience method - call setupMock() to extend debug information when failure occurs
     public func setupMock(file: StaticString = #file, line: UInt = #line) {
@@ -2814,7 +2960,7 @@ class GenericProtocolWithTypeConstraintMock: GenericProtocolWithTypeConstraint, 
 
 
 
-    func decode<T: Decodable>(_ type: T.Type, from data: Data) -> T {
+    open func decode<T: Decodable>(_ type: T.Type, from data: Data) -> T {
         addInvocation(.m_decode__typefrom_data(Parameter<T.Type>.value(`type`).wrapAsGeneric(), Parameter<Data>.value(`data`)))
 		let perform = methodPerformValue(.m_decode__typefrom_data(Parameter<T.Type>.value(`type`).wrapAsGeneric(), Parameter<Data>.value(`data`))) as? (T.Type, Data) -> Void
 		perform?(`type`, `data`)
@@ -2828,7 +2974,7 @@ class GenericProtocolWithTypeConstraintMock: GenericProtocolWithTypeConstraint, 
 		return __value
     }
 
-    func test<FOO>(_ type: FOO.Type) -> Int {
+    open func test<FOO>(_ type: FOO.Type) -> Int {
         addInvocation(.m_test__type(Parameter<FOO.Type>.value(`type`).wrapAsGeneric()))
 		let perform = methodPerformValue(.m_test__type(Parameter<FOO.Type>.value(`type`).wrapAsGeneric())) as? (FOO.Type) -> Void
 		perform?(`type`)
@@ -2868,72 +3014,52 @@ class GenericProtocolWithTypeConstraintMock: GenericProtocolWithTypeConstraint, 
         }
     }
 
-    class Given: StubbedMethod {
+    open class Given: StubbedMethod {
         fileprivate var method: MethodType
 
-        private init(method: MethodType, products: [Product]) {
+        private init(method: MethodType, products: [StubProduct]) {
             self.method = method
             super.init(products)
         }
 
 
-        static func decode<T: Decodable>(_ type: Parameter<T.Type>, from data: Parameter<Data>, willReturn: T...) -> MethodStub {
-            return Given(method: .m_decode__typefrom_data(`type`.wrapAsGeneric(), `data`), products: willReturn.map({ Product.return($0) }))
+        public static func decode<T: Decodable>(_ type: Parameter<T.Type>, from data: Parameter<Data>, willReturn: T...) -> MethodStub {
+            return Given(method: .m_decode__typefrom_data(`type`.wrapAsGeneric(), `data`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `type` label")
-		static func decode<T: Decodable>(type: Parameter<T.Type>, from data: Parameter<Data>, willReturn: T...) -> MethodStub {
-            return Given(method: .m_decode__typefrom_data(`type`.wrapAsGeneric(), `data`), products: willReturn.map({ Product.return($0) }))
+        public static func test<FOO>(_ type: Parameter<FOO.Type>, willReturn: Int...) -> MethodStub {
+            return Given(method: .m_test__type(`type`.wrapAsGeneric()), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func test<FOO>(_ type: Parameter<FOO.Type>, willReturn: Int...) -> MethodStub {
-            return Given(method: .m_test__type(`type`.wrapAsGeneric()), products: willReturn.map({ Product.return($0) }))
-        }
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `type` label")
-		static func test<FOO>(type: Parameter<FOO.Type>, willReturn: Int...) -> MethodStub {
-            return Given(method: .m_test__type(`type`.wrapAsGeneric()), products: willReturn.map({ Product.return($0) }))
-        }
-        static func decode<T: Decodable>(_ type: Parameter<T.Type>, from data: Parameter<Data>, willProduce: (Stubber<T>) -> Void) -> MethodStub {
+        public static func decode<T: Decodable>(_ type: Parameter<T.Type>, from data: Parameter<Data>, willProduce: (Stubber<T>) -> Void) -> MethodStub {
             let willReturn: [T] = []
-			let given: Given = { return Given(method: .m_decode__typefrom_data(`type`.wrapAsGeneric(), `data`), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_decode__typefrom_data(`type`.wrapAsGeneric(), `data`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (T).self)
 			willProduce(stubber)
 			return given
         }
-        static func test<FOO>(_ type: Parameter<FOO.Type>, willProduce: (Stubber<Int>) -> Void) -> MethodStub {
+        public static func test<FOO>(_ type: Parameter<FOO.Type>, willProduce: (Stubber<Int>) -> Void) -> MethodStub {
             let willReturn: [Int] = []
-			let given: Given = { return Given(method: .m_test__type(`type`.wrapAsGeneric()), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_test__type(`type`.wrapAsGeneric()), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (Int).self)
 			willProduce(stubber)
 			return given
         }
     }
 
-    struct Verify {
+    public struct Verify {
         fileprivate var method: MethodType
 
-        static func decode<T>(_ type: Parameter<T.Type>, from data: Parameter<Data>) -> Verify { return Verify(method: .m_decode__typefrom_data(`type`.wrapAsGeneric(), `data`))}
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `type` label")
-		static func decode<T>(type: Parameter<T.Type>, from data: Parameter<Data>) -> Verify { return Verify(method: .m_decode__typefrom_data(`type`.wrapAsGeneric(), `data`))}
-        static func test<FOO>(_ type: Parameter<FOO.Type>) -> Verify { return Verify(method: .m_test__type(`type`.wrapAsGeneric()))}
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `type` label")
-		static func test<FOO>(type: Parameter<FOO.Type>) -> Verify { return Verify(method: .m_test__type(`type`.wrapAsGeneric()))}
+        public static func decode<T>(_ type: Parameter<T.Type>, from data: Parameter<Data>) -> Verify where T:Decodable { return Verify(method: .m_decode__typefrom_data(`type`.wrapAsGeneric(), `data`))}
+        public static func test<FOO>(_ type: Parameter<FOO.Type>) -> Verify { return Verify(method: .m_test__type(`type`.wrapAsGeneric()))}
     }
 
-    struct Perform {
+    public struct Perform {
         fileprivate var method: MethodType
         var performs: Any
 
-        static func decode<T>(_ type: Parameter<T.Type>, from data: Parameter<Data>, perform: @escaping (T.Type, Data) -> Void) -> Perform {
+        public static func decode<T>(_ type: Parameter<T.Type>, from data: Parameter<Data>, perform: @escaping (T.Type, Data) -> Void) -> Perform where T:Decodable {
             return Perform(method: .m_decode__typefrom_data(`type`.wrapAsGeneric(), `data`), performs: perform)
         }
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `type` label")
-		static func decode<T>(type: Parameter<T.Type>, from data: Parameter<Data>, perform: @escaping (T.Type, Data) -> Void) -> Perform {
-            return Perform(method: .m_decode__typefrom_data(`type`.wrapAsGeneric(), `data`), performs: perform)
-        }
-        static func test<FOO>(_ type: Parameter<FOO.Type>, perform: @escaping (FOO.Type) -> Void) -> Perform {
-            return Perform(method: .m_test__type(`type`.wrapAsGeneric()), performs: perform)
-        }
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `type` label")
-		static func test<FOO>(type: Parameter<FOO.Type>, perform: @escaping (FOO.Type) -> Void) -> Perform {
+        public static func test<FOO>(_ type: Parameter<FOO.Type>, perform: @escaping (FOO.Type) -> Void) -> Perform {
             return Perform(method: .m_test__type(`type`.wrapAsGeneric()), performs: perform)
         }
     }
@@ -2949,13 +3075,13 @@ class GenericProtocolWithTypeConstraintMock: GenericProtocolWithTypeConstraint, 
 
     public func verify(_ method: Verify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
         let invocations = matchingCalls(method.method)
-        MockyAssert(count.matches(invocations.count), "Expeced: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
     }
 
     private func addInvocation(_ call: MethodType) {
         invocations.append(call)
     }
-    private func methodReturnValue(_ method: MethodType) throws -> Product {
+    private func methodReturnValue(_ method: MethodType) throws -> StubProduct {
         let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
         let matched = candidates.first(where: { $0.isValid && MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
         guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
@@ -2995,7 +3121,7 @@ class GenericProtocolWithTypeConstraintMock: GenericProtocolWithTypeConstraint, 
 }
 
 // MARK: - HistorySectionMapperType
-class HistorySectionMapperTypeMock: HistorySectionMapperType, Mock {
+open class HistorySectionMapperTypeMock: HistorySectionMapperType, Mock {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
         self.sequencingPolicy = sequencingPolicy
         self.stubbingPolicy = stubbingPolicy
@@ -3012,9 +3138,9 @@ class HistorySectionMapperTypeMock: HistorySectionMapperType, Mock {
     private var file: StaticString?
     private var line: UInt?
 
-    typealias PropertyStub = Given
-    typealias MethodStub = Given
-    typealias SubscriptStub = Given
+    public typealias PropertyStub = Given
+    public typealias MethodStub = Given
+    public typealias SubscriptStub = Given
 
     /// Convenience method - call setupMock() to extend debug information when failure occurs
     public func setupMock(file: StaticString = #file, line: UInt = #line) {
@@ -3026,7 +3152,7 @@ class HistorySectionMapperTypeMock: HistorySectionMapperType, Mock {
 
 
 
-    func map<T: DateSortable>(_ items: [T]) -> [(key: String, items: [T])] {
+    open func map<T: DateSortable>(_ items: [T]) -> [(key: String, items: [T])] {
         addInvocation(.m_map__items(Parameter<[T]>.value(`items`).wrapAsGeneric()))
 		let perform = methodPerformValue(.m_map__items(Parameter<[T]>.value(`items`).wrapAsGeneric())) as? ([T]) -> Void
 		perform?(`items`)
@@ -3059,48 +3185,38 @@ class HistorySectionMapperTypeMock: HistorySectionMapperType, Mock {
         }
     }
 
-    class Given: StubbedMethod {
+    open class Given: StubbedMethod {
         fileprivate var method: MethodType
 
-        private init(method: MethodType, products: [Product]) {
+        private init(method: MethodType, products: [StubProduct]) {
             self.method = method
             super.init(products)
         }
 
 
-        static func map<T: DateSortable>(_ items: Parameter<[T]>, willReturn: [(key: String, items: [T])]...) -> MethodStub {
-            return Given(method: .m_map__items(`items`.wrapAsGeneric()), products: willReturn.map({ Product.return($0) }))
+        public static func map<T: DateSortable>(_ items: Parameter<[T]>, willReturn: [(key: String, items: [T])]...) -> MethodStub {
+            return Given(method: .m_map__items(`items`.wrapAsGeneric()), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `items` label")
-		static func map<T: DateSortable>(items: Parameter<[T]>, willReturn: [(key: String, items: [T])]...) -> MethodStub {
-            return Given(method: .m_map__items(`items`.wrapAsGeneric()), products: willReturn.map({ Product.return($0) }))
-        }
-        static func map<T: DateSortable>(_ items: Parameter<[T]>, willProduce: (Stubber<[(key: String, items: [T])]>) -> Void) -> MethodStub {
+        public static func map<T: DateSortable>(_ items: Parameter<[T]>, willProduce: (Stubber<[(key: String, items: [T])]>) -> Void) -> MethodStub {
             let willReturn: [[(key: String, items: [T])]] = []
-			let given: Given = { return Given(method: .m_map__items(`items`.wrapAsGeneric()), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_map__items(`items`.wrapAsGeneric()), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: ([(key: String, items: [T])]).self)
 			willProduce(stubber)
 			return given
         }
     }
 
-    struct Verify {
+    public struct Verify {
         fileprivate var method: MethodType
 
-        static func map<T>(_ items: Parameter<[T]>) -> Verify { return Verify(method: .m_map__items(`items`.wrapAsGeneric()))}
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `items` label")
-		static func map<T>(items: Parameter<[T]>) -> Verify { return Verify(method: .m_map__items(`items`.wrapAsGeneric()))}
+        public static func map<T>(_ items: Parameter<[T]>) -> Verify where T:DateSortable { return Verify(method: .m_map__items(`items`.wrapAsGeneric()))}
     }
 
-    struct Perform {
+    public struct Perform {
         fileprivate var method: MethodType
         var performs: Any
 
-        static func map<T>(_ items: Parameter<[T]>, perform: @escaping ([T]) -> Void) -> Perform {
-            return Perform(method: .m_map__items(`items`.wrapAsGeneric()), performs: perform)
-        }
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `items` label")
-		static func map<T>(items: Parameter<[T]>, perform: @escaping ([T]) -> Void) -> Perform {
+        public static func map<T>(_ items: Parameter<[T]>, perform: @escaping ([T]) -> Void) -> Perform where T:DateSortable {
             return Perform(method: .m_map__items(`items`.wrapAsGeneric()), performs: perform)
         }
     }
@@ -3116,13 +3232,186 @@ class HistorySectionMapperTypeMock: HistorySectionMapperType, Mock {
 
     public func verify(_ method: Verify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
         let invocations = matchingCalls(method.method)
-        MockyAssert(count.matches(invocations.count), "Expeced: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
     }
 
     private func addInvocation(_ call: MethodType) {
         invocations.append(call)
     }
-    private func methodReturnValue(_ method: MethodType) throws -> Product {
+    private func methodReturnValue(_ method: MethodType) throws -> StubProduct {
+        let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
+        let matched = candidates.first(where: { $0.isValid && MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
+        guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
+        return product
+    }
+    private func methodPerformValue(_ method: MethodType) -> Any? {
+        let matched = methodPerformValues.reversed().first { MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) }
+        return matched?.performs
+    }
+    private func matchingCalls(_ method: MethodType) -> [MethodType] {
+        return invocations.filter { MethodType.compareParameters(lhs: $0, rhs: method, matcher: matcher) }
+    }
+    private func matchingCalls(_ method: Verify) -> Int {
+        return matchingCalls(method.method).count
+    }
+    private func givenGetterValue<T>(_ method: MethodType, _ message: String) -> T {
+        do {
+            return try methodReturnValue(method).casted()
+        } catch {
+            onFatalFailure(message)
+            Failure(message)
+        }
+    }
+    private func optionalGivenGetterValue<T>(_ method: MethodType, _ message: String) -> T? {
+        do {
+            return try methodReturnValue(method).casted()
+        } catch {
+            return nil
+        }
+    }
+    private func onFatalFailure(_ message: String) {
+        #if Mocky
+        guard let file = self.file, let line = self.line else { return } // Let if fail if cannot handle gratefully
+        SwiftyMockyTestObserver.handleMissingStubError(message: message, file: file, line: line)
+        #endif
+    }
+}
+
+// MARK: - InoutProtocol
+open class InoutProtocolMock: InoutProtocol, Mock {
+    init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
+        self.sequencingPolicy = sequencingPolicy
+        self.stubbingPolicy = stubbingPolicy
+        self.file = file
+        self.line = line
+    }
+
+    var matcher: Matcher = Matcher.default
+    var stubbingPolicy: StubbingPolicy = .wrap
+    var sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst
+    private var invocations: [MethodType] = []
+    private var methodReturnValues: [Given] = []
+    private var methodPerformValues: [Perform] = []
+    private var file: StaticString?
+    private var line: UInt?
+
+    public typealias PropertyStub = Given
+    public typealias MethodStub = Given
+    public typealias SubscriptStub = Given
+
+    /// Convenience method - call setupMock() to extend debug information when failure occurs
+    public func setupMock(file: StaticString = #file, line: UInt = #line) {
+        self.file = file
+        self.line = line
+    }
+
+
+
+
+
+    open func passThisAsInOut(value: inout URLRequest) {
+        addInvocation(.m_passThisAsInOut__value_value(Parameter<URLRequest>.value(`value`)))
+		let perform = methodPerformValue(.m_passThisAsInOut__value_value(Parameter<URLRequest>.value(`value`))) as? (inout URLRequest) -> Void
+		perform?(&`value`)
+    }
+
+    open func returnAndInOut(value: inout Int) -> String {
+        addInvocation(.m_returnAndInOut__value_value(Parameter<Int>.value(`value`)))
+		let perform = methodPerformValue(.m_returnAndInOut__value_value(Parameter<Int>.value(`value`))) as? (inout Int) -> Void
+		perform?(&`value`)
+		var __value: String
+		do {
+		    __value = try methodReturnValue(.m_returnAndInOut__value_value(Parameter<Int>.value(`value`))).casted()
+		} catch {
+			onFatalFailure("Stub return value not specified for returnAndInOut(value: inout Int). Use given")
+			Failure("Stub return value not specified for returnAndInOut(value: inout Int). Use given")
+		}
+		return __value
+    }
+
+
+    fileprivate enum MethodType {
+        case m_passThisAsInOut__value_value(Parameter<URLRequest>)
+        case m_returnAndInOut__value_value(Parameter<Int>)
+
+        static func compareParameters(lhs: MethodType, rhs: MethodType, matcher: Matcher) -> Bool {
+            switch (lhs, rhs) {
+            case (.m_passThisAsInOut__value_value(let lhsValue), .m_passThisAsInOut__value_value(let rhsValue)):
+                guard Parameter.compare(lhs: lhsValue, rhs: rhsValue, with: matcher) else { return false } 
+                return true 
+            case (.m_returnAndInOut__value_value(let lhsValue), .m_returnAndInOut__value_value(let rhsValue)):
+                guard Parameter.compare(lhs: lhsValue, rhs: rhsValue, with: matcher) else { return false } 
+                return true 
+            default: return false
+            }
+        }
+
+        func intValue() -> Int {
+            switch self {
+            case let .m_passThisAsInOut__value_value(p0): return p0.intValue
+            case let .m_returnAndInOut__value_value(p0): return p0.intValue
+            }
+        }
+    }
+
+    open class Given: StubbedMethod {
+        fileprivate var method: MethodType
+
+        private init(method: MethodType, products: [StubProduct]) {
+            self.method = method
+            super.init(products)
+        }
+
+
+        public static func returnAndInOut(value: Parameter<Int>, willReturn: String...) -> MethodStub {
+            return Given(method: .m_returnAndInOut__value_value(`value`), products: willReturn.map({ StubProduct.return($0 as Any) }))
+        }
+        public static func returnAndInOut(value: Parameter<Int>, willProduce: (Stubber<String>) -> Void) -> MethodStub {
+            let willReturn: [String] = []
+			let given: Given = { return Given(method: .m_returnAndInOut__value_value(`value`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
+			let stubber = given.stub(for: (String).self)
+			willProduce(stubber)
+			return given
+        }
+    }
+
+    public struct Verify {
+        fileprivate var method: MethodType
+
+        public static func passThisAsInOut(value: Parameter<URLRequest>) -> Verify { return Verify(method: .m_passThisAsInOut__value_value(`value`))}
+        public static func returnAndInOut(value: Parameter<Int>) -> Verify { return Verify(method: .m_returnAndInOut__value_value(`value`))}
+    }
+
+    public struct Perform {
+        fileprivate var method: MethodType
+        var performs: Any
+
+        public static func passThisAsInOut(value: Parameter<URLRequest>, perform: @escaping (inout URLRequest) -> Void) -> Perform {
+            return Perform(method: .m_passThisAsInOut__value_value(`value`), performs: perform)
+        }
+        public static func returnAndInOut(value: Parameter<Int>, perform: @escaping (inout Int) -> Void) -> Perform {
+            return Perform(method: .m_returnAndInOut__value_value(`value`), performs: perform)
+        }
+    }
+
+    public func given(_ method: Given) {
+        methodReturnValues.append(method)
+    }
+
+    public func perform(_ method: Perform) {
+        methodPerformValues.append(method)
+        methodPerformValues.sort { $0.method.intValue() < $1.method.intValue() }
+    }
+
+    public func verify(_ method: Verify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
+        let invocations = matchingCalls(method.method)
+        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+    }
+
+    private func addInvocation(_ call: MethodType) {
+        invocations.append(call)
+    }
+    private func methodReturnValue(_ method: MethodType) throws -> StubProduct {
         let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
         let matched = candidates.first(where: { $0.isValid && MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
         guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
@@ -3162,7 +3451,7 @@ class HistorySectionMapperTypeMock: HistorySectionMapperType, Mock {
 }
 
 // MARK: - NonSwiftProtocol
-class NonSwiftProtocolMock: NSObject, NonSwiftProtocol, Mock {
+open class NonSwiftProtocolMock: NSObject, NonSwiftProtocol, Mock {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
         self.sequencingPolicy = sequencingPolicy
         self.stubbingPolicy = stubbingPolicy
@@ -3179,9 +3468,9 @@ class NonSwiftProtocolMock: NSObject, NonSwiftProtocol, Mock {
     private var file: StaticString?
     private var line: UInt?
 
-    typealias PropertyStub = Given
-    typealias MethodStub = Given
-    typealias SubscriptStub = Given
+    public typealias PropertyStub = Given
+    public typealias MethodStub = Given
+    public typealias SubscriptStub = Given
 
     /// Convenience method - call setupMock() to extend debug information when failure occurs
     public func setupMock(file: StaticString = #file, line: UInt = #line) {
@@ -3193,13 +3482,13 @@ class NonSwiftProtocolMock: NSObject, NonSwiftProtocol, Mock {
 
 
 
-    func returnNoting() {
+    open func returnNoting() {
         addInvocation(.m_returnNoting)
 		let perform = methodPerformValue(.m_returnNoting) as? () -> Void
 		perform?()
     }
 
-    func someMethod() {
+    open func someMethod() {
         addInvocation(.m_someMethod)
 		let perform = methodPerformValue(.m_someMethod) as? () -> Void
 		perform?()
@@ -3228,10 +3517,10 @@ class NonSwiftProtocolMock: NSObject, NonSwiftProtocol, Mock {
         }
     }
 
-    class Given: StubbedMethod {
+    open class Given: StubbedMethod {
         fileprivate var method: MethodType
 
-        private init(method: MethodType, products: [Product]) {
+        private init(method: MethodType, products: [StubProduct]) {
             self.method = method
             super.init(products)
         }
@@ -3239,21 +3528,21 @@ class NonSwiftProtocolMock: NSObject, NonSwiftProtocol, Mock {
 
     }
 
-    struct Verify {
+    public struct Verify {
         fileprivate var method: MethodType
 
-        static func returnNoting() -> Verify { return Verify(method: .m_returnNoting)}
-        static func someMethod() -> Verify { return Verify(method: .m_someMethod)}
+        public static func returnNoting() -> Verify { return Verify(method: .m_returnNoting)}
+        public static func someMethod() -> Verify { return Verify(method: .m_someMethod)}
     }
 
-    struct Perform {
+    public struct Perform {
         fileprivate var method: MethodType
         var performs: Any
 
-        static func returnNoting(perform: @escaping () -> Void) -> Perform {
+        public static func returnNoting(perform: @escaping () -> Void) -> Perform {
             return Perform(method: .m_returnNoting, performs: perform)
         }
-        static func someMethod(perform: @escaping () -> Void) -> Perform {
+        public static func someMethod(perform: @escaping () -> Void) -> Perform {
             return Perform(method: .m_someMethod, performs: perform)
         }
     }
@@ -3269,13 +3558,13 @@ class NonSwiftProtocolMock: NSObject, NonSwiftProtocol, Mock {
 
     public func verify(_ method: Verify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
         let invocations = matchingCalls(method.method)
-        MockyAssert(count.matches(invocations.count), "Expeced: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
     }
 
     private func addInvocation(_ call: MethodType) {
         invocations.append(call)
     }
-    private func methodReturnValue(_ method: MethodType) throws -> Product {
+    private func methodReturnValue(_ method: MethodType) throws -> StubProduct {
         let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
         let matched = candidates.first(where: { $0.isValid && MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
         guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
@@ -3315,7 +3604,7 @@ class NonSwiftProtocolMock: NSObject, NonSwiftProtocol, Mock {
 }
 
 // MARK: - ProtocolMethodsGenericThatDifferOnlyInReturnType
-class ProtocolMethodsGenericThatDifferOnlyInReturnTypeMock: ProtocolMethodsGenericThatDifferOnlyInReturnType, Mock {
+open class ProtocolMethodsGenericThatDifferOnlyInReturnTypeMock: ProtocolMethodsGenericThatDifferOnlyInReturnType, Mock {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
         self.sequencingPolicy = sequencingPolicy
         self.stubbingPolicy = stubbingPolicy
@@ -3332,9 +3621,9 @@ class ProtocolMethodsGenericThatDifferOnlyInReturnTypeMock: ProtocolMethodsGener
     private var file: StaticString?
     private var line: UInt?
 
-    typealias PropertyStub = Given
-    typealias MethodStub = Given
-    typealias SubscriptStub = Given
+    public typealias PropertyStub = Given
+    public typealias MethodStub = Given
+    public typealias SubscriptStub = Given
 
     /// Convenience method - call setupMock() to extend debug information when failure occurs
     public func setupMock(file: StaticString = #file, line: UInt = #line) {
@@ -3346,7 +3635,7 @@ class ProtocolMethodsGenericThatDifferOnlyInReturnTypeMock: ProtocolMethodsGener
 
 
 
-    func foo<T>(bar: T) -> String {
+    open func foo<T>(bar: T) -> String {
         addInvocation(.m_foo__bar_bar_1(Parameter<T>.value(`bar`).wrapAsGeneric()))
 		let perform = methodPerformValue(.m_foo__bar_bar_1(Parameter<T>.value(`bar`).wrapAsGeneric())) as? (T) -> Void
 		perform?(`bar`)
@@ -3360,7 +3649,7 @@ class ProtocolMethodsGenericThatDifferOnlyInReturnTypeMock: ProtocolMethodsGener
 		return __value
     }
 
-    func foo<T>(bar: T) -> Int {
+    open func foo<T>(bar: T) -> Int {
         addInvocation(.m_foo__bar_bar_2(Parameter<T>.value(`bar`).wrapAsGeneric()))
 		let perform = methodPerformValue(.m_foo__bar_bar_2(Parameter<T>.value(`bar`).wrapAsGeneric())) as? (T) -> Void
 		perform?(`bar`)
@@ -3374,7 +3663,7 @@ class ProtocolMethodsGenericThatDifferOnlyInReturnTypeMock: ProtocolMethodsGener
 		return __value
     }
 
-    func foo<T>(bar: T) -> Float where T: A {
+    open func foo<T>(bar: T) -> Float where T: A {
         addInvocation(.m_foo__bar_bar_4(Parameter<T>.value(`bar`).wrapAsGeneric()))
 		let perform = methodPerformValue(.m_foo__bar_bar_4(Parameter<T>.value(`bar`).wrapAsGeneric())) as? (T) -> Void
 		perform?(`bar`)
@@ -3388,7 +3677,7 @@ class ProtocolMethodsGenericThatDifferOnlyInReturnTypeMock: ProtocolMethodsGener
 		return __value
     }
 
-    func foo<T>(bar: T) -> Float where T: B {
+    open func foo<T>(bar: T) -> Float where T: B {
         addInvocation(.m_foo__bar_bar_4(Parameter<T>.value(`bar`).wrapAsGeneric()))
 		let perform = methodPerformValue(.m_foo__bar_bar_4(Parameter<T>.value(`bar`).wrapAsGeneric())) as? (T) -> Void
 		perform?(`bar`)
@@ -3402,7 +3691,7 @@ class ProtocolMethodsGenericThatDifferOnlyInReturnTypeMock: ProtocolMethodsGener
 		return __value
     }
 
-    func foo<T>(bar: T) -> Double where T: B {
+    open func foo<T>(bar: T) -> Double where T: B {
         addInvocation(.m_foo__bar_bar_5(Parameter<T>.value(`bar`).wrapAsGeneric()))
 		let perform = methodPerformValue(.m_foo__bar_bar_5(Parameter<T>.value(`bar`).wrapAsGeneric())) as? (T) -> Void
 		perform?(`bar`)
@@ -3416,7 +3705,7 @@ class ProtocolMethodsGenericThatDifferOnlyInReturnTypeMock: ProtocolMethodsGener
 		return __value
     }
 
-    func foo<T>(bar: String) -> Array<T> {
+    open func foo<T>(bar: String) -> Array<T> {
         addInvocation(.m_foo__bar_bar_6(Parameter<String>.value(`bar`)))
 		let perform = methodPerformValue(.m_foo__bar_bar_6(Parameter<String>.value(`bar`))) as? (String) -> Void
 		perform?(`bar`)
@@ -3430,7 +3719,7 @@ class ProtocolMethodsGenericThatDifferOnlyInReturnTypeMock: ProtocolMethodsGener
 		return __value
     }
 
-    func foo<T>(bar: String) -> Set<T> {
+    open func foo<T>(bar: String) -> Set<T> {
         addInvocation(.m_foo__bar_bar_7(Parameter<String>.value(`bar`)))
 		let perform = methodPerformValue(.m_foo__bar_bar_7(Parameter<String>.value(`bar`))) as? (String) -> Void
 		perform?(`bar`)
@@ -3444,7 +3733,7 @@ class ProtocolMethodsGenericThatDifferOnlyInReturnTypeMock: ProtocolMethodsGener
 		return __value
     }
 
-    func foo<T>(bar: Bool) -> T where T: A {
+    open func foo<T>(bar: Bool) -> T where T: A {
         addInvocation(.m_foo__bar_bar_9(Parameter<Bool>.value(`bar`)))
 		let perform = methodPerformValue(.m_foo__bar_bar_9(Parameter<Bool>.value(`bar`))) as? (Bool) -> Void
 		perform?(`bar`)
@@ -3458,7 +3747,7 @@ class ProtocolMethodsGenericThatDifferOnlyInReturnTypeMock: ProtocolMethodsGener
 		return __value
     }
 
-    func foo<T>(bar: Bool) -> T where T: B {
+    open func foo<T>(bar: Bool) -> T where T: B {
         addInvocation(.m_foo__bar_bar_9(Parameter<Bool>.value(`bar`)))
 		let perform = methodPerformValue(.m_foo__bar_bar_9(Parameter<Bool>.value(`bar`))) as? (Bool) -> Void
 		perform?(`bar`)
@@ -3522,122 +3811,122 @@ class ProtocolMethodsGenericThatDifferOnlyInReturnTypeMock: ProtocolMethodsGener
         }
     }
 
-    class Given: StubbedMethod {
+    open class Given: StubbedMethod {
         fileprivate var method: MethodType
 
-        private init(method: MethodType, products: [Product]) {
+        private init(method: MethodType, products: [StubProduct]) {
             self.method = method
             super.init(products)
         }
 
 
-        static func foo<T>(bar: Parameter<T>, willReturn: String...) -> MethodStub {
-            return Given(method: .m_foo__bar_bar_1(`bar`.wrapAsGeneric()), products: willReturn.map({ Product.return($0) }))
+        public static func foo<T>(bar: Parameter<T>, willReturn: String...) -> MethodStub {
+            return Given(method: .m_foo__bar_bar_1(`bar`.wrapAsGeneric()), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func foo<T>(bar: Parameter<T>, willReturn: Int...) -> MethodStub {
-            return Given(method: .m_foo__bar_bar_2(`bar`.wrapAsGeneric()), products: willReturn.map({ Product.return($0) }))
+        public static func foo<T>(bar: Parameter<T>, willReturn: Int...) -> MethodStub {
+            return Given(method: .m_foo__bar_bar_2(`bar`.wrapAsGeneric()), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func foo<T>(bar: Parameter<T>, willReturn: Float...) -> MethodStub {
-            return Given(method: .m_foo__bar_bar_4(`bar`.wrapAsGeneric()), products: willReturn.map({ Product.return($0) }))
+        public static func foo<T>(bar: Parameter<T>, willReturn: Float...) -> MethodStub {
+            return Given(method: .m_foo__bar_bar_4(`bar`.wrapAsGeneric()), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func foo<T>(bar: Parameter<T>, willReturn: Double...) -> MethodStub {
-            return Given(method: .m_foo__bar_bar_5(`bar`.wrapAsGeneric()), products: willReturn.map({ Product.return($0) }))
+        public static func foo<T>(bar: Parameter<T>, willReturn: Double...) -> MethodStub {
+            return Given(method: .m_foo__bar_bar_5(`bar`.wrapAsGeneric()), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func foo<T>(bar: Parameter<String>, willReturn: Array<T>...) -> MethodStub {
-            return Given(method: .m_foo__bar_bar_6(`bar`), products: willReturn.map({ Product.return($0) }))
+        public static func foo<T>(bar: Parameter<String>, willReturn: Array<T>...) -> MethodStub {
+            return Given(method: .m_foo__bar_bar_6(`bar`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func foo<T>(bar: Parameter<String>, willReturn: Set<T>...) -> MethodStub {
-            return Given(method: .m_foo__bar_bar_7(`bar`), products: willReturn.map({ Product.return($0) }))
+        public static func foo<T>(bar: Parameter<String>, willReturn: Set<T>...) -> MethodStub {
+            return Given(method: .m_foo__bar_bar_7(`bar`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func foo<T>(bar: Parameter<Bool>, willReturn: T...) -> MethodStub {
-            return Given(method: .m_foo__bar_bar_9(`bar`), products: willReturn.map({ Product.return($0) }))
+        public static func foo<T>(bar: Parameter<Bool>, willReturn: T...) -> MethodStub {
+            return Given(method: .m_foo__bar_bar_9(`bar`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func foo<T>(bar: Parameter<T>, willProduce: (Stubber<String>) -> Void) -> MethodStub {
+        public static func foo<T>(bar: Parameter<T>, willProduce: (Stubber<String>) -> Void) -> MethodStub {
             let willReturn: [String] = []
-			let given: Given = { return Given(method: .m_foo__bar_bar_1(`bar`.wrapAsGeneric()), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_foo__bar_bar_1(`bar`.wrapAsGeneric()), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (String).self)
 			willProduce(stubber)
 			return given
         }
-        static func foo<T>(bar: Parameter<T>, willProduce: (Stubber<Int>) -> Void) -> MethodStub {
+        public static func foo<T>(bar: Parameter<T>, willProduce: (Stubber<Int>) -> Void) -> MethodStub {
             let willReturn: [Int] = []
-			let given: Given = { return Given(method: .m_foo__bar_bar_2(`bar`.wrapAsGeneric()), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_foo__bar_bar_2(`bar`.wrapAsGeneric()), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (Int).self)
 			willProduce(stubber)
 			return given
         }
-        static func foo<T>(bar: Parameter<T>, willProduce: (Stubber<Float>) -> Void) -> MethodStub {
+        public static func foo<T>(bar: Parameter<T>, willProduce: (Stubber<Float>) -> Void) -> MethodStub {
             let willReturn: [Float] = []
-			let given: Given = { return Given(method: .m_foo__bar_bar_4(`bar`.wrapAsGeneric()), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_foo__bar_bar_4(`bar`.wrapAsGeneric()), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (Float).self)
 			willProduce(stubber)
 			return given
         }
-        static func foo<T>(bar: Parameter<T>, willProduce: (Stubber<Double>) -> Void) -> MethodStub {
+        public static func foo<T>(bar: Parameter<T>, willProduce: (Stubber<Double>) -> Void) -> MethodStub {
             let willReturn: [Double] = []
-			let given: Given = { return Given(method: .m_foo__bar_bar_5(`bar`.wrapAsGeneric()), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_foo__bar_bar_5(`bar`.wrapAsGeneric()), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (Double).self)
 			willProduce(stubber)
 			return given
         }
-        static func foo<T>(bar: Parameter<String>, willProduce: (Stubber<Array<T>>) -> Void) -> MethodStub {
+        public static func foo<T>(bar: Parameter<String>, willProduce: (Stubber<Array<T>>) -> Void) -> MethodStub {
             let willReturn: [Array<T>] = []
-			let given: Given = { return Given(method: .m_foo__bar_bar_6(`bar`), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_foo__bar_bar_6(`bar`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (Array<T>).self)
 			willProduce(stubber)
 			return given
         }
-        static func foo<T>(bar: Parameter<String>, willProduce: (Stubber<Set<T>>) -> Void) -> MethodStub {
+        public static func foo<T>(bar: Parameter<String>, willProduce: (Stubber<Set<T>>) -> Void) -> MethodStub {
             let willReturn: [Set<T>] = []
-			let given: Given = { return Given(method: .m_foo__bar_bar_7(`bar`), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_foo__bar_bar_7(`bar`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (Set<T>).self)
 			willProduce(stubber)
 			return given
         }
-        static func foo<T>(bar: Parameter<Bool>, willProduce: (Stubber<T>) -> Void) -> MethodStub {
+        public static func foo<T>(bar: Parameter<Bool>, willProduce: (Stubber<T>) -> Void) -> MethodStub {
             let willReturn: [T] = []
-			let given: Given = { return Given(method: .m_foo__bar_bar_9(`bar`), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_foo__bar_bar_9(`bar`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (T).self)
 			willProduce(stubber)
 			return given
         }
     }
 
-    struct Verify {
+    public struct Verify {
         fileprivate var method: MethodType
 
-        static func foo<T>(bar: Parameter<T>, returning: (String).Type) -> Verify { return Verify(method: .m_foo__bar_bar_1(`bar`.wrapAsGeneric()))}
-        static func foo<T>(bar: Parameter<T>, returning: (Int).Type) -> Verify { return Verify(method: .m_foo__bar_bar_2(`bar`.wrapAsGeneric()))}
-        static func foo<T>(bar: Parameter<T>, returning: (Float).Type) -> Verify { return Verify(method: .m_foo__bar_bar_4(`bar`.wrapAsGeneric()))}
-        static func foo<T>(bar: Parameter<T>, returning: (Double).Type) -> Verify { return Verify(method: .m_foo__bar_bar_5(`bar`.wrapAsGeneric()))}
-        static func foo<T>(bar: Parameter<String>, returning: (Array<T>).Type) -> Verify { return Verify(method: .m_foo__bar_bar_6(`bar`))}
-        static func foo<T>(bar: Parameter<String>, returning: (Set<T>).Type) -> Verify { return Verify(method: .m_foo__bar_bar_7(`bar`))}
-        static func foo<T>(bar: Parameter<Bool>, returning: (T).Type) -> Verify { return Verify(method: .m_foo__bar_bar_9(`bar`))}
+        public static func foo<T>(bar: Parameter<T>, returning: (String).Type) -> Verify { return Verify(method: .m_foo__bar_bar_1(`bar`.wrapAsGeneric()))}
+        public static func foo<T>(bar: Parameter<T>, returning: (Int).Type) -> Verify { return Verify(method: .m_foo__bar_bar_2(`bar`.wrapAsGeneric()))}
+        public static func foo<T>(bar: Parameter<T>, returning: (Float).Type) -> Verify { return Verify(method: .m_foo__bar_bar_4(`bar`.wrapAsGeneric()))}
+        public static func foo<T>(bar: Parameter<T>, returning: (Double).Type) -> Verify { return Verify(method: .m_foo__bar_bar_5(`bar`.wrapAsGeneric()))}
+        public static func foo<T>(bar: Parameter<String>, returning: (Array<T>).Type) -> Verify { return Verify(method: .m_foo__bar_bar_6(`bar`))}
+        public static func foo<T>(bar: Parameter<String>, returning: (Set<T>).Type) -> Verify { return Verify(method: .m_foo__bar_bar_7(`bar`))}
+        public static func foo<T>(bar: Parameter<Bool>, returning: (T).Type) -> Verify { return Verify(method: .m_foo__bar_bar_9(`bar`))}
     }
 
-    struct Perform {
+    public struct Perform {
         fileprivate var method: MethodType
         var performs: Any
 
-        static func foo<T>(bar: Parameter<T>, returning: (String).Type, perform: @escaping (T) -> Void) -> Perform {
+        public static func foo<T>(bar: Parameter<T>, returning: (String).Type, perform: @escaping (T) -> Void) -> Perform {
             return Perform(method: .m_foo__bar_bar_1(`bar`.wrapAsGeneric()), performs: perform)
         }
-        static func foo<T>(bar: Parameter<T>, returning: (Int).Type, perform: @escaping (T) -> Void) -> Perform {
+        public static func foo<T>(bar: Parameter<T>, returning: (Int).Type, perform: @escaping (T) -> Void) -> Perform {
             return Perform(method: .m_foo__bar_bar_2(`bar`.wrapAsGeneric()), performs: perform)
         }
-        static func foo<T>(bar: Parameter<T>, returning: (Float).Type, perform: @escaping (T) -> Void) -> Perform {
+        public static func foo<T>(bar: Parameter<T>, returning: (Float).Type, perform: @escaping (T) -> Void) -> Perform {
             return Perform(method: .m_foo__bar_bar_4(`bar`.wrapAsGeneric()), performs: perform)
         }
-        static func foo<T>(bar: Parameter<T>, returning: (Double).Type, perform: @escaping (T) -> Void) -> Perform {
+        public static func foo<T>(bar: Parameter<T>, returning: (Double).Type, perform: @escaping (T) -> Void) -> Perform {
             return Perform(method: .m_foo__bar_bar_5(`bar`.wrapAsGeneric()), performs: perform)
         }
-        static func foo<T>(bar: Parameter<String>, returning: (Array<T>).Type, perform: @escaping (String) -> Void) -> Perform {
+        public static func foo<T>(bar: Parameter<String>, returning: (Array<T>).Type, perform: @escaping (String) -> Void) -> Perform {
             return Perform(method: .m_foo__bar_bar_6(`bar`), performs: perform)
         }
-        static func foo<T>(bar: Parameter<String>, returning: (Set<T>).Type, perform: @escaping (String) -> Void) -> Perform {
+        public static func foo<T>(bar: Parameter<String>, returning: (Set<T>).Type, perform: @escaping (String) -> Void) -> Perform {
             return Perform(method: .m_foo__bar_bar_7(`bar`), performs: perform)
         }
-        static func foo<T>(bar: Parameter<Bool>, returning: (T).Type, perform: @escaping (Bool) -> Void) -> Perform {
+        public static func foo<T>(bar: Parameter<Bool>, returning: (T).Type, perform: @escaping (Bool) -> Void) -> Perform {
             return Perform(method: .m_foo__bar_bar_9(`bar`), performs: perform)
         }
     }
@@ -3653,13 +3942,13 @@ class ProtocolMethodsGenericThatDifferOnlyInReturnTypeMock: ProtocolMethodsGener
 
     public func verify(_ method: Verify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
         let invocations = matchingCalls(method.method)
-        MockyAssert(count.matches(invocations.count), "Expeced: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
     }
 
     private func addInvocation(_ call: MethodType) {
         invocations.append(call)
     }
-    private func methodReturnValue(_ method: MethodType) throws -> Product {
+    private func methodReturnValue(_ method: MethodType) throws -> StubProduct {
         let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
         let matched = candidates.first(where: { $0.isValid && MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
         guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
@@ -3699,7 +3988,7 @@ class ProtocolMethodsGenericThatDifferOnlyInReturnTypeMock: ProtocolMethodsGener
 }
 
 // MARK: - ProtocolMethodsThatDifferOnlyInReturnType
-class ProtocolMethodsThatDifferOnlyInReturnTypeMock: ProtocolMethodsThatDifferOnlyInReturnType, Mock {
+open class ProtocolMethodsThatDifferOnlyInReturnTypeMock: ProtocolMethodsThatDifferOnlyInReturnType, Mock {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
         self.sequencingPolicy = sequencingPolicy
         self.stubbingPolicy = stubbingPolicy
@@ -3716,9 +4005,9 @@ class ProtocolMethodsThatDifferOnlyInReturnTypeMock: ProtocolMethodsThatDifferOn
     private var file: StaticString?
     private var line: UInt?
 
-    typealias PropertyStub = Given
-    typealias MethodStub = Given
-    typealias SubscriptStub = Given
+    public typealias PropertyStub = Given
+    public typealias MethodStub = Given
+    public typealias SubscriptStub = Given
 
     /// Convenience method - call setupMock() to extend debug information when failure occurs
     public func setupMock(file: StaticString = #file, line: UInt = #line) {
@@ -3730,7 +4019,7 @@ class ProtocolMethodsThatDifferOnlyInReturnTypeMock: ProtocolMethodsThatDifferOn
 
 
 
-    func foo(bar: String) -> String {
+    open func foo(bar: String) -> String {
         addInvocation(.m_foo__bar_bar_1(Parameter<String>.value(`bar`)))
 		let perform = methodPerformValue(.m_foo__bar_bar_1(Parameter<String>.value(`bar`))) as? (String) -> Void
 		perform?(`bar`)
@@ -3744,7 +4033,7 @@ class ProtocolMethodsThatDifferOnlyInReturnTypeMock: ProtocolMethodsThatDifferOn
 		return __value
     }
 
-    func foo(bar: String) -> Int {
+    open func foo(bar: String) -> Int {
         addInvocation(.m_foo__bar_bar_2(Parameter<String>.value(`bar`)))
 		let perform = methodPerformValue(.m_foo__bar_bar_2(Parameter<String>.value(`bar`))) as? (String) -> Void
 		perform?(`bar`)
@@ -3783,52 +4072,52 @@ class ProtocolMethodsThatDifferOnlyInReturnTypeMock: ProtocolMethodsThatDifferOn
         }
     }
 
-    class Given: StubbedMethod {
+    open class Given: StubbedMethod {
         fileprivate var method: MethodType
 
-        private init(method: MethodType, products: [Product]) {
+        private init(method: MethodType, products: [StubProduct]) {
             self.method = method
             super.init(products)
         }
 
 
-        static func foo(bar: Parameter<String>, willReturn: String...) -> MethodStub {
-            return Given(method: .m_foo__bar_bar_1(`bar`), products: willReturn.map({ Product.return($0) }))
+        public static func foo(bar: Parameter<String>, willReturn: String...) -> MethodStub {
+            return Given(method: .m_foo__bar_bar_1(`bar`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func foo(bar: Parameter<String>, willReturn: Int...) -> MethodStub {
-            return Given(method: .m_foo__bar_bar_2(`bar`), products: willReturn.map({ Product.return($0) }))
+        public static func foo(bar: Parameter<String>, willReturn: Int...) -> MethodStub {
+            return Given(method: .m_foo__bar_bar_2(`bar`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func foo(bar: Parameter<String>, willProduce: (Stubber<String>) -> Void) -> MethodStub {
+        public static func foo(bar: Parameter<String>, willProduce: (Stubber<String>) -> Void) -> MethodStub {
             let willReturn: [String] = []
-			let given: Given = { return Given(method: .m_foo__bar_bar_1(`bar`), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_foo__bar_bar_1(`bar`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (String).self)
 			willProduce(stubber)
 			return given
         }
-        static func foo(bar: Parameter<String>, willProduce: (Stubber<Int>) -> Void) -> MethodStub {
+        public static func foo(bar: Parameter<String>, willProduce: (Stubber<Int>) -> Void) -> MethodStub {
             let willReturn: [Int] = []
-			let given: Given = { return Given(method: .m_foo__bar_bar_2(`bar`), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_foo__bar_bar_2(`bar`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (Int).self)
 			willProduce(stubber)
 			return given
         }
     }
 
-    struct Verify {
+    public struct Verify {
         fileprivate var method: MethodType
 
-        static func foo(bar: Parameter<String>, returning: (String).Type) -> Verify { return Verify(method: .m_foo__bar_bar_1(`bar`))}
-        static func foo(bar: Parameter<String>, returning: (Int).Type) -> Verify { return Verify(method: .m_foo__bar_bar_2(`bar`))}
+        public static func foo(bar: Parameter<String>, returning: (String).Type) -> Verify { return Verify(method: .m_foo__bar_bar_1(`bar`))}
+        public static func foo(bar: Parameter<String>, returning: (Int).Type) -> Verify { return Verify(method: .m_foo__bar_bar_2(`bar`))}
     }
 
-    struct Perform {
+    public struct Perform {
         fileprivate var method: MethodType
         var performs: Any
 
-        static func foo(bar: Parameter<String>, returning: (String).Type, perform: @escaping (String) -> Void) -> Perform {
+        public static func foo(bar: Parameter<String>, returning: (String).Type, perform: @escaping (String) -> Void) -> Perform {
             return Perform(method: .m_foo__bar_bar_1(`bar`), performs: perform)
         }
-        static func foo(bar: Parameter<String>, returning: (Int).Type, perform: @escaping (String) -> Void) -> Perform {
+        public static func foo(bar: Parameter<String>, returning: (Int).Type, perform: @escaping (String) -> Void) -> Perform {
             return Perform(method: .m_foo__bar_bar_2(`bar`), performs: perform)
         }
     }
@@ -3844,13 +4133,13 @@ class ProtocolMethodsThatDifferOnlyInReturnTypeMock: ProtocolMethodsThatDifferOn
 
     public func verify(_ method: Verify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
         let invocations = matchingCalls(method.method)
-        MockyAssert(count.matches(invocations.count), "Expeced: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
     }
 
     private func addInvocation(_ call: MethodType) {
         invocations.append(call)
     }
-    private func methodReturnValue(_ method: MethodType) throws -> Product {
+    private func methodReturnValue(_ method: MethodType) throws -> StubProduct {
         let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
         let matched = candidates.first(where: { $0.isValid && MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
         guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
@@ -3890,7 +4179,7 @@ class ProtocolMethodsThatDifferOnlyInReturnTypeMock: ProtocolMethodsThatDifferOn
 }
 
 // MARK: - ProtocolWithAssociatedType
-class ProtocolWithAssociatedTypeMock<T>: ProtocolWithAssociatedType, Mock where T: Sequence {
+open class ProtocolWithAssociatedTypeMock<T>: ProtocolWithAssociatedType, Mock where T: Sequence {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
         self.sequencingPolicy = sequencingPolicy
         self.stubbingPolicy = stubbingPolicy
@@ -3907,9 +4196,9 @@ class ProtocolWithAssociatedTypeMock<T>: ProtocolWithAssociatedType, Mock where 
     private var file: StaticString?
     private var line: UInt?
 
-    typealias PropertyStub = Given
-    typealias MethodStub = Given
-    typealias SubscriptStub = Given
+    public typealias PropertyStub = Given
+    public typealias MethodStub = Given
+    public typealias SubscriptStub = Given
 
     /// Convenience method - call setupMock() to extend debug information when failure occurs
     public func setupMock(file: StaticString = #file, line: UInt = #line) {
@@ -3917,7 +4206,7 @@ class ProtocolWithAssociatedTypeMock<T>: ProtocolWithAssociatedType, Mock where 
         self.line = line
     }
 
-    var sequence: T {
+    public var sequence: T {
 		get {	invocations.append(.p_sequence_get); return __p_sequence ?? givenGetterValue(.p_sequence_get, "ProtocolWithAssociatedTypeMock - stub value for sequence was not defined") }
 		@available(*, deprecated, message: "Using setters on readonly variables is deprecated, and will be removed in 3.1. Use Given to define stubbed property return value.")
 		set {	__p_sequence = newValue }
@@ -3928,7 +4217,7 @@ class ProtocolWithAssociatedTypeMock<T>: ProtocolWithAssociatedType, Mock where 
 
 
 
-    func methodWithType(t: T) -> Bool {
+    open func methodWithType(t: T) -> Bool {
         addInvocation(.m_methodWithType__t_t(Parameter<T>.value(`t`)))
 		let perform = methodPerformValue(.m_methodWithType__t_t(Parameter<T>.value(`t`))) as? (T) -> Void
 		perform?(`t`)
@@ -3965,42 +4254,42 @@ class ProtocolWithAssociatedTypeMock<T>: ProtocolWithAssociatedType, Mock where 
         }
     }
 
-    class Given: StubbedMethod {
+    open class Given: StubbedMethod {
         fileprivate var method: MethodType
 
-        private init(method: MethodType, products: [Product]) {
+        private init(method: MethodType, products: [StubProduct]) {
             self.method = method
             super.init(products)
         }
 
-        static func sequence(getter defaultValue: T...) -> PropertyStub {
-            return Given(method: .p_sequence_get, products: defaultValue.map({ Product.return($0) }))
+        public static func sequence(getter defaultValue: T...) -> PropertyStub {
+            return Given(method: .p_sequence_get, products: defaultValue.map({ StubProduct.return($0 as Any) }))
         }
 
-        static func methodWithType(t: Parameter<T>, willReturn: Bool...) -> MethodStub {
-            return Given(method: .m_methodWithType__t_t(`t`), products: willReturn.map({ Product.return($0) }))
+        public static func methodWithType(t: Parameter<T>, willReturn: Bool...) -> MethodStub {
+            return Given(method: .m_methodWithType__t_t(`t`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func methodWithType(t: Parameter<T>, willProduce: (Stubber<Bool>) -> Void) -> MethodStub {
+        public static func methodWithType(t: Parameter<T>, willProduce: (Stubber<Bool>) -> Void) -> MethodStub {
             let willReturn: [Bool] = []
-			let given: Given = { return Given(method: .m_methodWithType__t_t(`t`), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_methodWithType__t_t(`t`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (Bool).self)
 			willProduce(stubber)
 			return given
         }
     }
 
-    struct Verify {
+    public struct Verify {
         fileprivate var method: MethodType
 
-        static func methodWithType(t: Parameter<T>) -> Verify { return Verify(method: .m_methodWithType__t_t(`t`))}
-        static var sequence: Verify { return Verify(method: .p_sequence_get) }
+        public static func methodWithType(t: Parameter<T>) -> Verify { return Verify(method: .m_methodWithType__t_t(`t`))}
+        public static var sequence: Verify { return Verify(method: .p_sequence_get) }
     }
 
-    struct Perform {
+    public struct Perform {
         fileprivate var method: MethodType
         var performs: Any
 
-        static func methodWithType(t: Parameter<T>, perform: @escaping (T) -> Void) -> Perform {
+        public static func methodWithType(t: Parameter<T>, perform: @escaping (T) -> Void) -> Perform {
             return Perform(method: .m_methodWithType__t_t(`t`), performs: perform)
         }
     }
@@ -4016,13 +4305,151 @@ class ProtocolWithAssociatedTypeMock<T>: ProtocolWithAssociatedType, Mock where 
 
     public func verify(_ method: Verify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
         let invocations = matchingCalls(method.method)
-        MockyAssert(count.matches(invocations.count), "Expeced: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
     }
 
     private func addInvocation(_ call: MethodType) {
         invocations.append(call)
     }
-    private func methodReturnValue(_ method: MethodType) throws -> Product {
+    private func methodReturnValue(_ method: MethodType) throws -> StubProduct {
+        let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
+        let matched = candidates.first(where: { $0.isValid && MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
+        guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
+        return product
+    }
+    private func methodPerformValue(_ method: MethodType) -> Any? {
+        let matched = methodPerformValues.reversed().first { MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) }
+        return matched?.performs
+    }
+    private func matchingCalls(_ method: MethodType) -> [MethodType] {
+        return invocations.filter { MethodType.compareParameters(lhs: $0, rhs: method, matcher: matcher) }
+    }
+    private func matchingCalls(_ method: Verify) -> Int {
+        return matchingCalls(method.method).count
+    }
+    private func givenGetterValue<T>(_ method: MethodType, _ message: String) -> T {
+        do {
+            return try methodReturnValue(method).casted()
+        } catch {
+            onFatalFailure(message)
+            Failure(message)
+        }
+    }
+    private func optionalGivenGetterValue<T>(_ method: MethodType, _ message: String) -> T? {
+        do {
+            return try methodReturnValue(method).casted()
+        } catch {
+            return nil
+        }
+    }
+    private func onFatalFailure(_ message: String) {
+        #if Mocky
+        guard let file = self.file, let line = self.line else { return } // Let if fail if cannot handle gratefully
+        SwiftyMockyTestObserver.handleMissingStubError(message: message, file: file, line: line)
+        #endif
+    }
+}
+
+// MARK: - ProtocolWithAssociatedType2
+open class ProtocolWithAssociatedType2Mock<ValueType>: ProtocolWithAssociatedType2, Mock where ValueType: StringConvertibleType {
+    init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
+        self.sequencingPolicy = sequencingPolicy
+        self.stubbingPolicy = stubbingPolicy
+        self.file = file
+        self.line = line
+    }
+
+    var matcher: Matcher = Matcher.default
+    var stubbingPolicy: StubbingPolicy = .wrap
+    var sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst
+    private var invocations: [MethodType] = []
+    private var methodReturnValues: [Given] = []
+    private var methodPerformValues: [Perform] = []
+    private var file: StaticString?
+    private var line: UInt?
+
+    public typealias PropertyStub = Given
+    public typealias MethodStub = Given
+    public typealias SubscriptStub = Given
+
+    /// Convenience method - call setupMock() to extend debug information when failure occurs
+    public func setupMock(file: StaticString = #file, line: UInt = #line) {
+        self.file = file
+        self.line = line
+    }
+
+    public var property: String {
+		get {	invocations.append(.p_property_get); return __p_property ?? givenGetterValue(.p_property_get, "ProtocolWithAssociatedType2Mock - stub value for property was not defined") }
+		@available(*, deprecated, message: "Using setters on readonly variables is deprecated, and will be removed in 3.1. Use Given to define stubbed property return value.")
+		set {	__p_property = newValue }
+	}
+	private var __p_property: (String)?
+
+
+
+
+
+
+    fileprivate enum MethodType {
+        case p_property_get
+
+        static func compareParameters(lhs: MethodType, rhs: MethodType, matcher: Matcher) -> Bool {
+            switch (lhs, rhs) {
+            case (.p_property_get,.p_property_get): return true
+            }
+        }
+
+        func intValue() -> Int {
+            switch self {
+            case .p_property_get: return 0
+            }
+        }
+    }
+
+    open class Given: StubbedMethod {
+        fileprivate var method: MethodType
+
+        private init(method: MethodType, products: [StubProduct]) {
+            self.method = method
+            super.init(products)
+        }
+
+        public static func property(getter defaultValue: String...) -> PropertyStub {
+            return Given(method: .p_property_get, products: defaultValue.map({ StubProduct.return($0 as Any) }))
+        }
+
+    }
+
+    public struct Verify {
+        fileprivate var method: MethodType
+
+        public static var property: Verify { return Verify(method: .p_property_get) }
+    }
+
+    public struct Perform {
+        fileprivate var method: MethodType
+        var performs: Any
+
+    }
+
+    public func given(_ method: Given) {
+        methodReturnValues.append(method)
+    }
+
+    public func perform(_ method: Perform) {
+        methodPerformValues.append(method)
+        methodPerformValues.sort { $0.method.intValue() < $1.method.intValue() }
+    }
+
+    public func verify(_ method: Verify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
+        let invocations = matchingCalls(method.method)
+        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+    }
+
+    private func addInvocation(_ call: MethodType) {
+        invocations.append(call)
+    }
+    private func methodReturnValue(_ method: MethodType) throws -> StubProduct {
         let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
         let matched = candidates.first(where: { $0.isValid && MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
         guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
@@ -4062,7 +4489,7 @@ class ProtocolWithAssociatedTypeMock<T>: ProtocolWithAssociatedType, Mock where 
 }
 
 // MARK: - ProtocolWithClosures
-class ProtocolWithClosuresMock: ProtocolWithClosures, Mock {
+open class ProtocolWithClosuresMock: ProtocolWithClosures, Mock {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
         self.sequencingPolicy = sequencingPolicy
         self.stubbingPolicy = stubbingPolicy
@@ -4079,9 +4506,9 @@ class ProtocolWithClosuresMock: ProtocolWithClosures, Mock {
     private var file: StaticString?
     private var line: UInt?
 
-    typealias PropertyStub = Given
-    typealias MethodStub = Given
-    typealias SubscriptStub = Given
+    public typealias PropertyStub = Given
+    public typealias MethodStub = Given
+    public typealias SubscriptStub = Given
 
     /// Convenience method - call setupMock() to extend debug information when failure occurs
     public func setupMock(file: StaticString = #file, line: UInt = #line) {
@@ -4093,19 +4520,19 @@ class ProtocolWithClosuresMock: ProtocolWithClosures, Mock {
 
 
 
-    func methodThatTakes(closure: (Int) -> Int) {
+    open func methodThatTakes(closure: (Int) -> Int) {
         addInvocation(.m_methodThatTakes__closure_closure(Parameter<(Int) -> Int>.any))
 		let perform = methodPerformValue(.m_methodThatTakes__closure_closure(Parameter<(Int) -> Int>.any)) as? ((Int) -> Int) -> Void
 		perform?(`closure`)
     }
 
-    func methodThatTakesEscaping(closure: @escaping (Int) -> Int) {
+    open func methodThatTakesEscaping(closure: @escaping (Int) -> Int) {
         addInvocation(.m_methodThatTakesEscaping__closure_closure(Parameter<(Int) -> Int>.value(`closure`)))
 		let perform = methodPerformValue(.m_methodThatTakesEscaping__closure_closure(Parameter<(Int) -> Int>.value(`closure`))) as? (@escaping (Int) -> Int) -> Void
 		perform?(`closure`)
     }
 
-    func methodThatTakesCompletionBlock(completion: (Bool,Error?) -> Void) {
+    open func methodThatTakesCompletionBlock(completion: (Bool,Error?) -> Void) {
         addInvocation(.m_methodThatTakesCompletionBlock__completion_completion(Parameter<(Bool,Error?) -> Void>.any))
 		let perform = methodPerformValue(.m_methodThatTakesCompletionBlock__completion_completion(Parameter<(Bool,Error?) -> Void>.any)) as? ((Bool,Error?) -> Void) -> Void
 		perform?(`completion`)
@@ -4141,10 +4568,10 @@ class ProtocolWithClosuresMock: ProtocolWithClosures, Mock {
         }
     }
 
-    class Given: StubbedMethod {
+    open class Given: StubbedMethod {
         fileprivate var method: MethodType
 
-        private init(method: MethodType, products: [Product]) {
+        private init(method: MethodType, products: [StubProduct]) {
             self.method = method
             super.init(products)
         }
@@ -4152,25 +4579,25 @@ class ProtocolWithClosuresMock: ProtocolWithClosures, Mock {
 
     }
 
-    struct Verify {
+    public struct Verify {
         fileprivate var method: MethodType
 
-        static func methodThatTakes(closure: Parameter<(Int) -> Int>) -> Verify { return Verify(method: .m_methodThatTakes__closure_closure(`closure`))}
-        static func methodThatTakesEscaping(closure: Parameter<(Int) -> Int>) -> Verify { return Verify(method: .m_methodThatTakesEscaping__closure_closure(`closure`))}
-        static func methodThatTakesCompletionBlock(completion: Parameter<(Bool,Error?) -> Void>) -> Verify { return Verify(method: .m_methodThatTakesCompletionBlock__completion_completion(`completion`))}
+        public static func methodThatTakes(closure: Parameter<(Int) -> Int>) -> Verify { return Verify(method: .m_methodThatTakes__closure_closure(`closure`))}
+        public static func methodThatTakesEscaping(closure: Parameter<(Int) -> Int>) -> Verify { return Verify(method: .m_methodThatTakesEscaping__closure_closure(`closure`))}
+        public static func methodThatTakesCompletionBlock(completion: Parameter<(Bool,Error?) -> Void>) -> Verify { return Verify(method: .m_methodThatTakesCompletionBlock__completion_completion(`completion`))}
     }
 
-    struct Perform {
+    public struct Perform {
         fileprivate var method: MethodType
         var performs: Any
 
-        static func methodThatTakes(closure: Parameter<(Int) -> Int>, perform: @escaping ((Int) -> Int) -> Void) -> Perform {
+        public static func methodThatTakes(closure: Parameter<(Int) -> Int>, perform: @escaping ((Int) -> Int) -> Void) -> Perform {
             return Perform(method: .m_methodThatTakes__closure_closure(`closure`), performs: perform)
         }
-        static func methodThatTakesEscaping(closure: Parameter<(Int) -> Int>, perform: @escaping (@escaping (Int) -> Int) -> Void) -> Perform {
+        public static func methodThatTakesEscaping(closure: Parameter<(Int) -> Int>, perform: @escaping (@escaping (Int) -> Int) -> Void) -> Perform {
             return Perform(method: .m_methodThatTakesEscaping__closure_closure(`closure`), performs: perform)
         }
-        static func methodThatTakesCompletionBlock(completion: Parameter<(Bool,Error?) -> Void>, perform: @escaping ((Bool,Error?) -> Void) -> Void) -> Perform {
+        public static func methodThatTakesCompletionBlock(completion: Parameter<(Bool,Error?) -> Void>, perform: @escaping ((Bool,Error?) -> Void) -> Void) -> Perform {
             return Perform(method: .m_methodThatTakesCompletionBlock__completion_completion(`completion`), performs: perform)
         }
     }
@@ -4186,13 +4613,13 @@ class ProtocolWithClosuresMock: ProtocolWithClosures, Mock {
 
     public func verify(_ method: Verify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
         let invocations = matchingCalls(method.method)
-        MockyAssert(count.matches(invocations.count), "Expeced: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
     }
 
     private func addInvocation(_ call: MethodType) {
         invocations.append(call)
     }
-    private func methodReturnValue(_ method: MethodType) throws -> Product {
+    private func methodReturnValue(_ method: MethodType) throws -> StubProduct {
         let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
         let matched = candidates.first(where: { $0.isValid && MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
         guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
@@ -4232,7 +4659,7 @@ class ProtocolWithClosuresMock: ProtocolWithClosures, Mock {
 }
 
 // MARK: - ProtocolWithConflictingMembers
-class ProtocolWithConflictingMembersMock: ProtocolWithConflictingMembers, Mock {
+open class ProtocolWithConflictingMembersMock: ProtocolWithConflictingMembers, Mock {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
         self.sequencingPolicy = sequencingPolicy
         self.stubbingPolicy = stubbingPolicy
@@ -4249,9 +4676,9 @@ class ProtocolWithConflictingMembersMock: ProtocolWithConflictingMembers, Mock {
     private var file: StaticString?
     private var line: UInt?
 
-    typealias PropertyStub = Given
-    typealias MethodStub = Given
-    typealias SubscriptStub = Given
+    public typealias PropertyStub = Given
+    public typealias MethodStub = Given
+    public typealias SubscriptStub = Given
 
     /// Convenience method - call setupMock() to extend debug information when failure occurs
     public func setupMock(file: StaticString = #file, line: UInt = #line) {
@@ -4263,7 +4690,7 @@ class ProtocolWithConflictingMembersMock: ProtocolWithConflictingMembers, Mock {
 
 
 
-    func method(withLabel value: Int) -> Bool {
+    open func method(withLabel value: Int) -> Bool {
         addInvocation(.m_method__withLabel_value(Parameter<Int>.value(`value`)))
 		let perform = methodPerformValue(.m_method__withLabel_value(Parameter<Int>.value(`value`))) as? (Int) -> Void
 		perform?(`value`)
@@ -4277,7 +4704,7 @@ class ProtocolWithConflictingMembersMock: ProtocolWithConflictingMembers, Mock {
 		return __value
     }
 
-    func method(_ value: Int) -> Bool {
+    open func method(_ value: Int) -> Bool {
         addInvocation(.m_method__value(Parameter<Int>.value(`value`)))
 		let perform = methodPerformValue(.m_method__value(Parameter<Int>.value(`value`))) as? (Int) -> Void
 		perform?(`value`)
@@ -4291,7 +4718,7 @@ class ProtocolWithConflictingMembersMock: ProtocolWithConflictingMembers, Mock {
 		return __value
     }
 
-    func method(value: Int) -> Bool {
+    open func method(value: Int) -> Bool {
         addInvocation(.m_method__value_value(Parameter<Int>.value(`value`)))
 		let perform = methodPerformValue(.m_method__value_value(Parameter<Int>.value(`value`))) as? (Int) -> Void
 		perform?(`value`)
@@ -4335,66 +4762,66 @@ class ProtocolWithConflictingMembersMock: ProtocolWithConflictingMembers, Mock {
         }
     }
 
-    class Given: StubbedMethod {
+    open class Given: StubbedMethod {
         fileprivate var method: MethodType
 
-        private init(method: MethodType, products: [Product]) {
+        private init(method: MethodType, products: [StubProduct]) {
             self.method = method
             super.init(products)
         }
 
 
-        static func method(withLabel value: Parameter<Int>, willReturn: Bool...) -> MethodStub {
-            return Given(method: .m_method__withLabel_value(`value`), products: willReturn.map({ Product.return($0) }))
+        public static func method(withLabel value: Parameter<Int>, willReturn: Bool...) -> MethodStub {
+            return Given(method: .m_method__withLabel_value(`value`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func method(_ value: Parameter<Int>, willReturn: Bool...) -> MethodStub {
-            return Given(method: .m_method__value(`value`), products: willReturn.map({ Product.return($0) }))
+        public static func method(_ value: Parameter<Int>, willReturn: Bool...) -> MethodStub {
+            return Given(method: .m_method__value(`value`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func method(value: Parameter<Int>, willReturn: Bool...) -> MethodStub {
-            return Given(method: .m_method__value_value(`value`), products: willReturn.map({ Product.return($0) }))
+        public static func method(value: Parameter<Int>, willReturn: Bool...) -> MethodStub {
+            return Given(method: .m_method__value_value(`value`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func method(withLabel value: Parameter<Int>, willProduce: (Stubber<Bool>) -> Void) -> MethodStub {
+        public static func method(withLabel value: Parameter<Int>, willProduce: (Stubber<Bool>) -> Void) -> MethodStub {
             let willReturn: [Bool] = []
-			let given: Given = { return Given(method: .m_method__withLabel_value(`value`), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_method__withLabel_value(`value`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (Bool).self)
 			willProduce(stubber)
 			return given
         }
-        static func method(_ value: Parameter<Int>, willProduce: (Stubber<Bool>) -> Void) -> MethodStub {
+        public static func method(_ value: Parameter<Int>, willProduce: (Stubber<Bool>) -> Void) -> MethodStub {
             let willReturn: [Bool] = []
-			let given: Given = { return Given(method: .m_method__value(`value`), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_method__value(`value`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (Bool).self)
 			willProduce(stubber)
 			return given
         }
-        static func method(value: Parameter<Int>, willProduce: (Stubber<Bool>) -> Void) -> MethodStub {
+        public static func method(value: Parameter<Int>, willProduce: (Stubber<Bool>) -> Void) -> MethodStub {
             let willReturn: [Bool] = []
-			let given: Given = { return Given(method: .m_method__value_value(`value`), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_method__value_value(`value`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (Bool).self)
 			willProduce(stubber)
 			return given
         }
     }
 
-    struct Verify {
+    public struct Verify {
         fileprivate var method: MethodType
 
-        static func method(withLabel value: Parameter<Int>) -> Verify { return Verify(method: .m_method__withLabel_value(`value`))}
-        static func method(_ value: Parameter<Int>) -> Verify { return Verify(method: .m_method__value(`value`))}
-        static func method(value: Parameter<Int>) -> Verify { return Verify(method: .m_method__value_value(`value`))}
+        public static func method(withLabel value: Parameter<Int>) -> Verify { return Verify(method: .m_method__withLabel_value(`value`))}
+        public static func method(_ value: Parameter<Int>) -> Verify { return Verify(method: .m_method__value(`value`))}
+        public static func method(value: Parameter<Int>) -> Verify { return Verify(method: .m_method__value_value(`value`))}
     }
 
-    struct Perform {
+    public struct Perform {
         fileprivate var method: MethodType
         var performs: Any
 
-        static func method(withLabel value: Parameter<Int>, perform: @escaping (Int) -> Void) -> Perform {
+        public static func method(withLabel value: Parameter<Int>, perform: @escaping (Int) -> Void) -> Perform {
             return Perform(method: .m_method__withLabel_value(`value`), performs: perform)
         }
-        static func method(_ value: Parameter<Int>, perform: @escaping (Int) -> Void) -> Perform {
+        public static func method(_ value: Parameter<Int>, perform: @escaping (Int) -> Void) -> Perform {
             return Perform(method: .m_method__value(`value`), performs: perform)
         }
-        static func method(value: Parameter<Int>, perform: @escaping (Int) -> Void) -> Perform {
+        public static func method(value: Parameter<Int>, perform: @escaping (Int) -> Void) -> Perform {
             return Perform(method: .m_method__value_value(`value`), performs: perform)
         }
     }
@@ -4410,13 +4837,13 @@ class ProtocolWithConflictingMembersMock: ProtocolWithConflictingMembers, Mock {
 
     public func verify(_ method: Verify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
         let invocations = matchingCalls(method.method)
-        MockyAssert(count.matches(invocations.count), "Expeced: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
     }
 
     private func addInvocation(_ call: MethodType) {
         invocations.append(call)
     }
-    private func methodReturnValue(_ method: MethodType) throws -> Product {
+    private func methodReturnValue(_ method: MethodType) throws -> StubProduct {
         let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
         let matched = candidates.first(where: { $0.isValid && MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
         guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
@@ -4456,7 +4883,7 @@ class ProtocolWithConflictingMembersMock: ProtocolWithConflictingMembers, Mock {
 }
 
 // MARK: - ProtocolWithCustomAttributes
-class ProtocolWithCustomAttributesMock: ProtocolWithCustomAttributes, Mock {
+open class ProtocolWithCustomAttributesMock: ProtocolWithCustomAttributes, Mock {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
         self.sequencingPolicy = sequencingPolicy
         self.stubbingPolicy = stubbingPolicy
@@ -4473,9 +4900,9 @@ class ProtocolWithCustomAttributesMock: ProtocolWithCustomAttributes, Mock {
     private var file: StaticString?
     private var line: UInt?
 
-    typealias PropertyStub = Given
-    typealias MethodStub = Given
-    typealias SubscriptStub = Given
+    public typealias PropertyStub = Given
+    public typealias MethodStub = Given
+    public typealias SubscriptStub = Given
 
     /// Convenience method - call setupMock() to extend debug information when failure occurs
     public func setupMock(file: StaticString = #file, line: UInt = #line) {
@@ -4487,7 +4914,7 @@ class ProtocolWithCustomAttributesMock: ProtocolWithCustomAttributes, Mock {
 
 
 
-    func methodThatTakesUser(user: UserObject) throws {
+    open func methodThatTakesUser(user: UserObject) throws {
         addInvocation(.m_methodThatTakesUser__user_user(Parameter<UserObject>.value(`user`)))
 		let perform = methodPerformValue(.m_methodThatTakesUser__user_user(Parameter<UserObject>.value(`user`))) as? (UserObject) -> Void
 		perform?(`user`)
@@ -4500,7 +4927,7 @@ class ProtocolWithCustomAttributesMock: ProtocolWithCustomAttributes, Mock {
 		}
     }
 
-    func methodThatTakesArrayOfUsers(array: [UserObject]) -> Int {
+    open func methodThatTakesArrayOfUsers(array: [UserObject]) -> Int {
         addInvocation(.m_methodThatTakesArrayOfUsers__array_array(Parameter<[UserObject]>.value(`array`)))
 		let perform = methodPerformValue(.m_methodThatTakesArrayOfUsers__array_array(Parameter<[UserObject]>.value(`array`))) as? ([UserObject]) -> Void
 		perform?(`array`)
@@ -4539,52 +4966,52 @@ class ProtocolWithCustomAttributesMock: ProtocolWithCustomAttributes, Mock {
         }
     }
 
-    class Given: StubbedMethod {
+    open class Given: StubbedMethod {
         fileprivate var method: MethodType
 
-        private init(method: MethodType, products: [Product]) {
+        private init(method: MethodType, products: [StubProduct]) {
             self.method = method
             super.init(products)
         }
 
 
-        static func methodThatTakesArrayOfUsers(array: Parameter<[UserObject]>, willReturn: Int...) -> MethodStub {
-            return Given(method: .m_methodThatTakesArrayOfUsers__array_array(`array`), products: willReturn.map({ Product.return($0) }))
+        public static func methodThatTakesArrayOfUsers(array: Parameter<[UserObject]>, willReturn: Int...) -> MethodStub {
+            return Given(method: .m_methodThatTakesArrayOfUsers__array_array(`array`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func methodThatTakesArrayOfUsers(array: Parameter<[UserObject]>, willProduce: (Stubber<Int>) -> Void) -> MethodStub {
+        public static func methodThatTakesArrayOfUsers(array: Parameter<[UserObject]>, willProduce: (Stubber<Int>) -> Void) -> MethodStub {
             let willReturn: [Int] = []
-			let given: Given = { return Given(method: .m_methodThatTakesArrayOfUsers__array_array(`array`), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_methodThatTakesArrayOfUsers__array_array(`array`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (Int).self)
 			willProduce(stubber)
 			return given
         }
-        static func methodThatTakesUser(user: Parameter<UserObject>, willThrow: Error...) -> MethodStub {
-            return Given(method: .m_methodThatTakesUser__user_user(`user`), products: willThrow.map({ Product.throw($0) }))
+        public static func methodThatTakesUser(user: Parameter<UserObject>, willThrow: Error...) -> MethodStub {
+            return Given(method: .m_methodThatTakesUser__user_user(`user`), products: willThrow.map({ StubProduct.throw($0) }))
         }
-        static func methodThatTakesUser(user: Parameter<UserObject>, willProduce: (StubberThrows<Void>) -> Void) -> MethodStub {
+        public static func methodThatTakesUser(user: Parameter<UserObject>, willProduce: (StubberThrows<Void>) -> Void) -> MethodStub {
             let willThrow: [Error] = []
-			let given: Given = { return Given(method: .m_methodThatTakesUser__user_user(`user`), products: willThrow.map({ Product.throw($0) })) }()
+			let given: Given = { return Given(method: .m_methodThatTakesUser__user_user(`user`), products: willThrow.map({ StubProduct.throw($0) })) }()
 			let stubber = given.stubThrows(for: (Void).self)
 			willProduce(stubber)
 			return given
         }
     }
 
-    struct Verify {
+    public struct Verify {
         fileprivate var method: MethodType
 
-        static func methodThatTakesUser(user: Parameter<UserObject>) -> Verify { return Verify(method: .m_methodThatTakesUser__user_user(`user`))}
-        static func methodThatTakesArrayOfUsers(array: Parameter<[UserObject]>) -> Verify { return Verify(method: .m_methodThatTakesArrayOfUsers__array_array(`array`))}
+        public static func methodThatTakesUser(user: Parameter<UserObject>) -> Verify { return Verify(method: .m_methodThatTakesUser__user_user(`user`))}
+        public static func methodThatTakesArrayOfUsers(array: Parameter<[UserObject]>) -> Verify { return Verify(method: .m_methodThatTakesArrayOfUsers__array_array(`array`))}
     }
 
-    struct Perform {
+    public struct Perform {
         fileprivate var method: MethodType
         var performs: Any
 
-        static func methodThatTakesUser(user: Parameter<UserObject>, perform: @escaping (UserObject) -> Void) -> Perform {
+        public static func methodThatTakesUser(user: Parameter<UserObject>, perform: @escaping (UserObject) -> Void) -> Perform {
             return Perform(method: .m_methodThatTakesUser__user_user(`user`), performs: perform)
         }
-        static func methodThatTakesArrayOfUsers(array: Parameter<[UserObject]>, perform: @escaping ([UserObject]) -> Void) -> Perform {
+        public static func methodThatTakesArrayOfUsers(array: Parameter<[UserObject]>, perform: @escaping ([UserObject]) -> Void) -> Perform {
             return Perform(method: .m_methodThatTakesArrayOfUsers__array_array(`array`), performs: perform)
         }
     }
@@ -4600,13 +5027,13 @@ class ProtocolWithCustomAttributesMock: ProtocolWithCustomAttributes, Mock {
 
     public func verify(_ method: Verify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
         let invocations = matchingCalls(method.method)
-        MockyAssert(count.matches(invocations.count), "Expeced: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
     }
 
     private func addInvocation(_ call: MethodType) {
         invocations.append(call)
     }
-    private func methodReturnValue(_ method: MethodType) throws -> Product {
+    private func methodReturnValue(_ method: MethodType) throws -> StubProduct {
         let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
         let matched = candidates.first(where: { $0.isValid && MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
         guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
@@ -4646,7 +5073,7 @@ class ProtocolWithCustomAttributesMock: ProtocolWithCustomAttributes, Mock {
 }
 
 // MARK: - ProtocolWithDeprecatedMembers
-class ProtocolWithDeprecatedMembersMock: ProtocolWithDeprecatedMembers, Mock {
+open class ProtocolWithDeprecatedMembersMock: ProtocolWithDeprecatedMembers, Mock {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
         self.sequencingPolicy = sequencingPolicy
         self.stubbingPolicy = stubbingPolicy
@@ -4663,9 +5090,9 @@ class ProtocolWithDeprecatedMembersMock: ProtocolWithDeprecatedMembers, Mock {
     private var file: StaticString?
     private var line: UInt?
 
-    typealias PropertyStub = Given
-    typealias MethodStub = Given
-    typealias SubscriptStub = Given
+    public typealias PropertyStub = Given
+    public typealias MethodStub = Given
+    public typealias SubscriptStub = Given
 
     /// Convenience method - call setupMock() to extend debug information when failure occurs
     public func setupMock(file: StaticString = #file, line: UInt = #line) {
@@ -4677,7 +5104,7 @@ class ProtocolWithDeprecatedMembersMock: ProtocolWithDeprecatedMembers, Mock {
 
 
 
-    func method(_ value: Int) -> Bool {
+    open func method(_ value: Int) -> Bool {
         addInvocation(.m_method__value(Parameter<Int>.value(`value`)))
 		let perform = methodPerformValue(.m_method__value(Parameter<Int>.value(`value`))) as? (Int) -> Void
 		perform?(`value`)
@@ -4710,48 +5137,38 @@ class ProtocolWithDeprecatedMembersMock: ProtocolWithDeprecatedMembers, Mock {
         }
     }
 
-    class Given: StubbedMethod {
+    open class Given: StubbedMethod {
         fileprivate var method: MethodType
 
-        private init(method: MethodType, products: [Product]) {
+        private init(method: MethodType, products: [StubProduct]) {
             self.method = method
             super.init(products)
         }
 
 
-        static func method(_ value: Parameter<Int>, willReturn: Bool...) -> MethodStub {
-            return Given(method: .m_method__value(`value`), products: willReturn.map({ Product.return($0) }))
+        public static func method(_ value: Parameter<Int>, willReturn: Bool...) -> MethodStub {
+            return Given(method: .m_method__value(`value`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `value` label")
-		static func method(value: Parameter<Int>, willReturn: Bool...) -> MethodStub {
-            return Given(method: .m_method__value(`value`), products: willReturn.map({ Product.return($0) }))
-        }
-        static func method(_ value: Parameter<Int>, willProduce: (Stubber<Bool>) -> Void) -> MethodStub {
+        public static func method(_ value: Parameter<Int>, willProduce: (Stubber<Bool>) -> Void) -> MethodStub {
             let willReturn: [Bool] = []
-			let given: Given = { return Given(method: .m_method__value(`value`), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_method__value(`value`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (Bool).self)
 			willProduce(stubber)
 			return given
         }
     }
 
-    struct Verify {
+    public struct Verify {
         fileprivate var method: MethodType
 
-        static func method(_ value: Parameter<Int>) -> Verify { return Verify(method: .m_method__value(`value`))}
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `value` label")
-		static func method(value: Parameter<Int>) -> Verify { return Verify(method: .m_method__value(`value`))}
+        public static func method(_ value: Parameter<Int>) -> Verify { return Verify(method: .m_method__value(`value`))}
     }
 
-    struct Perform {
+    public struct Perform {
         fileprivate var method: MethodType
         var performs: Any
 
-        static func method(_ value: Parameter<Int>, perform: @escaping (Int) -> Void) -> Perform {
-            return Perform(method: .m_method__value(`value`), performs: perform)
-        }
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `value` label")
-		static func method(value: Parameter<Int>, perform: @escaping (Int) -> Void) -> Perform {
+        public static func method(_ value: Parameter<Int>, perform: @escaping (Int) -> Void) -> Perform {
             return Perform(method: .m_method__value(`value`), performs: perform)
         }
     }
@@ -4767,13 +5184,13 @@ class ProtocolWithDeprecatedMembersMock: ProtocolWithDeprecatedMembers, Mock {
 
     public func verify(_ method: Verify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
         let invocations = matchingCalls(method.method)
-        MockyAssert(count.matches(invocations.count), "Expeced: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
     }
 
     private func addInvocation(_ call: MethodType) {
         invocations.append(call)
     }
-    private func methodReturnValue(_ method: MethodType) throws -> Product {
+    private func methodReturnValue(_ method: MethodType) throws -> StubProduct {
         let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
         let matched = candidates.first(where: { $0.isValid && MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
         guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
@@ -4813,7 +5230,7 @@ class ProtocolWithDeprecatedMembersMock: ProtocolWithDeprecatedMembers, Mock {
 }
 
 // MARK: - ProtocolWithGenericMethods
-class ProtocolWithGenericMethodsMock: ProtocolWithGenericMethods, Mock {
+open class ProtocolWithGenericMethodsMock: ProtocolWithGenericMethods, Mock {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
         self.sequencingPolicy = sequencingPolicy
         self.stubbingPolicy = stubbingPolicy
@@ -4830,9 +5247,9 @@ class ProtocolWithGenericMethodsMock: ProtocolWithGenericMethods, Mock {
     private var file: StaticString?
     private var line: UInt?
 
-    typealias PropertyStub = Given
-    typealias MethodStub = Given
-    typealias SubscriptStub = Given
+    public typealias PropertyStub = Given
+    public typealias MethodStub = Given
+    public typealias SubscriptStub = Given
 
     /// Convenience method - call setupMock() to extend debug information when failure occurs
     public func setupMock(file: StaticString = #file, line: UInt = #line) {
@@ -4844,7 +5261,7 @@ class ProtocolWithGenericMethodsMock: ProtocolWithGenericMethods, Mock {
 
 
 
-    func methodWithGeneric<T>(lhs: T, rhs: T) -> Bool {
+    open func methodWithGeneric<T>(lhs: T, rhs: T) -> Bool {
         addInvocation(.m_methodWithGeneric__lhs_lhsrhs_rhs(Parameter<T>.value(`lhs`).wrapAsGeneric(), Parameter<T>.value(`rhs`).wrapAsGeneric()))
 		let perform = methodPerformValue(.m_methodWithGeneric__lhs_lhsrhs_rhs(Parameter<T>.value(`lhs`).wrapAsGeneric(), Parameter<T>.value(`rhs`).wrapAsGeneric())) as? (T, T) -> Void
 		perform?(`lhs`, `rhs`)
@@ -4858,7 +5275,7 @@ class ProtocolWithGenericMethodsMock: ProtocolWithGenericMethods, Mock {
 		return __value
     }
 
-    func methodWithGenericConstraint<U>(param: [U]) -> U where U: Equatable {
+    open func methodWithGenericConstraint<U>(param: [U]) -> U where U: Equatable {
         addInvocation(.m_methodWithGenericConstraint__param_param(Parameter<[U]>.value(`param`).wrapAsGeneric()))
 		let perform = methodPerformValue(.m_methodWithGenericConstraint__param_param(Parameter<[U]>.value(`param`).wrapAsGeneric())) as? ([U]) -> Void
 		perform?(`param`)
@@ -4898,52 +5315,52 @@ class ProtocolWithGenericMethodsMock: ProtocolWithGenericMethods, Mock {
         }
     }
 
-    class Given: StubbedMethod {
+    open class Given: StubbedMethod {
         fileprivate var method: MethodType
 
-        private init(method: MethodType, products: [Product]) {
+        private init(method: MethodType, products: [StubProduct]) {
             self.method = method
             super.init(products)
         }
 
 
-        static func methodWithGeneric<T>(lhs: Parameter<T>, rhs: Parameter<T>, willReturn: Bool...) -> MethodStub {
-            return Given(method: .m_methodWithGeneric__lhs_lhsrhs_rhs(`lhs`.wrapAsGeneric(), `rhs`.wrapAsGeneric()), products: willReturn.map({ Product.return($0) }))
+        public static func methodWithGeneric<T>(lhs: Parameter<T>, rhs: Parameter<T>, willReturn: Bool...) -> MethodStub {
+            return Given(method: .m_methodWithGeneric__lhs_lhsrhs_rhs(`lhs`.wrapAsGeneric(), `rhs`.wrapAsGeneric()), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func methodWithGenericConstraint<U>(param: Parameter<[U]>, willReturn: U...) -> MethodStub {
-            return Given(method: .m_methodWithGenericConstraint__param_param(`param`.wrapAsGeneric()), products: willReturn.map({ Product.return($0) }))
+        public static func methodWithGenericConstraint<U>(param: Parameter<[U]>, willReturn: U...) -> MethodStub {
+            return Given(method: .m_methodWithGenericConstraint__param_param(`param`.wrapAsGeneric()), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func methodWithGeneric<T>(lhs: Parameter<T>, rhs: Parameter<T>, willProduce: (Stubber<Bool>) -> Void) -> MethodStub {
+        public static func methodWithGeneric<T>(lhs: Parameter<T>, rhs: Parameter<T>, willProduce: (Stubber<Bool>) -> Void) -> MethodStub {
             let willReturn: [Bool] = []
-			let given: Given = { return Given(method: .m_methodWithGeneric__lhs_lhsrhs_rhs(`lhs`.wrapAsGeneric(), `rhs`.wrapAsGeneric()), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_methodWithGeneric__lhs_lhsrhs_rhs(`lhs`.wrapAsGeneric(), `rhs`.wrapAsGeneric()), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (Bool).self)
 			willProduce(stubber)
 			return given
         }
-        static func methodWithGenericConstraint<U>(param: Parameter<[U]>, willProduce: (Stubber<U>) -> Void) -> MethodStub {
+        public static func methodWithGenericConstraint<U>(param: Parameter<[U]>, willProduce: (Stubber<U>) -> Void) -> MethodStub {
             let willReturn: [U] = []
-			let given: Given = { return Given(method: .m_methodWithGenericConstraint__param_param(`param`.wrapAsGeneric()), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_methodWithGenericConstraint__param_param(`param`.wrapAsGeneric()), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (U).self)
 			willProduce(stubber)
 			return given
         }
     }
 
-    struct Verify {
+    public struct Verify {
         fileprivate var method: MethodType
 
-        static func methodWithGeneric<T>(lhs: Parameter<T>, rhs: Parameter<T>) -> Verify { return Verify(method: .m_methodWithGeneric__lhs_lhsrhs_rhs(`lhs`.wrapAsGeneric(), `rhs`.wrapAsGeneric()))}
-        static func methodWithGenericConstraint<U>(param: Parameter<[U]>) -> Verify { return Verify(method: .m_methodWithGenericConstraint__param_param(`param`.wrapAsGeneric()))}
+        public static func methodWithGeneric<T>(lhs: Parameter<T>, rhs: Parameter<T>) -> Verify { return Verify(method: .m_methodWithGeneric__lhs_lhsrhs_rhs(`lhs`.wrapAsGeneric(), `rhs`.wrapAsGeneric()))}
+        public static func methodWithGenericConstraint<U>(param: Parameter<[U]>) -> Verify { return Verify(method: .m_methodWithGenericConstraint__param_param(`param`.wrapAsGeneric()))}
     }
 
-    struct Perform {
+    public struct Perform {
         fileprivate var method: MethodType
         var performs: Any
 
-        static func methodWithGeneric<T>(lhs: Parameter<T>, rhs: Parameter<T>, perform: @escaping (T, T) -> Void) -> Perform {
+        public static func methodWithGeneric<T>(lhs: Parameter<T>, rhs: Parameter<T>, perform: @escaping (T, T) -> Void) -> Perform {
             return Perform(method: .m_methodWithGeneric__lhs_lhsrhs_rhs(`lhs`.wrapAsGeneric(), `rhs`.wrapAsGeneric()), performs: perform)
         }
-        static func methodWithGenericConstraint<U>(param: Parameter<[U]>, perform: @escaping ([U]) -> Void) -> Perform {
+        public static func methodWithGenericConstraint<U>(param: Parameter<[U]>, perform: @escaping ([U]) -> Void) -> Perform {
             return Perform(method: .m_methodWithGenericConstraint__param_param(`param`.wrapAsGeneric()), performs: perform)
         }
     }
@@ -4959,13 +5376,13 @@ class ProtocolWithGenericMethodsMock: ProtocolWithGenericMethods, Mock {
 
     public func verify(_ method: Verify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
         let invocations = matchingCalls(method.method)
-        MockyAssert(count.matches(invocations.count), "Expeced: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
     }
 
     private func addInvocation(_ call: MethodType) {
         invocations.append(call)
     }
-    private func methodReturnValue(_ method: MethodType) throws -> Product {
+    private func methodReturnValue(_ method: MethodType) throws -> StubProduct {
         let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
         let matched = candidates.first(where: { $0.isValid && MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
         guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
@@ -5005,7 +5422,7 @@ class ProtocolWithGenericMethodsMock: ProtocolWithGenericMethods, Mock {
 }
 
 // MARK: - ProtocolWithGenericMethodsNested
-class ProtocolWithGenericMethodsNestedMock: ProtocolWithGenericMethodsNested, Mock {
+open class ProtocolWithGenericMethodsNestedMock: ProtocolWithGenericMethodsNested, Mock {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
         self.sequencingPolicy = sequencingPolicy
         self.stubbingPolicy = stubbingPolicy
@@ -5022,9 +5439,9 @@ class ProtocolWithGenericMethodsNestedMock: ProtocolWithGenericMethodsNested, Mo
     private var file: StaticString?
     private var line: UInt?
 
-    typealias PropertyStub = Given
-    typealias MethodStub = Given
-    typealias SubscriptStub = Given
+    public typealias PropertyStub = Given
+    public typealias MethodStub = Given
+    public typealias SubscriptStub = Given
 
     /// Convenience method - call setupMock() to extend debug information when failure occurs
     public func setupMock(file: StaticString = #file, line: UInt = #line) {
@@ -5036,7 +5453,7 @@ class ProtocolWithGenericMethodsNestedMock: ProtocolWithGenericMethodsNested, Mo
 
 
 
-    func methodWithGeneric<T>(resource: Resource<T>) -> Observable<Response<T>> {
+    open func methodWithGeneric<T>(resource: Resource<T>) -> Observable<Response<T>> {
         addInvocation(.m_methodWithGeneric__resource_resource(Parameter<Resource<T>>.value(`resource`).wrapAsGeneric()))
 		let perform = methodPerformValue(.m_methodWithGeneric__resource_resource(Parameter<Resource<T>>.value(`resource`).wrapAsGeneric())) as? (Resource<T>) -> Void
 		perform?(`resource`)
@@ -5069,38 +5486,38 @@ class ProtocolWithGenericMethodsNestedMock: ProtocolWithGenericMethodsNested, Mo
         }
     }
 
-    class Given: StubbedMethod {
+    open class Given: StubbedMethod {
         fileprivate var method: MethodType
 
-        private init(method: MethodType, products: [Product]) {
+        private init(method: MethodType, products: [StubProduct]) {
             self.method = method
             super.init(products)
         }
 
 
-        static func methodWithGeneric<T>(resource: Parameter<Resource<T>>, willReturn: Observable<Response<T>>...) -> MethodStub {
-            return Given(method: .m_methodWithGeneric__resource_resource(`resource`.wrapAsGeneric()), products: willReturn.map({ Product.return($0) }))
+        public static func methodWithGeneric<T>(resource: Parameter<Resource<T>>, willReturn: Observable<Response<T>>...) -> MethodStub {
+            return Given(method: .m_methodWithGeneric__resource_resource(`resource`.wrapAsGeneric()), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func methodWithGeneric<T>(resource: Parameter<Resource<T>>, willProduce: (Stubber<Observable<Response<T>>>) -> Void) -> MethodStub {
+        public static func methodWithGeneric<T>(resource: Parameter<Resource<T>>, willProduce: (Stubber<Observable<Response<T>>>) -> Void) -> MethodStub {
             let willReturn: [Observable<Response<T>>] = []
-			let given: Given = { return Given(method: .m_methodWithGeneric__resource_resource(`resource`.wrapAsGeneric()), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_methodWithGeneric__resource_resource(`resource`.wrapAsGeneric()), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (Observable<Response<T>>).self)
 			willProduce(stubber)
 			return given
         }
     }
 
-    struct Verify {
+    public struct Verify {
         fileprivate var method: MethodType
 
-        static func methodWithGeneric<T>(resource: Parameter<Resource<T>>) -> Verify { return Verify(method: .m_methodWithGeneric__resource_resource(`resource`.wrapAsGeneric()))}
+        public static func methodWithGeneric<T>(resource: Parameter<Resource<T>>) -> Verify { return Verify(method: .m_methodWithGeneric__resource_resource(`resource`.wrapAsGeneric()))}
     }
 
-    struct Perform {
+    public struct Perform {
         fileprivate var method: MethodType
         var performs: Any
 
-        static func methodWithGeneric<T>(resource: Parameter<Resource<T>>, perform: @escaping (Resource<T>) -> Void) -> Perform {
+        public static func methodWithGeneric<T>(resource: Parameter<Resource<T>>, perform: @escaping (Resource<T>) -> Void) -> Perform {
             return Perform(method: .m_methodWithGeneric__resource_resource(`resource`.wrapAsGeneric()), performs: perform)
         }
     }
@@ -5116,13 +5533,13 @@ class ProtocolWithGenericMethodsNestedMock: ProtocolWithGenericMethodsNested, Mo
 
     public func verify(_ method: Verify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
         let invocations = matchingCalls(method.method)
-        MockyAssert(count.matches(invocations.count), "Expeced: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
     }
 
     private func addInvocation(_ call: MethodType) {
         invocations.append(call)
     }
-    private func methodReturnValue(_ method: MethodType) throws -> Product {
+    private func methodReturnValue(_ method: MethodType) throws -> StubProduct {
         let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
         let matched = candidates.first(where: { $0.isValid && MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
         guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
@@ -5162,7 +5579,7 @@ class ProtocolWithGenericMethodsNestedMock: ProtocolWithGenericMethodsNested, Mo
 }
 
 // MARK: - ProtocolWithInitializers
-class ProtocolWithInitializersMock: ProtocolWithInitializers, Mock {
+open class ProtocolWithInitializersMock: ProtocolWithInitializers, Mock {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
         self.sequencingPolicy = sequencingPolicy
         self.stubbingPolicy = stubbingPolicy
@@ -5179,9 +5596,9 @@ class ProtocolWithInitializersMock: ProtocolWithInitializers, Mock {
     private var file: StaticString?
     private var line: UInt?
 
-    typealias PropertyStub = Given
-    typealias MethodStub = Given
-    typealias SubscriptStub = Given
+    public typealias PropertyStub = Given
+    public typealias MethodStub = Given
+    public typealias SubscriptStub = Given
 
     /// Convenience method - call setupMock() to extend debug information when failure occurs
     public func setupMock(file: StaticString = #file, line: UInt = #line) {
@@ -5189,14 +5606,14 @@ class ProtocolWithInitializersMock: ProtocolWithInitializers, Mock {
         self.line = line
     }
 
-    var param: Int {
+    public var param: Int {
 		get {	invocations.append(.p_param_get); return __p_param ?? givenGetterValue(.p_param_get, "ProtocolWithInitializersMock - stub value for param was not defined") }
 		@available(*, deprecated, message: "Using setters on readonly variables is deprecated, and will be removed in 3.1. Use Given to define stubbed property return value.")
 		set {	__p_param = newValue }
 	}
 	private var __p_param: (Int)?
 
-    var other: String {
+    public var other: String {
 		get {	invocations.append(.p_other_get); return __p_other ?? givenGetterValue(.p_other_get, "ProtocolWithInitializersMock - stub value for other was not defined") }
 		@available(*, deprecated, message: "Using setters on readonly variables is deprecated, and will be removed in 3.1. Use Given to define stubbed property return value.")
 		set {	__p_other = newValue }
@@ -5207,9 +5624,9 @@ class ProtocolWithInitializersMock: ProtocolWithInitializers, Mock {
 
 
 
-    required init(param: Int, other: String) { }
+    public required init(param: Int, other: String) { }
 
-    required init(param: Int) { }
+    public required init(param: Int) { }
 
 
     fileprivate enum MethodType {
@@ -5232,31 +5649,31 @@ class ProtocolWithInitializersMock: ProtocolWithInitializers, Mock {
         }
     }
 
-    class Given: StubbedMethod {
+    open class Given: StubbedMethod {
         fileprivate var method: MethodType
 
-        private init(method: MethodType, products: [Product]) {
+        private init(method: MethodType, products: [StubProduct]) {
             self.method = method
             super.init(products)
         }
 
-        static func param(getter defaultValue: Int...) -> PropertyStub {
-            return Given(method: .p_param_get, products: defaultValue.map({ Product.return($0) }))
+        public static func param(getter defaultValue: Int...) -> PropertyStub {
+            return Given(method: .p_param_get, products: defaultValue.map({ StubProduct.return($0 as Any) }))
         }
-        static func other(getter defaultValue: String...) -> PropertyStub {
-            return Given(method: .p_other_get, products: defaultValue.map({ Product.return($0) }))
+        public static func other(getter defaultValue: String...) -> PropertyStub {
+            return Given(method: .p_other_get, products: defaultValue.map({ StubProduct.return($0 as Any) }))
         }
 
     }
 
-    struct Verify {
+    public struct Verify {
         fileprivate var method: MethodType
 
-        static var param: Verify { return Verify(method: .p_param_get) }
-        static var other: Verify { return Verify(method: .p_other_get) }
+        public static var param: Verify { return Verify(method: .p_param_get) }
+        public static var other: Verify { return Verify(method: .p_other_get) }
     }
 
-    struct Perform {
+    public struct Perform {
         fileprivate var method: MethodType
         var performs: Any
 
@@ -5273,13 +5690,13 @@ class ProtocolWithInitializersMock: ProtocolWithInitializers, Mock {
 
     public func verify(_ method: Verify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
         let invocations = matchingCalls(method.method)
-        MockyAssert(count.matches(invocations.count), "Expeced: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
     }
 
     private func addInvocation(_ call: MethodType) {
         invocations.append(call)
     }
-    private func methodReturnValue(_ method: MethodType) throws -> Product {
+    private func methodReturnValue(_ method: MethodType) throws -> StubProduct {
         let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
         let matched = candidates.first(where: { $0.isValid && MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
         guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
@@ -5319,7 +5736,7 @@ class ProtocolWithInitializersMock: ProtocolWithInitializers, Mock {
 }
 
 // MARK: - ProtocolWithPropoerties
-class ProtocolWithPropoertiesMock: ProtocolWithPropoerties, Mock, StaticMock {
+open class ProtocolWithPropoertiesMock: ProtocolWithPropoerties, Mock, StaticMock {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
         self.sequencingPolicy = sequencingPolicy
         self.stubbingPolicy = stubbingPolicy
@@ -5336,9 +5753,9 @@ class ProtocolWithPropoertiesMock: ProtocolWithPropoerties, Mock, StaticMock {
     private var file: StaticString?
     private var line: UInt?
 
-    typealias PropertyStub = Given
-    typealias MethodStub = Given
-    typealias SubscriptStub = Given
+    public typealias PropertyStub = Given
+    public typealias MethodStub = Given
+    public typealias SubscriptStub = Given
 
     /// Convenience method - call setupMock() to extend debug information when failure occurs
     public func setupMock(file: StaticString = #file, line: UInt = #line) {
@@ -5351,34 +5768,34 @@ class ProtocolWithPropoertiesMock: ProtocolWithPropoerties, Mock, StaticMock {
     static private var invocations: [StaticMethodType] = []
     static private var methodReturnValues: [StaticGiven] = []
     static private var methodPerformValues: [StaticPerform] = []
-    typealias StaticPropertyStub = StaticGiven
-    typealias StaticMethodStub = StaticGiven
-    static func clear() {
+    public typealias StaticPropertyStub = StaticGiven
+    public typealias StaticMethodStub = StaticGiven
+    public static func clear() {
         invocations = []
         methodReturnValues = []
         methodPerformValues = []
     }
 
-    var name: String {
+    public var name: String {
 		get {	invocations.append(.p_name_get); return __p_name ?? givenGetterValue(.p_name_get, "ProtocolWithPropoertiesMock - stub value for name was not defined") }
 		set {	invocations.append(.p_name_set(.value(newValue))); __p_name = newValue }
 	}
 	private var __p_name: (String)?
 
-    var email: String? {
+    public var email: String? {
 		get {	invocations.append(.p_email_get); return __p_email ?? optionalGivenGetterValue(.p_email_get, "ProtocolWithPropoertiesMock - stub value for email was not defined") }
 		set {	invocations.append(.p_email_set(.value(newValue))); __p_email = newValue }
 	}
 	private var __p_email: (String)?
 
 
-    static var name: String {
+    public static var name: String {
 		get {	ProtocolWithPropoertiesMock.invocations.append(.p_name_get); return ProtocolWithPropoertiesMock.__p_name ?? givenGetterValue(.p_name_get, "ProtocolWithPropoertiesMock - stub value for name was not defined") }
 		set {	ProtocolWithPropoertiesMock.invocations.append(.p_name_set(.value(newValue))); ProtocolWithPropoertiesMock.__p_name = newValue }
 	}
 	private static var __p_name: (String)?
 
-    static var defaultEmail: String? {
+    public static var defaultEmail: String? {
 		get {	ProtocolWithPropoertiesMock.invocations.append(.p_defaultEmail_get); return ProtocolWithPropoertiesMock.__p_defaultEmail ?? optionalGivenGetterValue(.p_defaultEmail_get, "ProtocolWithPropoertiesMock - stub value for defaultEmail was not defined") }
 		set {	ProtocolWithPropoertiesMock.invocations.append(.p_defaultEmail_set(.value(newValue))); ProtocolWithPropoertiesMock.__p_defaultEmail = newValue }
 	}
@@ -5387,19 +5804,19 @@ class ProtocolWithPropoertiesMock: ProtocolWithPropoerties, Mock, StaticMock {
 
 
 
-    static func defaultEmail(_ newValue: String!) {
+    public static func defaultEmail(_ newValue: String!) {
         addInvocation(.sm_defaultEmail__newValue(Parameter<String?>.value(`newValue`)))
 		let perform = methodPerformValue(.sm_defaultEmail__newValue(Parameter<String?>.value(`newValue`))) as? (String?) -> Void
 		perform?(`newValue`)
     }
 
-    func name(_ newValue: String) {
+    open func name(_ newValue: String) {
         addInvocation(.m_name__newValue(Parameter<String>.value(`newValue`)))
 		let perform = methodPerformValue(.m_name__newValue(Parameter<String>.value(`newValue`))) as? (String) -> Void
 		perform?(`newValue`)
     }
 
-    func email(_ newValue: String!) {
+    open func email(_ newValue: String!) {
         addInvocation(.m_email__newValue(Parameter<String?>.value(`newValue`)))
 		let perform = methodPerformValue(.m_email__newValue(Parameter<String?>.value(`newValue`))) as? (String?) -> Void
 		perform?(`newValue`)
@@ -5436,44 +5853,38 @@ class ProtocolWithPropoertiesMock: ProtocolWithPropoerties, Mock, StaticMock {
         }
     }
 
-    class StaticGiven: StubbedMethod {
+    open class StaticGiven: StubbedMethod {
         fileprivate var method: StaticMethodType
 
-        private init(method: StaticMethodType, products: [Product]) {
+        private init(method: StaticMethodType, products: [StubProduct]) {
             self.method = method
             super.init(products)
         }
 
-        static func name(getter defaultValue: String...) -> StaticPropertyStub {
-            return StaticGiven(method: .p_name_get, products: defaultValue.map({ Product.return($0) }))
+        public static func name(getter defaultValue: String...) -> StaticPropertyStub {
+            return StaticGiven(method: .p_name_get, products: defaultValue.map({ StubProduct.return($0 as Any) }))
         }
-        static func defaultEmail(getter defaultValue: String?...) -> StaticPropertyStub {
-            return StaticGiven(method: .p_defaultEmail_get, products: defaultValue.map({ Product.return($0) }))
+        public static func defaultEmail(getter defaultValue: String?...) -> StaticPropertyStub {
+            return StaticGiven(method: .p_defaultEmail_get, products: defaultValue.map({ StubProduct.return($0 as Any) }))
         }
 
     }
 
-    struct StaticVerify {
+    public struct StaticVerify {
         fileprivate var method: StaticMethodType
 
-        static func defaultEmail(_ newValue: Parameter<String?>) -> StaticVerify { return StaticVerify(method: .sm_defaultEmail__newValue(`newValue`))}
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `newValue` label")
-		static func defaultEmail(newValue: Parameter<String?>) -> StaticVerify { return StaticVerify(method: .sm_defaultEmail__newValue(`newValue`))}
-        static var name: StaticVerify { return StaticVerify(method: .p_name_get) }
-		static func name(set newValue: Parameter<String>) -> StaticVerify { return StaticVerify(method: .p_name_set(newValue)) }
-        static var defaultEmail: StaticVerify { return StaticVerify(method: .p_defaultEmail_get) }
-		static func defaultEmail(set newValue: Parameter<String?>) -> StaticVerify { return StaticVerify(method: .p_defaultEmail_set(newValue)) }
+        public static func defaultEmail(_ newValue: Parameter<String?>) -> StaticVerify { return StaticVerify(method: .sm_defaultEmail__newValue(`newValue`))}
+        public static var name: StaticVerify { return StaticVerify(method: .p_name_get) }
+		public static func name(set newValue: Parameter<String>) -> StaticVerify { return StaticVerify(method: .p_name_set(newValue)) }
+        public static var defaultEmail: StaticVerify { return StaticVerify(method: .p_defaultEmail_get) }
+		public static func defaultEmail(set newValue: Parameter<String?>) -> StaticVerify { return StaticVerify(method: .p_defaultEmail_set(newValue)) }
     }
 
-    struct StaticPerform {
+    public struct StaticPerform {
         fileprivate var method: StaticMethodType
         var performs: Any
 
-        static func defaultEmail(_ newValue: Parameter<String?>, perform: @escaping (String?) -> Void) -> StaticPerform {
-            return StaticPerform(method: .sm_defaultEmail__newValue(`newValue`), performs: perform)
-        }
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `newValue` label")
-		static func defaultEmail(newValue: Parameter<String?>, perform: @escaping (String?) -> Void) -> StaticPerform {
+        public static func defaultEmail(_ newValue: Parameter<String?>, perform: @escaping (String?) -> Void) -> StaticPerform {
             return StaticPerform(method: .sm_defaultEmail__newValue(`newValue`), performs: perform)
         }
     }
@@ -5515,54 +5926,42 @@ class ProtocolWithPropoertiesMock: ProtocolWithPropoerties, Mock, StaticMock {
         }
     }
 
-    class Given: StubbedMethod {
+    open class Given: StubbedMethod {
         fileprivate var method: MethodType
 
-        private init(method: MethodType, products: [Product]) {
+        private init(method: MethodType, products: [StubProduct]) {
             self.method = method
             super.init(products)
         }
 
-        static func name(getter defaultValue: String...) -> PropertyStub {
-            return Given(method: .p_name_get, products: defaultValue.map({ Product.return($0) }))
+        public static func name(getter defaultValue: String...) -> PropertyStub {
+            return Given(method: .p_name_get, products: defaultValue.map({ StubProduct.return($0 as Any) }))
         }
-        static func email(getter defaultValue: String?...) -> PropertyStub {
-            return Given(method: .p_email_get, products: defaultValue.map({ Product.return($0) }))
+        public static func email(getter defaultValue: String?...) -> PropertyStub {
+            return Given(method: .p_email_get, products: defaultValue.map({ StubProduct.return($0 as Any) }))
         }
 
     }
 
-    struct Verify {
+    public struct Verify {
         fileprivate var method: MethodType
 
-        static func name(_ newValue: Parameter<String>) -> Verify { return Verify(method: .m_name__newValue(`newValue`))}
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `newValue` label")
-		static func name(newValue: Parameter<String>) -> Verify { return Verify(method: .m_name__newValue(`newValue`))}
-        static func email(_ newValue: Parameter<String?>) -> Verify { return Verify(method: .m_email__newValue(`newValue`))}
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `newValue` label")
-		static func email(newValue: Parameter<String?>) -> Verify { return Verify(method: .m_email__newValue(`newValue`))}
-        static var name: Verify { return Verify(method: .p_name_get) }
-		static func name(set newValue: Parameter<String>) -> Verify { return Verify(method: .p_name_set(newValue)) }
-        static var email: Verify { return Verify(method: .p_email_get) }
-		static func email(set newValue: Parameter<String?>) -> Verify { return Verify(method: .p_email_set(newValue)) }
+        public static func name(_ newValue: Parameter<String>) -> Verify { return Verify(method: .m_name__newValue(`newValue`))}
+        public static func email(_ newValue: Parameter<String?>) -> Verify { return Verify(method: .m_email__newValue(`newValue`))}
+        public static var name: Verify { return Verify(method: .p_name_get) }
+		public static func name(set newValue: Parameter<String>) -> Verify { return Verify(method: .p_name_set(newValue)) }
+        public static var email: Verify { return Verify(method: .p_email_get) }
+		public static func email(set newValue: Parameter<String?>) -> Verify { return Verify(method: .p_email_set(newValue)) }
     }
 
-    struct Perform {
+    public struct Perform {
         fileprivate var method: MethodType
         var performs: Any
 
-        static func name(_ newValue: Parameter<String>, perform: @escaping (String) -> Void) -> Perform {
+        public static func name(_ newValue: Parameter<String>, perform: @escaping (String) -> Void) -> Perform {
             return Perform(method: .m_name__newValue(`newValue`), performs: perform)
         }
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `newValue` label")
-		static func name(newValue: Parameter<String>, perform: @escaping (String) -> Void) -> Perform {
-            return Perform(method: .m_name__newValue(`newValue`), performs: perform)
-        }
-        static func email(_ newValue: Parameter<String?>, perform: @escaping (String?) -> Void) -> Perform {
-            return Perform(method: .m_email__newValue(`newValue`), performs: perform)
-        }
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `newValue` label")
-		static func email(newValue: Parameter<String?>, perform: @escaping (String?) -> Void) -> Perform {
+        public static func email(_ newValue: Parameter<String?>, perform: @escaping (String?) -> Void) -> Perform {
             return Perform(method: .m_email__newValue(`newValue`), performs: perform)
         }
     }
@@ -5578,13 +5977,13 @@ class ProtocolWithPropoertiesMock: ProtocolWithPropoerties, Mock, StaticMock {
 
     public func verify(_ method: Verify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
         let invocations = matchingCalls(method.method)
-        MockyAssert(count.matches(invocations.count), "Expeced: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
     }
 
     private func addInvocation(_ call: MethodType) {
         invocations.append(call)
     }
-    private func methodReturnValue(_ method: MethodType) throws -> Product {
+    private func methodReturnValue(_ method: MethodType) throws -> StubProduct {
         let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
         let matched = candidates.first(where: { $0.isValid && MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
         guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
@@ -5633,13 +6032,13 @@ class ProtocolWithPropoertiesMock: ProtocolWithPropoerties, Mock, StaticMock {
 
     static public func verify(_ method: StaticVerify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
         let invocations = matchingCalls(method.method)
-        MockyAssert(count.matches(invocations.count), "Expeced: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
     }
 
     static private func addInvocation(_ call: StaticMethodType) {
         invocations.append(call)
     }
-    static private func methodReturnValue(_ method: StaticMethodType) throws -> Product {
+    static private func methodReturnValue(_ method: StaticMethodType) throws -> StubProduct {
         let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
         let matched = candidates.first(where: { $0.isValid && StaticMethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
         guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
@@ -5672,7 +6071,7 @@ class ProtocolWithPropoertiesMock: ProtocolWithPropoerties, Mock, StaticMock {
 }
 
 // MARK: - ProtocolWithStaticMembers
-class ProtocolWithStaticMembersMock: ProtocolWithStaticMembers, Mock, StaticMock {
+open class ProtocolWithStaticMembersMock: ProtocolWithStaticMembers, Mock, StaticMock {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
         self.sequencingPolicy = sequencingPolicy
         self.stubbingPolicy = stubbingPolicy
@@ -5689,9 +6088,9 @@ class ProtocolWithStaticMembersMock: ProtocolWithStaticMembers, Mock, StaticMock
     private var file: StaticString?
     private var line: UInt?
 
-    typealias PropertyStub = Given
-    typealias MethodStub = Given
-    typealias SubscriptStub = Given
+    public typealias PropertyStub = Given
+    public typealias MethodStub = Given
+    public typealias SubscriptStub = Given
 
     /// Convenience method - call setupMock() to extend debug information when failure occurs
     public func setupMock(file: StaticString = #file, line: UInt = #line) {
@@ -5704,16 +6103,16 @@ class ProtocolWithStaticMembersMock: ProtocolWithStaticMembers, Mock, StaticMock
     static private var invocations: [StaticMethodType] = []
     static private var methodReturnValues: [StaticGiven] = []
     static private var methodPerformValues: [StaticPerform] = []
-    typealias StaticPropertyStub = StaticGiven
-    typealias StaticMethodStub = StaticGiven
-    static func clear() {
+    public typealias StaticPropertyStub = StaticGiven
+    public typealias StaticMethodStub = StaticGiven
+    public static func clear() {
         invocations = []
         methodReturnValues = []
         methodPerformValues = []
     }
 
 
-    static var staticProperty: String {
+    public static var staticProperty: String {
 		get {	ProtocolWithStaticMembersMock.invocations.append(.p_staticProperty_get); return ProtocolWithStaticMembersMock.__p_staticProperty ?? givenGetterValue(.p_staticProperty_get, "ProtocolWithStaticMembersMock - stub value for staticProperty was not defined") }
 		@available(*, deprecated, message: "Using setters on readonly variables is deprecated, and will be removed in 3.1. Use Given to define stubbed property return value.")
 		set {	ProtocolWithStaticMembersMock.__p_staticProperty = newValue }
@@ -5723,7 +6122,7 @@ class ProtocolWithStaticMembersMock: ProtocolWithStaticMembers, Mock, StaticMock
 
 
 
-    static func staticMethod(param: Int) throws -> Int {
+    public static func staticMethod(param: Int) throws -> Int {
         addInvocation(.sm_staticMethod__param_param(Parameter<Int>.value(`param`)))
 		let perform = methodPerformValue(.sm_staticMethod__param_param(Parameter<Int>.value(`param`))) as? (Int) -> Void
 		perform?(`param`)
@@ -5760,45 +6159,45 @@ class ProtocolWithStaticMembersMock: ProtocolWithStaticMembers, Mock, StaticMock
         }
     }
 
-    class StaticGiven: StubbedMethod {
+    open class StaticGiven: StubbedMethod {
         fileprivate var method: StaticMethodType
 
-        private init(method: StaticMethodType, products: [Product]) {
+        private init(method: StaticMethodType, products: [StubProduct]) {
             self.method = method
             super.init(products)
         }
 
-        static func staticProperty(getter defaultValue: String...) -> StaticPropertyStub {
-            return StaticGiven(method: .p_staticProperty_get, products: defaultValue.map({ Product.return($0) }))
+        public static func staticProperty(getter defaultValue: String...) -> StaticPropertyStub {
+            return StaticGiven(method: .p_staticProperty_get, products: defaultValue.map({ StubProduct.return($0 as Any) }))
         }
 
-        static func staticMethod(param: Parameter<Int>, willReturn: Int...) -> StaticMethodStub {
-            return StaticGiven(method: .sm_staticMethod__param_param(`param`), products: willReturn.map({ Product.return($0) }))
+        public static func staticMethod(param: Parameter<Int>, willReturn: Int...) -> StaticMethodStub {
+            return StaticGiven(method: .sm_staticMethod__param_param(`param`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func staticMethod(param: Parameter<Int>, willThrow: Error...) -> StaticMethodStub {
-            return StaticGiven(method: .sm_staticMethod__param_param(`param`), products: willThrow.map({ Product.throw($0) }))
+        public static func staticMethod(param: Parameter<Int>, willThrow: Error...) -> StaticMethodStub {
+            return StaticGiven(method: .sm_staticMethod__param_param(`param`), products: willThrow.map({ StubProduct.throw($0) }))
         }
-        static func staticMethod(param: Parameter<Int>, willProduce: (StubberThrows<Int>) -> Void) -> StaticMethodStub {
+        public static func staticMethod(param: Parameter<Int>, willProduce: (StubberThrows<Int>) -> Void) -> StaticMethodStub {
             let willThrow: [Error] = []
-			let given: StaticGiven = { return StaticGiven(method: .sm_staticMethod__param_param(`param`), products: willThrow.map({ Product.throw($0) })) }()
+			let given: StaticGiven = { return StaticGiven(method: .sm_staticMethod__param_param(`param`), products: willThrow.map({ StubProduct.throw($0) })) }()
 			let stubber = given.stubThrows(for: (Int).self)
 			willProduce(stubber)
 			return given
         }
     }
 
-    struct StaticVerify {
+    public struct StaticVerify {
         fileprivate var method: StaticMethodType
 
-        static func staticMethod(param: Parameter<Int>) -> StaticVerify { return StaticVerify(method: .sm_staticMethod__param_param(`param`))}
-        static var staticProperty: StaticVerify { return StaticVerify(method: .p_staticProperty_get) }
+        public static func staticMethod(param: Parameter<Int>) -> StaticVerify { return StaticVerify(method: .sm_staticMethod__param_param(`param`))}
+        public static var staticProperty: StaticVerify { return StaticVerify(method: .p_staticProperty_get) }
     }
 
-    struct StaticPerform {
+    public struct StaticPerform {
         fileprivate var method: StaticMethodType
         var performs: Any
 
-        static func staticMethod(param: Parameter<Int>, perform: @escaping (Int) -> Void) -> StaticPerform {
+        public static func staticMethod(param: Parameter<Int>, perform: @escaping (Int) -> Void) -> StaticPerform {
             return StaticPerform(method: .sm_staticMethod__param_param(`param`), performs: perform)
         }
     }
@@ -5809,10 +6208,10 @@ class ProtocolWithStaticMembersMock: ProtocolWithStaticMembers, Mock, StaticMock
         func intValue() -> Int { return 0 }
     }
 
-    class Given: StubbedMethod {
+    open class Given: StubbedMethod {
         fileprivate var method: MethodType
 
-        private init(method: MethodType, products: [Product]) {
+        private init(method: MethodType, products: [StubProduct]) {
             self.method = method
             super.init(products)
         }
@@ -5820,12 +6219,12 @@ class ProtocolWithStaticMembersMock: ProtocolWithStaticMembers, Mock, StaticMock
 
     }
 
-    struct Verify {
+    public struct Verify {
         fileprivate var method: MethodType
 
     }
 
-    struct Perform {
+    public struct Perform {
         fileprivate var method: MethodType
         var performs: Any
 
@@ -5842,13 +6241,13 @@ class ProtocolWithStaticMembersMock: ProtocolWithStaticMembers, Mock, StaticMock
 
     public func verify(_ method: Verify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
         let invocations = matchingCalls(method.method)
-        MockyAssert(count.matches(invocations.count), "Expeced: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
     }
 
     private func addInvocation(_ call: MethodType) {
         invocations.append(call)
     }
-    private func methodReturnValue(_ method: MethodType) throws -> Product {
+    private func methodReturnValue(_ method: MethodType) throws -> StubProduct {
         let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
         let matched = candidates.first(where: { $0.isValid && MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
         guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
@@ -5897,13 +6296,13 @@ class ProtocolWithStaticMembersMock: ProtocolWithStaticMembers, Mock, StaticMock
 
     static public func verify(_ method: StaticVerify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
         let invocations = matchingCalls(method.method)
-        MockyAssert(count.matches(invocations.count), "Expeced: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
     }
 
     static private func addInvocation(_ call: StaticMethodType) {
         invocations.append(call)
     }
-    static private func methodReturnValue(_ method: StaticMethodType) throws -> Product {
+    static private func methodReturnValue(_ method: StaticMethodType) throws -> StubProduct {
         let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
         let matched = candidates.first(where: { $0.isValid && StaticMethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
         guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
@@ -5936,7 +6335,7 @@ class ProtocolWithStaticMembersMock: ProtocolWithStaticMembers, Mock, StaticMock
 }
 
 // MARK: - ProtocolWithSubscripts
-class ProtocolWithSubscriptsMock: ProtocolWithSubscripts, Mock {
+open class ProtocolWithSubscriptsMock: ProtocolWithSubscripts, Mock {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
         self.sequencingPolicy = sequencingPolicy
         self.stubbingPolicy = stubbingPolicy
@@ -5953,9 +6352,9 @@ class ProtocolWithSubscriptsMock: ProtocolWithSubscripts, Mock {
     private var file: StaticString?
     private var line: UInt?
 
-    typealias PropertyStub = Given
-    typealias MethodStub = Given
-    typealias SubscriptStub = Given
+    public typealias PropertyStub = Given
+    public typealias MethodStub = Given
+    public typealias SubscriptStub = Given
 
     /// Convenience method - call setupMock() to extend debug information when failure occurs
     public func setupMock(file: StaticString = #file, line: UInt = #line) {
@@ -5963,7 +6362,7 @@ class ProtocolWithSubscriptsMock: ProtocolWithSubscripts, Mock {
         self.line = line
     }
 
-    var something: Any {
+    public var something: Any {
 		get {	invocations.append(.p_something_get); return __p_something ?? givenGetterValue(.p_something_get, "ProtocolWithSubscriptsMock - stub value for something was not defined") }
 		set {	invocations.append(.p_something_set(.value(newValue))); __p_something = newValue }
 	}
@@ -5973,7 +6372,7 @@ class ProtocolWithSubscriptsMock: ProtocolWithSubscripts, Mock {
 
 
 
-    func aaa(_ value: Int) -> Bool {
+    open func aaa(_ value: Int) -> Bool {
         addInvocation(.m_aaa__value(Parameter<Int>.value(`value`)))
 		let perform = methodPerformValue(.m_aaa__value(Parameter<Int>.value(`value`))) as? (Int) -> Void
 		perform?(`value`)
@@ -5987,7 +6386,7 @@ class ProtocolWithSubscriptsMock: ProtocolWithSubscripts, Mock {
 		return __value
     }
 
-    subscript (_ index: Int) -> String {
+    public subscript (_ index: Int) -> String {
 		get {
 			addInvocation(.subscript_get_index_1(Parameter<Int>.value(`index`)))
 			do {
@@ -6001,7 +6400,7 @@ class ProtocolWithSubscriptsMock: ProtocolWithSubscripts, Mock {
 		}
 	}
 
-    subscript (labeled index: Int) -> String {
+    public subscript (labeled index: Int) -> String {
 		get {
 			addInvocation(.subscript_get_labeled_index(Parameter<Int>.value(`index`)))
 			do {
@@ -6015,7 +6414,7 @@ class ProtocolWithSubscriptsMock: ProtocolWithSubscripts, Mock {
 		}
 	}
 
-    subscript (_ x: Int, _ y: Int) -> String {
+    public subscript (_ x: Int, _ y: Int) -> String {
 		get {
 			addInvocation(.subscript_get_x_y(Parameter<Int>.value(`x`), Parameter<Int>.value(`y`)))
 			do {
@@ -6029,7 +6428,7 @@ class ProtocolWithSubscriptsMock: ProtocolWithSubscripts, Mock {
 		}
 	}
 
-    subscript (_ index: String) -> String {
+    public subscript (_ index: String) -> String {
 		get {
 			addInvocation(.subscript_get_index_2(Parameter<String>.value(`index`)))
 			do {
@@ -6043,7 +6442,7 @@ class ProtocolWithSubscriptsMock: ProtocolWithSubscripts, Mock {
 		}
 	}
 
-    subscript (index index: String) -> String {
+    public subscript (index index: String) -> String {
 		get {
 			addInvocation(.subscript_get_index_index(Parameter<String>.value(`index`)))
 			do {
@@ -6057,7 +6456,7 @@ class ProtocolWithSubscriptsMock: ProtocolWithSubscripts, Mock {
 		}
 	}
 
-    subscript (label name: String) -> Int {
+    public subscript (label name: String) -> Int {
 		get {
 			addInvocation(.subscript_get_label_name(Parameter<String>.value(`name`)))
 			do {
@@ -6068,7 +6467,7 @@ class ProtocolWithSubscriptsMock: ProtocolWithSubscripts, Mock {
 		}
 	}
 
-    subscript<T: Sequence>(with generic: T) -> Bool where T.Element: Equatable {
+    public subscript<T: Sequence>(with generic: T) -> Bool where T.Element: Equatable {
 		get {
 			addInvocation(.subscript_get_with_generic_1(Parameter<T>.value(`generic`).wrapAsGeneric()))
 			do {
@@ -6082,7 +6481,7 @@ class ProtocolWithSubscriptsMock: ProtocolWithSubscripts, Mock {
 		}
 	}
 
-    subscript<T: FloatingPoint>(with generic: T) -> Int where T: FloatingPoint {
+    public subscript<T: FloatingPoint>(with generic: T) -> Int where T: FloatingPoint {
 		get {
 			addInvocation(.subscript_get_with_generic_2(Parameter<T>.value(`generic`).wrapAsGeneric()))
 			do {
@@ -6096,7 +6495,7 @@ class ProtocolWithSubscriptsMock: ProtocolWithSubscripts, Mock {
 		}
 	}
 
-    subscript<T>(_ i: Int, _ type: T.Type) -> T {
+    public subscript<T>(_ i: Int, _ type: T.Type) -> T {
 		get {
 			addInvocation(.subscript_get_i_type(Parameter<Int>.value(`i`), Parameter<T.Type>.value(`type`).wrapAsGeneric()))
 			do {
@@ -6110,7 +6509,7 @@ class ProtocolWithSubscriptsMock: ProtocolWithSubscripts, Mock {
 		}
 	}
 
-    subscript (closure c: @escaping (Int) -> Void) -> Bool {
+    public subscript (closure c: @escaping (Int) -> Void) -> Bool {
 		get {
 			addInvocation(.subscript_get_closure_c(Parameter<(Int) -> Void>.value(`c`)))
 			do {
@@ -6124,7 +6523,7 @@ class ProtocolWithSubscriptsMock: ProtocolWithSubscripts, Mock {
 		}
 	}
 
-    subscript (same same: Int) -> Bool {
+    public subscript (same same: Int) -> Bool {
 		get {
 			addInvocation(.subscript_get_same_same_1(Parameter<Int>.value(`same`)))
 			do {
@@ -6138,7 +6537,7 @@ class ProtocolWithSubscriptsMock: ProtocolWithSubscripts, Mock {
 		}
 	}
 
-    subscript (same same: Int) -> Int {
+    public subscript (same same: Int) -> Int {
 		get {
 			addInvocation(.subscript_get_same_same_2(Parameter<Int>.value(`same`)))
 			do {
@@ -6297,112 +6696,102 @@ class ProtocolWithSubscriptsMock: ProtocolWithSubscripts, Mock {
         }
     }
 
-    class Given: StubbedMethod {
+    open class Given: StubbedMethod {
         fileprivate var method: MethodType
 
-        private init(method: MethodType, products: [Product]) {
+        private init(method: MethodType, products: [StubProduct]) {
             self.method = method
             super.init(products)
         }
 
-        static func something(getter defaultValue: Any...) -> PropertyStub {
-            return Given(method: .p_something_get, products: defaultValue.map({ Product.return($0) }))
+        public static func something(getter defaultValue: Any...) -> PropertyStub {
+            return Given(method: .p_something_get, products: defaultValue.map({ StubProduct.return($0 as Any) }))
         }
 
-        static func aaa(_ value: Parameter<Int>, willReturn: Bool...) -> MethodStub {
-            return Given(method: .m_aaa__value(`value`), products: willReturn.map({ Product.return($0) }))
+        public static func aaa(_ value: Parameter<Int>, willReturn: Bool...) -> MethodStub {
+            return Given(method: .m_aaa__value(`value`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `value` label")
-		static func aaa(value: Parameter<Int>, willReturn: Bool...) -> MethodStub {
-            return Given(method: .m_aaa__value(`value`), products: willReturn.map({ Product.return($0) }))
-        }
-        static func aaa(_ value: Parameter<Int>, willProduce: (Stubber<Bool>) -> Void) -> MethodStub {
+        public static func aaa(_ value: Parameter<Int>, willProduce: (Stubber<Bool>) -> Void) -> MethodStub {
             let willReturn: [Bool] = []
-			let given: Given = { return Given(method: .m_aaa__value(`value`), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_aaa__value(`value`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (Bool).self)
 			willProduce(stubber)
 			return given
         }
-        static func `subscript`(_ index: Parameter<Int>, willReturn: String...) -> SubscriptStub {
-            return Given(method: .subscript_get_index_1(`index`), products: willReturn.map({ Product.return($0) }))
+        public static func `subscript`(_ index: Parameter<Int>, willReturn: String...) -> SubscriptStub {
+            return Given(method: .subscript_get_index_1(`index`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func `subscript`(labeled index: Parameter<Int>, willReturn: String...) -> SubscriptStub {
-            return Given(method: .subscript_get_labeled_index(`index`), products: willReturn.map({ Product.return($0) }))
+        public static func `subscript`(labeled index: Parameter<Int>, willReturn: String...) -> SubscriptStub {
+            return Given(method: .subscript_get_labeled_index(`index`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func `subscript`(_ x: Parameter<Int>, _ y: Parameter<Int>, willReturn: String...) -> SubscriptStub {
-            return Given(method: .subscript_get_x_y(`x`, `y`), products: willReturn.map({ Product.return($0) }))
+        public static func `subscript`(_ x: Parameter<Int>, _ y: Parameter<Int>, willReturn: String...) -> SubscriptStub {
+            return Given(method: .subscript_get_x_y(`x`, `y`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func `subscript`(_ index: Parameter<String>, willReturn: String...) -> SubscriptStub {
-            return Given(method: .subscript_get_index_2(`index`), products: willReturn.map({ Product.return($0) }))
+        public static func `subscript`(_ index: Parameter<String>, willReturn: String...) -> SubscriptStub {
+            return Given(method: .subscript_get_index_2(`index`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func `subscript`(index: Parameter<String>, willReturn: String...) -> SubscriptStub {
-            return Given(method: .subscript_get_index_index(`index`), products: willReturn.map({ Product.return($0) }))
+        public static func `subscript`(index: Parameter<String>, willReturn: String...) -> SubscriptStub {
+            return Given(method: .subscript_get_index_index(`index`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func `subscript`(label name: Parameter<String>, willReturn: Int...) -> SubscriptStub {
-            return Given(method: .subscript_get_label_name(`name`), products: willReturn.map({ Product.return($0) }))
+        public static func `subscript`(label name: Parameter<String>, willReturn: Int...) -> SubscriptStub {
+            return Given(method: .subscript_get_label_name(`name`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func `subscript`<T: Sequence>(with generic: Parameter<T>, willReturn: Bool...) -> SubscriptStub {
-            return Given(method: .subscript_get_with_generic_1(`generic`.wrapAsGeneric()), products: willReturn.map({ Product.return($0) }))
+        public static func `subscript`<T: Sequence>(with generic: Parameter<T>, willReturn: Bool...) -> SubscriptStub {
+            return Given(method: .subscript_get_with_generic_1(`generic`.wrapAsGeneric()), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func `subscript`<T: FloatingPoint>(with generic: Parameter<T>, willReturn: Int...) -> SubscriptStub {
-            return Given(method: .subscript_get_with_generic_2(`generic`.wrapAsGeneric()), products: willReturn.map({ Product.return($0) }))
+        public static func `subscript`<T: FloatingPoint>(with generic: Parameter<T>, willReturn: Int...) -> SubscriptStub {
+            return Given(method: .subscript_get_with_generic_2(`generic`.wrapAsGeneric()), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func `subscript`<T>(_ i: Parameter<Int>, _ type: Parameter<T.Type>, willReturn: T...) -> SubscriptStub {
-            return Given(method: .subscript_get_i_type(`i`, `type`.wrapAsGeneric()), products: willReturn.map({ Product.return($0) }))
+        public static func `subscript`<T>(_ i: Parameter<Int>, _ type: Parameter<T.Type>, willReturn: T...) -> SubscriptStub {
+            return Given(method: .subscript_get_i_type(`i`, `type`.wrapAsGeneric()), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func `subscript`(closure c: Parameter<(Int) -> Void>, willReturn: Bool...) -> SubscriptStub {
-            return Given(method: .subscript_get_closure_c(`c`), products: willReturn.map({ Product.return($0) }))
+        public static func `subscript`(closure c: Parameter<(Int) -> Void>, willReturn: Bool...) -> SubscriptStub {
+            return Given(method: .subscript_get_closure_c(`c`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func `subscript`(same: Parameter<Int>, willReturn: Bool...) -> SubscriptStub {
-            return Given(method: .subscript_get_same_same_1(`same`), products: willReturn.map({ Product.return($0) }))
+        public static func `subscript`(same: Parameter<Int>, willReturn: Bool...) -> SubscriptStub {
+            return Given(method: .subscript_get_same_same_1(`same`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func `subscript`(same: Parameter<Int>, willReturn: Int...) -> SubscriptStub {
-            return Given(method: .subscript_get_same_same_2(`same`), products: willReturn.map({ Product.return($0) }))
+        public static func `subscript`(same: Parameter<Int>, willReturn: Int...) -> SubscriptStub {
+            return Given(method: .subscript_get_same_same_2(`same`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
     }
 
-    struct Verify {
+    public struct Verify {
         fileprivate var method: MethodType
 
-        static func aaa(_ value: Parameter<Int>) -> Verify { return Verify(method: .m_aaa__value(`value`))}
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `value` label")
-		static func aaa(value: Parameter<Int>) -> Verify { return Verify(method: .m_aaa__value(`value`))}
-        static var something: Verify { return Verify(method: .p_something_get) }
-		static func something(set newValue: Parameter<Any>) -> Verify { return Verify(method: .p_something_set(newValue)) }
-        static func `subscript`(_ index: Parameter<Int>) -> Verify { return Verify(method: .subscript_get_index_1(`index`))}
-        static func `subscript`(_ index: Parameter<Int>, set newValue: Parameter<String>) -> Verify { return Verify(method: .subscript_set_index_1(`index`, newValue))}
-        static func `subscript`(labeled index: Parameter<Int>) -> Verify { return Verify(method: .subscript_get_labeled_index(`index`))}
-        static func `subscript`(labeled index: Parameter<Int>, set newValue: Parameter<String>) -> Verify { return Verify(method: .subscript_set_labeled_index(`index`, newValue))}
-        static func `subscript`(_ x: Parameter<Int>, _ y: Parameter<Int>) -> Verify { return Verify(method: .subscript_get_x_y(`x`, `y`))}
-        static func `subscript`(_ x: Parameter<Int>, _ y: Parameter<Int>, set newValue: Parameter<String>) -> Verify { return Verify(method: .subscript_set_x_y(`x`, `y`, newValue))}
-        static func `subscript`(_ index: Parameter<String>) -> Verify { return Verify(method: .subscript_get_index_2(`index`))}
-        static func `subscript`(_ index: Parameter<String>, set newValue: Parameter<String>) -> Verify { return Verify(method: .subscript_set_index_2(`index`, newValue))}
-        static func `subscript`(index: Parameter<String>) -> Verify { return Verify(method: .subscript_get_index_index(`index`))}
-        static func `subscript`(index: Parameter<String>, set newValue: Parameter<String>) -> Verify { return Verify(method: .subscript_set_index_index(`index`, newValue))}
-        static func `subscript`(label name: Parameter<String>) -> Verify { return Verify(method: .subscript_get_label_name(`name`))}
-        static func `subscript`<T: Sequence>(with generic: Parameter<T>) -> Verify { return Verify(method: .subscript_get_with_generic_1(`generic`.wrapAsGeneric()))}
-        static func `subscript`<T: Sequence>(with generic: Parameter<T>, set newValue: Parameter<Bool>) -> Verify { return Verify(method: .subscript_set_with_generic_1(`generic`.wrapAsGeneric(), newValue))}
-        static func `subscript`<T: FloatingPoint>(with generic: Parameter<T>) -> Verify { return Verify(method: .subscript_get_with_generic_2(`generic`.wrapAsGeneric()))}
-        static func `subscript`<T: FloatingPoint>(with generic: Parameter<T>, set newValue: Parameter<Int>) -> Verify { return Verify(method: .subscript_set_with_generic_2(`generic`.wrapAsGeneric(), newValue))}
-        static func `subscript`<T>(_ i: Parameter<Int>, _ type: Parameter<T.Type>) -> Verify { return Verify(method: .subscript_get_i_type(`i`, `type`.wrapAsGeneric()))}
-        static func `subscript`<T>(_ i: Parameter<Int>, _ type: Parameter<T.Type>, set newValue: Parameter<T>) -> Verify { return Verify(method: .subscript_set_i_type(`i`, `type`.wrapAsGeneric(), newValue.wrapAsGeneric()))}
-        static func `subscript`(closure c: Parameter<(Int) -> Void>) -> Verify { return Verify(method: .subscript_get_closure_c(`c`))}
-        static func `subscript`(closure c: Parameter<(Int) -> Void>, set newValue: Parameter<Bool>) -> Verify { return Verify(method: .subscript_set_closure_c(`c`, newValue))}
-        static func `subscript`(same: Parameter<Int>, returning: (Bool).Type) -> Verify { return Verify(method: .subscript_get_same_same_1(`same`))}
-        static func `subscript`(same: Parameter<Int>, set newValue: Parameter<Bool>) -> Verify { return Verify(method: .subscript_set_same_same_1(`same`, newValue))}
-        static func `subscript`(same: Parameter<Int>, returning: (Int).Type) -> Verify { return Verify(method: .subscript_get_same_same_2(`same`))}
-        static func `subscript`(same: Parameter<Int>, set newValue: Parameter<Int>) -> Verify { return Verify(method: .subscript_set_same_same_2(`same`, newValue))}
+        public static func aaa(_ value: Parameter<Int>) -> Verify { return Verify(method: .m_aaa__value(`value`))}
+        public static var something: Verify { return Verify(method: .p_something_get) }
+		public static func something(set newValue: Parameter<Any>) -> Verify { return Verify(method: .p_something_set(newValue)) }
+        public static func `subscript`(_ index: Parameter<Int>) -> Verify { return Verify(method: .subscript_get_index_1(`index`))}
+        public static func `subscript`(_ index: Parameter<Int>, set newValue: Parameter<String>) -> Verify { return Verify(method: .subscript_set_index_1(`index`, newValue))}
+        public static func `subscript`(labeled index: Parameter<Int>) -> Verify { return Verify(method: .subscript_get_labeled_index(`index`))}
+        public static func `subscript`(labeled index: Parameter<Int>, set newValue: Parameter<String>) -> Verify { return Verify(method: .subscript_set_labeled_index(`index`, newValue))}
+        public static func `subscript`(_ x: Parameter<Int>, _ y: Parameter<Int>) -> Verify { return Verify(method: .subscript_get_x_y(`x`, `y`))}
+        public static func `subscript`(_ x: Parameter<Int>, _ y: Parameter<Int>, set newValue: Parameter<String>) -> Verify { return Verify(method: .subscript_set_x_y(`x`, `y`, newValue))}
+        public static func `subscript`(_ index: Parameter<String>) -> Verify { return Verify(method: .subscript_get_index_2(`index`))}
+        public static func `subscript`(_ index: Parameter<String>, set newValue: Parameter<String>) -> Verify { return Verify(method: .subscript_set_index_2(`index`, newValue))}
+        public static func `subscript`(index: Parameter<String>) -> Verify { return Verify(method: .subscript_get_index_index(`index`))}
+        public static func `subscript`(index: Parameter<String>, set newValue: Parameter<String>) -> Verify { return Verify(method: .subscript_set_index_index(`index`, newValue))}
+        public static func `subscript`(label name: Parameter<String>) -> Verify { return Verify(method: .subscript_get_label_name(`name`))}
+        public static func `subscript`<T: Sequence>(with generic: Parameter<T>) -> Verify { return Verify(method: .subscript_get_with_generic_1(`generic`.wrapAsGeneric()))}
+        public static func `subscript`<T: Sequence>(with generic: Parameter<T>, set newValue: Parameter<Bool>) -> Verify { return Verify(method: .subscript_set_with_generic_1(`generic`.wrapAsGeneric(), newValue))}
+        public static func `subscript`<T: FloatingPoint>(with generic: Parameter<T>) -> Verify { return Verify(method: .subscript_get_with_generic_2(`generic`.wrapAsGeneric()))}
+        public static func `subscript`<T: FloatingPoint>(with generic: Parameter<T>, set newValue: Parameter<Int>) -> Verify { return Verify(method: .subscript_set_with_generic_2(`generic`.wrapAsGeneric(), newValue))}
+        public static func `subscript`<T>(_ i: Parameter<Int>, _ type: Parameter<T.Type>) -> Verify { return Verify(method: .subscript_get_i_type(`i`, `type`.wrapAsGeneric()))}
+        public static func `subscript`<T>(_ i: Parameter<Int>, _ type: Parameter<T.Type>, set newValue: Parameter<T>) -> Verify { return Verify(method: .subscript_set_i_type(`i`, `type`.wrapAsGeneric(), newValue.wrapAsGeneric()))}
+        public static func `subscript`(closure c: Parameter<(Int) -> Void>) -> Verify { return Verify(method: .subscript_get_closure_c(`c`))}
+        public static func `subscript`(closure c: Parameter<(Int) -> Void>, set newValue: Parameter<Bool>) -> Verify { return Verify(method: .subscript_set_closure_c(`c`, newValue))}
+        public static func `subscript`(same: Parameter<Int>, returning: (Bool).Type) -> Verify { return Verify(method: .subscript_get_same_same_1(`same`))}
+        public static func `subscript`(same: Parameter<Int>, set newValue: Parameter<Bool>) -> Verify { return Verify(method: .subscript_set_same_same_1(`same`, newValue))}
+        public static func `subscript`(same: Parameter<Int>, returning: (Int).Type) -> Verify { return Verify(method: .subscript_get_same_same_2(`same`))}
+        public static func `subscript`(same: Parameter<Int>, set newValue: Parameter<Int>) -> Verify { return Verify(method: .subscript_set_same_same_2(`same`, newValue))}
     }
 
-    struct Perform {
+    public struct Perform {
         fileprivate var method: MethodType
         var performs: Any
 
-        static func aaa(_ value: Parameter<Int>, perform: @escaping (Int) -> Void) -> Perform {
-            return Perform(method: .m_aaa__value(`value`), performs: perform)
-        }
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `value` label")
-		static func aaa(value: Parameter<Int>, perform: @escaping (Int) -> Void) -> Perform {
+        public static func aaa(_ value: Parameter<Int>, perform: @escaping (Int) -> Void) -> Perform {
             return Perform(method: .m_aaa__value(`value`), performs: perform)
         }
     }
@@ -6418,13 +6807,13 @@ class ProtocolWithSubscriptsMock: ProtocolWithSubscripts, Mock {
 
     public func verify(_ method: Verify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
         let invocations = matchingCalls(method.method)
-        MockyAssert(count.matches(invocations.count), "Expeced: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
     }
 
     private func addInvocation(_ call: MethodType) {
         invocations.append(call)
     }
-    private func methodReturnValue(_ method: MethodType) throws -> Product {
+    private func methodReturnValue(_ method: MethodType) throws -> StubProduct {
         let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
         let matched = candidates.first(where: { $0.isValid && MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
         guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
@@ -6464,7 +6853,7 @@ class ProtocolWithSubscriptsMock: ProtocolWithSubscripts, Mock {
 }
 
 // MARK: - ProtocolWithThrowingMethods
-class ProtocolWithThrowingMethodsMock: ProtocolWithThrowingMethods, Mock {
+open class ProtocolWithThrowingMethodsMock: ProtocolWithThrowingMethods, Mock {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
         self.sequencingPolicy = sequencingPolicy
         self.stubbingPolicy = stubbingPolicy
@@ -6481,9 +6870,9 @@ class ProtocolWithThrowingMethodsMock: ProtocolWithThrowingMethods, Mock {
     private var file: StaticString?
     private var line: UInt?
 
-    typealias PropertyStub = Given
-    typealias MethodStub = Given
-    typealias SubscriptStub = Given
+    public typealias PropertyStub = Given
+    public typealias MethodStub = Given
+    public typealias SubscriptStub = Given
 
     /// Convenience method - call setupMock() to extend debug information when failure occurs
     public func setupMock(file: StaticString = #file, line: UInt = #line) {
@@ -6495,7 +6884,7 @@ class ProtocolWithThrowingMethodsMock: ProtocolWithThrowingMethods, Mock {
 
 
 
-    func methodThatThrows() throws {
+    open func methodThatThrows() throws {
         addInvocation(.m_methodThatThrows)
 		let perform = methodPerformValue(.m_methodThatThrows) as? () -> Void
 		perform?()
@@ -6508,7 +6897,7 @@ class ProtocolWithThrowingMethodsMock: ProtocolWithThrowingMethods, Mock {
 		}
     }
 
-    func methodThatReturnsAndThrows(param: Int) throws -> Bool {
+    open func methodThatReturnsAndThrows(param: Int) throws -> Bool {
         addInvocation(.m_methodThatReturnsAndThrows__param_param(Parameter<Int>.value(`param`)))
 		let perform = methodPerformValue(.m_methodThatReturnsAndThrows__param_param(Parameter<Int>.value(`param`))) as? (Int) -> Void
 		perform?(`param`)
@@ -6548,55 +6937,55 @@ class ProtocolWithThrowingMethodsMock: ProtocolWithThrowingMethods, Mock {
         }
     }
 
-    class Given: StubbedMethod {
+    open class Given: StubbedMethod {
         fileprivate var method: MethodType
 
-        private init(method: MethodType, products: [Product]) {
+        private init(method: MethodType, products: [StubProduct]) {
             self.method = method
             super.init(products)
         }
 
 
-        static func methodThatReturnsAndThrows(param: Parameter<Int>, willReturn: Bool...) -> MethodStub {
-            return Given(method: .m_methodThatReturnsAndThrows__param_param(`param`), products: willReturn.map({ Product.return($0) }))
+        public static func methodThatReturnsAndThrows(param: Parameter<Int>, willReturn: Bool...) -> MethodStub {
+            return Given(method: .m_methodThatReturnsAndThrows__param_param(`param`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func methodThatThrows(willThrow: Error...) -> MethodStub {
-            return Given(method: .m_methodThatThrows, products: willThrow.map({ Product.throw($0) }))
+        public static func methodThatThrows(willThrow: Error...) -> MethodStub {
+            return Given(method: .m_methodThatThrows, products: willThrow.map({ StubProduct.throw($0) }))
         }
-        static func methodThatThrows(willProduce: (StubberThrows<Void>) -> Void) -> MethodStub {
+        public static func methodThatThrows(willProduce: (StubberThrows<Void>) -> Void) -> MethodStub {
             let willThrow: [Error] = []
-			let given: Given = { return Given(method: .m_methodThatThrows, products: willThrow.map({ Product.throw($0) })) }()
+			let given: Given = { return Given(method: .m_methodThatThrows, products: willThrow.map({ StubProduct.throw($0) })) }()
 			let stubber = given.stubThrows(for: (Void).self)
 			willProduce(stubber)
 			return given
         }
-        static func methodThatReturnsAndThrows(param: Parameter<Int>, willThrow: Error...) -> MethodStub {
-            return Given(method: .m_methodThatReturnsAndThrows__param_param(`param`), products: willThrow.map({ Product.throw($0) }))
+        public static func methodThatReturnsAndThrows(param: Parameter<Int>, willThrow: Error...) -> MethodStub {
+            return Given(method: .m_methodThatReturnsAndThrows__param_param(`param`), products: willThrow.map({ StubProduct.throw($0) }))
         }
-        static func methodThatReturnsAndThrows(param: Parameter<Int>, willProduce: (StubberThrows<Bool>) -> Void) -> MethodStub {
+        public static func methodThatReturnsAndThrows(param: Parameter<Int>, willProduce: (StubberThrows<Bool>) -> Void) -> MethodStub {
             let willThrow: [Error] = []
-			let given: Given = { return Given(method: .m_methodThatReturnsAndThrows__param_param(`param`), products: willThrow.map({ Product.throw($0) })) }()
+			let given: Given = { return Given(method: .m_methodThatReturnsAndThrows__param_param(`param`), products: willThrow.map({ StubProduct.throw($0) })) }()
 			let stubber = given.stubThrows(for: (Bool).self)
 			willProduce(stubber)
 			return given
         }
     }
 
-    struct Verify {
+    public struct Verify {
         fileprivate var method: MethodType
 
-        static func methodThatThrows() -> Verify { return Verify(method: .m_methodThatThrows)}
-        static func methodThatReturnsAndThrows(param: Parameter<Int>) -> Verify { return Verify(method: .m_methodThatReturnsAndThrows__param_param(`param`))}
+        public static func methodThatThrows() -> Verify { return Verify(method: .m_methodThatThrows)}
+        public static func methodThatReturnsAndThrows(param: Parameter<Int>) -> Verify { return Verify(method: .m_methodThatReturnsAndThrows__param_param(`param`))}
     }
 
-    struct Perform {
+    public struct Perform {
         fileprivate var method: MethodType
         var performs: Any
 
-        static func methodThatThrows(perform: @escaping () -> Void) -> Perform {
+        public static func methodThatThrows(perform: @escaping () -> Void) -> Perform {
             return Perform(method: .m_methodThatThrows, performs: perform)
         }
-        static func methodThatReturnsAndThrows(param: Parameter<Int>, perform: @escaping (Int) -> Void) -> Perform {
+        public static func methodThatReturnsAndThrows(param: Parameter<Int>, perform: @escaping (Int) -> Void) -> Perform {
             return Perform(method: .m_methodThatReturnsAndThrows__param_param(`param`), performs: perform)
         }
     }
@@ -6612,13 +7001,13 @@ class ProtocolWithThrowingMethodsMock: ProtocolWithThrowingMethods, Mock {
 
     public func verify(_ method: Verify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
         let invocations = matchingCalls(method.method)
-        MockyAssert(count.matches(invocations.count), "Expeced: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
     }
 
     private func addInvocation(_ call: MethodType) {
         invocations.append(call)
     }
-    private func methodReturnValue(_ method: MethodType) throws -> Product {
+    private func methodReturnValue(_ method: MethodType) throws -> StubProduct {
         let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
         let matched = candidates.first(where: { $0.isValid && MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
         guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
@@ -6658,7 +7047,7 @@ class ProtocolWithThrowingMethodsMock: ProtocolWithThrowingMethods, Mock {
 }
 
 // MARK: - ProtocolWithTuples
-class ProtocolWithTuplesMock: ProtocolWithTuples, Mock {
+open class ProtocolWithTuplesMock: ProtocolWithTuples, Mock {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
         self.sequencingPolicy = sequencingPolicy
         self.stubbingPolicy = stubbingPolicy
@@ -6675,9 +7064,9 @@ class ProtocolWithTuplesMock: ProtocolWithTuples, Mock {
     private var file: StaticString?
     private var line: UInt?
 
-    typealias PropertyStub = Given
-    typealias MethodStub = Given
-    typealias SubscriptStub = Given
+    public typealias PropertyStub = Given
+    public typealias MethodStub = Given
+    public typealias SubscriptStub = Given
 
     /// Convenience method - call setupMock() to extend debug information when failure occurs
     public func setupMock(file: StaticString = #file, line: UInt = #line) {
@@ -6689,7 +7078,7 @@ class ProtocolWithTuplesMock: ProtocolWithTuples, Mock {
 
 
 
-    func methodThatTakesTuple(tuple: (String,Int)) -> Int {
+    open func methodThatTakesTuple(tuple: (String,Int)) -> Int {
         addInvocation(.m_methodThatTakesTuple__tuple_tuple(Parameter<(String,Int)>.value(`tuple`)))
 		let perform = methodPerformValue(.m_methodThatTakesTuple__tuple_tuple(Parameter<(String,Int)>.value(`tuple`))) as? ((String,Int)) -> Void
 		perform?(`tuple`)
@@ -6722,38 +7111,38 @@ class ProtocolWithTuplesMock: ProtocolWithTuples, Mock {
         }
     }
 
-    class Given: StubbedMethod {
+    open class Given: StubbedMethod {
         fileprivate var method: MethodType
 
-        private init(method: MethodType, products: [Product]) {
+        private init(method: MethodType, products: [StubProduct]) {
             self.method = method
             super.init(products)
         }
 
 
-        static func methodThatTakesTuple(tuple: Parameter<(String,Int)>, willReturn: Int...) -> MethodStub {
-            return Given(method: .m_methodThatTakesTuple__tuple_tuple(`tuple`), products: willReturn.map({ Product.return($0) }))
+        public static func methodThatTakesTuple(tuple: Parameter<(String,Int)>, willReturn: Int...) -> MethodStub {
+            return Given(method: .m_methodThatTakesTuple__tuple_tuple(`tuple`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func methodThatTakesTuple(tuple: Parameter<(String,Int)>, willProduce: (Stubber<Int>) -> Void) -> MethodStub {
+        public static func methodThatTakesTuple(tuple: Parameter<(String,Int)>, willProduce: (Stubber<Int>) -> Void) -> MethodStub {
             let willReturn: [Int] = []
-			let given: Given = { return Given(method: .m_methodThatTakesTuple__tuple_tuple(`tuple`), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_methodThatTakesTuple__tuple_tuple(`tuple`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (Int).self)
 			willProduce(stubber)
 			return given
         }
     }
 
-    struct Verify {
+    public struct Verify {
         fileprivate var method: MethodType
 
-        static func methodThatTakesTuple(tuple: Parameter<(String,Int)>) -> Verify { return Verify(method: .m_methodThatTakesTuple__tuple_tuple(`tuple`))}
+        public static func methodThatTakesTuple(tuple: Parameter<(String,Int)>) -> Verify { return Verify(method: .m_methodThatTakesTuple__tuple_tuple(`tuple`))}
     }
 
-    struct Perform {
+    public struct Perform {
         fileprivate var method: MethodType
         var performs: Any
 
-        static func methodThatTakesTuple(tuple: Parameter<(String,Int)>, perform: @escaping ((String,Int)) -> Void) -> Perform {
+        public static func methodThatTakesTuple(tuple: Parameter<(String,Int)>, perform: @escaping ((String,Int)) -> Void) -> Perform {
             return Perform(method: .m_methodThatTakesTuple__tuple_tuple(`tuple`), performs: perform)
         }
     }
@@ -6769,13 +7158,13 @@ class ProtocolWithTuplesMock: ProtocolWithTuples, Mock {
 
     public func verify(_ method: Verify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
         let invocations = matchingCalls(method.method)
-        MockyAssert(count.matches(invocations.count), "Expeced: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
     }
 
     private func addInvocation(_ call: MethodType) {
         invocations.append(call)
     }
-    private func methodReturnValue(_ method: MethodType) throws -> Product {
+    private func methodReturnValue(_ method: MethodType) throws -> StubProduct {
         let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
         let matched = candidates.first(where: { $0.isValid && MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
         guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
@@ -6815,7 +7204,7 @@ class ProtocolWithTuplesMock: ProtocolWithTuples, Mock {
 }
 
 // MARK: - ProtocolWithWhereAfterDefinition
-class ProtocolWithWhereAfterDefinitionMock<T>: ProtocolWithWhereAfterDefinition, Mock where T: Sequence, T.Element: Equatable {
+open class ProtocolWithWhereAfterDefinitionMock<T>: ProtocolWithWhereAfterDefinition, Mock where T: Sequence, T.Element: Equatable {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
         self.sequencingPolicy = sequencingPolicy
         self.stubbingPolicy = stubbingPolicy
@@ -6832,9 +7221,9 @@ class ProtocolWithWhereAfterDefinitionMock<T>: ProtocolWithWhereAfterDefinition,
     private var file: StaticString?
     private var line: UInt?
 
-    typealias PropertyStub = Given
-    typealias MethodStub = Given
-    typealias SubscriptStub = Given
+    public typealias PropertyStub = Given
+    public typealias MethodStub = Given
+    public typealias SubscriptStub = Given
 
     /// Convenience method - call setupMock() to extend debug information when failure occurs
     public func setupMock(file: StaticString = #file, line: UInt = #line) {
@@ -6842,7 +7231,7 @@ class ProtocolWithWhereAfterDefinitionMock<T>: ProtocolWithWhereAfterDefinition,
         self.line = line
     }
 
-    var sequence: T {
+    public var sequence: T {
 		get {	invocations.append(.p_sequence_get); return __p_sequence ?? givenGetterValue(.p_sequence_get, "ProtocolWithWhereAfterDefinitionMock - stub value for sequence was not defined") }
 		@available(*, deprecated, message: "Using setters on readonly variables is deprecated, and will be removed in 3.1. Use Given to define stubbed property return value.")
 		set {	__p_sequence = newValue }
@@ -6853,7 +7242,7 @@ class ProtocolWithWhereAfterDefinitionMock<T>: ProtocolWithWhereAfterDefinition,
 
 
 
-    func methodWithType(t: T) -> Bool {
+    open func methodWithType(t: T) -> Bool {
         addInvocation(.m_methodWithType__t_t(Parameter<T>.value(`t`)))
 		let perform = methodPerformValue(.m_methodWithType__t_t(Parameter<T>.value(`t`))) as? (T) -> Void
 		perform?(`t`)
@@ -6890,42 +7279,42 @@ class ProtocolWithWhereAfterDefinitionMock<T>: ProtocolWithWhereAfterDefinition,
         }
     }
 
-    class Given: StubbedMethod {
+    open class Given: StubbedMethod {
         fileprivate var method: MethodType
 
-        private init(method: MethodType, products: [Product]) {
+        private init(method: MethodType, products: [StubProduct]) {
             self.method = method
             super.init(products)
         }
 
-        static func sequence(getter defaultValue: T...) -> PropertyStub {
-            return Given(method: .p_sequence_get, products: defaultValue.map({ Product.return($0) }))
+        public static func sequence(getter defaultValue: T...) -> PropertyStub {
+            return Given(method: .p_sequence_get, products: defaultValue.map({ StubProduct.return($0 as Any) }))
         }
 
-        static func methodWithType(t: Parameter<T>, willReturn: Bool...) -> MethodStub {
-            return Given(method: .m_methodWithType__t_t(`t`), products: willReturn.map({ Product.return($0) }))
+        public static func methodWithType(t: Parameter<T>, willReturn: Bool...) -> MethodStub {
+            return Given(method: .m_methodWithType__t_t(`t`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func methodWithType(t: Parameter<T>, willProduce: (Stubber<Bool>) -> Void) -> MethodStub {
+        public static func methodWithType(t: Parameter<T>, willProduce: (Stubber<Bool>) -> Void) -> MethodStub {
             let willReturn: [Bool] = []
-			let given: Given = { return Given(method: .m_methodWithType__t_t(`t`), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_methodWithType__t_t(`t`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (Bool).self)
 			willProduce(stubber)
 			return given
         }
     }
 
-    struct Verify {
+    public struct Verify {
         fileprivate var method: MethodType
 
-        static func methodWithType(t: Parameter<T>) -> Verify { return Verify(method: .m_methodWithType__t_t(`t`))}
-        static var sequence: Verify { return Verify(method: .p_sequence_get) }
+        public static func methodWithType(t: Parameter<T>) -> Verify { return Verify(method: .m_methodWithType__t_t(`t`))}
+        public static var sequence: Verify { return Verify(method: .p_sequence_get) }
     }
 
-    struct Perform {
+    public struct Perform {
         fileprivate var method: MethodType
         var performs: Any
 
-        static func methodWithType(t: Parameter<T>, perform: @escaping (T) -> Void) -> Perform {
+        public static func methodWithType(t: Parameter<T>, perform: @escaping (T) -> Void) -> Perform {
             return Perform(method: .m_methodWithType__t_t(`t`), performs: perform)
         }
     }
@@ -6941,13 +7330,13 @@ class ProtocolWithWhereAfterDefinitionMock<T>: ProtocolWithWhereAfterDefinition,
 
     public func verify(_ method: Verify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
         let invocations = matchingCalls(method.method)
-        MockyAssert(count.matches(invocations.count), "Expeced: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
     }
 
     private func addInvocation(_ call: MethodType) {
         invocations.append(call)
     }
-    private func methodReturnValue(_ method: MethodType) throws -> Product {
+    private func methodReturnValue(_ method: MethodType) throws -> StubProduct {
         let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
         let matched = candidates.first(where: { $0.isValid && MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
         guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
@@ -6987,7 +7376,7 @@ class ProtocolWithWhereAfterDefinitionMock<T>: ProtocolWithWhereAfterDefinition,
 }
 
 // MARK: - SampleServiceType
-class SampleServiceTypeMock: SampleServiceType, Mock {
+open class SampleServiceTypeMock: SampleServiceType, Mock {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
         self.sequencingPolicy = sequencingPolicy
         self.stubbingPolicy = stubbingPolicy
@@ -7004,9 +7393,9 @@ class SampleServiceTypeMock: SampleServiceType, Mock {
     private var file: StaticString?
     private var line: UInt?
 
-    typealias PropertyStub = Given
-    typealias MethodStub = Given
-    typealias SubscriptStub = Given
+    public typealias PropertyStub = Given
+    public typealias MethodStub = Given
+    public typealias SubscriptStub = Given
 
     /// Convenience method - call setupMock() to extend debug information when failure occurs
     public func setupMock(file: StaticString = #file, line: UInt = #line) {
@@ -7018,7 +7407,7 @@ class SampleServiceTypeMock: SampleServiceType, Mock {
 
 
 
-    func serviceName() -> String {
+    open func serviceName() -> String {
         addInvocation(.m_serviceName)
 		let perform = methodPerformValue(.m_serviceName) as? () -> Void
 		perform?()
@@ -7032,7 +7421,7 @@ class SampleServiceTypeMock: SampleServiceType, Mock {
 		return __value
     }
 
-    func getPoint(from point: Point) -> Point {
+    open func getPoint(from point: Point) -> Point {
         addInvocation(.m_getPoint__from_point(Parameter<Point>.value(`point`)))
 		let perform = methodPerformValue(.m_getPoint__from_point(Parameter<Point>.value(`point`))) as? (Point) -> Void
 		perform?(`point`)
@@ -7046,7 +7435,7 @@ class SampleServiceTypeMock: SampleServiceType, Mock {
 		return __value
     }
 
-    func getPoint(from tuple: (Float,Float)) -> Point {
+    open func getPoint(from tuple: (Float,Float)) -> Point {
         addInvocation(.m_getPoint__from_tuple(Parameter<(Float,Float)>.value(`tuple`)))
 		let perform = methodPerformValue(.m_getPoint__from_tuple(Parameter<(Float,Float)>.value(`tuple`))) as? ((Float,Float)) -> Void
 		perform?(`tuple`)
@@ -7060,7 +7449,7 @@ class SampleServiceTypeMock: SampleServiceType, Mock {
 		return __value
     }
 
-    func similarMethodThatDiffersOnType(_ value: Float) -> Bool {
+    open func similarMethodThatDiffersOnType(_ value: Float) -> Bool {
         addInvocation(.m_similarMethodThatDiffersOnType__value_1(Parameter<Float>.value(`value`)))
 		let perform = methodPerformValue(.m_similarMethodThatDiffersOnType__value_1(Parameter<Float>.value(`value`))) as? (Float) -> Void
 		perform?(`value`)
@@ -7074,7 +7463,7 @@ class SampleServiceTypeMock: SampleServiceType, Mock {
 		return __value
     }
 
-    func similarMethodThatDiffersOnType(_ value: Point) -> Bool {
+    open func similarMethodThatDiffersOnType(_ value: Point) -> Bool {
         addInvocation(.m_similarMethodThatDiffersOnType__value_2(Parameter<Point>.value(`value`)))
 		let perform = methodPerformValue(.m_similarMethodThatDiffersOnType__value_2(Parameter<Point>.value(`value`))) as? (Point) -> Void
 		perform?(`value`)
@@ -7088,13 +7477,13 @@ class SampleServiceTypeMock: SampleServiceType, Mock {
 		return __value
     }
 
-    func methodWithTypedef(_ scalar: Scalar) {
+    open func methodWithTypedef(_ scalar: Scalar) {
         addInvocation(.m_methodWithTypedef__scalar(Parameter<Scalar>.value(`scalar`)))
 		let perform = methodPerformValue(.m_methodWithTypedef__scalar(Parameter<Scalar>.value(`scalar`))) as? (Scalar) -> Void
 		perform?(`scalar`)
     }
 
-    func methodWithClosures(success function: LinearFunction) -> ClosureFabric {
+    open func methodWithClosures(success function: LinearFunction) -> ClosureFabric {
         addInvocation(.m_methodWithClosures__success_function_1(Parameter<LinearFunction>.value(`function`)))
 		let perform = methodPerformValue(.m_methodWithClosures__success_function_1(Parameter<LinearFunction>.value(`function`))) as? (LinearFunction) -> Void
 		perform?(`function`)
@@ -7108,7 +7497,7 @@ class SampleServiceTypeMock: SampleServiceType, Mock {
 		return __value
     }
 
-    func methodWithClosures(success function: ((Scalar,Scalar) -> Scalar)?) -> ((Int) -> Void) {
+    open func methodWithClosures(success function: ((Scalar,Scalar) -> Scalar)?) -> ((Int) -> Void) {
         addInvocation(.m_methodWithClosures__success_function_2(Parameter<((Scalar,Scalar) -> Scalar)?>.value(`function`)))
 		let perform = methodPerformValue(.m_methodWithClosures__success_function_2(Parameter<((Scalar,Scalar) -> Scalar)?>.value(`function`))) as? (((Scalar,Scalar) -> Scalar)?) -> Void
 		perform?(`function`)
@@ -7176,152 +7565,126 @@ class SampleServiceTypeMock: SampleServiceType, Mock {
         }
     }
 
-    class Given: StubbedMethod {
+    open class Given: StubbedMethod {
         fileprivate var method: MethodType
 
-        private init(method: MethodType, products: [Product]) {
+        private init(method: MethodType, products: [StubProduct]) {
             self.method = method
             super.init(products)
         }
 
 
-        static func serviceName(willReturn: String...) -> MethodStub {
-            return Given(method: .m_serviceName, products: willReturn.map({ Product.return($0) }))
+        public static func serviceName(willReturn: String...) -> MethodStub {
+            return Given(method: .m_serviceName, products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func getPoint(from point: Parameter<Point>, willReturn: Point...) -> MethodStub {
-            return Given(method: .m_getPoint__from_point(`point`), products: willReturn.map({ Product.return($0) }))
+        public static func getPoint(from point: Parameter<Point>, willReturn: Point...) -> MethodStub {
+            return Given(method: .m_getPoint__from_point(`point`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func getPoint(from tuple: Parameter<(Float,Float)>, willReturn: Point...) -> MethodStub {
-            return Given(method: .m_getPoint__from_tuple(`tuple`), products: willReturn.map({ Product.return($0) }))
+        public static func getPoint(from tuple: Parameter<(Float,Float)>, willReturn: Point...) -> MethodStub {
+            return Given(method: .m_getPoint__from_tuple(`tuple`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func similarMethodThatDiffersOnType(_ value: Parameter<Float>, willReturn: Bool...) -> MethodStub {
-            return Given(method: .m_similarMethodThatDiffersOnType__value_1(`value`), products: willReturn.map({ Product.return($0) }))
+        public static func similarMethodThatDiffersOnType(_ value: Parameter<Float>, willReturn: Bool...) -> MethodStub {
+            return Given(method: .m_similarMethodThatDiffersOnType__value_1(`value`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `value` label")
-		static func similarMethodThatDiffersOnType(value: Parameter<Float>, willReturn: Bool...) -> MethodStub {
-            return Given(method: .m_similarMethodThatDiffersOnType__value_1(`value`), products: willReturn.map({ Product.return($0) }))
+        public static func similarMethodThatDiffersOnType(_ value: Parameter<Point>, willReturn: Bool...) -> MethodStub {
+            return Given(method: .m_similarMethodThatDiffersOnType__value_2(`value`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func similarMethodThatDiffersOnType(_ value: Parameter<Point>, willReturn: Bool...) -> MethodStub {
-            return Given(method: .m_similarMethodThatDiffersOnType__value_2(`value`), products: willReturn.map({ Product.return($0) }))
+        public static func methodWithClosures(success function: Parameter<LinearFunction>, willReturn: ClosureFabric...) -> MethodStub {
+            return Given(method: .m_methodWithClosures__success_function_1(`function`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `value` label")
-		static func similarMethodThatDiffersOnType(value: Parameter<Point>, willReturn: Bool...) -> MethodStub {
-            return Given(method: .m_similarMethodThatDiffersOnType__value_2(`value`), products: willReturn.map({ Product.return($0) }))
+        public static func methodWithClosures(success function: Parameter<((Scalar,Scalar) -> Scalar)?>, willReturn: (Int) -> Void...) -> MethodStub {
+            return Given(method: .m_methodWithClosures__success_function_2(`function`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func methodWithClosures(success function: Parameter<LinearFunction>, willReturn: ClosureFabric...) -> MethodStub {
-            return Given(method: .m_methodWithClosures__success_function_1(`function`), products: willReturn.map({ Product.return($0) }))
-        }
-        static func methodWithClosures(success function: Parameter<((Scalar,Scalar) -> Scalar)?>, willReturn: (Int) -> Void...) -> MethodStub {
-            return Given(method: .m_methodWithClosures__success_function_2(`function`), products: willReturn.map({ Product.return($0) }))
-        }
-        static func serviceName(willProduce: (Stubber<String>) -> Void) -> MethodStub {
+        public static func serviceName(willProduce: (Stubber<String>) -> Void) -> MethodStub {
             let willReturn: [String] = []
-			let given: Given = { return Given(method: .m_serviceName, products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_serviceName, products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (String).self)
 			willProduce(stubber)
 			return given
         }
-        static func getPoint(from point: Parameter<Point>, willProduce: (Stubber<Point>) -> Void) -> MethodStub {
+        public static func getPoint(from point: Parameter<Point>, willProduce: (Stubber<Point>) -> Void) -> MethodStub {
             let willReturn: [Point] = []
-			let given: Given = { return Given(method: .m_getPoint__from_point(`point`), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_getPoint__from_point(`point`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (Point).self)
 			willProduce(stubber)
 			return given
         }
-        static func getPoint(from tuple: Parameter<(Float,Float)>, willProduce: (Stubber<Point>) -> Void) -> MethodStub {
+        public static func getPoint(from tuple: Parameter<(Float,Float)>, willProduce: (Stubber<Point>) -> Void) -> MethodStub {
             let willReturn: [Point] = []
-			let given: Given = { return Given(method: .m_getPoint__from_tuple(`tuple`), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_getPoint__from_tuple(`tuple`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (Point).self)
 			willProduce(stubber)
 			return given
         }
-        static func similarMethodThatDiffersOnType(_ value: Parameter<Float>, willProduce: (Stubber<Bool>) -> Void) -> MethodStub {
+        public static func similarMethodThatDiffersOnType(_ value: Parameter<Float>, willProduce: (Stubber<Bool>) -> Void) -> MethodStub {
             let willReturn: [Bool] = []
-			let given: Given = { return Given(method: .m_similarMethodThatDiffersOnType__value_1(`value`), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_similarMethodThatDiffersOnType__value_1(`value`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (Bool).self)
 			willProduce(stubber)
 			return given
         }
-        static func similarMethodThatDiffersOnType(_ value: Parameter<Point>, willProduce: (Stubber<Bool>) -> Void) -> MethodStub {
+        public static func similarMethodThatDiffersOnType(_ value: Parameter<Point>, willProduce: (Stubber<Bool>) -> Void) -> MethodStub {
             let willReturn: [Bool] = []
-			let given: Given = { return Given(method: .m_similarMethodThatDiffersOnType__value_2(`value`), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_similarMethodThatDiffersOnType__value_2(`value`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (Bool).self)
 			willProduce(stubber)
 			return given
         }
-        static func methodWithClosures(success function: Parameter<LinearFunction>, willProduce: (Stubber<ClosureFabric>) -> Void) -> MethodStub {
+        public static func methodWithClosures(success function: Parameter<LinearFunction>, willProduce: (Stubber<ClosureFabric>) -> Void) -> MethodStub {
             let willReturn: [ClosureFabric] = []
-			let given: Given = { return Given(method: .m_methodWithClosures__success_function_1(`function`), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_methodWithClosures__success_function_1(`function`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (ClosureFabric).self)
 			willProduce(stubber)
 			return given
         }
-        static func methodWithClosures(success function: Parameter<((Scalar,Scalar) -> Scalar)?>, willProduce: (Stubber<(Int) -> Void>) -> Void) -> MethodStub {
+        public static func methodWithClosures(success function: Parameter<((Scalar,Scalar) -> Scalar)?>, willProduce: (Stubber<(Int) -> Void>) -> Void) -> MethodStub {
             let willReturn: [(Int) -> Void] = []
-			let given: Given = { return Given(method: .m_methodWithClosures__success_function_2(`function`), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_methodWithClosures__success_function_2(`function`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: ((Int) -> Void).self)
 			willProduce(stubber)
 			return given
         }
     }
 
-    struct Verify {
+    public struct Verify {
         fileprivate var method: MethodType
 
-        static func serviceName() -> Verify { return Verify(method: .m_serviceName)}
-        static func getPoint(from point: Parameter<Point>) -> Verify { return Verify(method: .m_getPoint__from_point(`point`))}
-        static func getPoint(from tuple: Parameter<(Float,Float)>) -> Verify { return Verify(method: .m_getPoint__from_tuple(`tuple`))}
-        static func similarMethodThatDiffersOnType(_ value: Parameter<Float>) -> Verify { return Verify(method: .m_similarMethodThatDiffersOnType__value_1(`value`))}
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `value` label")
-		static func similarMethodThatDiffersOnType(value: Parameter<Float>) -> Verify { return Verify(method: .m_similarMethodThatDiffersOnType__value_1(`value`))}
-        static func similarMethodThatDiffersOnType(_ value: Parameter<Point>) -> Verify { return Verify(method: .m_similarMethodThatDiffersOnType__value_2(`value`))}
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `value` label")
-		static func similarMethodThatDiffersOnType(value: Parameter<Point>) -> Verify { return Verify(method: .m_similarMethodThatDiffersOnType__value_2(`value`))}
-        static func methodWithTypedef(_ scalar: Parameter<Scalar>) -> Verify { return Verify(method: .m_methodWithTypedef__scalar(`scalar`))}
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `scalar` label")
-		static func methodWithTypedef(scalar: Parameter<Scalar>) -> Verify { return Verify(method: .m_methodWithTypedef__scalar(`scalar`))}
-        static func methodWithClosures(success function: Parameter<LinearFunction>) -> Verify { return Verify(method: .m_methodWithClosures__success_function_1(`function`))}
-        static func methodWithClosures(success function: Parameter<((Scalar,Scalar) -> Scalar)?>) -> Verify { return Verify(method: .m_methodWithClosures__success_function_2(`function`))}
+        public static func serviceName() -> Verify { return Verify(method: .m_serviceName)}
+        public static func getPoint(from point: Parameter<Point>) -> Verify { return Verify(method: .m_getPoint__from_point(`point`))}
+        public static func getPoint(from tuple: Parameter<(Float,Float)>) -> Verify { return Verify(method: .m_getPoint__from_tuple(`tuple`))}
+        public static func similarMethodThatDiffersOnType(_ value: Parameter<Float>) -> Verify { return Verify(method: .m_similarMethodThatDiffersOnType__value_1(`value`))}
+        public static func similarMethodThatDiffersOnType(_ value: Parameter<Point>) -> Verify { return Verify(method: .m_similarMethodThatDiffersOnType__value_2(`value`))}
+        public static func methodWithTypedef(_ scalar: Parameter<Scalar>) -> Verify { return Verify(method: .m_methodWithTypedef__scalar(`scalar`))}
+        public static func methodWithClosures(success function: Parameter<LinearFunction>) -> Verify { return Verify(method: .m_methodWithClosures__success_function_1(`function`))}
+        public static func methodWithClosures(success function: Parameter<((Scalar,Scalar) -> Scalar)?>) -> Verify { return Verify(method: .m_methodWithClosures__success_function_2(`function`))}
     }
 
-    struct Perform {
+    public struct Perform {
         fileprivate var method: MethodType
         var performs: Any
 
-        static func serviceName(perform: @escaping () -> Void) -> Perform {
+        public static func serviceName(perform: @escaping () -> Void) -> Perform {
             return Perform(method: .m_serviceName, performs: perform)
         }
-        static func getPoint(from point: Parameter<Point>, perform: @escaping (Point) -> Void) -> Perform {
+        public static func getPoint(from point: Parameter<Point>, perform: @escaping (Point) -> Void) -> Perform {
             return Perform(method: .m_getPoint__from_point(`point`), performs: perform)
         }
-        static func getPoint(from tuple: Parameter<(Float,Float)>, perform: @escaping ((Float,Float)) -> Void) -> Perform {
+        public static func getPoint(from tuple: Parameter<(Float,Float)>, perform: @escaping ((Float,Float)) -> Void) -> Perform {
             return Perform(method: .m_getPoint__from_tuple(`tuple`), performs: perform)
         }
-        static func similarMethodThatDiffersOnType(_ value: Parameter<Float>, perform: @escaping (Float) -> Void) -> Perform {
+        public static func similarMethodThatDiffersOnType(_ value: Parameter<Float>, perform: @escaping (Float) -> Void) -> Perform {
             return Perform(method: .m_similarMethodThatDiffersOnType__value_1(`value`), performs: perform)
         }
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `value` label")
-		static func similarMethodThatDiffersOnType(value: Parameter<Float>, perform: @escaping (Float) -> Void) -> Perform {
-            return Perform(method: .m_similarMethodThatDiffersOnType__value_1(`value`), performs: perform)
-        }
-        static func similarMethodThatDiffersOnType(_ value: Parameter<Point>, perform: @escaping (Point) -> Void) -> Perform {
+        public static func similarMethodThatDiffersOnType(_ value: Parameter<Point>, perform: @escaping (Point) -> Void) -> Perform {
             return Perform(method: .m_similarMethodThatDiffersOnType__value_2(`value`), performs: perform)
         }
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `value` label")
-		static func similarMethodThatDiffersOnType(value: Parameter<Point>, perform: @escaping (Point) -> Void) -> Perform {
-            return Perform(method: .m_similarMethodThatDiffersOnType__value_2(`value`), performs: perform)
-        }
-        static func methodWithTypedef(_ scalar: Parameter<Scalar>, perform: @escaping (Scalar) -> Void) -> Perform {
+        public static func methodWithTypedef(_ scalar: Parameter<Scalar>, perform: @escaping (Scalar) -> Void) -> Perform {
             return Perform(method: .m_methodWithTypedef__scalar(`scalar`), performs: perform)
         }
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `scalar` label")
-		static func methodWithTypedef(scalar: Parameter<Scalar>, perform: @escaping (Scalar) -> Void) -> Perform {
-            return Perform(method: .m_methodWithTypedef__scalar(`scalar`), performs: perform)
-        }
-        static func methodWithClosures(success function: Parameter<LinearFunction>, perform: @escaping (LinearFunction) -> Void) -> Perform {
+        public static func methodWithClosures(success function: Parameter<LinearFunction>, perform: @escaping (LinearFunction) -> Void) -> Perform {
             return Perform(method: .m_methodWithClosures__success_function_1(`function`), performs: perform)
         }
-        static func methodWithClosures(success function: Parameter<((Scalar,Scalar) -> Scalar)?>, perform: @escaping (((Scalar,Scalar) -> Scalar)?) -> Void) -> Perform {
+        public static func methodWithClosures(success function: Parameter<((Scalar,Scalar) -> Scalar)?>, perform: @escaping (((Scalar,Scalar) -> Scalar)?) -> Void) -> Perform {
             return Perform(method: .m_methodWithClosures__success_function_2(`function`), performs: perform)
         }
     }
@@ -7337,13 +7700,13 @@ class SampleServiceTypeMock: SampleServiceType, Mock {
 
     public func verify(_ method: Verify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
         let invocations = matchingCalls(method.method)
-        MockyAssert(count.matches(invocations.count), "Expeced: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
     }
 
     private func addInvocation(_ call: MethodType) {
         invocations.append(call)
     }
-    private func methodReturnValue(_ method: MethodType) throws -> Product {
+    private func methodReturnValue(_ method: MethodType) throws -> StubProduct {
         let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
         let matched = candidates.first(where: { $0.isValid && MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
         guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
@@ -7383,7 +7746,7 @@ class SampleServiceTypeMock: SampleServiceType, Mock {
 }
 
 // MARK: - SelfConstrainedProtocol
-class SelfConstrainedProtocolMock: SelfConstrainedProtocol, Mock, StaticMock {
+open class SelfConstrainedProtocolMock: SelfConstrainedProtocol, Mock, StaticMock {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
         self.sequencingPolicy = sequencingPolicy
         self.stubbingPolicy = stubbingPolicy
@@ -7400,9 +7763,9 @@ class SelfConstrainedProtocolMock: SelfConstrainedProtocol, Mock, StaticMock {
     private var file: StaticString?
     private var line: UInt?
 
-    typealias PropertyStub = Given
-    typealias MethodStub = Given
-    typealias SubscriptStub = Given
+    public typealias PropertyStub = Given
+    public typealias MethodStub = Given
+    public typealias SubscriptStub = Given
 
     /// Convenience method - call setupMock() to extend debug information when failure occurs
     public func setupMock(file: StaticString = #file, line: UInt = #line) {
@@ -7415,9 +7778,9 @@ class SelfConstrainedProtocolMock: SelfConstrainedProtocol, Mock, StaticMock {
     static private var invocations: [StaticMethodType] = []
     static private var methodReturnValues: [StaticGiven] = []
     static private var methodPerformValues: [StaticPerform] = []
-    typealias StaticPropertyStub = StaticGiven
-    typealias StaticMethodStub = StaticGiven
-    static func clear() {
+    public typealias StaticPropertyStub = StaticGiven
+    public typealias StaticMethodStub = StaticGiven
+    public static func clear() {
         invocations = []
         methodReturnValues = []
         methodPerformValues = []
@@ -7427,7 +7790,7 @@ class SelfConstrainedProtocolMock: SelfConstrainedProtocol, Mock, StaticMock {
 
 
 
-    static func construct(param value: Int) -> Self {
+    public static func construct(param value: Int) -> Self {
         func _wrapped<__Self__>() -> __Self__ {
 		addInvocation(.sm_construct__param_value(Parameter<Int>.value(`value`)))
 		let perform = methodPerformValue(.sm_construct__param_value(Parameter<Int>.value(`value`))) as? (Int) -> Void
@@ -7443,7 +7806,7 @@ class SelfConstrainedProtocolMock: SelfConstrainedProtocol, Mock, StaticMock {
 		return _wrapped()
     }
 
-    func methodReturningSelf() -> Self {
+    open func methodReturningSelf() -> Self {
         func _wrapped<__Self__>() -> __Self__ {
 		addInvocation(.m_methodReturningSelf)
 		let perform = methodPerformValue(.m_methodReturningSelf) as? () -> Void
@@ -7460,7 +7823,7 @@ class SelfConstrainedProtocolMock: SelfConstrainedProtocol, Mock, StaticMock {
 		return _wrapped()
     }
 
-    func compare(with other: SelfConstrainedProtocolMock) -> Bool {
+    open func compare(with other: SelfConstrainedProtocolMock) -> Bool {
         addInvocation(.m_compare__with_other(Parameter<SelfConstrainedProtocolMock>.value(`other`)))
 		let perform = methodPerformValue(.m_compare__with_other(Parameter<SelfConstrainedProtocolMock>.value(`other`))) as? (SelfConstrainedProtocolMock) -> Void
 		perform?(`other`)
@@ -7474,7 +7837,7 @@ class SelfConstrainedProtocolMock: SelfConstrainedProtocol, Mock, StaticMock {
 		return __value
     }
 
-    func genericMethodWithNestedSelf<T>(param: Int, second: T, other: (SelfConstrainedProtocolMock,SelfConstrainedProtocolMock)) -> Self {
+    open func genericMethodWithNestedSelf<T>(param: Int, second: T, other: (SelfConstrainedProtocolMock,SelfConstrainedProtocolMock)) -> Self {
         func _wrapped<__Self__>() -> __Self__ {
 		addInvocation(.m_genericMethodWithNestedSelf__param_paramsecond_secondother_other(Parameter<Int>.value(`param`), Parameter<T>.value(`second`).wrapAsGeneric(), Parameter<(SelfConstrainedProtocolMock,SelfConstrainedProtocolMock)>.value(`other`)))
 		let perform = methodPerformValue(.m_genericMethodWithNestedSelf__param_paramsecond_secondother_other(Parameter<Int>.value(`param`), Parameter<T>.value(`second`).wrapAsGeneric(), Parameter<(SelfConstrainedProtocolMock,SelfConstrainedProtocolMock)>.value(`other`))) as? (Int, T, (SelfConstrainedProtocolMock,SelfConstrainedProtocolMock)) -> Void
@@ -7489,6 +7852,25 @@ class SelfConstrainedProtocolMock: SelfConstrainedProtocol, Mock, StaticMock {
 		return __value
 		}
 		return _wrapped()
+    }
+
+    open func configure(with secret: String) throws -> Self {
+        func _wrapped<__Self__>() throws -> __Self__ {
+		addInvocation(.m_configure__with_secret(Parameter<String>.value(`secret`)))
+		let perform = methodPerformValue(.m_configure__with_secret(Parameter<String>.value(`secret`))) as? (String) -> Void
+		perform?(`secret`)
+		var __value: __Self__
+		do {
+		    __value = try methodReturnValue(.m_configure__with_secret(Parameter<String>.value(`secret`))).casted()
+		} catch MockError.notStubed {
+			onFatalFailure("Stub return value not specified for configure(with secret: String). Use given")
+			Failure("Stub return value not specified for configure(with secret: String). Use given")
+		} catch {
+		    throw error
+		}
+		return __value
+		}
+		return try _wrapped()
     }
 
     fileprivate enum StaticMethodType {
@@ -7509,38 +7891,38 @@ class SelfConstrainedProtocolMock: SelfConstrainedProtocol, Mock, StaticMock {
         }
     }
 
-    class StaticGiven: StubbedMethod {
+    open class StaticGiven: StubbedMethod {
         fileprivate var method: StaticMethodType
 
-        private init(method: StaticMethodType, products: [Product]) {
+        private init(method: StaticMethodType, products: [StubProduct]) {
             self.method = method
             super.init(products)
         }
 
 
-        static func construct(param value: Parameter<Int>, willReturn: SelfConstrainedProtocolMock...) -> StaticMethodStub {
-            return StaticGiven(method: .sm_construct__param_value(`value`), products: willReturn.map({ Product.return($0) }))
+        public static func construct(param value: Parameter<Int>, willReturn: SelfConstrainedProtocolMock...) -> StaticMethodStub {
+            return StaticGiven(method: .sm_construct__param_value(`value`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func construct(param value: Parameter<Int>, willProduce: (Stubber<SelfConstrainedProtocolMock>) -> Void) -> StaticMethodStub {
+        public static func construct(param value: Parameter<Int>, willProduce: (Stubber<SelfConstrainedProtocolMock>) -> Void) -> StaticMethodStub {
             let willReturn: [SelfConstrainedProtocolMock] = []
-			let given: StaticGiven = { return StaticGiven(method: .sm_construct__param_value(`value`), products: willReturn.map({ Product.return($0) })) }()
+			let given: StaticGiven = { return StaticGiven(method: .sm_construct__param_value(`value`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (SelfConstrainedProtocolMock).self)
 			willProduce(stubber)
 			return given
         }
     }
 
-    struct StaticVerify {
+    public struct StaticVerify {
         fileprivate var method: StaticMethodType
 
-        static func construct(param value: Parameter<Int>) -> StaticVerify { return StaticVerify(method: .sm_construct__param_value(`value`))}
+        public static func construct(param value: Parameter<Int>) -> StaticVerify { return StaticVerify(method: .sm_construct__param_value(`value`))}
     }
 
-    struct StaticPerform {
+    public struct StaticPerform {
         fileprivate var method: StaticMethodType
         var performs: Any
 
-        static func construct(param value: Parameter<Int>, perform: @escaping (Int) -> Void) -> StaticPerform {
+        public static func construct(param value: Parameter<Int>, perform: @escaping (Int) -> Void) -> StaticPerform {
             return StaticPerform(method: .sm_construct__param_value(`value`), performs: perform)
         }
     }
@@ -7550,6 +7932,7 @@ class SelfConstrainedProtocolMock: SelfConstrainedProtocol, Mock, StaticMock {
         case m_methodReturningSelf
         case m_compare__with_other(Parameter<SelfConstrainedProtocolMock>)
         case m_genericMethodWithNestedSelf__param_paramsecond_secondother_other(Parameter<Int>, Parameter<GenericAttribute>, Parameter<(SelfConstrainedProtocolMock,SelfConstrainedProtocolMock)>)
+        case m_configure__with_secret(Parameter<String>)
 
         static func compareParameters(lhs: MethodType, rhs: MethodType, matcher: Matcher) -> Bool {
             switch (lhs, rhs) {
@@ -7563,6 +7946,9 @@ class SelfConstrainedProtocolMock: SelfConstrainedProtocol, Mock, StaticMock {
                 guard Parameter.compare(lhs: lhsSecond, rhs: rhsSecond, with: matcher) else { return false } 
                 guard Parameter.compare(lhs: lhsOther, rhs: rhsOther, with: matcher) else { return false } 
                 return true 
+            case (.m_configure__with_secret(let lhsSecret), .m_configure__with_secret(let rhsSecret)):
+                guard Parameter.compare(lhs: lhsSecret, rhs: rhsSecret, with: matcher) else { return false } 
+                return true 
             default: return false
             }
         }
@@ -7572,71 +7958,89 @@ class SelfConstrainedProtocolMock: SelfConstrainedProtocol, Mock, StaticMock {
             case .m_methodReturningSelf: return 0
             case let .m_compare__with_other(p0): return p0.intValue
             case let .m_genericMethodWithNestedSelf__param_paramsecond_secondother_other(p0, p1, p2): return p0.intValue + p1.intValue + p2.intValue
+            case let .m_configure__with_secret(p0): return p0.intValue
             }
         }
     }
 
-    class Given: StubbedMethod {
+    open class Given: StubbedMethod {
         fileprivate var method: MethodType
 
-        private init(method: MethodType, products: [Product]) {
+        private init(method: MethodType, products: [StubProduct]) {
             self.method = method
             super.init(products)
         }
 
 
-        static func methodReturningSelf(willReturn: SelfConstrainedProtocolMock...) -> MethodStub {
-            return Given(method: .m_methodReturningSelf, products: willReturn.map({ Product.return($0) }))
+        public static func methodReturningSelf(willReturn: SelfConstrainedProtocolMock...) -> MethodStub {
+            return Given(method: .m_methodReturningSelf, products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func compare(with other: Parameter<SelfConstrainedProtocolMock>, willReturn: Bool...) -> MethodStub {
-            return Given(method: .m_compare__with_other(`other`), products: willReturn.map({ Product.return($0) }))
+        public static func compare(with other: Parameter<SelfConstrainedProtocolMock>, willReturn: Bool...) -> MethodStub {
+            return Given(method: .m_compare__with_other(`other`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func genericMethodWithNestedSelf<T>(param: Parameter<Int>, second: Parameter<T>, other: Parameter<(SelfConstrainedProtocolMock,SelfConstrainedProtocolMock)>, willReturn: SelfConstrainedProtocolMock...) -> MethodStub {
-            return Given(method: .m_genericMethodWithNestedSelf__param_paramsecond_secondother_other(`param`, `second`.wrapAsGeneric(), `other`), products: willReturn.map({ Product.return($0) }))
+        public static func genericMethodWithNestedSelf<T>(param: Parameter<Int>, second: Parameter<T>, other: Parameter<(SelfConstrainedProtocolMock,SelfConstrainedProtocolMock)>, willReturn: SelfConstrainedProtocolMock...) -> MethodStub {
+            return Given(method: .m_genericMethodWithNestedSelf__param_paramsecond_secondother_other(`param`, `second`.wrapAsGeneric(), `other`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func methodReturningSelf(willProduce: (Stubber<SelfConstrainedProtocolMock>) -> Void) -> MethodStub {
+        public static func configure(with secret: Parameter<String>, willReturn: SelfConstrainedProtocolMock...) -> MethodStub {
+            return Given(method: .m_configure__with_secret(`secret`), products: willReturn.map({ StubProduct.return($0 as Any) }))
+        }
+        public static func methodReturningSelf(willProduce: (Stubber<SelfConstrainedProtocolMock>) -> Void) -> MethodStub {
             let willReturn: [SelfConstrainedProtocolMock] = []
-			let given: Given = { return Given(method: .m_methodReturningSelf, products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_methodReturningSelf, products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (SelfConstrainedProtocolMock).self)
 			willProduce(stubber)
 			return given
         }
-        static func compare(with other: Parameter<SelfConstrainedProtocolMock>, willProduce: (Stubber<Bool>) -> Void) -> MethodStub {
+        public static func compare(with other: Parameter<SelfConstrainedProtocolMock>, willProduce: (Stubber<Bool>) -> Void) -> MethodStub {
             let willReturn: [Bool] = []
-			let given: Given = { return Given(method: .m_compare__with_other(`other`), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_compare__with_other(`other`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (Bool).self)
 			willProduce(stubber)
 			return given
         }
-        static func genericMethodWithNestedSelf<T>(param: Parameter<Int>, second: Parameter<T>, other: Parameter<(SelfConstrainedProtocolMock,SelfConstrainedProtocolMock)>, willProduce: (Stubber<SelfConstrainedProtocolMock>) -> Void) -> MethodStub {
+        public static func genericMethodWithNestedSelf<T>(param: Parameter<Int>, second: Parameter<T>, other: Parameter<(SelfConstrainedProtocolMock,SelfConstrainedProtocolMock)>, willProduce: (Stubber<SelfConstrainedProtocolMock>) -> Void) -> MethodStub {
             let willReturn: [SelfConstrainedProtocolMock] = []
-			let given: Given = { return Given(method: .m_genericMethodWithNestedSelf__param_paramsecond_secondother_other(`param`, `second`.wrapAsGeneric(), `other`), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_genericMethodWithNestedSelf__param_paramsecond_secondother_other(`param`, `second`.wrapAsGeneric(), `other`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (SelfConstrainedProtocolMock).self)
+			willProduce(stubber)
+			return given
+        }
+        public static func configure(with secret: Parameter<String>, willThrow: Error...) -> MethodStub {
+            return Given(method: .m_configure__with_secret(`secret`), products: willThrow.map({ StubProduct.throw($0) }))
+        }
+        public static func configure(with secret: Parameter<String>, willProduce: (StubberThrows<SelfConstrainedProtocolMock>) -> Void) -> MethodStub {
+            let willThrow: [Error] = []
+			let given: Given = { return Given(method: .m_configure__with_secret(`secret`), products: willThrow.map({ StubProduct.throw($0) })) }()
+			let stubber = given.stubThrows(for: (SelfConstrainedProtocolMock).self)
 			willProduce(stubber)
 			return given
         }
     }
 
-    struct Verify {
+    public struct Verify {
         fileprivate var method: MethodType
 
-        static func methodReturningSelf() -> Verify { return Verify(method: .m_methodReturningSelf)}
-        static func compare(with other: Parameter<SelfConstrainedProtocolMock>) -> Verify { return Verify(method: .m_compare__with_other(`other`))}
-        static func genericMethodWithNestedSelf<T>(param: Parameter<Int>, second: Parameter<T>, other: Parameter<(SelfConstrainedProtocolMock,SelfConstrainedProtocolMock)>) -> Verify { return Verify(method: .m_genericMethodWithNestedSelf__param_paramsecond_secondother_other(`param`, `second`.wrapAsGeneric(), `other`))}
+        public static func methodReturningSelf() -> Verify { return Verify(method: .m_methodReturningSelf)}
+        public static func compare(with other: Parameter<SelfConstrainedProtocolMock>) -> Verify { return Verify(method: .m_compare__with_other(`other`))}
+        public static func genericMethodWithNestedSelf<T>(param: Parameter<Int>, second: Parameter<T>, other: Parameter<(SelfConstrainedProtocolMock,SelfConstrainedProtocolMock)>) -> Verify { return Verify(method: .m_genericMethodWithNestedSelf__param_paramsecond_secondother_other(`param`, `second`.wrapAsGeneric(), `other`))}
+        public static func configure(with secret: Parameter<String>) -> Verify { return Verify(method: .m_configure__with_secret(`secret`))}
     }
 
-    struct Perform {
+    public struct Perform {
         fileprivate var method: MethodType
         var performs: Any
 
-        static func methodReturningSelf(perform: @escaping () -> Void) -> Perform {
+        public static func methodReturningSelf(perform: @escaping () -> Void) -> Perform {
             return Perform(method: .m_methodReturningSelf, performs: perform)
         }
-        static func compare(with other: Parameter<SelfConstrainedProtocolMock>, perform: @escaping (SelfConstrainedProtocolMock) -> Void) -> Perform {
+        public static func compare(with other: Parameter<SelfConstrainedProtocolMock>, perform: @escaping (SelfConstrainedProtocolMock) -> Void) -> Perform {
             return Perform(method: .m_compare__with_other(`other`), performs: perform)
         }
-        static func genericMethodWithNestedSelf<T>(param: Parameter<Int>, second: Parameter<T>, other: Parameter<(SelfConstrainedProtocolMock,SelfConstrainedProtocolMock)>, perform: @escaping (Int, T, (SelfConstrainedProtocolMock,SelfConstrainedProtocolMock)) -> Void) -> Perform {
+        public static func genericMethodWithNestedSelf<T>(param: Parameter<Int>, second: Parameter<T>, other: Parameter<(SelfConstrainedProtocolMock,SelfConstrainedProtocolMock)>, perform: @escaping (Int, T, (SelfConstrainedProtocolMock,SelfConstrainedProtocolMock)) -> Void) -> Perform {
             return Perform(method: .m_genericMethodWithNestedSelf__param_paramsecond_secondother_other(`param`, `second`.wrapAsGeneric(), `other`), performs: perform)
+        }
+        public static func configure(with secret: Parameter<String>, perform: @escaping (String) -> Void) -> Perform {
+            return Perform(method: .m_configure__with_secret(`secret`), performs: perform)
         }
     }
 
@@ -7651,13 +8055,13 @@ class SelfConstrainedProtocolMock: SelfConstrainedProtocol, Mock, StaticMock {
 
     public func verify(_ method: Verify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
         let invocations = matchingCalls(method.method)
-        MockyAssert(count.matches(invocations.count), "Expeced: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
     }
 
     private func addInvocation(_ call: MethodType) {
         invocations.append(call)
     }
-    private func methodReturnValue(_ method: MethodType) throws -> Product {
+    private func methodReturnValue(_ method: MethodType) throws -> StubProduct {
         let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
         let matched = candidates.first(where: { $0.isValid && MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
         guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
@@ -7706,13 +8110,13 @@ class SelfConstrainedProtocolMock: SelfConstrainedProtocol, Mock, StaticMock {
 
     static public func verify(_ method: StaticVerify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
         let invocations = matchingCalls(method.method)
-        MockyAssert(count.matches(invocations.count), "Expeced: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
     }
 
     static private func addInvocation(_ call: StaticMethodType) {
         invocations.append(call)
     }
-    static private func methodReturnValue(_ method: StaticMethodType) throws -> Product {
+    static private func methodReturnValue(_ method: StaticMethodType) throws -> StubProduct {
         let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
         let matched = candidates.first(where: { $0.isValid && StaticMethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
         guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
@@ -7745,7 +8149,7 @@ class SelfConstrainedProtocolMock: SelfConstrainedProtocol, Mock, StaticMock {
 }
 
 // MARK: - ShouldAllowNoStubDefined
-class ShouldAllowNoStubDefinedMock: ShouldAllowNoStubDefined, Mock, StaticMock {
+open class ShouldAllowNoStubDefinedMock: ShouldAllowNoStubDefined, Mock, StaticMock {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
         self.sequencingPolicy = sequencingPolicy
         self.stubbingPolicy = stubbingPolicy
@@ -7762,9 +8166,9 @@ class ShouldAllowNoStubDefinedMock: ShouldAllowNoStubDefined, Mock, StaticMock {
     private var file: StaticString?
     private var line: UInt?
 
-    typealias PropertyStub = Given
-    typealias MethodStub = Given
-    typealias SubscriptStub = Given
+    public typealias PropertyStub = Given
+    public typealias MethodStub = Given
+    public typealias SubscriptStub = Given
 
     /// Convenience method - call setupMock() to extend debug information when failure occurs
     public func setupMock(file: StaticString = #file, line: UInt = #line) {
@@ -7777,15 +8181,15 @@ class ShouldAllowNoStubDefinedMock: ShouldAllowNoStubDefined, Mock, StaticMock {
     static private var invocations: [StaticMethodType] = []
     static private var methodReturnValues: [StaticGiven] = []
     static private var methodPerformValues: [StaticPerform] = []
-    typealias StaticPropertyStub = StaticGiven
-    typealias StaticMethodStub = StaticGiven
-    static func clear() {
+    public typealias StaticPropertyStub = StaticGiven
+    public typealias StaticMethodStub = StaticGiven
+    public static func clear() {
         invocations = []
         methodReturnValues = []
         methodPerformValues = []
     }
 
-    var property: Int? {
+    public var property: Int? {
 		get {	invocations.append(.p_property_get); return __p_property ?? optionalGivenGetterValue(.p_property_get, "ShouldAllowNoStubDefinedMock - stub value for property was not defined") }
 		@available(*, deprecated, message: "Using setters on readonly variables is deprecated, and will be removed in 3.1. Use Given to define stubbed property return value.")
 		set {	__p_property = newValue }
@@ -7793,7 +8197,7 @@ class ShouldAllowNoStubDefinedMock: ShouldAllowNoStubDefined, Mock, StaticMock {
 	private var __p_property: (Int)?
 
 
-    static var property: Int? {
+    public static var property: Int? {
 		get {	ShouldAllowNoStubDefinedMock.invocations.append(.p_property_get); return ShouldAllowNoStubDefinedMock.__p_property ?? optionalGivenGetterValue(.p_property_get, "ShouldAllowNoStubDefinedMock - stub value for property was not defined") }
 		@available(*, deprecated, message: "Using setters on readonly variables is deprecated, and will be removed in 3.1. Use Given to define stubbed property return value.")
 		set {	ShouldAllowNoStubDefinedMock.__p_property = newValue }
@@ -7803,13 +8207,13 @@ class ShouldAllowNoStubDefinedMock: ShouldAllowNoStubDefined, Mock, StaticMock {
 
 
 
-    static func voidMethod(_ key: String) {
+    public static func voidMethod(_ key: String) {
         addInvocation(.sm_voidMethod__key(Parameter<String>.value(`key`)))
 		let perform = methodPerformValue(.sm_voidMethod__key(Parameter<String>.value(`key`))) as? (String) -> Void
 		perform?(`key`)
     }
 
-    static func throwingVoidMethod(_ key: String) throws {
+    public static func throwingVoidMethod(_ key: String) throws {
         addInvocation(.sm_throwingVoidMethod__key(Parameter<String>.value(`key`)))
 		let perform = methodPerformValue(.sm_throwingVoidMethod__key(Parameter<String>.value(`key`))) as? (String) -> Void
 		perform?(`key`)
@@ -7822,7 +8226,7 @@ class ShouldAllowNoStubDefinedMock: ShouldAllowNoStubDefined, Mock, StaticMock {
 		}
     }
 
-    static func optionalMethod(_ key: String) -> Int? {
+    public static func optionalMethod(_ key: String) -> Int? {
         addInvocation(.sm_optionalMethod__key(Parameter<String>.value(`key`)))
 		let perform = methodPerformValue(.sm_optionalMethod__key(Parameter<String>.value(`key`))) as? (String) -> Void
 		perform?(`key`)
@@ -7835,7 +8239,7 @@ class ShouldAllowNoStubDefinedMock: ShouldAllowNoStubDefined, Mock, StaticMock {
 		return __value
     }
 
-    static func optionalThrowingMethod(_ key: String) -> Int? {
+    public static func optionalThrowingMethod(_ key: String) -> Int? {
         addInvocation(.sm_optionalThrowingMethod__key(Parameter<String>.value(`key`)))
 		let perform = methodPerformValue(.sm_optionalThrowingMethod__key(Parameter<String>.value(`key`))) as? (String) -> Void
 		perform?(`key`)
@@ -7848,13 +8252,13 @@ class ShouldAllowNoStubDefinedMock: ShouldAllowNoStubDefined, Mock, StaticMock {
 		return __value
     }
 
-    func voidMethod(_ key: String) {
+    open func voidMethod(_ key: String) {
         addInvocation(.m_voidMethod__key(Parameter<String>.value(`key`)))
 		let perform = methodPerformValue(.m_voidMethod__key(Parameter<String>.value(`key`))) as? (String) -> Void
 		perform?(`key`)
     }
 
-    func throwingVoidMethod(_ key: String) throws {
+    open func throwingVoidMethod(_ key: String) throws {
         addInvocation(.m_throwingVoidMethod__key(Parameter<String>.value(`key`)))
 		let perform = methodPerformValue(.m_throwingVoidMethod__key(Parameter<String>.value(`key`))) as? (String) -> Void
 		perform?(`key`)
@@ -7867,7 +8271,7 @@ class ShouldAllowNoStubDefinedMock: ShouldAllowNoStubDefined, Mock, StaticMock {
 		}
     }
 
-    func optionalMethod(_ key: String) -> Int? {
+    open func optionalMethod(_ key: String) -> Int? {
         addInvocation(.m_optionalMethod__key(Parameter<String>.value(`key`)))
 		let perform = methodPerformValue(.m_optionalMethod__key(Parameter<String>.value(`key`))) as? (String) -> Void
 		perform?(`key`)
@@ -7880,7 +8284,7 @@ class ShouldAllowNoStubDefinedMock: ShouldAllowNoStubDefined, Mock, StaticMock {
 		return __value
     }
 
-    func optionalThrowingMethod(_ key: String) -> Int? {
+    open func optionalThrowingMethod(_ key: String) -> Int? {
         addInvocation(.m_optionalThrowingMethod__key(Parameter<String>.value(`key`)))
 		let perform = methodPerformValue(.m_optionalThrowingMethod__key(Parameter<String>.value(`key`))) as? (String) -> Void
 		perform?(`key`)
@@ -7893,7 +8297,7 @@ class ShouldAllowNoStubDefinedMock: ShouldAllowNoStubDefined, Mock, StaticMock {
 		return __value
     }
 
-    subscript (_ x: Int) -> Int? {
+    public subscript (_ x: Int) -> Int? {
 		get {
 			addInvocation(.subscript_get_x(Parameter<Int>.value(`x`)))
 			do {
@@ -7941,110 +8345,74 @@ class ShouldAllowNoStubDefinedMock: ShouldAllowNoStubDefined, Mock, StaticMock {
         }
     }
 
-    class StaticGiven: StubbedMethod {
+    open class StaticGiven: StubbedMethod {
         fileprivate var method: StaticMethodType
 
-        private init(method: StaticMethodType, products: [Product]) {
+        private init(method: StaticMethodType, products: [StubProduct]) {
             self.method = method
             super.init(products)
         }
 
-        static func property(getter defaultValue: Int?...) -> StaticPropertyStub {
-            return StaticGiven(method: .p_property_get, products: defaultValue.map({ Product.return($0) }))
+        public static func property(getter defaultValue: Int?...) -> StaticPropertyStub {
+            return StaticGiven(method: .p_property_get, products: defaultValue.map({ StubProduct.return($0 as Any) }))
         }
 
-        static func optionalMethod(_ key: Parameter<String>, willReturn: Int?...) -> StaticMethodStub {
-            return StaticGiven(method: .sm_optionalMethod__key(`key`), products: willReturn.map({ Product.return($0) }))
+        public static func optionalMethod(_ key: Parameter<String>, willReturn: Int?...) -> StaticMethodStub {
+            return StaticGiven(method: .sm_optionalMethod__key(`key`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `key` label")
-		static func optionalMethod(key: Parameter<String>, willReturn: Int?...) -> StaticMethodStub {
-            return StaticGiven(method: .sm_optionalMethod__key(`key`), products: willReturn.map({ Product.return($0) }))
+        public static func optionalThrowingMethod(_ key: Parameter<String>, willReturn: Int?...) -> StaticMethodStub {
+            return StaticGiven(method: .sm_optionalThrowingMethod__key(`key`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func optionalThrowingMethod(_ key: Parameter<String>, willReturn: Int?...) -> StaticMethodStub {
-            return StaticGiven(method: .sm_optionalThrowingMethod__key(`key`), products: willReturn.map({ Product.return($0) }))
-        }
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `key` label")
-		static func optionalThrowingMethod(key: Parameter<String>, willReturn: Int?...) -> StaticMethodStub {
-            return StaticGiven(method: .sm_optionalThrowingMethod__key(`key`), products: willReturn.map({ Product.return($0) }))
-        }
-        static func optionalMethod(_ key: Parameter<String>, willProduce: (Stubber<Int?>) -> Void) -> StaticMethodStub {
+        public static func optionalMethod(_ key: Parameter<String>, willProduce: (Stubber<Int?>) -> Void) -> StaticMethodStub {
             let willReturn: [Int?] = []
-			let given: StaticGiven = { return StaticGiven(method: .sm_optionalMethod__key(`key`), products: willReturn.map({ Product.return($0) })) }()
+			let given: StaticGiven = { return StaticGiven(method: .sm_optionalMethod__key(`key`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (Int?).self)
 			willProduce(stubber)
 			return given
         }
-        static func optionalThrowingMethod(_ key: Parameter<String>, willProduce: (Stubber<Int?>) -> Void) -> StaticMethodStub {
+        public static func optionalThrowingMethod(_ key: Parameter<String>, willProduce: (Stubber<Int?>) -> Void) -> StaticMethodStub {
             let willReturn: [Int?] = []
-			let given: StaticGiven = { return StaticGiven(method: .sm_optionalThrowingMethod__key(`key`), products: willReturn.map({ Product.return($0) })) }()
+			let given: StaticGiven = { return StaticGiven(method: .sm_optionalThrowingMethod__key(`key`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (Int?).self)
 			willProduce(stubber)
 			return given
         }
-        static func throwingVoidMethod(_ key: Parameter<String>, willThrow: Error...) -> StaticMethodStub {
-            return StaticGiven(method: .sm_throwingVoidMethod__key(`key`), products: willThrow.map({ Product.throw($0) }))
+        public static func throwingVoidMethod(_ key: Parameter<String>, willThrow: Error...) -> StaticMethodStub {
+            return StaticGiven(method: .sm_throwingVoidMethod__key(`key`), products: willThrow.map({ StubProduct.throw($0) }))
         }
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `key` label")
-		static func throwingVoidMethod(key: Parameter<String>, willThrow: Error...) -> StaticMethodStub {
-            return StaticGiven(method: .sm_throwingVoidMethod__key(`key`), products: willThrow.map({ Product.throw($0) }))
-        }
-        static func throwingVoidMethod(_ key: Parameter<String>, willProduce: (StubberThrows<Void>) -> Void) -> StaticMethodStub {
+        public static func throwingVoidMethod(_ key: Parameter<String>, willProduce: (StubberThrows<Void>) -> Void) -> StaticMethodStub {
             let willThrow: [Error] = []
-			let given: StaticGiven = { return StaticGiven(method: .sm_throwingVoidMethod__key(`key`), products: willThrow.map({ Product.throw($0) })) }()
+			let given: StaticGiven = { return StaticGiven(method: .sm_throwingVoidMethod__key(`key`), products: willThrow.map({ StubProduct.throw($0) })) }()
 			let stubber = given.stubThrows(for: (Void).self)
 			willProduce(stubber)
 			return given
         }
     }
 
-    struct StaticVerify {
+    public struct StaticVerify {
         fileprivate var method: StaticMethodType
 
-        static func voidMethod(_ key: Parameter<String>) -> StaticVerify { return StaticVerify(method: .sm_voidMethod__key(`key`))}
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `key` label")
-		static func voidMethod(key: Parameter<String>) -> StaticVerify { return StaticVerify(method: .sm_voidMethod__key(`key`))}
-        static func throwingVoidMethod(_ key: Parameter<String>) -> StaticVerify { return StaticVerify(method: .sm_throwingVoidMethod__key(`key`))}
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `key` label")
-		static func throwingVoidMethod(key: Parameter<String>) -> StaticVerify { return StaticVerify(method: .sm_throwingVoidMethod__key(`key`))}
-        static func optionalMethod(_ key: Parameter<String>) -> StaticVerify { return StaticVerify(method: .sm_optionalMethod__key(`key`))}
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `key` label")
-		static func optionalMethod(key: Parameter<String>) -> StaticVerify { return StaticVerify(method: .sm_optionalMethod__key(`key`))}
-        static func optionalThrowingMethod(_ key: Parameter<String>) -> StaticVerify { return StaticVerify(method: .sm_optionalThrowingMethod__key(`key`))}
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `key` label")
-		static func optionalThrowingMethod(key: Parameter<String>) -> StaticVerify { return StaticVerify(method: .sm_optionalThrowingMethod__key(`key`))}
-        static var property: StaticVerify { return StaticVerify(method: .p_property_get) }
+        public static func voidMethod(_ key: Parameter<String>) -> StaticVerify { return StaticVerify(method: .sm_voidMethod__key(`key`))}
+        public static func throwingVoidMethod(_ key: Parameter<String>) -> StaticVerify { return StaticVerify(method: .sm_throwingVoidMethod__key(`key`))}
+        public static func optionalMethod(_ key: Parameter<String>) -> StaticVerify { return StaticVerify(method: .sm_optionalMethod__key(`key`))}
+        public static func optionalThrowingMethod(_ key: Parameter<String>) -> StaticVerify { return StaticVerify(method: .sm_optionalThrowingMethod__key(`key`))}
+        public static var property: StaticVerify { return StaticVerify(method: .p_property_get) }
     }
 
-    struct StaticPerform {
+    public struct StaticPerform {
         fileprivate var method: StaticMethodType
         var performs: Any
 
-        static func voidMethod(_ key: Parameter<String>, perform: @escaping (String) -> Void) -> StaticPerform {
+        public static func voidMethod(_ key: Parameter<String>, perform: @escaping (String) -> Void) -> StaticPerform {
             return StaticPerform(method: .sm_voidMethod__key(`key`), performs: perform)
         }
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `key` label")
-		static func voidMethod(key: Parameter<String>, perform: @escaping (String) -> Void) -> StaticPerform {
-            return StaticPerform(method: .sm_voidMethod__key(`key`), performs: perform)
-        }
-        static func throwingVoidMethod(_ key: Parameter<String>, perform: @escaping (String) -> Void) -> StaticPerform {
+        public static func throwingVoidMethod(_ key: Parameter<String>, perform: @escaping (String) -> Void) -> StaticPerform {
             return StaticPerform(method: .sm_throwingVoidMethod__key(`key`), performs: perform)
         }
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `key` label")
-		static func throwingVoidMethod(key: Parameter<String>, perform: @escaping (String) -> Void) -> StaticPerform {
-            return StaticPerform(method: .sm_throwingVoidMethod__key(`key`), performs: perform)
-        }
-        static func optionalMethod(_ key: Parameter<String>, perform: @escaping (String) -> Void) -> StaticPerform {
+        public static func optionalMethod(_ key: Parameter<String>, perform: @escaping (String) -> Void) -> StaticPerform {
             return StaticPerform(method: .sm_optionalMethod__key(`key`), performs: perform)
         }
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `key` label")
-		static func optionalMethod(key: Parameter<String>, perform: @escaping (String) -> Void) -> StaticPerform {
-            return StaticPerform(method: .sm_optionalMethod__key(`key`), performs: perform)
-        }
-        static func optionalThrowingMethod(_ key: Parameter<String>, perform: @escaping (String) -> Void) -> StaticPerform {
-            return StaticPerform(method: .sm_optionalThrowingMethod__key(`key`), performs: perform)
-        }
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `key` label")
-		static func optionalThrowingMethod(key: Parameter<String>, perform: @escaping (String) -> Void) -> StaticPerform {
+        public static func optionalThrowingMethod(_ key: Parameter<String>, perform: @escaping (String) -> Void) -> StaticPerform {
             return StaticPerform(method: .sm_optionalThrowingMethod__key(`key`), performs: perform)
         }
     }
@@ -8092,114 +8460,78 @@ class ShouldAllowNoStubDefinedMock: ShouldAllowNoStubDefined, Mock, StaticMock {
         }
     }
 
-    class Given: StubbedMethod {
+    open class Given: StubbedMethod {
         fileprivate var method: MethodType
 
-        private init(method: MethodType, products: [Product]) {
+        private init(method: MethodType, products: [StubProduct]) {
             self.method = method
             super.init(products)
         }
 
-        static func property(getter defaultValue: Int?...) -> PropertyStub {
-            return Given(method: .p_property_get, products: defaultValue.map({ Product.return($0) }))
+        public static func property(getter defaultValue: Int?...) -> PropertyStub {
+            return Given(method: .p_property_get, products: defaultValue.map({ StubProduct.return($0 as Any) }))
         }
 
-        static func optionalMethod(_ key: Parameter<String>, willReturn: Int?...) -> MethodStub {
-            return Given(method: .m_optionalMethod__key(`key`), products: willReturn.map({ Product.return($0) }))
+        public static func optionalMethod(_ key: Parameter<String>, willReturn: Int?...) -> MethodStub {
+            return Given(method: .m_optionalMethod__key(`key`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `key` label")
-		static func optionalMethod(key: Parameter<String>, willReturn: Int?...) -> MethodStub {
-            return Given(method: .m_optionalMethod__key(`key`), products: willReturn.map({ Product.return($0) }))
+        public static func optionalThrowingMethod(_ key: Parameter<String>, willReturn: Int?...) -> MethodStub {
+            return Given(method: .m_optionalThrowingMethod__key(`key`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func optionalThrowingMethod(_ key: Parameter<String>, willReturn: Int?...) -> MethodStub {
-            return Given(method: .m_optionalThrowingMethod__key(`key`), products: willReturn.map({ Product.return($0) }))
-        }
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `key` label")
-		static func optionalThrowingMethod(key: Parameter<String>, willReturn: Int?...) -> MethodStub {
-            return Given(method: .m_optionalThrowingMethod__key(`key`), products: willReturn.map({ Product.return($0) }))
-        }
-        static func optionalMethod(_ key: Parameter<String>, willProduce: (Stubber<Int?>) -> Void) -> MethodStub {
+        public static func optionalMethod(_ key: Parameter<String>, willProduce: (Stubber<Int?>) -> Void) -> MethodStub {
             let willReturn: [Int?] = []
-			let given: Given = { return Given(method: .m_optionalMethod__key(`key`), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_optionalMethod__key(`key`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (Int?).self)
 			willProduce(stubber)
 			return given
         }
-        static func optionalThrowingMethod(_ key: Parameter<String>, willProduce: (Stubber<Int?>) -> Void) -> MethodStub {
+        public static func optionalThrowingMethod(_ key: Parameter<String>, willProduce: (Stubber<Int?>) -> Void) -> MethodStub {
             let willReturn: [Int?] = []
-			let given: Given = { return Given(method: .m_optionalThrowingMethod__key(`key`), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_optionalThrowingMethod__key(`key`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (Int?).self)
 			willProduce(stubber)
 			return given
         }
-        static func `subscript`(_ x: Parameter<Int>, willReturn: Int?...) -> SubscriptStub {
-            return Given(method: .subscript_get_x(`x`), products: willReturn.map({ Product.return($0) }))
+        public static func `subscript`(_ x: Parameter<Int>, willReturn: Int?...) -> SubscriptStub {
+            return Given(method: .subscript_get_x(`x`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func throwingVoidMethod(_ key: Parameter<String>, willThrow: Error...) -> MethodStub {
-            return Given(method: .m_throwingVoidMethod__key(`key`), products: willThrow.map({ Product.throw($0) }))
+        public static func throwingVoidMethod(_ key: Parameter<String>, willThrow: Error...) -> MethodStub {
+            return Given(method: .m_throwingVoidMethod__key(`key`), products: willThrow.map({ StubProduct.throw($0) }))
         }
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `key` label")
-		static func throwingVoidMethod(key: Parameter<String>, willThrow: Error...) -> MethodStub {
-            return Given(method: .m_throwingVoidMethod__key(`key`), products: willThrow.map({ Product.throw($0) }))
-        }
-        static func throwingVoidMethod(_ key: Parameter<String>, willProduce: (StubberThrows<Void>) -> Void) -> MethodStub {
+        public static func throwingVoidMethod(_ key: Parameter<String>, willProduce: (StubberThrows<Void>) -> Void) -> MethodStub {
             let willThrow: [Error] = []
-			let given: Given = { return Given(method: .m_throwingVoidMethod__key(`key`), products: willThrow.map({ Product.throw($0) })) }()
+			let given: Given = { return Given(method: .m_throwingVoidMethod__key(`key`), products: willThrow.map({ StubProduct.throw($0) })) }()
 			let stubber = given.stubThrows(for: (Void).self)
 			willProduce(stubber)
 			return given
         }
     }
 
-    struct Verify {
+    public struct Verify {
         fileprivate var method: MethodType
 
-        static func voidMethod(_ key: Parameter<String>) -> Verify { return Verify(method: .m_voidMethod__key(`key`))}
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `key` label")
-		static func voidMethod(key: Parameter<String>) -> Verify { return Verify(method: .m_voidMethod__key(`key`))}
-        static func throwingVoidMethod(_ key: Parameter<String>) -> Verify { return Verify(method: .m_throwingVoidMethod__key(`key`))}
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `key` label")
-		static func throwingVoidMethod(key: Parameter<String>) -> Verify { return Verify(method: .m_throwingVoidMethod__key(`key`))}
-        static func optionalMethod(_ key: Parameter<String>) -> Verify { return Verify(method: .m_optionalMethod__key(`key`))}
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `key` label")
-		static func optionalMethod(key: Parameter<String>) -> Verify { return Verify(method: .m_optionalMethod__key(`key`))}
-        static func optionalThrowingMethod(_ key: Parameter<String>) -> Verify { return Verify(method: .m_optionalThrowingMethod__key(`key`))}
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `key` label")
-		static func optionalThrowingMethod(key: Parameter<String>) -> Verify { return Verify(method: .m_optionalThrowingMethod__key(`key`))}
-        static var property: Verify { return Verify(method: .p_property_get) }
-        static func `subscript`(_ x: Parameter<Int>) -> Verify { return Verify(method: .subscript_get_x(`x`))}
+        public static func voidMethod(_ key: Parameter<String>) -> Verify { return Verify(method: .m_voidMethod__key(`key`))}
+        public static func throwingVoidMethod(_ key: Parameter<String>) -> Verify { return Verify(method: .m_throwingVoidMethod__key(`key`))}
+        public static func optionalMethod(_ key: Parameter<String>) -> Verify { return Verify(method: .m_optionalMethod__key(`key`))}
+        public static func optionalThrowingMethod(_ key: Parameter<String>) -> Verify { return Verify(method: .m_optionalThrowingMethod__key(`key`))}
+        public static var property: Verify { return Verify(method: .p_property_get) }
+        public static func `subscript`(_ x: Parameter<Int>) -> Verify { return Verify(method: .subscript_get_x(`x`))}
     }
 
-    struct Perform {
+    public struct Perform {
         fileprivate var method: MethodType
         var performs: Any
 
-        static func voidMethod(_ key: Parameter<String>, perform: @escaping (String) -> Void) -> Perform {
+        public static func voidMethod(_ key: Parameter<String>, perform: @escaping (String) -> Void) -> Perform {
             return Perform(method: .m_voidMethod__key(`key`), performs: perform)
         }
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `key` label")
-		static func voidMethod(key: Parameter<String>, perform: @escaping (String) -> Void) -> Perform {
-            return Perform(method: .m_voidMethod__key(`key`), performs: perform)
-        }
-        static func throwingVoidMethod(_ key: Parameter<String>, perform: @escaping (String) -> Void) -> Perform {
+        public static func throwingVoidMethod(_ key: Parameter<String>, perform: @escaping (String) -> Void) -> Perform {
             return Perform(method: .m_throwingVoidMethod__key(`key`), performs: perform)
         }
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `key` label")
-		static func throwingVoidMethod(key: Parameter<String>, perform: @escaping (String) -> Void) -> Perform {
-            return Perform(method: .m_throwingVoidMethod__key(`key`), performs: perform)
-        }
-        static func optionalMethod(_ key: Parameter<String>, perform: @escaping (String) -> Void) -> Perform {
+        public static func optionalMethod(_ key: Parameter<String>, perform: @escaping (String) -> Void) -> Perform {
             return Perform(method: .m_optionalMethod__key(`key`), performs: perform)
         }
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `key` label")
-		static func optionalMethod(key: Parameter<String>, perform: @escaping (String) -> Void) -> Perform {
-            return Perform(method: .m_optionalMethod__key(`key`), performs: perform)
-        }
-        static func optionalThrowingMethod(_ key: Parameter<String>, perform: @escaping (String) -> Void) -> Perform {
-            return Perform(method: .m_optionalThrowingMethod__key(`key`), performs: perform)
-        }
-        @available(*, deprecated, message: "This constructor is deprecated, and will be removed in v3.1 Possible fix:  remove `key` label")
-		static func optionalThrowingMethod(key: Parameter<String>, perform: @escaping (String) -> Void) -> Perform {
+        public static func optionalThrowingMethod(_ key: Parameter<String>, perform: @escaping (String) -> Void) -> Perform {
             return Perform(method: .m_optionalThrowingMethod__key(`key`), performs: perform)
         }
     }
@@ -8215,13 +8547,13 @@ class ShouldAllowNoStubDefinedMock: ShouldAllowNoStubDefined, Mock, StaticMock {
 
     public func verify(_ method: Verify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
         let invocations = matchingCalls(method.method)
-        MockyAssert(count.matches(invocations.count), "Expeced: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
     }
 
     private func addInvocation(_ call: MethodType) {
         invocations.append(call)
     }
-    private func methodReturnValue(_ method: MethodType) throws -> Product {
+    private func methodReturnValue(_ method: MethodType) throws -> StubProduct {
         let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
         let matched = candidates.first(where: { $0.isValid && MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
         guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
@@ -8270,13 +8602,13 @@ class ShouldAllowNoStubDefinedMock: ShouldAllowNoStubDefined, Mock, StaticMock {
 
     static public func verify(_ method: StaticVerify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
         let invocations = matchingCalls(method.method)
-        MockyAssert(count.matches(invocations.count), "Expeced: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
     }
 
     static private func addInvocation(_ call: StaticMethodType) {
         invocations.append(call)
     }
-    static private func methodReturnValue(_ method: StaticMethodType) throws -> Product {
+    static private func methodReturnValue(_ method: StaticMethodType) throws -> StubProduct {
         let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
         let matched = candidates.first(where: { $0.isValid && StaticMethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
         guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
@@ -8309,7 +8641,7 @@ class ShouldAllowNoStubDefinedMock: ShouldAllowNoStubDefined, Mock, StaticMock {
 }
 
 // MARK: - SimpleProtocolThatInheritsOtherProtocols
-class SimpleProtocolThatInheritsOtherProtocolsMock: SimpleProtocolThatInheritsOtherProtocols, Mock {
+open class SimpleProtocolThatInheritsOtherProtocolsMock: SimpleProtocolThatInheritsOtherProtocols, Mock {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
         self.sequencingPolicy = sequencingPolicy
         self.stubbingPolicy = stubbingPolicy
@@ -8326,9 +8658,9 @@ class SimpleProtocolThatInheritsOtherProtocolsMock: SimpleProtocolThatInheritsOt
     private var file: StaticString?
     private var line: UInt?
 
-    typealias PropertyStub = Given
-    typealias MethodStub = Given
-    typealias SubscriptStub = Given
+    public typealias PropertyStub = Given
+    public typealias MethodStub = Given
+    public typealias SubscriptStub = Given
 
     /// Convenience method - call setupMock() to extend debug information when failure occurs
     public func setupMock(file: StaticString = #file, line: UInt = #line) {
@@ -8336,32 +8668,32 @@ class SimpleProtocolThatInheritsOtherProtocolsMock: SimpleProtocolThatInheritsOt
         self.line = line
     }
 
-    var property: String {
+    public var property: String {
 		get {	invocations.append(.p_property_get); return __p_property ?? givenGetterValue(.p_property_get, "SimpleProtocolThatInheritsOtherProtocolsMock - stub value for property was not defined") }
 		set {	invocations.append(.p_property_set(.value(newValue))); __p_property = newValue }
 	}
 	private var __p_property: (String)?
 
-    var weakProperty: AnyObject! {
+    public var weakProperty: AnyObject! {
 		get {	invocations.append(.p_weakProperty_get); return __p_weakProperty ?? optionalGivenGetterValue(.p_weakProperty_get, "SimpleProtocolThatInheritsOtherProtocolsMock - stub value for weakProperty was not defined") }
 		set {	invocations.append(.p_weakProperty_set(.value(newValue))); __p_weakProperty = newValue }
 	}
 	private var __p_weakProperty: (AnyObject)?
 
-    var propertyGetOnly: String {
+    public var propertyGetOnly: String {
 		get {	invocations.append(.p_propertyGetOnly_get); return __p_propertyGetOnly ?? givenGetterValue(.p_propertyGetOnly_get, "SimpleProtocolThatInheritsOtherProtocolsMock - stub value for propertyGetOnly was not defined") }
 		@available(*, deprecated, message: "Using setters on readonly variables is deprecated, and will be removed in 3.1. Use Given to define stubbed property return value.")
 		set {	__p_propertyGetOnly = newValue }
 	}
 	private var __p_propertyGetOnly: (String)?
 
-    var propertyOptional: Int? {
+    public var propertyOptional: Int? {
 		get {	invocations.append(.p_propertyOptional_get); return __p_propertyOptional ?? optionalGivenGetterValue(.p_propertyOptional_get, "SimpleProtocolThatInheritsOtherProtocolsMock - stub value for propertyOptional was not defined") }
 		set {	invocations.append(.p_propertyOptional_set(.value(newValue))); __p_propertyOptional = newValue }
 	}
 	private var __p_propertyOptional: (Int)?
 
-    var propertyImplicit: Int! {
+    public var propertyImplicit: Int! {
 		get {	invocations.append(.p_propertyImplicit_get); return __p_propertyImplicit ?? optionalGivenGetterValue(.p_propertyImplicit_get, "SimpleProtocolThatInheritsOtherProtocolsMock - stub value for propertyImplicit was not defined") }
 		set {	invocations.append(.p_propertyImplicit_set(.value(newValue))); __p_propertyImplicit = newValue }
 	}
@@ -8371,13 +8703,13 @@ class SimpleProtocolThatInheritsOtherProtocolsMock: SimpleProtocolThatInheritsOt
 
 
 
-    func simpleMethod() {
+    open func simpleMethod() {
         addInvocation(.m_simpleMethod)
 		let perform = methodPerformValue(.m_simpleMethod) as? () -> Void
 		perform?()
     }
 
-    func simpleMehtodThatReturns() -> Int {
+    open func simpleMehtodThatReturns() -> Int {
         addInvocation(.m_simpleMehtodThatReturns)
 		let perform = methodPerformValue(.m_simpleMehtodThatReturns) as? () -> Void
 		perform?()
@@ -8391,7 +8723,7 @@ class SimpleProtocolThatInheritsOtherProtocolsMock: SimpleProtocolThatInheritsOt
 		return __value
     }
 
-    func simpleMehtodThatReturns(param: String) -> String {
+    open func simpleMehtodThatReturns(param: String) -> String {
         addInvocation(.m_simpleMehtodThatReturns__param_param(Parameter<String>.value(`param`)))
 		let perform = methodPerformValue(.m_simpleMehtodThatReturns__param_param(Parameter<String>.value(`param`))) as? (String) -> Void
 		perform?(`param`)
@@ -8405,7 +8737,7 @@ class SimpleProtocolThatInheritsOtherProtocolsMock: SimpleProtocolThatInheritsOt
 		return __value
     }
 
-    func simpleMehtodThatReturns(optionalParam: String?) -> String? {
+    open func simpleMehtodThatReturns(optionalParam: String?) -> String? {
         addInvocation(.m_simpleMehtodThatReturns__optionalParam_optionalParam(Parameter<String?>.value(`optionalParam`)))
 		let perform = methodPerformValue(.m_simpleMehtodThatReturns__optionalParam_optionalParam(Parameter<String?>.value(`optionalParam`))) as? (String?) -> Void
 		perform?(`optionalParam`)
@@ -8478,94 +8810,94 @@ class SimpleProtocolThatInheritsOtherProtocolsMock: SimpleProtocolThatInheritsOt
         }
     }
 
-    class Given: StubbedMethod {
+    open class Given: StubbedMethod {
         fileprivate var method: MethodType
 
-        private init(method: MethodType, products: [Product]) {
+        private init(method: MethodType, products: [StubProduct]) {
             self.method = method
             super.init(products)
         }
 
-        static func property(getter defaultValue: String...) -> PropertyStub {
-            return Given(method: .p_property_get, products: defaultValue.map({ Product.return($0) }))
+        public static func property(getter defaultValue: String...) -> PropertyStub {
+            return Given(method: .p_property_get, products: defaultValue.map({ StubProduct.return($0 as Any) }))
         }
-        static func weakProperty(getter defaultValue: AnyObject?...) -> PropertyStub {
-            return Given(method: .p_weakProperty_get, products: defaultValue.map({ Product.return($0) }))
+        public static func weakProperty(getter defaultValue: AnyObject?...) -> PropertyStub {
+            return Given(method: .p_weakProperty_get, products: defaultValue.map({ StubProduct.return($0 as Any) }))
         }
-        static func propertyGetOnly(getter defaultValue: String...) -> PropertyStub {
-            return Given(method: .p_propertyGetOnly_get, products: defaultValue.map({ Product.return($0) }))
+        public static func propertyGetOnly(getter defaultValue: String...) -> PropertyStub {
+            return Given(method: .p_propertyGetOnly_get, products: defaultValue.map({ StubProduct.return($0 as Any) }))
         }
-        static func propertyOptional(getter defaultValue: Int?...) -> PropertyStub {
-            return Given(method: .p_propertyOptional_get, products: defaultValue.map({ Product.return($0) }))
+        public static func propertyOptional(getter defaultValue: Int?...) -> PropertyStub {
+            return Given(method: .p_propertyOptional_get, products: defaultValue.map({ StubProduct.return($0 as Any) }))
         }
-        static func propertyImplicit(getter defaultValue: Int?...) -> PropertyStub {
-            return Given(method: .p_propertyImplicit_get, products: defaultValue.map({ Product.return($0) }))
+        public static func propertyImplicit(getter defaultValue: Int?...) -> PropertyStub {
+            return Given(method: .p_propertyImplicit_get, products: defaultValue.map({ StubProduct.return($0 as Any) }))
         }
 
-        static func simpleMehtodThatReturns(willReturn: Int...) -> MethodStub {
-            return Given(method: .m_simpleMehtodThatReturns, products: willReturn.map({ Product.return($0) }))
+        public static func simpleMehtodThatReturns(willReturn: Int...) -> MethodStub {
+            return Given(method: .m_simpleMehtodThatReturns, products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func simpleMehtodThatReturns(param: Parameter<String>, willReturn: String...) -> MethodStub {
-            return Given(method: .m_simpleMehtodThatReturns__param_param(`param`), products: willReturn.map({ Product.return($0) }))
+        public static func simpleMehtodThatReturns(param: Parameter<String>, willReturn: String...) -> MethodStub {
+            return Given(method: .m_simpleMehtodThatReturns__param_param(`param`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func simpleMehtodThatReturns(optionalParam: Parameter<String?>, willReturn: String?...) -> MethodStub {
-            return Given(method: .m_simpleMehtodThatReturns__optionalParam_optionalParam(`optionalParam`), products: willReturn.map({ Product.return($0) }))
+        public static func simpleMehtodThatReturns(optionalParam: Parameter<String?>, willReturn: String?...) -> MethodStub {
+            return Given(method: .m_simpleMehtodThatReturns__optionalParam_optionalParam(`optionalParam`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func simpleMehtodThatReturns(willProduce: (Stubber<Int>) -> Void) -> MethodStub {
+        public static func simpleMehtodThatReturns(willProduce: (Stubber<Int>) -> Void) -> MethodStub {
             let willReturn: [Int] = []
-			let given: Given = { return Given(method: .m_simpleMehtodThatReturns, products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_simpleMehtodThatReturns, products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (Int).self)
 			willProduce(stubber)
 			return given
         }
-        static func simpleMehtodThatReturns(param: Parameter<String>, willProduce: (Stubber<String>) -> Void) -> MethodStub {
+        public static func simpleMehtodThatReturns(param: Parameter<String>, willProduce: (Stubber<String>) -> Void) -> MethodStub {
             let willReturn: [String] = []
-			let given: Given = { return Given(method: .m_simpleMehtodThatReturns__param_param(`param`), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_simpleMehtodThatReturns__param_param(`param`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (String).self)
 			willProduce(stubber)
 			return given
         }
-        static func simpleMehtodThatReturns(optionalParam: Parameter<String?>, willProduce: (Stubber<String?>) -> Void) -> MethodStub {
+        public static func simpleMehtodThatReturns(optionalParam: Parameter<String?>, willProduce: (Stubber<String?>) -> Void) -> MethodStub {
             let willReturn: [String?] = []
-			let given: Given = { return Given(method: .m_simpleMehtodThatReturns__optionalParam_optionalParam(`optionalParam`), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_simpleMehtodThatReturns__optionalParam_optionalParam(`optionalParam`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (String?).self)
 			willProduce(stubber)
 			return given
         }
     }
 
-    struct Verify {
+    public struct Verify {
         fileprivate var method: MethodType
 
-        static func simpleMethod() -> Verify { return Verify(method: .m_simpleMethod)}
-        static func simpleMehtodThatReturns() -> Verify { return Verify(method: .m_simpleMehtodThatReturns)}
-        static func simpleMehtodThatReturns(param: Parameter<String>) -> Verify { return Verify(method: .m_simpleMehtodThatReturns__param_param(`param`))}
-        static func simpleMehtodThatReturns(optionalParam: Parameter<String?>) -> Verify { return Verify(method: .m_simpleMehtodThatReturns__optionalParam_optionalParam(`optionalParam`))}
-        static var property: Verify { return Verify(method: .p_property_get) }
-		static func property(set newValue: Parameter<String>) -> Verify { return Verify(method: .p_property_set(newValue)) }
-        static var weakProperty: Verify { return Verify(method: .p_weakProperty_get) }
-		static func weakProperty(set newValue: Parameter<AnyObject?>) -> Verify { return Verify(method: .p_weakProperty_set(newValue)) }
-        static var propertyGetOnly: Verify { return Verify(method: .p_propertyGetOnly_get) }
-        static var propertyOptional: Verify { return Verify(method: .p_propertyOptional_get) }
-		static func propertyOptional(set newValue: Parameter<Int?>) -> Verify { return Verify(method: .p_propertyOptional_set(newValue)) }
-        static var propertyImplicit: Verify { return Verify(method: .p_propertyImplicit_get) }
-		static func propertyImplicit(set newValue: Parameter<Int?>) -> Verify { return Verify(method: .p_propertyImplicit_set(newValue)) }
+        public static func simpleMethod() -> Verify { return Verify(method: .m_simpleMethod)}
+        public static func simpleMehtodThatReturns() -> Verify { return Verify(method: .m_simpleMehtodThatReturns)}
+        public static func simpleMehtodThatReturns(param: Parameter<String>) -> Verify { return Verify(method: .m_simpleMehtodThatReturns__param_param(`param`))}
+        public static func simpleMehtodThatReturns(optionalParam: Parameter<String?>) -> Verify { return Verify(method: .m_simpleMehtodThatReturns__optionalParam_optionalParam(`optionalParam`))}
+        public static var property: Verify { return Verify(method: .p_property_get) }
+		public static func property(set newValue: Parameter<String>) -> Verify { return Verify(method: .p_property_set(newValue)) }
+        public static var weakProperty: Verify { return Verify(method: .p_weakProperty_get) }
+		public static func weakProperty(set newValue: Parameter<AnyObject?>) -> Verify { return Verify(method: .p_weakProperty_set(newValue)) }
+        public static var propertyGetOnly: Verify { return Verify(method: .p_propertyGetOnly_get) }
+        public static var propertyOptional: Verify { return Verify(method: .p_propertyOptional_get) }
+		public static func propertyOptional(set newValue: Parameter<Int?>) -> Verify { return Verify(method: .p_propertyOptional_set(newValue)) }
+        public static var propertyImplicit: Verify { return Verify(method: .p_propertyImplicit_get) }
+		public static func propertyImplicit(set newValue: Parameter<Int?>) -> Verify { return Verify(method: .p_propertyImplicit_set(newValue)) }
     }
 
-    struct Perform {
+    public struct Perform {
         fileprivate var method: MethodType
         var performs: Any
 
-        static func simpleMethod(perform: @escaping () -> Void) -> Perform {
+        public static func simpleMethod(perform: @escaping () -> Void) -> Perform {
             return Perform(method: .m_simpleMethod, performs: perform)
         }
-        static func simpleMehtodThatReturns(perform: @escaping () -> Void) -> Perform {
+        public static func simpleMehtodThatReturns(perform: @escaping () -> Void) -> Perform {
             return Perform(method: .m_simpleMehtodThatReturns, performs: perform)
         }
-        static func simpleMehtodThatReturns(param: Parameter<String>, perform: @escaping (String) -> Void) -> Perform {
+        public static func simpleMehtodThatReturns(param: Parameter<String>, perform: @escaping (String) -> Void) -> Perform {
             return Perform(method: .m_simpleMehtodThatReturns__param_param(`param`), performs: perform)
         }
-        static func simpleMehtodThatReturns(optionalParam: Parameter<String?>, perform: @escaping (String?) -> Void) -> Perform {
+        public static func simpleMehtodThatReturns(optionalParam: Parameter<String?>, perform: @escaping (String?) -> Void) -> Perform {
             return Perform(method: .m_simpleMehtodThatReturns__optionalParam_optionalParam(`optionalParam`), performs: perform)
         }
     }
@@ -8581,13 +8913,13 @@ class SimpleProtocolThatInheritsOtherProtocolsMock: SimpleProtocolThatInheritsOt
 
     public func verify(_ method: Verify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
         let invocations = matchingCalls(method.method)
-        MockyAssert(count.matches(invocations.count), "Expeced: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
     }
 
     private func addInvocation(_ call: MethodType) {
         invocations.append(call)
     }
-    private func methodReturnValue(_ method: MethodType) throws -> Product {
+    private func methodReturnValue(_ method: MethodType) throws -> StubProduct {
         let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
         let matched = candidates.first(where: { $0.isValid && MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
         guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
@@ -8627,7 +8959,7 @@ class SimpleProtocolThatInheritsOtherProtocolsMock: SimpleProtocolThatInheritsOt
 }
 
 // MARK: - SimpleProtocolUsingCollections
-class SimpleProtocolUsingCollectionsMock: SimpleProtocolUsingCollections, Mock {
+open class SimpleProtocolUsingCollectionsMock: SimpleProtocolUsingCollections, Mock {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
         self.sequencingPolicy = sequencingPolicy
         self.stubbingPolicy = stubbingPolicy
@@ -8644,9 +8976,9 @@ class SimpleProtocolUsingCollectionsMock: SimpleProtocolUsingCollections, Mock {
     private var file: StaticString?
     private var line: UInt?
 
-    typealias PropertyStub = Given
-    typealias MethodStub = Given
-    typealias SubscriptStub = Given
+    public typealias PropertyStub = Given
+    public typealias MethodStub = Given
+    public typealias SubscriptStub = Given
 
     /// Convenience method - call setupMock() to extend debug information when failure occurs
     public func setupMock(file: StaticString = #file, line: UInt = #line) {
@@ -8658,7 +8990,7 @@ class SimpleProtocolUsingCollectionsMock: SimpleProtocolUsingCollections, Mock {
 
 
 
-    func getArray() -> [Int] {
+    open func getArray() -> [Int] {
         addInvocation(.m_getArray)
 		let perform = methodPerformValue(.m_getArray) as? () -> Void
 		perform?()
@@ -8672,7 +9004,7 @@ class SimpleProtocolUsingCollectionsMock: SimpleProtocolUsingCollections, Mock {
 		return __value
     }
 
-    func map(array: [String], param: Int) -> [Int: String] {
+    open func map(array: [String], param: Int) -> [Int: String] {
         addInvocation(.m_map__array_arrayparam_param(Parameter<[String]>.value(`array`), Parameter<Int>.value(`param`)))
 		let perform = methodPerformValue(.m_map__array_arrayparam_param(Parameter<[String]>.value(`array`), Parameter<Int>.value(`param`))) as? ([String], Int) -> Void
 		perform?(`array`, `param`)
@@ -8686,7 +9018,7 @@ class SimpleProtocolUsingCollectionsMock: SimpleProtocolUsingCollections, Mock {
 		return __value
     }
 
-    func use(dictionary: [Int: String]) -> [Int: String] {
+    open func use(dictionary: [Int: String]) -> [Int: String] {
         addInvocation(.m_use__dictionary_dictionary(Parameter<[Int: String]>.value(`dictionary`)))
 		let perform = methodPerformValue(.m_use__dictionary_dictionary(Parameter<[Int: String]>.value(`dictionary`))) as? ([Int: String]) -> Void
 		perform?(`dictionary`)
@@ -8700,7 +9032,7 @@ class SimpleProtocolUsingCollectionsMock: SimpleProtocolUsingCollections, Mock {
 		return __value
     }
 
-    func verify(set: Set<Int>) -> Bool {
+    open func verify(set: Set<Int>) -> Bool {
         addInvocation(.m_verify__set_set(Parameter<Set<Int>>.value(`set`)))
 		let perform = methodPerformValue(.m_verify__set_set(Parameter<Set<Int>>.value(`set`))) as? (Set<Int>) -> Void
 		perform?(`set`)
@@ -8749,80 +9081,80 @@ class SimpleProtocolUsingCollectionsMock: SimpleProtocolUsingCollections, Mock {
         }
     }
 
-    class Given: StubbedMethod {
+    open class Given: StubbedMethod {
         fileprivate var method: MethodType
 
-        private init(method: MethodType, products: [Product]) {
+        private init(method: MethodType, products: [StubProduct]) {
             self.method = method
             super.init(products)
         }
 
 
-        static func getArray(willReturn: [Int]...) -> MethodStub {
-            return Given(method: .m_getArray, products: willReturn.map({ Product.return($0) }))
+        public static func getArray(willReturn: [Int]...) -> MethodStub {
+            return Given(method: .m_getArray, products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func map(array: Parameter<[String]>, param: Parameter<Int>, willReturn: [Int: String]...) -> MethodStub {
-            return Given(method: .m_map__array_arrayparam_param(`array`, `param`), products: willReturn.map({ Product.return($0) }))
+        public static func map(array: Parameter<[String]>, param: Parameter<Int>, willReturn: [Int: String]...) -> MethodStub {
+            return Given(method: .m_map__array_arrayparam_param(`array`, `param`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func use(dictionary: Parameter<[Int: String]>, willReturn: [Int: String]...) -> MethodStub {
-            return Given(method: .m_use__dictionary_dictionary(`dictionary`), products: willReturn.map({ Product.return($0) }))
+        public static func use(dictionary: Parameter<[Int: String]>, willReturn: [Int: String]...) -> MethodStub {
+            return Given(method: .m_use__dictionary_dictionary(`dictionary`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func verify(set: Parameter<Set<Int>>, willReturn: Bool...) -> MethodStub {
-            return Given(method: .m_verify__set_set(`set`), products: willReturn.map({ Product.return($0) }))
+        public static func verify(set: Parameter<Set<Int>>, willReturn: Bool...) -> MethodStub {
+            return Given(method: .m_verify__set_set(`set`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func getArray(willProduce: (Stubber<[Int]>) -> Void) -> MethodStub {
+        public static func getArray(willProduce: (Stubber<[Int]>) -> Void) -> MethodStub {
             let willReturn: [[Int]] = []
-			let given: Given = { return Given(method: .m_getArray, products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_getArray, products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: ([Int]).self)
 			willProduce(stubber)
 			return given
         }
-        static func map(array: Parameter<[String]>, param: Parameter<Int>, willProduce: (Stubber<[Int: String]>) -> Void) -> MethodStub {
+        public static func map(array: Parameter<[String]>, param: Parameter<Int>, willProduce: (Stubber<[Int: String]>) -> Void) -> MethodStub {
             let willReturn: [[Int: String]] = []
-			let given: Given = { return Given(method: .m_map__array_arrayparam_param(`array`, `param`), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_map__array_arrayparam_param(`array`, `param`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: ([Int: String]).self)
 			willProduce(stubber)
 			return given
         }
-        static func use(dictionary: Parameter<[Int: String]>, willProduce: (Stubber<[Int: String]>) -> Void) -> MethodStub {
+        public static func use(dictionary: Parameter<[Int: String]>, willProduce: (Stubber<[Int: String]>) -> Void) -> MethodStub {
             let willReturn: [[Int: String]] = []
-			let given: Given = { return Given(method: .m_use__dictionary_dictionary(`dictionary`), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_use__dictionary_dictionary(`dictionary`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: ([Int: String]).self)
 			willProduce(stubber)
 			return given
         }
-        static func verify(set: Parameter<Set<Int>>, willProduce: (Stubber<Bool>) -> Void) -> MethodStub {
+        public static func verify(set: Parameter<Set<Int>>, willProduce: (Stubber<Bool>) -> Void) -> MethodStub {
             let willReturn: [Bool] = []
-			let given: Given = { return Given(method: .m_verify__set_set(`set`), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_verify__set_set(`set`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (Bool).self)
 			willProduce(stubber)
 			return given
         }
     }
 
-    struct Verify {
+    public struct Verify {
         fileprivate var method: MethodType
 
-        static func getArray() -> Verify { return Verify(method: .m_getArray)}
-        static func map(array: Parameter<[String]>, param: Parameter<Int>) -> Verify { return Verify(method: .m_map__array_arrayparam_param(`array`, `param`))}
-        static func use(dictionary: Parameter<[Int: String]>) -> Verify { return Verify(method: .m_use__dictionary_dictionary(`dictionary`))}
-        static func verify(set: Parameter<Set<Int>>) -> Verify { return Verify(method: .m_verify__set_set(`set`))}
+        public static func getArray() -> Verify { return Verify(method: .m_getArray)}
+        public static func map(array: Parameter<[String]>, param: Parameter<Int>) -> Verify { return Verify(method: .m_map__array_arrayparam_param(`array`, `param`))}
+        public static func use(dictionary: Parameter<[Int: String]>) -> Verify { return Verify(method: .m_use__dictionary_dictionary(`dictionary`))}
+        public static func verify(set: Parameter<Set<Int>>) -> Verify { return Verify(method: .m_verify__set_set(`set`))}
     }
 
-    struct Perform {
+    public struct Perform {
         fileprivate var method: MethodType
         var performs: Any
 
-        static func getArray(perform: @escaping () -> Void) -> Perform {
+        public static func getArray(perform: @escaping () -> Void) -> Perform {
             return Perform(method: .m_getArray, performs: perform)
         }
-        static func map(array: Parameter<[String]>, param: Parameter<Int>, perform: @escaping ([String], Int) -> Void) -> Perform {
+        public static func map(array: Parameter<[String]>, param: Parameter<Int>, perform: @escaping ([String], Int) -> Void) -> Perform {
             return Perform(method: .m_map__array_arrayparam_param(`array`, `param`), performs: perform)
         }
-        static func use(dictionary: Parameter<[Int: String]>, perform: @escaping ([Int: String]) -> Void) -> Perform {
+        public static func use(dictionary: Parameter<[Int: String]>, perform: @escaping ([Int: String]) -> Void) -> Perform {
             return Perform(method: .m_use__dictionary_dictionary(`dictionary`), performs: perform)
         }
-        static func verify(set: Parameter<Set<Int>>, perform: @escaping (Set<Int>) -> Void) -> Perform {
+        public static func verify(set: Parameter<Set<Int>>, perform: @escaping (Set<Int>) -> Void) -> Perform {
             return Perform(method: .m_verify__set_set(`set`), performs: perform)
         }
     }
@@ -8838,13 +9170,13 @@ class SimpleProtocolUsingCollectionsMock: SimpleProtocolUsingCollections, Mock {
 
     public func verify(_ method: Verify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
         let invocations = matchingCalls(method.method)
-        MockyAssert(count.matches(invocations.count), "Expeced: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
     }
 
     private func addInvocation(_ call: MethodType) {
         invocations.append(call)
     }
-    private func methodReturnValue(_ method: MethodType) throws -> Product {
+    private func methodReturnValue(_ method: MethodType) throws -> StubProduct {
         let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
         let matched = candidates.first(where: { $0.isValid && MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
         guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
@@ -8884,7 +9216,7 @@ class SimpleProtocolUsingCollectionsMock: SimpleProtocolUsingCollections, Mock {
 }
 
 // MARK: - SimpleProtocolWithBothMethodsAndProperties
-class SimpleProtocolWithBothMethodsAndPropertiesMock: SimpleProtocolWithBothMethodsAndProperties, Mock {
+open class SimpleProtocolWithBothMethodsAndPropertiesMock: SimpleProtocolWithBothMethodsAndProperties, Mock {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
         self.sequencingPolicy = sequencingPolicy
         self.stubbingPolicy = stubbingPolicy
@@ -8901,9 +9233,9 @@ class SimpleProtocolWithBothMethodsAndPropertiesMock: SimpleProtocolWithBothMeth
     private var file: StaticString?
     private var line: UInt?
 
-    typealias PropertyStub = Given
-    typealias MethodStub = Given
-    typealias SubscriptStub = Given
+    public typealias PropertyStub = Given
+    public typealias MethodStub = Given
+    public typealias SubscriptStub = Given
 
     /// Convenience method - call setupMock() to extend debug information when failure occurs
     public func setupMock(file: StaticString = #file, line: UInt = #line) {
@@ -8911,7 +9243,7 @@ class SimpleProtocolWithBothMethodsAndPropertiesMock: SimpleProtocolWithBothMeth
         self.line = line
     }
 
-    var property: String {
+    public var property: String {
 		get {	invocations.append(.p_property_get); return __p_property ?? givenGetterValue(.p_property_get, "SimpleProtocolWithBothMethodsAndPropertiesMock - stub value for property was not defined") }
 		@available(*, deprecated, message: "Using setters on readonly variables is deprecated, and will be removed in 3.1. Use Given to define stubbed property return value.")
 		set {	__p_property = newValue }
@@ -8922,7 +9254,7 @@ class SimpleProtocolWithBothMethodsAndPropertiesMock: SimpleProtocolWithBothMeth
 
 
 
-    func simpleMethod() -> String {
+    open func simpleMethod() -> String {
         addInvocation(.m_simpleMethod)
 		let perform = methodPerformValue(.m_simpleMethod) as? () -> Void
 		perform?()
@@ -8958,42 +9290,42 @@ class SimpleProtocolWithBothMethodsAndPropertiesMock: SimpleProtocolWithBothMeth
         }
     }
 
-    class Given: StubbedMethod {
+    open class Given: StubbedMethod {
         fileprivate var method: MethodType
 
-        private init(method: MethodType, products: [Product]) {
+        private init(method: MethodType, products: [StubProduct]) {
             self.method = method
             super.init(products)
         }
 
-        static func property(getter defaultValue: String...) -> PropertyStub {
-            return Given(method: .p_property_get, products: defaultValue.map({ Product.return($0) }))
+        public static func property(getter defaultValue: String...) -> PropertyStub {
+            return Given(method: .p_property_get, products: defaultValue.map({ StubProduct.return($0 as Any) }))
         }
 
-        static func simpleMethod(willReturn: String...) -> MethodStub {
-            return Given(method: .m_simpleMethod, products: willReturn.map({ Product.return($0) }))
+        public static func simpleMethod(willReturn: String...) -> MethodStub {
+            return Given(method: .m_simpleMethod, products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func simpleMethod(willProduce: (Stubber<String>) -> Void) -> MethodStub {
+        public static func simpleMethod(willProduce: (Stubber<String>) -> Void) -> MethodStub {
             let willReturn: [String] = []
-			let given: Given = { return Given(method: .m_simpleMethod, products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_simpleMethod, products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (String).self)
 			willProduce(stubber)
 			return given
         }
     }
 
-    struct Verify {
+    public struct Verify {
         fileprivate var method: MethodType
 
-        static func simpleMethod() -> Verify { return Verify(method: .m_simpleMethod)}
-        static var property: Verify { return Verify(method: .p_property_get) }
+        public static func simpleMethod() -> Verify { return Verify(method: .m_simpleMethod)}
+        public static var property: Verify { return Verify(method: .p_property_get) }
     }
 
-    struct Perform {
+    public struct Perform {
         fileprivate var method: MethodType
         var performs: Any
 
-        static func simpleMethod(perform: @escaping () -> Void) -> Perform {
+        public static func simpleMethod(perform: @escaping () -> Void) -> Perform {
             return Perform(method: .m_simpleMethod, performs: perform)
         }
     }
@@ -9009,13 +9341,13 @@ class SimpleProtocolWithBothMethodsAndPropertiesMock: SimpleProtocolWithBothMeth
 
     public func verify(_ method: Verify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
         let invocations = matchingCalls(method.method)
-        MockyAssert(count.matches(invocations.count), "Expeced: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
     }
 
     private func addInvocation(_ call: MethodType) {
         invocations.append(call)
     }
-    private func methodReturnValue(_ method: MethodType) throws -> Product {
+    private func methodReturnValue(_ method: MethodType) throws -> StubProduct {
         let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
         let matched = candidates.first(where: { $0.isValid && MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
         guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
@@ -9055,7 +9387,7 @@ class SimpleProtocolWithBothMethodsAndPropertiesMock: SimpleProtocolWithBothMeth
 }
 
 // MARK: - SimpleProtocolWithMethods
-class SimpleProtocolWithMethodsMock: SimpleProtocolWithMethods, Mock {
+open class SimpleProtocolWithMethodsMock: SimpleProtocolWithMethods, Mock {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
         self.sequencingPolicy = sequencingPolicy
         self.stubbingPolicy = stubbingPolicy
@@ -9072,9 +9404,9 @@ class SimpleProtocolWithMethodsMock: SimpleProtocolWithMethods, Mock {
     private var file: StaticString?
     private var line: UInt?
 
-    typealias PropertyStub = Given
-    typealias MethodStub = Given
-    typealias SubscriptStub = Given
+    public typealias PropertyStub = Given
+    public typealias MethodStub = Given
+    public typealias SubscriptStub = Given
 
     /// Convenience method - call setupMock() to extend debug information when failure occurs
     public func setupMock(file: StaticString = #file, line: UInt = #line) {
@@ -9086,13 +9418,13 @@ class SimpleProtocolWithMethodsMock: SimpleProtocolWithMethods, Mock {
 
 
 
-    func simpleMethod() {
+    open func simpleMethod() {
         addInvocation(.m_simpleMethod)
 		let perform = methodPerformValue(.m_simpleMethod) as? () -> Void
 		perform?()
     }
 
-    func simpleMehtodThatReturns() -> Int {
+    open func simpleMehtodThatReturns() -> Int {
         addInvocation(.m_simpleMehtodThatReturns)
 		let perform = methodPerformValue(.m_simpleMehtodThatReturns) as? () -> Void
 		perform?()
@@ -9106,7 +9438,7 @@ class SimpleProtocolWithMethodsMock: SimpleProtocolWithMethods, Mock {
 		return __value
     }
 
-    func simpleMehtodThatReturns(param: String) -> String {
+    open func simpleMehtodThatReturns(param: String) -> String {
         addInvocation(.m_simpleMehtodThatReturns__param_param(Parameter<String>.value(`param`)))
 		let perform = methodPerformValue(.m_simpleMehtodThatReturns__param_param(Parameter<String>.value(`param`))) as? (String) -> Void
 		perform?(`param`)
@@ -9120,7 +9452,7 @@ class SimpleProtocolWithMethodsMock: SimpleProtocolWithMethods, Mock {
 		return __value
     }
 
-    func simpleMehtodThatReturns(optionalParam: String?) -> String? {
+    open func simpleMehtodThatReturns(optionalParam: String?) -> String? {
         addInvocation(.m_simpleMehtodThatReturns__optionalParam_optionalParam(Parameter<String?>.value(`optionalParam`)))
 		let perform = methodPerformValue(.m_simpleMehtodThatReturns__optionalParam_optionalParam(Parameter<String?>.value(`optionalParam`))) as? (String?) -> Void
 		perform?(`optionalParam`)
@@ -9166,70 +9498,70 @@ class SimpleProtocolWithMethodsMock: SimpleProtocolWithMethods, Mock {
         }
     }
 
-    class Given: StubbedMethod {
+    open class Given: StubbedMethod {
         fileprivate var method: MethodType
 
-        private init(method: MethodType, products: [Product]) {
+        private init(method: MethodType, products: [StubProduct]) {
             self.method = method
             super.init(products)
         }
 
 
-        static func simpleMehtodThatReturns(willReturn: Int...) -> MethodStub {
-            return Given(method: .m_simpleMehtodThatReturns, products: willReturn.map({ Product.return($0) }))
+        public static func simpleMehtodThatReturns(willReturn: Int...) -> MethodStub {
+            return Given(method: .m_simpleMehtodThatReturns, products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func simpleMehtodThatReturns(param: Parameter<String>, willReturn: String...) -> MethodStub {
-            return Given(method: .m_simpleMehtodThatReturns__param_param(`param`), products: willReturn.map({ Product.return($0) }))
+        public static func simpleMehtodThatReturns(param: Parameter<String>, willReturn: String...) -> MethodStub {
+            return Given(method: .m_simpleMehtodThatReturns__param_param(`param`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func simpleMehtodThatReturns(optionalParam: Parameter<String?>, willReturn: String?...) -> MethodStub {
-            return Given(method: .m_simpleMehtodThatReturns__optionalParam_optionalParam(`optionalParam`), products: willReturn.map({ Product.return($0) }))
+        public static func simpleMehtodThatReturns(optionalParam: Parameter<String?>, willReturn: String?...) -> MethodStub {
+            return Given(method: .m_simpleMehtodThatReturns__optionalParam_optionalParam(`optionalParam`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func simpleMehtodThatReturns(willProduce: (Stubber<Int>) -> Void) -> MethodStub {
+        public static func simpleMehtodThatReturns(willProduce: (Stubber<Int>) -> Void) -> MethodStub {
             let willReturn: [Int] = []
-			let given: Given = { return Given(method: .m_simpleMehtodThatReturns, products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_simpleMehtodThatReturns, products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (Int).self)
 			willProduce(stubber)
 			return given
         }
-        static func simpleMehtodThatReturns(param: Parameter<String>, willProduce: (Stubber<String>) -> Void) -> MethodStub {
+        public static func simpleMehtodThatReturns(param: Parameter<String>, willProduce: (Stubber<String>) -> Void) -> MethodStub {
             let willReturn: [String] = []
-			let given: Given = { return Given(method: .m_simpleMehtodThatReturns__param_param(`param`), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_simpleMehtodThatReturns__param_param(`param`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (String).self)
 			willProduce(stubber)
 			return given
         }
-        static func simpleMehtodThatReturns(optionalParam: Parameter<String?>, willProduce: (Stubber<String?>) -> Void) -> MethodStub {
+        public static func simpleMehtodThatReturns(optionalParam: Parameter<String?>, willProduce: (Stubber<String?>) -> Void) -> MethodStub {
             let willReturn: [String?] = []
-			let given: Given = { return Given(method: .m_simpleMehtodThatReturns__optionalParam_optionalParam(`optionalParam`), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_simpleMehtodThatReturns__optionalParam_optionalParam(`optionalParam`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (String?).self)
 			willProduce(stubber)
 			return given
         }
     }
 
-    struct Verify {
+    public struct Verify {
         fileprivate var method: MethodType
 
-        static func simpleMethod() -> Verify { return Verify(method: .m_simpleMethod)}
-        static func simpleMehtodThatReturns() -> Verify { return Verify(method: .m_simpleMehtodThatReturns)}
-        static func simpleMehtodThatReturns(param: Parameter<String>) -> Verify { return Verify(method: .m_simpleMehtodThatReturns__param_param(`param`))}
-        static func simpleMehtodThatReturns(optionalParam: Parameter<String?>) -> Verify { return Verify(method: .m_simpleMehtodThatReturns__optionalParam_optionalParam(`optionalParam`))}
+        public static func simpleMethod() -> Verify { return Verify(method: .m_simpleMethod)}
+        public static func simpleMehtodThatReturns() -> Verify { return Verify(method: .m_simpleMehtodThatReturns)}
+        public static func simpleMehtodThatReturns(param: Parameter<String>) -> Verify { return Verify(method: .m_simpleMehtodThatReturns__param_param(`param`))}
+        public static func simpleMehtodThatReturns(optionalParam: Parameter<String?>) -> Verify { return Verify(method: .m_simpleMehtodThatReturns__optionalParam_optionalParam(`optionalParam`))}
     }
 
-    struct Perform {
+    public struct Perform {
         fileprivate var method: MethodType
         var performs: Any
 
-        static func simpleMethod(perform: @escaping () -> Void) -> Perform {
+        public static func simpleMethod(perform: @escaping () -> Void) -> Perform {
             return Perform(method: .m_simpleMethod, performs: perform)
         }
-        static func simpleMehtodThatReturns(perform: @escaping () -> Void) -> Perform {
+        public static func simpleMehtodThatReturns(perform: @escaping () -> Void) -> Perform {
             return Perform(method: .m_simpleMehtodThatReturns, performs: perform)
         }
-        static func simpleMehtodThatReturns(param: Parameter<String>, perform: @escaping (String) -> Void) -> Perform {
+        public static func simpleMehtodThatReturns(param: Parameter<String>, perform: @escaping (String) -> Void) -> Perform {
             return Perform(method: .m_simpleMehtodThatReturns__param_param(`param`), performs: perform)
         }
-        static func simpleMehtodThatReturns(optionalParam: Parameter<String?>, perform: @escaping (String?) -> Void) -> Perform {
+        public static func simpleMehtodThatReturns(optionalParam: Parameter<String?>, perform: @escaping (String?) -> Void) -> Perform {
             return Perform(method: .m_simpleMehtodThatReturns__optionalParam_optionalParam(`optionalParam`), performs: perform)
         }
     }
@@ -9245,13 +9577,13 @@ class SimpleProtocolWithMethodsMock: SimpleProtocolWithMethods, Mock {
 
     public func verify(_ method: Verify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
         let invocations = matchingCalls(method.method)
-        MockyAssert(count.matches(invocations.count), "Expeced: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
     }
 
     private func addInvocation(_ call: MethodType) {
         invocations.append(call)
     }
-    private func methodReturnValue(_ method: MethodType) throws -> Product {
+    private func methodReturnValue(_ method: MethodType) throws -> StubProduct {
         let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
         let matched = candidates.first(where: { $0.isValid && MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
         guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
@@ -9291,7 +9623,7 @@ class SimpleProtocolWithMethodsMock: SimpleProtocolWithMethods, Mock {
 }
 
 // MARK: - SimpleProtocolWithProperties
-class SimpleProtocolWithPropertiesMock: SimpleProtocolWithProperties, Mock {
+open class SimpleProtocolWithPropertiesMock: SimpleProtocolWithProperties, Mock {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
         self.sequencingPolicy = sequencingPolicy
         self.stubbingPolicy = stubbingPolicy
@@ -9308,9 +9640,9 @@ class SimpleProtocolWithPropertiesMock: SimpleProtocolWithProperties, Mock {
     private var file: StaticString?
     private var line: UInt?
 
-    typealias PropertyStub = Given
-    typealias MethodStub = Given
-    typealias SubscriptStub = Given
+    public typealias PropertyStub = Given
+    public typealias MethodStub = Given
+    public typealias SubscriptStub = Given
 
     /// Convenience method - call setupMock() to extend debug information when failure occurs
     public func setupMock(file: StaticString = #file, line: UInt = #line) {
@@ -9318,32 +9650,32 @@ class SimpleProtocolWithPropertiesMock: SimpleProtocolWithProperties, Mock {
         self.line = line
     }
 
-    var property: String {
+    public var property: String {
 		get {	invocations.append(.p_property_get); return __p_property ?? givenGetterValue(.p_property_get, "SimpleProtocolWithPropertiesMock - stub value for property was not defined") }
 		set {	invocations.append(.p_property_set(.value(newValue))); __p_property = newValue }
 	}
 	private var __p_property: (String)?
 
-    var weakProperty: AnyObject! {
+    public var weakProperty: AnyObject! {
 		get {	invocations.append(.p_weakProperty_get); return __p_weakProperty ?? optionalGivenGetterValue(.p_weakProperty_get, "SimpleProtocolWithPropertiesMock - stub value for weakProperty was not defined") }
 		set {	invocations.append(.p_weakProperty_set(.value(newValue))); __p_weakProperty = newValue }
 	}
 	private var __p_weakProperty: (AnyObject)?
 
-    var propertyGetOnly: String {
+    public var propertyGetOnly: String {
 		get {	invocations.append(.p_propertyGetOnly_get); return __p_propertyGetOnly ?? givenGetterValue(.p_propertyGetOnly_get, "SimpleProtocolWithPropertiesMock - stub value for propertyGetOnly was not defined") }
 		@available(*, deprecated, message: "Using setters on readonly variables is deprecated, and will be removed in 3.1. Use Given to define stubbed property return value.")
 		set {	__p_propertyGetOnly = newValue }
 	}
 	private var __p_propertyGetOnly: (String)?
 
-    var propertyOptional: Int? {
+    public var propertyOptional: Int? {
 		get {	invocations.append(.p_propertyOptional_get); return __p_propertyOptional ?? optionalGivenGetterValue(.p_propertyOptional_get, "SimpleProtocolWithPropertiesMock - stub value for propertyOptional was not defined") }
 		set {	invocations.append(.p_propertyOptional_set(.value(newValue))); __p_propertyOptional = newValue }
 	}
 	private var __p_propertyOptional: (Int)?
 
-    var propertyImplicit: Int! {
+    public var propertyImplicit: Int! {
 		get {	invocations.append(.p_propertyImplicit_get); return __p_propertyImplicit ?? optionalGivenGetterValue(.p_propertyImplicit_get, "SimpleProtocolWithPropertiesMock - stub value for propertyImplicit was not defined") }
 		set {	invocations.append(.p_propertyImplicit_set(.value(newValue))); __p_propertyImplicit = newValue }
 	}
@@ -9395,47 +9727,47 @@ class SimpleProtocolWithPropertiesMock: SimpleProtocolWithProperties, Mock {
         }
     }
 
-    class Given: StubbedMethod {
+    open class Given: StubbedMethod {
         fileprivate var method: MethodType
 
-        private init(method: MethodType, products: [Product]) {
+        private init(method: MethodType, products: [StubProduct]) {
             self.method = method
             super.init(products)
         }
 
-        static func property(getter defaultValue: String...) -> PropertyStub {
-            return Given(method: .p_property_get, products: defaultValue.map({ Product.return($0) }))
+        public static func property(getter defaultValue: String...) -> PropertyStub {
+            return Given(method: .p_property_get, products: defaultValue.map({ StubProduct.return($0 as Any) }))
         }
-        static func weakProperty(getter defaultValue: AnyObject?...) -> PropertyStub {
-            return Given(method: .p_weakProperty_get, products: defaultValue.map({ Product.return($0) }))
+        public static func weakProperty(getter defaultValue: AnyObject?...) -> PropertyStub {
+            return Given(method: .p_weakProperty_get, products: defaultValue.map({ StubProduct.return($0 as Any) }))
         }
-        static func propertyGetOnly(getter defaultValue: String...) -> PropertyStub {
-            return Given(method: .p_propertyGetOnly_get, products: defaultValue.map({ Product.return($0) }))
+        public static func propertyGetOnly(getter defaultValue: String...) -> PropertyStub {
+            return Given(method: .p_propertyGetOnly_get, products: defaultValue.map({ StubProduct.return($0 as Any) }))
         }
-        static func propertyOptional(getter defaultValue: Int?...) -> PropertyStub {
-            return Given(method: .p_propertyOptional_get, products: defaultValue.map({ Product.return($0) }))
+        public static func propertyOptional(getter defaultValue: Int?...) -> PropertyStub {
+            return Given(method: .p_propertyOptional_get, products: defaultValue.map({ StubProduct.return($0 as Any) }))
         }
-        static func propertyImplicit(getter defaultValue: Int?...) -> PropertyStub {
-            return Given(method: .p_propertyImplicit_get, products: defaultValue.map({ Product.return($0) }))
+        public static func propertyImplicit(getter defaultValue: Int?...) -> PropertyStub {
+            return Given(method: .p_propertyImplicit_get, products: defaultValue.map({ StubProduct.return($0 as Any) }))
         }
 
     }
 
-    struct Verify {
+    public struct Verify {
         fileprivate var method: MethodType
 
-        static var property: Verify { return Verify(method: .p_property_get) }
-		static func property(set newValue: Parameter<String>) -> Verify { return Verify(method: .p_property_set(newValue)) }
-        static var weakProperty: Verify { return Verify(method: .p_weakProperty_get) }
-		static func weakProperty(set newValue: Parameter<AnyObject?>) -> Verify { return Verify(method: .p_weakProperty_set(newValue)) }
-        static var propertyGetOnly: Verify { return Verify(method: .p_propertyGetOnly_get) }
-        static var propertyOptional: Verify { return Verify(method: .p_propertyOptional_get) }
-		static func propertyOptional(set newValue: Parameter<Int?>) -> Verify { return Verify(method: .p_propertyOptional_set(newValue)) }
-        static var propertyImplicit: Verify { return Verify(method: .p_propertyImplicit_get) }
-		static func propertyImplicit(set newValue: Parameter<Int?>) -> Verify { return Verify(method: .p_propertyImplicit_set(newValue)) }
+        public static var property: Verify { return Verify(method: .p_property_get) }
+		public static func property(set newValue: Parameter<String>) -> Verify { return Verify(method: .p_property_set(newValue)) }
+        public static var weakProperty: Verify { return Verify(method: .p_weakProperty_get) }
+		public static func weakProperty(set newValue: Parameter<AnyObject?>) -> Verify { return Verify(method: .p_weakProperty_set(newValue)) }
+        public static var propertyGetOnly: Verify { return Verify(method: .p_propertyGetOnly_get) }
+        public static var propertyOptional: Verify { return Verify(method: .p_propertyOptional_get) }
+		public static func propertyOptional(set newValue: Parameter<Int?>) -> Verify { return Verify(method: .p_propertyOptional_set(newValue)) }
+        public static var propertyImplicit: Verify { return Verify(method: .p_propertyImplicit_get) }
+		public static func propertyImplicit(set newValue: Parameter<Int?>) -> Verify { return Verify(method: .p_propertyImplicit_set(newValue)) }
     }
 
-    struct Perform {
+    public struct Perform {
         fileprivate var method: MethodType
         var performs: Any
 
@@ -9452,13 +9784,13 @@ class SimpleProtocolWithPropertiesMock: SimpleProtocolWithProperties, Mock {
 
     public func verify(_ method: Verify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
         let invocations = matchingCalls(method.method)
-        MockyAssert(count.matches(invocations.count), "Expeced: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
     }
 
     private func addInvocation(_ call: MethodType) {
         invocations.append(call)
     }
-    private func methodReturnValue(_ method: MethodType) throws -> Product {
+    private func methodReturnValue(_ method: MethodType) throws -> StubProduct {
         let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
         let matched = candidates.first(where: { $0.isValid && MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
         guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
@@ -9498,7 +9830,7 @@ class SimpleProtocolWithPropertiesMock: SimpleProtocolWithProperties, Mock {
 }
 
 // MARK: - UserNetworkType
-class UserNetworkTypeMock: UserNetworkType, Mock {
+open class UserNetworkTypeMock: UserNetworkType, Mock {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
         self.sequencingPolicy = sequencingPolicy
         self.stubbingPolicy = stubbingPolicy
@@ -9515,9 +9847,9 @@ class UserNetworkTypeMock: UserNetworkType, Mock {
     private var file: StaticString?
     private var line: UInt?
 
-    typealias PropertyStub = Given
-    typealias MethodStub = Given
-    typealias SubscriptStub = Given
+    public typealias PropertyStub = Given
+    public typealias MethodStub = Given
+    public typealias SubscriptStub = Given
 
     /// Convenience method - call setupMock() to extend debug information when failure occurs
     public func setupMock(file: StaticString = #file, line: UInt = #line) {
@@ -9529,29 +9861,29 @@ class UserNetworkTypeMock: UserNetworkType, Mock {
 
 
 
-    required init(config: NetworkConfig) { }
+    public required init(config: NetworkConfig) { }
 
-    required init(baseUrl: String) { }
+    public required init(baseUrl: String) { }
 
-    func getUser(for id: String, completion: (User?) -> Void) {
+    open func getUser(for id: String, completion: (User?) -> Void) {
         addInvocation(.m_getUser__for_idcompletion_completion(Parameter<String>.value(`id`), Parameter<(User?) -> Void>.any))
 		let perform = methodPerformValue(.m_getUser__for_idcompletion_completion(Parameter<String>.value(`id`), Parameter<(User?) -> Void>.any)) as? (String, (User?) -> Void) -> Void
 		perform?(`id`, `completion`)
     }
 
-    func getUserEscaping(for id: String, completion: @escaping (User?,Error?) -> Void) {
+    open func getUserEscaping(for id: String, completion: @escaping (User?,Error?) -> Void) {
         addInvocation(.m_getUserEscaping__for_idcompletion_completion(Parameter<String>.value(`id`), Parameter<(User?,Error?) -> Void>.value(`completion`)))
 		let perform = methodPerformValue(.m_getUserEscaping__for_idcompletion_completion(Parameter<String>.value(`id`), Parameter<(User?,Error?) -> Void>.value(`completion`))) as? (String, @escaping (User?,Error?) -> Void) -> Void
 		perform?(`id`, `completion`)
     }
 
-    func doSomething(prop: @autoclosure () -> String) {
+    open func doSomething(prop: @autoclosure () -> String) {
         addInvocation(.m_doSomething__prop_prop(Parameter<() -> String>.any))
 		let perform = methodPerformValue(.m_doSomething__prop_prop(Parameter<() -> String>.any)) as? (@autoclosure () -> String) -> Void
 		perform?(`prop`)
     }
 
-    func testDefaultValues(value: String) {
+    open func testDefaultValues(value: String) {
         addInvocation(.m_testDefaultValues__value_value(Parameter<String>.value(`value`)))
 		let perform = methodPerformValue(.m_testDefaultValues__value_value(Parameter<String>.value(`value`))) as? (String) -> Void
 		perform?(`value`)
@@ -9594,10 +9926,10 @@ class UserNetworkTypeMock: UserNetworkType, Mock {
         }
     }
 
-    class Given: StubbedMethod {
+    open class Given: StubbedMethod {
         fileprivate var method: MethodType
 
-        private init(method: MethodType, products: [Product]) {
+        private init(method: MethodType, products: [StubProduct]) {
             self.method = method
             super.init(products)
         }
@@ -9605,29 +9937,29 @@ class UserNetworkTypeMock: UserNetworkType, Mock {
 
     }
 
-    struct Verify {
+    public struct Verify {
         fileprivate var method: MethodType
 
-        static func getUser(for id: Parameter<String>, completion: Parameter<(User?) -> Void>) -> Verify { return Verify(method: .m_getUser__for_idcompletion_completion(`id`, `completion`))}
-        static func getUserEscaping(for id: Parameter<String>, completion: Parameter<(User?,Error?) -> Void>) -> Verify { return Verify(method: .m_getUserEscaping__for_idcompletion_completion(`id`, `completion`))}
-        static func doSomething(prop: Parameter<() -> String>) -> Verify { return Verify(method: .m_doSomething__prop_prop(`prop`))}
-        static func testDefaultValues(value: Parameter<String>) -> Verify { return Verify(method: .m_testDefaultValues__value_value(`value`))}
+        public static func getUser(for id: Parameter<String>, completion: Parameter<(User?) -> Void>) -> Verify { return Verify(method: .m_getUser__for_idcompletion_completion(`id`, `completion`))}
+        public static func getUserEscaping(for id: Parameter<String>, completion: Parameter<(User?,Error?) -> Void>) -> Verify { return Verify(method: .m_getUserEscaping__for_idcompletion_completion(`id`, `completion`))}
+        public static func doSomething(prop: Parameter<() -> String>) -> Verify { return Verify(method: .m_doSomething__prop_prop(`prop`))}
+        public static func testDefaultValues(value: Parameter<String>) -> Verify { return Verify(method: .m_testDefaultValues__value_value(`value`))}
     }
 
-    struct Perform {
+    public struct Perform {
         fileprivate var method: MethodType
         var performs: Any
 
-        static func getUser(for id: Parameter<String>, completion: Parameter<(User?) -> Void>, perform: @escaping (String, (User?) -> Void) -> Void) -> Perform {
+        public static func getUser(for id: Parameter<String>, completion: Parameter<(User?) -> Void>, perform: @escaping (String, (User?) -> Void) -> Void) -> Perform {
             return Perform(method: .m_getUser__for_idcompletion_completion(`id`, `completion`), performs: perform)
         }
-        static func getUserEscaping(for id: Parameter<String>, completion: Parameter<(User?,Error?) -> Void>, perform: @escaping (String, @escaping (User?,Error?) -> Void) -> Void) -> Perform {
+        public static func getUserEscaping(for id: Parameter<String>, completion: Parameter<(User?,Error?) -> Void>, perform: @escaping (String, @escaping (User?,Error?) -> Void) -> Void) -> Perform {
             return Perform(method: .m_getUserEscaping__for_idcompletion_completion(`id`, `completion`), performs: perform)
         }
-        static func doSomething(prop: Parameter<() -> String>, perform: @escaping (@autoclosure () -> String) -> Void) -> Perform {
+        public static func doSomething(prop: Parameter<() -> String>, perform: @escaping (@autoclosure () -> String) -> Void) -> Perform {
             return Perform(method: .m_doSomething__prop_prop(`prop`), performs: perform)
         }
-        static func testDefaultValues(value: Parameter<String>, perform: @escaping (String) -> Void) -> Perform {
+        public static func testDefaultValues(value: Parameter<String>, perform: @escaping (String) -> Void) -> Perform {
             return Perform(method: .m_testDefaultValues__value_value(`value`), performs: perform)
         }
     }
@@ -9643,13 +9975,13 @@ class UserNetworkTypeMock: UserNetworkType, Mock {
 
     public func verify(_ method: Verify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
         let invocations = matchingCalls(method.method)
-        MockyAssert(count.matches(invocations.count), "Expeced: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
     }
 
     private func addInvocation(_ call: MethodType) {
         invocations.append(call)
     }
-    private func methodReturnValue(_ method: MethodType) throws -> Product {
+    private func methodReturnValue(_ method: MethodType) throws -> StubProduct {
         let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
         let matched = candidates.first(where: { $0.isValid && MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
         guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
@@ -9689,7 +10021,7 @@ class UserNetworkTypeMock: UserNetworkType, Mock {
 }
 
 // MARK: - UserStorageType
-class UserStorageTypeMock: UserStorageType, Mock {
+open class UserStorageTypeMock: UserStorageType, Mock {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
         self.sequencingPolicy = sequencingPolicy
         self.stubbingPolicy = stubbingPolicy
@@ -9706,9 +10038,9 @@ class UserStorageTypeMock: UserStorageType, Mock {
     private var file: StaticString?
     private var line: UInt?
 
-    typealias PropertyStub = Given
-    typealias MethodStub = Given
-    typealias SubscriptStub = Given
+    public typealias PropertyStub = Given
+    public typealias MethodStub = Given
+    public typealias SubscriptStub = Given
 
     /// Convenience method - call setupMock() to extend debug information when failure occurs
     public func setupMock(file: StaticString = #file, line: UInt = #line) {
@@ -9720,7 +10052,7 @@ class UserStorageTypeMock: UserStorageType, Mock {
 
 
 
-    func surname(for name: String) -> String {
+    open func surname(for name: String) -> String {
         addInvocation(.m_surname__for_name(Parameter<String>.value(`name`)))
 		let perform = methodPerformValue(.m_surname__for_name(Parameter<String>.value(`name`))) as? (String) -> Void
 		perform?(`name`)
@@ -9734,7 +10066,7 @@ class UserStorageTypeMock: UserStorageType, Mock {
 		return __value
     }
 
-    func storeUser(name: String, surname: String) {
+    open func storeUser(name: String, surname: String) {
         addInvocation(.m_storeUser__name_namesurname_surname(Parameter<String>.value(`name`), Parameter<String>.value(`surname`)))
 		let perform = methodPerformValue(.m_storeUser__name_namesurname_surname(Parameter<String>.value(`name`), Parameter<String>.value(`surname`))) as? (String, String) -> Void
 		perform?(`name`, `surname`)
@@ -9766,42 +10098,42 @@ class UserStorageTypeMock: UserStorageType, Mock {
         }
     }
 
-    class Given: StubbedMethod {
+    open class Given: StubbedMethod {
         fileprivate var method: MethodType
 
-        private init(method: MethodType, products: [Product]) {
+        private init(method: MethodType, products: [StubProduct]) {
             self.method = method
             super.init(products)
         }
 
 
-        static func surname(for name: Parameter<String>, willReturn: String...) -> MethodStub {
-            return Given(method: .m_surname__for_name(`name`), products: willReturn.map({ Product.return($0) }))
+        public static func surname(for name: Parameter<String>, willReturn: String...) -> MethodStub {
+            return Given(method: .m_surname__for_name(`name`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        static func surname(for name: Parameter<String>, willProduce: (Stubber<String>) -> Void) -> MethodStub {
+        public static func surname(for name: Parameter<String>, willProduce: (Stubber<String>) -> Void) -> MethodStub {
             let willReturn: [String] = []
-			let given: Given = { return Given(method: .m_surname__for_name(`name`), products: willReturn.map({ Product.return($0) })) }()
+			let given: Given = { return Given(method: .m_surname__for_name(`name`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (String).self)
 			willProduce(stubber)
 			return given
         }
     }
 
-    struct Verify {
+    public struct Verify {
         fileprivate var method: MethodType
 
-        static func surname(for name: Parameter<String>) -> Verify { return Verify(method: .m_surname__for_name(`name`))}
-        static func storeUser(name: Parameter<String>, surname: Parameter<String>) -> Verify { return Verify(method: .m_storeUser__name_namesurname_surname(`name`, `surname`))}
+        public static func surname(for name: Parameter<String>) -> Verify { return Verify(method: .m_surname__for_name(`name`))}
+        public static func storeUser(name: Parameter<String>, surname: Parameter<String>) -> Verify { return Verify(method: .m_storeUser__name_namesurname_surname(`name`, `surname`))}
     }
 
-    struct Perform {
+    public struct Perform {
         fileprivate var method: MethodType
         var performs: Any
 
-        static func surname(for name: Parameter<String>, perform: @escaping (String) -> Void) -> Perform {
+        public static func surname(for name: Parameter<String>, perform: @escaping (String) -> Void) -> Perform {
             return Perform(method: .m_surname__for_name(`name`), performs: perform)
         }
-        static func storeUser(name: Parameter<String>, surname: Parameter<String>, perform: @escaping (String, String) -> Void) -> Perform {
+        public static func storeUser(name: Parameter<String>, surname: Parameter<String>, perform: @escaping (String, String) -> Void) -> Perform {
             return Perform(method: .m_storeUser__name_namesurname_surname(`name`, `surname`), performs: perform)
         }
     }
@@ -9817,13 +10149,13 @@ class UserStorageTypeMock: UserStorageType, Mock {
 
     public func verify(_ method: Verify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
         let invocations = matchingCalls(method.method)
-        MockyAssert(count.matches(invocations.count), "Expeced: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
     }
 
     private func addInvocation(_ call: MethodType) {
         invocations.append(call)
     }
-    private func methodReturnValue(_ method: MethodType) throws -> Product {
+    private func methodReturnValue(_ method: MethodType) throws -> StubProduct {
         let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
         let matched = candidates.first(where: { $0.isValid && MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
         guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }

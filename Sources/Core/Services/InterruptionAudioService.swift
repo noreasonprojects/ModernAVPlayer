@@ -66,6 +66,8 @@ final class ModernAVPlayerInterruptionAudioService {
             onInterruptionBegan?()
         case .ended:
             onInterruptionEnded?()
+        @unknown default:
+            ModernAVPlayerLogger.instance.log(message: "Unknown InterruptionType case", domain: .error)
         }
     }
 }

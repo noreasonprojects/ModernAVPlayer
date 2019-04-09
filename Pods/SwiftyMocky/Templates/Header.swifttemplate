@@ -1,0 +1,57 @@
+<%# ================================================== SwiftLint -%><%_ -%>
+<%_ for rule in swiftLintRules(argument) { -%>
+    <%_ %><%= rule %>
+<%_ } -%>
+<%# ================================================== SwiftLint (aggregated argument) -%><%_ -%>
+<%_ if let swiftyMockyArgs = argument["swiftyMocky"] as? [String: Any], let rules = swiftyMockyArgs["excludedSwiftLintRules"] as? [String] { -%>
+    <%_ for rule in rules { -%>
+    <%_ %>//swiftlint:disable <%= rule %>
+    <%_ } -%>
+<%_ } -%>
+
+#if MockyCustom
+import SwiftyMocky
+<%# ================================================== IMPORTS InAPP -%><%_ -%>
+    <%_ for projectImport in projectImports(argument) { -%>
+        <%_ %><%= projectImport %>
+    <%_ } -%>
+    <%# ============================ IMPORTS InAPP (aggregated argument) -%><%_ -%>
+    <%_ if let swiftyMockyArgs = argument["swiftyMocky"] as? [String: Any] { -%>
+        <%_ for projectImport in imports(swiftyMockyArgs) { -%>
+            <%_ %><%= projectImport %>
+        <%_ } -%>
+    <%_ } -%>
+
+    public final class MockyAssertion {
+        public static var handler: ((Bool, String, StaticString, UInt) -> Void)?
+    }
+
+    func MockyAssert(_ expression: @autoclosure () -> Bool, _ message: @autoclosure () -> String = "Verification failed", file: StaticString = #file, line: UInt = #line) {
+        guard let handler = MockyAssertion.handler else {
+            assert(expression, message, file: file, line: line)
+            return
+        }
+
+        handler(expression(), message(), file, line)
+    }
+#elseif Mocky
+import SwiftyMocky
+import XCTest
+<%# ================================================== IMPORTS -%><%_ -%>
+    <%_ for projectImport in projectImports(argument) { -%>
+        <%_ %><%= projectImport %>
+    <%_ } -%>
+    <%# ============================ IMPORTS InAPP (aggregated argument) -%><%_ -%>
+    <%_ if let swiftyMockyArgs = argument["swiftyMocky"] as? [String: Any] { -%>
+        <%_ for projectImport in projectImports(swiftyMockyArgs) { -%>
+            <%_ %><%= projectImport %>
+        <%_ } -%>
+    <%_ } -%>
+
+    func MockyAssert(_ expression: @autoclosure () -> Bool, _ message: @autoclosure () -> String = "Verification failed", file: StaticString = #file, line: UInt = #line) {
+        XCTAssert(expression(), message(), file: file, line: line)
+    }
+#else
+import Sourcery
+import SourceryRuntime
+#endif

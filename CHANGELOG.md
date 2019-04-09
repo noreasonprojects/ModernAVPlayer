@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 * Feature:
 	* Support swift 5
 * Dependencies:
+	* [gem] Cocoapods -> 1.6.1
 	* [pod] Quick -> 2.0.0
 	* [pod] Nimble -> 8.0.1
 	* [pod] RxSwift -> 4.5.0

@@ -490,7 +490,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-ModernAVPlayer_Tests/Pods-ModernAVPlayer_Tests-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-ModernAVPlayer_Tests/Pods-ModernAVPlayer_Tests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
 				"${BUILT_PRODUCTS_DIR}/Quick/Quick.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyMocky/SwiftyMocky.framework",
@@ -503,7 +503,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ModernAVPlayer_Tests/Pods-ModernAVPlayer_Tests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ModernAVPlayer_Tests/Pods-ModernAVPlayer_Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8A8AD8ED6850E535248D8646 /* [CP] Check Pods Manifest.lock */ = {
@@ -530,7 +530,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-ModernAVPlayer_Example/Pods-ModernAVPlayer_Example-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-ModernAVPlayer_Example/Pods-ModernAVPlayer_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ModernAVPlayer/ModernAVPlayer.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
@@ -543,7 +543,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ModernAVPlayer_Example/Pods-ModernAVPlayer_Example-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ModernAVPlayer_Example/Pods-ModernAVPlayer_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E12CC72E216AE67600109A16 /* SwiftyMocky */ = {
@@ -776,7 +776,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 20190123.1745;
+				CURRENT_PROJECT_VERSION = 20190409.1521;
 				DEVELOPMENT_TEAM = UNDCF9JXB2;
 				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -798,7 +798,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 20190123.1745;
+				CURRENT_PROJECT_VERSION = 20190409.1521;
 				DEVELOPMENT_TEAM = 95Y7JDW7K4;
 				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

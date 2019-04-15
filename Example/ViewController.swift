@@ -310,7 +310,9 @@ extension ViewController {
         // Animate state working loader
         player.rx.state
             .observeOn(concurrentBackgroundScheduler)
-            .map(isPlayerWorking)
+            .map { [unowned self] in
+                self.isPlayerWorking(state: $0)
+            }
             .asDriver(onErrorJustReturn: false)
             .drive(indicatorView.rx.isAnimating)
             .disposed(by: disposeBag)

@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 
 ---
+## [X.X.X]
+* Fix:
+	* Retain cycle in example project
+
 ## [1.2.0]
 * Feature:
 	* Support swift 5

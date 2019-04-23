@@ -60,6 +60,24 @@ struct Data {
             ModernAVPlayerMedia(url: localClip, type: .clip, metadata: meta2)
         ]
     }()
+    
+    static let invalidMedia: PlayerMedia = {
+        let url = URL(fileURLWithPath: Bundle.main.path(forResource: "noreason", ofType: "txt")!)
+        return ModernAVPlayerMedia(url: url, type: .clip, metadata: nil)
+    }()
+    
+    static func media(with liveUrlString: String?) -> PlayerMedia {
+        guard
+            let liveUrl = URL(string: liveUrlString ?? "")
+            else { assertionFailure(); return invalidMedia }
+        
+        let meta = ModernAVPlayerMediaMetadata(title: "Custom Url live",
+                                               albumTitle: "Album0",
+                                               artist: "Artist0",
+                                               image: UIImage(named: "sennaLive")?.jpegData(compressionQuality: 1.0))
+        
+        return ModernAVPlayerMedia(url: liveUrl, type: .stream(isLive: true), metadata: meta)
+    }
 }
 
 final class ViewController: UIViewController {
@@ -80,7 +98,9 @@ final class ViewController: UIViewController {
     @IBOutlet weak private var debugMessage: UILabel!
     @IBOutlet weak private var currentMedia: UILabel!
     @IBOutlet weak private var loopMode: UIButton!
-
+    @IBOutlet weak var customLiveUrlSwitch: UISwitch!
+    @IBOutlet weak var customLiveUrlTextField: UITextField!
+    
     // MARK: - Player Commands
     @IBAction func toggleLoopMode(_ sender: UIButton) {
         player.loopMode = !player.loopMode
@@ -118,21 +138,28 @@ final class ViewController: UIViewController {
     }
 
     @IBAction func loadMedia(_ sender: UIButton) {
-        let media = Data.medias[sender.tag % 3]
+        let media: PlayerMedia
+        if(customLiveUrlSwitch.isOn && sender.tag == 0) {
+            media = Data.media(with: customLiveUrlTextField.text)
+        } else {
+            media = Data.medias[sender.tag % 3]
+        }
         loadMedia(media, autostart: sender.tag < 3)
         currentMedia.text = player.currentMedia?.description
     }
 
     @IBAction func loadInvalidFormat(_ sender: UIButton) {
-        let url = URL(fileURLWithPath: Bundle.main.path(forResource: "noreason", ofType: "txt")!)
-        let media = ModernAVPlayerMedia(url: url, type: .clip, metadata: nil)
-        loadMedia(media, autostart: true)
+        loadMedia(Data.invalidMedia, autostart: true)
     }
     
     @IBAction func loadInvalidRemoteUrl(_ sender: UIButton) {
         let url = URL(string: "foo://noreason")!
         let media = ModernAVPlayerMedia(url: url, type: .clip, metadata: nil)
         loadMedia(media, autostart: true)
+    }
+    
+    @IBAction func customLiveSwitchChanged(_ sender: Any) {
+        customLiveUrlTextField.isEnabled = (sender as! UISwitch).isOn
     }
     
     // MARK: - Input

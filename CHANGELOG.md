@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 
 ---
+## [X.X.X]
+* Improvement:
+	* Add a new textfield in example app to test custom urls
+
 ## [1.2.1]
 * Dependency:
 	* [gem] Cocoapods -> 1.7.5
@@ -12,6 +16,7 @@ All notable changes to this project will be documented in this file.
 	* [pod] RxCococa -> 5.0
 	* [pod] SwiftLint -> 0.35.0
 	* [pod] SwiftyMocky -> 3.3.4
+
 * Fix:
 	* Retain cycle in example project
 

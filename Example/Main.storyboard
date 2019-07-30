@@ -204,6 +204,9 @@
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="BYZ-38-t0r" id="caO-8o-b2D"/>
+                                                </connections>
                                             </textField>
                                         </subviews>
                                     </stackView>

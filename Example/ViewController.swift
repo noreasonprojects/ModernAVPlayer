@@ -186,6 +186,7 @@ final class ViewController: UIViewController {
         currentMedia.text = nil
         setupRemoteCustomRemoteCommand()
         initSliderObservables()
+        addDismissKeyboardTouch()
         bindPlayerRxAttibutes()
     }
 
@@ -202,6 +203,10 @@ final class ViewController: UIViewController {
         ]
         isSliderSeeking = Observable.merge(sliderEvents).startWith(false)
         sliderValue = slider.rx.value
+    }
+    
+    private func addDismissKeyboardTouch() {
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
     }
 
     // MARK: - Player
@@ -358,5 +363,13 @@ extension ViewController {
                 self?.setDebugMessage("end time: \(endTime)")
             })
             .disposed(by: disposeBag)
+    }
+}
+
+extension ViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+
+        return true
     }
 }

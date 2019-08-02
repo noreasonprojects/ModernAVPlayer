@@ -30,6 +30,9 @@ import RxCocoa
 import UIKit
 
 struct Data {
+    
+    struct InvalidMediaError: Error { }
+
     static let medias: [PlayerMedia] = {
         guard
             let liveUrl = URL(string: "http://direct.franceinter.fr/live/franceinter-midfi.mp3"),
@@ -66,10 +69,10 @@ struct Data {
         return ModernAVPlayerMedia(url: url, type: .clip, metadata: nil)
     }()
     
-    static func media(with liveUrlString: String?) -> PlayerMedia {
+    static func media(with liveUrlString: String?) throws -> PlayerMedia {
         guard
             let liveUrl = URL(string: liveUrlString ?? "")
-            else { assertionFailure(); return invalidMedia }
+            else { throw Data.InvalidMediaError() }
         
         let meta = ModernAVPlayerMediaMetadata(title: "Custom Url live",
                                                albumTitle: "Album0",
@@ -140,7 +143,11 @@ final class ViewController: UIViewController {
     @IBAction func loadMedia(_ sender: UIButton) {
         let media: PlayerMedia
         if(customLiveUrlSwitch.isOn && sender.tag == 0) {
-            media = Data.media(with: customLiveUrlTextField.text)
+            guard let customMedia = try? Data.media(with: customLiveUrlTextField.text) else {
+                showInvalidUrlAlert()
+                return
+            }
+            media = customMedia
         } else {
             media = Data.medias[sender.tag % 3]
         }
@@ -189,6 +196,8 @@ final class ViewController: UIViewController {
         addDismissKeyboardTouch()
         bindPlayerRxAttibutes()
     }
+    
+    // MARK: - Private Setup
 
     private func setupRemoteCustomRemoteCommand() {
         let commands = RemoteCommandFactoryExample(player: player).defaultCommands
@@ -207,6 +216,12 @@ final class ViewController: UIViewController {
     
     private func addDismissKeyboardTouch() {
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
+    }
+    
+    private func showInvalidUrlAlert() {
+        let alert = UIAlertController(title: nil, message: "Custom Stream URL is invalid", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
 
     // MARK: - Player

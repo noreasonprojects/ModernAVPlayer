@@ -32,10 +32,10 @@
 
         ],
         "RxSwift": [
-          "~> 4.5"
+          "~> 5.0"
         ],
         "RxCocoa": [
-          "~> 4.5"
+          "~> 5.0"
         ]
       },
       "source_files": "Sources/RxModernAVPlayer/**/*"

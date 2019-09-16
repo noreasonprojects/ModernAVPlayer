@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ## [X.X.X]
 * Dependency:
 	* [gem] Cocoapods -> 1.7.5
+	* [gem] Fastlane -> 2.131.0
 	* [pod] RxSwift -> 5.0
 	* [pod] RxCococa -> 5.0
 * Fix:

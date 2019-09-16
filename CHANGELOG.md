@@ -3,6 +3,9 @@ All notable changes to this project will be documented in this file.
 
 ---
 ## [X.X.X]
+* Dependency:
+	* [pod] RxSwift -> 5.0
+	* [pod] RxCococa -> 5.0
 * Fix:
 	* Retain cycle in example project
 

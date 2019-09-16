@@ -4,6 +4,49 @@ All changes to SwiftyMocky project will be documented in this file.
 
 -----
 
+## __3.3.4__ / 2019
+
+#### Fixed:
+* Fixed problem with not printable ASCI characters by @TimeDelta
+* Fixed problem with missing generic constraints by @demalex
+
+-----
+
+## __3.3.3__ / 2019
+
+#### Fixed:
+* Swift 5.0 issue with custom assertions not compiling
+
+-----
+
+## __3.3.2__ / 2019
+
+#### Fixed:
+* Fixed problems with multiple mocks being part of same target (@davidmtamas)
+
+-----
+
+## __3.3.1__ / 2019
+
+#### Fixed:
+* Removed leftover swift version setting to 5.0 from SwiftyPrototype target, causing problems for Carthage setup
+
+-----
+
+## __3.3.0__ / 2019
+
+#### Added:
+* Added SwiftyMocky CLI, simplifying setup and providing `doctor` feature
+* Added support for Swift Package Manager (SPM)
+* New configuration file for working with multiple targets - `Mockfile`
+* Fixed redundant constraints for methods with stripped generics (@tarbayev)
+* Added Argument captor (@timedelta)
+#### Removed:
+* dropped Swift 4.0, SwiftyMocky now requires Swift 4.1+
+* dropped MockyCustom subspec, new subspec is Prototyping, for Carthage SwiftyPrototype
+
+-----
+
 ## __3.2.0__ / 2019
 
 #### Added:

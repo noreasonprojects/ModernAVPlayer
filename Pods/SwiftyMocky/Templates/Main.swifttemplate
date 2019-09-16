@@ -1,12 +1,15 @@
 <%# ================================================== SETUP -%><%_ -%>
 <%_ var all = types.all
-    all += types.protocols.map { $0 } -%>
+    all += types.protocols.map { $0 }
+    var mockedCount = 0
+-%>
 
 <%_ for type in all { -%><%_ -%>
 <%_ let autoMockable: Bool = type.inheritedTypes.contains("AutoMockable") || type.annotations["AutoMockable"] != nil
     let protocolToDecorate = types.protocols.first(where: { $0.name == (type.annotations["mock"] as? String) })
     let inlineMockable = protocolToDecorate != nil
     guard let aProtocol = autoMockable ? type : protocolToDecorate else { continue }
+    mockedCount += 1
     let associatedTypes: [String]? = Helpers.extractAssociatedTypes(from: aProtocol)
     let genericTypesModifier: String = Helpers.extractGenericTypesModifier(associatedTypes)
     let genericTypesConstraints: String = Helpers.extractGenericTypesConstraints(associatedTypes)
@@ -16,6 +19,10 @@
     let allStaticVariables = uniques(variables: aProtocol.allVariables.filter({ $0.isStatic }))
     let containsStaticVariables = !allStaticVariables.isEmpty
     let allMethods = uniques(methods: aProtocol.allMethods.filter({ !$0.isStatic }))
+    let accessModifier: String = {
+        let selfConstrained = allMethods.map(wrapMethod).contains(where: { $0.returnsGenericConstrainedToSelf || $0.parametersContainsSelf })
+        return selfConstrained ? "public final" : "open"
+    }()
     let allMethodsForMethodType = uniquesWithoutGenericConstraints(methods: aProtocol.allMethods.filter({ !$0.isStatic }))
     let allStaticMethods = uniques(methods: aProtocol.allMethods.filter({ $0.isStatic }))
     let allStaticMethodsForMethodType = uniquesWithoutGenericConstraints(methods: aProtocol.allMethods.filter({ $0.isStatic }))
@@ -23,8 +30,9 @@
     let conformsToMock = !allMethods.isEmpty || !allVariables.isEmpty -%><%_ -%><%_ -%>
 <%_ if autoMockable { -%>
 // MARK: - <%= type.name %>
-open class <%= type.name %>Mock<%= genericTypesModifier %>:<%= type.annotations["ObjcProtocol"] != nil ? " NSObject," : "" %> <%= type.name %>, Mock<%= conformsToStaticMock ? ", StaticMock" : "" %><%= genericTypesConstraints %> {
+<%= accessModifier %> class <%= type.name %>Mock<%= genericTypesModifier %>:<%= type.annotations["ObjcProtocol"] != nil ? " NSObject," : "" %> <%= type.name %>, Mock<%= conformsToStaticMock ? ", StaticMock" : "" %><%= genericTypesConstraints %> {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
+        SwiftyMockyTestObserver.setup()
         self.sequencingPolicy = sequencingPolicy
         self.stubbingPolicy = stubbingPolicy
         self.file = file
@@ -490,3 +498,7 @@ open class <%= type.name %>Mock<%= genericTypesModifier %>:<%= type.annotations[
 // sourcery:end
 <%_ } -%>
 <% } -%>
+<%_ if mockedCount == 0 { -%>
+// SwiftyMocky: no AutoMockable found.
+// Please define and inherit from AutoMockable, or annotate protocols to be mocked
+<%_ } -%>

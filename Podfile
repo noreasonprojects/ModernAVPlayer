@@ -10,7 +10,7 @@ target 'ModernAVPlayer_Example' do
 
 	pod 'Quick', '2.0.0'
 	pod 'Nimble', '8.0.1'
-	pod 'SwiftyMocky', '3.2.0'
+	pod 'SwiftyMocky', '3.3.4'
 
   end
 end

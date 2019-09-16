@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file.
 	* [pod] RxSwift -> 5.0
 	* [pod] RxCococa -> 5.0
 	* [pod] SwiftLint -> 0.35.0
+	* [pod] SwiftyMocky -> 3.3.4
 * Fix:
 	* Retain cycle in example project
 

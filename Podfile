@@ -8,7 +8,7 @@ target 'ModernAVPlayer_Example' do
   target 'ModernAVPlayer_Tests' do
     inherit! :search_paths
 
-	pod 'Quick', '2.0.0'
+	pod 'Quick', '2.2.0'
 	pod 'Nimble', '8.0.4'
 	pod 'SwiftyMocky', '3.3.4'
 

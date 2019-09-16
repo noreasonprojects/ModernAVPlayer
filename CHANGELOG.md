@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 * Dependency:
 	* [gem] Cocoapods -> 1.7.5
 	* [gem] Fastlane -> 2.131.0
+	* [pod] Quick -> 2.2.0
 	* [pod] Nimble -> 8.0.4
 	* [pod] RxSwift -> 5.0
 	* [pod] RxCococa -> 5.0

@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 
 ---
-## [X.X.X]
+## [1.2.1]
 * Dependency:
 	* [gem] Cocoapods -> 1.7.5
 	* [gem] Fastlane -> 2.131.0

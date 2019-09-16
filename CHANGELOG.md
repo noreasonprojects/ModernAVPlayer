@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 ---
 ## [X.X.X]
 * Dependency:
+	* [gem] Cocoapods -> 1.7.5
 	* [pod] RxSwift -> 5.0
 	* [pod] RxCococa -> 5.0
 * Fix:

@@ -45,6 +45,7 @@ struct ModernAVPlayerURLSessionDataTaskFactory: URLSessionDataTaskFactory {
                      completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> CustomURLSessionDataTask {
         let sessionConfig = URLSessionConfiguration.ephemeral
         sessionConfig.timeoutIntervalForRequest = timeout
+        // TODO: Add delegate to get bandwidth https://stackoverflow.com/questions/33887748/right-way-of-determining-internet-speed-in-ios-8
         return URLSession(configuration: sessionConfig).dataTask(with: url, completionHandler: completionHandler)
     }
 }

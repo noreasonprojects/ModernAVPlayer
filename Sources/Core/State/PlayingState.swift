@@ -128,8 +128,20 @@ final class PlayingState: PlayerState {
         guard let media = context.currentMedia
             else { assertionFailure("media should exist"); return }
 
-        itemPlaybackObservingService.onPlaybackStalled = { [weak self] in self?.redirectToWaitingForNetworkState() }
-        itemPlaybackObservingService.onFailedToPlayToEndTime = { [weak self] in self?.redirectToWaitingForNetworkState() }
+        itemPlaybackObservingService.onPlaybackStalled = { [weak self] in
+            let accessLog = self?.context.currentItem?.accessLog().debugDescription ?? ""
+            let errorLog = self?.context.currentItem?.errorLog().debugDescription ?? ""
+            let playbackStalledErrorMessage = "PlaybackStalled: -\n" + accessLog + errorLog
+            self?.context.delegate?.playerContext(debugMessage: playbackStalledErrorMessage)
+            self?.redirectToWaitingForNetworkState()
+        }
+        itemPlaybackObservingService.onFailedToPlayToEndTime = { [weak self] in
+            let accessLog = self?.context.currentItem?.accessLog().debugDescription ?? ""
+            let errorLog = self?.context.currentItem?.errorLog().debugDescription ?? ""
+            let playbackStalledErrorMessage = "FailedPlay: -\n" + accessLog + errorLog
+            self?.context.delegate?.playerContext(debugMessage: playbackStalledErrorMessage)
+            self?.redirectToWaitingForNetworkState()
+        }
         itemPlaybackObservingService.onPlayToEndTime = { [weak self, context] in
             context.delegate?.playerContext(didItemPlayToEndTime: context.currentTime)
             context.plugins.forEach { $0.didItemPlayToEndTime(media: media, endTime: context.currentTime) }

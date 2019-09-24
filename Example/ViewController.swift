@@ -142,7 +142,7 @@ final class ViewController: UIViewController {
 
     @IBAction func loadMedia(_ sender: UIButton) {
         let media: PlayerMedia
-        if(customLiveUrlSwitch.isOn && sender.tag == 0) {
+        if(customLiveUrlSwitch.isOn && [0,3].contains(sender.tag)) {
             guard let customMedia = try? Data.media(with: customLiveUrlTextField.text) else {
                 showInvalidUrlAlert()
                 return

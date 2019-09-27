@@ -10,6 +10,7 @@
 		45494C7B209378B3005C3DE2 /* ItemPlaybackObservingServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45494C7A209378B2005C3DE2 /* ItemPlaybackObservingServiceTests.swift */; };
 		45D49A5F2093656100F63ACF /* MockObservingRateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D49A5E2093656100F63ACF /* MockObservingRateService.swift */; };
 		45D49A6320936CC100F63ACF /* MockItemPlaybackObservingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D49A6220936CC100F63ACF /* MockItemPlaybackObservingService.swift */; };
+		50E99FA4233E51BF001155C9 /* Observable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E99FA3233E51BF001155C9 /* Observable+Extension.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
@@ -80,6 +81,7 @@
 		45494C7A209378B2005C3DE2 /* ItemPlaybackObservingServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemPlaybackObservingServiceTests.swift; sourceTree = "<group>"; };
 		45D49A5E2093656100F63ACF /* MockObservingRateService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockObservingRateService.swift; sourceTree = "<group>"; };
 		45D49A6220936CC100F63ACF /* MockItemPlaybackObservingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockItemPlaybackObservingService.swift; sourceTree = "<group>"; };
+		50E99FA3233E51BF001155C9 /* Observable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Observable+Extension.swift"; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* ModernAVPlayer_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ModernAVPlayer_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
+				50E99FA3233E51BF001155C9 /* Observable+Extension.swift */,
 			);
 			name = "Example for ModernAVPlayer";
 			path = Example;
@@ -587,6 +590,7 @@
 			files = (
 				E10B20E721C9557E00924E1D /* PlayerConfigurationExample.swift in Sources */,
 				E10B20E521C94F7400924E1D /* RemoteCommandExample.swift in Sources */,
+				50E99FA4233E51BF001155C9 /* Observable+Extension.swift in Sources */,
 				E12D8B5620792AE300A84A5E /* ViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 			);

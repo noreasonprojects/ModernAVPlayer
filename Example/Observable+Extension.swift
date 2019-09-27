@@ -3,8 +3,8 @@
 // ModernAVPlayer
 // Copyright (c) 2018 Raphael Ankierman <raphael.ankierman@radiofrance.com>
 //
-// PlayerError.swift
-// Created by raphael ankierman on 24/02/2018.
+// Observable+Extension
+// Created by Albert Arroyo on 27/09/2019.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,15 +24,18 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import Foundation
+import RxSwift
+import RxCocoa
 
-public enum PlayerError: Error {
-    case loadingFailed
-    case playbackStalled
-    case bufferingFailed
-}
-
-public struct PlayerErrorInfo {
-    public let errorCode: Int
-    public let errorMessage: String?
+extension Observable {
+    func asDriverIgnoringErrors() -> Driver<E> {
+        return map { $0 as E? }
+            .asDriver(onErrorJustReturn: nil)
+            .flatMap {element in
+                guard let value = element else {
+                    return Driver<E>.empty()
+                }
+                return Driver<E>.just(value)
+        }
+    }
 }

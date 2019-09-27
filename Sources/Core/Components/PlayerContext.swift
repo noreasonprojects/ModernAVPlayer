@@ -32,7 +32,7 @@ protocol PlayerContextDelegate: class {
     func playerContext(didCurrentTimeChange currentTime: Double)
     func playerContext(didItemDurationChange itemDuration: Double?)
     func playerContext(debugMessage: String?)
-    func playerContext(errorCode: Int, errorMessage: String?)
+    func playerContext(errorInfo: PlayerErrorInfo)
     func playerContext(didItemPlayToEndTime endTime: Double)
 }
 

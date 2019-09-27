@@ -351,7 +351,7 @@
                         <outlet property="currentMedia" destination="7Gy-B6-gKR" id="vo8-BN-4vf"/>
                         <outlet property="debugMessage" destination="HC6-AH-Aas" id="h5S-3b-Xho"/>
                         <outlet property="durationLabel" destination="KRz-I4-0Ph" id="tmC-JR-VaH"/>
-                        <outlet property="errorInfo" destination="nYX-za-AQ4" id="3I0-QM-sMl"/>
+                        <outlet property="errorInfoLabel" destination="nYX-za-AQ4" id="kSF-SD-7Kd"/>
                         <outlet property="indicatorView" destination="hOt-Ep-6tZ" id="aey-8w-ecu"/>
                         <outlet property="loopMode" destination="Khp-HV-pPz" id="xXT-At-czx"/>
                         <outlet property="playerStateLabel" destination="Zzn-sM-nLM" id="sKb-zj-tM4"/>

@@ -161,7 +161,8 @@ final class PlayingState: PlayerState {
             let firstEvent = errorLog.events[0]
             let errorCode = firstEvent.errorStatusCode
             let errorMessage = firstEvent.errorComment
-            delegate?.playerContext(errorCode: errorCode, errorMessage: errorMessage)
+            let errorInfo = PlayerErrorInfo(errorCode: errorCode, errorMessage: errorMessage)
+            delegate?.playerContext(errorInfo: errorInfo)
         }
     }
     

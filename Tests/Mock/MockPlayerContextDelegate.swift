@@ -40,6 +40,7 @@ final class MockPlayerContextDelegate: PlayerContextDelegate {
     }
     
     func playerContext(debugMessage: String?) { }
+    func playerContext(errorCode: Int, errorMessage: String?) { }
     
     private (set) var didItemPlayToEndTimeCallCount = 0
     private (set) var didItemPlayToEndTimeLastParam: Double?

@@ -46,12 +46,13 @@ ModernAVPlayerDelegate {
     }
     
     // MARK: - Proxy Subjects
-    
+
     lazy var stateSubject = PublishSubject<ModernAVPlayer.State>()
     lazy var currentMediaSubject = PublishSubject<PlayerMedia?>()
     lazy var currentTimeSubject = PublishSubject<Double>()
     lazy var itemDurationSubject = PublishSubject<Double?>()
     lazy var debugMessageSubject = PublishSubject<String?>()
+    lazy var errorSubject = PublishSubject<(Int, String?)>()
     lazy var itemPlayToEndTimeSubject = PublishSubject<Double>()
     
     // MARK: - ModernAVPlayerDelegate
@@ -74,6 +75,10 @@ ModernAVPlayerDelegate {
     
     public func modernAVPlayer(_ player: ModernAVPlayer, debugMessage: String?) {
         debugMessageSubject.onNext(debugMessage)
+    }
+
+    public func modernAVPlayer(_ player: ModernAVPlayer, errorCode: Int, errorMessage: String?) {
+        errorSubject.onNext((errorCode, errorMessage))
     }
     
     public func modernAVPlayer(_ player: ModernAVPlayer, didItemPlayToEndTime endTime: Double) {

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -272,7 +272,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Khp-HV-pPz">
-                                <rect key="frame" x="148.5" y="364" width="77" height="30"/>
+                                <rect key="frame" x="149" y="364" width="77" height="30"/>
                                 <state key="normal" title="Loop mode"/>
                                 <connections>
                                     <action selector="toggleLoopMode:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bHe-Ye-ceN"/>
@@ -310,24 +310,35 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error Code: - Error Message: " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nYX-za-AQ4" userLabel="ErrorInfo">
+                                <rect key="frame" x="40" y="566.5" width="295" height="17"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
+                                <color key="textColor" red="1" green="0.27549239650000001" blue="0.20477252609999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="7Gy-B6-gKR" firstAttribute="top" relation="greaterThanOrEqual" secondItem="nYX-za-AQ4" secondAttribute="bottom" constant="20" id="0f3-M5-LYI"/>
                             <constraint firstItem="KVE-RP-I9x" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="67k-ub-07w"/>
                             <constraint firstItem="HC6-AH-Aas" firstAttribute="top" secondItem="occ-dY-JEv" secondAttribute="bottom" constant="60" id="Bn9-Yg-Lha"/>
                             <constraint firstItem="occ-dY-JEv" firstAttribute="top" secondItem="KVE-RP-I9x" secondAttribute="bottom" constant="6" id="CZP-q9-4jW"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="yda-Pn-Lut" secondAttribute="trailing" constant="10" id="Hom-ug-JoT"/>
+                            <constraint firstItem="nYX-za-AQ4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="JjE-G6-4ao"/>
                             <constraint firstItem="jRa-DP-PJB" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="LIJ-Re-9qV"/>
                             <constraint firstItem="yda-Pn-Lut" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="MHB-O1-RRH"/>
                             <constraint firstItem="yda-Pn-Lut" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="O5a-7y-4hT"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="KVE-RP-I9x" secondAttribute="trailing" constant="40" id="R5k-8T-Qmj"/>
+                            <constraint firstItem="nYX-za-AQ4" firstAttribute="top" secondItem="HC6-AH-Aas" secondAttribute="bottom" constant="20" id="TM8-th-8Ho"/>
                             <constraint firstItem="DLZ-YT-GWw" firstAttribute="top" secondItem="jRa-DP-PJB" secondAttribute="bottom" constant="40" id="XYz-bY-5rx"/>
+                            <constraint firstItem="nYX-za-AQ4" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="dXW-xq-daN"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="7Gy-B6-gKR" secondAttribute="trailing" constant="10" id="eD0-hu-w1B"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="7Gy-B6-gKR" secondAttribute="bottom" constant="10" id="fSQ-Np-U6l"/>
                             <constraint firstItem="DLZ-YT-GWw" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fTb-45-u2p"/>
                             <constraint firstItem="KVE-RP-I9x" firstAttribute="top" secondItem="Khp-HV-pPz" secondAttribute="bottom" constant="16" id="kPN-VZ-7H0"/>
                             <constraint firstItem="Khp-HV-pPz" firstAttribute="top" secondItem="DLZ-YT-GWw" secondAttribute="bottom" constant="14" id="nFc-Tf-BNH"/>
                             <constraint firstItem="HC6-AH-Aas" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="qxW-mJ-01q"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="nYX-za-AQ4" secondAttribute="trailing" constant="40" id="tAE-mQ-M5Y"/>
                             <constraint firstItem="occ-dY-JEv" firstAttribute="leading" secondItem="KVE-RP-I9x" secondAttribute="leading" id="uMz-4n-kl4"/>
                             <constraint firstItem="occ-dY-JEv" firstAttribute="trailing" secondItem="KVE-RP-I9x" secondAttribute="trailing" id="w1r-FY-sk0"/>
                             <constraint firstItem="jRa-DP-PJB" firstAttribute="top" secondItem="yda-Pn-Lut" secondAttribute="bottom" constant="60" id="wsn-J3-pkf"/>
@@ -340,6 +351,7 @@
                         <outlet property="currentMedia" destination="7Gy-B6-gKR" id="vo8-BN-4vf"/>
                         <outlet property="debugMessage" destination="HC6-AH-Aas" id="h5S-3b-Xho"/>
                         <outlet property="durationLabel" destination="KRz-I4-0Ph" id="tmC-JR-VaH"/>
+                        <outlet property="errorInfo" destination="nYX-za-AQ4" id="3I0-QM-sMl"/>
                         <outlet property="indicatorView" destination="hOt-Ep-6tZ" id="aey-8w-ecu"/>
                         <outlet property="loopMode" destination="Khp-HV-pPz" id="xXT-At-czx"/>
                         <outlet property="playerStateLabel" destination="Zzn-sM-nLM" id="sKb-zj-tM4"/>

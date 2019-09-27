@@ -6,6 +6,10 @@ All notable changes to this project will be documented in this file.
 * Fix:
 	* Retain cycle in example project
 
+## [1.3.0]
+* Feature:
+        * Exposed new delegate method `playerContext(errorCode: Int, errorMessage: String?)`
+
 ## [1.2.0]
 * Feature:
 	* Support swift 5

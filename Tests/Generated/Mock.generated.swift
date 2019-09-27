@@ -1,47 +1,21 @@
-// Generated using Sourcery 0.16.0 — https://github.com/krzysztofzablocki/Sourcery
+// Generated using Sourcery 0.17.0 — https://github.com/krzysztofzablocki/Sourcery
 // DO NOT EDIT
 
 
-//swiftlint:disable force_cast
-//swiftlint:disable function_body_length
-//swiftlint:disable line_length
-//swiftlint:disable vertical_whitespace
+// Generated with SwiftyMocky 3.3.4
 
-#if MockyCustom
 import SwiftyMocky
-import AVFoundation
-@testable import ModernAVPlayer
-
-    public final class MockyAssertion {
-        public static var handler: ((Bool, String, StaticString, UInt) -> Void)?
-    }
-
-    func MockyAssert(_ expression: @autoclosure () -> Bool, _ message: @autoclosure () -> String = "Verification failed", file: StaticString = #file, line: UInt = #line) {
-        guard let handler = MockyAssertion.handler else {
-            assert(expression, message, file: file, line: line)
-            return
-        }
-
-        handler(expression(), message(), file, line)
-    }
-#elseif Mocky
-import SwiftyMocky
+#if !MockyCustom
 import XCTest
+#endif
 import AVFoundation
 @testable import ModernAVPlayer
-
-    func MockyAssert(_ expression: @autoclosure () -> Bool, _ message: @autoclosure () -> String = "Verification failed", file: StaticString = #file, line: UInt = #line) {
-        XCTAssert(expression(), message(), file: file, line: line)
-    }
-#else
-import Sourcery
-import SourceryRuntime
-#endif
 
 
 // MARK: - AudioSessionService
 open class AudioSessionServiceMock: AudioSessionService, Mock {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
+        SwiftyMockyTestObserver.setup()
         self.sequencingPolicy = sequencingPolicy
         self.stubbingPolicy = stubbingPolicy
         self.file = file
@@ -196,6 +170,7 @@ open class AudioSessionServiceMock: AudioSessionService, Mock {
 // MARK: - NowPlaying
 open class NowPlayingMock: NowPlaying, Mock {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
+        SwiftyMockyTestObserver.setup()
         self.sequencingPolicy = sequencingPolicy
         self.stubbingPolicy = stubbingPolicy
         self.file = file
@@ -354,6 +329,7 @@ open class NowPlayingMock: NowPlaying, Mock {
 // MARK: - PlaybackObservingService
 open class PlaybackObservingServiceMock: PlaybackObservingService, Mock {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
+        SwiftyMockyTestObserver.setup()
         self.sequencingPolicy = sequencingPolicy
         self.stubbingPolicy = stubbingPolicy
         self.file = file
@@ -530,6 +506,7 @@ open class PlaybackObservingServiceMock: PlaybackObservingService, Mock {
 // MARK: - PlayerContext
 open class PlayerContextMock: PlayerContext, Mock {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
+        SwiftyMockyTestObserver.setup()
         self.sequencingPolicy = sequencingPolicy
         self.stubbingPolicy = stubbingPolicy
         self.file = file
@@ -981,6 +958,7 @@ open class PlayerContextMock: PlayerContext, Mock {
 // MARK: - PlayerMedia
 open class PlayerMediaMock: PlayerMedia, Mock {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
+        SwiftyMockyTestObserver.setup()
         self.sequencingPolicy = sequencingPolicy
         self.stubbingPolicy = stubbingPolicy
         self.file = file
@@ -1240,6 +1218,7 @@ open class PlayerMediaMock: PlayerMedia, Mock {
 // MARK: - PlayerPlugin
 open class PlayerPluginMock: PlayerPlugin, Mock {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
+        SwiftyMockyTestObserver.setup()
         self.sequencingPolicy = sequencingPolicy
         self.stubbingPolicy = stubbingPolicy
         self.file = file

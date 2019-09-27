@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="yda-Pn-Lut">
-                                <rect key="frame" x="10" y="40" width="355" height="150"/>
+                                <rect key="frame" x="10" y="40" width="355" height="226"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="Od9-ZL-As6" userLabel="Stack LiveLoading">
                                         <rect key="frame" x="0.0" y="0.0" width="355" height="36"/>
@@ -179,8 +179,39 @@
                                             </button>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="fhj-ml-7RV" userLabel="Failed Format">
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AMx-Sx-0V7">
                                         <rect key="frame" x="0.0" y="114" width="355" height="36"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use Live Stream Custom URL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2kL-gu-7N4">
+                                                <rect key="frame" x="0.0" y="0.0" width="306" height="36"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ZtD-IK-000">
+                                                <rect key="frame" x="306" y="0.0" width="51" height="36"/>
+                                                <connections>
+                                                    <action selector="customLiveSwitchChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="8qC-KA-bG6"/>
+                                                </connections>
+                                            </switch>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TM4-s7-nYe">
+                                        <rect key="frame" x="0.0" y="152" width="355" height="36"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ras-Q6-Mjm">
+                                                <rect key="frame" x="0.0" y="0.0" width="355" height="36"/>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="BYZ-38-t0r" id="caO-8o-b2D"/>
+                                                </connections>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="fhj-ml-7RV" userLabel="Failed Format">
+                                        <rect key="frame" x="0.0" y="190" width="355" height="36"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t1C-7K-w1g">
                                                 <rect key="frame" x="0.0" y="0.0" width="159.5" height="36"/>
@@ -205,6 +236,7 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="8x4-uI-Bz7" firstAttribute="height" secondItem="hgg-3y-CVQ" secondAttribute="height" id="2P0-y8-Z20"/>
+                                    <constraint firstItem="TM4-s7-nYe" firstAttribute="width" secondItem="Od9-ZL-As6" secondAttribute="width" id="6DS-X0-Wet"/>
                                     <constraint firstItem="Ept-rB-68d" firstAttribute="height" secondItem="hgg-3y-CVQ" secondAttribute="height" id="8Wm-Kx-Se9"/>
                                     <constraint firstItem="Od9-ZL-As6" firstAttribute="leading" secondItem="yda-Pn-Lut" secondAttribute="leading" id="9bm-ey-AXt"/>
                                     <constraint firstItem="Tzn-Eq-bbA" firstAttribute="height" secondItem="hgg-3y-CVQ" secondAttribute="height" id="GuB-zW-J3m"/>
@@ -222,10 +254,11 @@
                                     <constraint firstItem="9wB-1E-eaa" firstAttribute="height" secondItem="hgg-3y-CVQ" secondAttribute="height" id="vLC-ex-6z4"/>
                                     <constraint firstAttribute="trailing" secondItem="cVD-Fm-THi" secondAttribute="trailing" id="yPo-Gv-UNd"/>
                                     <constraint firstItem="W0n-zi-Rid" firstAttribute="width" secondItem="fS1-Ba-3ND" secondAttribute="width" id="z0Q-fy-eBU"/>
+                                    <constraint firstItem="AMx-Sx-0V7" firstAttribute="width" secondItem="Od9-ZL-As6" secondAttribute="width" id="zYu-zh-YQ0"/>
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="jRa-DP-PJB">
-                                <rect key="frame" x="98" y="250" width="179.5" height="30"/>
+                                <rect key="frame" x="98" y="326" width="179.5" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="default state" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zzn-sM-nLM" userLabel="StateValue">
                                         <rect key="frame" x="0.0" y="0.0" width="149.5" height="30"/>
@@ -239,7 +272,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="DLZ-YT-GWw" userLabel="Stack Commands">
-                                <rect key="frame" x="30.5" y="320" width="314" height="30"/>
+                                <rect key="frame" x="30.5" y="396" width="314" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fqp-f4-dhf">
                                         <rect key="frame" x="0.0" y="0.0" width="65" height="30"/>
@@ -279,10 +312,10 @@
                                 </connections>
                             </button>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="KVE-RP-I9x">
-                                <rect key="frame" x="38" y="410" width="299" height="31"/>
+                                <rect key="frame" x="38" y="486" width="299" height="31"/>
                             </slider>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="occ-dY-JEv" userLabel="SliderLabels">
-                                <rect key="frame" x="40" y="446" width="295" height="21"/>
+                                <rect key="frame" x="40" y="522" width="295" height="21"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="current time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZvH-SF-VsK" userLabel="CurrentTime">
                                         <rect key="frame" x="0.0" y="0.0" width="147.5" height="21"/>
@@ -299,7 +332,7 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DebugMsg" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HC6-AH-Aas" userLabel="DebugMessage">
-                                <rect key="frame" x="146" y="527" width="83" height="19.5"/>
+                                <rect key="frame" x="146" y="603" width="83" height="19.5"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
                                 <color key="textColor" red="1" green="0.27549239646099244" blue="0.20477252612872443" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -349,6 +382,8 @@
                     </view>
                     <connections>
                         <outlet property="currentMedia" destination="7Gy-B6-gKR" id="vo8-BN-4vf"/>
+                        <outlet property="customLiveUrlSwitch" destination="ZtD-IK-000" id="QQg-kG-eFF"/>
+                        <outlet property="customLiveUrlTextField" destination="Ras-Q6-Mjm" id="Zdw-er-fnr"/>
                         <outlet property="debugMessage" destination="HC6-AH-Aas" id="h5S-3b-Xho"/>
                         <outlet property="durationLabel" destination="KRz-I4-0Ph" id="tmC-JR-VaH"/>
                         <outlet property="errorInfoLabel" destination="nYX-za-AQ4" id="kSF-SD-7Kd"/>

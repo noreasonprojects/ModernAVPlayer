@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'ModernAVPlayer'
-  s.version          = '1.2.0'
+  s.version          = '1.2.1'
   s.summary          = 'ModernAVPlayer is an audio persistence AVPlayer wrapper'
   s.description      = <<-DESC
 ModernAVPlayer is an ongoing project that aims to create a more usable audio video player with readable status and network persistence option.
@@ -20,8 +20,8 @@ ModernAVPlayer is an ongoing project that aims to create a more usable audio vid
 
   s.subspec 'RxSwift' do |ss|
     ss.dependency 'ModernAVPlayer/Core'
-    ss.dependency "RxSwift", "~> 4.5"
-    ss.dependency "RxCocoa", "~> 4.5"
+    ss.dependency "RxSwift", "~> 5.0"
+    ss.dependency "RxCocoa", "~> 5.0"
     ss.source_files = 'Sources/RxModernAVPlayer/**/*'
   end
 

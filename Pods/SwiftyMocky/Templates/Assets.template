@@ -1,0 +1,62 @@
+import Foundation
+import PathKit
+
+public enum Assets {
+
+    public enum swifttemplate {
+        public static let allTypes: AssetFile = Files.allTypes
+        public static let mock: AssetFile = Files.mock
+        public static let prototype: AssetFile = Files.prototype
+    }
+
+    public static var mockfileTemplate: String { return """
+        # Mockfile is a SwiftyMocky YAML configuration file
+        sourceryCommand: null
+        unit.tests.mock:    # Name of your mock
+          sources:
+            include:        # All swift files here would be scanned for AutoMockable types
+                - ./MyApp
+            exclude: []     # You can exclude files as well
+          output:           # Generated mock file location and name
+            ./MyAppUnitTests/Mocks/Mock.generated.swift
+          targets:          # Specify XCodeproj targets for your mock. Used for linting
+            - MyAppUnitTests
+          testable: []      # Specify  list of imported/@testable modules referenced in mock
+          import: []        # You can use 'swiftymocky autoimport' to update it automatically
+        """
+    }
+}
+
+public protocol AssetFile {
+
+    var name: String { get }
+    var data: Data { get }
+
+    func write(to path: Path) throws
+}
+
+private struct File: AssetFile {
+
+    let name: String
+    let contents: String
+    var data: Data { return Data(base64Encoded: contents) ?? Data() }
+
+    func write(to path: Path) throws {
+        try path.write(data)
+    }
+}
+
+private enum Files {
+    static let allTypes = File(
+        name: "AllTypes.swifttemplate",
+        contents: "{{ AllTypes.swifttemplate }}"
+    )
+    static let mock = File(
+        name: "Mock.swifttemplate",
+        contents: "{{ Mock.swifttemplate }}"
+    )
+    static let prototype = File(
+        name: "Mock.swifttemplate",
+        contents: "{{ Prototype.swifttemplate }}"
+    )
+}

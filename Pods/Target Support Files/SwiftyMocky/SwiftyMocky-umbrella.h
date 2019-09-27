@@ -10,7 +10,6 @@
 #endif
 #endif
 
-#import "MockySetup.h"
 
 FOUNDATION_EXPORT double SwiftyMockyVersionNumber;
 FOUNDATION_EXPORT const unsigned char SwiftyMockyVersionString[];

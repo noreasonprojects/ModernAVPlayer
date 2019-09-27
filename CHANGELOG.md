@@ -3,6 +3,20 @@ All notable changes to this project will be documented in this file.
 
 ---
 ## [X.X.X]
+* Improvement:
+	* Add a new textfield in example app to test custom urls
+
+## [1.2.1]
+* Dependency:
+	* [gem] Cocoapods -> 1.7.5
+	* [gem] Fastlane -> 2.131.0
+	* [pod] Quick -> 2.2.0
+	* [pod] Nimble -> 8.0.4
+	* [pod] RxSwift -> 5.0
+	* [pod] RxCococa -> 5.0
+	* [pod] SwiftLint -> 0.35.0
+	* [pod] SwiftyMocky -> 3.3.4
+
 * Fix:
 	* Retain cycle in example project
 

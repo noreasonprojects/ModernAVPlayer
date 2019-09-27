@@ -30,6 +30,9 @@ import RxCocoa
 import UIKit
 
 struct Data {
+    
+    struct InvalidMediaError: Error { }
+
     static let medias: [PlayerMedia] = {
         guard
             let liveUrl = URL(string: "http://direct.franceinter.fr/live/franceinter-midfi.mp3"),
@@ -60,6 +63,24 @@ struct Data {
             ModernAVPlayerMedia(url: localClip, type: .clip, metadata: meta2)
         ]
     }()
+    
+    static let invalidMedia: PlayerMedia = {
+        let url = URL(fileURLWithPath: Bundle.main.path(forResource: "noreason", ofType: "txt")!)
+        return ModernAVPlayerMedia(url: url, type: .clip, metadata: nil)
+    }()
+    
+    static func media(with liveUrlString: String?) throws -> PlayerMedia {
+        guard
+            let liveUrl = URL(string: liveUrlString ?? "")
+            else { throw Data.InvalidMediaError() }
+        
+        let meta = ModernAVPlayerMediaMetadata(title: "Custom Url live",
+                                               albumTitle: "Album0",
+                                               artist: "Artist0",
+                                               image: UIImage(named: "sennaLive")?.jpegData(compressionQuality: 1.0))
+        
+        return ModernAVPlayerMedia(url: liveUrl, type: .stream(isLive: true), metadata: meta)
+    }
 }
 
 final class ViewController: UIViewController {
@@ -81,7 +102,9 @@ final class ViewController: UIViewController {
     @IBOutlet weak private var errorInfoLabel: UILabel!
     @IBOutlet weak private var currentMedia: UILabel!
     @IBOutlet weak private var loopMode: UIButton!
-
+    @IBOutlet weak var customLiveUrlSwitch: UISwitch!
+    @IBOutlet weak var customLiveUrlTextField: UITextField!
+    
     // MARK: - Player Commands
     @IBAction func toggleLoopMode(_ sender: UIButton) {
         player.loopMode = !player.loopMode
@@ -119,21 +142,32 @@ final class ViewController: UIViewController {
     }
 
     @IBAction func loadMedia(_ sender: UIButton) {
-        let media = Data.medias[sender.tag % 3]
+        let media: PlayerMedia
+        if(customLiveUrlSwitch.isOn && [0,3].contains(sender.tag)) {
+            guard let customMedia = try? Data.media(with: customLiveUrlTextField.text) else {
+                showInvalidUrlAlert()
+                return
+            }
+            media = customMedia
+        } else {
+            media = Data.medias[sender.tag % 3]
+        }
         loadMedia(media, autostart: sender.tag < 3)
         currentMedia.text = player.currentMedia?.description
     }
 
     @IBAction func loadInvalidFormat(_ sender: UIButton) {
-        let url = URL(fileURLWithPath: Bundle.main.path(forResource: "noreason", ofType: "txt")!)
-        let media = ModernAVPlayerMedia(url: url, type: .clip, metadata: nil)
-        loadMedia(media, autostart: true)
+        loadMedia(Data.invalidMedia, autostart: true)
     }
     
     @IBAction func loadInvalidRemoteUrl(_ sender: UIButton) {
         let url = URL(string: "foo://noreason")!
         let media = ModernAVPlayerMedia(url: url, type: .clip, metadata: nil)
         loadMedia(media, autostart: true)
+    }
+    
+    @IBAction func customLiveSwitchChanged(_ sender: Any) {
+        customLiveUrlTextField.isEnabled = (sender as! UISwitch).isOn
     }
     
     // MARK: - Input
@@ -161,8 +195,11 @@ final class ViewController: UIViewController {
         currentMedia.text = nil
         setupRemoteCustomRemoteCommand()
         initSliderObservables()
+        addDismissKeyboardTouch()
         bindPlayerRxAttibutes()
     }
+    
+    // MARK: - Private Setup
 
     private func setupRemoteCustomRemoteCommand() {
         let commands = RemoteCommandFactoryExample(player: player).defaultCommands
@@ -177,6 +214,16 @@ final class ViewController: UIViewController {
         ]
         isSliderSeeking = Observable.merge(sliderEvents).startWith(false)
         sliderValue = slider.rx.value
+    }
+    
+    private func addDismissKeyboardTouch() {
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
+    }
+    
+    private func showInvalidUrlAlert() {
+        let alert = UIAlertController(title: nil, message: "Custom Stream URL is invalid", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
 
     // MARK: - Player
@@ -346,5 +393,13 @@ extension ViewController {
                 self?.setDebugMessage("end time: \(endTime)")
             })
             .disposed(by: disposeBag)
+    }
+}
+
+extension ViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+
+        return true
     }
 }

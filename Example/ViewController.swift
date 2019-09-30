@@ -99,7 +99,6 @@ final class ViewController: UIViewController {
     @IBOutlet weak private var slider: UISlider!
     @IBOutlet weak private var indicatorView: UIActivityIndicatorView!
     @IBOutlet weak private var debugMessage: UILabel!
-    @IBOutlet weak private var errorInfoLabel: UILabel!
     @IBOutlet weak private var currentMedia: UILabel!
     @IBOutlet weak private var loopMode: UIButton!
     @IBOutlet weak var customLiveUrlSwitch: UISwitch!
@@ -191,7 +190,6 @@ final class ViewController: UIViewController {
         super.viewDidLoad()
         
         debugMessage.text = nil
-        errorInfoLabel.text = nil
         currentMedia.text = nil
         setupRemoteCustomRemoteCommand()
         initSliderObservables()
@@ -246,14 +244,6 @@ final class ViewController: UIViewController {
         UIView.animate(withDuration: 1.5) { self.debugMessage.alpha = 0 }
     }
 
-    private func setErrorInfo(errorInfo: PlayerErrorInfo) {
-        let errorMsg = errorInfo.errorMessage ?? ""
-        let errorCode = errorInfo.errorCode
-        errorInfoLabel.text = "Error Code: \(errorCode) - Error Message: \(errorMsg)"
-        errorInfoLabel.alpha = 1.0
-        UIView.animate(withDuration: 1.5) { self.errorInfoLabel.alpha = 0 }
-    }
-    
     private func formatPosition(_ position: PositionRequest) -> String? {
         switch position {
         case .currentTime(let time, _):
@@ -351,11 +341,6 @@ extension ViewController {
             .drive(onNext: setDebugMessage)
             .disposed(by: disposeBag)
 
-        player.rx.errorInfo
-            .asDriverIgnoringErrors()
-            .drive(onNext: setErrorInfo)
-            .disposed(by: disposeBag)
-        
         // Display item duration
         player.rx.itemDuration
             .observeOn(concurrentBackgroundScheduler)

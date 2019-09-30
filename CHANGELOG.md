@@ -6,6 +6,10 @@ All notable changes to this project will be documented in this file.
 * Improvement:
 	* Add a new textfield in example app to test custom urls
 
+## [1.3.0]
+* Feature:
+    * Get item error logs on playing
+
 ## [1.2.1]
 * Dependency:
 	* [gem] Cocoapods -> 1.7.5
@@ -19,10 +23,6 @@ All notable changes to this project will be documented in this file.
 
 * Fix:
 	* Retain cycle in example project
-
-## [1.3.0]
-* Feature:
-        * Exposed new delegate method `playerContext(errorCode: Int, errorMessage: String?)`
 
 ## [1.2.0]
 * Feature:

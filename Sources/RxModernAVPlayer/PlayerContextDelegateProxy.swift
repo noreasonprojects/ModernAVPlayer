@@ -52,7 +52,7 @@ ModernAVPlayerDelegate {
     lazy var currentTimeSubject = PublishSubject<Double>()
     lazy var itemDurationSubject = PublishSubject<Double?>()
     lazy var debugMessageSubject = PublishSubject<String?>()
-    lazy var errorSubject = PublishSubject<PlayerErrorInfo>()
+    lazy var errorSubject = PublishSubject<PlayerItemErrorInfo>()
     lazy var itemPlayToEndTimeSubject = PublishSubject<Double>()
     
     // MARK: - ModernAVPlayerDelegate
@@ -77,8 +77,8 @@ ModernAVPlayerDelegate {
         debugMessageSubject.onNext(debugMessage)
     }
 
-    public func modernAVPlayer(_ player: ModernAVPlayer, errorInfo: PlayerErrorInfo) {
-        errorSubject.onNext(errorInfo)
+    public func modernAVPlayer(_ player: ModernAVPlayer, itemErrorInfo: PlayerItemErrorInfo) {
+        errorSubject.onNext(itemErrorInfo)
     }
     
     public func modernAVPlayer(_ player: ModernAVPlayer, didItemPlayToEndTime endTime: Double) {

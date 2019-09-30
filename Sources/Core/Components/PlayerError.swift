@@ -24,6 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+import AVFoundation
 import Foundation
 
 public enum PlayerError: Error {
@@ -32,7 +33,7 @@ public enum PlayerError: Error {
     case bufferingFailed
 }
 
-public struct PlayerErrorInfo {
-    public let errorCode: Int
-    public let errorMessage: String?
+public struct PlayerItemErrorInfo {
+    public let errorLog: AVPlayerItemErrorLog?
+    public let accessLog: AVPlayerItemAccessLog?
 }

@@ -147,23 +147,11 @@ final class PlayingState: PlayerState {
         }
     }
 
-    //swiftlint:disable line_length
-    /// Method to send the error from the delegate
-    /// Examples of codes:
-    ///      - if long .ts video file respons                                           -> errorCode: -12645, -12889        -> errorMessage: "No response for media file in N s"
-    ///      - video .ts file bitrate differ from m3u8 declaration           -> errorCode: -12318                     -> errorMessage: "Segment exceeds specified bandwidth for variant"
-    ///      - for live stream.playlist m3u8 did not change too long    -> errorCode: -12642                    -> errorMessage: "Playlist File unchanged for 2 consecutive reads"
-    ///   - playerItem: AVPlayerItem? the player item
-    ///   - delegate: PlayerContextDelegate? the delegate to call the playerContext(errorCode:errorMessage) method
-    //swiftlint:enable line_length
     private func sendError(for playerItem: AVPlayerItem?, with delegate: PlayerContextDelegate?) {
-        if let errorLog = playerItem?.errorLog() {
-            let firstEvent = errorLog.events[0]
-            let errorCode = firstEvent.errorStatusCode
-            let errorMessage = firstEvent.errorComment
-            let errorInfo = PlayerErrorInfo(errorCode: errorCode, errorMessage: errorMessage)
-            delegate?.playerContext(errorInfo: errorInfo)
-        }
+        let errorLog = playerItem?.errorLog()
+        let accessLog = playerItem?.accessLog()
+        let playerItemErrorInfo = PlayerItemErrorInfo(errorLog: errorLog, accessLog: accessLog)
+        delegate?.playerContext(itemErrorInfo: playerItemErrorInfo)
     }
     
     private func redirectToWaitingForNetworkState() {

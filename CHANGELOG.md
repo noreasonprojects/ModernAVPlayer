@@ -3,6 +3,8 @@ All notable changes to this project will be documented in this file.
 
 ---
 ## [X.X.X]
+* Improvement:
+	* Add a new textfield in example app to test custom urls
 * Feature:
     * Get item error logs on playing
 

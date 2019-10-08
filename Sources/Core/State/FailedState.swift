@@ -63,7 +63,9 @@ final class FailedState: PlayerState {
     }
 
     func pause() {
-        sendDebugMessage("Unable to pause, load a media first")
+        let debug = "Unable to pause, load a media first"
+        ModernAVPlayerLogger.instance.log(message: debug, domain: .unavailableCommand)
+        context.delegate?.playerContext(unavailableActionReason: .loadMediaFirst)
     }
 
     func play() {
@@ -75,15 +77,14 @@ final class FailedState: PlayerState {
     }
 
     func seek(position: Double) {
-        sendDebugMessage("Unable to seek, load a media first")
+        let debug = "Unable to seek, load a media first"
+        ModernAVPlayerLogger.instance.log(message: debug, domain: .unavailableCommand)
+        context.delegate?.playerContext(unavailableActionReason: .loadMediaFirst)
     }
 
     func stop() {
-        sendDebugMessage("Unable to stop, load a media first")
-    }
-    
-    private func sendDebugMessage(_ debugMessage: String) {
-        context.debugMessage = debugMessage
-        ModernAVPlayerLogger.instance.log(message: debugMessage, domain: .unavailableCommand)
+        let debug = "Unable to stop, load a media first"
+        ModernAVPlayerLogger.instance.log(message: debug, domain: .unavailableCommand)
+        context.delegate?.playerContext(unavailableActionReason: .loadMediaFirst)
     }
 }

@@ -130,8 +130,8 @@ final class BufferingState: NSObject, PlayerState {
 
     func play() {
         let debug = "Already trying to play"
-        context.debugMessage = debug
-        ModernAVPlayerLogger.instance.log(message: "Already trying to play", domain: .unavailableCommand)
+        ModernAVPlayerLogger.instance.log(message: debug, domain: .unavailableCommand)
+        context.delegate?.playerContext(unavailableActionReason: .alreadyTryingToPlay)
     }
 
     func seek(position: Double) {

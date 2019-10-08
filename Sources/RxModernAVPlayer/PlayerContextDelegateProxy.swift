@@ -51,7 +51,7 @@ ModernAVPlayerDelegate {
     lazy var currentMediaSubject = PublishSubject<PlayerMedia?>()
     lazy var currentTimeSubject = PublishSubject<Double>()
     lazy var itemDurationSubject = PublishSubject<Double?>()
-    lazy var debugMessageSubject = PublishSubject<String?>()
+    lazy var unavailableActionSubject = PublishSubject<UnavailableActionReason>()
     lazy var itemPlayToEndTimeSubject = PublishSubject<Double>()
     
     // MARK: - ModernAVPlayerDelegate
@@ -72,8 +72,8 @@ ModernAVPlayerDelegate {
         itemDurationSubject.onNext(itemDuration)
     }
     
-    public func modernAVPlayer(_ player: ModernAVPlayer, debugMessage: String?) {
-        debugMessageSubject.onNext(debugMessage)
+    public func modernAVPlayer(_ player: ModernAVPlayer, unavailableActionReason: UnavailableActionReason) {
+        unavailableActionSubject.onNext(unavailableActionReason)
     }
     
     public func modernAVPlayer(_ player: ModernAVPlayer, didItemPlayToEndTime endTime: Double) {

@@ -108,8 +108,8 @@ final class PlayingState: PlayerState {
     
     func play() {
         let debug = "Already playing"
-        context.debugMessage = debug
         ModernAVPlayerLogger.instance.log(message: debug, domain: .unavailableCommand)
+        context.delegate?.playerContext(unavailableActionReason: .alreadyPlaying)
     }
 
     func seek(position: Double) {
@@ -128,8 +128,10 @@ final class PlayingState: PlayerState {
         guard let media = context.currentMedia
             else { assertionFailure("media should exist"); return }
 
-        itemPlaybackObservingService.onPlaybackStalled = { [weak self] in self?.redirectToWaitingForNetworkState() }
-        itemPlaybackObservingService.onFailedToPlayToEndTime = { [weak self] in self?.redirectToWaitingForNetworkState() }
+        itemPlaybackObservingService.onPlaybackStalled = { [weak self] in self?.redirectToWaitingForNetworkState()
+        }
+        itemPlaybackObservingService.onFailedToPlayToEndTime = { [weak self] in self?.redirectToWaitingForNetworkState()
+        }
         itemPlaybackObservingService.onPlayToEndTime = { [weak self, context] in
             context.delegate?.playerContext(didItemPlayToEndTime: context.currentTime)
             context.plugins.forEach { $0.didItemPlayToEndTime(media: media, endTime: context.currentTime) }

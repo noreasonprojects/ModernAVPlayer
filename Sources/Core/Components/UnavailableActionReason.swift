@@ -3,8 +3,8 @@
 // ModernAVPlayer
 // Copyright (c) 2018 Raphael Ankierman <raphrel@gmail.com>
 //
-// StoppedState.swift
-// Created by raphael ankierman on 03/01/2019.
+// UnavailableActionReason.swift
+// Created by raphael ankierman on 09/10/2019.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,34 +24,19 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import AVFoundation
-import MediaPlayer
+import Foundation
 
-final class StoppedState: PausedState {
+///
+/// `UnavailableActionReason` explicit why action initated by
+///  a client has no effect on the player.
+///
 
-    // MARK: Init
-
-    init(context: PlayerContext) {
-        super.init(context: context, type: .stopped)
-
-        seek(position: 0)
-    }
-
-    override func contextUpdated() {
-        context.plugins.forEach {
-            $0.didStopped(media: context.currentMedia, position: context.currentTime)
-        }
-    }
-
-    // MARK: - Shared actions
-
-    override func pause() {
-        context.changeState(state: PausedState(context: context))
-    }
-
-    override func stop() {
-        let debug = "Already stopped"
-        ModernAVPlayerLogger.instance.log(message: debug, domain: .unavailableCommand)
-        context.delegate?.playerContext(unavailableActionReason: .alreadyStopped)
-    }
+public enum UnavailableActionReason {
+    case alreadyPaused
+    case alreadyPlaying
+    case alreadyStopped
+    case alreadyTryingToPlay
+    case loadMediaFirst
+    case waitEstablishedNetwork
+    case waitMediaToBeLoaded
 }

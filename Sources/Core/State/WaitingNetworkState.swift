@@ -101,15 +101,15 @@ final class WaitingNetworkState: PlayerState {
     }
     
     func play() {
-        let debug = "Unable to play, reload a media first"
-        context.debugMessage = debug
+        let debug = "Reload a media first before playing"
         ModernAVPlayerLogger.instance.log(message: debug, domain: .unavailableCommand)
+        context.delegate?.playerContext(unavailableActionReason: .waitEstablishedNetwork)
     }
     
     func seek(position: Double) {
-        let debug = "Unable to seek, load a media first"
-        context.debugMessage = debug
+        let debug = "Reload a media first before seeking"
         ModernAVPlayerLogger.instance.log(message: debug, domain: .unavailableCommand)
+        context.delegate?.playerContext(unavailableActionReason: .waitEstablishedNetwork)
     }
     
     func stop() {

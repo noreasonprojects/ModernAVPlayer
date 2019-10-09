@@ -1,5 +1,5 @@
 language: objective-c
-osx_image: xcode10.2
+osx_image: xcode11
 
 install:
   - bundle install
@@ -10,4 +10,4 @@ script:
   - bundle exec pod repo update
   - bundle exec pod lib lint --allow-warnings
   - Pods/SwiftLint/swiftlint --strict
-  - xcodebuild test -workspace ModernAVPlayer.xcworkspace -scheme ModernAVPlayer-Example -destination "platform=iOS Simulator,name=iPhone 7" | xcpretty -f `xcpretty-travis-formatter`
+  - xcodebuild test -workspace ModernAVPlayer.xcworkspace -scheme ModernAVPlayer-Example -destination "platform=iOS Simulator,name=iPhone 11" | xcpretty -f `xcpretty-travis-formatter`

@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 
 ---
-## [X.X.X]
+## [1.3.0]
 * Improvement:
 	* Add a new textfield in example app to test custom urls
 	* Expose explicit unavailable action reason

@@ -455,7 +455,7 @@
 		E061525B4F1430B4B34B465746D43C2A /* MediaPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674F8459293564D78775BD6BE8E584BC /* MediaPlayer.swift */; };
 		E0E7C6168E4D6EA6DE497588EBFF1ABB /* NSTextView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E22394A1FAEBA32E33A2D37C0B9CD6E /* NSTextView+Rx.swift */; };
 		E0EAC85F7ACFAD998B14FCE66144000E /* NMBStringify.h in Headers */ = {isa = PBXBuildFile; fileRef = E50A34A8DDC56E5A5748945A5EB7C5B2 /* NMBStringify.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E1AF2692234D452100A1B5EE /* UnavailableActionReason.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AF2691234D452100A1B5EE /* UnavailableActionReason.swift */; };
+		E1AF2692234D452100A1B5EE /* PlayerUnavailableActionReason.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AF2691234D452100A1B5EE /* PlayerUnavailableActionReason.swift */; };
 		E2821F71151795EEFFA477608A15DD66 /* _RXKVOObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E39E10735AC6DE9210AF68BE3AB9140 /* _RXKVOObserver.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E35A49941477274C4B1B1C6680A67B91 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF7C62A7A7A478F6F70C6663F1A006DD /* RxSwift.framework */; };
 		E3EAB16C7F21B78B71541B4DF2E6A054 /* PlayerMediaMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942A73658573F9941E4EFBB1249F3D4C /* PlayerMediaMetadata.swift */; };
@@ -1079,7 +1079,7 @@
 		E020283E9128E3F63076893B499EDC6D /* ModernAVPlayer.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ModernAVPlayer.xcconfig; sourceTree = "<group>"; };
 		E06F91B4F377B9ACEC9A1C1232D77BB6 /* First.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = First.swift; path = RxSwift/Observables/First.swift; sourceTree = "<group>"; };
 		E18656BAD68AA9ABA1B145EE0D83BE02 /* RxRelay-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "RxRelay-dummy.m"; sourceTree = "<group>"; };
-		E1AF2691234D452100A1B5EE /* UnavailableActionReason.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnavailableActionReason.swift; sourceTree = "<group>"; };
+		E1AF2691234D452100A1B5EE /* PlayerUnavailableActionReason.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerUnavailableActionReason.swift; sourceTree = "<group>"; };
 		E2FFFA557ABB4C3E1C9BBA07BDE65999 /* Filter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Filter.swift; path = RxSwift/Observables/Filter.swift; sourceTree = "<group>"; };
 		E367E4EDA564481D924D7AB27FBDCC08 /* QuickSpec.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = QuickSpec.h; path = Sources/QuickObjectiveC/QuickSpec.h; sourceTree = "<group>"; };
 		E3B3DA248E11DE20F7E6F258D0341263 /* RxCocoa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RxCocoa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1295,7 +1295,7 @@
 				C27D9B4DCE3DA34497D12F0818CBE64C /* PlayerPlugin.swift */,
 				2BAE53877BD2E89FC1638A755BA49437 /* PlayerState.swift */,
 				720CABA6509791638922841CAC49E2D6 /* TimerFactory.swift */,
-				E1AF2691234D452100A1B5EE /* UnavailableActionReason.swift */,
+				E1AF2691234D452100A1B5EE /* PlayerUnavailableActionReason.swift */,
 				910923F7D40218530746C1E82B73AE75 /* URLSessionDataTaskFactory.swift */,
 				3C60FCC20FCFD18E8BB9E14459470DCC /* RemoteCommand */,
 			);
@@ -2667,7 +2667,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E1AF2692234D452100A1B5EE /* UnavailableActionReason.swift in Sources */,
+				E1AF2692234D452100A1B5EE /* PlayerUnavailableActionReason.swift in Sources */,
 				E0303B7ABF1CA4FE87BCBFE0804C32F6 /* AudioSessionService.swift in Sources */,
 				8174479CFD0415B0376A8493D51DFA80 /* AVPlayerRemoteCommand.swift in Sources */,
 				1614C0B72FDF624EA48F1A741D418FB4 /* BufferingState.swift in Sources */,

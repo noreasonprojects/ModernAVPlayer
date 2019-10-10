@@ -3,7 +3,7 @@
 // ModernAVPlayer
 // Copyright (c) 2018 Raphael Ankierman <raphrel@gmail.com>
 //
-// UnavailableActionReason.swift
+// PlayerUnavailableActionReason.swift
 // Created by raphael ankierman on 09/10/2019.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -27,16 +27,16 @@
 import Foundation
 
 ///
-/// `UnavailableActionReason` explicit why action initated by
+/// `PlayerUnavailableActionReason` explicit why action initated by
 ///  a client has no effect on the player.
 ///
 
-public enum UnavailableActionReason {
+public enum PlayerUnavailableActionReason {
     case alreadyPaused
     case alreadyPlaying
     case alreadyStopped
     case alreadyTryingToPlay
     case loadMediaFirst
     case waitEstablishedNetwork
-    case waitMediaToBeLoaded
+    case waitLoadedMedia
 }

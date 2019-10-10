@@ -31,7 +31,7 @@ protocol PlayerContextDelegate: class {
     func playerContext(didCurrentMediaChange media: PlayerMedia?)
     func playerContext(didCurrentTimeChange currentTime: Double)
     func playerContext(didItemDurationChange itemDuration: Double?)
-    func playerContext(unavailableActionReason: UnavailableActionReason)
+    func playerContext(unavailableActionReason: PlayerUnavailableActionReason)
     func playerContext(didItemPlayToEndTime endTime: Double)
 }
 

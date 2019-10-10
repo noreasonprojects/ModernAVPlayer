@@ -278,7 +278,7 @@ final class ViewController: UIViewController {
         return Double(slider.value) * duration
     }
 
-    private func actionReasonDescription(_ reason: UnavailableActionReason) -> String {
+    private func actionReasonDescription(_ reason: PlayerUnavailableActionReason) -> String {
         switch reason {
         case .alreadyPaused:
             return "Already Paused"
@@ -291,9 +291,9 @@ final class ViewController: UIViewController {
         case .loadMediaFirst:
             return "Please load a media first"
         case .waitEstablishedNetwork:
-            return "Wait network to be established"
-        case .waitMediaToBeLoaded:
-            return "Wait media to be loaed"
+            return "Wait for the network to be established"
+        case .waitLoadedMedia:
+            return "Wait for the media to be loaded"
         }
     }
 }

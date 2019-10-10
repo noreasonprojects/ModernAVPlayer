@@ -47,8 +47,8 @@ final class MockPlayerContextDelegate: PlayerContextDelegate {
     }
 
     private (set) var unavailableActionCallCount = 0
-    private (set) var unavailableActionLastParam: UnavailableActionReason?
-    func playerContext(unavailableActionReason: UnavailableActionReason) {
+    private (set) var unavailableActionLastParam: PlayerUnavailableActionReason?
+    func playerContext(unavailableActionReason: PlayerUnavailableActionReason) {
         unavailableActionCallCount += 1
         unavailableActionLastParam = unavailableActionReason
     }

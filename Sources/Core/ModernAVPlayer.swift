@@ -31,7 +31,7 @@ public protocol ModernAVPlayerDelegate: class {
     func modernAVPlayer(_ player: ModernAVPlayer, didCurrentMediaChange media: PlayerMedia?)
     func modernAVPlayer(_ player: ModernAVPlayer, didCurrentTimeChange currentTime: Double)
     func modernAVPlayer(_ player: ModernAVPlayer, didItemDurationChange itemDuration: Double?)
-    func modernAVPlayer(_ player: ModernAVPlayer, unavailableActionReason: UnavailableActionReason)
+    func modernAVPlayer(_ player: ModernAVPlayer, unavailableActionReason: PlayerUnavailableActionReason)
     func modernAVPlayer(_ player: ModernAVPlayer, didItemPlayToEndTime endTime: Double)
 }
 
@@ -190,7 +190,7 @@ extension ModernAVPlayer: PlayerContextDelegate {
         delegate?.modernAVPlayer(self, didItemDurationChange: itemDuration)
     }
 
-    func playerContext(unavailableActionReason: UnavailableActionReason) {
+    func playerContext(unavailableActionReason: PlayerUnavailableActionReason) {
         delegate?.modernAVPlayer(self, unavailableActionReason: unavailableActionReason)
     }
     

@@ -49,7 +49,7 @@ public extension Reactive where Base: ModernAVPlayer {
         return RxPlayerContextDelegateProxy.proxy(for: base).itemDurationSubject.asObservable()
     }
     
-    var unavailableActionReason: Observable<UnavailableActionReason> {
+    var unavailableActionReason: Observable<PlayerUnavailableActionReason> {
         return RxPlayerContextDelegateProxy.proxy(for: base).unavailableActionSubject.asObservable()
     }
     

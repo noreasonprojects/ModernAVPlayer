@@ -31,7 +31,7 @@ protocol PlayerContextDelegate: class {
     func playerContext(didCurrentMediaChange media: PlayerMedia?)
     func playerContext(didCurrentTimeChange currentTime: Double)
     func playerContext(didItemDurationChange itemDuration: Double?)
-    func playerContext(debugMessage: String?)
+    func playerContext(unavailableActionReason: PlayerUnavailableActionReason)
     func playerContext(didItemPlayToEndTime endTime: Double)
 }
 
@@ -42,7 +42,6 @@ protocol PlayerContext: class, MediaPlayer {
     var config: PlayerConfiguration { get }
     var currentMedia: PlayerMedia? { get set }
     var currentItem: AVPlayerItem? { get }
-    var debugMessage: String? { get set }
     var delegate: PlayerContextDelegate? { get }
     var itemDuration: Double? { get }
     var nowPlaying: NowPlaying { get }
@@ -93,9 +92,6 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
             state.contextUpdated()
             delegate?.playerContext(didStateChange: state.type)
         }
-    }
-    var debugMessage: String? {
-        didSet { delegate?.playerContext(debugMessage: debugMessage) }
     }
 
     // MARK: - LifeCycle
@@ -165,8 +161,9 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
     
     func updateMetadata(_ metadata: PlayerMediaMetadata) {
         guard let media = currentMedia else {
-            ModernAVPlayerLogger.instance.log(message: "Load a media before update metadata",
-                                              domain: .unavailableCommand)
+            let debug = "Load a media before update metadata"
+            ModernAVPlayerLogger.instance.log(message: debug, domain: .unavailableCommand)
+            delegate?.playerContext(unavailableActionReason: .loadMediaFirst)
             return
         }
         media.setMetadata(metadata)

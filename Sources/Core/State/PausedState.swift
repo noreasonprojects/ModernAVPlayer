@@ -75,8 +75,8 @@ class PausedState: PlayerState {
 
     func pause() {
         let debug = "Already paused"
-        context.debugMessage = debug
         ModernAVPlayerLogger.instance.log(message: debug, domain: .unavailableCommand)
+        context.delegate?.playerContext(unavailableActionReason: .alreadyPaused)
     }
 
     func play() {
@@ -88,9 +88,9 @@ class PausedState: PlayerState {
             let state = LoadingMediaState(context: context, media: media, autostart: true)
             context.changeState(state: state)
         } else {
-            let debug = "Please load item before playing"
-            context.debugMessage = debug
+            let debug = "Load media before playing"
             ModernAVPlayerLogger.instance.log(message: debug, domain: .unavailableCommand)
+            context.delegate?.playerContext(unavailableActionReason: .loadMediaFirst)
         }
     }
 

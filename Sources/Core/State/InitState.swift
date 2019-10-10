@@ -59,14 +59,14 @@ struct InitState: PlayerState {
     
     func play() {
         let debug = "Load item before playing"
-        context.debugMessage = debug
         ModernAVPlayerLogger.instance.log(message: debug, domain: .unavailableCommand)
+        context.delegate?.playerContext(unavailableActionReason: .loadMediaFirst)
     }
     
     func seek(position: Double) {
-        let debug = "Unable to seek, load a media first"
-        context.debugMessage = debug
+        let debug = "Load item before seeking"
         ModernAVPlayerLogger.instance.log(message: debug, domain: .unavailableCommand)
+        context.delegate?.playerContext(unavailableActionReason: .loadMediaFirst)
     }
     
     func stop() {

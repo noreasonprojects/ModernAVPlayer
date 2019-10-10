@@ -565,12 +565,6 @@ open class PlayerContextMock: PlayerContext, Mock {
 	}
 	private var __p_currentItem: (AVPlayerItem)?
 
-    public var debugMessage: String? {
-		get {	invocations.append(.p_debugMessage_get); return __p_debugMessage ?? optionalGivenGetterValue(.p_debugMessage_get, "PlayerContextMock - stub value for debugMessage was not defined") }
-		set {	invocations.append(.p_debugMessage_set(.value(newValue))); __p_debugMessage = newValue }
-	}
-	private var __p_debugMessage: (String)?
-
     public var delegate: PlayerContextDelegate? {
 		get {	invocations.append(.p_delegate_get); return __p_delegate ?? optionalGivenGetterValue(.p_delegate_get, "PlayerContextMock - stub value for delegate was not defined") }
 		@available(*, deprecated, message: "Using setters on readonly variables is deprecated, and will be removed in 3.1. Use Given to define stubbed property return value.")
@@ -695,8 +689,6 @@ open class PlayerContextMock: PlayerContext, Mock {
         case p_currentMedia_get
 		case p_currentMedia_set(Parameter<PlayerMedia?>)
         case p_currentItem_get
-        case p_debugMessage_get
-		case p_debugMessage_set(Parameter<String?>)
         case p_delegate_get
         case p_itemDuration_get
         case p_nowPlaying_get
@@ -737,8 +729,6 @@ open class PlayerContextMock: PlayerContext, Mock {
             case (.p_currentMedia_get,.p_currentMedia_get): return true
 			case (.p_currentMedia_set(let left),.p_currentMedia_set(let right)): return Parameter<PlayerMedia?>.compare(lhs: left, rhs: right, with: matcher)
             case (.p_currentItem_get,.p_currentItem_get): return true
-            case (.p_debugMessage_get,.p_debugMessage_get): return true
-			case (.p_debugMessage_set(let left),.p_debugMessage_set(let right)): return Parameter<String?>.compare(lhs: left, rhs: right, with: matcher)
             case (.p_delegate_get,.p_delegate_get): return true
             case (.p_itemDuration_get,.p_itemDuration_get): return true
             case (.p_nowPlaying_get,.p_nowPlaying_get): return true
@@ -769,8 +759,6 @@ open class PlayerContextMock: PlayerContext, Mock {
             case .p_currentMedia_get: return 0
 			case .p_currentMedia_set(let newValue): return newValue.intValue
             case .p_currentItem_get: return 0
-            case .p_debugMessage_get: return 0
-			case .p_debugMessage_set(let newValue): return newValue.intValue
             case .p_delegate_get: return 0
             case .p_itemDuration_get: return 0
             case .p_nowPlaying_get: return 0
@@ -807,9 +795,6 @@ open class PlayerContextMock: PlayerContext, Mock {
         }
         public static func currentItem(getter defaultValue: AVPlayerItem?...) -> PropertyStub {
             return Given(method: .p_currentItem_get, products: defaultValue.map({ StubProduct.return($0 as Any) }))
-        }
-        public static func debugMessage(getter defaultValue: String?...) -> PropertyStub {
-            return Given(method: .p_debugMessage_get, products: defaultValue.map({ StubProduct.return($0 as Any) }))
         }
         public static func delegate(getter defaultValue: PlayerContextDelegate?...) -> PropertyStub {
             return Given(method: .p_delegate_get, products: defaultValue.map({ StubProduct.return($0 as Any) }))
@@ -858,8 +843,6 @@ open class PlayerContextMock: PlayerContext, Mock {
         public static var currentMedia: Verify { return Verify(method: .p_currentMedia_get) }
 		public static func currentMedia(set newValue: Parameter<PlayerMedia?>) -> Verify { return Verify(method: .p_currentMedia_set(newValue)) }
         public static var currentItem: Verify { return Verify(method: .p_currentItem_get) }
-        public static var debugMessage: Verify { return Verify(method: .p_debugMessage_get) }
-		public static func debugMessage(set newValue: Parameter<String?>) -> Verify { return Verify(method: .p_debugMessage_set(newValue)) }
         public static var delegate: Verify { return Verify(method: .p_delegate_get) }
         public static var itemDuration: Verify { return Verify(method: .p_itemDuration_get) }
         public static var nowPlaying: Verify { return Verify(method: .p_nowPlaying_get) }

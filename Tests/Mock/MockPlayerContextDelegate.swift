@@ -39,12 +39,17 @@ final class MockPlayerContextDelegate: PlayerContextDelegate {
         didItemDurationChangeLastParam = itemDuration
     }
     
-    func playerContext(debugMessage: String?) { }
-    
     private (set) var didItemPlayToEndTimeCallCount = 0
     private (set) var didItemPlayToEndTimeLastParam: Double?
     func playerContext(didItemPlayToEndTime endTime: Double) {
         didItemPlayToEndTimeCallCount += 1
         didItemPlayToEndTimeLastParam = endTime
+    }
+
+    private (set) var unavailableActionCallCount = 0
+    private (set) var unavailableActionLastParam: PlayerUnavailableActionReason?
+    func playerContext(unavailableActionReason: PlayerUnavailableActionReason) {
+        unavailableActionCallCount += 1
+        unavailableActionLastParam = unavailableActionReason
     }
 }

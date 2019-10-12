@@ -41,7 +41,7 @@ public struct ModernAVPlayerRemoteCommandFactory {
 
     // MARK: - Inputs
 
-    private let player: ModernAVPlayerExposable
+    private unowned let player: ModernAVPlayerExposable
     private let commandCenter: MPRemoteCommandCenter
 
     // MARK: - Init

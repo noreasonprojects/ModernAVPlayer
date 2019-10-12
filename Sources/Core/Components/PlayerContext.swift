@@ -119,6 +119,7 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
     }
 
     deinit {
+        print("~~~ deinit PLayerContext")
         ModernAVPlayerLogger.instance.log(message: "Deinit", domain: .lifecycleState)
     }
 

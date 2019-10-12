@@ -36,11 +36,12 @@ final class PlayingState: PlayerState {
     private let routeAudioService: ModernAVPlayerRouteAudioService
     private let interruptionAudioService: ModernAVPlayerInterruptionAudioService
     private let audioSession: AVAudioSession
+    private lazy var periodicPlayingTime = { context.config.periodicPlayingTime }()
     
     // MARK: - Variables
     
     let type: ModernAVPlayer.State = .playing
-    private var timerObserver: Any?
+    private var optTimerObserver: Any?
     
     // MARK: - Lifecycle
 
@@ -71,8 +72,8 @@ final class PlayingState: PlayerState {
     }
     
     deinit {
+        print("~~~ deinit PLaying STate")
         ModernAVPlayerLogger.instance.log(message: "Deinit", domain: .lifecycleState)
-        if let to = timerObserver { context.player.removeTimeObserver(to) }
     }
 
     // MARK: - Background task
@@ -98,11 +99,13 @@ final class PlayingState: PlayerState {
     // MARK: - Shared actions
 
     func load(media: PlayerMedia, autostart: Bool, position: Double? = nil) {
+        removeTimeObserver()
         let state = LoadingMediaState(context: context, media: media, autostart: autostart, position: position)
         context.changeState(state: state)
     }
 
     func pause() {
+        removeTimeObserver()
         context.changeState(state: PausedState(context: context))
     }
     
@@ -113,13 +116,16 @@ final class PlayingState: PlayerState {
     }
 
     func seek(position: Double) {
+        removeTimeObserver()
         let state = BufferingState(context: context)
         context.changeState(state: state)
         state.seekCommand(position: position)
     }
 
     func stop() {
-        context.changeState(state: StoppedState(context: context))
+        removeTimeObserver()
+        let state = StoppedState(context: context)
+        context.changeState(state: state)
     }
 
     // MARK: - Playback Observing Service
@@ -128,17 +134,21 @@ final class PlayingState: PlayerState {
         guard let media = context.currentMedia
             else { assertionFailure("media should exist"); return }
 
-        itemPlaybackObservingService.onPlaybackStalled = { [weak self] in self?.redirectToWaitingForNetworkState()
+        itemPlaybackObservingService.onPlaybackStalled = { [weak self] in
+            self?.redirectToWaitingForNetworkState()
         }
         itemPlaybackObservingService.onFailedToPlayToEndTime = { [weak self] in self?.redirectToWaitingForNetworkState()
         }
-        itemPlaybackObservingService.onPlayToEndTime = { [weak self, context] in
-            context.delegate?.playerContext(didItemPlayToEndTime: context.currentTime)
-            context.plugins.forEach { $0.didItemPlayToEndTime(media: media, endTime: context.currentTime) }
-            if context.loopMode {
-                self?.seek(position: 0)
+        itemPlaybackObservingService.onPlayToEndTime = { [weak self] in
+            guard let strongSelf = self else { return }
+            strongSelf.context.delegate?.playerContext(didItemPlayToEndTime: strongSelf.context.currentTime)
+            strongSelf.context.plugins.forEach {
+                $0.didItemPlayToEndTime(media: media, endTime: strongSelf.context.currentTime)
+            }
+            if strongSelf.context.loopMode {
+                strongSelf.seek(position: 0)
             } else {
-                self?.redirectToStoppedState()
+                strongSelf.stop()
             }
         }
     }
@@ -146,16 +156,13 @@ final class PlayingState: PlayerState {
     private func redirectToWaitingForNetworkState() {
         guard let url = (context.currentItem?.asset as? AVURLAsset)?.url
             else { assertionFailure(); return }
-        
+
+        removeTimeObserver()
         startBgTask(context: context)
         context.changeState(state: WaitingNetworkState(context: context,
                                                        urlToReload: url,
                                                        autostart: true,
                                                        error: .playbackStalled))
-    }
-
-    private func redirectToStoppedState() {
-        context.changeState(state: StoppedState(context: context))
     }
     
     // MARK: - Interruption Service
@@ -178,11 +185,17 @@ final class PlayingState: PlayerState {
     // MARK: - Private actions
 
     private func setTimerObserver() {
-        timerObserver = context.player.addPeriodicTimeObserver(forInterval: context.config.periodicPlayingTime,
-                                                               queue: nil) { [context] time in
-            context.delegate?.playerContext(didCurrentTimeChange: time.seconds)
-            context.nowPlaying.overrideInfoCenter(for: MPNowPlayingInfoPropertyElapsedPlaybackTime,
-                                                  value: time.seconds)
+        optTimerObserver = context.player.addPeriodicTimeObserver(forInterval: periodicPlayingTime,
+                                                                  queue: nil) { [weak context] time in
+            context?.delegate?.playerContext(didCurrentTimeChange: time.seconds)
+            context?.nowPlaying.overrideInfoCenter(for: MPNowPlayingInfoPropertyElapsedPlaybackTime,
+                                                   value: time.seconds)
+        }
+    }
+
+    private func removeTimeObserver() {
+        if let timerObserver = optTimerObserver {
+            context.player.removeTimeObserver(timerObserver)
         }
     }
     

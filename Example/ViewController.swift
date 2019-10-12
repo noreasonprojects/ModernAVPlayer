@@ -196,6 +196,10 @@ final class ViewController: UIViewController {
         addDismissKeyboardTouch()
         bindPlayerRxAttibutes()
     }
+
+    deinit {
+        print("~~~ Monkey Tests VC deinit")
+    }
     
     // MARK: - Private Setup
 

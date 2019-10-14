@@ -12,7 +12,7 @@ struct DemoData {
 
     struct InvalidMediaError: Error { }
 
-    static let medias: [PlayerMedia] = {
+    let medias: [PlayerMedia] = {
         guard
             let liveUrl = URL(string: "http://direct.franceinter.fr/live/franceinter-midfi.mp3"),
             let remoteClip = URL(string: "http://media.radiofrance-podcast.net/podcast09/13100-17.01.2017-ITEMA_21199585-0.mp3"),
@@ -43,12 +43,12 @@ struct DemoData {
         ]
     }()
 
-    static let invalidMedia: PlayerMedia = {
+    let invalidMedia: PlayerMedia = {
         let url = URL(fileURLWithPath: Bundle.main.path(forResource: "noreason", ofType: "txt")!)
         return ModernAVPlayerMedia(url: url, type: .clip, metadata: nil)
     }()
 
-    static func media(with liveUrlString: String?) throws -> PlayerMedia {
+    func media(with liveUrlString: String?) throws -> PlayerMedia {
         guard
             let liveUrl = URL(string: liveUrlString ?? "")
             else { throw DemoData.InvalidMediaError() }

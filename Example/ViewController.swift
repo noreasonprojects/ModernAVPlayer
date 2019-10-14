@@ -81,7 +81,7 @@ final class ViewController: UIViewController {
     }
     
     @IBAction func loadMediaWithPosition(_ sender: UIButton) {
-        let media = DemoData.medias[sender.tag % 3]
+        let media = DemoData().medias[sender.tag % 3]
         loadMedia(media, autostart: true, position: 42.0)
         currentMedia.text = player.currentMedia?.description
     }
@@ -89,20 +89,20 @@ final class ViewController: UIViewController {
     @IBAction func loadMedia(_ sender: UIButton) {
         let media: PlayerMedia
         if(customLiveUrlSwitch.isOn && [0,3].contains(sender.tag)) {
-            guard let customMedia = try? DemoData.media(with: customLiveUrlTextField.text) else {
+            guard let customMedia = try? DemoData().media(with: customLiveUrlTextField.text) else {
                 showInvalidUrlAlert()
                 return
             }
             media = customMedia
         } else {
-            media = DemoData.medias[sender.tag % 3]
+            media = DemoData().medias[sender.tag % 3]
         }
         loadMedia(media, autostart: sender.tag < 3)
-        currentMedia.text = player.currentMedia?.description
+        currentMedia.text = media.description
     }
 
     @IBAction func loadInvalidFormat(_ sender: UIButton) {
-        loadMedia(DemoData.invalidMedia, autostart: true)
+        loadMedia(DemoData().invalidMedia, autostart: true)
     }
     
     @IBAction func loadInvalidRemoteUrl(_ sender: UIButton) {
@@ -311,7 +311,7 @@ extension ViewController {
 
         // Enable slider interaction
         player.rx.currentMedia
-            .map { return $0?.type == .clip }
+            .map { $0?.type == .clip }
             .bind(to: slider.rx.isEnabled)
             .disposed(by: disposeBag)
 

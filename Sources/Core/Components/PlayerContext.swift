@@ -36,7 +36,7 @@ protocol PlayerContextDelegate: class {
 }
 
 //sourcery: AutoMockable
-protocol PlayerContext: class, MediaPlayer {
+protocol PlayerContext: MediaPlayer {
     var audioSession: AudioSessionService { get }
     var bgToken: UIBackgroundTaskIdentifier? { get set }
     var config: PlayerConfiguration { get }

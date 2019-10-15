@@ -36,7 +36,9 @@ final class PlayingState: PlayerState {
     private let routeAudioService: ModernAVPlayerRouteAudioService
     private let interruptionAudioService: ModernAVPlayerInterruptionAudioService
     private let audioSession: AVAudioSession
-    private lazy var periodicPlayingTime = { context.config.periodicPlayingTime }()
+    private var periodicPlayingTime: CMTime {
+        context.config.periodicPlayingTime
+    }
     
     // MARK: - Variables
     
@@ -72,20 +74,18 @@ final class PlayingState: PlayerState {
     }
     
     deinit {
-        print("~~~ deinit PLaying STate")
         ModernAVPlayerLogger.instance.log(message: "Deinit", domain: .lifecycleState)
     }
 
     // MARK: - Background task
 
-    private func startBgTask(context: PlayerContext) {
-        context.bgToken = UIApplication.shared.beginBackgroundTask { [context] in
-            if let token = context.bgToken {
-                UIApplication.shared.endBackgroundTask(token)
-            }
-            context.bgToken = nil
+    private func startBgTask() {
+        context.bgToken = UIApplication.shared.beginBackgroundTask { [weak context] in
+            if let token = context?.bgToken { UIApplication.shared.endBackgroundTask(token) }
+            context?.bgToken = nil
         }
-        ModernAVPlayerLogger.instance.log(message: "StartBgTask create: \(String(describing: context.bgToken))", domain: .service)
+        let debug = "Start background task"
+        ModernAVPlayerLogger.instance.log(message: debug, domain: .service)
     }
 
     private func stopBgTask(context: PlayerContext) {
@@ -99,14 +99,12 @@ final class PlayingState: PlayerState {
     // MARK: - Shared actions
 
     func load(media: PlayerMedia, autostart: Bool, position: Double? = nil) {
-        removeTimeObserver()
         let state = LoadingMediaState(context: context, media: media, autostart: autostart, position: position)
-        context.changeState(state: state)
+        changeState(state: state)
     }
 
     func pause() {
-        removeTimeObserver()
-        context.changeState(state: PausedState(context: context))
+        changeState(state: PausedState(context: context))
     }
     
     func play() {
@@ -116,16 +114,14 @@ final class PlayingState: PlayerState {
     }
 
     func seek(position: Double) {
-        removeTimeObserver()
         let state = BufferingState(context: context)
-        context.changeState(state: state)
+        changeState(state: state)
         state.seekCommand(position: position)
     }
 
     func stop() {
-        removeTimeObserver()
         let state = StoppedState(context: context)
-        context.changeState(state: state)
+        changeState(state: state)
     }
 
     // MARK: - Playback Observing Service
@@ -157,12 +153,12 @@ final class PlayingState: PlayerState {
         guard let url = (context.currentItem?.asset as? AVURLAsset)?.url
             else { assertionFailure(); return }
 
-        removeTimeObserver()
-        startBgTask(context: context)
-        context.changeState(state: WaitingNetworkState(context: context,
-                                                       urlToReload: url,
-                                                       autostart: true,
-                                                       error: .playbackStalled))
+        startBgTask()
+        let state = WaitingNetworkState(context: context,
+                                        urlToReload: url,
+                                        autostart: true,
+                                        error: .playbackStalled)
+        changeState(state: state)
     }
     
     // MARK: - Interruption Service
@@ -179,10 +175,15 @@ final class PlayingState: PlayerState {
         if !audioSession.secondaryAudioShouldBeSilencedHint {
             state.onInterruptionEnded = { [weak state] in state?.play() }
         }
-        context.changeState(state: state)
+        changeState(state: state)
     }
     
     // MARK: - Private actions
+
+    private func changeState(state: PlayerState) {
+        removeTimeObserver()
+        context.changeState(state: state)
+    }
 
     private func setTimerObserver() {
         optTimerObserver = context.player.addPeriodicTimeObserver(forInterval: periodicPlayingTime,
@@ -202,7 +203,7 @@ final class PlayingState: PlayerState {
     private func routeAudioChanged(reason: AVAudioSession.RouteChangeReason) {
         switch reason {
         case .oldDeviceUnavailable, .unknown:
-            context.changeState(state: PausedState(context: context))
+            changeState(state: PausedState(context: context))
         default:
             break
         }

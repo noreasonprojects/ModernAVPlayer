@@ -95,11 +95,9 @@ public final class ModernAVPlayer: NSObject, ModernAVPlayerExposable {
         context = ModernAVPlayerContext(player: player, config: config, plugins: plugins)
         super.init()
         context.delegate = self
-        
-        defer {
-            if config.useDefaultRemoteCommand {
-                remoteCommands = ModernAVPlayerRemoteCommandFactory(player: self).defaultCommands
-            }
+
+        if config.useDefaultRemoteCommand {
+            remoteCommands = ModernAVPlayerRemoteCommandFactory(player: self).defaultCommands
         }
     }
     

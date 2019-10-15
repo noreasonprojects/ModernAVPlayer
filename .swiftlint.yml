@@ -117,7 +117,6 @@ disabled_rules: # rule identifiers to exclude from running
   - explicit_type_interface
   - file_header
   - implicitly_unwrapped_optional
-  - inert_defer
   - multiline_arguments
   - multiline_parameters
   - nesting

@@ -150,13 +150,12 @@ final class LoadingMediaState: PlayerState {
     }
 
     private func startBgTask() {
-        context.bgToken = UIApplication.shared.beginBackgroundTask { [unowned context] in
-            if let token = context.bgToken {
-                UIApplication.shared.endBackgroundTask(token)
-            }
-            context.bgToken = nil
+        context.bgToken = UIApplication.shared.beginBackgroundTask { [weak context] in
+            if let token = context?.bgToken { UIApplication.shared.endBackgroundTask(token) }
+            context?.bgToken = nil
         }
-        ModernAVPlayerLogger.instance.log(message: "StartBgTask create: \(String(describing: context.bgToken))", domain: .service)
+        let debug = "Start background task"
+        ModernAVPlayerLogger.instance.log(message: debug, domain: .service)
     }
 
     private func moveToNextState(with status: AVPlayerItem.Status) {
@@ -168,10 +167,10 @@ final class LoadingMediaState: PlayerState {
         case .readyToPlay:
             guard let position = self.position else { moveToLoadedState(); return }
             let seekPosition = CMTime(seconds: position, preferredTimescale: context.config.preferedTimeScale)
-            context.player.seek(to: seekPosition) { [weak self, context] completed in
-                context.delegate?.playerContext(didCurrentTimeChange: context.currentTime)
+            context.player.seek(to: seekPosition) { [weak self] completed in
+                guard let strongSelf = self else { return }
+                strongSelf.context.delegate?.playerContext(didCurrentTimeChange: strongSelf.context.currentTime)
                 guard completed else { return }
-                guard let strongSelf = self else { assertionFailure(); return }
                 strongSelf.moveToLoadedState()
             }
         @unknown default:

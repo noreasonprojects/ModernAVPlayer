@@ -81,7 +81,7 @@ final class ViewController: UIViewController {
     }
     
     @IBAction func loadMediaWithPosition(_ sender: UIButton) {
-        let media = DemoData().medias[sender.tag % 3]
+        let media = data.medias[sender.tag % 3]
         loadMedia(media, autostart: true, position: 42.0)
         currentMedia.text = player.currentMedia?.description
     }
@@ -89,20 +89,20 @@ final class ViewController: UIViewController {
     @IBAction func loadMedia(_ sender: UIButton) {
         let media: PlayerMedia
         if(customLiveUrlSwitch.isOn && [0,3].contains(sender.tag)) {
-            guard let customMedia = try? DemoData().media(with: customLiveUrlTextField.text) else {
+            guard let customMedia = try? data.media(with: customLiveUrlTextField.text) else {
                 showInvalidUrlAlert()
                 return
             }
             media = customMedia
         } else {
-            media = DemoData().medias[sender.tag % 3]
+            media = data.medias[sender.tag % 3]
         }
         loadMedia(media, autostart: sender.tag < 3)
         currentMedia.text = media.description
     }
 
     @IBAction func loadInvalidFormat(_ sender: UIButton) {
-        loadMedia(DemoData().invalidMedia, autostart: true)
+        loadMedia(data.invalidMedia, autostart: true)
     }
     
     @IBAction func loadInvalidRemoteUrl(_ sender: UIButton) {
@@ -115,8 +115,9 @@ final class ViewController: UIViewController {
         customLiveUrlTextField.isEnabled = (sender as! UISwitch).isOn
     }
     
-    // MARK: - Input
+    // MARK: - Inputs
 
+    private let data = DemoData()
     private let player = ModernAVPlayer(config: PlayerConfigurationExample(),
                                         loggerDomains: [.state, .error, .unavailableCommand, .remoteCommand])
     
@@ -141,10 +142,6 @@ final class ViewController: UIViewController {
         initSliderObservables()
         addDismissKeyboardTouch()
         bindPlayerRxAttibutes()
-    }
-
-    deinit {
-        print("~~~ Monkey Tests VC deinit")
     }
     
     // MARK: - Private Setup
@@ -307,7 +304,6 @@ extension ViewController {
             })
             .bind(to: slider.rx.value)
             .disposed(by: disposeBag)
-
 
         // Enable slider interaction
         player.rx.currentMedia

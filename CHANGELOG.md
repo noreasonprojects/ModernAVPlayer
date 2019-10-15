@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ## [X.X.X]
 * Fix:
 	* Update readme requirements
+	* Remove Player & Demo memory leaks (oups..)
 
 ## [1.3.0]
 * Improvement:

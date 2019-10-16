@@ -3,8 +3,8 @@
 // ModernAVPlayer
 // Copyright (c) 2018 Raphael Ankierman <raphael.ankierman@radiofrance.com>
 //
-// ModernAVPlayerCurrentState.swift
-// Created by raphael ankierman on 17/08/2018.
+// TableViewController.swift
+// Created by raphael ankierman on 12/10/2019.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,12 +24,33 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import Foundation
+import UIKit
 
-public protocol ModernAVPlayerCurrentState: class {
-    var state: ModernAVPlayer.State { get }
-}
+final class TableViewController: UITableViewController {
 
-public protocol ModernAVPlayerCurrentMedia: class {
-    var currentMedia: PlayerMedia? { get }
+    private let dataSource: [DemoScreens] = [.monkeyTests]
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+    }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "screenCell", for: indexPath)
+        cell.textLabel?.text = dataSource[indexPath.row].description
+        return cell
+    }
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return dataSource.count
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let navVC = navigationController else { assertionFailure(); return }
+
+        let id = dataSource[indexPath.row].id
+        let sb = UIStoryboard(name: id, bundle: Bundle.main)
+        let vc = sb.instantiateViewController(withIdentifier: id)
+        navVC.pushViewController(vc, animated: true)
+    }
 }

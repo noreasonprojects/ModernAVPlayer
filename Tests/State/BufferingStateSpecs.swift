@@ -42,6 +42,7 @@ final class BufferingStateSpecs: QuickSpec {
 
     override func spec() {
         beforeEach {
+            ModernAVPlayerLogger.setup.domains = []
             self.item = MockPlayerItem.createOne(url: "foo")
             self.mockPlayer = MockCustomPlayer(overrideCurrentItem: self.item)
             self.delegate = MockPlayerContextDelegate()

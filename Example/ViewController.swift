@@ -29,60 +29,6 @@ import RxSwift
 import RxCocoa
 import UIKit
 
-struct Data {
-    
-    struct InvalidMediaError: Error { }
-
-    static let medias: [PlayerMedia] = {
-        guard
-            let liveUrl = URL(string: "http://direct.franceinter.fr/live/franceinter-midfi.mp3"),
-            let remoteClip = URL(string: "http://media.radiofrance-podcast.net/podcast09/13100-17.01.2017-ITEMA_21199585-0.mp3"),
-            let file = Bundle.main.path(forResource: "AllNew", ofType: "mp3")
-            else { assertionFailure(); return [] }
-        
-        let localClip = URL(fileURLWithPath: file)
-
-        let meta0 = ModernAVPlayerMediaMetadata(title: "Le live",
-                                                albumTitle: "Album0",
-                                                artist: "Artist0",
-                                                image: UIImage(named: "sennaLive")?.jpegData(compressionQuality: 1.0))
-
-        let meta1 = ModernAVPlayerMediaMetadata(title: "Remote clip",
-                                                albumTitle: "Album1",
-                                                artist: "Artist1",
-                                                image: nil)
-
-        let meta2 = ModernAVPlayerMediaMetadata(title: "Local clip",
-                                                albumTitle: "Album2",
-                                                artist: "Artist2",
-                                                image: UIImage(named: "ankierman")?.jpegData(compressionQuality: 1.0),
-                                                remoteImageUrl: URL(string: "https://goo.gl/U4QoQj"))
-        return [
-            ModernAVPlayerMedia(url: liveUrl, type: .stream(isLive: true), metadata: meta0),
-            ModernAVPlayerMedia(url: remoteClip, type: .clip, metadata: meta1),
-            ModernAVPlayerMedia(url: localClip, type: .clip, metadata: meta2)
-        ]
-    }()
-    
-    static let invalidMedia: PlayerMedia = {
-        let url = URL(fileURLWithPath: Bundle.main.path(forResource: "noreason", ofType: "txt")!)
-        return ModernAVPlayerMedia(url: url, type: .clip, metadata: nil)
-    }()
-    
-    static func media(with liveUrlString: String?) throws -> PlayerMedia {
-        guard
-            let liveUrl = URL(string: liveUrlString ?? "")
-            else { throw Data.InvalidMediaError() }
-        
-        let meta = ModernAVPlayerMediaMetadata(title: "Custom Url live",
-                                               albumTitle: "Album0",
-                                               artist: "Artist0",
-                                               image: UIImage(named: "sennaLive")?.jpegData(compressionQuality: 1.0))
-        
-        return ModernAVPlayerMedia(url: liveUrl, type: .stream(isLive: true), metadata: meta)
-    }
-}
-
 final class ViewController: UIViewController {
 
     enum PositionRequest {
@@ -135,7 +81,7 @@ final class ViewController: UIViewController {
     }
     
     @IBAction func loadMediaWithPosition(_ sender: UIButton) {
-        let media = Data.medias[sender.tag % 3]
+        let media = data.medias[sender.tag % 3]
         loadMedia(media, autostart: true, position: 42.0)
         currentMedia.text = player.currentMedia?.description
     }
@@ -143,20 +89,20 @@ final class ViewController: UIViewController {
     @IBAction func loadMedia(_ sender: UIButton) {
         let media: PlayerMedia
         if(customLiveUrlSwitch.isOn && [0,3].contains(sender.tag)) {
-            guard let customMedia = try? Data.media(with: customLiveUrlTextField.text) else {
+            guard let customMedia = try? data.media(with: customLiveUrlTextField.text) else {
                 showInvalidUrlAlert()
                 return
             }
             media = customMedia
         } else {
-            media = Data.medias[sender.tag % 3]
+            media = data.medias[sender.tag % 3]
         }
         loadMedia(media, autostart: sender.tag < 3)
-        currentMedia.text = player.currentMedia?.description
+        currentMedia.text = media.description
     }
 
     @IBAction func loadInvalidFormat(_ sender: UIButton) {
-        loadMedia(Data.invalidMedia, autostart: true)
+        loadMedia(data.invalidMedia, autostart: true)
     }
     
     @IBAction func loadInvalidRemoteUrl(_ sender: UIButton) {
@@ -169,8 +115,9 @@ final class ViewController: UIViewController {
         customLiveUrlTextField.isEnabled = (sender as! UISwitch).isOn
     }
     
-    // MARK: - Input
+    // MARK: - Inputs
 
+    private let data = DemoData()
     private let player = ModernAVPlayer(config: PlayerConfigurationExample(),
                                         loggerDomains: [.state, .error, .unavailableCommand, .remoteCommand])
     
@@ -215,13 +162,16 @@ final class ViewController: UIViewController {
     }
     
     private func addDismissKeyboardTouch() {
-        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self.view,
+                                                         action: #selector(UIView.endEditing(_:))))
     }
     
     private func showInvalidUrlAlert() {
-        let alert = UIAlertController(title: nil, message: "Custom Stream URL is invalid", preferredStyle: UIAlertController.Style.alert)
+        let alert = UIAlertController(title: nil,
+                                      message: "Custom Stream URL is invalid",
+                                      preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
 
     // MARK: - Player
@@ -239,8 +189,8 @@ final class ViewController: UIViewController {
     }
 
     private func setDebugMessage(_ msg: String?) {
-        self.debugMessage.text = msg
-        self.debugMessage.alpha = 1.0
+        debugMessage.text = msg
+        debugMessage.alpha = 1.0
         UIView.animate(withDuration: 1.5) { self.debugMessage.alpha = 0 }
     }
     
@@ -312,12 +262,18 @@ extension ViewController {
             .withLatestFrom(player.rx.state) { return ($0.0, $0.1, $0.2, $1) }
             .withLatestFrom(isSliderSeeking) { return ($0.3, $0.0, $1, $0.1, $0.2) }
             .subscribeOn(concurrentBackgroundScheduler)
-            .map(createPositionRequest)
-            .map(formatPosition)
+            .map({ [unowned self] request in
+                self.createPositionRequest(state: request.0,
+                                           currentTime: request.1,
+                                           isSliderSeeking: request.2,
+                                           sliderPosition: request.3,
+                                           optDuration: request.4)
+            })
+            .map({ [unowned self] position in self.formatPosition(position) })
             .asDriver(onErrorJustReturn: "error")
             .drive(timingLabel.rx.text)
             .disposed(by: disposeBag)
-        
+
         // Seek
         isSliderSeeking
             .distinctUntilChanged()
@@ -325,10 +281,10 @@ extension ViewController {
             .filter { !$0 }
             .withLatestFrom(itemDurationSubject.asObservable())
             .filter { $0 != nil }.map { $0! }
-            .map(setSeekPosition)
-            .subscribe(onNext: seek)
+            .map({ [unowned self] position in self.setSeekPosition(from: position) })
+            .subscribe(onNext: { [unowned self] position in self.seek(position: position) })
             .disposed(by: disposeBag)
-        
+
         // Set slider value
         Observable
             .combineLatest(isSliderSeeking, player.rx.currentTime, player.rx.state)
@@ -343,24 +299,25 @@ extension ViewController {
                 return duration != nil
             }
             .map { return ($0.0.0, $0.1!) } //unwrap current time & duration
-            .map(setSliderPosition)
+            .map({ [unowned self] position in
+                self.setSliderPosition(current: position.0, duration: position.1)
+            })
             .bind(to: slider.rx.value)
             .disposed(by: disposeBag)
-        
-        
+
         // Enable slider interaction
         player.rx.currentMedia
-            .map { return $0?.type == .clip }
+            .map { $0?.type == .clip }
             .bind(to: slider.rx.isEnabled)
             .disposed(by: disposeBag)
-        
+
         // Display debugMessage
         player.rx.unavailableActionReason
             .map({ [unowned self] reason in self.actionReasonDescription(reason) })
             .asDriver(onErrorJustReturn: "Error")
-            .drive(onNext: setDebugMessage)
+            .drive(onNext: { [unowned self] reason in self.setDebugMessage(reason) })
             .disposed(by: disposeBag)
-        
+
         // Display item duration
         player.rx.itemDuration
             .observeOn(concurrentBackgroundScheduler)
@@ -369,11 +326,11 @@ extension ViewController {
             .asDriver(onErrorJustReturn: "error")
             .drive(durationLabel.rx.text)
             .disposed(by: disposeBag)
-        
+
         player.rx.itemDuration
             .bind(to: itemDurationSubject)
             .disposed(by: disposeBag)
-        
+
         // Animate state working loader
         player.rx.state
             .observeOn(concurrentBackgroundScheduler)
@@ -381,7 +338,7 @@ extension ViewController {
             .asDriver(onErrorJustReturn: false)
             .drive(indicatorView.rx.isAnimating)
             .disposed(by: disposeBag)
-        
+
         // Display state
         player.rx.state
             .observeOn(concurrentBackgroundScheduler)
@@ -389,7 +346,7 @@ extension ViewController {
             .asDriver(onErrorJustReturn: "error")
             .drive(playerStateLabel.rx.text)
             .disposed(by: disposeBag)
-        
+
         // End Time
         player.rx.itemPlayToEndTime
             .subscribe(onNext: { [weak self] endTime in
@@ -400,9 +357,9 @@ extension ViewController {
 }
 
 extension ViewController: UITextFieldDelegate {
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-
         return true
     }
 }

@@ -71,7 +71,7 @@ final class LoadingMediaState: PlayerState {
         context.audioSession.activate()
         
         setupInterruptionCallback()
-        startBgTask(context: context)
+        startBgTask()
     }
     
     func contextUpdated() {
@@ -149,12 +149,13 @@ final class LoadingMediaState: PlayerState {
         }
     }
 
-    private func startBgTask(context: PlayerContext) {
-        context.bgToken = UIApplication.shared.beginBackgroundTask { [context] in
-            if let token = context.bgToken { UIApplication.shared.endBackgroundTask(token) }
-            context.bgToken = nil
+    private func startBgTask() {
+        context.bgToken = UIApplication.shared.beginBackgroundTask { [weak context] in
+            if let token = context?.bgToken { UIApplication.shared.endBackgroundTask(token) }
+            context?.bgToken = nil
         }
-        ModernAVPlayerLogger.instance.log(message: "StartBgTask create: \(String(describing: context.bgToken))", domain: .service)
+        let debug = "Start background task"
+        ModernAVPlayerLogger.instance.log(message: debug, domain: .service)
     }
 
     private func moveToNextState(with status: AVPlayerItem.Status) {
@@ -166,10 +167,11 @@ final class LoadingMediaState: PlayerState {
         case .readyToPlay:
             guard let position = self.position else { moveToLoadedState(); return }
             let seekPosition = CMTime(seconds: position, preferredTimescale: context.config.preferedTimeScale)
-            context.player.seek(to: seekPosition) { [context] completed in
-                context.delegate?.playerContext(didCurrentTimeChange: context.currentTime)
+            context.player.seek(to: seekPosition) { [weak self] completed in
+                guard let strongSelf = self else { return }
+                strongSelf.context.delegate?.playerContext(didCurrentTimeChange: strongSelf.context.currentTime)
                 guard completed else { return }
-                self.moveToLoadedState()
+                strongSelf.moveToLoadedState()
             }
         @unknown default:
             ModernAVPlayerLogger.instance.log(message: "Unknown PlayerItem Status case", domain: .error)
@@ -178,7 +180,7 @@ final class LoadingMediaState: PlayerState {
 
     private func moveToLoadedState() {
         let state = LoadedState(context: self.context)
-        self.context.changeState(state: state)
-        if self.autostart { state.play() }
+        context.changeState(state: state)
+        if autostart { state.play() }
     }
 }

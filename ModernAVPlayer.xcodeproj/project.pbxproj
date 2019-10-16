@@ -56,6 +56,10 @@
 		E16FFBD521A3095F00004A90 /* PluginFailedStateSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16FFBD321A308B300004A90 /* PluginFailedStateSpecs.swift */; };
 		E186A1812126D2F0002B1455 /* MockMPRemoteCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = E186A1802126D2F0002B1455 /* MockMPRemoteCommand.swift */; };
 		E18E3D29213BF3E600FF4E63 /* MockNowPlayingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18E3D28213BF3E600FF4E63 /* MockNowPlayingService.swift */; };
+		E1910528235274A500E440C7 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1910527235274A500E440C7 /* TableViewController.swift */; };
+		E191052A235276D600E440C7 /* DemoScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1910529235276D600E440C7 /* DemoScreen.swift */; };
+		E191052C2352790B00E440C7 /* MonkeyTests.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E191052B2352790B00E440C7 /* MonkeyTests.storyboard */; };
+		E191052F23527A3100E440C7 /* DemoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E191052E23527A3100E440C7 /* DemoData.swift */; };
 		E19C9D672109B4D900FDA0D7 /* MockPlayerContextDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19C9D662109B4D900FDA0D7 /* MockPlayerContextDelegate.swift */; };
 		E1A308AD20B5C032007ED482 /* noreason.txt in Resources */ = {isa = PBXBuildFile; fileRef = E1A308AC20B5C032007ED482 /* noreason.txt */; };
 		E1A4C32E209B06F1000580F5 /* RouteAudioServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A4C32D209B06F1000580F5 /* RouteAudioServiceTests.swift */; };
@@ -131,6 +135,10 @@
 		E16FFBD321A308B300004A90 /* PluginFailedStateSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginFailedStateSpecs.swift; sourceTree = "<group>"; };
 		E186A1802126D2F0002B1455 /* MockMPRemoteCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMPRemoteCommand.swift; sourceTree = "<group>"; };
 		E18E3D28213BF3E600FF4E63 /* MockNowPlayingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNowPlayingService.swift; sourceTree = "<group>"; };
+		E1910527235274A500E440C7 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		E1910529235276D600E440C7 /* DemoScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoScreen.swift; sourceTree = "<group>"; };
+		E191052B2352790B00E440C7 /* MonkeyTests.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MonkeyTests.storyboard; sourceTree = "<group>"; };
+		E191052E23527A3100E440C7 /* DemoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoData.swift; sourceTree = "<group>"; };
 		E19C9D662109B4D900FDA0D7 /* MockPlayerContextDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPlayerContextDelegate.swift; sourceTree = "<group>"; };
 		E1A308AC20B5C032007ED482 /* noreason.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = noreason.txt; sourceTree = "<group>"; };
 		E1A4C32D209B06F1000580F5 /* RouteAudioServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteAudioServiceTests.swift; sourceTree = "<group>"; };
@@ -198,7 +206,10 @@
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				E10B20E621C9557E00924E1D /* PlayerConfigurationExample.swift */,
 				E10B20E421C94F7400924E1D /* RemoteCommandExample.swift */,
-				E12D8B5520792AE300A84A5E /* ViewController.swift */,
+				E191052D2352792900E440C7 /* MonkeyTests */,
+				E191052E23527A3100E440C7 /* DemoData.swift */,
+				E1910529235276D600E440C7 /* DemoScreen.swift */,
+				E1910527235274A500E440C7 /* TableViewController.swift */,
 				E112DB442079359D00DB69E8 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
@@ -350,6 +361,15 @@
 			path = State;
 			sourceTree = "<group>";
 		};
+		E191052D2352792900E440C7 /* MonkeyTests */ = {
+			isa = PBXGroup;
+			children = (
+				E12D8B5520792AE300A84A5E /* ViewController.swift */,
+				E191052B2352790B00E440C7 /* MonkeyTests.storyboard */,
+			);
+			name = MonkeyTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -448,6 +468,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E112DB452079359D00DB69E8 /* Main.storyboard in Resources */,
+				E191052C2352790B00E440C7 /* MonkeyTests.storyboard in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				E1A308AD20B5C032007ED482 /* noreason.txt in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
@@ -588,7 +609,10 @@
 			files = (
 				E10B20E721C9557E00924E1D /* PlayerConfigurationExample.swift in Sources */,
 				E10B20E521C94F7400924E1D /* RemoteCommandExample.swift in Sources */,
+				E191052F23527A3100E440C7 /* DemoData.swift in Sources */,
+				E191052A235276D600E440C7 /* DemoScreen.swift in Sources */,
 				E12D8B5620792AE300A84A5E /* ViewController.swift in Sources */,
+				E1910528235274A500E440C7 /* TableViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -36,7 +36,7 @@ protocol PlayerContextDelegate: class {
 }
 
 //sourcery: AutoMockable
-protocol PlayerContext: class, MediaPlayer {
+protocol PlayerContext: MediaPlayer {
     var audioSession: AudioSessionService { get }
     var bgToken: UIBackgroundTaskIdentifier? { get set }
     var config: PlayerConfiguration { get }
@@ -112,10 +112,8 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
         setAudioSessionCategory()
         setAllowsExternalPlayback()
         
-        defer {
-            state = InitState(context: self)
-            plugins.forEach { $0.didInit(player: player) }
-        }
+        state = InitState(context: self)
+        plugins.forEach { $0.didInit(player: player) }
     }
 
     deinit {

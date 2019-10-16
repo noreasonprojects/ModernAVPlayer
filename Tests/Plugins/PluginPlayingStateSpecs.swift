@@ -61,7 +61,7 @@ final class PluginPlayingStateSpecs: XCTestCase {
 
     func testWhenEndTimeOccured_DidPlayToEndTimePluginShouldBeCall() {
         // ARRANGE
-        _ = PlayingState(context: context, itemPlaybackObservingService: playbackObervingService)
+        let state = PlayingState(context: context, itemPlaybackObservingService: playbackObervingService)
 
         // ACT
         playbackObervingService.onPlayToEndTime?()

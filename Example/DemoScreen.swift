@@ -3,8 +3,8 @@
 // ModernAVPlayer
 // Copyright (c) 2018 Raphael Ankierman <raphael.ankierman@radiofrance.com>
 //
-// ModernAVPlayerCurrentState.swift
-// Created by raphael ankierman on 17/08/2018.
+// DemoScreen.swift
+// Created by raphael ankierman on 12/10/2019.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,10 +26,20 @@
 
 import Foundation
 
-public protocol ModernAVPlayerCurrentState: class {
-    var state: ModernAVPlayer.State { get }
-}
+enum DemoScreens {
+    case monkeyTests
 
-public protocol ModernAVPlayerCurrentMedia: class {
-    var currentMedia: PlayerMedia? { get }
+    var id: String {
+        switch self {
+        case .monkeyTests:
+            return "MonkeyTests"
+        }
+    }
+
+    var description: String {
+        switch self {
+        case .monkeyTests:
+            return "Monkey Tests"
+        }
+    }
 }

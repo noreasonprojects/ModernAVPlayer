@@ -1078,7 +1078,7 @@
 		E020283E9128E3F63076893B499EDC6D /* ModernAVPlayer.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ModernAVPlayer.xcconfig; sourceTree = "<group>"; };
 		E06F91B4F377B9ACEC9A1C1232D77BB6 /* First.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = First.swift; path = RxSwift/Observables/First.swift; sourceTree = "<group>"; };
 		E18656BAD68AA9ABA1B145EE0D83BE02 /* RxRelay-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "RxRelay-dummy.m"; sourceTree = "<group>"; };
-		E1FB26AC2357A0C100277B40 /* ModernAVPlayerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModernAVPlayerDelegate.swift; sourceTree = "<group>"; };
+		E1FB26AC2357A0C100277B40 /* ModernAVPlayerDelegate.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = ModernAVPlayerDelegate.swift; path = Sources/Core/ModernAVPlayerDelegate.swift; sourceTree = "<group>"; };
 		E2FFFA557ABB4C3E1C9BBA07BDE65999 /* Filter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Filter.swift; path = RxSwift/Observables/Filter.swift; sourceTree = "<group>"; };
 		E367E4EDA564481D924D7AB27FBDCC08 /* QuickSpec.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = QuickSpec.h; path = Sources/QuickObjectiveC/QuickSpec.h; sourceTree = "<group>"; };
 		E3B3DA248E11DE20F7E6F258D0341263 /* RxCocoa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RxCocoa.framework; sourceTree = BUILT_PRODUCTS_DIR; };

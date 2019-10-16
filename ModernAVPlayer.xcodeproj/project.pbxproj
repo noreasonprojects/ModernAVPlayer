@@ -66,6 +66,8 @@
 		E1EFA9AA20B44811002605A9 /* WaitingNetworkStateSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1EFA9A920B44811002605A9 /* WaitingNetworkStateSpecs.swift */; };
 		E1EFA9AC20B449FF002605A9 /* MockReachabilityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1EFA9AB20B449FF002605A9 /* MockReachabilityService.swift */; };
 		E1F3E91421DCEC75004EB717 /* MockPlayerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F3E91321DCEC74004EB717 /* MockPlayerPlugin.swift */; };
+		E1FB26A62357898A00277B40 /* SimpleAudioDelegateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FB26A52357898A00277B40 /* SimpleAudioDelegateVC.swift */; };
+		E1FB26A8235789AD00277B40 /* SimpleAudioDelegate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1FB26A7235789AD00277B40 /* SimpleAudioDelegate.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -145,6 +147,8 @@
 		E1EFA9A920B44811002605A9 /* WaitingNetworkStateSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingNetworkStateSpecs.swift; sourceTree = "<group>"; };
 		E1EFA9AB20B449FF002605A9 /* MockReachabilityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockReachabilityService.swift; sourceTree = "<group>"; };
 		E1F3E91321DCEC74004EB717 /* MockPlayerPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPlayerPlugin.swift; sourceTree = "<group>"; };
+		E1FB26A52357898A00277B40 /* SimpleAudioDelegateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleAudioDelegateVC.swift; sourceTree = "<group>"; };
+		E1FB26A7235789AD00277B40 /* SimpleAudioDelegate.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SimpleAudioDelegate.storyboard; sourceTree = "<group>"; };
 		FB1C104CD10D29DEB562AF28 /* Pods-ModernAVPlayer_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ModernAVPlayer_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ModernAVPlayer_Tests/Pods-ModernAVPlayer_Tests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -207,6 +211,7 @@
 				E10B20E621C9557E00924E1D /* PlayerConfigurationExample.swift */,
 				E10B20E421C94F7400924E1D /* RemoteCommandExample.swift */,
 				E191052D2352792900E440C7 /* MonkeyTests */,
+				E1FB26A9235789BD00277B40 /* SimpleAudio */,
 				E191052E23527A3100E440C7 /* DemoData.swift */,
 				E1910529235276D600E440C7 /* DemoScreen.swift */,
 				E1910527235274A500E440C7 /* TableViewController.swift */,
@@ -370,6 +375,15 @@
 			name = MonkeyTests;
 			sourceTree = "<group>";
 		};
+		E1FB26A9235789BD00277B40 /* SimpleAudio */ = {
+			isa = PBXGroup;
+			children = (
+				E1FB26A52357898A00277B40 /* SimpleAudioDelegateVC.swift */,
+				E1FB26A7235789AD00277B40 /* SimpleAudioDelegate.storyboard */,
+			);
+			name = SimpleAudio;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -471,6 +485,7 @@
 				E191052C2352790B00E440C7 /* MonkeyTests.storyboard in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				E1A308AD20B5C032007ED482 /* noreason.txt in Resources */,
+				E1FB26A8235789AD00277B40 /* SimpleAudioDelegate.storyboard in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
 				E112DB482079365B00DB69E8 /* AllNew.mp3 in Resources */,
 			);
@@ -610,6 +625,7 @@
 				E10B20E721C9557E00924E1D /* PlayerConfigurationExample.swift in Sources */,
 				E10B20E521C94F7400924E1D /* RemoteCommandExample.swift in Sources */,
 				E191052F23527A3100E440C7 /* DemoData.swift in Sources */,
+				E1FB26A62357898A00277B40 /* SimpleAudioDelegateVC.swift in Sources */,
 				E191052A235276D600E440C7 /* DemoScreen.swift in Sources */,
 				E12D8B5620792AE300A84A5E /* ViewController.swift in Sources */,
 				E1910528235274A500E440C7 /* TableViewController.swift in Sources */,

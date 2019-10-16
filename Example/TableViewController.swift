@@ -28,7 +28,7 @@ import UIKit
 
 final class TableViewController: UITableViewController {
 
-    private let dataSource: [DemoScreens] = [.monkeyTests]
+    private let dataSource: [DemoScreens] = [.simpleAudioDelegate, .monkeyTests]
 
     override func viewDidLoad() {
         super.viewDidLoad()

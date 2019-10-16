@@ -37,6 +37,6 @@ struct PlayerConfigurationExample: PlayerConfiguration {
     let allowsExternalPlayback = false
 
     init() {
-        periodicPlayingTime = CMTime(seconds: 1, preferredTimescale: preferedTimeScale)
+        periodicPlayingTime = CMTime(seconds: 0.1, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
     }
 }

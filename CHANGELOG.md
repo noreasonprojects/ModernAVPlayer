@@ -3,6 +3,8 @@ All notable changes to this project will be documented in this file.
 
 ---
 ## [X.X.X]
+* Improvement:
+	* Make player delegate method optionals
 * Fix:
 	* Update readme requirements
 	* Remove Player & Demo memory leaks (oups..)

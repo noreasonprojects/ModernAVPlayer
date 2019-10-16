@@ -428,6 +428,7 @@
 		E024BB52D3BEBE8CCE74506E74BB6D30 /* MockyAssert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A783AC2D38EA6A310ECE8FE4E082B97 /* MockyAssert.swift */; };
 		E0EAC85F7ACFAD998B14FCE66144000E /* NMBStringify.h in Headers */ = {isa = PBXBuildFile; fileRef = E50A34A8DDC56E5A5748945A5EB7C5B2 /* NMBStringify.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E1CDB45E68469FFFC8311ADC63E9531F /* UITabBarController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1759117CDEA42A7005C86B858D9E67E0 /* UITabBarController+Rx.swift */; };
+		E1FB26AD2357A0C100277B40 /* ModernAVPlayerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FB26AC2357A0C100277B40 /* ModernAVPlayerDelegate.swift */; };
 		E42A11BCB69E8B81875A650F39F7B59A /* NSObject+Rx+RawRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC2CA020892B0164F0587403D3FABE7 /* NSObject+Rx+RawRepresentable.swift */; };
 		E458AAE1AE9E2250F29806E5633B1860 /* Expression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016D505FC4CF10982E56527920BB6035 /* Expression.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		E4C1760396808EA3DC0E6730E2858BB5 /* Completable+AndThen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B30E3A77C76A58E278F999D466EA1B /* Completable+AndThen.swift */; };
@@ -1077,6 +1078,7 @@
 		E020283E9128E3F63076893B499EDC6D /* ModernAVPlayer.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ModernAVPlayer.xcconfig; sourceTree = "<group>"; };
 		E06F91B4F377B9ACEC9A1C1232D77BB6 /* First.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = First.swift; path = RxSwift/Observables/First.swift; sourceTree = "<group>"; };
 		E18656BAD68AA9ABA1B145EE0D83BE02 /* RxRelay-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "RxRelay-dummy.m"; sourceTree = "<group>"; };
+		E1FB26AC2357A0C100277B40 /* ModernAVPlayerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModernAVPlayerDelegate.swift; sourceTree = "<group>"; };
 		E2FFFA557ABB4C3E1C9BBA07BDE65999 /* Filter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Filter.swift; path = RxSwift/Observables/Filter.swift; sourceTree = "<group>"; };
 		E367E4EDA564481D924D7AB27FBDCC08 /* QuickSpec.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = QuickSpec.h; path = Sources/QuickObjectiveC/QuickSpec.h; sourceTree = "<group>"; };
 		E3B3DA248E11DE20F7E6F258D0341263 /* RxCocoa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RxCocoa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2015,6 +2017,7 @@
 			isa = PBXGroup;
 			children = (
 				F52C897C3BF01766535FF375B9FFB6C5 /* ModernAVPlayer.swift */,
+				E1FB26AC2357A0C100277B40 /* ModernAVPlayerDelegate.swift */,
 				2F6FD9D32AD3922E7BE784ED6BB1747D /* Components */,
 				EAEF58F488D63D87679D1D498E513BDD /* Services */,
 				5AB8B41AC445AF929E78D4618E25D85A /* State */,
@@ -2813,6 +2816,7 @@
 				5111E175EEBD9564C6099B9BFF1EF1D7 /* ModernAVPlayerLogger.swift in Sources */,
 				A2C08D50401CA9B827783E9728DCECD6 /* ModernAVPlayerLoggerDomain.swift in Sources */,
 				9E1A5B609B7DA0A12CE7203EFF8B14B6 /* ModernAVPlayerMedia.swift in Sources */,
+				E1FB26AD2357A0C100277B40 /* ModernAVPlayerDelegate.swift in Sources */,
 				7B453CFFB9D83F27AB4C55165F021F1D /* ModernAVPlayerMediaMetadata.swift in Sources */,
 				C41AA2BF0B2F1C0104FC3399786D13EB /* ModernAVPlayerRemoteCommand.swift in Sources */,
 				A766EB4B003A918258574B4D874FA7E1 /* ModernAVPlayerRemoteCommandFactory.swift in Sources */,

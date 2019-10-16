@@ -157,13 +157,6 @@ let player = ModernAVPlayer()
 let state: Observable<ModernAVPlayer.State> = player.rx.state
 ```
 
-## Todo
-- [ ] Remove useless Init state
-- [ ] Add TvOS example to check compatibility
-- [ ] Make a prettier audio and video example
-- [ ] Separate background task to a service
-- [ ] Make log message available to multiple domain
-
 ## Communication
 
 - If you **found a bug**, open an issue.

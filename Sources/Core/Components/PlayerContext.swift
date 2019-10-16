@@ -111,9 +111,13 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
         ModernAVPlayerLogger.instance.log(message: "Init", domain: .lifecycleState)
         setAudioSessionCategory()
         setAllowsExternalPlayback()
-        
-        state = InitState(context: self)
-        plugins.forEach { $0.didInit(player: player) }
+
+        // defer use to execute didSet state instruction
+        //swiftlint:disable inert_defer
+        defer {
+            state = InitState(context: self)
+            plugins.forEach { $0.didInit(player: player) }
+        }
     }
 
     deinit {

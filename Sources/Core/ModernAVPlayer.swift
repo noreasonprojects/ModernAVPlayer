@@ -26,15 +26,6 @@
 
 import AVFoundation
 
-public protocol ModernAVPlayerDelegate: class {
-    func modernAVPlayer(_ player: ModernAVPlayer, didStateChange state: ModernAVPlayer.State)
-    func modernAVPlayer(_ player: ModernAVPlayer, didCurrentMediaChange media: PlayerMedia?)
-    func modernAVPlayer(_ player: ModernAVPlayer, didCurrentTimeChange currentTime: Double)
-    func modernAVPlayer(_ player: ModernAVPlayer, didItemDurationChange itemDuration: Double?)
-    func modernAVPlayer(_ player: ModernAVPlayer, unavailableActionReason: PlayerUnavailableActionReason)
-    func modernAVPlayer(_ player: ModernAVPlayer, didItemPlayToEndTime endTime: Double)
-}
-
 public final class ModernAVPlayer: NSObject, ModernAVPlayerExposable {
 
     // MARK: - Outputs

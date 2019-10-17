@@ -163,7 +163,8 @@ final class LoadingMediaState: PlayerState {
         case .unknown:
             assertionFailure()
         case .failed:
-            context.changeState(state: FailedState(context: context, error: .loadingFailed))
+            let state = FailedState(context: context, error: .loadingFailed)
+            context.changeState(state: state)
         case .readyToPlay:
             guard let position = self.position else { moveToLoadedState(); return }
             let seekPosition = CMTime(seconds: position, preferredTimescale: context.config.preferedTimeScale)

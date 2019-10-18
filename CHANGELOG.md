@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file.
 	* Update readme requirements
 	* Remove Player & Demo memory leaks (oups..)
 * Dependency:
+	* [gem] Cocoapod -> 1.8.4
 	* [gem] Fastlane -> 2.134.0
 
 ## [1.3.0]

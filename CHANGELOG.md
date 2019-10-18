@@ -8,6 +8,8 @@ All notable changes to this project will be documented in this file.
 * Fix:
 	* Update readme requirements
 	* Remove Player & Demo memory leaks (oups..)
+* Dependency:
+	* [gem] Fastlane -> 2.134.0
 
 ## [1.3.0]
 * Improvement:

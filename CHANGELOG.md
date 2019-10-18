@@ -5,22 +5,22 @@ All notable changes to this project will be documented in this file.
 ## [1.3.1]
 * Improvement:
 	* Make player delegate method optionals
-* Fix:
+* Fixes:
 	* Update readme requirements
 	* Remove Player & Demo memory leaks (oups..)
-* Dependency:
+* Dependencies:
 	* [gem] Cocoapod -> 1.8.4
 	* [gem] Fastlane -> 2.134.0
 
 ## [1.3.0]
-* Improvement:
+* Improvements:
 	* Add a new textfield in example app to test custom urls
 	* Expose explicit unavailable action reason
 * CI:
 	* Update travis xcode version to 11
 
 ## [1.2.1]
-* Dependency:
+* Dependencies:
 	* [gem] Cocoapods -> 1.7.5
 	* [gem] Fastlane -> 2.131.0
 	* [pod] Quick -> 2.2.0

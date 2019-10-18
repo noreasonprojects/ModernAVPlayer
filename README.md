@@ -44,6 +44,10 @@
 
 ## Installation
 
+### Swift Package Manager
+
+Supported version: ``swift-tools-version:5.0``
+
 ### CocoaPods
 
 [CocoaPods](http://cocoapods.org) is a dependency manager for Cocoa projects. You can install it with the following command:

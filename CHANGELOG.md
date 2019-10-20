@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 
 ---
+## [X.X.X]
+* Fix:
+	* Update player metadata access control
+
 ## [1.3.1]
 * Improvement:
 	* Make player delegate method optionals

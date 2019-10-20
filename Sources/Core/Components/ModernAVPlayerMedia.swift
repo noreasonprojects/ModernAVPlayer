@@ -26,10 +26,17 @@
 
 public class ModernAVPlayerMedia: PlayerMedia {
 
+    // MARK: - Outputs
+
     public let url: URL
     public let type: MediaType
-    public var metadata: ModernAVPlayerMediaMetadata?
     public let assetOptions: [String: Any]?
+
+    // MARK: - Input
+
+    private var metadata: ModernAVPlayerMediaMetadata?
+
+    // MARK: - Init
 
     public init(url: URL,
                 type: MediaType,
@@ -40,7 +47,9 @@ public class ModernAVPlayerMedia: PlayerMedia {
         self.metadata = metadata
         self.assetOptions = assetOptions
     }
-    
+
+    // MARK: - Metadata
+
     public func getMetadata() -> PlayerMediaMetadata? {
         return metadata
     }

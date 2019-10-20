@@ -6,41 +6,68 @@
 //  Copyright © 2018 CocoaPods. All rights reserved.
 //
 
-import Foundation
-import Nimble
 @testable
 import ModernAVPlayer
 import XCTest
 
 final class PlayerMediaSpecs: XCTestCase {
 
-    private var media: ModernAVPlayerMedia!
-
-    override func setUp() {
-        let url = URL(string: "foo")!
-        media = ModernAVPlayerMedia(url: url, type: .clip, metadata: nil)
-    }
+    private let url = URL(string: "foo")!
 
     func testSetMetadata() {
         // ARRANGE
+        let media = ModernAVPlayerMedia(url: url, type: .stream(isLive: false), metadata: nil)
         let newMetadata = ModernAVPlayerMediaMetadata(title: "foo")
 
         // ACT
         media.setMetadata(newMetadata)
+        let expected = media.getMetadata() as? ModernAVPlayerMediaMetadata
 
         // ASSERT
-        expect(self.media.metadata).to(equal(newMetadata))
+        XCTAssertEqual(expected, newMetadata)
     }
 
-    func testGetMetadata() {
+    func testGetMetadataNil() {
         // ARRANGE
-        let newMetadata = ModernAVPlayerMediaMetadata(title: "foo")
-        media.metadata = newMetadata
+        let media = ModernAVPlayerMedia(url: url, type: .stream(isLive: false), metadata: nil)
 
         // ACT
         let expectedMetadata = media.getMetadata() as? ModernAVPlayerMediaMetadata
 
         // ASSERT
-        expect(expectedMetadata).to(equal(newMetadata))
+        XCTAssertNil(expectedMetadata)
+    }
+
+    func testTypeNotLiveStream() {
+        // ARRANGE
+        let media = ModernAVPlayerMedia(url: url, type: .stream(isLive: false), metadata: nil)
+
+        // ASSERT
+        XCTAssertFalse(media.isLive())
+    }
+
+    func testTypetLiveStream() {
+        // ARRANGE
+        let media = ModernAVPlayerMedia(url: url, type: .stream(isLive: true), metadata: nil)
+
+        // ASSERT
+        XCTAssertTrue(media.isLive())
+    }
+
+    func testTypeClip() {
+        // ARRANGE
+        let media = ModernAVPlayerMedia(url: url, type: .clip, metadata: nil)
+
+        // ASSERT
+        XCTAssertFalse(media.isLive())
+    }
+
+    func testOutputDescription() {
+        // ARRANGE
+        let type = MediaType.clip
+        let media = ModernAVPlayerMedia(url: url, type: type, metadata: nil)
+
+        // ASSERT
+        XCTAssertEqual(media.description, "url: \(url.absoluteString) | type: \(type.description)")
     }
 }

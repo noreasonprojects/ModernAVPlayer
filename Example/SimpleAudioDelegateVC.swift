@@ -20,20 +20,17 @@ final class SimpleAudioDelegateVC: UIViewController {
     private let data = DemoData()
     private var currentTime: Double?
     private var itemDuration: Double?
-    private let helper = Helper()
 
     // MARK: - Interface Buidler
 
     @IBOutlet weak private var stateLabel: UILabel!
     @IBOutlet weak private var timingLabel: UILabel!
-    @IBOutlet weak private var reasonLabel: UILabel!
 
     // MARK: - LifeCycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        reasonLabel.text = nil
         player.delegate = self
         player.load(media: data.medias[2], autostart: false)
     }
@@ -85,19 +82,5 @@ extension SimpleAudioDelegateVC: ModernAVPlayerDelegate {
 
     func modernAVPlayer(_ player: ModernAVPlayer, didItemDurationChange itemDuration: Double?) {
         self.itemDuration = itemDuration
-    }
-
-    func modernAVPlayer(_ player: ModernAVPlayer, unavailableActionReason: PlayerUnavailableActionReason) {
-        let reason = helper.reasonDescription(unavailableActionReason)
-
-        DispatchQueue.main.async {
-            self.reasonLabel.text = reason
-            self.reasonLabel.alpha = 1
-            UIView.animate(withDuration: 0.8, animations: {
-                self.reasonLabel.alpha = 0
-            }) { _ in
-                self.reasonLabel.text = nil
-            }
-        }
     }
 }

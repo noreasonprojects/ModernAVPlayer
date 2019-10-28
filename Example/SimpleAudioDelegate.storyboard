@@ -85,12 +85,6 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reason" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mdC-rq-tFJ">
-                                <rect key="frame" x="20" y="557" width="374" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
-                                <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -100,18 +94,14 @@
                             <constraint firstItem="M5n-bk-XEc" firstAttribute="centerY" secondItem="6e0-Xg-z86" secondAttribute="centerY" id="BQM-Mi-rcr"/>
                             <constraint firstItem="2He-N3-ZbS" firstAttribute="leading" secondItem="M5n-bk-XEc" secondAttribute="leading" id="GAO-7W-Tqe"/>
                             <constraint firstItem="jiY-A4-u4S" firstAttribute="trailing" secondItem="M5n-bk-XEc" secondAttribute="trailing" id="H56-on-Zaf"/>
-                            <constraint firstItem="mdC-rq-tFJ" firstAttribute="trailing" secondItem="2He-N3-ZbS" secondAttribute="trailing" id="HHX-aF-UbM"/>
-                            <constraint firstItem="mdC-rq-tFJ" firstAttribute="leading" secondItem="2He-N3-ZbS" secondAttribute="leading" id="PBW-lg-cwr"/>
                             <constraint firstItem="2He-N3-ZbS" firstAttribute="top" secondItem="M5n-bk-XEc" secondAttribute="bottom" constant="20" id="epg-Gg-1dd"/>
                             <constraint firstItem="jiY-A4-u4S" firstAttribute="leading" secondItem="M5n-bk-XEc" secondAttribute="leading" id="f9U-lr-Dg7"/>
                             <constraint firstItem="M5n-bk-XEc" firstAttribute="centerX" secondItem="6e0-Xg-z86" secondAttribute="centerX" id="lGS-1m-oHn"/>
-                            <constraint firstItem="mdC-rq-tFJ" firstAttribute="top" secondItem="2He-N3-ZbS" secondAttribute="bottom" constant="44" id="rKe-5X-y8F"/>
                             <constraint firstItem="M5n-bk-XEc" firstAttribute="leading" secondItem="b1a-d4-7Nh" secondAttribute="leading" constant="20" id="vMM-eJ-nvV"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="b1a-d4-7Nh"/>
                     </view>
                     <connections>
-                        <outlet property="reasonLabel" destination="mdC-rq-tFJ" id="qb2-7K-nyn"/>
                         <outlet property="stateLabel" destination="g4s-cd-v6c" id="ANT-PO-y2d"/>
                         <outlet property="timingLabel" destination="d0L-ea-V62" id="KZc-YM-Tdw"/>
                     </connections>

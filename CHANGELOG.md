@@ -3,9 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ---
 ## [X.X.X]
-* Fix:
+* Fixes:
 	* Update player metadata access control
 	* Remove useless travis command
+	* Remove retain cycles
 
 ## [1.3.1]
 * Improvement:

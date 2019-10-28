@@ -75,8 +75,10 @@ final class BufferingState: NSObject, PlayerState {
     // MARK: - Setup
     
     private func setupRateObservingCallback() {
-        rateObservingService.onTimeout = { [context] in
-            guard let url = (context.currentItem?.asset as? AVURLAsset)?.url
+        rateObservingService.onTimeout = { [weak self] in
+            guard
+                let context = self?.context,
+                let url = (context.currentItem?.asset as? AVURLAsset)?.url
                 else { return }
             
             let waitingState = WaitingNetworkState(context: context,
@@ -110,10 +112,10 @@ final class BufferingState: NSObject, PlayerState {
     func seekCommand(position: Double) {
         context.currentItem?.cancelPendingSeeks()
         let time = CMTime(seconds: position, preferredTimescale: context.config.preferedTimeScale)
-        context.player.seek(to: time) { [context] completed in
-            guard completed else { return }
-            context.delegate?.playerContext(didCurrentTimeChange: context.currentTime)
-            self.playCommand()
+        context.player.seek(to: time) { [weak self] completed in
+            guard completed, let strongSelf = self else { return }
+            strongSelf.context.delegate?.playerContext(didCurrentTimeChange: strongSelf.context.currentTime)
+            strongSelf.playCommand()
         }
     }
 

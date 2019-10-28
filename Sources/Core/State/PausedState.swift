@@ -96,8 +96,8 @@ class PausedState: PlayerState {
 
     func seek(position: Double) {
         let time = CMTime(seconds: position, preferredTimescale: context.config.preferedTimeScale)
-        context.player.seek(to: time) { [context] completed in
-            guard completed else { return }
+        context.player.seek(to: time) { [weak self] completed in
+            guard completed, let context = self?.context else { return }
             context.delegate?.playerContext(didCurrentTimeChange: context.currentTime)
             context.nowPlaying.overrideInfoCenter(for: MPNowPlayingInfoPropertyElapsedPlaybackTime,
                                                   value: context.currentTime)

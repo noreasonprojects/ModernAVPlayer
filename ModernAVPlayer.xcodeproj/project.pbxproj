@@ -59,7 +59,7 @@
 		E1910528235274A500E440C7 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1910527235274A500E440C7 /* TableViewController.swift */; };
 		E191052A235276D600E440C7 /* DemoScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1910529235276D600E440C7 /* DemoScreen.swift */; };
 		E191052C2352790B00E440C7 /* MonkeyTests.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E191052B2352790B00E440C7 /* MonkeyTests.storyboard */; };
-		E191052F23527A3100E440C7 /* DemoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E191052E23527A3100E440C7 /* DemoData.swift */; };
+		E191052F23527A3100E440C7 /* MediaResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E191052E23527A3100E440C7 /* MediaResource.swift */; };
 		E19C9D672109B4D900FDA0D7 /* MockPlayerContextDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19C9D662109B4D900FDA0D7 /* MockPlayerContextDelegate.swift */; };
 		E19F1ABE235922FD00535291 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19F1ABD235922FD00535291 /* Helper.swift */; };
 		E1A308AD20B5C032007ED482 /* noreason.txt in Resources */ = {isa = PBXBuildFile; fileRef = E1A308AC20B5C032007ED482 /* noreason.txt */; };
@@ -141,7 +141,7 @@
 		E1910527235274A500E440C7 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		E1910529235276D600E440C7 /* DemoScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoScreen.swift; sourceTree = "<group>"; };
 		E191052B2352790B00E440C7 /* MonkeyTests.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MonkeyTests.storyboard; sourceTree = "<group>"; };
-		E191052E23527A3100E440C7 /* DemoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoData.swift; sourceTree = "<group>"; };
+		E191052E23527A3100E440C7 /* MediaResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaResource.swift; sourceTree = "<group>"; };
 		E19C9D662109B4D900FDA0D7 /* MockPlayerContextDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPlayerContextDelegate.swift; sourceTree = "<group>"; };
 		E19F1ABD235922FD00535291 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		E1A308AC20B5C032007ED482 /* noreason.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = noreason.txt; sourceTree = "<group>"; };
@@ -214,7 +214,7 @@
 				E10B20E421C94F7400924E1D /* RemoteCommandExample.swift */,
 				E191052D2352792900E440C7 /* MonkeyTests */,
 				E1FB26A9235789BD00277B40 /* SimpleAudio */,
-				E191052E23527A3100E440C7 /* DemoData.swift */,
+				E191052E23527A3100E440C7 /* MediaResource.swift */,
 				E1910529235276D600E440C7 /* DemoScreen.swift */,
 				E1910527235274A500E440C7 /* TableViewController.swift */,
 				E112DB442079359D00DB69E8 /* Main.storyboard */,
@@ -627,7 +627,7 @@
 			files = (
 				E10B20E721C9557E00924E1D /* PlayerConfigurationExample.swift in Sources */,
 				E10B20E521C94F7400924E1D /* RemoteCommandExample.swift in Sources */,
-				E191052F23527A3100E440C7 /* DemoData.swift in Sources */,
+				E191052F23527A3100E440C7 /* MediaResource.swift in Sources */,
 				E1FB26A62357898A00277B40 /* SimpleAudioDelegateVC.swift in Sources */,
 				E191052A235276D600E440C7 /* DemoScreen.swift in Sources */,
 				E12D8B5620792AE300A84A5E /* ViewController.swift in Sources */,

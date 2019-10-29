@@ -17,22 +17,26 @@ final class SimpleAudioDelegateVC: UIViewController {
         let conf = PlayerConfigurationExample()
         return ModernAVPlayer(config: conf, loggerDomains: [.error, .unavailableCommand])
     }()
-    private let data = DemoData()
     private var currentTime: Double?
     private var itemDuration: Double?
+    private let dataSource: [MediaResource] = [.live, .remote, .local, .invalid]
 
     // MARK: - Interface Buidler
 
     @IBOutlet weak private var stateLabel: UILabel!
     @IBOutlet weak private var timingLabel: UILabel!
-
+    @IBOutlet weak private var mediaPicker: UIPickerView!
+    
     // MARK: - LifeCycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         player.delegate = self
-        player.load(media: data.medias[2], autostart: false)
+        mediaPicker.dataSource = self
+        mediaPicker.delegate = self
+
+        player.load(media: dataSource[0].playerMedia, autostart: false)
     }
 
     // MARK: - Commands
@@ -82,5 +86,26 @@ extension SimpleAudioDelegateVC: ModernAVPlayerDelegate {
 
     func modernAVPlayer(_ player: ModernAVPlayer, didItemDurationChange itemDuration: Double?) {
         self.itemDuration = itemDuration
+    }
+}
+
+extension SimpleAudioDelegateVC: UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return dataSource.count
+    }
+}
+
+extension SimpleAudioDelegateVC: UIPickerViewDelegate {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return dataSource[row].description
+    }
+
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        let playerMedia = dataSource[row].playerMedia
+        player.load(media: playerMedia, autostart: false)
     }
 }

@@ -81,7 +81,7 @@ final class ViewController: UIViewController {
     }
     
     @IBAction func loadMediaWithPosition(_ sender: UIButton) {
-        let media = data.medias[sender.tag % 3]
+        let media = dataSource[sender.tag % 3].playerMedia
         loadMedia(media, autostart: true, position: 42.0)
         currentMedia.text = player.currentMedia?.description
     }
@@ -89,20 +89,19 @@ final class ViewController: UIViewController {
     @IBAction func loadMedia(_ sender: UIButton) {
         let media: PlayerMedia
         if(customLiveUrlSwitch.isOn && [0,3].contains(sender.tag)) {
-            guard let customMedia = try? data.media(with: customLiveUrlTextField.text) else {
-                showInvalidUrlAlert()
-                return
-            }
-            media = customMedia
+            guard let customUrl = customLiveUrlTextField.text, !customUrl.isEmpty
+                else { showInvalidUrlAlert(); return }
+            media = MediaResource.custom(customUrl).playerMedia
         } else {
-            media = data.medias[sender.tag % 3]
+            media = dataSource[sender.tag % 3].playerMedia
         }
         loadMedia(media, autostart: sender.tag < 3)
         currentMedia.text = media.description
     }
 
     @IBAction func loadInvalidFormat(_ sender: UIButton) {
-        loadMedia(data.invalidMedia, autostart: true)
+        let media = MediaResource.invalid.playerMedia
+        loadMedia(media, autostart: true)
     }
     
     @IBAction func loadInvalidRemoteUrl(_ sender: UIButton) {
@@ -117,7 +116,7 @@ final class ViewController: UIViewController {
     
     // MARK: - Inputs
 
-    private let data = DemoData()
+    private let dataSource: [MediaResource] = [.live, .remote, .local]
     private let player = ModernAVPlayer(config: PlayerConfigurationExample(),
                                         loggerDomains: [.state, .error, .unavailableCommand, .remoteCommand])
     

@@ -13,30 +13,30 @@ import ModernAVPlayer
 /// Documentation provided in PlayerConfiguration.swift
 ///
 
-public struct PlayerConfigurationExample: PlayerConfiguration {
+struct PlayerConfigurationExample: PlayerConfiguration {
 
     // Buffering State
-    public let rateObservingTimeout: TimeInterval = 3
-    public let rateObservingTickTime: TimeInterval = 0.3
+    let rateObservingTimeout: TimeInterval = 3
+    let rateObservingTickTime: TimeInterval = 0.3
 
     // General Audio preferences
-    public let preferedTimeScale: CMTimeScale = 1
-    public let periodicPlayingTime: CMTime
-    public let audioSessionCategory = AVAudioSession.Category.playback
+    let preferedTimeScale: CMTimeScale = 1
+    let periodicPlayingTime: CMTime
+    let audioSessionCategory = AVAudioSession.Category.playback
 
     // Reachability Service
-    public let reachabilityURLSessionTimeout: TimeInterval = 3
+    let reachabilityURLSessionTimeout: TimeInterval = 3
     //swiftlint:disable:next force_unwrapping
-    public let reachabilityNetworkTestingURL = URL(string: "https://www.google.com")!
-    public let reachabilityNetworkTestingTickTime: TimeInterval = 3
-    public let reachabilityNetworkTestingIteration: UInt = 10
+    let reachabilityNetworkTestingURL = URL(string: "https://www.google.com")!
+    let reachabilityNetworkTestingTickTime: TimeInterval = 3
+    let reachabilityNetworkTestingIteration: UInt = 10
 
     // RemoteCommandExample is used for example
-    public var useDefaultRemoteCommand = false
+    var useDefaultRemoteCommand = false
     
-    public let allowsExternalPlayback = false
+    let allowsExternalPlayback = false
 
-    public init() {
-        periodicPlayingTime = CMTime(seconds: 1, preferredTimescale: preferedTimeScale)
+    init() {
+        periodicPlayingTime = CMTime(seconds: 0.1, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
     }
 }

@@ -28,11 +28,14 @@ import Foundation
 
 enum DemoScreens {
     case monkeyTests
+    case simpleAudio
 
     var id: String {
         switch self {
         case .monkeyTests:
             return "MonkeyTests"
+        case .simpleAudio:
+            return "SimpleAudio"
         }
     }
 
@@ -40,6 +43,8 @@ enum DemoScreens {
         switch self {
         case .monkeyTests:
             return "Monkey Tests"
+        case .simpleAudio:
+            return "Simple Audio"
         }
     }
 }

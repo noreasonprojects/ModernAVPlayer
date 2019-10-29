@@ -28,12 +28,7 @@ import UIKit
 
 final class TableViewController: UITableViewController {
 
-    private let dataSource: [DemoScreens] = [.monkeyTests]
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-    }
+    private let dataSource: [DemoScreens] = [.simpleAudio, .monkeyTests]
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "screenCell", for: indexPath)

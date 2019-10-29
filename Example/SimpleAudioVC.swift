@@ -9,7 +9,7 @@
 import ModernAVPlayer
 import UIKit
 
-final class SimpleAudioDelegateVC: UIViewController {
+final class SimpleAudioVC: UIViewController {
 
     // MARK: - Inputs
 
@@ -74,7 +74,7 @@ final class SimpleAudioDelegateVC: UIViewController {
     }
 }
 
-extension SimpleAudioDelegateVC: ModernAVPlayerDelegate {
+extension SimpleAudioVC: ModernAVPlayerDelegate {
     func modernAVPlayer(_ player: ModernAVPlayer, didStateChange state: ModernAVPlayer.State) {
         DispatchQueue.main.async { self.stateLabel.text = "State: " + state.description }
     }
@@ -89,7 +89,7 @@ extension SimpleAudioDelegateVC: ModernAVPlayerDelegate {
     }
 }
 
-extension SimpleAudioDelegateVC: UIPickerViewDataSource {
+extension SimpleAudioVC: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -99,7 +99,7 @@ extension SimpleAudioDelegateVC: UIPickerViewDataSource {
     }
 }
 
-extension SimpleAudioDelegateVC: UIPickerViewDelegate {
+extension SimpleAudioVC: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return dataSource[row].description
     }

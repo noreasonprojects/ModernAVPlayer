@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 
 ---
-## [X.X.X]
+## [1.3.2]
 * Fixes:
 	* Update player metadata access control
 	* Remove useless travis command

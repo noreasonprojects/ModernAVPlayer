@@ -210,18 +210,12 @@
 			children = (
 				E112DB462079364900DB69E8 /* Resources */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
-				E10B20E621C9557E00924E1D /* PlayerConfigurationExample.swift */,
-				E10B20E421C94F7400924E1D /* RemoteCommandExample.swift */,
-				E191052D2352792900E440C7 /* MonkeyTests */,
-				E1FB26A9235789BD00277B40 /* SimpleAudio */,
-				E191052E23527A3100E440C7 /* MediaResource.swift */,
 				E1910529235276D600E440C7 /* DemoScreen.swift */,
-				E1910527235274A500E440C7 /* TableViewController.swift */,
-				E112DB442079359D00DB69E8 /* Main.storyboard */,
+				E177C7042368DEC300826796 /* Domains */,
+				E177C7062368E02D00826796 /* PlayerConf */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
-				E19F1ABD235922FD00535291 /* Helper.swift */,
 			);
 			name = "Example for ModernAVPlayer";
 			path = Example;
@@ -367,6 +361,36 @@
 				E1EFA9A920B44811002605A9 /* WaitingNetworkStateSpecs.swift */,
 			);
 			path = State;
+			sourceTree = "<group>";
+		};
+		E177C7042368DEC300826796 /* Domains */ = {
+			isa = PBXGroup;
+			children = (
+				E177C7052368DED300826796 /* Main */,
+				E191052D2352792900E440C7 /* MonkeyTests */,
+				E1FB26A9235789BD00277B40 /* SimpleAudio */,
+			);
+			name = Domains;
+			sourceTree = "<group>";
+		};
+		E177C7052368DED300826796 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				E112DB442079359D00DB69E8 /* Main.storyboard */,
+				E1910527235274A500E440C7 /* TableViewController.swift */,
+			);
+			name = Main;
+			sourceTree = "<group>";
+		};
+		E177C7062368E02D00826796 /* PlayerConf */ = {
+			isa = PBXGroup;
+			children = (
+				E10B20E621C9557E00924E1D /* PlayerConfigurationExample.swift */,
+				E10B20E421C94F7400924E1D /* RemoteCommandExample.swift */,
+				E191052E23527A3100E440C7 /* MediaResource.swift */,
+				E19F1ABD235922FD00535291 /* Helper.swift */,
+			);
+			name = PlayerConf;
 			sourceTree = "<group>";
 		};
 		E191052D2352792900E440C7 /* MonkeyTests */ = {

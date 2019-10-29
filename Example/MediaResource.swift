@@ -32,11 +32,7 @@ enum MediaResource: CustomStringConvertible {
     case remote
     case local
     case invalid
-    case custom(String?)
-
-    static var allCases: [MediaResource] {
-        return [.live, .local, .remote, .invalid, .custom(nil)]
-    }
+    case custom(String)
 
     var description: String {
         switch self {
@@ -73,7 +69,7 @@ enum MediaResource: CustomStringConvertible {
         case .invalid:
             return URL(fileURLWithPath: Bundle.main.path(forResource: "noreason", ofType: "txt")!)
         case .custom(let customUrl):
-            return URL(string: customUrl ?? "")!
+            return URL(string: customUrl)!
         }
     }
 

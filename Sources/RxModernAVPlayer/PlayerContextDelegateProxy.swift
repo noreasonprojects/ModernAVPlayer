@@ -24,6 +24,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+// Compilation failed from SPM without this import
+import ModernAVPlayer
 import RxCocoa
 import RxSwift
 

@@ -26,9 +26,10 @@
 
 import Foundation
 
-enum DemoScreens {
-    case monkeyTests
+enum DemoScreens: CaseIterable {
     case simpleAudio
+    case simpleVideo
+    case monkeyTests
 
     var id: String {
         switch self {
@@ -36,6 +37,8 @@ enum DemoScreens {
             return "MonkeyTests"
         case .simpleAudio:
             return "SimpleAudio"
+        case .simpleVideo:
+            return "SimpleVideo"
         }
     }
 
@@ -45,6 +48,8 @@ enum DemoScreens {
             return "Monkey Tests"
         case .simpleAudio:
             return "Simple Audio"
+        case .simpleVideo:
+            return "Simple Video"
         }
     }
 }

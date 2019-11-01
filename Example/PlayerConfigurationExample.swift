@@ -20,7 +20,7 @@ struct PlayerConfigurationExample: PlayerConfiguration {
     let rateObservingTickTime: TimeInterval = 0.3
 
     // General Audio preferences
-    let preferedTimeScale: CMTimeScale = 1
+    let preferedTimeScale = CMTimeScale(NSEC_PER_SEC)
     let periodicPlayingTime: CMTime
     let audioSessionCategory = AVAudioSession.Category.playback
 
@@ -37,6 +37,6 @@ struct PlayerConfigurationExample: PlayerConfiguration {
     let allowsExternalPlayback = false
 
     init() {
-        periodicPlayingTime = CMTime(seconds: 0.1, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
+        periodicPlayingTime = CMTime(seconds: 0.1, preferredTimescale: preferedTimeScale)
     }
 }

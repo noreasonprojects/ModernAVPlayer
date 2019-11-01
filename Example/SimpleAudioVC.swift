@@ -32,6 +32,7 @@ final class SimpleAudioVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        title = "Simple Audio"
         player.delegate = self
         mediaPicker.dataSource = self
         mediaPicker.delegate = self

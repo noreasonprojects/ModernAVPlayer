@@ -20,13 +20,16 @@ final class SimpleVideoVC: UIViewController {
     }()
     private var currentTime: Double?
     private var itemDuration: Double?
-    private let dataSource: [MediaResource] = [.custom("http://qthttp.apple.com.edgesuite.net/1010qwoeiuryfg/sl.m3u8")]
+    private let seekTime: Double = 5
+    private let dataSource: [MediaResource] = [.custom("https://file-examples.com/wp-content/uploads/2018/04/file_example_MOV_480_700kB.mov")]
 
     // MARK: - Interface Buidler
 
     @IBOutlet weak private var stateLabel: UILabel!
     @IBOutlet weak private var timingLabel: UILabel!
     @IBOutlet weak private var playerVideo: AVPlayerView!
+    @IBOutlet weak private var prevSeek: UIButton!
+    @IBOutlet weak private var nextSeek: UIButton!
     
     // MARK: - LifeCycle
 
@@ -34,6 +37,9 @@ final class SimpleVideoVC: UIViewController {
         super.viewDidLoad()
 
         title = "Simple HLS Video"
+        prevSeek.setTitle("- \(seekTime)", for: .normal)
+        nextSeek.setTitle("+ \(seekTime)", for: .normal)
+
         player.delegate = self
         player.load(media: dataSource[0].playerMedia, autostart: false)
 
@@ -62,18 +68,19 @@ final class SimpleVideoVC: UIViewController {
     }
 
     @IBAction func prevSeek(_ sender: UIButton) {
-        guard let position = currentTime else { return }
-        let newPosition = position - 15
-        guard newPosition >= 0 else { return }
-        player.seek(position: newPosition)
+        guard let currentPosition = currentTime else { return }
+        let position = max(currentPosition - seekTime, 0)
+        player.seek(position: position)
     }
 
     @IBAction func nextSeek(_ sender: UIButton) {
-        guard let position = currentTime, let duration = itemDuration
+        guard let currentPosition = currentTime, let duration = itemDuration
             else { return }
-        let newPosition = position + 15
-        guard newPosition < duration else { return }
-        player.seek(position: position + 15)
+
+        let position = currentPosition + seekTime
+        guard position < duration else { return }
+
+        player.seek(position: position)
     }
 }
 

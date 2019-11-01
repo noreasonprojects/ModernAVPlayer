@@ -110,7 +110,9 @@
                         <viewLayoutGuide key="safeArea" id="tIz-eP-aB1"/>
                     </view>
                     <connections>
+                        <outlet property="nextSeek" destination="hep-x1-W7G" id="Fbu-gZ-Wvd"/>
                         <outlet property="playerVideo" destination="xYF-43-zQN" id="H9e-NI-IPe"/>
+                        <outlet property="prevSeek" destination="w65-uV-LA3" id="rgW-EY-wbN"/>
                         <outlet property="stateLabel" destination="Ept-HN-lio" id="HKe-vc-uyc"/>
                         <outlet property="timingLabel" destination="aJv-4v-WZz" id="u7o-lA-zAU"/>
                     </connections>

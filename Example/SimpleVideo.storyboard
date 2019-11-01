@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Simple VideoVC-->
+        <scene sceneID="QVD-7G-gja">
+            <objects>
+                <viewController storyboardIdentifier="SimpleVideo" id="gLg-p3-NiP" customClass="SimpleVideoVC" customModule="ModernAVPlayer_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="CII-Oo-FG6">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xYF-43-zQN" userLabel="PlayerVideo" customClass="AVPlayerView" customModule="ModernAVPlayer_Example" customModuleProvider="target">
+                                <rect key="frame" x="20" y="94" width="374" height="217"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="vkQ-fX-KT2" userLabel="Labels">
+                                <rect key="frame" x="20" y="354" width="374" height="24"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="State" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ept-HN-lio">
+                                        <rect key="frame" x="0.0" y="0.0" width="187" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Timing" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aJv-4v-WZz">
+                                        <rect key="frame" x="187" y="0.0" width="187" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="l8c-EG-7DJ" userLabel="CommandPlay">
+                                <rect key="frame" x="20" y="438" width="374" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XU7-YL-r2i" userLabel="Play">
+                                        <rect key="frame" x="0.0" y="0.0" width="118" height="30"/>
+                                        <state key="normal" title="Play"/>
+                                        <connections>
+                                            <action selector="play:" destination="gLg-p3-NiP" eventType="touchUpInside" id="MnJ-Hp-g3F"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hxV-py-3kg" userLabel="Pause">
+                                        <rect key="frame" x="128" y="0.0" width="118" height="30"/>
+                                        <state key="normal" title="Pause"/>
+                                        <connections>
+                                            <action selector="pause:" destination="gLg-p3-NiP" eventType="touchUpInside" id="vqu-qJ-5pM"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="URT-AR-lgL" userLabel="Stop">
+                                        <rect key="frame" x="256" y="0.0" width="118" height="30"/>
+                                        <state key="normal" title="Stop"/>
+                                        <connections>
+                                            <action selector="stop:" destination="gLg-p3-NiP" eventType="touchUpInside" id="K74-9c-e1T"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="siO-OD-Uxg" userLabel="Seek">
+                                <rect key="frame" x="20" y="488" width="374" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w65-uV-LA3">
+                                        <rect key="frame" x="0.0" y="0.0" width="118" height="30"/>
+                                        <state key="normal" title="-15"/>
+                                        <connections>
+                                            <action selector="prevSeek:" destination="gLg-p3-NiP" eventType="touchUpInside" id="rhi-B7-wPD"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jvZ-gf-Dep" userLabel="Loop">
+                                        <rect key="frame" x="128" y="0.0" width="118" height="30"/>
+                                        <state key="normal" title="Loop"/>
+                                        <connections>
+                                            <action selector="loop:" destination="gLg-p3-NiP" eventType="touchUpInside" id="MZY-Gu-tsr"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hep-x1-W7G">
+                                        <rect key="frame" x="256" y="0.0" width="118" height="30"/>
+                                        <state key="normal" title="+15"/>
+                                        <connections>
+                                            <action selector="nextSeek:" destination="gLg-p3-NiP" eventType="touchUpInside" id="UzI-7q-eFv"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="siO-OD-Uxg" firstAttribute="trailing" secondItem="l8c-EG-7DJ" secondAttribute="trailing" id="6mV-nF-K5S"/>
+                            <constraint firstItem="xYF-43-zQN" firstAttribute="leading" secondItem="vkQ-fX-KT2" secondAttribute="leading" id="BGQ-ym-gth"/>
+                            <constraint firstItem="xYF-43-zQN" firstAttribute="top" secondItem="tIz-eP-aB1" secondAttribute="top" constant="50" id="BvO-jq-GB5"/>
+                            <constraint firstItem="vkQ-fX-KT2" firstAttribute="trailing" secondItem="l8c-EG-7DJ" secondAttribute="trailing" id="OaA-jx-eHO"/>
+                            <constraint firstItem="tIz-eP-aB1" firstAttribute="trailing" secondItem="l8c-EG-7DJ" secondAttribute="trailing" constant="20" id="Zhb-Oq-cc8"/>
+                            <constraint firstItem="vkQ-fX-KT2" firstAttribute="leading" secondItem="l8c-EG-7DJ" secondAttribute="leading" id="a5S-Vm-cqV"/>
+                            <constraint firstItem="vkQ-fX-KT2" firstAttribute="top" secondItem="xYF-43-zQN" secondAttribute="bottom" constant="43" id="aCT-dl-8aj"/>
+                            <constraint firstItem="l8c-EG-7DJ" firstAttribute="top" secondItem="vkQ-fX-KT2" secondAttribute="bottom" constant="60" id="hZd-xv-7ma"/>
+                            <constraint firstItem="siO-OD-Uxg" firstAttribute="top" secondItem="l8c-EG-7DJ" secondAttribute="bottom" constant="20" id="hnf-Kp-IcX"/>
+                            <constraint firstItem="l8c-EG-7DJ" firstAttribute="leading" secondItem="tIz-eP-aB1" secondAttribute="leading" constant="20" id="jgx-Vb-SqY"/>
+                            <constraint firstItem="l8c-EG-7DJ" firstAttribute="centerY" secondItem="tIz-eP-aB1" secondAttribute="centerY" id="ynJ-L8-5fv"/>
+                            <constraint firstItem="xYF-43-zQN" firstAttribute="trailing" secondItem="vkQ-fX-KT2" secondAttribute="trailing" id="zGN-s2-RU7"/>
+                            <constraint firstItem="siO-OD-Uxg" firstAttribute="leading" secondItem="l8c-EG-7DJ" secondAttribute="leading" id="zTM-6A-5lm"/>
+                            <constraint firstItem="l8c-EG-7DJ" firstAttribute="centerX" secondItem="CII-Oo-FG6" secondAttribute="centerX" id="zxa-wv-KcI"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="tIz-eP-aB1"/>
+                    </view>
+                    <connections>
+                        <outlet property="nextSeek" destination="hep-x1-W7G" id="Fbu-gZ-Wvd"/>
+                        <outlet property="playerVideo" destination="xYF-43-zQN" id="H9e-NI-IPe"/>
+                        <outlet property="prevSeek" destination="w65-uV-LA3" id="rgW-EY-wbN"/>
+                        <outlet property="stateLabel" destination="Ept-HN-lio" id="HKe-vc-uyc"/>
+                        <outlet property="timingLabel" destination="aJv-4v-WZz" id="u7o-lA-zAU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="i58-HC-Su0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-41" y="98"/>
+        </scene>
+    </scenes>
+</document>

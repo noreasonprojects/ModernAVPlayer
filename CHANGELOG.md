@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 
 ---
+## [X.X.X]
+* Demo:
+	* New simple video example
+
 ## [1.3.2]
 * Fixes:
 	* Update player metadata access control

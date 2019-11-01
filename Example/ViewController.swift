@@ -134,7 +134,8 @@ final class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        title = "Monkey Tests"
         debugMessage.text = nil
         currentMedia.text = nil
         setupRemoteCustomRemoteCommand()

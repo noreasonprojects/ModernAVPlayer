@@ -4,7 +4,7 @@
 ![CocoaPods](https://img.shields.io/cocoapods/v/ModernAVPlayer.svg)
 ![CocoaPods](https://img.shields.io/cocoapods/l/ModernAVPlayer.svg)
 
-``ModernAVPlayer`` is an audio persistence ``AVPlayer`` wrapper
+``ModernAVPlayer`` is a persistence ``AVPlayer`` wrapper
 
 #### ++ Cool features ++
 - Get 9 nice and relevant player states (playing, buffering, loading, loaded...)

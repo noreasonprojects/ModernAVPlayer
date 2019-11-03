@@ -2,13 +2,16 @@
 All notable changes to this project will be documented in this file.
 
 ---
-## [X.X.X]
+## [1.3.3]
 * Feature:
 	* Seek media with a given offset
+	* Seek position is bounded between 0 and current media end time 
 * Demo:
 	* New simple video example
 * Breaking change:
 	* Remove useless ModernAVPlayerCurrentMedia protocol
+* Dependencies:
+	* Update some gems
 
 ## [1.3.2]
 * Fixes:

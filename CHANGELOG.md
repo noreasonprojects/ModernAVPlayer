@@ -5,6 +5,8 @@ All notable changes to this project will be documented in this file.
 ## [X.X.X]
 * Demo:
 	* New simple video example
+* Breaking change:
+	* Remove useless ModernAVPlayerCurrentMedia protocol
 
 ## [1.3.2]
 * Fixes:

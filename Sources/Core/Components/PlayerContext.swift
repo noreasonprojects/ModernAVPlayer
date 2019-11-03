@@ -152,6 +152,8 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
             state.seek(position: boundedPosition)
         } else if let reason = newPosition.reason {
             unaivalableCommand(reason: reason)
+        } else {
+            assertionFailure("boundedPosition should return at least value or reason")
         }
     }
 

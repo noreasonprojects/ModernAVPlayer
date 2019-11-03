@@ -18,10 +18,8 @@ final class SimpleVideoVC: UIViewController {
         let conf = PlayerConfigurationExample()
         return ModernAVPlayer(config: conf, loggerDomains: [.error, .unavailableCommand])
     }()
-    private var currentTime: Double?
-    private var itemDuration: Double?
     private let seekTime: Double = 5
-    private let dataSource: [MediaResource] = [.custom("https://file-examples.com/wp-content/uploads/2018/04/file_example_MOV_480_700kB.mov")]
+    private let dataSource: [MediaResource] = [.custom("https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8")]
 
     // MARK: - Interface Buidler
 
@@ -36,9 +34,7 @@ final class SimpleVideoVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = "Simple HLS Video"
-        prevSeek.setTitle("- \(seekTime)", for: .normal)
-        nextSeek.setTitle("+ \(seekTime)", for: .normal)
+        setupLabels()
 
         player.delegate = self
         player.load(media: dataSource[0].playerMedia, autostart: false)
@@ -46,6 +42,12 @@ final class SimpleVideoVC: UIViewController {
         guard let videoLayer = playerVideo.layer as? AVPlayerLayer
             else { return }
         videoLayer.player = player.player
+    }
+
+    private func setupLabels() {
+        title = "Simple HLS Video"
+        prevSeek.setTitle("- \(seekTime)", for: .normal)
+        nextSeek.setTitle("+ \(seekTime)", for: .normal)
     }
 
     // MARK: - Commands
@@ -68,19 +70,11 @@ final class SimpleVideoVC: UIViewController {
     }
 
     @IBAction func prevSeek(_ sender: UIButton) {
-        guard let currentPosition = currentTime else { return }
-        let position = max(currentPosition - seekTime, 0)
-        player.seek(position: position)
+        player.seek(offset: -seekTime)
     }
 
     @IBAction func nextSeek(_ sender: UIButton) {
-        guard let currentPosition = currentTime, let duration = itemDuration
-            else { return }
-
-        let position = currentPosition + seekTime
-        guard position < duration else { return }
-
-        player.seek(position: position)
+        player.seek(offset: seekTime)
     }
 }
 
@@ -90,11 +84,6 @@ extension SimpleVideoVC: ModernAVPlayerDelegate {
     }
 
     func modernAVPlayer(_ player: ModernAVPlayer, didCurrentTimeChange currentTime: Double) {
-        self.currentTime = currentTime
         DispatchQueue.main.async { self.timingLabel.text = "Timing: " + String(format: "%.2f", currentTime) }
-    }
-
-    func modernAVPlayer(_ player: ModernAVPlayer, didItemDurationChange itemDuration: Double?) {
-        self.itemDuration = itemDuration
     }
 }

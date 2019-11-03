@@ -36,7 +36,9 @@ public enum PlayerUnavailableActionReason {
     case alreadyPlaying
     case alreadyStopped
     case alreadyTryingToPlay
+    case itemDurationNotSet
     case loadMediaFirst
+    case positionExceed
     case waitEstablishedNetwork
     case waitLoadedMedia
 }

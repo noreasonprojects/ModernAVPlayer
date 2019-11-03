@@ -17,8 +17,6 @@ final class SimpleAudioVC: UIViewController {
         let conf = PlayerConfigurationExample()
         return ModernAVPlayer(config: conf, loggerDomains: [.error, .unavailableCommand])
     }()
-    private var currentTime: Double?
-    private var itemDuration: Double?
     private let dataSource: [MediaResource] = [.live, .remote, .local, .invalid]
 
     // MARK: - Interface Buidler
@@ -60,18 +58,11 @@ final class SimpleAudioVC: UIViewController {
     }
 
     @IBAction func prevSeek(_ sender: UIButton) {
-        guard let position = currentTime else { return }
-        let newPosition = position - 15
-        guard newPosition >= 0 else { return }
-        player.seek(position: newPosition)
+        player.seek(offset: -15)
     }
 
     @IBAction func nextSeek(_ sender: UIButton) {
-        guard let position = currentTime, let duration = itemDuration
-            else { return }
-        let newPosition = position + 15
-        guard newPosition < duration else { return }
-        player.seek(position: position + 15)
+        player.seek(offset: +15)
     }
 }
 
@@ -81,12 +72,7 @@ extension SimpleAudioVC: ModernAVPlayerDelegate {
     }
 
     func modernAVPlayer(_ player: ModernAVPlayer, didCurrentTimeChange currentTime: Double) {
-        self.currentTime = currentTime
         DispatchQueue.main.async { self.timingLabel.text = "Timing: " + String(format: "%.2f", currentTime) }
-    }
-
-    func modernAVPlayer(_ player: ModernAVPlayer, didItemDurationChange itemDuration: Double?) {
-        self.itemDuration = itemDuration
     }
 }
 

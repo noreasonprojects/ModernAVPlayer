@@ -131,19 +131,50 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
     private func setAllowsExternalPlayback() {
         player.allowsExternalPlayback = config.allowsExternalPlayback
     }
-    
-    func changeState(state: PlayerState) {
-        self.state = state
+
+    private func seekPosition(_ position: Double) -> Double? {
+        guard currentMedia != nil else {
+            let message = "Seek failed, load a media first"
+            ModernAVPlayerLogger.instance.log(message: message, domain: .unavailableCommand)
+            delegate?.playerContext(unavailableActionReason: .loadMediaFirst)
+            return nil
+        }
+        guard position > 0 else { return 0 }
+
+        guard let duration = self.itemDuration, duration.isNormal else {
+            let message = "Seek failed, item duration not set"
+            ModernAVPlayerLogger.instance.log(message: message, domain: .unavailableCommand)
+            delegate?.playerContext(unavailableActionReason: .itemDurationNotSet)
+            return nil
+        }
+        guard position < duration else {
+            let message = "Seek position should not exceed item end position"
+            ModernAVPlayerLogger.instance.log(message: message, domain: .unavailableCommand)
+            delegate?.playerContext(unavailableActionReason: .positionExceed)
+            return nil
+        }
+        return position
     }
     
     // MARK: - Public functions
+
+    func changeState(state: PlayerState) {
+        self.state = state
+    }
 
     func pause() {
         state.pause()
     }
 
     func seek(position: Double) {
-        state.seek(position: position)
+        guard let boundedPosition = seekPosition(position)
+            else { return }
+        state.seek(position: boundedPosition)
+    }
+
+    func seek(offset: Double) {
+        let position = currentTime + offset
+        seek(position: position)
     }
 
     func stop() {

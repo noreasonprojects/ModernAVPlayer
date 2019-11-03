@@ -100,12 +100,23 @@ public final class ModernAVPlayer: NSObject, ModernAVPlayerExposable {
     }
     
     ///
-    /// Sets the current playback time to the specified time
+    /// Sets the media current time to the specified position
     ///
+    /// - Note: position is bounded between 0 and end time
     /// - parameter position: time to seek
     ///
     public func seek(position: Double) {
         context.seek(position: position)
+    }
+
+    ///
+    /// Apply offset to the media current time
+    ///
+    /// - Note: position is bounded between 0 and end time
+    /// - parameter offset: offset to apply
+    ///
+    public func seek(offset: Double) {
+        context.seek(offset: offset)
     }
     
     /// Stops playback of the current item then seek to 0

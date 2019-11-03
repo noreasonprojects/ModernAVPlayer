@@ -27,6 +27,7 @@
 import AVFoundation
 
 public protocol MediaPlayer: class, PlayerCommand {
+    var currentMedia: PlayerMedia? { get }
     var currentTime: Double { get }
     var loopMode: Bool { get set }
     var player: AVPlayer { get }

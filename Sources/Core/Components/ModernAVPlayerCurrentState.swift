@@ -29,7 +29,3 @@ import Foundation
 public protocol ModernAVPlayerCurrentState: class {
     var state: ModernAVPlayer.State { get }
 }
-
-public protocol ModernAVPlayerCurrentMedia: class {
-    var currentMedia: PlayerMedia? { get }
-}

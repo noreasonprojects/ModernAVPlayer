@@ -26,4 +26,4 @@
 
 import Foundation
 
-public typealias ModernAVPlayerExposable = ModernAVPlayerCurrentState & MediaPlayer & ModernAVPlayerCurrentMedia
+public typealias ModernAVPlayerExposable = ModernAVPlayerCurrentState & MediaPlayer

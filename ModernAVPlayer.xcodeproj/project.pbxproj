@@ -64,6 +64,7 @@
 		E19F1ABE235922FD00535291 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19F1ABD235922FD00535291 /* Helper.swift */; };
 		E1A308AD20B5C032007ED482 /* noreason.txt in Resources */ = {isa = PBXBuildFile; fileRef = E1A308AC20B5C032007ED482 /* noreason.txt */; };
 		E1A4C32E209B06F1000580F5 /* RouteAudioServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A4C32D209B06F1000580F5 /* RouteAudioServiceTests.swift */; };
+		E1A6C254236EE08900416A62 /* SeekServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A6C252236EDFF100416A62 /* SeekServiceTests.swift */; };
 		E1CE54A9236BBCE0009A5236 /* AVPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CE54A8236BBCE0009A5236 /* AVPlayerView.swift */; };
 		E1EFA9AA20B44811002605A9 /* WaitingNetworkStateSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1EFA9A920B44811002605A9 /* WaitingNetworkStateSpecs.swift */; };
 		E1EFA9AC20B449FF002605A9 /* MockReachabilityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1EFA9AB20B449FF002605A9 /* MockReachabilityService.swift */; };
@@ -149,6 +150,7 @@
 		E19F1ABD235922FD00535291 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		E1A308AC20B5C032007ED482 /* noreason.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = noreason.txt; sourceTree = "<group>"; };
 		E1A4C32D209B06F1000580F5 /* RouteAudioServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteAudioServiceTests.swift; sourceTree = "<group>"; };
+		E1A6C252236EDFF100416A62 /* SeekServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeekServiceTests.swift; sourceTree = "<group>"; };
 		E1CE54A8236BBCE0009A5236 /* AVPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVPlayerView.swift; sourceTree = "<group>"; };
 		E1EFA9A920B44811002605A9 /* WaitingNetworkStateSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingNetworkStateSpecs.swift; sourceTree = "<group>"; };
 		E1EFA9AB20B449FF002605A9 /* MockReachabilityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockReachabilityService.swift; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 				E1272947209B6721007583DB /* InterruptionAudioServiceTests.swift */,
 				E16368B12097572E00E69DAB /* ReachabilityServiceTests.swift */,
 				E1A4C32D209B06F1000580F5 /* RouteAudioServiceTests.swift */,
+				E1A6C252236EDFF100416A62 /* SeekServiceTests.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -695,6 +698,7 @@
 				45D49A6320936CC100F63ACF /* MockItemPlaybackObservingService.swift in Sources */,
 				E152D530207A472500E0347C /* PlayingStateSpecs.swift in Sources */,
 				E152D521207A45A100E0347C /* MockPlayerItem.swift in Sources */,
+				E1A6C254236EE08900416A62 /* SeekServiceTests.swift in Sources */,
 				E1EFA9AA20B44811002605A9 /* WaitingNetworkStateSpecs.swift in Sources */,
 				E1272948209B6721007583DB /* InterruptionAudioServiceTests.swift in Sources */,
 				E152D52D207A472500E0347C /* PausedStateSpecs.swift in Sources */,

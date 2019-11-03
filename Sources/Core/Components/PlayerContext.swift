@@ -132,30 +132,6 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
         player.allowsExternalPlayback = config.allowsExternalPlayback
     }
 
-    private func seekPosition(_ position: Double) -> Double? {
-        guard currentMedia != nil else {
-            let message = "Seek failed, load a media first"
-            ModernAVPlayerLogger.instance.log(message: message, domain: .unavailableCommand)
-            delegate?.playerContext(unavailableActionReason: .loadMediaFirst)
-            return nil
-        }
-        guard position > 0 else { return 0 }
-
-        guard let duration = self.itemDuration, duration.isNormal else {
-            let message = "Seek failed, item duration not set"
-            ModernAVPlayerLogger.instance.log(message: message, domain: .unavailableCommand)
-            delegate?.playerContext(unavailableActionReason: .itemDurationNotSet)
-            return nil
-        }
-        guard position < duration else {
-            let message = "Seek position should not exceed item end position"
-            ModernAVPlayerLogger.instance.log(message: message, domain: .unavailableCommand)
-            delegate?.playerContext(unavailableActionReason: .positionExceed)
-            return nil
-        }
-        return position
-    }
-    
     // MARK: - Public functions
 
     func changeState(state: PlayerState) {
@@ -167,9 +143,14 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
     }
 
     func seek(position: Double) {
-        guard let boundedPosition = seekPosition(position)
-            else { return }
-        state.seek(position: boundedPosition)
+        let newPosition = SeekService().boundedPosition(position,
+                                                        media: currentMedia,
+                                                        duration: itemDuration)
+        if let boundedPosition = newPosition.value {
+            state.seek(position: boundedPosition)
+        } else if let reason = newPosition.error {
+            unaivalableCommand(reason: reason)
+        }
     }
 
     func seek(offset: Double) {
@@ -193,13 +174,29 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
     }
     
     func updateMetadata(_ metadata: PlayerMediaMetadata) {
-        guard let media = currentMedia else {
-            let debug = "Load a media before update metadata"
-            ModernAVPlayerLogger.instance.log(message: debug, domain: .unavailableCommand)
-            delegate?.playerContext(unavailableActionReason: .loadMediaFirst)
-            return
-        }
+        guard let media = currentMedia
+            else { unaivalableCommand(reason: .loadMediaFirst, metadata: true); return }
+        
         media.setMetadata(metadata)
         nowPlaying.update(metadata: metadata, duration: nil, isLive: nil)
+    }
+
+    // MARK: - Helper
+
+    private func unaivalableCommand(reason: PlayerUnavailableActionReason, metadata: Bool = false) {
+        let message: String
+        switch reason {
+        case .positionExceed:
+            message = "Seek position should not exceed item end position"
+        case .itemDurationNotSet:
+            message = "Seek failed, item duration not set"
+        case .loadMediaFirst:
+            message = metadata ? "Load a media before update metadata" : "Seek failed, load a media first"
+        default:
+            assertionFailure("all context cases must be set")
+            message = ""
+        }
+        ModernAVPlayerLogger.instance.log(message: message, domain: .unavailableCommand)
+        delegate?.playerContext(unavailableActionReason: reason)
     }
 }

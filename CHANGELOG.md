@@ -3,6 +3,8 @@ All notable changes to this project will be documented in this file.
 
 ---
 ## [X.X.X]
+* Feature:
+	* Seek media with a given offset
 * Demo:
 	* New simple video example
 * Breaking change:

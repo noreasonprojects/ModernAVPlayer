@@ -26,6 +26,7 @@
 
 import AVFoundation
 
+//sourcery: AutoMockable
 protocol PlayerContextDelegate: class {
     func playerContext(didStateChange state: ModernAVPlayer.State)
     func playerContext(didCurrentMediaChange media: PlayerMedia?)
@@ -61,6 +62,7 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
     let player: AVPlayer
     let plugins: [PlayerPlugin]
     var loopMode = false
+    private let seekService: SeekService
 
     weak var delegate: PlayerContextDelegate?
     
@@ -100,12 +102,14 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
          config: PlayerConfiguration,
          nowPlaying: NowPlaying = ModernAVPlayerNowPlayingService(),
          audioSession: AudioSessionService = ModernAVPlayerAudioSessionService(),
-         plugins: [PlayerPlugin]) {
+         plugins: [PlayerPlugin],
+         seekService: SeekService = ModernAVPlayerSeekService()) {
         self.player = player
         self.config = config
         self.nowPlaying = nowPlaying
         self.audioSession = audioSession
         self.plugins = plugins
+        self.seekService = seekService
         super.init()
 
         ModernAVPlayerLogger.instance.log(message: "Init", domain: .lifecycleState)
@@ -131,19 +135,31 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
     private func setAllowsExternalPlayback() {
         player.allowsExternalPlayback = config.allowsExternalPlayback
     }
-    
+
+    // MARK: - Public functions
+
     func changeState(state: PlayerState) {
         self.state = state
     }
-    
-    // MARK: - Public functions
 
     func pause() {
         state.pause()
     }
 
     func seek(position: Double) {
-        state.seek(position: position)
+        let newPosition = seekService.boundedPosition(position, media: currentMedia, duration: itemDuration)
+        if let boundedPosition = newPosition.value {
+            state.seek(position: boundedPosition)
+        } else if let reason = newPosition.reason {
+            unaivalableCommand(reason: reason)
+        } else {
+            assertionFailure("boundedPosition should return at least value or reason")
+        }
+    }
+
+    func seek(offset: Double) {
+        let position = currentTime + offset
+        seek(position: position)
     }
 
     func stop() {
@@ -162,13 +178,29 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
     }
     
     func updateMetadata(_ metadata: PlayerMediaMetadata) {
-        guard let media = currentMedia else {
-            let debug = "Load a media before update metadata"
-            ModernAVPlayerLogger.instance.log(message: debug, domain: .unavailableCommand)
-            delegate?.playerContext(unavailableActionReason: .loadMediaFirst)
-            return
-        }
+        guard let media = currentMedia
+            else { unaivalableCommand(reason: .loadMediaFirst, metadata: true); return }
+        
         media.setMetadata(metadata)
         nowPlaying.update(metadata: metadata, duration: nil, isLive: nil)
+    }
+
+    // MARK: - Helper
+
+    private func unaivalableCommand(reason: PlayerUnavailableActionReason, metadata: Bool = false) {
+        let message: String
+        switch reason {
+        case .seekOverstepTime:
+            message = "Seek position should not exceed item end position"
+        case .itemDurationNotSet:
+            message = "Seek failed, item duration not set"
+        case .loadMediaFirst:
+            message = metadata ? "Load a media before update metadata" : "Seek failed, load a media first"
+        default:
+            assertionFailure("all context cases must be set")
+            message = ""
+        }
+        ModernAVPlayerLogger.instance.log(message: message, domain: .unavailableCommand)
+        delegate?.playerContext(unavailableActionReason: reason)
     }
 }

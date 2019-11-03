@@ -3,8 +3,8 @@
 // ModernAVPlayer
 // Copyright (c) 2018 Raphael Ankierman <raphrel@gmail.com>
 //
-// PlayerUnavailableActionReason.swift
-// Created by raphael ankierman on 09/10/2019.
+// SeekService.swift
+// Created by raphael ankierman on 03/05/2018.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,19 +26,30 @@
 
 import Foundation
 
-///
-/// `PlayerUnavailableActionReason` explicit why action initated by
-///  a client has no effect on the player.
-///
+//sourcery: AutoMockable
+protocol SeekService {
+    func boundedPosition(_ position: Double,
+                         media: PlayerMedia?,
+                         duration: Double?) -> (value: Double?, reason: PlayerUnavailableActionReason?)
+}
 
-public enum PlayerUnavailableActionReason {
-    case alreadyPaused
-    case alreadyPlaying
-    case alreadyStopped
-    case alreadyTryingToPlay
-    case itemDurationNotSet
-    case loadMediaFirst
-    case seekOverstepTime
-    case waitEstablishedNetwork
-    case waitLoadedMedia
+struct ModernAVPlayerSeekService: SeekService {
+
+    func boundedPosition(_ position: Double,
+                         media: PlayerMedia?,
+                         duration: Double?) -> (value: Double?, reason: PlayerUnavailableActionReason?) {
+
+        guard media != nil
+            else { return (nil, .loadMediaFirst) }
+
+        guard position > 0 else { return (0, nil) }
+
+        guard let duration = duration, duration.isNormal
+            else { return (nil, .itemDurationNotSet) }
+
+        guard position < duration
+            else { return (nil, .seekOverstepTime) }
+
+        return (position, nil)
+    }
 }

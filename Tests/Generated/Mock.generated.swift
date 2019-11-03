@@ -938,6 +938,222 @@ open class PlayerContextMock: PlayerContext, Mock {
     }
 }
 
+// MARK: - PlayerContextDelegate
+open class PlayerContextDelegateMock: PlayerContextDelegate, Mock {
+    init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
+        SwiftyMockyTestObserver.setup()
+        self.sequencingPolicy = sequencingPolicy
+        self.stubbingPolicy = stubbingPolicy
+        self.file = file
+        self.line = line
+    }
+
+    var matcher: Matcher = Matcher.default
+    var stubbingPolicy: StubbingPolicy = .wrap
+    var sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst
+    private var invocations: [MethodType] = []
+    private var methodReturnValues: [Given] = []
+    private var methodPerformValues: [Perform] = []
+    private var file: StaticString?
+    private var line: UInt?
+
+    public typealias PropertyStub = Given
+    public typealias MethodStub = Given
+    public typealias SubscriptStub = Given
+
+    /// Convenience method - call setupMock() to extend debug information when failure occurs
+    public func setupMock(file: StaticString = #file, line: UInt = #line) {
+        self.file = file
+        self.line = line
+    }
+
+
+
+
+
+    open func playerContext(didStateChange state: ModernAVPlayer.State) {
+        addInvocation(.m_playerContext__didStateChange_state(Parameter<ModernAVPlayer.State>.value(`state`)))
+		let perform = methodPerformValue(.m_playerContext__didStateChange_state(Parameter<ModernAVPlayer.State>.value(`state`))) as? (ModernAVPlayer.State) -> Void
+		perform?(`state`)
+    }
+
+    open func playerContext(didCurrentMediaChange media: PlayerMedia?) {
+        addInvocation(.m_playerContext__didCurrentMediaChange_media(Parameter<PlayerMedia?>.value(`media`)))
+		let perform = methodPerformValue(.m_playerContext__didCurrentMediaChange_media(Parameter<PlayerMedia?>.value(`media`))) as? (PlayerMedia?) -> Void
+		perform?(`media`)
+    }
+
+    open func playerContext(didCurrentTimeChange currentTime: Double) {
+        addInvocation(.m_playerContext__didCurrentTimeChange_currentTime(Parameter<Double>.value(`currentTime`)))
+		let perform = methodPerformValue(.m_playerContext__didCurrentTimeChange_currentTime(Parameter<Double>.value(`currentTime`))) as? (Double) -> Void
+		perform?(`currentTime`)
+    }
+
+    open func playerContext(didItemDurationChange itemDuration: Double?) {
+        addInvocation(.m_playerContext__didItemDurationChange_itemDuration(Parameter<Double?>.value(`itemDuration`)))
+		let perform = methodPerformValue(.m_playerContext__didItemDurationChange_itemDuration(Parameter<Double?>.value(`itemDuration`))) as? (Double?) -> Void
+		perform?(`itemDuration`)
+    }
+
+    open func playerContext(unavailableActionReason: PlayerUnavailableActionReason) {
+        addInvocation(.m_playerContext__unavailableActionReason_unavailableActionReason(Parameter<PlayerUnavailableActionReason>.value(`unavailableActionReason`)))
+		let perform = methodPerformValue(.m_playerContext__unavailableActionReason_unavailableActionReason(Parameter<PlayerUnavailableActionReason>.value(`unavailableActionReason`))) as? (PlayerUnavailableActionReason) -> Void
+		perform?(`unavailableActionReason`)
+    }
+
+    open func playerContext(didItemPlayToEndTime endTime: Double) {
+        addInvocation(.m_playerContext__didItemPlayToEndTime_endTime(Parameter<Double>.value(`endTime`)))
+		let perform = methodPerformValue(.m_playerContext__didItemPlayToEndTime_endTime(Parameter<Double>.value(`endTime`))) as? (Double) -> Void
+		perform?(`endTime`)
+    }
+
+
+    fileprivate enum MethodType {
+        case m_playerContext__didStateChange_state(Parameter<ModernAVPlayer.State>)
+        case m_playerContext__didCurrentMediaChange_media(Parameter<PlayerMedia?>)
+        case m_playerContext__didCurrentTimeChange_currentTime(Parameter<Double>)
+        case m_playerContext__didItemDurationChange_itemDuration(Parameter<Double?>)
+        case m_playerContext__unavailableActionReason_unavailableActionReason(Parameter<PlayerUnavailableActionReason>)
+        case m_playerContext__didItemPlayToEndTime_endTime(Parameter<Double>)
+
+        static func compareParameters(lhs: MethodType, rhs: MethodType, matcher: Matcher) -> Bool {
+            switch (lhs, rhs) {
+            case (.m_playerContext__didStateChange_state(let lhsState), .m_playerContext__didStateChange_state(let rhsState)):
+                guard Parameter.compare(lhs: lhsState, rhs: rhsState, with: matcher) else { return false } 
+                return true 
+            case (.m_playerContext__didCurrentMediaChange_media(let lhsMedia), .m_playerContext__didCurrentMediaChange_media(let rhsMedia)):
+                guard Parameter.compare(lhs: lhsMedia, rhs: rhsMedia, with: matcher) else { return false } 
+                return true 
+            case (.m_playerContext__didCurrentTimeChange_currentTime(let lhsCurrenttime), .m_playerContext__didCurrentTimeChange_currentTime(let rhsCurrenttime)):
+                guard Parameter.compare(lhs: lhsCurrenttime, rhs: rhsCurrenttime, with: matcher) else { return false } 
+                return true 
+            case (.m_playerContext__didItemDurationChange_itemDuration(let lhsItemduration), .m_playerContext__didItemDurationChange_itemDuration(let rhsItemduration)):
+                guard Parameter.compare(lhs: lhsItemduration, rhs: rhsItemduration, with: matcher) else { return false } 
+                return true 
+            case (.m_playerContext__unavailableActionReason_unavailableActionReason(let lhsUnavailableactionreason), .m_playerContext__unavailableActionReason_unavailableActionReason(let rhsUnavailableactionreason)):
+                guard Parameter.compare(lhs: lhsUnavailableactionreason, rhs: rhsUnavailableactionreason, with: matcher) else { return false } 
+                return true 
+            case (.m_playerContext__didItemPlayToEndTime_endTime(let lhsEndtime), .m_playerContext__didItemPlayToEndTime_endTime(let rhsEndtime)):
+                guard Parameter.compare(lhs: lhsEndtime, rhs: rhsEndtime, with: matcher) else { return false } 
+                return true 
+            default: return false
+            }
+        }
+
+        func intValue() -> Int {
+            switch self {
+            case let .m_playerContext__didStateChange_state(p0): return p0.intValue
+            case let .m_playerContext__didCurrentMediaChange_media(p0): return p0.intValue
+            case let .m_playerContext__didCurrentTimeChange_currentTime(p0): return p0.intValue
+            case let .m_playerContext__didItemDurationChange_itemDuration(p0): return p0.intValue
+            case let .m_playerContext__unavailableActionReason_unavailableActionReason(p0): return p0.intValue
+            case let .m_playerContext__didItemPlayToEndTime_endTime(p0): return p0.intValue
+            }
+        }
+    }
+
+    open class Given: StubbedMethod {
+        fileprivate var method: MethodType
+
+        private init(method: MethodType, products: [StubProduct]) {
+            self.method = method
+            super.init(products)
+        }
+
+
+    }
+
+    public struct Verify {
+        fileprivate var method: MethodType
+
+        public static func playerContext(didStateChange state: Parameter<ModernAVPlayer.State>) -> Verify { return Verify(method: .m_playerContext__didStateChange_state(`state`))}
+        public static func playerContext(didCurrentMediaChange media: Parameter<PlayerMedia?>) -> Verify { return Verify(method: .m_playerContext__didCurrentMediaChange_media(`media`))}
+        public static func playerContext(didCurrentTimeChange currentTime: Parameter<Double>) -> Verify { return Verify(method: .m_playerContext__didCurrentTimeChange_currentTime(`currentTime`))}
+        public static func playerContext(didItemDurationChange itemDuration: Parameter<Double?>) -> Verify { return Verify(method: .m_playerContext__didItemDurationChange_itemDuration(`itemDuration`))}
+        public static func playerContext(unavailableActionReason: Parameter<PlayerUnavailableActionReason>) -> Verify { return Verify(method: .m_playerContext__unavailableActionReason_unavailableActionReason(`unavailableActionReason`))}
+        public static func playerContext(didItemPlayToEndTime endTime: Parameter<Double>) -> Verify { return Verify(method: .m_playerContext__didItemPlayToEndTime_endTime(`endTime`))}
+    }
+
+    public struct Perform {
+        fileprivate var method: MethodType
+        var performs: Any
+
+        public static func playerContext(didStateChange state: Parameter<ModernAVPlayer.State>, perform: @escaping (ModernAVPlayer.State) -> Void) -> Perform {
+            return Perform(method: .m_playerContext__didStateChange_state(`state`), performs: perform)
+        }
+        public static func playerContext(didCurrentMediaChange media: Parameter<PlayerMedia?>, perform: @escaping (PlayerMedia?) -> Void) -> Perform {
+            return Perform(method: .m_playerContext__didCurrentMediaChange_media(`media`), performs: perform)
+        }
+        public static func playerContext(didCurrentTimeChange currentTime: Parameter<Double>, perform: @escaping (Double) -> Void) -> Perform {
+            return Perform(method: .m_playerContext__didCurrentTimeChange_currentTime(`currentTime`), performs: perform)
+        }
+        public static func playerContext(didItemDurationChange itemDuration: Parameter<Double?>, perform: @escaping (Double?) -> Void) -> Perform {
+            return Perform(method: .m_playerContext__didItemDurationChange_itemDuration(`itemDuration`), performs: perform)
+        }
+        public static func playerContext(unavailableActionReason: Parameter<PlayerUnavailableActionReason>, perform: @escaping (PlayerUnavailableActionReason) -> Void) -> Perform {
+            return Perform(method: .m_playerContext__unavailableActionReason_unavailableActionReason(`unavailableActionReason`), performs: perform)
+        }
+        public static func playerContext(didItemPlayToEndTime endTime: Parameter<Double>, perform: @escaping (Double) -> Void) -> Perform {
+            return Perform(method: .m_playerContext__didItemPlayToEndTime_endTime(`endTime`), performs: perform)
+        }
+    }
+
+    public func given(_ method: Given) {
+        methodReturnValues.append(method)
+    }
+
+    public func perform(_ method: Perform) {
+        methodPerformValues.append(method)
+        methodPerformValues.sort { $0.method.intValue() < $1.method.intValue() }
+    }
+
+    public func verify(_ method: Verify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
+        let invocations = matchingCalls(method.method)
+        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+    }
+
+    private func addInvocation(_ call: MethodType) {
+        invocations.append(call)
+    }
+    private func methodReturnValue(_ method: MethodType) throws -> StubProduct {
+        let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
+        let matched = candidates.first(where: { $0.isValid && MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
+        guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
+        return product
+    }
+    private func methodPerformValue(_ method: MethodType) -> Any? {
+        let matched = methodPerformValues.reversed().first { MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) }
+        return matched?.performs
+    }
+    private func matchingCalls(_ method: MethodType) -> [MethodType] {
+        return invocations.filter { MethodType.compareParameters(lhs: $0, rhs: method, matcher: matcher) }
+    }
+    private func matchingCalls(_ method: Verify) -> Int {
+        return matchingCalls(method.method).count
+    }
+    private func givenGetterValue<T>(_ method: MethodType, _ message: String) -> T {
+        do {
+            return try methodReturnValue(method).casted()
+        } catch {
+            onFatalFailure(message)
+            Failure(message)
+        }
+    }
+    private func optionalGivenGetterValue<T>(_ method: MethodType, _ message: String) -> T? {
+        do {
+            return try methodReturnValue(method).casted()
+        } catch {
+            return nil
+        }
+    }
+    private func onFatalFailure(_ message: String) {
+        #if Mocky
+        guard let file = self.file, let line = self.line else { return } // Let if fail if cannot handle gratefully
+        SwiftyMockyTestObserver.handleMissingStubError(message: message, file: file, line: line)
+        #endif
+    }
+}
+
 // MARK: - PlayerMedia
 open class PlayerMediaMock: PlayerMedia, Mock {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
@@ -1467,6 +1683,166 @@ open class PlayerPluginMock: PlayerPlugin, Mock {
         }
         public static func didItemPlayToEndTime(media: Parameter<PlayerMedia>, endTime: Parameter<Double>, perform: @escaping (PlayerMedia, Double) -> Void) -> Perform {
             return Perform(method: .m_didItemPlayToEndTime__media_mediaendTime_endTime(`media`, `endTime`), performs: perform)
+        }
+    }
+
+    public func given(_ method: Given) {
+        methodReturnValues.append(method)
+    }
+
+    public func perform(_ method: Perform) {
+        methodPerformValues.append(method)
+        methodPerformValues.sort { $0.method.intValue() < $1.method.intValue() }
+    }
+
+    public func verify(_ method: Verify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
+        let invocations = matchingCalls(method.method)
+        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+    }
+
+    private func addInvocation(_ call: MethodType) {
+        invocations.append(call)
+    }
+    private func methodReturnValue(_ method: MethodType) throws -> StubProduct {
+        let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
+        let matched = candidates.first(where: { $0.isValid && MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
+        guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
+        return product
+    }
+    private func methodPerformValue(_ method: MethodType) -> Any? {
+        let matched = methodPerformValues.reversed().first { MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) }
+        return matched?.performs
+    }
+    private func matchingCalls(_ method: MethodType) -> [MethodType] {
+        return invocations.filter { MethodType.compareParameters(lhs: $0, rhs: method, matcher: matcher) }
+    }
+    private func matchingCalls(_ method: Verify) -> Int {
+        return matchingCalls(method.method).count
+    }
+    private func givenGetterValue<T>(_ method: MethodType, _ message: String) -> T {
+        do {
+            return try methodReturnValue(method).casted()
+        } catch {
+            onFatalFailure(message)
+            Failure(message)
+        }
+    }
+    private func optionalGivenGetterValue<T>(_ method: MethodType, _ message: String) -> T? {
+        do {
+            return try methodReturnValue(method).casted()
+        } catch {
+            return nil
+        }
+    }
+    private func onFatalFailure(_ message: String) {
+        #if Mocky
+        guard let file = self.file, let line = self.line else { return } // Let if fail if cannot handle gratefully
+        SwiftyMockyTestObserver.handleMissingStubError(message: message, file: file, line: line)
+        #endif
+    }
+}
+
+// MARK: - SeekService
+open class SeekServiceMock: SeekService, Mock {
+    init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
+        SwiftyMockyTestObserver.setup()
+        self.sequencingPolicy = sequencingPolicy
+        self.stubbingPolicy = stubbingPolicy
+        self.file = file
+        self.line = line
+    }
+
+    var matcher: Matcher = Matcher.default
+    var stubbingPolicy: StubbingPolicy = .wrap
+    var sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst
+    private var invocations: [MethodType] = []
+    private var methodReturnValues: [Given] = []
+    private var methodPerformValues: [Perform] = []
+    private var file: StaticString?
+    private var line: UInt?
+
+    public typealias PropertyStub = Given
+    public typealias MethodStub = Given
+    public typealias SubscriptStub = Given
+
+    /// Convenience method - call setupMock() to extend debug information when failure occurs
+    public func setupMock(file: StaticString = #file, line: UInt = #line) {
+        self.file = file
+        self.line = line
+    }
+
+
+
+
+
+    open func boundedPosition(_ position: Double,                         media: PlayerMedia?,                         duration: Double?) -> (value: Double?, reason: PlayerUnavailableActionReason?) {
+        addInvocation(.m_boundedPosition__positionmedia_mediaduration_duration(Parameter<Double>.value(`position`), Parameter<PlayerMedia?>.value(`media`), Parameter<Double?>.value(`duration`)))
+		let perform = methodPerformValue(.m_boundedPosition__positionmedia_mediaduration_duration(Parameter<Double>.value(`position`), Parameter<PlayerMedia?>.value(`media`), Parameter<Double?>.value(`duration`))) as? (Double, PlayerMedia?, Double?) -> Void
+		perform?(`position`, `media`, `duration`)
+		var __value: (value: Double?, reason: PlayerUnavailableActionReason?)
+		do {
+		    __value = try methodReturnValue(.m_boundedPosition__positionmedia_mediaduration_duration(Parameter<Double>.value(`position`), Parameter<PlayerMedia?>.value(`media`), Parameter<Double?>.value(`duration`))).casted()
+		} catch {
+			onFatalFailure("Stub return value not specified for boundedPosition(_ position: Double,                         media: PlayerMedia?,                         duration: Double?). Use given")
+			Failure("Stub return value not specified for boundedPosition(_ position: Double,                         media: PlayerMedia?,                         duration: Double?). Use given")
+		}
+		return __value
+    }
+
+
+    fileprivate enum MethodType {
+        case m_boundedPosition__positionmedia_mediaduration_duration(Parameter<Double>, Parameter<PlayerMedia?>, Parameter<Double?>)
+
+        static func compareParameters(lhs: MethodType, rhs: MethodType, matcher: Matcher) -> Bool {
+            switch (lhs, rhs) {
+            case (.m_boundedPosition__positionmedia_mediaduration_duration(let lhsPosition, let lhsMedia, let lhsDuration), .m_boundedPosition__positionmedia_mediaduration_duration(let rhsPosition, let rhsMedia, let rhsDuration)):
+                guard Parameter.compare(lhs: lhsPosition, rhs: rhsPosition, with: matcher) else { return false } 
+                guard Parameter.compare(lhs: lhsMedia, rhs: rhsMedia, with: matcher) else { return false } 
+                guard Parameter.compare(lhs: lhsDuration, rhs: rhsDuration, with: matcher) else { return false } 
+                return true 
+            }
+        }
+
+        func intValue() -> Int {
+            switch self {
+            case let .m_boundedPosition__positionmedia_mediaduration_duration(p0, p1, p2): return p0.intValue + p1.intValue + p2.intValue
+            }
+        }
+    }
+
+    open class Given: StubbedMethod {
+        fileprivate var method: MethodType
+
+        private init(method: MethodType, products: [StubProduct]) {
+            self.method = method
+            super.init(products)
+        }
+
+
+        public static func boundedPosition(_ position: Parameter<Double>, media: Parameter<PlayerMedia?>, duration: Parameter<Double?>, willReturn: (value: Double?, reason: PlayerUnavailableActionReason?)...) -> MethodStub {
+            return Given(method: .m_boundedPosition__positionmedia_mediaduration_duration(`position`, `media`, `duration`), products: willReturn.map({ StubProduct.return($0 as Any) }))
+        }
+        public static func boundedPosition(_ position: Parameter<Double>, media: Parameter<PlayerMedia?>, duration: Parameter<Double?>, willProduce: (Stubber<(value: Double?, reason: PlayerUnavailableActionReason?)>) -> Void) -> MethodStub {
+            let willReturn: [(value: Double?, reason: PlayerUnavailableActionReason?)] = []
+			let given: Given = { return Given(method: .m_boundedPosition__positionmedia_mediaduration_duration(`position`, `media`, `duration`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
+			let stubber = given.stub(for: ((value: Double?, reason: PlayerUnavailableActionReason?)).self)
+			willProduce(stubber)
+			return given
+        }
+    }
+
+    public struct Verify {
+        fileprivate var method: MethodType
+
+        public static func boundedPosition(_ position: Parameter<Double>, media: Parameter<PlayerMedia?>, duration: Parameter<Double?>) -> Verify { return Verify(method: .m_boundedPosition__positionmedia_mediaduration_duration(`position`, `media`, `duration`))}
+    }
+
+    public struct Perform {
+        fileprivate var method: MethodType
+        var performs: Any
+
+        public static func boundedPosition(_ position: Parameter<Double>, media: Parameter<PlayerMedia?>, duration: Parameter<Double?>, perform: @escaping (Double, PlayerMedia?, Double?) -> Void) -> Perform {
+            return Perform(method: .m_boundedPosition__positionmedia_mediaduration_duration(`position`, `media`, `duration`), performs: perform)
         }
     }
 

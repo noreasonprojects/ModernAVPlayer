@@ -227,25 +227,6 @@ final class ViewController: UIViewController {
     private func setSeekPosition(from duration: Double) -> Double {
         return Double(slider.value) * duration
     }
-
-    private func actionReasonDescription(_ reason: PlayerUnavailableActionReason) -> String {
-        switch reason {
-        case .alreadyPaused:
-            return "Already Paused"
-        case .alreadyPlaying:
-            return "Already Playing"
-        case .alreadyStopped:
-            return "Already Stopped"
-        case .alreadyTryingToPlay:
-            return "Player is about to play"
-        case .loadMediaFirst:
-            return "Please load a media first"
-        case .waitEstablishedNetwork:
-            return "Wait for the network to be established"
-        case .waitLoadedMedia:
-            return "Wait for the media to be loaded"
-        }
-    }
 }
 
 // MARK: - Player RxSwift
@@ -313,7 +294,7 @@ extension ViewController {
 
         // Display debugMessage
         player.rx.unavailableActionReason
-            .map({ [unowned self] reason in self.actionReasonDescription(reason) })
+            .map(Helper().reasonDescription)
             .asDriver(onErrorJustReturn: "Error")
             .drive(onNext: { [unowned self] reason in self.setDebugMessage(reason) })
             .disposed(by: disposeBag)

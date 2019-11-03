@@ -3,7 +3,7 @@
 // ModernAVPlayer
 // Copyright (c) 2018 Raphael Ankierman <raphael.ankierman@radiofrance.com>
 //
-// ContextSpecs.swift
+// PlayerContextTests.swift
 // Created by raphael ankierman on 28/02/2018.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -25,13 +25,12 @@
 // THE SOFTWARE.
 
 import AVFoundation
-import Quick
 @testable
 import ModernAVPlayer
-import Nimble
 import SwiftyMocky
+import XCTest
 
-final class ContextSpecs: QuickSpec {
+final class PlayerContextTests: XCTestCase {
 
     private var audioSession: AudioSessionServiceMock!
     private var tested: PlayerContext!
@@ -39,227 +38,173 @@ final class ContextSpecs: QuickSpec {
     private var media: MockPlayerMedia!
     private var nowPlaying: MockNowPlayingService!
     private let player = MockCustomPlayer()
-    
-    override func spec() {
-        
-        beforeEach {
-            self.audioSession = AudioSessionServiceMock()
-            self.nowPlaying = MockNowPlayingService()
-            self.tested = ModernAVPlayerContext(player: self.player,
-                                                config: ModernAVPlayerConfiguration(),
-                                                nowPlaying: self.nowPlaying,
-                                                audioSession: self.audioSession,
-                                                plugins: [])
-            self.mockState = MockPlayerState(context: self.tested)
-            self.media = MockPlayerMedia(url: URL(string: "foo")!, type: .clip)
-        }
-        
-        context("init") {
-            it("should have init state") {
-                
-                // ASSERT
-                expect(self.tested.state).to(beAnInstanceOf(InitState.self))
-            }
 
-            it("should set category") {
+    override func setUp() {
+        ModernAVPlayerLogger.setup.domains = []
+        audioSession = AudioSessionServiceMock()
+        nowPlaying = MockNowPlayingService()
+        tested = ModernAVPlayerContext(player: player,
+                                            config: ModernAVPlayerConfiguration(),
+                                            nowPlaying: nowPlaying,
+                                            audioSession: audioSession,
+                                            plugins: [])
+        mockState = MockPlayerState(context: tested)
+        media = MockPlayerMedia(url: URL(string: "foo")!, type: .clip)
+    }
 
-                // ASSERT
-                Verify(self.audioSession, 1, .setCategory(.value(self.tested.config.audioSessionCategory)))
-            }
-        }
-        
-        context("pause") {
-            it("should call pause state") {
+    func testCurrentInitState() {
+        // ASSERT
+        XCTAssertTrue(tested.state is InitState)
+    }
 
-                // ARRANGE
-                self.tested.changeState(state: self.mockState)
+    func testSetCategoryOnInit() {
+        // ASSERT
+        Verify(self.audioSession, 1, .setCategory(.value(self.tested.config.audioSessionCategory)))
+    }
 
-                // ACT
-                self.tested.pause()
+    func testPause() {
+        // ARRANGE
+        tested.changeState(state: mockState)
 
-                // ASSERT
-                expect(self.mockState.pauseCallCount).to(equal(1))
-            }
-        }
+        // ACT
+        tested.pause()
 
-        context("play") {
-            it("should call play state") {
+        // ASSERT
+        XCTAssertEqual(mockState.pauseCallCount, 1)
+    }
 
-                // ARRANGE
-                self.tested.changeState(state: self.mockState)
+    func testPlay() {
+        // ARRANGE
+        tested.changeState(state: mockState)
 
-                // ACT
-                self.tested.play()
+        // ACT
+        tested.play()
 
-                // ASSERT
-                expect(self.mockState.playCallCount).to(equal(1))
-            }
-        }
+        // ASSERT
+        XCTAssertEqual(mockState.playCallCount, 1)
+    }
 
-        context("stop") {
-            it("should call stop state") {
+    func testStop() {
+        // ARRANGE
+        tested.changeState(state: mockState)
 
-                // ARRANGE
-                self.tested.changeState(state: self.mockState)
+        // ACT
+        tested.stop()
 
-                // ACT
-                self.tested.stop()
+        // ASSERT
+        XCTAssertEqual(mockState.stopCallCount, 1)
+    }
 
-                // ASSERT
-                expect(self.mockState.stopCallCount).to(equal(1))
-            }
-        }
+//    func testSeek() {
+//        // ARRANGE
+//        tested.changeState(state: mockState)
+//
+//        // ACT
+//        tested.seek(position: 42)
+//
+//        // ASSERT
+//        XCTAssertEqual(mockState.seekCallCount, 1)
+//        XCTAssertEqual(mockState.lastPositionParam, 42)
+//    }
 
-        context("seek") {
-            it("should call seek state") {
+    func testSetCurrentMedia() {
+        // ARRANGE
+        let media = MockPlayerMedia(url: URL(string: "foo")!, type: .clip)
 
-                // ARRANGE
-                self.tested.changeState(state: self.mockState)
+        // ACT
+        tested.load(media: media, autostart: false, position: nil)
 
-                // ACT
-                self.tested.seek(position: 42)
+        // ASSERT
+        XCTAssertEqual(tested.currentMedia as? MockPlayerMedia, media)
+    }
 
-                // ASSERT
-                expect(self.mockState.seekCallCount).to(equal(1))
-                expect(self.mockState.lastPositionParam).to(equal(42))
-            }
-        }
+    func testCallLoadMedia() {
+        // ARRANGE
+        tested.changeState(state: mockState)
+        let media = MockPlayerMedia(url: URL(string: "foo")!, type: .clip)
+        let position = 42.0
 
-        context("loadMedia") {
-            it("should set current media") {
+        // ACT
+        tested.load(media: media, autostart: false, position: position)
 
-                // ARRANGE
-                let media = MockPlayerMedia(url: URL(string: "foo")!, type: .clip)
-                
-                // ACT
-                self.tested.load(media: media, autostart: false, position: nil)
+        // ASSERT
+        XCTAssertEqual(mockState.loadMedialCallCount, 1)
+        XCTAssert(mockState.lastLoadAutostartParam == false)
+        XCTAssertEqual(mockState.lastLoadPositionParam, position)
+    }
 
-                // ASSERT
-                expect(self.tested.currentMedia as? MockPlayerMedia).to(equal(media))
-            }
-            
-            it("should call loadMedia state") {
-                
-                // ARRANGE
-                self.tested.changeState(state: self.mockState)
-                let media = MockPlayerMedia(url: URL(string: "foo")!, type: .clip)
-                let position = 42.0
+    func testChangeState() {
+        // ARRANGE
+        let newState = MockPlayerState(context: tested, state: .failed)
 
-                // ACT
-                self.tested.load(media: media, autostart: false, position: position)
+        // ACT
+        tested.changeState(state: newState)
 
-                // ASSERT
-                expect(self.mockState.loadMedialCallCount).to(equal(1))
-                expect(self.mockState.lastLoadAutostartParam).to(beFalse())
-                expect(self.mockState.lastLoadPositionParam).to(be(position))
-            }
-        }
+        // ASSERT
+        XCTAssertEqual(tested.state.type, .failed)
+    }
 
-        context("changeState context") {
-            it("should change internal state") {
+    func testContextUpdatedCall() {
+        // ARRANGE
+        let newState = MockPlayerState(context: tested)
 
-                // ARRANGE
-                let newState = MockPlayerState(context: self.tested)
+        // ACT
+        tested.changeState(state: newState)
 
-                // ACT
-                self.tested.changeState(state: newState)
+        // ASSERT
+        XCTAssertEqual(newState.contextUpdatedCallCount, 1)
+    }
 
-                // ASSERT
-                expect(self.tested.state).to(beIdenticalTo(newState))
-            }
-            
-            it("should call state updateContext() method") {
-                
-                // ARRANGE
-                let newState = MockPlayerState(context: self.tested)
-                
-                // ACT
-                self.tested.changeState(state: newState)
-                
-                // ASSERT
-                expect(newState.contextUpdatedCallCount).to(equal(1))
-            }
-        }
+    func testUpdateMetadata() {
+        // ARRANGE
+        tested.currentMedia = media
+        let metadata = MockPlayerMediaMetadata(title: "title",
+                                               albumTitle: "album",
+                                               artist: "artist",
+                                               image: nil,
+                                               remoteImageUrl: nil)
 
-        context("update metadata when current media is set") {
-            it("should call setMetadata media method") {
+        // ACT
+        tested.updateMetadata(metadata)
 
-                // ARRANGE
-                self.tested.currentMedia = self.media
-                let metadata = MockPlayerMediaMetadata(title: "title",
-                                                       albumTitle: "album",
-                                                       artist: "artist",
-                                                       image: nil,
-                                                       remoteImageUrl: nil)
+        // ASSERT
+        XCTAssertEqual(media.setMetadataCallCount, 1)
+        let expectedMetadata = MockPlayerMediaMetadata.convert(media.setMetadataLastParam!)
+        XCTAssertEqual(expectedMetadata, metadata)
+    }
 
-                // ACT
-                self.tested.updateMetadata(metadata)
+    func testUpdateNowPlayingInfo() {
+        // ARRANGE
+        tested.currentMedia = media
+        let metadata = MockPlayerMediaMetadata(title: "title",
+                                               albumTitle: "album",
+                                               artist: "artist",
+                                               image: nil,
+                                               remoteImageUrl: nil)
 
-                // ASSERT
-                expect(self.media.setMetadataCallCount).to(equal(1))
-                let m = MockPlayerMediaMetadata.convert(self.media.setMetadataLastParam!)
-                expect(m).to(equal(metadata))
-            }
+        // ACT
+        tested.updateMetadata(metadata)
 
-            it("should update now playing info") {
+        // ASSERT
+        XCTAssertEqual(nowPlaying.updateCallCount, 1)
+        let expectedMetadata = MockPlayerMediaMetadata.convert(nowPlaying.updateLastMetadataParam!)
+        XCTAssertEqual(expectedMetadata, metadata)
+    }
 
-                // ARRANGE
-                self.tested.currentMedia = self.media
-                let metadata = MockPlayerMediaMetadata(title: "title",
-                                                       albumTitle: "album",
-                                                       artist: "artist",
-                                                       image: nil,
-                                                       remoteImageUrl: nil)
+    func testUpdateNowPlayingInfoWithNoCurrentMedia() {
+        // ARRANGE
+        tested.currentMedia = nil
+        let metadata = MockPlayerMediaMetadata(title: "title",
+                                               albumTitle: "album",
+                                               artist: "artist",
+                                               image: nil,
+                                               remoteImageUrl: nil)
 
-                // ACT
-                self.tested.updateMetadata(metadata)
+        // ACT
+        tested.updateMetadata(metadata)
 
-                // ASSERT
-                expect(self.nowPlaying.updateCallCount).to(equal(1))
-                let expectedMetadata = MockPlayerMediaMetadata.convert(self.nowPlaying.updateLastMetadataParam!)
-                expect(expectedMetadata).to(equal(metadata))
-            }
-        }
-
-        context("update metadata when current media is not set") {
-            it("shouldn't call media setMetadata") {
-
-                // ARRANGE
-                self.tested.currentMedia = nil
-                let metadata = MockPlayerMediaMetadata(title: "title",
-                                                       albumTitle: "album",
-                                                       artist: "artist",
-                                                       image: nil,
-                                                       remoteImageUrl: nil)
-
-                // ACT
-                self.tested.updateMetadata(metadata)
-
-                // ASSERT
-                expect(self.media.setMetadataCallCount).to(equal(0))
-                expect(self.media.setMetadataLastParam).to(beNil())
-
-            }
-
-            it("shouldn't update now pLaying") {
-
-                // ARRANGE
-                self.tested.currentMedia = nil
-                let metadata = MockPlayerMediaMetadata(title: "title",
-                                                       albumTitle: "album",
-                                                       artist: "artist",
-                                                       image: nil,
-                                                       remoteImageUrl: nil)
-
-                // ACT
-                self.tested.updateMetadata(metadata)
-
-                // ASSERT
-                expect(self.nowPlaying.updateCallCount).to(equal(0))
-                expect(self.nowPlaying.updateLastMetadataParam).to(beNil())
-                expect(self.nowPlaying.updateLastDurationParam).to(beNil())
-                expect(self.nowPlaying.updateLastIsLiveParam).to(beNil())
-            }
-        }
+        // ASSERT
+        XCTAssertEqual(media.setMetadataCallCount, 0)
+        XCTAssertEqual(nowPlaying.updateCallCount, 0)
     }
 }

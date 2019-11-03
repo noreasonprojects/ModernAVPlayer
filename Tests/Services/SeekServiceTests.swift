@@ -91,12 +91,12 @@ final class SeekServiceTests: XCTestCase {
         let boundedPosition = service.boundedPosition(position, media: media, duration: duration)
 
         // ASSERT
-        let expectedReason: PlayerUnavailableActionReason = .positionExceed
+        let expectedReason: PlayerUnavailableActionReason = .seekOverstepTime
         XCTAssertEqual(boundedPosition.reason, expectedReason)
         XCTAssertNil(boundedPosition.value)
     }
 
-    func testSeek() {
+    func testUsualSeek() {
         // ARRANGE
         let position: Double = 21
         let media = PlayerMediaMock()

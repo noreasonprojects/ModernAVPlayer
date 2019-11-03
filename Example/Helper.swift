@@ -28,7 +28,7 @@ struct Helper {
             return "Wait media to be loaded before doing this"
         case .itemDurationNotSet:
             return "Media duration needed to perform action"
-        case .positionExceed:
+        case .seekOverstepTime:
             return "You can't seek after item end"
         }
     }

@@ -48,7 +48,7 @@ struct ModernAVPlayerSeekService: SeekService {
             else { return (nil, .itemDurationNotSet) }
 
         guard position < duration
-            else { return (nil, .positionExceed) }
+            else { return (nil, .seekOverstepTime) }
 
         return (position, nil)
     }

@@ -188,7 +188,7 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
     private func unaivalableCommand(reason: PlayerUnavailableActionReason, metadata: Bool = false) {
         let message: String
         switch reason {
-        case .positionExceed:
+        case .seekOverstepTime:
             message = "Seek position should not exceed item end position"
         case .itemDurationNotSet:
             message = "Seek failed, item duration not set"

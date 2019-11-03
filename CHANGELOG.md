@@ -9,6 +9,8 @@ All notable changes to this project will be documented in this file.
 	* New simple video example
 * Breaking change:
 	* Remove useless ModernAVPlayerCurrentMedia protocol
+* Dependencies:
+	* Update some gems
 
 ## [1.3.2]
 * Fixes:

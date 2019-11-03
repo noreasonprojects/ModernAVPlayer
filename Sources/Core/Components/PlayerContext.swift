@@ -26,6 +26,7 @@
 
 import AVFoundation
 
+//sourcery: AutoMockable
 protocol PlayerContextDelegate: class {
     func playerContext(didStateChange state: ModernAVPlayer.State)
     func playerContext(didCurrentMediaChange media: PlayerMedia?)
@@ -61,6 +62,7 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
     let player: AVPlayer
     let plugins: [PlayerPlugin]
     var loopMode = false
+    private let seekService: SeekServiceProtocol
 
     weak var delegate: PlayerContextDelegate?
     
@@ -100,12 +102,14 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
          config: PlayerConfiguration,
          nowPlaying: NowPlaying = ModernAVPlayerNowPlayingService(),
          audioSession: AudioSessionService = ModernAVPlayerAudioSessionService(),
-         plugins: [PlayerPlugin]) {
+         plugins: [PlayerPlugin],
+         seekService: SeekServiceProtocol = SeekService()) {
         self.player = player
         self.config = config
         self.nowPlaying = nowPlaying
         self.audioSession = audioSession
         self.plugins = plugins
+        self.seekService = seekService
         super.init()
 
         ModernAVPlayerLogger.instance.log(message: "Init", domain: .lifecycleState)
@@ -143,9 +147,9 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
     }
 
     func seek(position: Double) {
-        let newPosition = SeekService().boundedPosition(position,
-                                                        media: currentMedia,
-                                                        duration: itemDuration)
+        let newPosition = seekService.boundedPosition(position,
+                                                      media: currentMedia,
+                                                      duration: itemDuration)
         if let boundedPosition = newPosition.value {
             state.seek(position: boundedPosition)
         } else if let reason = newPosition.error {

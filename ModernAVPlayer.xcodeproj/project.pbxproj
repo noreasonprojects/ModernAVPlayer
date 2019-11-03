@@ -15,7 +15,7 @@
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		7AF3322DE411E465CD4638A2 /* Pods_ModernAVPlayer_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C29EE3AE856D902F8DD65C /* Pods_ModernAVPlayer_Tests.framework */; };
 		BAF863D3FDB89A73BD58C6F3 /* Pods_ModernAVPlayer_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2C5C079F7F9B4BC96241584 /* Pods_ModernAVPlayer_Example.framework */; };
-		E1050F76207A44B100A7F540 /* ContextSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1050F75207A44B100A7F540 /* ContextSpecs.swift */; };
+		E1050F76207A44B100A7F540 /* PlayerContextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1050F75207A44B100A7F540 /* PlayerContextTests.swift */; };
 		E10B20E521C94F7400924E1D /* RemoteCommandExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10B20E421C94F7400924E1D /* RemoteCommandExample.swift */; };
 		E10B20E721C9557E00924E1D /* PlayerConfigurationExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10B20E621C9557E00924E1D /* PlayerConfigurationExample.swift */; };
 		E112DB452079359D00DB69E8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E112DB442079359D00DB69E8 /* Main.storyboard */; };
@@ -101,7 +101,7 @@
 		742975906FE82E40E7334051 /* Pods-ModernAVPlayer_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ModernAVPlayer_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ModernAVPlayer_Example/Pods-ModernAVPlayer_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		C2C5C079F7F9B4BC96241584 /* Pods_ModernAVPlayer_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ModernAVPlayer_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEF5F3BD9AEBC47C69872757 /* Pods-ModernAVPlayer_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ModernAVPlayer_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-ModernAVPlayer_Example/Pods-ModernAVPlayer_Example.release.xcconfig"; sourceTree = "<group>"; };
-		E1050F75207A44B100A7F540 /* ContextSpecs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContextSpecs.swift; sourceTree = "<group>"; };
+		E1050F75207A44B100A7F540 /* PlayerContextTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerContextTests.swift; sourceTree = "<group>"; };
 		E10B20E421C94F7400924E1D /* RemoteCommandExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteCommandExample.swift; sourceTree = "<group>"; };
 		E10B20E621C9557E00924E1D /* PlayerConfigurationExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerConfigurationExample.swift; sourceTree = "<group>"; };
 		E112DB442079359D00DB69E8 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -243,7 +243,7 @@
 			children = (
 				E12CC72F216AE7F800109A16 /* Generated */,
 				E11EE8CB216CF64600ABF06B /* Matches */,
-				E1050F75207A44B100A7F540 /* ContextSpecs.swift */,
+				E1050F75207A44B100A7F540 /* PlayerContextTests.swift */,
 				E14B4CFA215F61C500E02DE1 /* Components */,
 				E152D516207A459500E0347C /* Mock */,
 				E11EE8CC216CF65700ABF06B /* Plugins */,
@@ -732,7 +732,7 @@
 				E16FFBD521A3095F00004A90 /* PluginFailedStateSpecs.swift in Sources */,
 				E11EE8CE216CF79E00ABF06B /* PluginStopppedStateSpecs.swift in Sources */,
 				E16368B42097610900E69DAB /* MockDataTaskFactory.swift in Sources */,
-				E1050F76207A44B100A7F540 /* ContextSpecs.swift in Sources */,
+				E1050F76207A44B100A7F540 /* PlayerContextTests.swift in Sources */,
 				E19C9D672109B4D900FDA0D7 /* MockPlayerContextDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

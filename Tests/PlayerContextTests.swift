@@ -95,17 +95,40 @@ final class PlayerContextTests: XCTestCase {
         XCTAssertEqual(mockState.stopCallCount, 1)
     }
 
-//    func testSeek() {
-//        // ARRANGE
-//        tested.changeState(state: mockState)
-//
-//        // ACT
-//        tested.seek(position: 42)
-//
-//        // ASSERT
-//        XCTAssertEqual(mockState.seekCallCount, 1)
-//        XCTAssertEqual(mockState.lastPositionParam, 42)
-//    }
+    func testSeekWithNoMedia() {
+        // ARRANGE
+        let delegate = PlayerContextDelegateMock()
+        let seekService = SeekServiceProtocolMock()
+        Given(seekService, .boundedPosition(.any, media: .any, duration: .any,
+                                            willReturn: (nil, .loadMediaFirst)))
+        let tested = ModernAVPlayerContext(player: player, config: ModernAVPlayerConfiguration(),
+                                           plugins: [], seekService: seekService)
+        tested.delegate = delegate
+        tested.changeState(state: mockState)
+
+        // ACT
+        tested.seek(position: 0)
+
+        // ASSERT
+        Verify(delegate, 1, .playerContext(unavailableActionReason: .value(.loadMediaFirst)))
+    }
+
+    func testValidSeek() {
+        // ARRANGE
+        let seekPosition: Double = 21
+        let seekService = SeekServiceProtocolMock()
+        Given(seekService, .boundedPosition(.any, media: .any, duration: .any, willReturn: (seekPosition, nil)))
+        let tested = ModernAVPlayerContext(player: player, config: ModernAVPlayerConfiguration(),
+                                           plugins: [], seekService: seekService)
+        tested.changeState(state: mockState)
+
+        // ACT
+        tested.seek(position: 0)
+
+        // ASSERT
+        XCTAssertEqual(mockState.seekCallCount, 1)
+        XCTAssertEqual(mockState.lastPositionParam, seekPosition)
+    }
 
     func testSetCurrentMedia() {
         // ARRANGE

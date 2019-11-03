@@ -147,9 +147,7 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
     }
 
     func seek(position: Double) {
-        let newPosition = seekService.boundedPosition(position,
-                                                      media: currentMedia,
-                                                      duration: itemDuration)
+        let newPosition = seekService.boundedPosition(position, media: currentMedia, duration: itemDuration)
         if let boundedPosition = newPosition.value {
             state.seek(position: boundedPosition)
         } else if let reason = newPosition.error {

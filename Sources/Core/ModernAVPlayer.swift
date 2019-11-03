@@ -112,7 +112,7 @@ public final class ModernAVPlayer: NSObject, ModernAVPlayerExposable {
     ///
     /// Apply offset to the media current time
     ///
-    /// - Note: position is bounded between 0 and end time
+    /// - Note: this method compute position then call then seek(position:)
     /// - parameter offset: offset to apply
     ///
     public func seek(offset: Double) {

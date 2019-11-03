@@ -27,17 +27,17 @@
 import Foundation
 
 //sourcery: AutoMockable
-protocol SeekServiceProtocol {
+protocol SeekService {
     func boundedPosition(_ position: Double,
                          media: PlayerMedia?,
-                         duration: Double?) -> (value: Double?, error: PlayerUnavailableActionReason?)
+                         duration: Double?) -> (value: Double?, reason: PlayerUnavailableActionReason?)
 }
 
-struct SeekService: SeekServiceProtocol {
+struct ModernAVPlayerSeekService: SeekService {
 
     func boundedPosition(_ position: Double,
                          media: PlayerMedia?,
-                         duration: Double?) -> (value: Double?, error: PlayerUnavailableActionReason?) {
+                         duration: Double?) -> (value: Double?, reason: PlayerUnavailableActionReason?) {
 
         guard media != nil
             else { return (nil, .loadMediaFirst) }

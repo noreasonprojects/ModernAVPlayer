@@ -436,7 +436,7 @@
 		E024BB52D3BEBE8CCE74506E74BB6D30 /* MockyAssert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A783AC2D38EA6A310ECE8FE4E082B97 /* MockyAssert.swift */; };
 		E0EAC85F7ACFAD998B14FCE66144000E /* NMBStringify.h in Headers */ = {isa = PBXBuildFile; fileRef = E50A34A8DDC56E5A5748945A5EB7C5B2 /* NMBStringify.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E15A422A8F437D97E8C622D30C642498 /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = F721E077A0ACFAD640750921B3D386B7 /* Debug.swift */; };
-		E1D93755236ED66F00AF829E /* SeekService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D93754236ED66F00AF829E /* SeekService.swift */; };
+		E1D93755236ED66F00AF829E /* ModernAVPlayerSeekService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D93754236ED66F00AF829E /* ModernAVPlayerSeekService.swift */; };
 		E29F76F7A785879DC5D5BA2FC9485AC4 /* RxCocoa.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EF6CAC21EBFA0EB7512A3F10E58287 /* RxCocoa.swift */; };
 		E2B6FD052ADD6966C512A0514A0E4D2C /* Never.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F41D682836D7CDE42D56477F98EEE7 /* Never.swift */; };
 		E360E1F9343768C3B0D6F62AD93856DB /* AsSingle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D7CD3209571D12F6E2325FCBC4CBAE /* AsSingle.swift */; };
@@ -1078,7 +1078,7 @@
 		E01FC0DD5165013EA73D385827A2E6F3 /* Equal.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Equal.swift; path = Sources/Nimble/Matchers/Equal.swift; sourceTree = "<group>"; };
 		E06F91B4F377B9ACEC9A1C1232D77BB6 /* First.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = First.swift; path = RxSwift/Observables/First.swift; sourceTree = "<group>"; };
 		E18656BAD68AA9ABA1B145EE0D83BE02 /* RxRelay-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "RxRelay-dummy.m"; sourceTree = "<group>"; };
-		E1D93754236ED66F00AF829E /* SeekService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeekService.swift; sourceTree = "<group>"; };
+		E1D93754236ED66F00AF829E /* ModernAVPlayerSeekService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModernAVPlayerSeekService.swift; sourceTree = "<group>"; };
 		E2FFFA557ABB4C3E1C9BBA07BDE65999 /* Filter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Filter.swift; path = RxSwift/Observables/Filter.swift; sourceTree = "<group>"; };
 		E367E4EDA564481D924D7AB27FBDCC08 /* QuickSpec.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = QuickSpec.h; path = Sources/QuickObjectiveC/QuickSpec.h; sourceTree = "<group>"; };
 		E3B3DA248E11DE20F7E6F258D0341263 /* RxCocoa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RxCocoa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1334,7 +1334,7 @@
 				D20A2C71B40A3699B438C8DEE86D30C8 /* RateObservingService.swift */,
 				51F5963D2955AE2B185BB035B68C0D1D /* ReachabilityService.swift */,
 				3E9918536F7B863F07D8FA55F0C22D1D /* RouteAudioService.swift */,
-				E1D93754236ED66F00AF829E /* SeekService.swift */,
+				E1D93754236ED66F00AF829E /* ModernAVPlayerSeekService.swift */,
 			);
 			name = Services;
 			path = Sources/Core/Services;
@@ -2889,7 +2889,7 @@
 				70032F730656909C24A83122E99C30E0 /* ModernAVPlayer.swift in Sources */,
 				AFC166882BAC6D730DC77D24A09ADCC4 /* ModernAVPlayerConfiguration.swift in Sources */,
 				AE1FCB23FEB945B2CC7DA1BC47A4E34A /* ModernAVPlayerCurrentState.swift in Sources */,
-				E1D93755236ED66F00AF829E /* SeekService.swift in Sources */,
+				E1D93755236ED66F00AF829E /* ModernAVPlayerSeekService.swift in Sources */,
 				BFCA0EA9EC673791BA3A93FA25C075EB /* ModernAVPlayerDelegate.swift in Sources */,
 				0A52CD6A7CDD884EA598DB569D160882 /* ModernAVPlayerExposable.swift in Sources */,
 				4225FF52F7871C8AD49C95291296DE15 /* ModernAVPlayerLogger.swift in Sources */,

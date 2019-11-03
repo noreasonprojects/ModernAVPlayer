@@ -98,7 +98,7 @@ final class PlayerContextTests: XCTestCase {
     func testSeekWithNoMedia() {
         // ARRANGE
         let delegate = PlayerContextDelegateMock()
-        let seekService = SeekServiceProtocolMock()
+        let seekService = SeekServiceMock()
         Given(seekService, .boundedPosition(.any, media: .any, duration: .any,
                                             willReturn: (nil, .loadMediaFirst)))
         let tested = ModernAVPlayerContext(player: player, config: ModernAVPlayerConfiguration(),
@@ -116,7 +116,7 @@ final class PlayerContextTests: XCTestCase {
     func testValidSeek() {
         // ARRANGE
         let seekPosition: Double = 21
-        let seekService = SeekServiceProtocolMock()
+        let seekService = SeekServiceMock()
         Given(seekService, .boundedPosition(.any, media: .any, duration: .any, willReturn: (seekPosition, nil)))
         let tested = ModernAVPlayerContext(player: player, config: ModernAVPlayerConfiguration(),
                                            plugins: [], seekService: seekService)

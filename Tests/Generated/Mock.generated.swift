@@ -1742,8 +1742,8 @@ open class PlayerPluginMock: PlayerPlugin, Mock {
     }
 }
 
-// MARK: - SeekServiceProtocol
-open class SeekServiceProtocolMock: SeekServiceProtocol, Mock {
+// MARK: - SeekService
+open class SeekServiceMock: SeekService, Mock {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
         SwiftyMockyTestObserver.setup()
         self.sequencingPolicy = sequencingPolicy
@@ -1775,11 +1775,11 @@ open class SeekServiceProtocolMock: SeekServiceProtocol, Mock {
 
 
 
-    open func boundedPosition(_ position: Double,                         media: PlayerMedia?,                         duration: Double?) -> (value: Double?, error: PlayerUnavailableActionReason?) {
+    open func boundedPosition(_ position: Double,                         media: PlayerMedia?,                         duration: Double?) -> (value: Double?, reason: PlayerUnavailableActionReason?) {
         addInvocation(.m_boundedPosition__positionmedia_mediaduration_duration(Parameter<Double>.value(`position`), Parameter<PlayerMedia?>.value(`media`), Parameter<Double?>.value(`duration`)))
 		let perform = methodPerformValue(.m_boundedPosition__positionmedia_mediaduration_duration(Parameter<Double>.value(`position`), Parameter<PlayerMedia?>.value(`media`), Parameter<Double?>.value(`duration`))) as? (Double, PlayerMedia?, Double?) -> Void
 		perform?(`position`, `media`, `duration`)
-		var __value: (value: Double?, error: PlayerUnavailableActionReason?)
+		var __value: (value: Double?, reason: PlayerUnavailableActionReason?)
 		do {
 		    __value = try methodReturnValue(.m_boundedPosition__positionmedia_mediaduration_duration(Parameter<Double>.value(`position`), Parameter<PlayerMedia?>.value(`media`), Parameter<Double?>.value(`duration`))).casted()
 		} catch {
@@ -1819,13 +1819,13 @@ open class SeekServiceProtocolMock: SeekServiceProtocol, Mock {
         }
 
 
-        public static func boundedPosition(_ position: Parameter<Double>, media: Parameter<PlayerMedia?>, duration: Parameter<Double?>, willReturn: (value: Double?, error: PlayerUnavailableActionReason?)...) -> MethodStub {
+        public static func boundedPosition(_ position: Parameter<Double>, media: Parameter<PlayerMedia?>, duration: Parameter<Double?>, willReturn: (value: Double?, reason: PlayerUnavailableActionReason?)...) -> MethodStub {
             return Given(method: .m_boundedPosition__positionmedia_mediaduration_duration(`position`, `media`, `duration`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        public static func boundedPosition(_ position: Parameter<Double>, media: Parameter<PlayerMedia?>, duration: Parameter<Double?>, willProduce: (Stubber<(value: Double?, error: PlayerUnavailableActionReason?)>) -> Void) -> MethodStub {
-            let willReturn: [(value: Double?, error: PlayerUnavailableActionReason?)] = []
+        public static func boundedPosition(_ position: Parameter<Double>, media: Parameter<PlayerMedia?>, duration: Parameter<Double?>, willProduce: (Stubber<(value: Double?, reason: PlayerUnavailableActionReason?)>) -> Void) -> MethodStub {
+            let willReturn: [(value: Double?, reason: PlayerUnavailableActionReason?)] = []
 			let given: Given = { return Given(method: .m_boundedPosition__positionmedia_mediaduration_duration(`position`, `media`, `duration`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
-			let stubber = given.stub(for: ((value: Double?, error: PlayerUnavailableActionReason?)).self)
+			let stubber = given.stub(for: ((value: Double?, reason: PlayerUnavailableActionReason?)).self)
 			willProduce(stubber)
 			return given
         }

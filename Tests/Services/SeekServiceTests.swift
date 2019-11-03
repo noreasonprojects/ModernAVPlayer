@@ -31,10 +31,10 @@ import XCTest
 
 final class SeekServiceTests: XCTestCase {
 
-    private var service: SeekService!
+    private var service: ModernAVPlayerSeekService!
 
     override func setUp() {
-        service = SeekService()
+        service = ModernAVPlayerSeekService()
     }
 
     func testBoundedPositionWithNoMedia() {
@@ -48,7 +48,7 @@ final class SeekServiceTests: XCTestCase {
 
         // ASSERT
         let expectedReason: PlayerUnavailableActionReason = .loadMediaFirst
-        XCTAssertEqual(boundedPosition.error, expectedReason)
+        XCTAssertEqual(boundedPosition.reason, expectedReason)
         XCTAssertNil(boundedPosition.value)
     }
 
@@ -63,7 +63,7 @@ final class SeekServiceTests: XCTestCase {
 
         // ASSERT
         XCTAssertEqual(boundedPosition.value, 0)
-        XCTAssertNil(boundedPosition.error)
+        XCTAssertNil(boundedPosition.reason)
     }
 
     func testSeekForward() {
@@ -77,7 +77,7 @@ final class SeekServiceTests: XCTestCase {
 
         // ASSERT
         let expectedReason: PlayerUnavailableActionReason = .itemDurationNotSet
-        XCTAssertEqual(boundedPosition.error, expectedReason)
+        XCTAssertEqual(boundedPosition.reason, expectedReason)
         XCTAssertNil(boundedPosition.value)
     }
 
@@ -92,7 +92,7 @@ final class SeekServiceTests: XCTestCase {
 
         // ASSERT
         let expectedReason: PlayerUnavailableActionReason = .positionExceed
-        XCTAssertEqual(boundedPosition.error, expectedReason)
+        XCTAssertEqual(boundedPosition.reason, expectedReason)
         XCTAssertNil(boundedPosition.value)
     }
 
@@ -107,6 +107,6 @@ final class SeekServiceTests: XCTestCase {
 
         // ASSERT
         XCTAssertEqual(boundedPosition.value, position)
-        XCTAssertNil(boundedPosition.error)
+        XCTAssertNil(boundedPosition.reason)
     }
 }

@@ -62,7 +62,7 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
     let player: AVPlayer
     let plugins: [PlayerPlugin]
     var loopMode = false
-    private let seekService: SeekServiceProtocol
+    private let seekService: SeekService
 
     weak var delegate: PlayerContextDelegate?
     
@@ -103,7 +103,7 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
          nowPlaying: NowPlaying = ModernAVPlayerNowPlayingService(),
          audioSession: AudioSessionService = ModernAVPlayerAudioSessionService(),
          plugins: [PlayerPlugin],
-         seekService: SeekServiceProtocol = SeekService()) {
+         seekService: SeekService = ModernAVPlayerSeekService()) {
         self.player = player
         self.config = config
         self.nowPlaying = nowPlaying
@@ -150,7 +150,7 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
         let newPosition = seekService.boundedPosition(position, media: currentMedia, duration: itemDuration)
         if let boundedPosition = newPosition.value {
             state.seek(position: boundedPosition)
-        } else if let reason = newPosition.error {
+        } else if let reason = newPosition.reason {
             unaivalableCommand(reason: reason)
         }
     }

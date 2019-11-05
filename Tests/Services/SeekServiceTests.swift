@@ -24,6 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+import CoreMedia
 @testable
 import ModernAVPlayer
 import SwiftyMocky
@@ -32,34 +33,19 @@ import XCTest
 final class SeekServiceTests: XCTestCase {
 
     private var service: ModernAVPlayerSeekService!
+    private let preferedTimeScale = CMTimeScale(NSEC_PER_SEC)
 
     override func setUp() {
-        service = ModernAVPlayerSeekService()
-    }
-
-    func testBoundedPositionWithNoMedia() {
-        // ARRANGE
-        let position: Double = 0
-        let media: PlayerMedia? = nil
-        let duration: Double? = 42
-
-        // ACT
-        let boundedPosition = service.boundedPosition(position, media: media, duration: duration)
-
-        // ASSERT
-        let expectedReason: PlayerUnavailableActionReason = .loadMediaFirst
-        XCTAssertEqual(boundedPosition.reason, expectedReason)
-        XCTAssertNil(boundedPosition.value)
+        service = ModernAVPlayerSeekService(preferredTimescale: preferedTimeScale)
     }
 
     func testSeekBackward() {
         // ARRANGE
-        let position: Double = -42
-        let media = PlayerMediaMock()
-        let duration: Double = 42
+        let position: Double = -1
+        let item = MockPlayerItem(url: URL(fileURLWithPath: ""))
 
         // ACT
-        let boundedPosition = service.boundedPosition(position, media: media, duration: duration)
+        let boundedPosition = service.boundedPosition(position, item: item)
 
         // ASSERT
         XCTAssertEqual(boundedPosition.value, 0)
@@ -69,14 +55,15 @@ final class SeekServiceTests: XCTestCase {
     func testSeekForward() {
         // ARRANGE
         let position: Double = 42
-        let media = PlayerMediaMock()
-        let duration: Double? = nil
+        let duration = Double.infinity
+        let item = MockPlayerItem(url: URL(fileURLWithPath: ""))
+        item.overrideDuration = CMTime(seconds: duration, preferredTimescale: preferedTimeScale)
 
         // ACT
-        let boundedPosition = service.boundedPosition(position, media: media, duration: duration)
+        let boundedPosition = service.boundedPosition(position, item: item)
 
         // ASSERT
-        let expectedReason: PlayerUnavailableActionReason = .itemDurationNotSet
+        let expectedReason: PlayerUnavailableActionReason = .seekPositionNotAvailable
         XCTAssertEqual(boundedPosition.reason, expectedReason)
         XCTAssertNil(boundedPosition.value)
     }
@@ -84,14 +71,15 @@ final class SeekServiceTests: XCTestCase {
     func testSeekExceed() {
         // ARRANGE
         let position: Double = 42
-        let media = PlayerMediaMock()
         let duration: Double = 40
+        let item = MockPlayerItem(url: URL(fileURLWithPath: ""))
+        item.overrideDuration = CMTime(seconds: duration, preferredTimescale: preferedTimeScale)
 
         // ACT
-        let boundedPosition = service.boundedPosition(position, media: media, duration: duration)
+        let boundedPosition = service.boundedPosition(position, item: item)
 
         // ASSERT
-        let expectedReason: PlayerUnavailableActionReason = .seekOverstepTime
+        let expectedReason: PlayerUnavailableActionReason = .seekOverstepPosition
         XCTAssertEqual(boundedPosition.reason, expectedReason)
         XCTAssertNil(boundedPosition.value)
     }
@@ -99,11 +87,12 @@ final class SeekServiceTests: XCTestCase {
     func testUsualSeek() {
         // ARRANGE
         let position: Double = 21
-        let media = PlayerMediaMock()
-        let duration: Double? = 42
+        let duration: Double = 42
+        let item = MockPlayerItem(url: URL(fileURLWithPath: ""))
+        item.overrideDuration = CMTime(seconds: duration, preferredTimescale: preferedTimeScale)
 
         // ACT
-        let boundedPosition = service.boundedPosition(position, media: media, duration: duration)
+        let boundedPosition = service.boundedPosition(position, item: item)
 
         // ASSERT
         XCTAssertEqual(boundedPosition.value, position)

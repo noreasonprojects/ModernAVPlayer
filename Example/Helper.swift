@@ -23,12 +23,12 @@ struct Helper {
         case .loadMediaFirst:
             return "Load a media first"
         case .waitEstablishedNetwork:
-            return "Wait network to be established before doing this"
+            return "Wait network to be established before"
         case .waitLoadedMedia:
-            return "Wait media to be loaded before doing this"
-        case .itemDurationNotSet:
-            return "Media duration needed to perform action"
-        case .seekOverstepTime:
+            return "Wait media to be loaded before"
+        case .seekPositionNotAvailable:
+            return "Seek position not available"
+        case .seekOverstepPosition:
             return "You can't seek after item end"
         }
     }

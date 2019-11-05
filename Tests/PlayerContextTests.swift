@@ -33,21 +33,19 @@ import XCTest
 final class PlayerContextTests: XCTestCase {
 
     private var audioSession: AudioSessionServiceMock!
-    private var tested: PlayerContext!
+    private var tested: ModernAVPlayerContext!
     private var mockState: MockPlayerState!
     private var media: MockPlayerMedia!
     private var nowPlaying: MockNowPlayingService!
     private let player = MockCustomPlayer()
+    private let config = ModernAVPlayerConfiguration()
 
     override func setUp() {
         ModernAVPlayerLogger.setup.domains = []
         audioSession = AudioSessionServiceMock()
         nowPlaying = MockNowPlayingService()
-        tested = ModernAVPlayerContext(player: player,
-                                            config: ModernAVPlayerConfiguration(),
-                                            nowPlaying: nowPlaying,
-                                            audioSession: audioSession,
-                                            plugins: [])
+        tested = ModernAVPlayerContext(player: player, config: config, nowPlaying: nowPlaying,
+                                       audioSession: audioSession, plugins: [])
         mockState = MockPlayerState(context: tested)
         media = MockPlayerMedia(url: URL(string: "foo")!, type: .clip)
     }
@@ -98,11 +96,6 @@ final class PlayerContextTests: XCTestCase {
     func testSeekWithNoMedia() {
         // ARRANGE
         let delegate = PlayerContextDelegateMock()
-        let seekService = SeekServiceMock()
-        Given(seekService, .boundedPosition(.any, media: .any, duration: .any,
-                                            willReturn: (nil, .loadMediaFirst)))
-        let tested = ModernAVPlayerContext(player: player, config: ModernAVPlayerConfiguration(),
-                                           plugins: [], seekService: seekService)
         tested.delegate = delegate
         tested.changeState(state: mockState)
 
@@ -110,24 +103,60 @@ final class PlayerContextTests: XCTestCase {
         tested.seek(position: 0)
 
         // ASSERT
+        XCTAssertEqual(mockState.seekCallCount, 0)
         Verify(delegate, 1, .playerContext(unavailableActionReason: .value(.loadMediaFirst)))
     }
 
-    func testValidSeek() {
+    func testOverstepSeekPosition() {
         // ARRANGE
-        let seekPosition: Double = 21
-        let seekService = SeekServiceMock()
-        Given(seekService, .boundedPosition(.any, media: .any, duration: .any, willReturn: (seekPosition, nil)))
-        let tested = ModernAVPlayerContext(player: player, config: ModernAVPlayerConfiguration(),
-                                           plugins: [], seekService: seekService)
+        let seekPosition: Double = 43
+        let duration = CMTime(seconds: 42, preferredTimescale: config.preferedTimeScale)
+        player.overrideCurrentItem = MockPlayerItem(url: URL(fileURLWithPath: ""),
+                                                    duration: duration, status: nil)
+        let delegate = PlayerContextDelegateMock()
+        tested.delegate = delegate
         tested.changeState(state: mockState)
 
         // ACT
-        tested.seek(position: 0)
+        tested.seek(position: seekPosition)
+
+        // ASSERT
+        Verify(delegate, 1, .playerContext(unavailableActionReason: .value(.seekOverstepPosition)))
+    }
+
+    func testValidSeekPosition() {
+        // ARRANGE
+        let seekPosition: Double = 21
+        let duration = CMTime(seconds: 42, preferredTimescale: config.preferedTimeScale)
+        player.overrideCurrentItem = MockPlayerItem(url: URL(fileURLWithPath: ""),
+                                                    duration: duration, status: nil)
+        tested.changeState(state: mockState)
+
+        // ACT
+        tested.seek(position: seekPosition)
 
         // ASSERT
         XCTAssertEqual(mockState.seekCallCount, 1)
         XCTAssertEqual(mockState.lastPositionParam, seekPosition)
+    }
+
+    func testValidSeekOffset() {
+        // ARRANGE
+        let seekPosition = CMTime(seconds: 21, preferredTimescale: config.preferedTimeScale)
+        let duration = CMTime(seconds: 42, preferredTimescale: config.preferedTimeScale)
+        let offset: Double = 10
+        player.overrideCurrentTime = seekPosition
+        player.overrideCurrentItem = MockPlayerItem(url: URL(fileURLWithPath: ""),
+                                                    duration: duration, status: nil)
+        tested.changeState(state: mockState)
+
+        // ACT
+        tested.seek(offset: offset)
+
+        // ASSERT
+        let expected = seekPosition.seconds + offset
+        XCTAssertEqual(mockState.seekCallCount, 1)
+        XCTAssertEqual(mockState.lastPositionParam, expected)
     }
 
     func testSetCurrentMedia() {

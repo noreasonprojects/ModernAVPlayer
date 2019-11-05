@@ -1775,37 +1775,36 @@ open class SeekServiceMock: SeekService, Mock {
 
 
 
-    open func boundedPosition(_ position: Double,                         media: PlayerMedia?,                         duration: Double?) -> (value: Double?, reason: PlayerUnavailableActionReason?) {
-        addInvocation(.m_boundedPosition__positionmedia_mediaduration_duration(Parameter<Double>.value(`position`), Parameter<PlayerMedia?>.value(`media`), Parameter<Double?>.value(`duration`)))
-		let perform = methodPerformValue(.m_boundedPosition__positionmedia_mediaduration_duration(Parameter<Double>.value(`position`), Parameter<PlayerMedia?>.value(`media`), Parameter<Double?>.value(`duration`))) as? (Double, PlayerMedia?, Double?) -> Void
-		perform?(`position`, `media`, `duration`)
+    open func boundedPosition(_ position: Double,                         item: AVPlayerItem) -> (value: Double?, reason: PlayerUnavailableActionReason?) {
+        addInvocation(.m_boundedPosition__positionitem_item(Parameter<Double>.value(`position`), Parameter<AVPlayerItem>.value(`item`)))
+		let perform = methodPerformValue(.m_boundedPosition__positionitem_item(Parameter<Double>.value(`position`), Parameter<AVPlayerItem>.value(`item`))) as? (Double, AVPlayerItem) -> Void
+		perform?(`position`, `item`)
 		var __value: (value: Double?, reason: PlayerUnavailableActionReason?)
 		do {
-		    __value = try methodReturnValue(.m_boundedPosition__positionmedia_mediaduration_duration(Parameter<Double>.value(`position`), Parameter<PlayerMedia?>.value(`media`), Parameter<Double?>.value(`duration`))).casted()
+		    __value = try methodReturnValue(.m_boundedPosition__positionitem_item(Parameter<Double>.value(`position`), Parameter<AVPlayerItem>.value(`item`))).casted()
 		} catch {
-			onFatalFailure("Stub return value not specified for boundedPosition(_ position: Double,                         media: PlayerMedia?,                         duration: Double?). Use given")
-			Failure("Stub return value not specified for boundedPosition(_ position: Double,                         media: PlayerMedia?,                         duration: Double?). Use given")
+			onFatalFailure("Stub return value not specified for boundedPosition(_ position: Double,                         item: AVPlayerItem). Use given")
+			Failure("Stub return value not specified for boundedPosition(_ position: Double,                         item: AVPlayerItem). Use given")
 		}
 		return __value
     }
 
 
     fileprivate enum MethodType {
-        case m_boundedPosition__positionmedia_mediaduration_duration(Parameter<Double>, Parameter<PlayerMedia?>, Parameter<Double?>)
+        case m_boundedPosition__positionitem_item(Parameter<Double>, Parameter<AVPlayerItem>)
 
         static func compareParameters(lhs: MethodType, rhs: MethodType, matcher: Matcher) -> Bool {
             switch (lhs, rhs) {
-            case (.m_boundedPosition__positionmedia_mediaduration_duration(let lhsPosition, let lhsMedia, let lhsDuration), .m_boundedPosition__positionmedia_mediaduration_duration(let rhsPosition, let rhsMedia, let rhsDuration)):
+            case (.m_boundedPosition__positionitem_item(let lhsPosition, let lhsItem), .m_boundedPosition__positionitem_item(let rhsPosition, let rhsItem)):
                 guard Parameter.compare(lhs: lhsPosition, rhs: rhsPosition, with: matcher) else { return false } 
-                guard Parameter.compare(lhs: lhsMedia, rhs: rhsMedia, with: matcher) else { return false } 
-                guard Parameter.compare(lhs: lhsDuration, rhs: rhsDuration, with: matcher) else { return false } 
+                guard Parameter.compare(lhs: lhsItem, rhs: rhsItem, with: matcher) else { return false } 
                 return true 
             }
         }
 
         func intValue() -> Int {
             switch self {
-            case let .m_boundedPosition__positionmedia_mediaduration_duration(p0, p1, p2): return p0.intValue + p1.intValue + p2.intValue
+            case let .m_boundedPosition__positionitem_item(p0, p1): return p0.intValue + p1.intValue
             }
         }
     }
@@ -1819,12 +1818,12 @@ open class SeekServiceMock: SeekService, Mock {
         }
 
 
-        public static func boundedPosition(_ position: Parameter<Double>, media: Parameter<PlayerMedia?>, duration: Parameter<Double?>, willReturn: (value: Double?, reason: PlayerUnavailableActionReason?)...) -> MethodStub {
-            return Given(method: .m_boundedPosition__positionmedia_mediaduration_duration(`position`, `media`, `duration`), products: willReturn.map({ StubProduct.return($0 as Any) }))
+        public static func boundedPosition(_ position: Parameter<Double>, item: Parameter<AVPlayerItem>, willReturn: (value: Double?, reason: PlayerUnavailableActionReason?)...) -> MethodStub {
+            return Given(method: .m_boundedPosition__positionitem_item(`position`, `item`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        public static func boundedPosition(_ position: Parameter<Double>, media: Parameter<PlayerMedia?>, duration: Parameter<Double?>, willProduce: (Stubber<(value: Double?, reason: PlayerUnavailableActionReason?)>) -> Void) -> MethodStub {
+        public static func boundedPosition(_ position: Parameter<Double>, item: Parameter<AVPlayerItem>, willProduce: (Stubber<(value: Double?, reason: PlayerUnavailableActionReason?)>) -> Void) -> MethodStub {
             let willReturn: [(value: Double?, reason: PlayerUnavailableActionReason?)] = []
-			let given: Given = { return Given(method: .m_boundedPosition__positionmedia_mediaduration_duration(`position`, `media`, `duration`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
+			let given: Given = { return Given(method: .m_boundedPosition__positionitem_item(`position`, `item`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: ((value: Double?, reason: PlayerUnavailableActionReason?)).self)
 			willProduce(stubber)
 			return given
@@ -1834,15 +1833,15 @@ open class SeekServiceMock: SeekService, Mock {
     public struct Verify {
         fileprivate var method: MethodType
 
-        public static func boundedPosition(_ position: Parameter<Double>, media: Parameter<PlayerMedia?>, duration: Parameter<Double?>) -> Verify { return Verify(method: .m_boundedPosition__positionmedia_mediaduration_duration(`position`, `media`, `duration`))}
+        public static func boundedPosition(_ position: Parameter<Double>, item: Parameter<AVPlayerItem>) -> Verify { return Verify(method: .m_boundedPosition__positionitem_item(`position`, `item`))}
     }
 
     public struct Perform {
         fileprivate var method: MethodType
         var performs: Any
 
-        public static func boundedPosition(_ position: Parameter<Double>, media: Parameter<PlayerMedia?>, duration: Parameter<Double?>, perform: @escaping (Double, PlayerMedia?, Double?) -> Void) -> Perform {
-            return Perform(method: .m_boundedPosition__positionmedia_mediaduration_duration(`position`, `media`, `duration`), performs: perform)
+        public static func boundedPosition(_ position: Parameter<Double>, item: Parameter<AVPlayerItem>, perform: @escaping (Double, AVPlayerItem) -> Void) -> Perform {
+            return Perform(method: .m_boundedPosition__positionitem_item(`position`, `item`), performs: perform)
         }
     }
 

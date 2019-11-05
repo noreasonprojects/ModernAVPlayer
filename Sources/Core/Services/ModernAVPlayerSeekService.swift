@@ -24,31 +24,46 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+import AVFoundation
 import Foundation
 
 //sourcery: AutoMockable
 protocol SeekService {
     func boundedPosition(_ position: Double,
-                         media: PlayerMedia?,
-                         duration: Double?) -> (value: Double?, reason: PlayerUnavailableActionReason?)
+                         item: AVPlayerItem) -> (value: Double?, reason: PlayerUnavailableActionReason?)
 }
 
 struct ModernAVPlayerSeekService: SeekService {
 
-    func boundedPosition(_ position: Double,
-                         media: PlayerMedia?,
-                         duration: Double?) -> (value: Double?, reason: PlayerUnavailableActionReason?) {
+    private let preferredTimescale: CMTimeScale
 
-        guard media != nil
-            else { return (nil, .loadMediaFirst) }
+    init(preferredTimescale: CMTimeScale) {
+        self.preferredTimescale = preferredTimescale
+    }
+
+    private func isPositionInRanges(_ position: Double, _ ranges: [CMTimeRange]) -> Bool {
+        let time = CMTime(seconds: position, preferredTimescale: preferredTimescale)
+        return !ranges.filter { $0.containsTime(time) }.isEmpty
+    }
+
+    private func getItemRangesAvailable(_ item: AVPlayerItem) -> [CMTimeRange] {
+        let ranges = item.seekableTimeRanges + item.loadedTimeRanges
+        return ranges.map { $0.timeRangeValue }
+    }
+
+    func boundedPosition(_ position: Double,
+                         item: AVPlayerItem) -> (value: Double?, reason: PlayerUnavailableActionReason?) {
 
         guard position > 0 else { return (0, nil) }
 
-        guard let duration = duration, duration.isNormal
-            else { return (nil, .itemDurationNotSet) }
+        let duration = item.duration.seconds
+        guard duration.isNormal else {
+            let ranges = getItemRangesAvailable(item)
+            return isPositionInRanges(position, ranges) ? (position, nil) : (nil, .seekPositionNotAvailable)
+        }
 
         guard position < duration
-            else { return (nil, .seekOverstepTime) }
+            else { return (nil, .seekOverstepPosition) }
 
         return (position, nil)
     }

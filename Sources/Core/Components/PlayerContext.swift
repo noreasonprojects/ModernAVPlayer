@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 import AVFoundation
+import UIKit
 
 //sourcery: AutoMockable
 protocol PlayerContextDelegate: class {

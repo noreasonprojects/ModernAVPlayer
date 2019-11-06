@@ -3,6 +3,8 @@ All notable changes to this project will be documented in this file.
 
 ---
 ## [X.X.X]
+* Feature:
+	* Support SPM
 * Fix:
 	* Seek available on stream media
 * Break changes:

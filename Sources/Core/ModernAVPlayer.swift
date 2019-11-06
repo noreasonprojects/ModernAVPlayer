@@ -102,7 +102,7 @@ public final class ModernAVPlayer: NSObject, ModernAVPlayerExposable {
     ///
     /// Sets the media current time to the specified position
     ///
-    /// - Note: position is bounded between 0 and end time
+    /// - Note: position is bounded between 0 and end time or available ranges
     /// - parameter position: time to seek
     ///
     public func seek(position: Double) {

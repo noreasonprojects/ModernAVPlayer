@@ -50,9 +50,9 @@ final class MockPlayerItem: AVPlayerItem {
         cancelPendingSeeksCallCount += 1
     }
     
-    private(set) var overrideDuration: CMTime?
+    var overrideDuration: CMTime?
     override var duration: CMTime {
-        return overrideDuration ?? CMTime.zero
+        return overrideDuration ?? .zero
     }
 }
 

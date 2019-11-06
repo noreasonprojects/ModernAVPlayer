@@ -62,7 +62,6 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
     let player: AVPlayer
     let plugins: [PlayerPlugin]
     var loopMode = false
-    private let seekService: SeekService
 
     weak var delegate: PlayerContextDelegate?
     
@@ -102,14 +101,12 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
          config: PlayerConfiguration,
          nowPlaying: NowPlaying = ModernAVPlayerNowPlayingService(),
          audioSession: AudioSessionService = ModernAVPlayerAudioSessionService(),
-         plugins: [PlayerPlugin],
-         seekService: SeekService = ModernAVPlayerSeekService()) {
+         plugins: [PlayerPlugin]) {
         self.player = player
         self.config = config
         self.nowPlaying = nowPlaying
         self.audioSession = audioSession
         self.plugins = plugins
-        self.seekService = seekService
         super.init()
 
         ModernAVPlayerLogger.instance.log(message: "Init", domain: .lifecycleState)
@@ -147,10 +144,14 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
     }
 
     func seek(position: Double) {
-        let newPosition = seekService.boundedPosition(position, media: currentMedia, duration: itemDuration)
-        if let boundedPosition = newPosition.value {
+        guard let item = currentItem
+            else { unaivalableCommand(reason: .loadMediaFirst); return }
+
+        let seekService = ModernAVPlayerSeekService(preferredTimescale: config.preferedTimeScale)
+        let seekPosition = seekService.boundedPosition(position, item: item)
+        if let boundedPosition = seekPosition.value {
             state.seek(position: boundedPosition)
-        } else if let reason = newPosition.reason {
+        } else if let reason = seekPosition.reason {
             unaivalableCommand(reason: reason)
         } else {
             assertionFailure("boundedPosition should return at least value or reason")
@@ -179,7 +180,7 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
     
     func updateMetadata(_ metadata: PlayerMediaMetadata) {
         guard let media = currentMedia
-            else { unaivalableCommand(reason: .loadMediaFirst, metadata: true); return }
+            else { unaivalableCommand(reason: .loadMediaFirst); return }
         
         media.setMetadata(metadata)
         nowPlaying.update(metadata: metadata, duration: nil, isLive: nil)
@@ -187,15 +188,15 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
 
     // MARK: - Helper
 
-    private func unaivalableCommand(reason: PlayerUnavailableActionReason, metadata: Bool = false) {
+    private func unaivalableCommand(reason: PlayerUnavailableActionReason) {
         let message: String
         switch reason {
-        case .seekOverstepTime:
+        case .seekOverstepPosition:
             message = "Seek position should not exceed item end position"
-        case .itemDurationNotSet:
-            message = "Seek failed, item duration not set"
+        case .seekPositionNotAvailable:
+            message = "Seek position not available"
         case .loadMediaFirst:
-            message = metadata ? "Load a media before update metadata" : "Seek failed, load a media first"
+            message = "Load a media first"
         default:
             assertionFailure("all context cases must be set")
             message = ""

@@ -48,6 +48,22 @@
 
 Supported version: ``swift-tools-version:5.0``
 
+```swift
+// Package.swift
+
+import PackageDescription
+
+let package = Package(
+    name: "Sample",
+    dependencies: [
+        .package(url: "https://github.com/noreasonprojects/ModernAVPlayer", from: "X.X.X")
+    ],
+    targets: [
+        .target(name: "Sample", dependencies: ["ModernAVPlayer"])
+    ]
+)
+```
+
 ### CocoaPods
 
 [CocoaPods](http://cocoapods.org) is a dependency manager for Cocoa projects. You can install it with the following command:

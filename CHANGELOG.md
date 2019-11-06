@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file.
 
 ---
+## [X.X.X]
+* Fix:
+	* Seek available on stream media
+* Break changes:
+	* `PlayerUnavailableActionReason` enum changed
+		* `itemDurationNotSet` was replaced by `seekPositionNotAvailable`
+		* `seekOverstepTime` was replaced by `seekOverstepPosition`
+
 ## [1.3.3]
 * Feature:
 	* Seek media with a given offset

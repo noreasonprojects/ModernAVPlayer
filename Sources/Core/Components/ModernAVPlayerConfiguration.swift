@@ -52,6 +52,8 @@ public struct ModernAVPlayerConfiguration: PlayerConfiguration {
     
     public let allowsExternalPlayback = false
 
+    public let itemLoadedAssetKeys = ["playable", "duration"]
+
     public init() {
         periodicPlayingTime = CMTime(seconds: 1, preferredTimescale: preferedTimeScale)
     }

@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file.
 
 ---
+## [X.X.X]
+* Feature:
+	* Define custom item loaded asset keys
+* Breaking change:
+	* New `itemLoadedAssetKeys` attribut for `PlayerConfiguration`
+
 ## [1.4.0]
 * Feature:
 	* Support SPM

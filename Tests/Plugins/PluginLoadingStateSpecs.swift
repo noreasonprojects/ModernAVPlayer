@@ -33,6 +33,7 @@ final class PluginLoadingStateSpecs: XCTestCase {
         Given(context, .player(getter: player))
         Given(context, .plugins(getter: [plugin]))
         Given(context, .audioSession(getter: ModernAVPlayerAudioSessionService()))
+        Given(context, .config(getter: ModernAVPlayerConfiguration()))
     }
 
     func testInitState_DidFailedPluginShouldNotBeCall() {

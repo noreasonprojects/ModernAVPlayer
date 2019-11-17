@@ -35,7 +35,6 @@ final class LoadingMediaStateSpecs: QuickSpec {
 
     private var audioSession: AudioSessionServiceMock!
     private var state: LoadingMediaState!
-    private var item: AVPlayerItem!
     private var player: MockCustomPlayer!
     private var tested: ModernAVPlayerContext!
     private let playerMedia = MockPlayerMedia(url: URL(string: "x")!, type: .clip)

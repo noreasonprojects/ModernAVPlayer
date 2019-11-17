@@ -131,7 +131,7 @@ final class LoadingMediaState: PlayerState {
     
     private func createItem(with media: PlayerMedia) -> AVPlayerItem {
         let asset = AVURLAsset(url: media.url, options: media.assetOptions)
-        return AVPlayerItem(asset: asset, automaticallyLoadedAssetKeys: ["playable", "duration"])
+        return AVPlayerItem(asset: asset, automaticallyLoadedAssetKeys: context.config.itemLoadedAssetKeys)
     }
 
     private func createReplaceItem(media: PlayerMedia) {

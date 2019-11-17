@@ -59,4 +59,7 @@ public protocol PlayerConfiguration {
     /// Set allowsExternalPlayback to false to avoid black screen when using AirPlay on Apple TV
     ///
     var allowsExternalPlayback: Bool { get }
+
+    /// Use to feed `automaticallyLoadedAssetKeys` on `AVPlayerItem` initialization
+    var itemLoadedAssetKeys: [String] { get }
 }

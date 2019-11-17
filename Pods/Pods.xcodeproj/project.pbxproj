@@ -444,6 +444,7 @@
 		E0EAC85F7ACFAD998B14FCE66144000E /* NMBStringify.h in Headers */ = {isa = PBXBuildFile; fileRef = E50A34A8DDC56E5A5748945A5EB7C5B2 /* NMBStringify.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E170259E82DAC62DC39AB4991A5C64AA /* SharedSequence+Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590CFC58F9957D989BAC159A8BCE33A6 /* SharedSequence+Operators.swift */; };
 		E1ABAA7AB96B36BE96DEB0F13D7D369F /* TextInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FCD98F1022DAAA05CDF2B09FACE72F /* TextInput.swift */; };
+		E1FD7C832381E2CF0054F602 /* AVPlayerItemInitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FD7C822381E2CF0054F602 /* AVPlayerItemInitService.swift */; };
 		E378F5EBA73313E695049A5013198686 /* UITextView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF472A6D0998F9E15A3E70C829D0D780 /* UITextView+Rx.swift */; };
 		E44DE9EB381DC769A585E7F88EAC5B2A /* RxScrollViewDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9D5B3ABD4811162506D51C1574C943 /* RxScrollViewDelegateProxy.swift */; };
 		E458AAE1AE9E2250F29806E5633B1860 /* Expression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016D505FC4CF10982E56527920BB6035 /* Expression.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
@@ -1075,6 +1076,7 @@
 		E01FC0DD5165013EA73D385827A2E6F3 /* Equal.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Equal.swift; path = Sources/Nimble/Matchers/Equal.swift; sourceTree = "<group>"; };
 		E06F91B4F377B9ACEC9A1C1232D77BB6 /* First.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = First.swift; path = RxSwift/Observables/First.swift; sourceTree = "<group>"; };
 		E18656BAD68AA9ABA1B145EE0D83BE02 /* RxRelay-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "RxRelay-dummy.m"; sourceTree = "<group>"; };
+		E1FD7C822381E2CF0054F602 /* AVPlayerItemInitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVPlayerItemInitService.swift; sourceTree = "<group>"; };
 		E2FFFA557ABB4C3E1C9BBA07BDE65999 /* Filter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Filter.swift; path = RxSwift/Observables/Filter.swift; sourceTree = "<group>"; };
 		E367E4EDA564481D924D7AB27FBDCC08 /* QuickSpec.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = QuickSpec.h; path = Sources/QuickObjectiveC/QuickSpec.h; sourceTree = "<group>"; };
 		E3B3DA248E11DE20F7E6F258D0341263 /* RxCocoa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RxCocoa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1582,6 +1584,7 @@
 				799872255560A65953CB8AC8F949C1DB /* RateObservingService.swift */,
 				A09EA4276802A13B8D321881EAE9D7ED /* ReachabilityService.swift */,
 				FF60AE125F065887348142086FA8CF5A /* RouteAudioService.swift */,
+				E1FD7C822381E2CF0054F602 /* AVPlayerItemInitService.swift */,
 			);
 			name = Services;
 			path = Sources/Core/Services;
@@ -2672,6 +2675,7 @@
 				7DB617D89A7A828A02F6CC338BE1E5E4 /* PlayerCommand.swift in Sources */,
 				C500B5B67B0AD145662F77E2DD5BBFE9 /* PlayerConfiguration.swift in Sources */,
 				8A911F84418626575C51B017D33BF410 /* PlayerContext.swift in Sources */,
+				E1FD7C832381E2CF0054F602 /* AVPlayerItemInitService.swift in Sources */,
 				63EDC585E83CB730C2AEB71C0FE3FDE8 /* PlayerContextDelegateProxy.swift in Sources */,
 				778EEED3EAA7E4C6804152E73BA2ABBD /* PlayerError.swift in Sources */,
 				9683188492BD3653770E690A2D96783D /* PlayerMedia.swift in Sources */,

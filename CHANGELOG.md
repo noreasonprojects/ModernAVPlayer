@@ -8,6 +8,8 @@ All notable changes to this project will be documented in this file.
 	* Improve some unit tests
 * Fix:
 	* Fix not expected value on periodicTimeObserver
+* Improvement:
+	* Create service to deliver AVPlayerItem
 * Breaking change:
 	* New `itemLoadedAssetKeys` attribut for `PlayerConfiguration`
 	* `PlayerConfiguration` `preferedTimescale` was renamed as `preferredTimescale`

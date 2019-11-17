@@ -41,6 +41,7 @@ final class LoadingMediaState: PlayerState {
     private var position: Double?
     private var itemStatusObserving: ModernAVPLayerItemStatusObservingService?
     private var interruptionAudioService: InterruptionAudioService
+    private let itemInitService: AVPlayerItemInitService
 
     // MARK: - Init
 
@@ -48,7 +49,8 @@ final class LoadingMediaState: PlayerState {
          media: PlayerMedia,
          autostart: Bool,
          position: Double? = nil,
-         interruptionAudioService: InterruptionAudioService = ModernAVPlayerInterruptionAudioService()) {
+         interruptionAudioService: InterruptionAudioService = ModernAVPlayerInterruptionAudioService(),
+         itemInitService: AVPlayerItemInitService = ModernAVPlayerItemInitService()) {
         ModernAVPlayerLogger.instance.log(message: "Init", domain: .lifecycleState)
         
         self.context = context
@@ -56,6 +58,7 @@ final class LoadingMediaState: PlayerState {
         self.autostart = autostart
         self.position = position
         self.interruptionAudioService = interruptionAudioService
+        self.itemInitService = itemInitService
     }
     
     func contextUpdated() {
@@ -79,7 +82,7 @@ final class LoadingMediaState: PlayerState {
         guard let media = context.currentMedia
             else { assertionFailure("media should exist"); return }
         context.plugins.forEach { $0.willStartLoading(media: media) }
-        createReplaceItem(media: media)
+        processMedia(media)
         context.plugins.forEach { $0.didStartLoading(media: media) }
     }
 
@@ -96,7 +99,7 @@ final class LoadingMediaState: PlayerState {
     func load(media: PlayerMedia, autostart: Bool, position: Double? = nil) {
         self.position = position
         self.autostart = autostart
-        createReplaceItem(media: media)
+        processMedia(media)
     }
 
     func pause() {
@@ -129,14 +132,9 @@ final class LoadingMediaState: PlayerState {
         context.player.replaceCurrentItem(with: nil)
     }
     
-    private func createItem(with media: PlayerMedia) -> AVPlayerItem {
-        let asset = AVURLAsset(url: media.url, options: media.assetOptions)
-        return AVPlayerItem(asset: asset, automaticallyLoadedAssetKeys: context.config.itemLoadedAssetKeys)
-    }
-
-    private func createReplaceItem(media: PlayerMedia) {
-        let item = createItem(with: media)
-        
+    private func processMedia(_ media: PlayerMedia) {
+        let item = itemInitService.getItem(media: media,
+                                           loadedAssetKeys: context.config.itemLoadedAssetKeys)
         startObservingItemStatus(item: item)
         context.player.replaceCurrentItem(with: item)
         

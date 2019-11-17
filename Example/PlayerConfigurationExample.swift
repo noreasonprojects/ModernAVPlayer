@@ -36,6 +36,9 @@ struct PlayerConfigurationExample: PlayerConfiguration {
     
     let allowsExternalPlayback = false
 
+    // AVPlayerItem Init Service
+    let itemLoadedAssetKeys = ["playable", "duration"]
+
     init() {
         periodicPlayingTime = CMTime(seconds: 0.1, preferredTimescale: preferedTimeScale)
     }

@@ -110,7 +110,7 @@ final class PlayerContextTests: XCTestCase {
     func testOverstepSeekPosition() {
         // ARRANGE
         let seekPosition: Double = 43
-        let duration = CMTime(seconds: 42, preferredTimescale: config.preferedTimeScale)
+        let duration = CMTime(seconds: 42, preferredTimescale: config.preferredTimescale)
         player.overrideCurrentItem = MockPlayerItem(url: URL(fileURLWithPath: ""),
                                                     duration: duration, status: nil)
         let delegate = PlayerContextDelegateMock()
@@ -127,7 +127,7 @@ final class PlayerContextTests: XCTestCase {
     func testValidSeekPosition() {
         // ARRANGE
         let seekPosition: Double = 21
-        let duration = CMTime(seconds: 42, preferredTimescale: config.preferedTimeScale)
+        let duration = CMTime(seconds: 42, preferredTimescale: config.preferredTimescale)
         player.overrideCurrentItem = MockPlayerItem(url: URL(fileURLWithPath: ""),
                                                     duration: duration, status: nil)
         tested.changeState(state: mockState)
@@ -142,8 +142,8 @@ final class PlayerContextTests: XCTestCase {
 
     func testValidSeekOffset() {
         // ARRANGE
-        let seekPosition = CMTime(seconds: 21, preferredTimescale: config.preferedTimeScale)
-        let duration = CMTime(seconds: 42, preferredTimescale: config.preferedTimeScale)
+        let seekPosition = CMTime(seconds: 21, preferredTimescale: config.preferredTimescale)
+        let duration = CMTime(seconds: 42, preferredTimescale: config.preferredTimescale)
         let offset: Double = 10
         player.overrideCurrentTime = seekPosition
         player.overrideCurrentItem = MockPlayerItem(url: URL(fileURLWithPath: ""),

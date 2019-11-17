@@ -5,8 +5,11 @@ All notable changes to this project will be documented in this file.
 ## [X.X.X]
 * Feature:
 	* Define custom item loaded asset keys
+* Fix:
+	* Fix not expected value on periodicTimeObserver
 * Breaking change:
 	* New `itemLoadedAssetKeys` attribut for `PlayerConfiguration`
+	* `PlayerConfiguration` `preferedTimescale` was renamed as `preferredTimescale`
 
 ## [1.4.0]
 * Feature:

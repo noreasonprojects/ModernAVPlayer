@@ -148,7 +148,7 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
         guard let item = currentItem
             else { unaivalableCommand(reason: .loadMediaFirst); return }
 
-        let seekService = ModernAVPlayerSeekService(preferredTimescale: config.preferedTimeScale)
+        let seekService = ModernAVPlayerSeekService(preferredTimescale: config.preferredTimescale)
         let seekPosition = seekService.boundedPosition(position, item: item)
         if let boundedPosition = seekPosition.value {
             state.seek(position: boundedPosition)

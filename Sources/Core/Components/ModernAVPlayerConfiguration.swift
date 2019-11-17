@@ -37,7 +37,7 @@ public struct ModernAVPlayerConfiguration: PlayerConfiguration {
     public let rateObservingTickTime: TimeInterval = 0.3
 
     // General Audio preferences
-    public let preferedTimeScale: CMTimeScale = 1
+    public let preferredTimescale = CMTimeScale(NSEC_PER_SEC)
     public let periodicPlayingTime: CMTime
     public let audioSessionCategory = AVAudioSession.Category.playback
 
@@ -55,6 +55,6 @@ public struct ModernAVPlayerConfiguration: PlayerConfiguration {
     public let itemLoadedAssetKeys = ["playable", "duration"]
 
     public init() {
-        periodicPlayingTime = CMTime(seconds: 1, preferredTimescale: preferedTimeScale)
+        periodicPlayingTime = CMTime(seconds: 1, preferredTimescale: preferredTimescale)
     }
 }

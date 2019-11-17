@@ -38,7 +38,7 @@ public protocol PlayerConfiguration {
     /// all CMTime created use the specific preferedTimeScale
     /// currentTime and control center elapsed playback time attributes are set in the periodic block.
     ///
-    var preferedTimeScale: CMTimeScale { get }
+    var preferredTimescale: CMTimeScale { get }
     var periodicPlayingTime: CMTime { get }
     var audioSessionCategory: AVAudioSession.Category { get }
 

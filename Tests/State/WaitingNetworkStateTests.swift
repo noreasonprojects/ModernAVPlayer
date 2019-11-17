@@ -1,7 +1,7 @@
 // The MIT License (MIT)
 //
 // ModernAVPlayer
-// Copyright (c) 2018 Raphael Ankierman <raphael.ankierman@radiofrance.com>
+// Copyright (c) 2018 Raphael Ankierman <raphrel@gmail.com>
 //
 // WaitingNetworkStateSpecs.swift
 // Created by raphael ankierman on 22/05/2018.
@@ -39,7 +39,7 @@ final class WaitingNetworkStateTest: XCTestCase {
     private var reachability: ReachabilityServiceMock!
     private var context: PlayerContextMock!
     private var contextDelegate: PlayerContextDelegateMock!
-    private let item = AVPlayerItem(url: URL(string: "sdfsd")!)
+    private let item = AVPlayerItem(url: URL(string: "https://en.wikipedia.org/wiki/Feminism")!)
 
     override func setUp() {
         ModernAVPlayerLogger.setup.domains = []

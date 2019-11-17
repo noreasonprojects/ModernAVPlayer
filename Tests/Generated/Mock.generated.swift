@@ -800,6 +800,12 @@ open class PlayerContextMock: PlayerContext, Mock {
 	}
 	private var __p_state: (PlayerState)?
 
+    public var failedUsedAVPlayerItem: Set<AVPlayerItem> {
+		get {	invocations.append(.p_failedUsedAVPlayerItem_get); return __p_failedUsedAVPlayerItem ?? givenGetterValue(.p_failedUsedAVPlayerItem_get, "PlayerContextMock - stub value for failedUsedAVPlayerItem was not defined") }
+		set {	invocations.append(.p_failedUsedAVPlayerItem_set(.value(newValue))); __p_failedUsedAVPlayerItem = newValue }
+	}
+	private var __p_failedUsedAVPlayerItem: (Set<AVPlayerItem>)?
+
     public var currentTime: Double {
 		get {	invocations.append(.p_currentTime_get); return __p_currentTime ?? givenGetterValue(.p_currentTime_get, "PlayerContextMock - stub value for currentTime was not defined") }
 		@available(*, deprecated, message: "Using setters on readonly variables is deprecated, and will be removed in 3.1. Use Given to define stubbed property return value.")
@@ -894,6 +900,8 @@ open class PlayerContextMock: PlayerContext, Mock {
         case p_nowPlaying_get
         case p_plugins_get
         case p_state_get
+        case p_failedUsedAVPlayerItem_get
+		case p_failedUsedAVPlayerItem_set(Parameter<Set<AVPlayerItem>>)
         case p_currentTime_get
         case p_loopMode_get
 		case p_loopMode_set(Parameter<Bool>)
@@ -934,6 +942,8 @@ open class PlayerContextMock: PlayerContext, Mock {
             case (.p_nowPlaying_get,.p_nowPlaying_get): return true
             case (.p_plugins_get,.p_plugins_get): return true
             case (.p_state_get,.p_state_get): return true
+            case (.p_failedUsedAVPlayerItem_get,.p_failedUsedAVPlayerItem_get): return true
+			case (.p_failedUsedAVPlayerItem_set(let left),.p_failedUsedAVPlayerItem_set(let right)): return Parameter<Set<AVPlayerItem>>.compare(lhs: left, rhs: right, with: matcher)
             case (.p_currentTime_get,.p_currentTime_get): return true
             case (.p_loopMode_get,.p_loopMode_get): return true
 			case (.p_loopMode_set(let left),.p_loopMode_set(let right)): return Parameter<Bool>.compare(lhs: left, rhs: right, with: matcher)
@@ -964,6 +974,8 @@ open class PlayerContextMock: PlayerContext, Mock {
             case .p_nowPlaying_get: return 0
             case .p_plugins_get: return 0
             case .p_state_get: return 0
+            case .p_failedUsedAVPlayerItem_get: return 0
+			case .p_failedUsedAVPlayerItem_set(let newValue): return newValue.intValue
             case .p_currentTime_get: return 0
             case .p_loopMode_get: return 0
 			case .p_loopMode_set(let newValue): return newValue.intValue
@@ -1011,6 +1023,9 @@ open class PlayerContextMock: PlayerContext, Mock {
         public static func state(getter defaultValue: PlayerState?...) -> PropertyStub {
             return Given(method: .p_state_get, products: defaultValue.map({ StubProduct.return($0 as Any) }))
         }
+        public static func failedUsedAVPlayerItem(getter defaultValue: Set<AVPlayerItem>...) -> PropertyStub {
+            return Given(method: .p_failedUsedAVPlayerItem_get, products: defaultValue.map({ StubProduct.return($0 as Any) }))
+        }
         public static func currentTime(getter defaultValue: Double...) -> PropertyStub {
             return Given(method: .p_currentTime_get, products: defaultValue.map({ StubProduct.return($0 as Any) }))
         }
@@ -1048,6 +1063,8 @@ open class PlayerContextMock: PlayerContext, Mock {
         public static var nowPlaying: Verify { return Verify(method: .p_nowPlaying_get) }
         public static var plugins: Verify { return Verify(method: .p_plugins_get) }
         public static var state: Verify { return Verify(method: .p_state_get) }
+        public static var failedUsedAVPlayerItem: Verify { return Verify(method: .p_failedUsedAVPlayerItem_get) }
+		public static func failedUsedAVPlayerItem(set newValue: Parameter<Set<AVPlayerItem>>) -> Verify { return Verify(method: .p_failedUsedAVPlayerItem_set(newValue)) }
         public static var currentTime: Verify { return Verify(method: .p_currentTime_get) }
         public static var loopMode: Verify { return Verify(method: .p_loopMode_get) }
 		public static func loopMode(set newValue: Parameter<Bool>) -> Verify { return Verify(method: .p_loopMode_set(newValue)) }
@@ -1630,6 +1647,288 @@ open class PlayerMediaMock: PlayerMedia, Mock {
     }
 }
 
+// MARK: - PlayerMediaItem
+open class PlayerMediaItemMock: PlayerMediaItem, Mock {
+    init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
+        SwiftyMockyTestObserver.setup()
+        self.sequencingPolicy = sequencingPolicy
+        self.stubbingPolicy = stubbingPolicy
+        self.file = file
+        self.line = line
+    }
+
+    var matcher: Matcher = Matcher.default
+    var stubbingPolicy: StubbingPolicy = .wrap
+    var sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst
+    private var invocations: [MethodType] = []
+    private var methodReturnValues: [Given] = []
+    private var methodPerformValues: [Perform] = []
+    private var file: StaticString?
+    private var line: UInt?
+
+    public typealias PropertyStub = Given
+    public typealias MethodStub = Given
+    public typealias SubscriptStub = Given
+
+    /// Convenience method - call setupMock() to extend debug information when failure occurs
+    public func setupMock(file: StaticString = #file, line: UInt = #line) {
+        self.file = file
+        self.line = line
+    }
+
+    /// Clear mock internals. You can specify what to reset (invocations aka verify, givens or performs) or leave it empty to clear all mock internals
+    public func resetMock(_ scopes: MockScope...) {
+        let scopes: [MockScope] = scopes.isEmpty ? [.invocation, .given, .perform] : scopes
+        if scopes.contains(.invocation) { invocations = [] }
+        if scopes.contains(.given) { methodReturnValues = [] }
+        if scopes.contains(.perform) { methodPerformValues = [] }
+    }
+
+    public var item: AVPlayerItem {
+		get {	invocations.append(.p_item_get); return __p_item ?? givenGetterValue(.p_item_get, "PlayerMediaItemMock - stub value for item was not defined") }
+		@available(*, deprecated, message: "Using setters on readonly variables is deprecated, and will be removed in 3.1. Use Given to define stubbed property return value.")
+		set {	__p_item = newValue }
+	}
+	private var __p_item: (AVPlayerItem)?
+
+    public var url: URL {
+		get {	invocations.append(.p_url_get); return __p_url ?? givenGetterValue(.p_url_get, "PlayerMediaItemMock - stub value for url was not defined") }
+		@available(*, deprecated, message: "Using setters on readonly variables is deprecated, and will be removed in 3.1. Use Given to define stubbed property return value.")
+		set {	__p_url = newValue }
+	}
+	private var __p_url: (URL)?
+
+    public var type: MediaType {
+		get {	invocations.append(.p_type_get); return __p_type ?? givenGetterValue(.p_type_get, "PlayerMediaItemMock - stub value for type was not defined") }
+		@available(*, deprecated, message: "Using setters on readonly variables is deprecated, and will be removed in 3.1. Use Given to define stubbed property return value.")
+		set {	__p_type = newValue }
+	}
+	private var __p_type: (MediaType)?
+
+    public var assetOptions: [String: Any]? {
+		get {	invocations.append(.p_assetOptions_get); return __p_assetOptions ?? optionalGivenGetterValue(.p_assetOptions_get, "PlayerMediaItemMock - stub value for assetOptions was not defined") }
+		@available(*, deprecated, message: "Using setters on readonly variables is deprecated, and will be removed in 3.1. Use Given to define stubbed property return value.")
+		set {	__p_assetOptions = newValue }
+	}
+	private var __p_assetOptions: ([String: Any])?
+
+    public var description: String {
+		get {	invocations.append(.p_description_get); return __p_description ?? givenGetterValue(.p_description_get, "PlayerMediaItemMock - stub value for description was not defined") }
+		@available(*, deprecated, message: "Using setters on readonly variables is deprecated, and will be removed in 3.1. Use Given to define stubbed property return value.")
+		set {	__p_description = newValue }
+	}
+	private var __p_description: (String)?
+
+
+
+
+
+    open func isLive() -> Bool {
+        addInvocation(.m_isLive)
+		let perform = methodPerformValue(.m_isLive) as? () -> Void
+		perform?()
+		var __value: Bool
+		do {
+		    __value = try methodReturnValue(.m_isLive).casted()
+		} catch {
+			onFatalFailure("Stub return value not specified for isLive(). Use given")
+			Failure("Stub return value not specified for isLive(). Use given")
+		}
+		return __value
+    }
+
+    open func getMetadata() -> PlayerMediaMetadata? {
+        addInvocation(.m_getMetadata)
+		let perform = methodPerformValue(.m_getMetadata) as? () -> Void
+		perform?()
+		var __value: PlayerMediaMetadata? = nil
+		do {
+		    __value = try methodReturnValue(.m_getMetadata).casted()
+		} catch {
+			// do nothing
+		}
+		return __value
+    }
+
+    open func setMetadata(_ metadata: PlayerMediaMetadata) {
+        addInvocation(.m_setMetadata__metadata(Parameter<PlayerMediaMetadata>.value(`metadata`)))
+		let perform = methodPerformValue(.m_setMetadata__metadata(Parameter<PlayerMediaMetadata>.value(`metadata`))) as? (PlayerMediaMetadata) -> Void
+		perform?(`metadata`)
+    }
+
+
+    fileprivate enum MethodType {
+        case m_isLive
+        case m_getMetadata
+        case m_setMetadata__metadata(Parameter<PlayerMediaMetadata>)
+        case p_item_get
+        case p_url_get
+        case p_type_get
+        case p_assetOptions_get
+        case p_description_get
+
+        static func compareParameters(lhs: MethodType, rhs: MethodType, matcher: Matcher) -> Bool {
+            switch (lhs, rhs) {
+            case (.m_isLive, .m_isLive):
+                return true 
+            case (.m_getMetadata, .m_getMetadata):
+                return true 
+            case (.m_setMetadata__metadata(let lhsMetadata), .m_setMetadata__metadata(let rhsMetadata)):
+                guard Parameter.compare(lhs: lhsMetadata, rhs: rhsMetadata, with: matcher) else { return false } 
+                return true 
+            case (.p_item_get,.p_item_get): return true
+            case (.p_url_get,.p_url_get): return true
+            case (.p_type_get,.p_type_get): return true
+            case (.p_assetOptions_get,.p_assetOptions_get): return true
+            case (.p_description_get,.p_description_get): return true
+            default: return false
+            }
+        }
+
+        func intValue() -> Int {
+            switch self {
+            case .m_isLive: return 0
+            case .m_getMetadata: return 0
+            case let .m_setMetadata__metadata(p0): return p0.intValue
+            case .p_item_get: return 0
+            case .p_url_get: return 0
+            case .p_type_get: return 0
+            case .p_assetOptions_get: return 0
+            case .p_description_get: return 0
+            }
+        }
+    }
+
+    open class Given: StubbedMethod {
+        fileprivate var method: MethodType
+
+        private init(method: MethodType, products: [StubProduct]) {
+            self.method = method
+            super.init(products)
+        }
+
+        public static func item(getter defaultValue: AVPlayerItem...) -> PropertyStub {
+            return Given(method: .p_item_get, products: defaultValue.map({ StubProduct.return($0 as Any) }))
+        }
+        public static func url(getter defaultValue: URL...) -> PropertyStub {
+            return Given(method: .p_url_get, products: defaultValue.map({ StubProduct.return($0 as Any) }))
+        }
+        public static func type(getter defaultValue: MediaType...) -> PropertyStub {
+            return Given(method: .p_type_get, products: defaultValue.map({ StubProduct.return($0 as Any) }))
+        }
+        public static func assetOptions(getter defaultValue: [String: Any]?...) -> PropertyStub {
+            return Given(method: .p_assetOptions_get, products: defaultValue.map({ StubProduct.return($0 as Any) }))
+        }
+        public static func description(getter defaultValue: String...) -> PropertyStub {
+            return Given(method: .p_description_get, products: defaultValue.map({ StubProduct.return($0 as Any) }))
+        }
+
+        public static func isLive(willReturn: Bool...) -> MethodStub {
+            return Given(method: .m_isLive, products: willReturn.map({ StubProduct.return($0 as Any) }))
+        }
+        public static func getMetadata(willReturn: PlayerMediaMetadata?...) -> MethodStub {
+            return Given(method: .m_getMetadata, products: willReturn.map({ StubProduct.return($0 as Any) }))
+        }
+        public static func isLive(willProduce: (Stubber<Bool>) -> Void) -> MethodStub {
+            let willReturn: [Bool] = []
+			let given: Given = { return Given(method: .m_isLive, products: willReturn.map({ StubProduct.return($0 as Any) })) }()
+			let stubber = given.stub(for: (Bool).self)
+			willProduce(stubber)
+			return given
+        }
+        public static func getMetadata(willProduce: (Stubber<PlayerMediaMetadata?>) -> Void) -> MethodStub {
+            let willReturn: [PlayerMediaMetadata?] = []
+			let given: Given = { return Given(method: .m_getMetadata, products: willReturn.map({ StubProduct.return($0 as Any) })) }()
+			let stubber = given.stub(for: (PlayerMediaMetadata?).self)
+			willProduce(stubber)
+			return given
+        }
+    }
+
+    public struct Verify {
+        fileprivate var method: MethodType
+
+        public static func isLive() -> Verify { return Verify(method: .m_isLive)}
+        public static func getMetadata() -> Verify { return Verify(method: .m_getMetadata)}
+        public static func setMetadata(_ metadata: Parameter<PlayerMediaMetadata>) -> Verify { return Verify(method: .m_setMetadata__metadata(`metadata`))}
+        public static var item: Verify { return Verify(method: .p_item_get) }
+        public static var url: Verify { return Verify(method: .p_url_get) }
+        public static var type: Verify { return Verify(method: .p_type_get) }
+        public static var assetOptions: Verify { return Verify(method: .p_assetOptions_get) }
+        public static var description: Verify { return Verify(method: .p_description_get) }
+    }
+
+    public struct Perform {
+        fileprivate var method: MethodType
+        var performs: Any
+
+        public static func isLive(perform: @escaping () -> Void) -> Perform {
+            return Perform(method: .m_isLive, performs: perform)
+        }
+        public static func getMetadata(perform: @escaping () -> Void) -> Perform {
+            return Perform(method: .m_getMetadata, performs: perform)
+        }
+        public static func setMetadata(_ metadata: Parameter<PlayerMediaMetadata>, perform: @escaping (PlayerMediaMetadata) -> Void) -> Perform {
+            return Perform(method: .m_setMetadata__metadata(`metadata`), performs: perform)
+        }
+    }
+
+    public func given(_ method: Given) {
+        methodReturnValues.append(method)
+    }
+
+    public func perform(_ method: Perform) {
+        methodPerformValues.append(method)
+        methodPerformValues.sort { $0.method.intValue() < $1.method.intValue() }
+    }
+
+    public func verify(_ method: Verify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
+        let invocations = matchingCalls(method.method)
+        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+    }
+
+    private func addInvocation(_ call: MethodType) {
+        invocations.append(call)
+    }
+    private func methodReturnValue(_ method: MethodType) throws -> StubProduct {
+        let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
+        let matched = candidates.first(where: { $0.isValid && MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
+        guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
+        return product
+    }
+    private func methodPerformValue(_ method: MethodType) -> Any? {
+        let matched = methodPerformValues.reversed().first { MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) }
+        return matched?.performs
+    }
+    private func matchingCalls(_ method: MethodType) -> [MethodType] {
+        return invocations.filter { MethodType.compareParameters(lhs: $0, rhs: method, matcher: matcher) }
+    }
+    private func matchingCalls(_ method: Verify) -> Int {
+        return matchingCalls(method.method).count
+    }
+    private func givenGetterValue<T>(_ method: MethodType, _ message: String) -> T {
+        do {
+            return try methodReturnValue(method).casted()
+        } catch {
+            onFatalFailure(message)
+            Failure(message)
+        }
+    }
+    private func optionalGivenGetterValue<T>(_ method: MethodType, _ message: String) -> T? {
+        do {
+            return try methodReturnValue(method).casted()
+        } catch {
+            return nil
+        }
+    }
+    private func onFatalFailure(_ message: String) {
+        #if Mocky
+        guard let file = self.file, let line = self.line else { return } // Let if fail if cannot handle gratefully
+        SwiftyMockyTestObserver.handleMissingStubError(message: message, file: file, line: line)
+        #endif
+    }
+}
+
 // MARK: - PlayerPlugin
 open class PlayerPluginMock: PlayerPlugin, Mock {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
@@ -1907,6 +2206,188 @@ open class PlayerPluginMock: PlayerPlugin, Mock {
         }
         public static func didItemPlayToEndTime(media: Parameter<PlayerMedia>, endTime: Parameter<Double>, perform: @escaping (PlayerMedia, Double) -> Void) -> Perform {
             return Perform(method: .m_didItemPlayToEndTime__media_mediaendTime_endTime(`media`, `endTime`), performs: perform)
+        }
+    }
+
+    public func given(_ method: Given) {
+        methodReturnValues.append(method)
+    }
+
+    public func perform(_ method: Perform) {
+        methodPerformValues.append(method)
+        methodPerformValues.sort { $0.method.intValue() < $1.method.intValue() }
+    }
+
+    public func verify(_ method: Verify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
+        let invocations = matchingCalls(method.method)
+        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+    }
+
+    private func addInvocation(_ call: MethodType) {
+        invocations.append(call)
+    }
+    private func methodReturnValue(_ method: MethodType) throws -> StubProduct {
+        let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
+        let matched = candidates.first(where: { $0.isValid && MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
+        guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
+        return product
+    }
+    private func methodPerformValue(_ method: MethodType) -> Any? {
+        let matched = methodPerformValues.reversed().first { MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) }
+        return matched?.performs
+    }
+    private func matchingCalls(_ method: MethodType) -> [MethodType] {
+        return invocations.filter { MethodType.compareParameters(lhs: $0, rhs: method, matcher: matcher) }
+    }
+    private func matchingCalls(_ method: Verify) -> Int {
+        return matchingCalls(method.method).count
+    }
+    private func givenGetterValue<T>(_ method: MethodType, _ message: String) -> T {
+        do {
+            return try methodReturnValue(method).casted()
+        } catch {
+            onFatalFailure(message)
+            Failure(message)
+        }
+    }
+    private func optionalGivenGetterValue<T>(_ method: MethodType, _ message: String) -> T? {
+        do {
+            return try methodReturnValue(method).casted()
+        } catch {
+            return nil
+        }
+    }
+    private func onFatalFailure(_ message: String) {
+        #if Mocky
+        guard let file = self.file, let line = self.line else { return } // Let if fail if cannot handle gratefully
+        SwiftyMockyTestObserver.handleMissingStubError(message: message, file: file, line: line)
+        #endif
+    }
+}
+
+// MARK: - ReachabilityService
+open class ReachabilityServiceMock: ReachabilityService, Mock {
+    init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
+        SwiftyMockyTestObserver.setup()
+        self.sequencingPolicy = sequencingPolicy
+        self.stubbingPolicy = stubbingPolicy
+        self.file = file
+        self.line = line
+    }
+
+    var matcher: Matcher = Matcher.default
+    var stubbingPolicy: StubbingPolicy = .wrap
+    var sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst
+    private var invocations: [MethodType] = []
+    private var methodReturnValues: [Given] = []
+    private var methodPerformValues: [Perform] = []
+    private var file: StaticString?
+    private var line: UInt?
+
+    public typealias PropertyStub = Given
+    public typealias MethodStub = Given
+    public typealias SubscriptStub = Given
+
+    /// Convenience method - call setupMock() to extend debug information when failure occurs
+    public func setupMock(file: StaticString = #file, line: UInt = #line) {
+        self.file = file
+        self.line = line
+    }
+
+    /// Clear mock internals. You can specify what to reset (invocations aka verify, givens or performs) or leave it empty to clear all mock internals
+    public func resetMock(_ scopes: MockScope...) {
+        let scopes: [MockScope] = scopes.isEmpty ? [.invocation, .given, .perform] : scopes
+        if scopes.contains(.invocation) { invocations = [] }
+        if scopes.contains(.given) { methodReturnValues = [] }
+        if scopes.contains(.perform) { methodPerformValues = [] }
+    }
+
+    public var isReachable: (() -> Void)? {
+		get {	invocations.append(.p_isReachable_get); return __p_isReachable ?? optionalGivenGetterValue(.p_isReachable_get, "ReachabilityServiceMock - stub value for isReachable was not defined") }
+		set {	invocations.append(.p_isReachable_set(.value(newValue))); __p_isReachable = newValue }
+	}
+	private var __p_isReachable: (() -> Void)?
+
+    public var isTimedOut: (() -> Void)? {
+		get {	invocations.append(.p_isTimedOut_get); return __p_isTimedOut ?? optionalGivenGetterValue(.p_isTimedOut_get, "ReachabilityServiceMock - stub value for isTimedOut was not defined") }
+		set {	invocations.append(.p_isTimedOut_set(.value(newValue))); __p_isTimedOut = newValue }
+	}
+	private var __p_isTimedOut: (() -> Void)?
+
+
+
+
+
+    open func start() {
+        addInvocation(.m_start)
+		let perform = methodPerformValue(.m_start) as? () -> Void
+		perform?()
+    }
+
+
+    fileprivate enum MethodType {
+        case m_start
+        case p_isReachable_get
+		case p_isReachable_set(Parameter<(() -> Void)?>)
+        case p_isTimedOut_get
+		case p_isTimedOut_set(Parameter<(() -> Void)?>)
+
+        static func compareParameters(lhs: MethodType, rhs: MethodType, matcher: Matcher) -> Bool {
+            switch (lhs, rhs) {
+            case (.m_start, .m_start):
+                return true 
+            case (.p_isReachable_get,.p_isReachable_get): return true
+			case (.p_isReachable_set(let left),.p_isReachable_set(let right)): return Parameter<(() -> Void)?>.compare(lhs: left, rhs: right, with: matcher)
+            case (.p_isTimedOut_get,.p_isTimedOut_get): return true
+			case (.p_isTimedOut_set(let left),.p_isTimedOut_set(let right)): return Parameter<(() -> Void)?>.compare(lhs: left, rhs: right, with: matcher)
+            default: return false
+            }
+        }
+
+        func intValue() -> Int {
+            switch self {
+            case .m_start: return 0
+            case .p_isReachable_get: return 0
+			case .p_isReachable_set(let newValue): return newValue.intValue
+            case .p_isTimedOut_get: return 0
+			case .p_isTimedOut_set(let newValue): return newValue.intValue
+            }
+        }
+    }
+
+    open class Given: StubbedMethod {
+        fileprivate var method: MethodType
+
+        private init(method: MethodType, products: [StubProduct]) {
+            self.method = method
+            super.init(products)
+        }
+
+        public static func isReachable(getter defaultValue: (() -> Void)?...) -> PropertyStub {
+            return Given(method: .p_isReachable_get, products: defaultValue.map({ StubProduct.return($0 as Any) }))
+        }
+        public static func isTimedOut(getter defaultValue: (() -> Void)?...) -> PropertyStub {
+            return Given(method: .p_isTimedOut_get, products: defaultValue.map({ StubProduct.return($0 as Any) }))
+        }
+
+    }
+
+    public struct Verify {
+        fileprivate var method: MethodType
+
+        public static func start() -> Verify { return Verify(method: .m_start)}
+        public static var isReachable: Verify { return Verify(method: .p_isReachable_get) }
+		public static func isReachable(set newValue: Parameter<(() -> Void)?>) -> Verify { return Verify(method: .p_isReachable_set(newValue)) }
+        public static var isTimedOut: Verify { return Verify(method: .p_isTimedOut_get) }
+		public static func isTimedOut(set newValue: Parameter<(() -> Void)?>) -> Verify { return Verify(method: .p_isTimedOut_set(newValue)) }
+    }
+
+    public struct Perform {
+        fileprivate var method: MethodType
+        var performs: Any
+
+        public static func start(perform: @escaping () -> Void) -> Perform {
+            return Perform(method: .m_start, performs: perform)
         }
     }
 

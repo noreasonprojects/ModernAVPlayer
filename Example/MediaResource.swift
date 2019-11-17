@@ -24,7 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-
+import AVFoundation
 import ModernAVPlayer
 
 enum MediaResource: CustomStringConvertible {
@@ -96,7 +96,15 @@ enum MediaResource: CustomStringConvertible {
         }
     }
 
+    var item: AVPlayerItem {
+        return AVPlayerItem(url: url)
+    }
+
     var playerMedia: ModernAVPlayerMedia {
         return ModernAVPlayerMedia(url: url, type: type, metadata: metadata)
+    }
+
+    var playerMediaFromItem: ModernAVPlayerMediaItem? {
+        return ModernAVPlayerMediaItem(item: item, type: type, metadata: metadata)
     }
 }

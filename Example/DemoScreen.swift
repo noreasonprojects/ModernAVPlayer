@@ -26,8 +26,9 @@
 
 import Foundation
 
-enum DemoScreens: CaseIterable {
-    case simpleAudio
+enum DemoScreen: CaseIterable {
+    case simpleAudioURL
+    case simpleAudioAVPlayerItem
     case simpleVideo
     case monkeyTests
 
@@ -35,7 +36,7 @@ enum DemoScreens: CaseIterable {
         switch self {
         case .monkeyTests:
             return "MonkeyTests"
-        case .simpleAudio:
+        case .simpleAudioURL, .simpleAudioAVPlayerItem:
             return "SimpleAudio"
         case .simpleVideo:
             return "SimpleVideo"
@@ -46,8 +47,10 @@ enum DemoScreens: CaseIterable {
         switch self {
         case .monkeyTests:
             return "Monkey Tests"
-        case .simpleAudio:
-            return "Simple Audio"
+        case .simpleAudioURL:
+            return "Simple Audio from URL"
+        case .simpleAudioAVPlayerItem:
+            return "Simple Audio from AVPlayerItem"
         case .simpleVideo:
             return "Simple Video"
         }

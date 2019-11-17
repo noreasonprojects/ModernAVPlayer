@@ -49,6 +49,10 @@ final class FailedState: PlayerState {
         guard let media = context.currentMedia
             else { assertionFailure("media should exist"); return }
         context.plugins.forEach { $0.didFailed(media: media, error: error) }
+
+        guard let mediaItem = media as? PlayerMediaItem
+            else { return }
+        context.failedUsedAVPlayerItem.insert(mediaItem.item)
     }
 
     deinit {

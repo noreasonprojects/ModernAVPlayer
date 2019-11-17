@@ -94,10 +94,15 @@ $ pod install
 
 ## Getting started
 
-> Create a media
+> Create media from URL
 ```swift
-let media = ModernAVPlayerMedia(url: url, type: .clip)
+let media = ModernAVPlayerMedia(url: URL, type: MediaType)
 ```
+> Create media from AVPlayerItem
+```swift
+let media = ModernAVPlayerMediaItem(item: AVPlayerItem, type: MediaType, metadata: PlayerMediaMetadata)
+```
+
 > Instanciate the wrapper
 ```swift
 let player = ModernAVPlayer()

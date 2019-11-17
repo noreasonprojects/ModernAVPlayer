@@ -27,15 +27,20 @@
 import AVFoundation
 
 protocol AVPlayerItemInitService {
-    func getItem(media: PlayerMedia, loadedAssetKeys: [String]) -> AVPlayerItem
+    func getItem(media: PlayerMedia, loadedAssetKeys: [String], failedUsedItem: Set<AVPlayerItem>) -> AVPlayerItem
 }
 
 struct ModernAVPlayerItemInitService: AVPlayerItemInitService {
 
     // MARK: - Output
 
-    func getItem(media: PlayerMedia, loadedAssetKeys: [String]) -> AVPlayerItem {
-        let asset = AVURLAsset(url: media.url, options: media.assetOptions)
-        return AVPlayerItem(asset: asset, automaticallyLoadedAssetKeys: loadedAssetKeys)
+    func getItem(media: PlayerMedia, loadedAssetKeys: [String], failedUsedItem: Set<AVPlayerItem>) -> AVPlayerItem {
+
+        if let mediaItem = media as? PlayerMediaItem, !failedUsedItem.contains(mediaItem.item) {
+            return mediaItem.item
+        } else {
+            let asset = AVURLAsset(url: media.url, options: media.assetOptions)
+            return AVPlayerItem(asset: asset, automaticallyLoadedAssetKeys: loadedAssetKeys)
+        }
     }
 }

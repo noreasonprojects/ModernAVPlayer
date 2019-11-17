@@ -39,7 +39,7 @@
 		E152D52F207A472500E0347C /* LoadedStateSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E152D527207A472500E0347C /* LoadedStateSpecs.swift */; };
 		E152D530207A472500E0347C /* PlayingStateSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E152D528207A472500E0347C /* PlayingStateSpecs.swift */; };
 		E152D531207A472500E0347C /* BufferingStateSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E152D529207A472500E0347C /* BufferingStateSpecs.swift */; };
-		E152D532207A472500E0347C /* FailedStateSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E152D52A207A472500E0347C /* FailedStateSpecs.swift */; };
+		E152D532207A472500E0347C /* FailedStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E152D52A207A472500E0347C /* FailedStateTests.swift */; };
 		E152D533207A472500E0347C /* InitStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E152D52B207A472500E0347C /* InitStateTests.swift */; };
 		E1616A3F2126FC860067D3F5 /* MockMPRemoteCommandCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1616A3E2126FC860067D3F5 /* MockMPRemoteCommandCenter.swift */; };
 		E16368B22097572E00E69DAB /* ReachabilityServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16368B12097572E00E69DAB /* ReachabilityServiceTests.swift */; };
@@ -67,8 +67,7 @@
 		E1A4C32E209B06F1000580F5 /* RouteAudioServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A4C32D209B06F1000580F5 /* RouteAudioServiceTests.swift */; };
 		E1A6C254236EE08900416A62 /* SeekServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A6C252236EDFF100416A62 /* SeekServiceTests.swift */; };
 		E1CE54A9236BBCE0009A5236 /* AVPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CE54A8236BBCE0009A5236 /* AVPlayerView.swift */; };
-		E1EFA9AA20B44811002605A9 /* WaitingNetworkStateSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1EFA9A920B44811002605A9 /* WaitingNetworkStateSpecs.swift */; };
-		E1EFA9AC20B449FF002605A9 /* MockReachabilityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1EFA9AB20B449FF002605A9 /* MockReachabilityService.swift */; };
+		E1EFA9AA20B44811002605A9 /* WaitingNetworkStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1EFA9A920B44811002605A9 /* WaitingNetworkStateTests.swift */; };
 		E1F3E91421DCEC75004EB717 /* MockPlayerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F3E91321DCEC74004EB717 /* MockPlayerPlugin.swift */; };
 		E1FB26A62357898A00277B40 /* SimpleAudioVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FB26A52357898A00277B40 /* SimpleAudioVC.swift */; };
 		E1FB26A8235789AD00277B40 /* SimpleAudio.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1FB26A7235789AD00277B40 /* SimpleAudio.storyboard */; };
@@ -126,7 +125,7 @@
 		E152D527207A472500E0347C /* LoadedStateSpecs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadedStateSpecs.swift; sourceTree = "<group>"; };
 		E152D528207A472500E0347C /* PlayingStateSpecs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayingStateSpecs.swift; sourceTree = "<group>"; };
 		E152D529207A472500E0347C /* BufferingStateSpecs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BufferingStateSpecs.swift; sourceTree = "<group>"; };
-		E152D52A207A472500E0347C /* FailedStateSpecs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FailedStateSpecs.swift; sourceTree = "<group>"; };
+		E152D52A207A472500E0347C /* FailedStateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FailedStateTests.swift; sourceTree = "<group>"; };
 		E152D52B207A472500E0347C /* InitStateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitStateTests.swift; sourceTree = "<group>"; };
 		E1616A3E2126FC860067D3F5 /* MockMPRemoteCommandCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMPRemoteCommandCenter.swift; sourceTree = "<group>"; };
 		E16368B12097572E00E69DAB /* ReachabilityServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityServiceTests.swift; sourceTree = "<group>"; };
@@ -154,8 +153,7 @@
 		E1A4C32D209B06F1000580F5 /* RouteAudioServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteAudioServiceTests.swift; sourceTree = "<group>"; };
 		E1A6C252236EDFF100416A62 /* SeekServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeekServiceTests.swift; sourceTree = "<group>"; };
 		E1CE54A8236BBCE0009A5236 /* AVPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVPlayerView.swift; sourceTree = "<group>"; };
-		E1EFA9A920B44811002605A9 /* WaitingNetworkStateSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingNetworkStateSpecs.swift; sourceTree = "<group>"; };
-		E1EFA9AB20B449FF002605A9 /* MockReachabilityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockReachabilityService.swift; sourceTree = "<group>"; };
+		E1EFA9A920B44811002605A9 /* WaitingNetworkStateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingNetworkStateTests.swift; sourceTree = "<group>"; };
 		E1F3E91321DCEC74004EB717 /* MockPlayerPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPlayerPlugin.swift; sourceTree = "<group>"; };
 		E1FB26A52357898A00277B40 /* SimpleAudioVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleAudioVC.swift; sourceTree = "<group>"; };
 		E1FB26A7235789AD00277B40 /* SimpleAudio.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SimpleAudio.storyboard; sourceTree = "<group>"; };
@@ -352,7 +350,6 @@
 				E167A06B20E38EE000B9FA3D /* MockPlayerMediaMetadata.swift */,
 				E1F3E91321DCEC74004EB717 /* MockPlayerPlugin.swift */,
 				E152D517207A459500E0347C /* MockPlayerState.swift */,
-				E1EFA9AB20B449FF002605A9 /* MockReachabilityService.swift */,
 				E16368B52097654E00E69DAB /* MockTimer.swift */,
 				E1683B1B2099F48D0041B0F8 /* MockURLSessionDataTask.swift */,
 			);
@@ -363,14 +360,14 @@
 			isa = PBXGroup;
 			children = (
 				E152D529207A472500E0347C /* BufferingStateSpecs.swift */,
-				E152D52A207A472500E0347C /* FailedStateSpecs.swift */,
+				E152D52A207A472500E0347C /* FailedStateTests.swift */,
 				E152D52B207A472500E0347C /* InitStateTests.swift */,
 				E152D527207A472500E0347C /* LoadedStateSpecs.swift */,
 				E152D526207A472500E0347C /* LoadingMediaStateSpecs.swift */,
 				E152D525207A472500E0347C /* PausedStateSpecs.swift */,
 				E152D528207A472500E0347C /* PlayingStateSpecs.swift */,
 				E152D524207A472500E0347C /* StoppedStateSpecs.swift */,
-				E1EFA9A920B44811002605A9 /* WaitingNetworkStateSpecs.swift */,
+				E1EFA9A920B44811002605A9 /* WaitingNetworkStateTests.swift */,
 			);
 			path = State;
 			sourceTree = "<group>";
@@ -702,18 +699,17 @@
 				E152D530207A472500E0347C /* PlayingStateSpecs.swift in Sources */,
 				E152D521207A45A100E0347C /* MockPlayerItem.swift in Sources */,
 				E1A6C254236EE08900416A62 /* SeekServiceTests.swift in Sources */,
-				E1EFA9AA20B44811002605A9 /* WaitingNetworkStateSpecs.swift in Sources */,
+				E1EFA9AA20B44811002605A9 /* WaitingNetworkStateTests.swift in Sources */,
 				E1272948209B6721007583DB /* InterruptionAudioServiceTests.swift in Sources */,
 				E152D52D207A472500E0347C /* PausedStateSpecs.swift in Sources */,
 				E186A1812126D2F0002B1455 /* MockMPRemoteCommand.swift in Sources */,
 				E1683B1C2099F48D0041B0F8 /* MockURLSessionDataTask.swift in Sources */,
 				45D49A5F2093656100F63ACF /* MockObservingRateService.swift in Sources */,
-				E1EFA9AC20B449FF002605A9 /* MockReachabilityService.swift in Sources */,
 				E152D52C207A472500E0347C /* StoppedStateSpecs.swift in Sources */,
 				E11EE8CA216CF43400ABF06B /* MatchPlayerMedia.swift in Sources */,
 				E1616A3F2126FC860067D3F5 /* MockMPRemoteCommandCenter.swift in Sources */,
 				E18E3D29213BF3E600FF4E63 /* MockNowPlayingService.swift in Sources */,
-				E152D532207A472500E0347C /* FailedStateSpecs.swift in Sources */,
+				E152D532207A472500E0347C /* FailedStateTests.swift in Sources */,
 				E167A4C521A31E1400182C72 /* PluginBufferingStateSpecs.swift in Sources */,
 				E167A4C121A31AB000182C72 /* PluginLoadedStateSpecs.swift in Sources */,
 				E16368B62097654E00E69DAB /* MockTimer.swift in Sources */,

@@ -1,10 +1,10 @@
 // The MIT License (MIT)
 //
 // ModernAVPlayer
-// Copyright (c) 2018 Raphael Ankierman <raphael.ankierman@radiofrance.com>
+// Copyright (c) 2018 Raphael Ankierman <raphrel@gmail.com>
 //
-// MockReachabilityService.swift
-// Created by raphael ankierman on 22/05/2018.
+// PlayerMediaItem.swift
+// Created by raphael ankierman on 17/11/2019.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,14 +24,19 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-@testable import ModernAVPlayer
+import AVFoundation.AVPlayerItem
 
-final class MockReachability: ReachabilityService {
-    var isReachable: (() -> Void)?
-    var isTimedOut: (() -> Void)?
-    
-    var start_callCount = 0
-    func start() {
-        start_callCount += 1
-    }
+///
+/// `PlayerMediaItem` is a protocol use to create media from an `AVPlayerItem`.
+///  You may want to cache item before loading in the player.
+///
+
+// sourcery: AutoMockable
+public protocol PlayerMediaItem: PlayerMedia {
+
+    ///
+    /// Item used by the player only once.
+    /// - Note: If item failed, a fresh new one is created
+    ///
+    var item: AVPlayerItem { get }
 }

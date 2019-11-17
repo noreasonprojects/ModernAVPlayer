@@ -1,10 +1,10 @@
 // The MIT License (MIT)
 //
 // ModernAVPlayer
-// Copyright (c) 2018 Raphael Ankierman <raphael.ankierman@radiofrance.com>
+// Copyright (c) 2018 Raphael Ankierman <raphrel@gmail.com>
 //
-// WaitingNetworkStateSpecs.swift
-// Created by raphael ankierman on 22/05/2018.
+// FailedStateSpecs.swift
+// Created by raphael ankierman on 28/02/2018.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -30,16 +30,14 @@ import ModernAVPlayer
 import SwiftyMocky
 import XCTest
 
-final class WaitingNetworkStateTest: XCTestCase {
+final class FailedStateTests: XCTestCase {
 
-    private var state: WaitingNetworkState!
-    private var mockPlayer = MockCustomPlayer()
-    private var url: URL!
+    private var state: FailedState!
     private var playerMedia: PlayerMediaItemMock!
-    private var reachability: ReachabilityServiceMock!
     private var context: PlayerContextMock!
     private var contextDelegate: PlayerContextDelegateMock!
-    private let item = AVPlayerItem(url: URL(string: "sdfsd")!)
+    private let error = PlayerError.loadingFailed
+    private let item = AVPlayerItem(url: URL(string: "https://en.wikipedia.org/wiki/Feminism")!)
 
     override func setUp() {
         ModernAVPlayerLogger.setup.domains = []
@@ -48,52 +46,14 @@ final class WaitingNetworkStateTest: XCTestCase {
         Given(playerMedia, .item(getter: item))
 
         contextDelegate = PlayerContextDelegateMock()
-        reachability = ReachabilityServiceMock()
 
         context = PlayerContextMock()
         Given(context, .delegate(getter: contextDelegate))
-        Given(context, .player(getter: AVPlayer()))
-        Given(context, .config(getter: ModernAVPlayerConfiguration()))
         Given(context, .currentMedia(getter: playerMedia))
         Given(context, .plugins(getter: []))
         Given(context, .failedUsedAVPlayerItem(getter: []))
 
-        state = WaitingNetworkState(context: context,
-                                    autostart: true,
-                                    error: PlayerError.loadingFailed,
-                                    reachabilityService: reachability)
-    }
-
-    func testStartReachability() {
-        // ACT
-        state.contextUpdated()
-
-        // ASSERT
-        Verify(reachability, 1, .start())
-    }
-
-    func testPlay() {
-        // ACT
-        state.play()
-
-        // ASSERT
-        Verify(contextDelegate, 1, .playerContext(unavailableActionReason: .value(.waitEstablishedNetwork)))
-    }
-
-    func testSeek() {
-        // ACT
-        state.seek(position: 0)
-
-        // ASSERT
-        Verify(contextDelegate, 1, .playerContext(unavailableActionReason: .value(.waitEstablishedNetwork)))
-    }
-
-    func testPause() {
-        // ACT
-        state.pause()
-
-        // ASSERT
-        Verify(context, 1, .changeState(state: .matching { $0 is PausedState }))
+        state = FailedState(context: context, error: error)
     }
 
     func testStop() {
@@ -101,31 +61,39 @@ final class WaitingNetworkStateTest: XCTestCase {
         state.stop()
 
         // ASSERT
-        Verify(context, 1, .changeState(state: .matching { $0 is StoppedState }))
+        Verify(contextDelegate, 1, .playerContext(unavailableActionReason: .value(.loadMediaFirst)))
     }
 
-    func testLoadingMedia() {
+    func testPause() {
+        // ACT
+        state.pause()
+
+        // ASSERT
+        Verify(contextDelegate, 1, .playerContext(unavailableActionReason: .value(.loadMediaFirst)))
+    }
+
+    func testPlay() {
+        // ACT
+        state.play()
+
+        // ASSERT
+        Verify(context, 1, .changeState(state: .matching { $0 is LoadingMediaState } ))
+    }
+
+    func testLoadMedia() {
         // ACT
         state.load(media: playerMedia, autostart: false)
 
         // ASSERT
-        Verify(context, 1, .changeState(state: .matching { $0 is LoadingMediaState }))
+        Verify(context, 1, .changeState(state: .matching { $0 is LoadingMediaState } ))
     }
 
-    func testIsTimeOut() {
+    func testSeek() {
         // ACT
-        reachability.isTimedOut?()
+        state.seek(position: 0)
 
         // ASSERT
-        Verify(context, 1, .changeState(state: .matching { $0 is FailedState }))
-    }
-
-    func testIsReachable() {
-        // ACT
-        reachability.isReachable?()
-
-        // ASSERT
-        Verify(context, 1, .changeState(state: .matching { $0 is LoadingMediaState }))
+        Verify(contextDelegate, 1, .playerContext(unavailableActionReason: .value(.loadMediaFirst)))
     }
 
     func testFailedUsedAVPlayerItem() {
@@ -135,4 +103,5 @@ final class WaitingNetworkStateTest: XCTestCase {
         // ASSERT
         XCTAssert(context.failedUsedAVPlayerItem.contains(item))
     }
+
 }

@@ -19,7 +19,7 @@ Check out [guides][link-guides-contents], or full [documentation][link-docs]
 1. [Overview](#overview)
 1. [Current version](#current-version)
 1. [Getting started:](#getting-started)
-    1. [Installing SiwftyMocky CLI](#installation)
+    1. [Installing SwiftyMocky CLI](#installation)
     1. [Integrating SwiftyMocky runtime into test target](#integration)
     1. [Generate mocks](#generation)
 1. [Usage:](#usage)
@@ -127,7 +127,7 @@ Add **SwiftyMocky** to you **Package.swift** dependencies:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/MakeAWishFoundation/SwiftyMocky", from: "3.3.4"),
+    .package(url: "https://github.com/MakeAWishFoundation/SwiftyMocky", from: "3.4.0"),
 ]
 ```
 
@@ -278,7 +278,7 @@ Verify(mock, .never, .name(set: .value("Bishop")))
 
 All mocks has **perform** method (accessible both as instance method or global function), with easy to use syntax, allowing to specify closure, that will be executed upon stubbed method being called.
 
-It uses same paramter wrapping features as given, so you can specify different **Perform** cases for different attributes set.
+It uses same parameter wrapping features as given, so you can specify different **Perform** cases for different attributes set.
 
 It's very handy when working with completion block based approach.
 
@@ -367,11 +367,11 @@ SwiftyMocky is available under the MIT license. See the [LICENSE][link-license] 
 
 <!-- Links based on tag -->
 
-[link-docs]: https://cdn.rawgit.com/MakeAWishFoundation/SwiftyMocky/3.3.4/docs/index.html
-[link-docs-features]: https://cdn.rawgit.com/MakeAWishFoundation/SwiftyMocky/3.3.4/docs/supported-features.html
-[link-docs-installation]: https://cdn.rawgit.com/MakeAWishFoundation/SwiftyMocky/3.3.4/docs/installation.html
-[link-docs-installation-carthage]: https://cdn.rawgit.com/MakeAWishFoundation/SwiftyMocky/3.3.4/docs/installation.html#installation-carthage
-[link-docs-setup]: https://cdn.rawgit.com/MakeAWishFoundation/SwiftyMocky/3.3.4/docs/setup-in-project.html
+[link-docs]: https://cdn.rawgit.com/MakeAWishFoundation/SwiftyMocky/3.4.0/docs/index.html
+[link-docs-features]: https://cdn.rawgit.com/MakeAWishFoundation/SwiftyMocky/3.4.0/docs/supported-features.html
+[link-docs-installation]: https://cdn.rawgit.com/MakeAWishFoundation/SwiftyMocky/3.4.0/docs/installation.html
+[link-docs-installation-carthage]: https://cdn.rawgit.com/MakeAWishFoundation/SwiftyMocky/3.4.0/docs/installation.html#installation-carthage
+[link-docs-setup]: https://cdn.rawgit.com/MakeAWishFoundation/SwiftyMocky/3.4.0/docs/setup-in-project.html
 
 <!-- Assets -->
 

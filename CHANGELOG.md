@@ -10,6 +10,8 @@ All notable changes to this project will be documented in this file.
 * Breaking change:
 	* New `itemLoadedAssetKeys` attribut for `PlayerConfiguration`
 	* `PlayerConfiguration` `preferedTimescale` was renamed as `preferredTimescale`
+* Dependency:
+	* [pod] SwiftyMocky -> 3.4.0
 
 ## [1.4.0]
 * Feature:

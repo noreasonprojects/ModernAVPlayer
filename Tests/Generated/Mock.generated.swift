@@ -2,7 +2,7 @@
 // DO NOT EDIT
 
 
-// Generated with SwiftyMocky 3.3.4
+// Generated with SwiftyMocky 3.4.0
 
 import SwiftyMocky
 #if !MockyCustom
@@ -39,6 +39,14 @@ open class AudioSessionServiceMock: AudioSessionService, Mock {
     public func setupMock(file: StaticString = #file, line: UInt = #line) {
         self.file = file
         self.line = line
+    }
+
+    /// Clear mock internals. You can specify what to reset (invocations aka verify, givens or performs) or leave it empty to clear all mock internals
+    public func resetMock(_ scopes: MockScope...) {
+        let scopes: [MockScope] = scopes.isEmpty ? [.invocation, .given, .perform] : scopes
+        if scopes.contains(.invocation) { invocations = [] }
+        if scopes.contains(.given) { methodReturnValues = [] }
+        if scopes.contains(.perform) { methodPerformValues = [] }
     }
 
 
@@ -194,6 +202,14 @@ open class NowPlayingMock: NowPlaying, Mock {
     public func setupMock(file: StaticString = #file, line: UInt = #line) {
         self.file = file
         self.line = line
+    }
+
+    /// Clear mock internals. You can specify what to reset (invocations aka verify, givens or performs) or leave it empty to clear all mock internals
+    public func resetMock(_ scopes: MockScope...) {
+        let scopes: [MockScope] = scopes.isEmpty ? [.invocation, .given, .perform] : scopes
+        if scopes.contains(.invocation) { invocations = [] }
+        if scopes.contains(.given) { methodReturnValues = [] }
+        if scopes.contains(.perform) { methodPerformValues = [] }
     }
 
 
@@ -353,6 +369,14 @@ open class PlaybackObservingServiceMock: PlaybackObservingService, Mock {
     public func setupMock(file: StaticString = #file, line: UInt = #line) {
         self.file = file
         self.line = line
+    }
+
+    /// Clear mock internals. You can specify what to reset (invocations aka verify, givens or performs) or leave it empty to clear all mock internals
+    public func resetMock(_ scopes: MockScope...) {
+        let scopes: [MockScope] = scopes.isEmpty ? [.invocation, .given, .perform] : scopes
+        if scopes.contains(.invocation) { invocations = [] }
+        if scopes.contains(.given) { methodReturnValues = [] }
+        if scopes.contains(.perform) { methodPerformValues = [] }
     }
 
     public var onPlaybackStalled: (() -> Void)? {
@@ -530,6 +554,14 @@ open class PlayerContextMock: PlayerContext, Mock {
     public func setupMock(file: StaticString = #file, line: UInt = #line) {
         self.file = file
         self.line = line
+    }
+
+    /// Clear mock internals. You can specify what to reset (invocations aka verify, givens or performs) or leave it empty to clear all mock internals
+    public func resetMock(_ scopes: MockScope...) {
+        let scopes: [MockScope] = scopes.isEmpty ? [.invocation, .given, .perform] : scopes
+        if scopes.contains(.invocation) { invocations = [] }
+        if scopes.contains(.given) { methodReturnValues = [] }
+        if scopes.contains(.perform) { methodPerformValues = [] }
     }
 
     public var audioSession: AudioSessionService {
@@ -967,6 +999,14 @@ open class PlayerContextDelegateMock: PlayerContextDelegate, Mock {
         self.line = line
     }
 
+    /// Clear mock internals. You can specify what to reset (invocations aka verify, givens or performs) or leave it empty to clear all mock internals
+    public func resetMock(_ scopes: MockScope...) {
+        let scopes: [MockScope] = scopes.isEmpty ? [.invocation, .given, .perform] : scopes
+        if scopes.contains(.invocation) { invocations = [] }
+        if scopes.contains(.given) { methodReturnValues = [] }
+        if scopes.contains(.perform) { methodPerformValues = [] }
+    }
+
 
 
 
@@ -1181,6 +1221,14 @@ open class PlayerMediaMock: PlayerMedia, Mock {
     public func setupMock(file: StaticString = #file, line: UInt = #line) {
         self.file = file
         self.line = line
+    }
+
+    /// Clear mock internals. You can specify what to reset (invocations aka verify, givens or performs) or leave it empty to clear all mock internals
+    public func resetMock(_ scopes: MockScope...) {
+        let scopes: [MockScope] = scopes.isEmpty ? [.invocation, .given, .perform] : scopes
+        if scopes.contains(.invocation) { invocations = [] }
+        if scopes.contains(.given) { methodReturnValues = [] }
+        if scopes.contains(.perform) { methodPerformValues = [] }
     }
 
     public var url: URL {
@@ -1441,6 +1489,14 @@ open class PlayerPluginMock: PlayerPlugin, Mock {
     public func setupMock(file: StaticString = #file, line: UInt = #line) {
         self.file = file
         self.line = line
+    }
+
+    /// Clear mock internals. You can specify what to reset (invocations aka verify, givens or performs) or leave it empty to clear all mock internals
+    public func resetMock(_ scopes: MockScope...) {
+        let scopes: [MockScope] = scopes.isEmpty ? [.invocation, .given, .perform] : scopes
+        if scopes.contains(.invocation) { invocations = [] }
+        if scopes.contains(.given) { methodReturnValues = [] }
+        if scopes.contains(.perform) { methodPerformValues = [] }
     }
 
 
@@ -1769,6 +1825,14 @@ open class SeekServiceMock: SeekService, Mock {
     public func setupMock(file: StaticString = #file, line: UInt = #line) {
         self.file = file
         self.line = line
+    }
+
+    /// Clear mock internals. You can specify what to reset (invocations aka verify, givens or performs) or leave it empty to clear all mock internals
+    public func resetMock(_ scopes: MockScope...) {
+        let scopes: [MockScope] = scopes.isEmpty ? [.invocation, .given, .perform] : scopes
+        if scopes.contains(.invocation) { invocations = [] }
+        if scopes.contains(.given) { methodReturnValues = [] }
+        if scopes.contains(.perform) { methodPerformValues = [] }
     }
 
 

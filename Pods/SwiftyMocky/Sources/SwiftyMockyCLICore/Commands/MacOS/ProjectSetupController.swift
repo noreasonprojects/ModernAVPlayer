@@ -2,7 +2,7 @@ import Foundation
 import Yams
 import PathKit
 import Commander
-import xcodeproj
+import XcodeProj
 import Crayon
 
 // MARK: - Project Setup
@@ -146,7 +146,8 @@ public class ProjectSetupController {
             targets: [target.name],
             testable: testable.sorted(),
             import: imports.sorted(),
-            prototype: false
+            prototype: false,
+            sourcery: []
         )
         try generate.updateImports(into: &config)
 

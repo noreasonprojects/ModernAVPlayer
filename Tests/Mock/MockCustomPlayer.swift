@@ -45,6 +45,17 @@ final class MockCustomPlayer: AVPlayer {
     override var status: AVPlayer.Status {
         return overrideStatus
     }
+
+    var overrideAautomaticallyWaitsToMinimizeStalling: Bool!
+    var automaticallyWaitsToMinimizeStallingCallCount = 0
+    var automaticallyWaitsToMinimizeStallingNewValue: Bool?
+    override var automaticallyWaitsToMinimizeStalling: Bool {
+        get { return overrideAautomaticallyWaitsToMinimizeStalling }
+        set {
+            automaticallyWaitsToMinimizeStallingCallCount += 1
+            automaticallyWaitsToMinimizeStallingNewValue = newValue
+        }
+    }
     
     var overrideCurrentTime: CMTime?
     override func currentTime() -> CMTime {

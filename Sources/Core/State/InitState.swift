@@ -41,10 +41,11 @@ struct InitState: PlayerState {
     init(context: PlayerContext) {
         ModernAVPlayerLogger.instance.log(message: "Init (struct)", domain: .lifecycleState)
         self.context = context
-        context.player.automaticallyWaitsToMinimizeStalling = false
     }
     
-    func contextUpdated() { }
+    func contextUpdated() {
+        context.player.automaticallyWaitsToMinimizeStalling = false
+    }
     
     // MARK: - Shared actions
 

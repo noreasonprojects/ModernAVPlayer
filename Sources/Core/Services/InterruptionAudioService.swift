@@ -26,7 +26,13 @@
 
 import AVFoundation
 
-final class ModernAVPlayerInterruptionAudioService {
+//sourcery: AutoMockable
+protocol InterruptionAudioService {
+    var onInterruptionBegan: (() -> Void)? { get set }
+    var onInterruptionEnded: (() -> Void)? { get set }
+}
+
+final class ModernAVPlayerInterruptionAudioService: InterruptionAudioService {
     
     // MARK: - Outputs
     

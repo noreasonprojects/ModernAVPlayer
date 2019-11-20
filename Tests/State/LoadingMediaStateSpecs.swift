@@ -25,141 +25,156 @@
 // THE SOFTWARE.
 
 import AVFoundation
-import Quick
 @testable
 import ModernAVPlayer
-import Nimble
 import SwiftyMocky
+import XCTest
 
-final class LoadingMediaStateSpecs: QuickSpec {
+final class LoadingMediaStateTests: XCTestCase {
 
-    private var audioSession: AudioSessionServiceMock!
+    private var context: PlayerContextMock!
+    private var contextDelegate: PlayerContextDelegateMock!
     private var state: LoadingMediaState!
     private var player: MockCustomPlayer!
-    private var tested: ModernAVPlayerContext!
-    private let playerMedia = MockPlayerMedia(url: URL(string: "x")!, type: .clip)
-    private let seekPosition = 42.0
-    
-    override func spec() {
-        
-        beforeEach {
-            self.audioSession = AudioSessionServiceMock()
-            self.player = MockCustomPlayer.createOnUsingAsset(url: "foo")
-            self.tested = ModernAVPlayerContext(player: self.player,
-                                                config: ModernAVPlayerConfiguration(),
-                                                audioSession: self.audioSession,
-                                                plugins: [])
-            self.tested.currentMedia = self.playerMedia
-            self.state = LoadingMediaState(context: self.tested,
-                                           media: self.playerMedia,
-                                           autostart: true,
-                                           position: self.seekPosition)
-            self.tested.state = self.state
-        }
+    private var media: PlayerMediaMock!
+    private var audioSession: AudioSessionServiceMock!
+    private let autostart = true
+    private var plugin: PlayerPluginMock!
+    private var interruptionService: InterruptionAudioService!
 
-        context("init") {
-            it("should replace current item") {
-                
-                // ASSERT
-                let newItemUrl = (self.player.replaceCurrentItemCallCountLastParam?.asset as? AVURLAsset)?.url
-                expect(self.player.replaceCurrentItemCallCount).to(equal(2))
-                expect(newItemUrl).to(equal(URL(string: "x")!))
-            }
-            
-           it("should active audio session") {
-                Verify(self.audioSession, 1, .activate())
-            }
-        }
-        
-        context("loadMedia") {
-            it("should not update state context") {
-                
-                // ACT
-                self.state.load(media: self.playerMedia, autostart: true)
-                
-                // ASSERT
-                expect(self.tested.state).to(beIdenticalTo(self.state))
-            }
-        }
-        
-        context("play") {
-            it("should not update state context") {
-                
-                // ACT
-                self.state.play()
-                
-                // ASSERT
-                expect(self.tested.state).to(beIdenticalTo(self.state))
-            }
-        }
+    override func setUp() {
+        ModernAVPlayerLogger.setup.domains = []
+        player = MockCustomPlayer.createOnUsingAsset(url: "foo")
+        context = PlayerContextMock()
+        contextDelegate = PlayerContextDelegateMock()
+        media = PlayerMediaMock()
+        media.matcher.register(PlayerMedia.self, match: matchPlayerMedia)
+        audioSession = AudioSessionServiceMock()
+        plugin = PlayerPluginMock()
+        interruptionService = InterruptionAudioServiceMock()
 
-        context("pause") {
-            it("should update state context to Paused") {
+        Given(context, .config(getter: ModernAVPlayerConfiguration()))
+        Given(context, .audioSession(getter: audioSession))
+        Given(context, .player(getter: player))
+        Given(context, .delegate(getter: contextDelegate))
+        Given(context, .plugins(getter: [plugin]))
+        Given(media, .url(getter: URL(string: "foo")!))
 
-                // ACT
-                self.state.pause()
+        state = LoadingMediaState(context: context, media: media, autostart: autostart,
+                                  position: 42, interruptionAudioService: interruptionService)
+    }
 
-                // ASSERT
-                expect(self.tested.state).to(beAnInstanceOf(PausedState.self))
-            }
-        }
+    func testContextUpdated() {
+        // ARRANGE
+        Given(context, .currentMedia(getter: media))
 
-        context("pause") {
-            it("should replace current item") {
+        // ACT
+        state.contextUpdated()
 
-                // ACT
-                self.state.pause()
+        // ASSERTS
+        XCTAssertEqual(player.pauseCallCount, 1)
+        XCTAssertEqual(player.replaceCurrentItemCallCount, 2)
+        XCTAssertNotNil(player.replaceCurrentItemLastParam)
+        Verify(audioSession, .once, .activate())
+    }
 
-                // ASSERT
-                expect(self.player.replaceCurrentItemCallCount).to(equal(3))
-                expect(self.player.replaceCurrentItemCallCountLastParam).to(beNil())
-            }
-        }
+    func testContextUpdatedShouldSetInterruptionAudioServiceCallback() {
+        // ARRANGE
+        Given(context, .currentMedia(getter: media))
 
-        context("stop") {
-            it("should update state context to Stopped") {
+        // ACT
+        state.contextUpdated()
 
-                // ACT
-                self.state.stop()
+        // ASSERTS
+        XCTAssertNotNil(interruptionService.onInterruptionBegan)
+    }
 
-                // ASSERT
-                expect(self.tested.state).to(beAnInstanceOf(StoppedState.self))
-            }
-        }
-        
-        context("stop") {
-            it("should replace current item") {
+    func testContextUpdatedShouldStartBackgroundTask() {
+        // ARRANGE
+        Given(context, .currentMedia(getter: media))
 
-                // ACT
-                self.state.stop()
+        // ACT
+        state.contextUpdated()
 
-                // ASSERT
-                expect(self.player.replaceCurrentItemCallCount).to(equal(3))
-                expect(self.player.replaceCurrentItemCallCountLastParam).to(beNil())
-            }
-        }
+        // ASSERTS
+        XCTAssertNotNil(context.bgToken)
+    }
 
-        context("stop") {
-            it("should cancel asset loading") {
+    func testContextUpdatedShouldNotifyPlugins() {
+        // ARRANGE
+        Given(context, .currentMedia(getter: media))
 
-                // ACT
-                self.state.stop()
+        // ACT
+        state.contextUpdated()
 
-                // ASSERT
-                let asset = self.player.overrideCurrentItem?.asset as? MockAVAsset
-                expect(asset?.cancelLoadingCallCount).to(equal(1))
-            }
-        }
-        
-        context("seek") {
-            it("should not update state context") {
-                
-                // ACT
-                self.state.seek(position: 42)
-                
-                // ASSERT
-                expect(self.tested.state).to(beIdenticalTo(self.state))
-            }
-        }
+        // ASSERTS
+        Verify(plugin, .once, .willStartLoading(media: .value(media)))
+        Verify(plugin, .once, .didStartLoading(media: .value(media)))
+    }
+
+    func testPauseCall() {
+        // ACT
+        state.pause()
+
+        // ASSERT
+        Verify(context, .once, .changeState(state: .matching { $0 is PausedState }))
+        XCTAssertEqual(player.replaceCurrentItemCallCount, 1)
+        XCTAssertNil(player.replaceCurrentItemLastParam)
+    }
+
+    func testPauseCallShouldCancelLoadingMedia() {
+        // ARRANGE
+        let item = MockPlayerItem.createOnUsingAsset(url: "foo")
+        Given(context, .currentItem(getter: item))
+
+        // ACT
+        state.pause()
+
+        // ASSERTS
+        let asset = (item.asset as? MockAVAsset)
+        XCTAssertEqual(asset?.cancelLoadingCallCount, 1)
+        XCTAssertEqual(item.cancelPendingSeeksCallCount, 1)
+        XCTAssertEqual(player.replaceCurrentItemCallCount, 1)
+        XCTAssertNil(player.replaceCurrentItemLastParam)
+    }
+
+    func testStopCall() {
+        // ACT
+        state.stop()
+
+        // ASSERT
+        Verify(context, .once, .changeState(state: .matching { $0 is StoppedState }))
+    }
+
+    func testStopCallShouldCancelLoadingMedia() {
+        // ARRANGE
+        let item = MockPlayerItem.createOnUsingAsset(url: "foo")
+        Given(context, .currentItem(getter: item))
+
+        // ACT
+        state.stop()
+
+        // ASSERTS
+        let asset = (item.asset as? MockAVAsset)
+        XCTAssertEqual(asset?.cancelLoadingCallCount, 1)
+        XCTAssertEqual(item.cancelPendingSeeksCallCount, 1)
+        XCTAssertEqual(player.replaceCurrentItemCallCount, 1)
+        XCTAssertNil(player.replaceCurrentItemLastParam)
+    }
+
+    func testPlayCall() {
+        // ACT
+        state.play()
+
+        // ASSERT
+        Verify(contextDelegate, .once, .playerContext(unavailableActionReason: .value(.waitLoadedMedia)))
+    }
+
+    func testSeekCall() {
+        // ACT
+        state.seek(position: 42)
+
+        // ASSERT
+        Verify(contextDelegate, .once, .playerContext(unavailableActionReason: .value(.waitLoadedMedia)))
     }
 }

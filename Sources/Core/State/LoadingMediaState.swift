@@ -40,7 +40,7 @@ final class LoadingMediaState: PlayerState {
     private var autostart: Bool
     private var position: Double?
     private var itemStatusObserving: ModernAVPLayerItemStatusObservingService?
-    private var interruptionAudioService: ModernAVPlayerInterruptionAudioService
+    private var interruptionAudioService: InterruptionAudioService
 
     // MARK: - Init
 
@@ -48,7 +48,7 @@ final class LoadingMediaState: PlayerState {
          media: PlayerMedia,
          autostart: Bool,
          position: Double? = nil,
-         interruptionAudioService: ModernAVPlayerInterruptionAudioService = ModernAVPlayerInterruptionAudioService()) {
+         interruptionAudioService: InterruptionAudioService = ModernAVPlayerInterruptionAudioService()) {
         ModernAVPlayerLogger.instance.log(message: "Init", domain: .lifecycleState)
         
         self.context = context
@@ -56,13 +56,15 @@ final class LoadingMediaState: PlayerState {
         self.autostart = autostart
         self.position = position
         self.interruptionAudioService = interruptionAudioService
-        
+    }
+    
+    func contextUpdated() {
         /*
          Loading a clip media from playing state, play automatically the new clip media
          Ensure player will play only when we ask
          */
         context.player.pause()
-        
+
         /*
          It seems to be a good idea to reset player current item
          Fix side effect when coming from failed state
@@ -70,12 +72,10 @@ final class LoadingMediaState: PlayerState {
         context.player.replaceCurrentItem(with: nil)
 
         context.audioSession.activate()
-        
+
         setupInterruptionCallback()
         startBgTask()
-    }
-    
-    func contextUpdated() {
+
         guard let media = context.currentMedia
             else { assertionFailure("media should exist"); return }
         context.plugins.forEach { $0.willStartLoading(media: media) }

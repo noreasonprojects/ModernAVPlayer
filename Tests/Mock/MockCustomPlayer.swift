@@ -89,10 +89,10 @@ final class MockCustomPlayer: AVPlayer {
     }
     
     var replaceCurrentItemCallCount = 0
-    var replaceCurrentItemCallCountLastParam: AVPlayerItem?
+    var replaceCurrentItemLastParam: AVPlayerItem?
     override func replaceCurrentItem(with item: AVPlayerItem?) {
         replaceCurrentItemCallCount += 1
-        replaceCurrentItemCallCountLastParam = item
+        replaceCurrentItemLastParam = item
     }
 
     var addObserverCallCount = 0

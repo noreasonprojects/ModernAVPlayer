@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ## [X.X.X]
 * Feature:
 	* Define custom item loaded asset keys
+	* Improve some unit tests
 * Fix:
 	* Fix not expected value on periodicTimeObserver
 * Breaking change:

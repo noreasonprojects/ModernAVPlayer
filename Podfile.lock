@@ -13,7 +13,7 @@ PODS:
     - RxSwift (~> 5)
   - RxSwift (5.0.0)
   - Sourcery (0.17.0)
-  - SwiftLint (0.35.0)
+  - SwiftLint (0.38.2)
   - SwiftyMocky (3.4.0):
     - SwiftyMocky/Core (= 3.4.0)
   - SwiftyMocky/Core (3.4.0):
@@ -23,7 +23,7 @@ DEPENDENCIES:
   - ModernAVPlayer/RxSwift (from `.`)
   - Nimble (= 8.0.4)
   - Quick (= 2.2.0)
-  - SwiftLint (= 0.35.0)
+  - SwiftLint (= 0.38.2)
   - SwiftyMocky (= 3.4.0)
 
 SPEC REPOS:
@@ -33,9 +33,9 @@ SPEC REPOS:
     - RxCocoa
     - RxRelay
     - RxSwift
-    - SwiftLint
   trunk:
     - Sourcery
+    - SwiftLint
     - SwiftyMocky
 
 EXTERNAL SOURCES:
@@ -50,9 +50,9 @@ SPEC CHECKSUMS:
   RxRelay: 4f7409406a51a55cd88483f21ed898c234d60f18
   RxSwift: 8b0671caa829a763bbce7271095859121cbd895f
   Sourcery: 3ed61be7c8a1218fce349266139379dba477efe0
-  SwiftLint: 5553187048b900c91aa03552807681bb6b027846
+  SwiftLint: 8f5d2f903e1c9bcbc832fd16771e80a263ac6cbb
   SwiftyMocky: 030e1f0e0669952287af29d38b4748461d22312d
 
-PODFILE CHECKSUM: 7a7e917bc470e4967b099fe14e6fb94ad37d2d82
+PODFILE CHECKSUM: 5743338b2fa75ee252b8fc7aed2e2afb5c43fc13
 
 COCOAPODS: 1.8.4

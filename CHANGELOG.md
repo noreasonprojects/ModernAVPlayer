@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ---
 ## [X.X.X]
-* Feature:
+* Features:
 	* Define custom item loaded asset keys
 	* Improve some unit tests
 * Fix:
@@ -14,7 +14,10 @@ All notable changes to this project will be documented in this file.
 	* New `itemLoadedAssetKeys` attribut for `PlayerConfiguration`
 	* `PlayerConfiguration` `preferedTimescale` was renamed as `preferredTimescale`
 * Dependency:
-	* [pod] SwiftyMocky -> 3.4.0
+	* [gem] Fastlane -> 2.140.0
+	* [pod] Rx... -> 5.0.1
+	* [pod] Swiftlint -> 0.38.2
+	* [pod] SwiftyMocky -> 3.5.0
 
 ## [1.4.0]
 * Feature:

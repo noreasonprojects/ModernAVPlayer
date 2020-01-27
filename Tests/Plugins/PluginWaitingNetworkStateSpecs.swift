@@ -33,7 +33,7 @@ final class PluginWaitingNetworkStateSpecs: XCTestCase {
 
     func testInitState_DidStartWaitingForNetworkPluginShouldNotBeCall() {
         // ACT
-        _ = WaitingNetworkState(context: context, urlToReload: media.url, autostart: false, error: .bufferingFailed)
+        _ = WaitingNetworkState(context: context, autostart: false, error: .bufferingFailed)
 
         // EXPECT
         Verify(plugin, 0, .didStartWaitingForNetwork(media: .value(media)))
@@ -41,10 +41,7 @@ final class PluginWaitingNetworkStateSpecs: XCTestCase {
 
     func testWhenContextUpdated_DidStartWaitingForNetworkPluginShouldBeCall() {
         // ARRANGE
-        let state = WaitingNetworkState(context: context,
-                                        urlToReload: media.url,
-                                        autostart: false,
-                                        error: .bufferingFailed)
+        let state = WaitingNetworkState(context: context, autostart: false, error: .bufferingFailed)
 
         // ACT
         state.contextUpdated()

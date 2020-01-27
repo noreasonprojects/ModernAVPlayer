@@ -40,7 +40,6 @@ final class WaitingNetworkState: PlayerState {
     // MARK: - Init
     
     init(context: PlayerContext,
-         urlToReload: URL,
          autostart: Bool,
          error: PlayerError,
          reachabilityService: ReachabilityService? = nil) {
@@ -48,7 +47,7 @@ final class WaitingNetworkState: PlayerState {
         ModernAVPlayerLogger.instance.log(message: "Init", domain: .lifecycleState)
         self.context = context
         self.reachability = reachabilityService ?? ModernAVPlayerReachabilityService(config: context.config)
-        setupReachabilityCallbacks(autostart: autostart, urlToReload: urlToReload, error: error)
+        setupReachabilityCallbacks(autostart: autostart, error: error)
     }
     
     deinit {
@@ -64,7 +63,7 @@ final class WaitingNetworkState: PlayerState {
     
     // MARK: - Reachability
     
-    private func setupReachabilityCallbacks(autostart: Bool, urlToReload: URL, error: PlayerError) {
+    private func setupReachabilityCallbacks(autostart: Bool, error: PlayerError) {
         reachability.isTimedOut = { [weak self] in
             guard let strongSelf = self else { return }
             

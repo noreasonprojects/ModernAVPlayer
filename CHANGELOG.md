@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 	* Improve some unit tests
 * Fix:
 	* Fix not expected value on periodicTimeObserver
+	* Remove some WaitingForNetworkState dead code
 * Improvement:
 	* Create service to deliver AVPlayerItem
 * Breaking change:

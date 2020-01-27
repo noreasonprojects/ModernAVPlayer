@@ -49,7 +49,6 @@ final class WaitingNetworkStateSpecs: QuickSpec {
                                                 plugins: [])
             self.tested.currentMedia = self.playerMedia
             self.state = WaitingNetworkState(context: self.tested,
-                                             urlToReload: self.url,
                                              autostart: true,
                                              error: PlayerError.loadingFailed,
                                              reachabilityService: self.mockReachability)

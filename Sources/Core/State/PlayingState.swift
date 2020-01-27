@@ -150,14 +150,8 @@ final class PlayingState: PlayerState {
     }
     
     private func redirectToWaitingForNetworkState() {
-        guard let url = (context.currentItem?.asset as? AVURLAsset)?.url
-            else { assertionFailure(); return }
-
         startBgTask()
-        let state = WaitingNetworkState(context: context,
-                                        urlToReload: url,
-                                        autostart: true,
-                                        error: .playbackStalled)
+        let state = WaitingNetworkState(context: context, autostart: true, error: .playbackStalled)
         changeState(state: state)
     }
     

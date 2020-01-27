@@ -76,15 +76,9 @@ final class BufferingState: NSObject, PlayerState {
     
     private func setupRateObservingCallback() {
         rateObservingService.onTimeout = { [weak self] in
-            guard
-                let context = self?.context,
-                let url = (context.currentItem?.asset as? AVURLAsset)?.url
-                else { return }
+            guard let context = self?.context else { return }
             
-            let waitingState = WaitingNetworkState(context: context,
-                                                   urlToReload: url,
-                                                   autostart: true,
-                                                   error: .bufferingFailed)
+            let waitingState = WaitingNetworkState(context: context, autostart: true, error: .bufferingFailed)
             context.changeState(state: waitingState)
         }
 

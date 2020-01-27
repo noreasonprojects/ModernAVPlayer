@@ -1,14 +1,6 @@
-#
-# Be sure to run `pod lib lint Mocky.podspec' to ensure this is a
-# valid spec before submitting.
-#
-# Any lines starting with a # are optional, but their use is encouraged
-# To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html
-#
-
 Pod::Spec.new do |s|
   s.name             = 'SwiftyMocky'
-  s.version          = '3.4.0'
+  s.version          = '3.5.0'
   s.summary          = 'Unit testing library for Swift, with mock generation. Adds a set of handy methods, simplifying testing.'
   s.description      = <<-DESC
 Library that uses metaprogramming technique to generate mocks based on sources, that makes testing for Swift Mockito-like.
@@ -19,13 +11,13 @@ Library that uses metaprogramming technique to generate mocks based on sources, 
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Przemysław Wośko' => 'przemyslaw.wosko@intive.com', 'Andrzej Michnia' => 'amichnia@gmail.com' }
   s.source           = { :git => 'https://github.com/MakeAWishFoundation/SwiftyMocky.git', :tag => s.version.to_s }
-
+  
+  s.swift_versions    = ['4.1', '4.2', '5.0', '5.1.2']
   s.ios.deployment_target = '8.0'
   s.tvos.deployment_target = '9.0'
   s.macos.deployment_target = '10.10'
   s.default_subspec  = "Core"
   s.preserve_paths = '*'
-  s.swift_version = '4.2'
 
   s.subspec 'Core' do |core|
     core.source_files = 'Sources/Classes/**/*'

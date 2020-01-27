@@ -2,7 +2,7 @@
 // DO NOT EDIT
 
 
-// Generated with SwiftyMocky 3.4.0
+// Generated with SwiftyMocky 3.5.0
 
 import SwiftyMocky
 #if !MockyCustom

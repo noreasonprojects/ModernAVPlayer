@@ -14,9 +14,9 @@ PODS:
   - RxSwift (5.0.0)
   - Sourcery (0.17.0)
   - SwiftLint (0.38.2)
-  - SwiftyMocky (3.4.0):
-    - SwiftyMocky/Core (= 3.4.0)
-  - SwiftyMocky/Core (3.4.0):
+  - SwiftyMocky (3.5.0):
+    - SwiftyMocky/Core (= 3.5.0)
+  - SwiftyMocky/Core (3.5.0):
     - Sourcery (>= 0.17)
 
 DEPENDENCIES:
@@ -24,7 +24,7 @@ DEPENDENCIES:
   - Nimble (= 8.0.4)
   - Quick (= 2.2.0)
   - SwiftLint (= 0.38.2)
-  - SwiftyMocky (= 3.4.0)
+  - SwiftyMocky (= 3.5.0)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -51,8 +51,8 @@ SPEC CHECKSUMS:
   RxSwift: 8b0671caa829a763bbce7271095859121cbd895f
   Sourcery: 3ed61be7c8a1218fce349266139379dba477efe0
   SwiftLint: 8f5d2f903e1c9bcbc832fd16771e80a263ac6cbb
-  SwiftyMocky: 030e1f0e0669952287af29d38b4748461d22312d
+  SwiftyMocky: f277174040db328a9da04ce8efa81b6d6d5b9d7d
 
-PODFILE CHECKSUM: 5743338b2fa75ee252b8fc7aed2e2afb5c43fc13
+PODFILE CHECKSUM: 56811f68aa97345ee3c5a4f1c98a0aa332e2b289
 
 COCOAPODS: 1.8.4

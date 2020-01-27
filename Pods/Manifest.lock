@@ -6,12 +6,12 @@ PODS:
     - RxSwift (~> 5.0)
   - Nimble (8.0.4)
   - Quick (2.2.0)
-  - RxCocoa (5.0.0):
+  - RxCocoa (5.0.1):
     - RxRelay (~> 5)
     - RxSwift (~> 5)
-  - RxRelay (5.0.0):
+  - RxRelay (5.0.1):
     - RxSwift (~> 5)
-  - RxSwift (5.0.0)
+  - RxSwift (5.0.1)
   - Sourcery (0.17.0)
   - SwiftLint (0.38.2)
   - SwiftyMocky (3.5.0):
@@ -30,10 +30,10 @@ SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - Nimble
     - Quick
+  trunk:
     - RxCocoa
     - RxRelay
     - RxSwift
-  trunk:
     - Sourcery
     - SwiftLint
     - SwiftyMocky
@@ -46,9 +46,9 @@ SPEC CHECKSUMS:
   ModernAVPlayer: f11249a036df101ecc02c5a947e1e00a1fc953ed
   Nimble: 18d5360282923225d62b09d781f63abc1a0111fc
   Quick: 7fb19e13be07b5dfb3b90d4f9824c855a11af40e
-  RxCocoa: fcf32050ac00d801f34a7f71d5e8e7f23026dcd8
-  RxRelay: 4f7409406a51a55cd88483f21ed898c234d60f18
-  RxSwift: 8b0671caa829a763bbce7271095859121cbd895f
+  RxCocoa: e741b9749968e8a143e2b787f1dfbff2b63d0a5c
+  RxRelay: 89d54507f4fd4d969e6ec1d4bd7f3673640b4640
+  RxSwift: e2dc62b366a3adf6a0be44ba9f405efd4c94e0c4
   Sourcery: 3ed61be7c8a1218fce349266139379dba477efe0
   SwiftLint: 8f5d2f903e1c9bcbc832fd16771e80a263ac6cbb
   SwiftyMocky: f277174040db328a9da04ce8efa81b6d6d5b9d7d

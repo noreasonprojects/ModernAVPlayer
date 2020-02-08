@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 
 ---
-## [X.X.X]
+## [1.5.0]
 * Features:
 	* Create media from an AVPlayerItem
 	* Define custom item loaded asset keys

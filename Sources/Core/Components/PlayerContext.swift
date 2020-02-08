@@ -49,6 +49,7 @@ protocol PlayerContext: MediaPlayer {
     var nowPlaying: NowPlaying { get }
     var plugins: [PlayerPlugin] { get }
     var state: PlayerState! { get }
+    var failedUsedAVPlayerItem: Set<AVPlayerItem> { get set }
     
     func changeState(state: PlayerState)
 }
@@ -63,6 +64,7 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
     let player: AVPlayer
     let plugins: [PlayerPlugin]
     var loopMode = false
+    var failedUsedAVPlayerItem = Set<AVPlayerItem>()
 
     weak var delegate: PlayerContextDelegate?
     

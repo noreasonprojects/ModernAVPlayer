@@ -1,10 +1,10 @@
 // The MIT License (MIT)
 //
 // ModernAVPlayer
-// Copyright (c) 2018 Raphael Ankierman <raphael.ankierman@radiofrance.com>
+// Copyright (c) 2018 Raphael Ankierman <raphrel@gmail.com>
 //
-// PlayerMedia.swift
-// Created by raphael ankierman on 24/02/2018.
+// ModernAVPlayerMediaItem.swift
+// Created by raphael ankierman on 17/11/2019.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,41 +26,41 @@
 
 import AVFoundation.AVPlayerItem
 
-///
-/// `PlayerMedia` is a protocol use to create media player.
-///  By this way, `AVPlayerItem` is automatically created.
-///  If you want to load your custom `AVPlayerItem`, conform to `PlayerMediaItem`
-///
+public class ModernAVPlayerMediaItem: PlayerMediaItem {
 
-// sourcery: AutoMockable
-public protocol PlayerMedia: CustomStringConvertible {
+    // MARK: - Outputs
 
-    /// URL set to the AVURLAsset
-    var url: URL { get }
+    public let item: AVPlayerItem
+    public let url: URL
+    public let type: MediaType
+    public let assetOptions: [String: Any]?
 
-    /// Type of the media
-    var type: MediaType { get }
-    
-    /// Asset options use by AVURLAsset
-    var assetOptions: [String: Any]? { get }
+    // MARK: - Input
 
-    /// Returns stream media isLive parameter
-    func isLive() -> Bool
+    private var metadata: ModernAVPlayerMediaMetadata?
 
-    func getMetadata() -> PlayerMediaMetadata?
-    func setMetadata(_ metadata: PlayerMediaMetadata)
-}
+    // MARK: - Init
 
-public extension PlayerMedia {
-    var description: String {
-        return "url: \(url.description) | type: \(type.description)"
+    public init?(item: AVPlayerItem,
+                 type: MediaType,
+                 metadata: ModernAVPlayerMediaMetadata? = nil,
+                 assetOptions: [String: Any]? = nil) {
+        self.item = item
+        self.type = type
+        self.metadata = metadata
+        self.assetOptions = assetOptions
+
+        guard let url = (item.asset as? AVURLAsset)?.url else { return nil }
+        self.url = url
     }
-}
 
-public extension PlayerMedia {
-    func isLive() -> Bool {
-        guard case let MediaType.stream(isLive) = type, isLive
-            else { return false }
-        return true
+    // MARK: - Metadata
+
+    public func getMetadata() -> PlayerMediaMetadata? {
+        return metadata
+    }
+
+    public func setMetadata(_ metadata: PlayerMediaMetadata) {
+        self.metadata = metadata as? ModernAVPlayerMediaMetadata
     }
 }

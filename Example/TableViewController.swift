@@ -28,7 +28,7 @@ import UIKit
 
 final class TableViewController: UITableViewController {
 
-    private let dataSource = DemoScreens.allCases
+    private let dataSource = DemoScreen.allCases
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "screenCell", for: indexPath)
@@ -43,9 +43,23 @@ final class TableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let navVC = navigationController else { assertionFailure(); return }
 
-        let id = dataSource[indexPath.row].id
-        let sb = UIStoryboard(name: id, bundle: Bundle.main)
-        let vc = sb.instantiateViewController(withIdentifier: id)
+        let screen = dataSource[indexPath.row]
+        let sb = UIStoryboard(name: screen.id, bundle: Bundle.main)
+        let vc = sb.instantiateViewController(withIdentifier: screen.id)
+        setupSimpleAudioInputSource(vc: vc, screen: screen)
         navVC.pushViewController(vc, animated: true)
+    }
+
+    private func setupSimpleAudioInputSource(vc: UIViewController, screen: DemoScreen) {
+        guard let vc = vc as? SimpleAudioVC else { return }
+
+        switch screen {
+        case .simpleAudioURL:
+            vc.inputSource = .URL
+        case .simpleAudioAVPlayerItem:
+            vc.inputSource = .AVPlayerItem
+        default:
+            preconditionFailure()
+        }
     }
 }

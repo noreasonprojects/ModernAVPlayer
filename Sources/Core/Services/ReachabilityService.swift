@@ -26,6 +26,7 @@
 
 import Foundation
 
+// sourcery: AutoMockable
 protocol ReachabilityService {
     var isReachable: (() -> Void)? { get set }
     var isTimedOut: (() -> Void)? { get set }

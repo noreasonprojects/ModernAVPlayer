@@ -11,6 +11,11 @@ import UIKit
 
 final class SimpleAudioVC: UIViewController {
 
+    enum InputSource {
+        case URL
+        case AVPlayerItem
+    }
+
     // MARK: - Inputs
 
     private let player: ModernAVPlayer = {
@@ -18,6 +23,7 @@ final class SimpleAudioVC: UIViewController {
         return ModernAVPlayer(config: conf, loggerDomains: [.error, .unavailableCommand])
     }()
     private let dataSource: [MediaResource] = [.live, .remote, .local, .invalid]
+    var inputSource: InputSource!
 
     // MARK: - Interface Buidler
 
@@ -35,7 +41,19 @@ final class SimpleAudioVC: UIViewController {
         mediaPicker.dataSource = self
         mediaPicker.delegate = self
 
-        player.load(media: dataSource[0].playerMedia, autostart: false)
+        let media =  getMedia(index: 0)
+        player.load(media: media, autostart: false)
+    }
+
+    private func getMedia(index: Int) -> PlayerMedia {
+        switch inputSource {
+        case .URL:
+            return dataSource[index].playerMedia
+        case .AVPlayerItem:
+            return dataSource[index].playerMediaFromItem!
+        default:
+            preconditionFailure()
+        }
     }
 
     // MARK: - Commands
@@ -92,7 +110,7 @@ extension SimpleAudioVC: UIPickerViewDelegate {
     }
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        let playerMedia = dataSource[row].playerMedia
-        player.load(media: playerMedia, autostart: false)
+        let media =  getMedia(index: row)
+        player.load(media: media, autostart: false)
     }
 }

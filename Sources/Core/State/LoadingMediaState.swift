@@ -134,7 +134,8 @@ final class LoadingMediaState: PlayerState {
     
     private func processMedia(_ media: PlayerMedia) {
         let item = itemInitService.getItem(media: media,
-                                           loadedAssetKeys: context.config.itemLoadedAssetKeys)
+                                           loadedAssetKeys: context.config.itemLoadedAssetKeys,
+                                           failedUsedItem: context.failedUsedAVPlayerItem)
         startObservingItemStatus(item: item)
         context.player.replaceCurrentItem(with: item)
         

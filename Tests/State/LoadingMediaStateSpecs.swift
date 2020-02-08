@@ -58,6 +58,7 @@ final class LoadingMediaStateTests: XCTestCase {
         Given(context, .player(getter: player))
         Given(context, .delegate(getter: contextDelegate))
         Given(context, .plugins(getter: [plugin]))
+        Given(context, .failedUsedAVPlayerItem(getter: []))
         Given(media, .url(getter: URL(string: "foo")!))
 
         state = LoadingMediaState(context: context, media: media, autostart: autostart,

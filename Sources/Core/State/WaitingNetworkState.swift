@@ -59,6 +59,10 @@ final class WaitingNetworkState: PlayerState {
         guard let media = context.currentMedia
             else { assertionFailure("media should exist"); return }
         context.plugins.forEach { $0.didStartWaitingForNetwork(media: media) }
+
+        guard let mediaItem = media as? PlayerMediaItem
+            else { return }
+        context.failedUsedAVPlayerItem.insert(mediaItem.item)
     }
     
     // MARK: - Reachability
@@ -74,8 +78,9 @@ final class WaitingNetworkState: PlayerState {
         reachability.isReachable = { [weak self] in
             guard let media = self?.context.currentMedia else { assertionFailure(); return }
             guard let strongSelf = self else { return }
-            
-            let lastKnownPosition = strongSelf.isDurationItemFinite() ? strongSelf.context.player.currentTime() : nil
+
+            let currentTime = strongSelf.context.player.currentTime()
+            let lastKnownPosition = strongSelf.isDurationItemFinite() ? currentTime : nil
             let state = LoadingMediaState(context: strongSelf.context,
                                           media: media,
                                           autostart: autostart,

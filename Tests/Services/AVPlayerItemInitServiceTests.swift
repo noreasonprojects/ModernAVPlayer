@@ -38,14 +38,60 @@ final class AVPlayerItemInitServiceTests: XCTestCase {
         service = ModernAVPlayerItemInitService()
     }
 
-    func testGetItem() {
+    func testURLInputSource() {
         // ARRANGE
         let url = URL(string: "https://en.wikipedia.org/wiki/Feminism")!
         let media = PlayerMediaMock()
         Given(media, .url(getter: url))
 
         // ACT
-        let item = service.getItem(media: media, loadedAssetKeys: [])
+        let item = service.getItem(media: media, loadedAssetKeys: [], failedUsedItem: [])
+
+        // ASSERT
+        let itemURL = (item.asset as? AVURLAsset)?.url
+        XCTAssertEqual(itemURL, url)
+    }
+
+    func testAVPlayerItemInputSource() {
+        // ARRANGE
+        let url = URL(string: "https://en.wikipedia.org/wiki/Feminism")!
+        let source = AVPlayerItem(url: url)
+        let media = PlayerMediaItemMock()
+        Given(media, .item(getter: source))
+        Given(media, .url(getter: url))
+
+        // ACT
+        let item = service.getItem(media: media, loadedAssetKeys: [], failedUsedItem: [])
+
+        // ASSERT
+        XCTAssert(source === item)
+    }
+
+    func testFailedAVPlayerItemInputSource() {
+        // ARRANGE
+        let url = URL(string: "https://en.wikipedia.org/wiki/Feminism")!
+        let source = AVPlayerItem(url: url)
+        let media = PlayerMediaItemMock()
+        Given(media, .item(getter: source))
+        Given(media, .url(getter: url))
+
+        // ACT
+        let item = service.getItem(media: media, loadedAssetKeys: [], failedUsedItem: [source])
+
+        // ASSERT
+        XCTAssert(source !== item)
+    }
+
+    func testURLFailedAVPlayerItemInputSource() {
+        // ARRANGE
+        let url = URL(string: "https://en.wikipedia.org/wiki/Feminism")!
+        let source = AVPlayerItem(url: url)
+        let media = PlayerMediaItemMock()
+        Given(media, .item(getter: source))
+        Given(media, .url(getter: url))
+
+        // ACT
+        let item = service.getItem(media: media, loadedAssetKeys: [], failedUsedItem: [source])
 
         // ASSERT
         let itemURL = (item.asset as? AVURLAsset)?.url

@@ -4,8 +4,8 @@ All notable changes to this project will be documented in this file.
 ---
 ## [X.X.X]
 * Features:
+	* Create media from an AVPlayerItem
 	* Define custom item loaded asset keys
-	* Improve some unit tests
 * Fix:
 	* Fix not expected value on periodicTimeObserver
 	* Remove some WaitingForNetworkState dead code

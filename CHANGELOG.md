@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 
 ---
+## [1.5.1]
+* Fix:
+	* Fix duplicated target handler generated when getting commands from `ModernAVPlayerRemoteCommandFactory`
+
 ## [1.5.0]
 * Features:
 	* Create media from an AVPlayerItem

@@ -28,9 +28,9 @@ import Foundation
 import MediaPlayer
 
 public class ModernAVPlayerRemoteCommandFactory {
-
+    
     // MARK: - Output
-
+    
     /// Return all factory commands
     ///
     public var defaultCommands: [ModernAVPlayerRemoteCommand] {
@@ -38,20 +38,20 @@ public class ModernAVPlayerRemoteCommandFactory {
                 prevTrackCommand, nextTrackCommand, repeatModeCommand, changePositionCommand,
                 shuffleModeCommand, skipBackwardCommand(), skipForwardCommand()]
     }
-
+    
     // MARK: - Inputs
-
+    
     private unowned let player: ModernAVPlayerExposable
     private let commandCenter: MPRemoteCommandCenter
-
+    
     // MARK: - Init
-
+    
     public init(player: ModernAVPlayerExposable,
                 commandCenter: MPRemoteCommandCenter = MPRemoteCommandCenter.shared()) {
         self.player = player
         self.commandCenter = commandCenter
     }
-
+    
     // MARK: - Playback Commands
     
     /// Play Command
@@ -119,7 +119,7 @@ public class ModernAVPlayerRemoteCommandFactory {
                                            debugDescription: "Toggle play/pause",
                                            isEnabled: isEnabled)
     }()
-
+    
     /// Stop command
     ///
     public lazy var stopCommand: ModernAVPlayerRemoteCommand = {
@@ -140,7 +140,7 @@ public class ModernAVPlayerRemoteCommandFactory {
     }()
     
     // MARK: - Navigating between tracks
-
+    
     /// Previous Track Command
     /// Not enabled yet
     ///
@@ -151,7 +151,7 @@ public class ModernAVPlayerRemoteCommandFactory {
                                            debugDescription: "Prev track",
                                            isEnabled: isEnabled)
     }()
-
+    
     /// Next Track Command
     /// Not enabled yet
     ///
@@ -161,8 +161,8 @@ public class ModernAVPlayerRemoteCommandFactory {
         return ModernAVPlayerRemoteCommand(reference: command,
                                            debugDescription: "Next track",
                                            isEnabled: isEnabled)
-        }()
-
+    }()
+    
     /// Change Repeat Mode Command
     /// Not enabled yet
     ///
@@ -172,8 +172,8 @@ public class ModernAVPlayerRemoteCommandFactory {
         return ModernAVPlayerRemoteCommand(reference: command,
                                            debugDescription: "Repeat mode",
                                            isEnabled: isEnabled)
-        }()
-
+    }()
+    
     /// Change Shuffle Mode Command
     /// Not enabled yet
     ///
@@ -183,8 +183,8 @@ public class ModernAVPlayerRemoteCommandFactory {
         return ModernAVPlayerRemoteCommand(reference: command,
                                            debugDescription: "Shuffle mode",
                                            isEnabled: isEnabled)
-        }()
-
+    }()
+    
     // MARK: - Navigating a track's contents
     
     /// Change Position Command
@@ -200,7 +200,7 @@ public class ModernAVPlayerRemoteCommandFactory {
                                                       domain: .error)
                     return .commandFailed
             }
-
+            
             let position = e.positionTime
             ModernAVPlayerLogger.instance.log(message: "Remote command: seek to \(position)", domain: .service)
             self.player.seek(position: position)
@@ -210,8 +210,8 @@ public class ModernAVPlayerRemoteCommandFactory {
         return ModernAVPlayerRemoteCommand(reference: command,
                                            debugDescription: "Change position",
                                            isEnabled: isEnabled)
-        }()
-
+    }()
+    
     /// Skip Backward command
     /// Enable for clip media type only
     ///
@@ -228,7 +228,7 @@ public class ModernAVPlayerRemoteCommandFactory {
                                                       domain: .error)
                     return .commandFailed
             }
-
+            
             ModernAVPlayerLogger.instance.log(message: "Remote command: skipBackward", domain: .service)
             let position = max(self.player.currentTime - skipTime, 0)
             self.player.seek(position: position)
@@ -238,8 +238,8 @@ public class ModernAVPlayerRemoteCommandFactory {
         return ModernAVPlayerRemoteCommand(reference: command,
                                            debugDescription: "Skip backward",
                                            isEnabled: isEnabled)
-        }
-
+    }
+    
     /// Skip Forward command
     /// Enable for clip media type only
     ///
@@ -253,11 +253,11 @@ public class ModernAVPlayerRemoteCommandFactory {
                 let skipTime = (event as? MPSkipIntervalCommandEvent)?.interval
                 else {
                     ModernAVPlayerLogger.instance.log(message: "Failed skipForward remote command ",
-
+                                                      
                                                       domain: .error)
                     return .commandFailed
             }
-
+            
             ModernAVPlayerLogger.instance.log(message: "Remote command: skipForward", domain: .service)
             let position = self.player.currentTime + skipTime
             self.player.seek(position: position)
@@ -267,5 +267,5 @@ public class ModernAVPlayerRemoteCommandFactory {
         return ModernAVPlayerRemoteCommand(reference: command,
                                            debugDescription: "Skip forward",
                                            isEnabled: isEnabled)
-        }
+    }
 }

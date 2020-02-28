@@ -27,16 +27,16 @@
 import Foundation
 import MediaPlayer
 
-public struct ModernAVPlayerRemoteCommandFactory {
+public class ModernAVPlayerRemoteCommandFactory {
 
     // MARK: - Output
 
     /// Return all factory commands
     ///
     public var defaultCommands: [ModernAVPlayerRemoteCommand] {
-        return [playCommand(), pauseCommand(), stopCommand(), togglePlayPauseCommand(),
-                prevTrackCommand(), nextTrackCommand(), repeatModeCommand(), changePositionCommand(),
-                shuffleModeCommand(), skipBackwardCommand(), skipForwardCommand()]
+        return [playCommand, pauseCommand, stopCommand, togglePlayPauseCommand,
+                prevTrackCommand, nextTrackCommand, repeatModeCommand, changePositionCommand,
+                shuffleModeCommand, skipBackwardCommand(), skipForwardCommand()]
     }
 
     // MARK: - Inputs
@@ -58,7 +58,7 @@ public struct ModernAVPlayerRemoteCommandFactory {
     /// When pressing play, if media is not live, a simple play is done
     /// If media is a stream live, we reload the media and play (autostart: true)
     ///
-    public func playCommand() -> ModernAVPlayerRemoteCommand {
+    public lazy var playCommand: ModernAVPlayerRemoteCommand = {
         let command = commandCenter.playCommand
         let isEnabled: (MediaType) -> Bool = { _ in true }
         let handler: (MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus = { _ in
@@ -78,11 +78,11 @@ public struct ModernAVPlayerRemoteCommandFactory {
         return ModernAVPlayerRemoteCommand(reference: command,
                                            debugDescription: "Play",
                                            isEnabled: isEnabled)
-    }
+    }()
     
     /// Toggle play pause command
     ///
-    public func togglePlayPauseCommand() -> ModernAVPlayerRemoteCommand {
+    public lazy var togglePlayPauseCommand: ModernAVPlayerRemoteCommand = {
         let command = commandCenter.togglePlayPauseCommand
         let isEnabled: (MediaType) -> Bool = { _ in true }
         let handler: (MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus = { _ in
@@ -99,11 +99,11 @@ public struct ModernAVPlayerRemoteCommandFactory {
         }
         command.addTarget(handler: handler)
         return ModernAVPlayerRemoteCommand(reference: command, isEnabled: isEnabled)
-    }
+    }()
     
     /// Pause command
     ///
-    public func pauseCommand() -> ModernAVPlayerRemoteCommand {
+    public lazy var pauseCommand: ModernAVPlayerRemoteCommand = {
         let command = commandCenter.pauseCommand
         let isEnabled: (MediaType) -> Bool = {
             guard case .stream(let isLive) = $0, isLive else { return true }
@@ -118,11 +118,11 @@ public struct ModernAVPlayerRemoteCommandFactory {
         return ModernAVPlayerRemoteCommand(reference: command,
                                            debugDescription: "Toggle play/pause",
                                            isEnabled: isEnabled)
-    }
+    }()
 
     /// Stop command
     ///
-    public func stopCommand() -> ModernAVPlayerRemoteCommand {
+    public lazy var stopCommand: ModernAVPlayerRemoteCommand = {
         let command = commandCenter.stopCommand
         let isEnabled: (MediaType) -> Bool = {
             guard case .stream(let isLive) = $0, isLive else { return false }
@@ -137,60 +137,60 @@ public struct ModernAVPlayerRemoteCommandFactory {
         return ModernAVPlayerRemoteCommand(reference: command,
                                            debugDescription: "Stop",
                                            isEnabled: isEnabled)
-    }
+    }()
     
     // MARK: - Navigating between tracks
 
     /// Previous Track Command
     /// Not enabled yet
     ///
-    public func prevTrackCommand() -> ModernAVPlayerRemoteCommand {
+    public lazy var prevTrackCommand: ModernAVPlayerRemoteCommand = {
         let command = commandCenter.previousTrackCommand
         let isEnabled: (MediaType) -> Bool = { _ in false }
         return ModernAVPlayerRemoteCommand(reference: command,
                                            debugDescription: "Prev track",
                                            isEnabled: isEnabled)
-    }
+    }()
 
     /// Next Track Command
     /// Not enabled yet
     ///
-    public func nextTrackCommand() -> ModernAVPlayerRemoteCommand {
+    public lazy var nextTrackCommand: ModernAVPlayerRemoteCommand = {
         let command = commandCenter.nextTrackCommand
         let isEnabled: (MediaType) -> Bool = { _ in false }
         return ModernAVPlayerRemoteCommand(reference: command,
                                            debugDescription: "Next track",
                                            isEnabled: isEnabled)
-    }
+        }()
 
     /// Change Repeat Mode Command
     /// Not enabled yet
     ///
-    public func repeatModeCommand() -> ModernAVPlayerRemoteCommand {
+    public lazy var repeatModeCommand: ModernAVPlayerRemoteCommand = {
         let command = commandCenter.changeRepeatModeCommand
         let isEnabled: (MediaType) -> Bool = { _ in false }
         return ModernAVPlayerRemoteCommand(reference: command,
                                            debugDescription: "Repeat mode",
                                            isEnabled: isEnabled)
-    }
+        }()
 
     /// Change Shuffle Mode Command
     /// Not enabled yet
     ///
-    public func shuffleModeCommand() -> ModernAVPlayerRemoteCommand {
+    public lazy var shuffleModeCommand: ModernAVPlayerRemoteCommand = {
         let command = commandCenter.changeShuffleModeCommand
         let isEnabled: (MediaType) -> Bool = { _ in false }
         return ModernAVPlayerRemoteCommand(reference: command,
                                            debugDescription: "Shuffle mode",
                                            isEnabled: isEnabled)
-    }
+        }()
 
     // MARK: - Navigating a track's contents
     
     /// Change Position Command
     /// Enable for clip media type only
     ///
-    public func changePositionCommand() -> ModernAVPlayerRemoteCommand {
+    public lazy var changePositionCommand: ModernAVPlayerRemoteCommand = {
         let command = commandCenter.changePlaybackPositionCommand
         let isEnabled: (MediaType) -> Bool = { $0 == .clip }
         let handler: (MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus = { event in
@@ -210,13 +210,14 @@ public struct ModernAVPlayerRemoteCommandFactory {
         return ModernAVPlayerRemoteCommand(reference: command,
                                            debugDescription: "Change position",
                                            isEnabled: isEnabled)
-    }
+        }()
 
     /// Skip Backward command
     /// Enable for clip media type only
     ///
     public func skipBackwardCommand(preferredIntervals: [NSNumber] = [10]) -> ModernAVPlayerRemoteCommand {
         let command = commandCenter.skipBackwardCommand
+        command.removeTarget(nil)
         command.preferredIntervals = preferredIntervals
         let isEnabled: (MediaType) -> Bool = { $0 == .clip }
         let handler: (MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus = { event in
@@ -237,13 +238,14 @@ public struct ModernAVPlayerRemoteCommandFactory {
         return ModernAVPlayerRemoteCommand(reference: command,
                                            debugDescription: "Skip backward",
                                            isEnabled: isEnabled)
-    }
+        }
 
     /// Skip Forward command
     /// Enable for clip media type only
     ///
     public func skipForwardCommand(preferredIntervals: [NSNumber] = [10]) -> ModernAVPlayerRemoteCommand {
         let command = commandCenter.skipForwardCommand
+        command.removeTarget(nil)
         command.preferredIntervals = preferredIntervals
         let isEnabled: (MediaType) -> Bool = { $0 == .clip }
         let handler: (MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus = { event in
@@ -265,5 +267,5 @@ public struct ModernAVPlayerRemoteCommandFactory {
         return ModernAVPlayerRemoteCommand(reference: command,
                                            debugDescription: "Skip forward",
                                            isEnabled: isEnabled)
-    }
+        }
 }

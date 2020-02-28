@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file.
 
 ---
+## [X.X.X]
+* Fix:
+	* Fix duplicated target handler generated when getting commands from `ModernAVPlayerRemoteCommandFactory`
+* Breaking changes:
+	* ModernAVPlayerRemoteCommandFactory become a class
+	* Get most remote commands from lazy var instead of functions
+
 ## [1.5.0]
 * Features:
 	* Create media from an AVPlayerItem

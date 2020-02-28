@@ -2,12 +2,15 @@
 All notable changes to this project will be documented in this file.
 
 ---
-## [X.X.X]
+## [1.5.1]
 * Fix:
-	* Fix duplicated target handler generated when getting commands from `ModernAVPlayerRemoteCommandFactory`
+	* Fix duplicated command target handler from `ModernAVPlayerRemoteCommandFactory`
 * Breaking changes:
 	* ModernAVPlayerRemoteCommandFactory become a class
 	* Get most remote commands from lazy var instead of functions
+* Dependencies:
+	* [gem] Cocoapods -> 1.9.0
+	* [gem] Fastlane -> 2.142.0
 
 ## [1.5.0]
 * Features:
@@ -18,10 +21,10 @@ All notable changes to this project will be documented in this file.
 	* Remove some WaitingForNetworkState dead code
 * Improvement:
 	* Create service to deliver AVPlayerItem
-* Breaking change:
+* Breaking changes:
 	* New `itemLoadedAssetKeys` attribut for `PlayerConfiguration`
 	* `PlayerConfiguration` `preferedTimescale` was renamed as `preferredTimescale`
-* Dependency:
+* Dependencies:
 	* [gem] Fastlane -> 2.141.0
 	* [pod] Rx... -> 5.0.1
 	* [pod] Swiftlint -> 0.38.2

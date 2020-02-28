@@ -62,11 +62,10 @@ public class ModernAVPlayerRemoteCommandFactory {
         let command = commandCenter.playCommand
         let isEnabled: (MediaType) -> Bool = { _ in true }
         let handler: (MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus = { _ in
-            guard let media = self.player.currentMedia
-                else {
-                    ModernAVPlayerLogger.instance.log(message: "Failed play remote command",
-                                                      domain: .error)
-                    return .noSuchContent
+            guard let media = self.player.currentMedia else {
+                ModernAVPlayerLogger.instance.log(message: "Failed play remote command",
+                                                  domain: .error)
+                return .noSuchContent
             }
             ModernAVPlayerLogger.instance.log(message: "Remote command: play", domain: .service)
             guard case let .stream(isLive) = media.type, isLive
@@ -75,9 +74,7 @@ public class ModernAVPlayerRemoteCommandFactory {
             return .success
         }
         command.addTarget(handler: handler)
-        return ModernAVPlayerRemoteCommand(reference: command,
-                                           debugDescription: "Play",
-                                           isEnabled: isEnabled)
+        return ModernAVPlayerRemoteCommand(reference: command, debugDescription: "Play", isEnabled: isEnabled)
     }()
     
     /// Toggle play pause command
@@ -194,11 +191,10 @@ public class ModernAVPlayerRemoteCommandFactory {
         let command = commandCenter.changePlaybackPositionCommand
         let isEnabled: (MediaType) -> Bool = { $0 == .clip }
         let handler: (MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus = { event in
-            guard let e = event as? MPChangePlaybackPositionCommandEvent
-                else {
-                    ModernAVPlayerLogger.instance.log(message: "Failed changePosition remote command ",
-                                                      domain: .error)
-                    return .commandFailed
+            guard let e = event as? MPChangePlaybackPositionCommandEvent else {
+                ModernAVPlayerLogger.instance.log(message: "Failed changePosition remote command ",
+                                                  domain: .error)
+                return .commandFailed
             }
             
             let position = e.positionTime
@@ -221,12 +217,10 @@ public class ModernAVPlayerRemoteCommandFactory {
         command.preferredIntervals = preferredIntervals
         let isEnabled: (MediaType) -> Bool = { $0 == .clip }
         let handler: (MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus = { event in
-            guard
-                let skipTime = (event as? MPSkipIntervalCommandEvent)?.interval
-                else {
-                    ModernAVPlayerLogger.instance.log(message: "Failed skipBackward remote command",
-                                                      domain: .error)
-                    return .commandFailed
+            guard let skipTime = (event as? MPSkipIntervalCommandEvent)?.interval else {
+                ModernAVPlayerLogger.instance.log(message: "Failed skipBackward remote command",
+                                                  domain: .error)
+                return .commandFailed
             }
             
             ModernAVPlayerLogger.instance.log(message: "Remote command: skipBackward", domain: .service)
@@ -249,13 +243,10 @@ public class ModernAVPlayerRemoteCommandFactory {
         command.preferredIntervals = preferredIntervals
         let isEnabled: (MediaType) -> Bool = { $0 == .clip }
         let handler: (MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus = { event in
-            guard
-                let skipTime = (event as? MPSkipIntervalCommandEvent)?.interval
-                else {
-                    ModernAVPlayerLogger.instance.log(message: "Failed skipForward remote command ",
-                                                      
-                                                      domain: .error)
-                    return .commandFailed
+            guard let skipTime = (event as? MPSkipIntervalCommandEvent)?.interval else {
+                ModernAVPlayerLogger.instance.log(message: "Failed skipForward remote command ",
+                                                  domain: .error)
+                return .commandFailed
             }
             
             ModernAVPlayerLogger.instance.log(message: "Remote command: skipForward", domain: .service)

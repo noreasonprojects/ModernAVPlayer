@@ -5,6 +5,8 @@ All notable changes to this project will be documented in this file.
 ## [X.X.X]
 * Fix:
 	* Fix Xcode 11.4.1 compile issues
+* Dependency:
+	* [gem] Cocoapods -> 1.9.1
 
 ## [1.5.1]
 * Fix:

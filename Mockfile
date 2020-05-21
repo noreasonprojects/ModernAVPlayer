@@ -1,0 +1,12 @@
+sourceryCommand: null
+mocky:
+  sources:
+    include:
+    - ./Sources
+  output: ./Tests/Generated/Mock.generated.swift
+  targets:
+  - ModernAVPlayer_Tests
+  testable:
+  - ModernAVPlayer
+  import:
+  - AVFoundation

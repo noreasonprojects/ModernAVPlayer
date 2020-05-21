@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 
 ---
+## [X.X.X]
+* Fix:
+	* Fix Xcode 11.4.1 compile issues
+
 ## [1.5.1]
 * Fix:
 	* Fix duplicated command target handler from `ModernAVPlayerRemoteCommandFactory`

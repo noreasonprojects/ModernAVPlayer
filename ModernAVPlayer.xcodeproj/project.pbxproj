@@ -439,7 +439,6 @@
 			buildConfigurationList = 607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "ModernAVPlayer_Example" */;
 			buildPhases = (
 				8A8AD8ED6850E535248D8646 /* [CP] Check Pods Manifest.lock */,
-				E12CC72E216AE67600109A16 /* SwiftyMocky */,
 				607FACCC1AFB9204008FA782 /* Sources */,
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
@@ -460,6 +459,7 @@
 			buildConfigurationList = 607FACF21AFB9204008FA782 /* Build configuration list for PBXNativeTarget "ModernAVPlayer_Tests" */;
 			buildPhases = (
 				15644DB022723493B622D2B4 /* [CP] Check Pods Manifest.lock */,
+				E1E419E224773FC900D84E54 /* Generate Mocks */,
 				607FACE11AFB9204008FA782 /* Sources */,
 				607FACE21AFB9204008FA782 /* Frameworks */,
 				607FACE31AFB9204008FA782 /* Resources */,
@@ -632,24 +632,6 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ModernAVPlayer_Example/Pods-ModernAVPlayer_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E12CC72E216AE67600109A16 /* SwiftyMocky */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = SwiftyMocky;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "Pods/Sourcery/bin/sourcery --config mocky.yml\n";
-		};
 		E1459933207922F6001479E2 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -663,6 +645,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint";
+		};
+		E1E419E224773FC900D84E54 /* Generate Mocks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Generate Mocks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Mock generated file is track by git so this script is to avoid CI/CD server to install useless and generate them...\nif command -v swiftymocky >/dev/null 2>&1\nthen\n    swiftymocky generate\nelse\n    echo \"warning: swifty mocky is not installed. please visit: https://github.com/MakeAWishFoundation/SwiftyMocky#generation\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

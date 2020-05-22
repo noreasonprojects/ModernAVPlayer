@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Simple Audio QueueVC-->
+        <scene sceneID="6kh-NY-We6">
+            <objects>
+                <viewController storyboardIdentifier="SimpleAudioQueue" id="7qn-y3-yPz" customClass="SimpleAudioQueueVC" customModule="ModernAVPlayer_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="JDc-Qt-PCc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="orS-i8-pAp" userLabel="Labels">
+                                <rect key="frame" x="20" y="327" width="374" height="86"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ts-Mj-dBt" userLabel="Media">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="21.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="State" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vMo-lh-c6T">
+                                        <rect key="frame" x="0.0" y="21.5" width="374" height="21.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Timing" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I7h-bJ-IPD">
+                                        <rect key="frame" x="0.0" y="43" width="374" height="21.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Duration" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LxD-l2-Zhe" userLabel="Duration">
+                                        <rect key="frame" x="0.0" y="64.5" width="374" height="21.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Wnw-Of-5i4" userLabel="CommandPlay">
+                                <rect key="frame" x="20" y="433" width="374" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IaM-pY-e4M" userLabel="Play">
+                                        <rect key="frame" x="0.0" y="0.0" width="118" height="30"/>
+                                        <state key="normal" title="Play"/>
+                                        <connections>
+                                            <action selector="play:" destination="7qn-y3-yPz" eventType="touchUpInside" id="P22-YT-CdX"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pEm-qV-9R7" userLabel="Pause">
+                                        <rect key="frame" x="128" y="0.0" width="118" height="30"/>
+                                        <state key="normal" title="Pause"/>
+                                        <connections>
+                                            <action selector="pause:" destination="7qn-y3-yPz" eventType="touchUpInside" id="zGQ-if-F8j"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3bv-D5-0PV" userLabel="Stop">
+                                        <rect key="frame" x="256" y="0.0" width="118" height="30"/>
+                                        <state key="normal" title="Stop"/>
+                                        <connections>
+                                            <action selector="stop:" destination="7qn-y3-yPz" eventType="touchUpInside" id="QQh-Cx-XvP"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="OQ6-B9-ifA" userLabel="Seek">
+                                <rect key="frame" x="20" y="483" width="374" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sjr-EQ-5Ye" userLabel="Prev">
+                                        <rect key="frame" x="0.0" y="0.0" width="118" height="30"/>
+                                        <state key="normal" title="Prev"/>
+                                        <connections>
+                                            <action selector="prevSeek:" destination="7qn-y3-yPz" eventType="touchUpInside" id="l00-ka-dSU"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mSk-3a-mOz" userLabel="Blank">
+                                        <rect key="frame" x="128" y="0.0" width="118" height="30"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Lc-jj-swF" userLabel="Next">
+                                        <rect key="frame" x="256" y="0.0" width="118" height="30"/>
+                                        <state key="normal" title="Next"/>
+                                        <connections>
+                                            <action selector="nextSeek:" destination="7qn-y3-yPz" eventType="touchUpInside" id="g29-RO-jjT"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Wnw-Of-5i4" firstAttribute="leading" secondItem="1JW-En-b28" secondAttribute="leading" constant="20" id="0A1-GO-dGW"/>
+                            <constraint firstItem="orS-i8-pAp" firstAttribute="leading" secondItem="Wnw-Of-5i4" secondAttribute="leading" id="6cZ-dJ-BLI"/>
+                            <constraint firstItem="OQ6-B9-ifA" firstAttribute="leading" secondItem="Wnw-Of-5i4" secondAttribute="leading" id="HLL-Bi-7Y8"/>
+                            <constraint firstItem="Wnw-Of-5i4" firstAttribute="top" secondItem="orS-i8-pAp" secondAttribute="bottom" constant="20" id="Lkn-xb-Caa"/>
+                            <constraint firstItem="OQ6-B9-ifA" firstAttribute="top" secondItem="Wnw-Of-5i4" secondAttribute="bottom" constant="20" id="SG3-NA-zAb"/>
+                            <constraint firstItem="1JW-En-b28" firstAttribute="trailing" secondItem="Wnw-Of-5i4" secondAttribute="trailing" constant="20" id="TAl-gO-imO"/>
+                            <constraint firstItem="OQ6-B9-ifA" firstAttribute="trailing" secondItem="Wnw-Of-5i4" secondAttribute="trailing" id="YAw-rU-h6a"/>
+                            <constraint firstItem="Wnw-Of-5i4" firstAttribute="centerY" secondItem="JDc-Qt-PCc" secondAttribute="centerY" id="cK5-yd-Wif"/>
+                            <constraint firstItem="orS-i8-pAp" firstAttribute="trailing" secondItem="Wnw-Of-5i4" secondAttribute="trailing" id="s7E-Eh-MJQ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="1JW-En-b28"/>
+                    </view>
+                    <connections>
+                        <outlet property="itemDuration" destination="LxD-l2-Zhe" id="BeJ-wo-GU5"/>
+                        <outlet property="mediaLabel" destination="4Ts-Mj-dBt" id="vsz-j3-giW"/>
+                        <outlet property="stateLabel" destination="vMo-lh-c6T" id="beK-eo-ehL"/>
+                        <outlet property="timingLabel" destination="I7h-bJ-IPD" id="XoN-wQ-WbY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jvc-wq-Zxh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-49" y="70"/>
+        </scene>
+    </scenes>
+</document>

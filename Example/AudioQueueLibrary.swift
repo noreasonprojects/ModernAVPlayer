@@ -16,6 +16,6 @@ protocol AudioQueueLibrary: class {
 
 final class ModernAudioQueueLibrary: AudioQueueLibrary {
 
-    let dataSource = AudioQueueResource.remoteMedias()
+    let dataSource = AudioQueueResource.localMedias()
     var selectedMediaIndex = 0
 }

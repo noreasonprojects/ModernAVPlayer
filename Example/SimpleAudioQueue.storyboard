@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -93,16 +93,36 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fJl-6E-8Nz" userLabel="Next automatic">
+                                <rect key="frame" x="20" y="533" width="374" height="31"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Automatic next song" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vxp-OU-Ju7">
+                                        <rect key="frame" x="0.0" y="0.0" width="325" height="31"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Cnr-c1-701">
+                                        <rect key="frame" x="325" y="0.0" width="51" height="31"/>
+                                        <connections>
+                                            <action selector="setupPlayNext:" destination="7qn-y3-yPz" eventType="valueChanged" id="yPc-0K-wCT"/>
+                                        </connections>
+                                    </switch>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="Wnw-Of-5i4" firstAttribute="leading" secondItem="1JW-En-b28" secondAttribute="leading" constant="20" id="0A1-GO-dGW"/>
                             <constraint firstItem="orS-i8-pAp" firstAttribute="leading" secondItem="Wnw-Of-5i4" secondAttribute="leading" id="6cZ-dJ-BLI"/>
+                            <constraint firstItem="fJl-6E-8Nz" firstAttribute="leading" secondItem="OQ6-B9-ifA" secondAttribute="leading" id="7da-A0-hAA"/>
                             <constraint firstItem="OQ6-B9-ifA" firstAttribute="leading" secondItem="Wnw-Of-5i4" secondAttribute="leading" id="HLL-Bi-7Y8"/>
                             <constraint firstItem="Wnw-Of-5i4" firstAttribute="top" secondItem="orS-i8-pAp" secondAttribute="bottom" constant="20" id="Lkn-xb-Caa"/>
+                            <constraint firstItem="fJl-6E-8Nz" firstAttribute="trailing" secondItem="OQ6-B9-ifA" secondAttribute="trailing" id="M1v-St-Aoe"/>
                             <constraint firstItem="OQ6-B9-ifA" firstAttribute="top" secondItem="Wnw-Of-5i4" secondAttribute="bottom" constant="20" id="SG3-NA-zAb"/>
                             <constraint firstItem="1JW-En-b28" firstAttribute="trailing" secondItem="Wnw-Of-5i4" secondAttribute="trailing" constant="20" id="TAl-gO-imO"/>
                             <constraint firstItem="OQ6-B9-ifA" firstAttribute="trailing" secondItem="Wnw-Of-5i4" secondAttribute="trailing" id="YAw-rU-h6a"/>
+                            <constraint firstItem="OQ6-B9-ifA" firstAttribute="bottom" secondItem="fJl-6E-8Nz" secondAttribute="top" constant="-20" id="aFV-Vq-XMr"/>
                             <constraint firstItem="Wnw-Of-5i4" firstAttribute="centerY" secondItem="JDc-Qt-PCc" secondAttribute="centerY" id="cK5-yd-Wif"/>
                             <constraint firstItem="orS-i8-pAp" firstAttribute="trailing" secondItem="Wnw-Of-5i4" secondAttribute="trailing" id="s7E-Eh-MJQ"/>
                         </constraints>

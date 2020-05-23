@@ -13,6 +13,10 @@ import UIKit
 
 final class SimpleAudioQueueVC: UIViewController {
 
+    enum UserAction {
+        case prevTrack, nextTrack, start
+    }
+
     // MARK: - Inputs
 
     private let player: ModernAVPlayer = {
@@ -23,6 +27,7 @@ final class SimpleAudioQueueVC: UIViewController {
     private lazy var remote: AudioQueueRemoteExample = {
         return AudioQueueRemoteExample(player: self.player, library: self.library)
     }()
+    private var playNext: Disposable?
     private let disposeBag = DisposeBag()
 
     // MARK: - Interface Buidler
@@ -43,7 +48,13 @@ final class SimpleAudioQueueVC: UIViewController {
         player.remoteCommands = remote.defaultCommands
         setupRemoteCallback()
 
-        loadMedia(index: 0)
+        loadMedia(userAction: .start)
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        playNext?.dispose()
     }
 
     private func setupRxLabels() {
@@ -64,6 +75,21 @@ final class SimpleAudioQueueVC: UIViewController {
             })
             .bind(to: itemDuration.rx.text)
             .disposed(by: disposeBag)
+    }
+
+    @IBAction func setupPlayNext(_ sender: UISwitch) {
+        guard sender.isOn else {
+            playNext?.dispose()
+            playNext = nil
+            return
+        }
+
+        playNext = player.rx.itemPlayToEndTime
+            .subscribe(onNext: { [weak self] _ in
+                DispatchQueue.main.async {
+                    self?.loadMedia(userAction: .nextTrack)
+                }
+            })
     }
 
     private func setupMediaIndexLabel(index: String) {
@@ -91,18 +117,24 @@ final class SimpleAudioQueueVC: UIViewController {
     }
 
     @IBAction func prevSeek(_ sender: UIButton) {
-        library.selectedMediaIndex -= 1
-        let index = abs(library.selectedMediaIndex % library.dataSource.count)
-        loadMedia(index: index)
+        loadMedia(userAction: .prevTrack)
     }
 
     @IBAction func nextSeek(_ sender: UIButton) {
-        library.selectedMediaIndex += 1
-        let index = abs(library.selectedMediaIndex % library.dataSource.count)
-        loadMedia(index: index)
+        loadMedia(userAction: .nextTrack)
     }
 
-    private func loadMedia(index: Int) {
+    private func loadMedia(userAction: UserAction) {
+        switch userAction {
+        case .prevTrack:
+            library.selectedMediaIndex -= 1
+        case .nextTrack:
+            library.selectedMediaIndex += 1
+        case .start:
+            break
+        }
+
+        let index = abs(library.selectedMediaIndex % library.dataSource.count)
         setupMediaIndexLabel(index: index.description)
         let sample = library.dataSource[index]
         player.load(media: sample, autostart: true)

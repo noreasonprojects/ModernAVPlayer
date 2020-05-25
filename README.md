@@ -25,7 +25,6 @@
     - [Remote Command](#remote-command)
     - [Plugin](#plugin)
     - [RxSwift](#rxswift)
-- [Todo](#todo)
 - [Communication](#communication)
 
 ## Requirements

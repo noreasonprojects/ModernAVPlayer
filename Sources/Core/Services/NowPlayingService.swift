@@ -56,10 +56,6 @@ final class ModernAVPlayerNowPlayingService: NowPlaying {
             infos.removeValue(forKey: MPMediaItemPropertyArtwork)
         }
 
-        if let imageUrl = metadata?.remoteImageUrl {
-            updateRemoteImage(url: imageUrl)
-        }
-
         if let isLive = isLive {
             infos[MPNowPlayingInfoPropertyIsLiveStream] = isLive
         }
@@ -71,6 +67,10 @@ final class ModernAVPlayerNowPlayingService: NowPlaying {
         }
 
         MPNowPlayingInfoCenter.default().nowPlayingInfo = infos
+
+        if let imageUrl = metadata?.remoteImageUrl {
+            updateRemoteImage(url: imageUrl)
+        }
 
         ModernAVPlayerLogger.instance.log(message: "Update now playing dictionnary", domain: .service)
     }
@@ -88,8 +88,13 @@ final class ModernAVPlayerNowPlayingService: NowPlaying {
     private func updateRemoteImage(url: URL) {
         task?.cancel()
         task = session.dataTask(with: url) { [weak self] data, _, _ in
-            guard let imageData = data, let image = UIImage(data: imageData), let artwork = self?.getArtwork(image: image) else { return }
-            self?.overrideInfoCenter(for: MPMediaItemPropertyArtwork, value: artwork)
+            guard let self = self, let imageData = data, let image = UIImage(data: imageData)
+                else { return }
+
+            DispatchQueue.main.async {
+                let artwork = self.getArtwork(image: image)
+                self.overrideInfoCenter(for: MPMediaItemPropertyArtwork, value: artwork)
+            }
         }
         task?.resume()
     }

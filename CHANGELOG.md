@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 ---
 ## [X.X.X]
 * Fix:
+	* [#158] Crash when updating metadata
 	* Fix Xcode 11.4.1 compile issues
 * Dependency:
 	* [gem] Cocoapods -> 1.9.1

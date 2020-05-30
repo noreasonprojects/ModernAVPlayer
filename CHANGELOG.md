@@ -7,7 +7,7 @@ All notable changes to this project will be documented in this file.
 	* [#158] Crash when updating metadata
 	* Fix Xcode 11.4.1 compile issues
 * Demo:
-	* Add simple queue example
+	* Add simple audio queue example
 * Dependency:
 	* [gem] Cocoapods -> 1.9.1
 	* [gem] Fastlane -> 2.148.1

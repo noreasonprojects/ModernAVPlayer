@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 	* Add simple queue example
 * Dependency:
 	* [gem] Cocoapods -> 1.9.1
+	* [gem] Fastlane -> 2.148.1
 
 ## [1.5.1]
 * Fix:

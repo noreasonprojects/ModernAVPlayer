@@ -134,11 +134,10 @@ final class AudioQueueRemoteExample {
 
         let handler: (MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus = { [weak self] _ in
             guard let self = self else { return .commandFailed }
-            self.library.selectedMediaIndex -= 1
-            let index = abs(self.library.selectedMediaIndex % self.library.dataSource.count)
-            let media = self.library.dataSource[index]
+            self.library.changeMedia(userAction: .prevTrack)
+            let media = self.library.selectedMedia
             self.player.load(media: media, autostart: true, position: nil)
-            self.selectedMediaIndexChanged?(index.description)
+            self.selectedMediaIndexChanged?(self.library.index.description)
             return .success
         }
         command.addTarget(handler: handler)
@@ -157,11 +156,10 @@ final class AudioQueueRemoteExample {
 
         let handler: (MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus = { [weak self] _ in
             guard let self = self else { return .commandFailed }
-            self.library.selectedMediaIndex += 1
-            let index = abs(self.library.selectedMediaIndex % self.library.dataSource.count)
-            let media = self.library.dataSource[index]
+            self.library.changeMedia(userAction: .nextTrack)
+            let media = self.library.selectedMedia
             self.player.load(media: media, autostart: true, position: nil)
-            self.selectedMediaIndexChanged?(index.description)
+            self.selectedMediaIndexChanged?(self.library.index.description)
             return .success
         }
         command.addTarget(handler: handler)

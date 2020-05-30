@@ -13,10 +13,6 @@ import UIKit
 
 final class SimpleAudioQueueVC: UIViewController {
 
-    enum UserAction {
-        case prevTrack, nextTrack, start
-    }
-
     // MARK: - Inputs
 
     private let player: ModernAVPlayer = {
@@ -48,7 +44,7 @@ final class SimpleAudioQueueVC: UIViewController {
         player.remoteCommands = remote.defaultCommands
         setupRemoteCallback()
 
-        loadMedia(userAction: .start)
+        loadMedia()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -124,19 +120,13 @@ final class SimpleAudioQueueVC: UIViewController {
         loadMedia(userAction: .nextTrack)
     }
 
-    private func loadMedia(userAction: UserAction) {
-        switch userAction {
-        case .prevTrack:
-            library.selectedMediaIndex -= 1
-        case .nextTrack:
-            library.selectedMediaIndex += 1
-        case .start:
-            break
+    private func loadMedia(userAction: ModernAudioQueueLibrary.UserAction? = nil) {
+        if let action = userAction {
+            library.changeMedia(userAction: action)
         }
 
-        let index = abs(library.selectedMediaIndex % library.dataSource.count)
-        setupMediaIndexLabel(index: index.description)
-        let sample = library.dataSource[index]
-        player.load(media: sample, autostart: true)
+        setupMediaIndexLabel(index: library.index.description)
+        let media = library.selectedMedia
+        player.load(media: media, autostart: true)
     }
 }

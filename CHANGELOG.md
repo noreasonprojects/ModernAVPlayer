@@ -6,6 +6,8 @@ All notable changes to this project will be documented in this file.
 * Fix:
 	* [#158] Crash when updating metadata
 	* Fix Xcode 11.4.1 compile issues
+* Demo:
+	* Add simple queue example
 * Dependency:
 	* [gem] Cocoapods -> 1.9.1
 

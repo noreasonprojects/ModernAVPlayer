@@ -29,6 +29,7 @@ import Foundation
 enum DemoScreen: CaseIterable {
     case simpleAudioURL
     case simpleAudioAVPlayerItem
+    case simpleAudioQueue
     case simpleVideo
     case monkeyTests
 
@@ -40,6 +41,8 @@ enum DemoScreen: CaseIterable {
             return "SimpleAudio"
         case .simpleVideo:
             return "SimpleVideo"
+        case .simpleAudioQueue:
+            return "SimpleAudioQueue"
         }
     }
 
@@ -53,6 +56,8 @@ enum DemoScreen: CaseIterable {
             return "Simple Audio from AVPlayerItem"
         case .simpleVideo:
             return "Simple Video"
+        case .simpleAudioQueue:
+            return "Simple Audio Queue"
         }
     }
 }

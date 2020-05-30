@@ -20,11 +20,19 @@
 		E10B20E721C9557E00924E1D /* PlayerConfigurationExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10B20E621C9557E00924E1D /* PlayerConfigurationExample.swift */; };
 		E112DB452079359D00DB69E8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E112DB442079359D00DB69E8 /* Main.storyboard */; };
 		E112DB482079365B00DB69E8 /* AllNew.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E112DB472079365B00DB69E8 /* AllNew.mp3 */; };
+		E116E2AB2478863300039943 /* AudioQueueRemoteExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = E116E2AA2478863300039943 /* AudioQueueRemoteExample.swift */; };
+		E116E2AD24788ED900039943 /* AudioQueueResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E116E2AC24788ED900039943 /* AudioQueueResource.swift */; };
+		E116E2AF24788F4300039943 /* AudioQueueLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = E116E2AE24788F4300039943 /* AudioQueueLibrary.swift */; };
+		E116E2B3247896C000039943 /* SampleA.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E116E2B0247896C000039943 /* SampleA.mp3 */; };
+		E116E2B4247896C000039943 /* SampleB.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E116E2B1247896C000039943 /* SampleB.mp3 */; };
+		E116E2B5247896C000039943 /* SampleC.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E116E2B2247896C000039943 /* SampleC.mp3 */; };
 		E11EE8C8216CEA8600ABF06B /* PluginPausedStateSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11EE8C6216CEA8200ABF06B /* PluginPausedStateSpecs.swift */; };
 		E11EE8CA216CF43400ABF06B /* MatchPlayerMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11EE8C9216CF43400ABF06B /* MatchPlayerMedia.swift */; };
 		E11EE8CE216CF79E00ABF06B /* PluginStopppedStateSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11EE8CD216CF79E00ABF06B /* PluginStopppedStateSpecs.swift */; };
 		E11EE8D0216CF9D800ABF06B /* PluginInitSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11EE8CF216CF9D800ABF06B /* PluginInitSpecs.swift */; };
 		E11EE8D2216D011700ABF06B /* PluginWaitingNetworkStateSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11EE8D1216D011700ABF06B /* PluginWaitingNetworkStateSpecs.swift */; };
+		E1243FE12477D24E00B5F582 /* SimpleAudioQueue.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1243FE02477D24E00B5F582 /* SimpleAudioQueue.storyboard */; };
+		E1243FE32477D2AE00B5F582 /* SimpleAudioQueueVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1243FE22477D2AE00B5F582 /* SimpleAudioQueueVC.swift */; };
 		E1272948209B6721007583DB /* InterruptionAudioServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1272947209B6721007583DB /* InterruptionAudioServiceTests.swift */; };
 		E12CC731216AE7F800109A16 /* Mock.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12CC730216AE7F800109A16 /* Mock.generated.swift */; };
 		E12D8B5620792AE300A84A5E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12D8B5520792AE300A84A5E /* ViewController.swift */; };
@@ -106,11 +114,19 @@
 		E10B20E621C9557E00924E1D /* PlayerConfigurationExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerConfigurationExample.swift; sourceTree = "<group>"; };
 		E112DB442079359D00DB69E8 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		E112DB472079365B00DB69E8 /* AllNew.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = AllNew.mp3; sourceTree = "<group>"; };
+		E116E2AA2478863300039943 /* AudioQueueRemoteExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioQueueRemoteExample.swift; sourceTree = "<group>"; };
+		E116E2AC24788ED900039943 /* AudioQueueResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioQueueResource.swift; sourceTree = "<group>"; };
+		E116E2AE24788F4300039943 /* AudioQueueLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioQueueLibrary.swift; sourceTree = "<group>"; };
+		E116E2B0247896C000039943 /* SampleA.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SampleA.mp3; sourceTree = "<group>"; };
+		E116E2B1247896C000039943 /* SampleB.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SampleB.mp3; sourceTree = "<group>"; };
+		E116E2B2247896C000039943 /* SampleC.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SampleC.mp3; sourceTree = "<group>"; };
 		E11EE8C6216CEA8200ABF06B /* PluginPausedStateSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginPausedStateSpecs.swift; sourceTree = "<group>"; };
 		E11EE8C9216CF43400ABF06B /* MatchPlayerMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchPlayerMedia.swift; sourceTree = "<group>"; };
 		E11EE8CD216CF79E00ABF06B /* PluginStopppedStateSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginStopppedStateSpecs.swift; sourceTree = "<group>"; };
 		E11EE8CF216CF9D800ABF06B /* PluginInitSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginInitSpecs.swift; sourceTree = "<group>"; };
 		E11EE8D1216D011700ABF06B /* PluginWaitingNetworkStateSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginWaitingNetworkStateSpecs.swift; sourceTree = "<group>"; };
+		E1243FE02477D24E00B5F582 /* SimpleAudioQueue.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SimpleAudioQueue.storyboard; sourceTree = "<group>"; };
+		E1243FE22477D2AE00B5F582 /* SimpleAudioQueueVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleAudioQueueVC.swift; sourceTree = "<group>"; };
 		E1272947209B6721007583DB /* InterruptionAudioServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterruptionAudioServiceTests.swift; sourceTree = "<group>"; };
 		E12CC730216AE7F800109A16 /* Mock.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mock.generated.swift; sourceTree = "<group>"; };
 		E12D8B5520792AE300A84A5E /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -288,6 +304,9 @@
 			children = (
 				E1A308AC20B5C032007ED482 /* noreason.txt */,
 				E112DB472079365B00DB69E8 /* AllNew.mp3 */,
+				E116E2B0247896C000039943 /* SampleA.mp3 */,
+				E116E2B1247896C000039943 /* SampleB.mp3 */,
+				E116E2B2247896C000039943 /* SampleC.mp3 */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -315,6 +334,18 @@
 				E11EE8D1216D011700ABF06B /* PluginWaitingNetworkStateSpecs.swift */,
 			);
 			path = Plugins;
+			sourceTree = "<group>";
+		};
+		E1243FDF2477D13E00B5F582 /* SimpleAudioQueue */ = {
+			isa = PBXGroup;
+			children = (
+				E1243FE02477D24E00B5F582 /* SimpleAudioQueue.storyboard */,
+				E1243FE22477D2AE00B5F582 /* SimpleAudioQueueVC.swift */,
+				E116E2AA2478863300039943 /* AudioQueueRemoteExample.swift */,
+				E116E2AC24788ED900039943 /* AudioQueueResource.swift */,
+				E116E2AE24788F4300039943 /* AudioQueueLibrary.swift */,
+			);
+			name = SimpleAudioQueue;
 			sourceTree = "<group>";
 		};
 		E12CC72F216AE7F800109A16 /* Generated */ = {
@@ -375,6 +406,7 @@
 		E177C7042368DEC300826796 /* Domains */ = {
 			isa = PBXGroup;
 			children = (
+				E1243FDF2477D13E00B5F582 /* SimpleAudioQueue */,
 				E177C7052368DED300826796 /* Main */,
 				E191052D2352792900E440C7 /* MonkeyTests */,
 				E1FB26A9235789BD00277B40 /* SimpleAudio */,
@@ -531,11 +563,15 @@
 			files = (
 				E112DB452079359D00DB69E8 /* Main.storyboard in Resources */,
 				E191052C2352790B00E440C7 /* MonkeyTests.storyboard in Resources */,
+				E116E2B5247896C000039943 /* SampleC.mp3 in Resources */,
+				E116E2B4247896C000039943 /* SampleB.mp3 in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				E1A308AD20B5C032007ED482 /* noreason.txt in Resources */,
 				E1FB26A8235789AD00277B40 /* SimpleAudio.storyboard in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
 				E1FD71B3236B828F0021B999 /* SimpleVideo.storyboard in Resources */,
+				E1243FE12477D24E00B5F582 /* SimpleAudioQueue.storyboard in Resources */,
+				E116E2B3247896C000039943 /* SampleA.mp3 in Resources */,
 				E112DB482079365B00DB69E8 /* AllNew.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -673,14 +709,18 @@
 			files = (
 				E1CE54A9236BBCE0009A5236 /* AVPlayerView.swift in Sources */,
 				E10B20E721C9557E00924E1D /* PlayerConfigurationExample.swift in Sources */,
+				E116E2AF24788F4300039943 /* AudioQueueLibrary.swift in Sources */,
 				E10B20E521C94F7400924E1D /* RemoteCommandExample.swift in Sources */,
 				E191052F23527A3100E440C7 /* MediaResource.swift in Sources */,
 				E1FB26A62357898A00277B40 /* SimpleAudioVC.swift in Sources */,
 				E191052A235276D600E440C7 /* DemoScreen.swift in Sources */,
 				E1FD71B1236B81DF0021B999 /* SimpleVideo.swift in Sources */,
 				E12D8B5620792AE300A84A5E /* ViewController.swift in Sources */,
+				E116E2AB2478863300039943 /* AudioQueueRemoteExample.swift in Sources */,
 				E19F1ABE235922FD00535291 /* Helper.swift in Sources */,
+				E1243FE32477D2AE00B5F582 /* SimpleAudioQueueVC.swift in Sources */,
 				E1910528235274A500E440C7 /* TableViewController.swift in Sources */,
+				E116E2AD24788ED900039943 /* AudioQueueResource.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

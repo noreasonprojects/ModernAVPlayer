@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 
 ---
-## [X.X.X]
+## [1.5.2]
 * Fix:
 	* [#158] Crash when updating metadata
 	* Fix Xcode 11.4.1 compile issues

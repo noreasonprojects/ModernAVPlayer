@@ -72,16 +72,16 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
     
     var bgToken: UIBackgroundTaskIdentifier?
     var currentItem: AVPlayerItem? {
-        return player.currentItem
+        player.currentItem
     }
     var currentMedia: PlayerMedia? {
         didSet { delegate?.playerContext(didCurrentMediaChange: currentMedia) }
     }
     var currentTime: Double {
-        return player.currentTime().seconds
+        player.currentTime().seconds
     }
     var itemDuration: Double? {
-        return currentItem?.duration.seconds
+        currentItem?.duration.seconds
     }
     var remoteCommands: [ModernAVPlayerRemoteCommand]? {
         didSet {

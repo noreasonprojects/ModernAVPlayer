@@ -2281,6 +2281,256 @@ open class PlayerPluginMock: PlayerPlugin, Mock {
     }
 }
 
+// MARK: - PlayerState
+open class PlayerStateMock: PlayerState, Mock {
+    init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
+        SwiftyMockyTestObserver.setup()
+        self.sequencingPolicy = sequencingPolicy
+        self.stubbingPolicy = stubbingPolicy
+        self.file = file
+        self.line = line
+    }
+
+    var matcher: Matcher = Matcher.default
+    var stubbingPolicy: StubbingPolicy = .wrap
+    var sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst
+    private var invocations: [MethodType] = []
+    private var methodReturnValues: [Given] = []
+    private var methodPerformValues: [Perform] = []
+    private var file: StaticString?
+    private var line: UInt?
+
+    public typealias PropertyStub = Given
+    public typealias MethodStub = Given
+    public typealias SubscriptStub = Given
+
+    /// Convenience method - call setupMock() to extend debug information when failure occurs
+    public func setupMock(file: StaticString = #file, line: UInt = #line) {
+        self.file = file
+        self.line = line
+    }
+
+    /// Clear mock internals. You can specify what to reset (invocations aka verify, givens or performs) or leave it empty to clear all mock internals
+    public func resetMock(_ scopes: MockScope...) {
+        let scopes: [MockScope] = scopes.isEmpty ? [.invocation, .given, .perform] : scopes
+        if scopes.contains(.invocation) { invocations = [] }
+        if scopes.contains(.given) { methodReturnValues = [] }
+        if scopes.contains(.perform) { methodPerformValues = [] }
+    }
+
+    public var context: PlayerContext {
+		get {	invocations.append(.p_context_get); return __p_context ?? givenGetterValue(.p_context_get, "PlayerStateMock - stub value for context was not defined") }
+		@available(*, deprecated, message: "Using setters on readonly variables is deprecated, and will be removed in 3.1. Use Given to define stubbed property return value.")
+		set {	__p_context = newValue }
+	}
+	private var __p_context: (PlayerContext)?
+
+    public var type: ModernAVPlayer.State {
+		get {	invocations.append(.p_type_get); return __p_type ?? givenGetterValue(.p_type_get, "PlayerStateMock - stub value for type was not defined") }
+		@available(*, deprecated, message: "Using setters on readonly variables is deprecated, and will be removed in 3.1. Use Given to define stubbed property return value.")
+		set {	__p_type = newValue }
+	}
+	private var __p_type: (ModernAVPlayer.State)?
+
+
+
+
+
+    open func contextUpdated() {
+        addInvocation(.m_contextUpdated)
+		let perform = methodPerformValue(.m_contextUpdated) as? () -> Void
+		perform?()
+    }
+
+    open func load(media: PlayerMedia, autostart: Bool, position: Double?) {
+        addInvocation(.m_load__media_mediaautostart_autostartposition_position(Parameter<PlayerMedia>.value(`media`), Parameter<Bool>.value(`autostart`), Parameter<Double?>.value(`position`)))
+		let perform = methodPerformValue(.m_load__media_mediaautostart_autostartposition_position(Parameter<PlayerMedia>.value(`media`), Parameter<Bool>.value(`autostart`), Parameter<Double?>.value(`position`))) as? (PlayerMedia, Bool, Double?) -> Void
+		perform?(`media`, `autostart`, `position`)
+    }
+
+    open func pause() {
+        addInvocation(.m_pause)
+		let perform = methodPerformValue(.m_pause) as? () -> Void
+		perform?()
+    }
+
+    open func play() {
+        addInvocation(.m_play)
+		let perform = methodPerformValue(.m_play) as? () -> Void
+		perform?()
+    }
+
+    open func seek(position: Double) {
+        addInvocation(.m_seek__position_position(Parameter<Double>.value(`position`)))
+		let perform = methodPerformValue(.m_seek__position_position(Parameter<Double>.value(`position`))) as? (Double) -> Void
+		perform?(`position`)
+    }
+
+    open func stop() {
+        addInvocation(.m_stop)
+		let perform = methodPerformValue(.m_stop) as? () -> Void
+		perform?()
+    }
+
+
+    fileprivate enum MethodType {
+        case m_contextUpdated
+        case m_load__media_mediaautostart_autostartposition_position(Parameter<PlayerMedia>, Parameter<Bool>, Parameter<Double?>)
+        case m_pause
+        case m_play
+        case m_seek__position_position(Parameter<Double>)
+        case m_stop
+        case p_context_get
+        case p_type_get
+
+        static func compareParameters(lhs: MethodType, rhs: MethodType, matcher: Matcher) -> Bool {
+            switch (lhs, rhs) {
+            case (.m_contextUpdated, .m_contextUpdated):
+                return true 
+            case (.m_load__media_mediaautostart_autostartposition_position(let lhsMedia, let lhsAutostart, let lhsPosition), .m_load__media_mediaautostart_autostartposition_position(let rhsMedia, let rhsAutostart, let rhsPosition)):
+                guard Parameter.compare(lhs: lhsMedia, rhs: rhsMedia, with: matcher) else { return false } 
+                guard Parameter.compare(lhs: lhsAutostart, rhs: rhsAutostart, with: matcher) else { return false } 
+                guard Parameter.compare(lhs: lhsPosition, rhs: rhsPosition, with: matcher) else { return false } 
+                return true 
+            case (.m_pause, .m_pause):
+                return true 
+            case (.m_play, .m_play):
+                return true 
+            case (.m_seek__position_position(let lhsPosition), .m_seek__position_position(let rhsPosition)):
+                guard Parameter.compare(lhs: lhsPosition, rhs: rhsPosition, with: matcher) else { return false } 
+                return true 
+            case (.m_stop, .m_stop):
+                return true 
+            case (.p_context_get,.p_context_get): return true
+            case (.p_type_get,.p_type_get): return true
+            default: return false
+            }
+        }
+
+        func intValue() -> Int {
+            switch self {
+            case .m_contextUpdated: return 0
+            case let .m_load__media_mediaautostart_autostartposition_position(p0, p1, p2): return p0.intValue + p1.intValue + p2.intValue
+            case .m_pause: return 0
+            case .m_play: return 0
+            case let .m_seek__position_position(p0): return p0.intValue
+            case .m_stop: return 0
+            case .p_context_get: return 0
+            case .p_type_get: return 0
+            }
+        }
+    }
+
+    open class Given: StubbedMethod {
+        fileprivate var method: MethodType
+
+        private init(method: MethodType, products: [StubProduct]) {
+            self.method = method
+            super.init(products)
+        }
+
+        public static func context(getter defaultValue: PlayerContext...) -> PropertyStub {
+            return Given(method: .p_context_get, products: defaultValue.map({ StubProduct.return($0 as Any) }))
+        }
+        public static func type(getter defaultValue: ModernAVPlayer.State...) -> PropertyStub {
+            return Given(method: .p_type_get, products: defaultValue.map({ StubProduct.return($0 as Any) }))
+        }
+
+    }
+
+    public struct Verify {
+        fileprivate var method: MethodType
+
+        public static func contextUpdated() -> Verify { return Verify(method: .m_contextUpdated)}
+        public static func load(media: Parameter<PlayerMedia>, autostart: Parameter<Bool>, position: Parameter<Double?>) -> Verify { return Verify(method: .m_load__media_mediaautostart_autostartposition_position(`media`, `autostart`, `position`))}
+        public static func pause() -> Verify { return Verify(method: .m_pause)}
+        public static func play() -> Verify { return Verify(method: .m_play)}
+        public static func seek(position: Parameter<Double>) -> Verify { return Verify(method: .m_seek__position_position(`position`))}
+        public static func stop() -> Verify { return Verify(method: .m_stop)}
+        public static var context: Verify { return Verify(method: .p_context_get) }
+        public static var type: Verify { return Verify(method: .p_type_get) }
+    }
+
+    public struct Perform {
+        fileprivate var method: MethodType
+        var performs: Any
+
+        public static func contextUpdated(perform: @escaping () -> Void) -> Perform {
+            return Perform(method: .m_contextUpdated, performs: perform)
+        }
+        public static func load(media: Parameter<PlayerMedia>, autostart: Parameter<Bool>, position: Parameter<Double?>, perform: @escaping (PlayerMedia, Bool, Double?) -> Void) -> Perform {
+            return Perform(method: .m_load__media_mediaautostart_autostartposition_position(`media`, `autostart`, `position`), performs: perform)
+        }
+        public static func pause(perform: @escaping () -> Void) -> Perform {
+            return Perform(method: .m_pause, performs: perform)
+        }
+        public static func play(perform: @escaping () -> Void) -> Perform {
+            return Perform(method: .m_play, performs: perform)
+        }
+        public static func seek(position: Parameter<Double>, perform: @escaping (Double) -> Void) -> Perform {
+            return Perform(method: .m_seek__position_position(`position`), performs: perform)
+        }
+        public static func stop(perform: @escaping () -> Void) -> Perform {
+            return Perform(method: .m_stop, performs: perform)
+        }
+    }
+
+    public func given(_ method: Given) {
+        methodReturnValues.append(method)
+    }
+
+    public func perform(_ method: Perform) {
+        methodPerformValues.append(method)
+        methodPerformValues.sort { $0.method.intValue() < $1.method.intValue() }
+    }
+
+    public func verify(_ method: Verify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
+        let invocations = matchingCalls(method.method)
+        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+    }
+
+    private func addInvocation(_ call: MethodType) {
+        invocations.append(call)
+    }
+    private func methodReturnValue(_ method: MethodType) throws -> StubProduct {
+        let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
+        let matched = candidates.first(where: { $0.isValid && MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
+        guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
+        return product
+    }
+    private func methodPerformValue(_ method: MethodType) -> Any? {
+        let matched = methodPerformValues.reversed().first { MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) }
+        return matched?.performs
+    }
+    private func matchingCalls(_ method: MethodType) -> [MethodType] {
+        return invocations.filter { MethodType.compareParameters(lhs: $0, rhs: method, matcher: matcher) }
+    }
+    private func matchingCalls(_ method: Verify) -> Int {
+        return matchingCalls(method.method).count
+    }
+    private func givenGetterValue<T>(_ method: MethodType, _ message: String) -> T {
+        do {
+            return try methodReturnValue(method).casted()
+        } catch {
+            onFatalFailure(message)
+            Failure(message)
+        }
+    }
+    private func optionalGivenGetterValue<T>(_ method: MethodType, _ message: String) -> T? {
+        do {
+            return try methodReturnValue(method).casted()
+        } catch {
+            return nil
+        }
+    }
+    private func onFatalFailure(_ message: String) {
+        #if Mocky
+        guard let file = self.file, let line = self.line else { return } // Let if fail if cannot handle gratefully
+        SwiftyMockyTestObserver.handleMissingStubError(message: message, file: file, line: line)
+        #endif
+    }
+}
+
 // MARK: - ReachabilityService
 open class ReachabilityServiceMock: ReachabilityService, Mock {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {

@@ -33,80 +33,165 @@ import XCTest
 final class PlayerContextTests: XCTestCase {
 
     private var audioSession: AudioSessionServiceMock!
-    private var tested: ModernAVPlayerContext!
-    private var mockState: MockPlayerState!
+    private var context: ModernAVPlayerContext!
+    private var state: PlayerStateMock!
     private var media: MockPlayerMedia!
     private var nowPlaying: NowPlayingMock!
-    private let player = MockCustomPlayer()
+    private var player: MockCustomPlayer!
     private let config = ModernAVPlayerConfiguration()
     private var delegate: PlayerContextDelegateMock!
 
     override func setUp() {
+        player = MockCustomPlayer()
         delegate = PlayerContextDelegateMock()
         ModernAVPlayerLogger.setup.domains = []
         audioSession = AudioSessionServiceMock()
         nowPlaying = NowPlayingMock()
-        tested = ModernAVPlayerContext(player: player, config: config, nowPlaying: nowPlaying,
+        context = ModernAVPlayerContext(player: player, config: config, nowPlaying: nowPlaying,
                                        audioSession: audioSession, plugins: [])
-        mockState = MockPlayerState(context: tested)
         media = MockPlayerMedia(url: URL(string: "foo")!, type: .clip)
-        tested.delegate = delegate
+        context.delegate = delegate
+
+        state = PlayerStateMock()
+        Given(state, .type(getter: .failed))
+        Given(state, .context(getter: context))
+    }
+
+    func testCurrentItem() {
+        // ARRANGE
+        let duration = CMTime(seconds: 42, preferredTimescale: config.preferredTimescale)
+        let item = MockPlayerItem(url: URL(fileURLWithPath: ""), duration: duration, status: nil)
+        player.overrideCurrentItem = item
+
+        // ACT
+        let itemResponse = context.currentItem
+
+        // ASERT
+        XCTAssertEqual(item, itemResponse)
+    }
+
+    func testCurrentMediaDelegateCall() {
+        // ACT
+        context.currentMedia = media
+
+        // ASSERT
+        Verify(delegate, 1,
+               .playerContext(didCurrentMediaChange: .matching { $0 as? MockPlayerMedia == self.media }))
+    }
+
+    func testCurrentTime() {
+        // ARRANGE
+        let currentTime = CMTime(seconds: 42, preferredTimescale: config.preferredTimescale)
+        player.overrideCurrentTime = currentTime
+
+        // ACT
+        let currentTimeResponse = context.currentTime
+
+        // ASSERT
+        XCTAssertEqual(currentTime.seconds, currentTimeResponse)
+    }
+
+    func testCurrentItemDuration() {
+        // ARRANGE
+        let duration = CMTime(seconds: 42, preferredTimescale: config.preferredTimescale)
+        let item = MockPlayerItem.createOne(url: "foo", duration: duration)
+        player.overrideCurrentItem = item
+
+        // ACT
+        let durationResponse = context.currentItem?.duration
+
+        // ASERT
+        XCTAssertEqual(duration, durationResponse)
+    }
+
+    func testSetStateContextUpdatedCall() {
+        // ACT
+        context.changeState(state: state)
+
+        // ASSERT
+        Verify(state, 1, .contextUpdated())
+    }
+
+    func testSetStateDelegateCall() {
+        // ACT
+        context.changeState(state: state)
+
+        // ASSERT
+        Verify(delegate, 1, .playerContext(didStateChange: .value(state.type)))
     }
 
     func testCurrentInitState() {
         // ASSERT
-        XCTAssertTrue(tested.state is InitState)
+        XCTAssertTrue(context.state is InitState)
     }
 
     func testSetCategoryOnInit() {
         // ASSERT
-        Verify(self.audioSession, 1, .setCategory(.value(self.tested.config.audioSessionCategory)))
+        Verify(self.audioSession, 1, .setCategory(.value(self.context.config.audioSessionCategory)))
+    }
+
+    func testSetExternalPlayback() {
+        // ARRANGE
+        player.overrideAllowsExternalPlayback = config.allowsExternalPlayback
+        
+        // ASSERT
+        XCTAssertEqual(player.allowsExternalPlayback, config.allowsExternalPlayback)
+        // AVPlayer init allowsExternalPlayback property
+        XCTAssertEqual(player.allowsExternalPlaybackCallCount, 2)
+    }
+
+    func testChangeState() {
+        // ARRANGE
+        Given(state, .type(getter: .loaded))
+
+        // ACT
+        context.changeState(state: state)
+
+        // ASSERT
+        XCTAssertEqual(context.state.type, .loaded)
     }
 
     func testPause() {
         // ARRANGE
-        tested.changeState(state: mockState)
+        context.changeState(state: state)
 
         // ACT
-        tested.pause()
+        context.pause()
 
         // ASSERT
-        XCTAssertEqual(mockState.pauseCallCount, 1)
+        Verify(state, 1, .pause())
     }
 
     func testPlay() {
         // ARRANGE
-        tested.changeState(state: mockState)
+        context.changeState(state: state)
 
         // ACT
-        tested.play()
+        context.play()
 
         // ASSERT
-        XCTAssertEqual(mockState.playCallCount, 1)
+        Verify(state, 1, .play())
     }
 
     func testStop() {
         // ARRANGE
-        tested.changeState(state: mockState)
+        context.changeState(state: state)
 
         // ACT
-        tested.stop()
+        context.stop()
 
         // ASSERT
-        XCTAssertEqual(mockState.stopCallCount, 1)
+        Verify(state, 1, .stop())
     }
 
-    func testSeekWithNoMedia() {
+    func testSeekWithNoCurrentItem() {
         // ARRANGE
-        let delegate = PlayerContextDelegateMock()
-        tested.delegate = delegate
-        tested.changeState(state: mockState)
+        context.changeState(state: state)
 
         // ACT
-        tested.seek(position: 0)
+        context.seek(position: 0)
 
         // ASSERT
-        XCTAssertEqual(mockState.seekCallCount, 0)
         Verify(delegate, 1, .playerContext(unavailableActionReason: .value(.loadMediaFirst)))
     }
 
@@ -116,12 +201,9 @@ final class PlayerContextTests: XCTestCase {
         let duration = CMTime(seconds: 42, preferredTimescale: config.preferredTimescale)
         player.overrideCurrentItem = MockPlayerItem(url: URL(fileURLWithPath: ""),
                                                     duration: duration, status: nil)
-        let delegate = PlayerContextDelegateMock()
-        tested.delegate = delegate
-        tested.changeState(state: mockState)
 
         // ACT
-        tested.seek(position: seekPosition)
+        context.seek(position: seekPosition)
 
         // ASSERT
         Verify(delegate, 1, .playerContext(unavailableActionReason: .value(.seekOverstepPosition)))
@@ -133,14 +215,13 @@ final class PlayerContextTests: XCTestCase {
         let duration = CMTime(seconds: 42, preferredTimescale: config.preferredTimescale)
         player.overrideCurrentItem = MockPlayerItem(url: URL(fileURLWithPath: ""),
                                                     duration: duration, status: nil)
-        tested.changeState(state: mockState)
+        context.changeState(state: state)
 
         // ACT
-        tested.seek(position: seekPosition)
+        context.seek(position: seekPosition)
 
         // ASSERT
-        XCTAssertEqual(mockState.seekCallCount, 1)
-        XCTAssertEqual(mockState.lastPositionParam, seekPosition)
+        Verify(state, 1, .seek(position: .value(seekPosition)))
     }
 
     func testValidSeekOffset() {
@@ -151,69 +232,36 @@ final class PlayerContextTests: XCTestCase {
         player.overrideCurrentTime = seekPosition
         player.overrideCurrentItem = MockPlayerItem(url: URL(fileURLWithPath: ""),
                                                     duration: duration, status: nil)
-        tested.changeState(state: mockState)
+        context.changeState(state: state)
 
         // ACT
-        tested.seek(offset: offset)
+        context.seek(offset: offset)
 
         // ASSERT
         let expected = seekPosition.seconds + offset
-        XCTAssertEqual(mockState.seekCallCount, 1)
-        XCTAssertEqual(mockState.lastPositionParam, expected)
+        Verify(state, 1, .seek(position: .value(expected)))
     }
 
-    func testSetCurrentMedia() {
+    func testLoadMedia() {
         // ARRANGE
         let media = MockPlayerMedia(url: URL(string: "foo")!, type: .clip)
+        let autostart = true
+        let position: Double = 56
+        context.changeState(state: state)
 
         // ACT
-        tested.load(media: media, autostart: false, position: nil)
+        context.load(media: media, autostart: autostart, position: position)
 
         // ASSERT
-        XCTAssertEqual(tested.currentMedia as? MockPlayerMedia, media)
-    }
-
-    func testCallLoadMedia() {
-        // ARRANGE
-        tested.changeState(state: mockState)
-        let media = MockPlayerMedia(url: URL(string: "foo")!, type: .clip)
-        let position = 42.0
-
-        // ACT
-        tested.load(media: media, autostart: false, position: position)
-
-        // ASSERT
-        XCTAssertEqual(mockState.loadMedialCallCount, 1)
-        XCTAssert(mockState.lastLoadAutostartParam == false)
-        XCTAssertEqual(mockState.lastLoadPositionParam, position)
-    }
-
-    func testChangeState() {
-        // ARRANGE
-        let newState = MockPlayerState(context: tested, state: .failed)
-
-        // ACT
-        tested.changeState(state: newState)
-
-        // ASSERT
-        XCTAssertEqual(tested.state.type, .failed)
-    }
-
-    func testContextUpdatedCall() {
-        // ARRANGE
-        let newState = MockPlayerState(context: tested)
-
-        // ACT
-        tested.changeState(state: newState)
-
-        // ASSERT
-        XCTAssertEqual(newState.contextUpdatedCallCount, 1)
+        Verify(state, 1, .load(media: .matching { $0 as? MockPlayerMedia == media },
+                               autostart: .value(autostart),
+                               position: .value(position)))
     }
 
     func testUpdateMetadataSetMetadata() {
         // ARRANGE
         let media = PlayerMediaMock()
-        tested.currentMedia = media
+        context.currentMedia = media
         let metadata = MockPlayerMediaMetadata(title: "title",
                                                albumTitle: "album",
                                                artist: "artist",
@@ -221,7 +269,7 @@ final class PlayerContextTests: XCTestCase {
                                                remoteImageUrl: nil)
 
         // ACT
-        tested.updateMetadata(metadata)
+        context.updateMetadata(metadata)
 
         // ASSERT
         Verify(media, 1, .setMetadata(.matching { $0 as? MockPlayerMediaMetadata == metadata }))
@@ -229,7 +277,7 @@ final class PlayerContextTests: XCTestCase {
 
     func testUpdateMetadataNowPlayingInfo() {
         // ARRANGE
-        tested.currentMedia = media
+        context.currentMedia = media
         let metadata = MockPlayerMediaMetadata(title: "title",
                                                albumTitle: "album",
                                                artist: "artist",
@@ -237,7 +285,7 @@ final class PlayerContextTests: XCTestCase {
                                                remoteImageUrl: nil)
 
         // ACT
-        tested.updateMetadata(metadata)
+        context.updateMetadata(metadata)
 
         // ASSERT
         Verify(nowPlaying, 1, .update(metadata: .matching { $0 as? MockPlayerMediaMetadata == metadata }))
@@ -245,10 +293,10 @@ final class PlayerContextTests: XCTestCase {
 
     func testUpdateMetadataWithNoCurrentMedia() {
         // ARRANGE
-        tested.currentMedia = nil
+        context.currentMedia = nil
 
         // ACT
-        tested.updateMetadata(nil)
+        context.updateMetadata(nil)
 
         // ASSERT
         Verify(delegate, 1, .playerContext(unavailableActionReason: .value(.loadMediaFirst)))

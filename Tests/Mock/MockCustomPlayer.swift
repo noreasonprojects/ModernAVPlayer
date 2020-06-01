@@ -111,4 +111,11 @@ final class MockCustomPlayer: AVPlayer {
         let item = MockPlayerItem.createOnUsingAsset(url: url)
         return MockCustomPlayer(overrideCurrentItem: item)
     }
+
+    private(set) var allowsExternalPlaybackCallCount = 0
+    var overrideAllowsExternalPlayback: Bool!
+    override var allowsExternalPlayback: Bool {
+        get { overrideAllowsExternalPlayback }
+        set { allowsExternalPlaybackCallCount += 1 }
+    }
 }

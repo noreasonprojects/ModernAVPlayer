@@ -140,7 +140,7 @@ public final class ModernAVPlayer: NSObject, ModernAVPlayerExposable {
     ///
     /// - parameter metadata: metadata to load
     ///
-    public func updateMetadata(_ metadata: PlayerMediaMetadata) {
+    public func updateMetadata(_ metadata: PlayerMediaMetadata?) {
         context.updateMetadata(metadata)
     }
     

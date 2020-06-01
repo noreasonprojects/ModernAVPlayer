@@ -36,18 +36,21 @@ final class PlayerContextTests: XCTestCase {
     private var tested: ModernAVPlayerContext!
     private var mockState: MockPlayerState!
     private var media: MockPlayerMedia!
-    private var nowPlaying: MockNowPlayingService!
+    private var nowPlaying: NowPlayingMock!
     private let player = MockCustomPlayer()
     private let config = ModernAVPlayerConfiguration()
+    private var delegate: PlayerContextDelegateMock!
 
     override func setUp() {
+        delegate = PlayerContextDelegateMock()
         ModernAVPlayerLogger.setup.domains = []
         audioSession = AudioSessionServiceMock()
-        nowPlaying = MockNowPlayingService()
+        nowPlaying = NowPlayingMock()
         tested = ModernAVPlayerContext(player: player, config: config, nowPlaying: nowPlaying,
                                        audioSession: audioSession, plugins: [])
         mockState = MockPlayerState(context: tested)
         media = MockPlayerMedia(url: URL(string: "foo")!, type: .clip)
+        tested.delegate = delegate
     }
 
     func testCurrentInitState() {
@@ -207,7 +210,24 @@ final class PlayerContextTests: XCTestCase {
         XCTAssertEqual(newState.contextUpdatedCallCount, 1)
     }
 
-    func testUpdateMetadata() {
+    func testUpdateMetadataSetMetadata() {
+        // ARRANGE
+        let media = PlayerMediaMock()
+        tested.currentMedia = media
+        let metadata = MockPlayerMediaMetadata(title: "title",
+                                               albumTitle: "album",
+                                               artist: "artist",
+                                               image: nil,
+                                               remoteImageUrl: nil)
+
+        // ACT
+        tested.updateMetadata(metadata)
+
+        // ASSERT
+        Verify(media, 1, .setMetadata(.matching { $0 as? MockPlayerMediaMetadata == metadata }))
+    }
+
+    func testUpdateMetadataNowPlayingInfo() {
         // ARRANGE
         tested.currentMedia = media
         let metadata = MockPlayerMediaMetadata(title: "title",
@@ -220,43 +240,17 @@ final class PlayerContextTests: XCTestCase {
         tested.updateMetadata(metadata)
 
         // ASSERT
-        XCTAssertEqual(media.setMetadataCallCount, 1)
-        let expectedMetadata = MockPlayerMediaMetadata.convert(media.setMetadataLastParam!)
-        XCTAssertEqual(expectedMetadata, metadata)
+        Verify(nowPlaying, 1, .update(metadata: .matching { $0 as? MockPlayerMediaMetadata == metadata }))
     }
 
-    func testUpdateNowPlayingInfo() {
-        // ARRANGE
-        tested.currentMedia = media
-        let metadata = MockPlayerMediaMetadata(title: "title",
-                                               albumTitle: "album",
-                                               artist: "artist",
-                                               image: nil,
-                                               remoteImageUrl: nil)
-
-        // ACT
-        tested.updateMetadata(metadata)
-
-        // ASSERT
-        XCTAssertEqual(nowPlaying.updateCallCount, 1)
-        let expectedMetadata = MockPlayerMediaMetadata.convert(nowPlaying.updateLastMetadataParam!)
-        XCTAssertEqual(expectedMetadata, metadata)
-    }
-
-    func testUpdateNowPlayingInfoWithNoCurrentMedia() {
+    func testUpdateMetadataWithNoCurrentMedia() {
         // ARRANGE
         tested.currentMedia = nil
-        let metadata = MockPlayerMediaMetadata(title: "title",
-                                               albumTitle: "album",
-                                               artist: "artist",
-                                               image: nil,
-                                               remoteImageUrl: nil)
 
         // ACT
-        tested.updateMetadata(metadata)
+        tested.updateMetadata(nil)
 
         // ASSERT
-        XCTAssertEqual(media.setMetadataCallCount, 0)
-        XCTAssertEqual(nowPlaying.updateCallCount, 0)
+        Verify(delegate, 1, .playerContext(unavailableActionReason: .value(.loadMediaFirst)))
     }
 }

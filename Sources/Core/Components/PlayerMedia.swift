@@ -48,7 +48,7 @@ public protocol PlayerMedia: CustomStringConvertible {
     func isLive() -> Bool
 
     func getMetadata() -> PlayerMediaMetadata?
-    func setMetadata(_ metadata: PlayerMediaMetadata)
+    func setMetadata(_ metadata: PlayerMediaMetadata?)
 }
 
 public extension PlayerMedia {

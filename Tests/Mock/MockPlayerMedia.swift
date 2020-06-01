@@ -29,7 +29,7 @@ final class MockPlayerMedia: PlayerMedia, Equatable {
 
     private(set) var setMetadataCallCount = 0
     private(set) var setMetadataLastParam: PlayerMediaMetadata?
-    func setMetadata(_ metadata: PlayerMediaMetadata) {
+    func setMetadata(_ metadata: PlayerMediaMetadata?) {
         setMetadataCallCount += 1
         setMetadataLastParam = metadata
     }

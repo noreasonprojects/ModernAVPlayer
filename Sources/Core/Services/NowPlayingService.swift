@@ -29,7 +29,8 @@ import MediaPlayer
 
 //sourcery: AutoMockable
 protocol NowPlaying {
-    func update(metadata: PlayerMediaMetadata?, duration: Double?, isLive: Bool?)
+    func update(metadata: PlayerMediaMetadata?)
+    func update(metadata: PlayerMediaMetadata?, duration: Double?, isLive: Bool)
     func overrideInfoCenter(for key: String, value: Any)
 }
 
@@ -43,7 +44,7 @@ final class ModernAVPlayerNowPlayingService: NowPlaying {
     private var session: URLSession { return URLSession.shared }
     private var task: URLSessionTask?
 
-    func update(metadata: PlayerMediaMetadata?, duration: Double?, isLive: Bool?) {
+    func update(metadata: PlayerMediaMetadata?) {
         infos[MPMediaItemPropertyTitle] = metadata?.title ?? ""
         infos[MPMediaItemPropertyArtist] = metadata?.artist ?? ""
         infos[MPMediaItemPropertyAlbumTitle] = metadata?.albumTitle ?? ""
@@ -56,16 +57,6 @@ final class ModernAVPlayerNowPlayingService: NowPlaying {
             infos.removeValue(forKey: MPMediaItemPropertyArtwork)
         }
 
-        if let isLive = isLive {
-            infos[MPNowPlayingInfoPropertyIsLiveStream] = isLive
-        }
-
-        if let duration = duration, duration.isNormal {
-            infos[MPMediaItemPropertyPlaybackDuration] = duration
-        } else {
-            infos.removeValue(forKey: MPMediaItemPropertyPlaybackDuration)
-        }
-
         MPNowPlayingInfoCenter.default().nowPlayingInfo = infos
 
         if let imageUrl = metadata?.remoteImageUrl {
@@ -73,6 +64,18 @@ final class ModernAVPlayerNowPlayingService: NowPlaying {
         }
 
         ModernAVPlayerLogger.instance.log(message: "Update now playing dictionnary", domain: .service)
+    }
+
+    func update(metadata: PlayerMediaMetadata?, duration: Double?, isLive: Bool) {
+        infos[MPNowPlayingInfoPropertyIsLiveStream] = isLive
+
+        if let duration = duration, duration.isNormal {
+            infos[MPMediaItemPropertyPlaybackDuration] = duration
+        } else {
+            infos.removeValue(forKey: MPMediaItemPropertyPlaybackDuration)
+        }
+
+        update(metadata: metadata)
     }
     
     func overrideInfoCenter(for key: String, value: Any) {

@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file.
 
 ---
+## [X.X.X]
+* Feature:
+	* Accept optional metadata when updating
+* Fix:
+	* Duration value when update metadata manually
+
 ## [1.5.2]
 * Fix:
 	* [#158] Crash when updating metadata

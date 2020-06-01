@@ -385,9 +385,15 @@ open class NowPlayingMock: NowPlaying, Mock {
 
 
 
-    open func update(metadata: PlayerMediaMetadata?, duration: Double?, isLive: Bool?) {
-        addInvocation(.m_update__metadata_metadataduration_durationisLive_isLive(Parameter<PlayerMediaMetadata?>.value(`metadata`), Parameter<Double?>.value(`duration`), Parameter<Bool?>.value(`isLive`)))
-		let perform = methodPerformValue(.m_update__metadata_metadataduration_durationisLive_isLive(Parameter<PlayerMediaMetadata?>.value(`metadata`), Parameter<Double?>.value(`duration`), Parameter<Bool?>.value(`isLive`))) as? (PlayerMediaMetadata?, Double?, Bool?) -> Void
+    open func update(metadata: PlayerMediaMetadata?) {
+        addInvocation(.m_update__metadata_metadata(Parameter<PlayerMediaMetadata?>.value(`metadata`)))
+		let perform = methodPerformValue(.m_update__metadata_metadata(Parameter<PlayerMediaMetadata?>.value(`metadata`))) as? (PlayerMediaMetadata?) -> Void
+		perform?(`metadata`)
+    }
+
+    open func update(metadata: PlayerMediaMetadata?, duration: Double?, isLive: Bool) {
+        addInvocation(.m_update__metadata_metadataduration_durationisLive_isLive(Parameter<PlayerMediaMetadata?>.value(`metadata`), Parameter<Double?>.value(`duration`), Parameter<Bool>.value(`isLive`)))
+		let perform = methodPerformValue(.m_update__metadata_metadataduration_durationisLive_isLive(Parameter<PlayerMediaMetadata?>.value(`metadata`), Parameter<Double?>.value(`duration`), Parameter<Bool>.value(`isLive`))) as? (PlayerMediaMetadata?, Double?, Bool) -> Void
 		perform?(`metadata`, `duration`, `isLive`)
     }
 
@@ -399,11 +405,15 @@ open class NowPlayingMock: NowPlaying, Mock {
 
 
     fileprivate enum MethodType {
-        case m_update__metadata_metadataduration_durationisLive_isLive(Parameter<PlayerMediaMetadata?>, Parameter<Double?>, Parameter<Bool?>)
+        case m_update__metadata_metadata(Parameter<PlayerMediaMetadata?>)
+        case m_update__metadata_metadataduration_durationisLive_isLive(Parameter<PlayerMediaMetadata?>, Parameter<Double?>, Parameter<Bool>)
         case m_overrideInfoCenter__for_keyvalue_value(Parameter<String>, Parameter<Any>)
 
         static func compareParameters(lhs: MethodType, rhs: MethodType, matcher: Matcher) -> Bool {
             switch (lhs, rhs) {
+            case (.m_update__metadata_metadata(let lhsMetadata), .m_update__metadata_metadata(let rhsMetadata)):
+                guard Parameter.compare(lhs: lhsMetadata, rhs: rhsMetadata, with: matcher) else { return false } 
+                return true 
             case (.m_update__metadata_metadataduration_durationisLive_isLive(let lhsMetadata, let lhsDuration, let lhsIslive), .m_update__metadata_metadataduration_durationisLive_isLive(let rhsMetadata, let rhsDuration, let rhsIslive)):
                 guard Parameter.compare(lhs: lhsMetadata, rhs: rhsMetadata, with: matcher) else { return false } 
                 guard Parameter.compare(lhs: lhsDuration, rhs: rhsDuration, with: matcher) else { return false } 
@@ -419,6 +429,7 @@ open class NowPlayingMock: NowPlaying, Mock {
 
         func intValue() -> Int {
             switch self {
+            case let .m_update__metadata_metadata(p0): return p0.intValue
             case let .m_update__metadata_metadataduration_durationisLive_isLive(p0, p1, p2): return p0.intValue + p1.intValue + p2.intValue
             case let .m_overrideInfoCenter__for_keyvalue_value(p0, p1): return p0.intValue + p1.intValue
             }
@@ -439,7 +450,8 @@ open class NowPlayingMock: NowPlaying, Mock {
     public struct Verify {
         fileprivate var method: MethodType
 
-        public static func update(metadata: Parameter<PlayerMediaMetadata?>, duration: Parameter<Double?>, isLive: Parameter<Bool?>) -> Verify { return Verify(method: .m_update__metadata_metadataduration_durationisLive_isLive(`metadata`, `duration`, `isLive`))}
+        public static func update(metadata: Parameter<PlayerMediaMetadata?>) -> Verify { return Verify(method: .m_update__metadata_metadata(`metadata`))}
+        public static func update(metadata: Parameter<PlayerMediaMetadata?>, duration: Parameter<Double?>, isLive: Parameter<Bool>) -> Verify { return Verify(method: .m_update__metadata_metadataduration_durationisLive_isLive(`metadata`, `duration`, `isLive`))}
         public static func overrideInfoCenter(for key: Parameter<String>, value: Parameter<Any>) -> Verify { return Verify(method: .m_overrideInfoCenter__for_keyvalue_value(`key`, `value`))}
     }
 
@@ -447,7 +459,10 @@ open class NowPlayingMock: NowPlaying, Mock {
         fileprivate var method: MethodType
         var performs: Any
 
-        public static func update(metadata: Parameter<PlayerMediaMetadata?>, duration: Parameter<Double?>, isLive: Parameter<Bool?>, perform: @escaping (PlayerMediaMetadata?, Double?, Bool?) -> Void) -> Perform {
+        public static func update(metadata: Parameter<PlayerMediaMetadata?>, perform: @escaping (PlayerMediaMetadata?) -> Void) -> Perform {
+            return Perform(method: .m_update__metadata_metadata(`metadata`), performs: perform)
+        }
+        public static func update(metadata: Parameter<PlayerMediaMetadata?>, duration: Parameter<Double?>, isLive: Parameter<Bool>, perform: @escaping (PlayerMediaMetadata?, Double?, Bool) -> Void) -> Perform {
             return Perform(method: .m_update__metadata_metadataduration_durationisLive_isLive(`metadata`, `duration`, `isLive`), performs: perform)
         }
         public static func overrideInfoCenter(for key: Parameter<String>, value: Parameter<Any>, perform: @escaping (String, Any) -> Void) -> Perform {
@@ -844,9 +859,9 @@ open class PlayerContextMock: PlayerContext, Mock {
 		perform?(`state`)
     }
 
-    open func updateMetadata(_ metadata: PlayerMediaMetadata) {
-        addInvocation(.m_updateMetadata__metadata(Parameter<PlayerMediaMetadata>.value(`metadata`)))
-		let perform = methodPerformValue(.m_updateMetadata__metadata(Parameter<PlayerMediaMetadata>.value(`metadata`))) as? (PlayerMediaMetadata) -> Void
+    open func updateMetadata(_ metadata: PlayerMediaMetadata?) {
+        addInvocation(.m_updateMetadata__metadata(Parameter<PlayerMediaMetadata?>.value(`metadata`)))
+		let perform = methodPerformValue(.m_updateMetadata__metadata(Parameter<PlayerMediaMetadata?>.value(`metadata`))) as? (PlayerMediaMetadata?) -> Void
 		perform?(`metadata`)
     }
 
@@ -883,7 +898,7 @@ open class PlayerContextMock: PlayerContext, Mock {
 
     fileprivate enum MethodType {
         case m_changeState__state_state(Parameter<PlayerState>)
-        case m_updateMetadata__metadata(Parameter<PlayerMediaMetadata>)
+        case m_updateMetadata__metadata(Parameter<PlayerMediaMetadata?>)
         case m_load__media_mediaautostart_autostartposition_position(Parameter<PlayerMedia>, Parameter<Bool>, Parameter<Double?>)
         case m_pause
         case m_play
@@ -1046,7 +1061,7 @@ open class PlayerContextMock: PlayerContext, Mock {
         fileprivate var method: MethodType
 
         public static func changeState(state: Parameter<PlayerState>) -> Verify { return Verify(method: .m_changeState__state_state(`state`))}
-        public static func updateMetadata(_ metadata: Parameter<PlayerMediaMetadata>) -> Verify { return Verify(method: .m_updateMetadata__metadata(`metadata`))}
+        public static func updateMetadata(_ metadata: Parameter<PlayerMediaMetadata?>) -> Verify { return Verify(method: .m_updateMetadata__metadata(`metadata`))}
         public static func load(media: Parameter<PlayerMedia>, autostart: Parameter<Bool>, position: Parameter<Double?>) -> Verify { return Verify(method: .m_load__media_mediaautostart_autostartposition_position(`media`, `autostart`, `position`))}
         public static func pause() -> Verify { return Verify(method: .m_pause)}
         public static func play() -> Verify { return Verify(method: .m_play)}
@@ -1080,7 +1095,7 @@ open class PlayerContextMock: PlayerContext, Mock {
         public static func changeState(state: Parameter<PlayerState>, perform: @escaping (PlayerState) -> Void) -> Perform {
             return Perform(method: .m_changeState__state_state(`state`), performs: perform)
         }
-        public static func updateMetadata(_ metadata: Parameter<PlayerMediaMetadata>, perform: @escaping (PlayerMediaMetadata) -> Void) -> Perform {
+        public static func updateMetadata(_ metadata: Parameter<PlayerMediaMetadata?>, perform: @escaping (PlayerMediaMetadata?) -> Void) -> Perform {
             return Perform(method: .m_updateMetadata__metadata(`metadata`), performs: perform)
         }
         public static func load(media: Parameter<PlayerMedia>, autostart: Parameter<Bool>, position: Parameter<Double?>, perform: @escaping (PlayerMedia, Bool, Double?) -> Void) -> Perform {
@@ -1476,9 +1491,9 @@ open class PlayerMediaMock: PlayerMedia, Mock {
 		return __value
     }
 
-    open func setMetadata(_ metadata: PlayerMediaMetadata) {
-        addInvocation(.m_setMetadata__metadata(Parameter<PlayerMediaMetadata>.value(`metadata`)))
-		let perform = methodPerformValue(.m_setMetadata__metadata(Parameter<PlayerMediaMetadata>.value(`metadata`))) as? (PlayerMediaMetadata) -> Void
+    open func setMetadata(_ metadata: PlayerMediaMetadata?) {
+        addInvocation(.m_setMetadata__metadata(Parameter<PlayerMediaMetadata?>.value(`metadata`)))
+		let perform = methodPerformValue(.m_setMetadata__metadata(Parameter<PlayerMediaMetadata?>.value(`metadata`))) as? (PlayerMediaMetadata?) -> Void
 		perform?(`metadata`)
     }
 
@@ -1486,7 +1501,7 @@ open class PlayerMediaMock: PlayerMedia, Mock {
     fileprivate enum MethodType {
         case m_isLive
         case m_getMetadata
-        case m_setMetadata__metadata(Parameter<PlayerMediaMetadata>)
+        case m_setMetadata__metadata(Parameter<PlayerMediaMetadata?>)
         case p_url_get
         case p_type_get
         case p_assetOptions_get
@@ -1570,7 +1585,7 @@ open class PlayerMediaMock: PlayerMedia, Mock {
 
         public static func isLive() -> Verify { return Verify(method: .m_isLive)}
         public static func getMetadata() -> Verify { return Verify(method: .m_getMetadata)}
-        public static func setMetadata(_ metadata: Parameter<PlayerMediaMetadata>) -> Verify { return Verify(method: .m_setMetadata__metadata(`metadata`))}
+        public static func setMetadata(_ metadata: Parameter<PlayerMediaMetadata?>) -> Verify { return Verify(method: .m_setMetadata__metadata(`metadata`))}
         public static var url: Verify { return Verify(method: .p_url_get) }
         public static var type: Verify { return Verify(method: .p_type_get) }
         public static var assetOptions: Verify { return Verify(method: .p_assetOptions_get) }
@@ -1587,7 +1602,7 @@ open class PlayerMediaMock: PlayerMedia, Mock {
         public static func getMetadata(perform: @escaping () -> Void) -> Perform {
             return Perform(method: .m_getMetadata, performs: perform)
         }
-        public static func setMetadata(_ metadata: Parameter<PlayerMediaMetadata>, perform: @escaping (PlayerMediaMetadata) -> Void) -> Perform {
+        public static func setMetadata(_ metadata: Parameter<PlayerMediaMetadata?>, perform: @escaping (PlayerMediaMetadata?) -> Void) -> Perform {
             return Perform(method: .m_setMetadata__metadata(`metadata`), performs: perform)
         }
     }
@@ -1751,9 +1766,9 @@ open class PlayerMediaItemMock: PlayerMediaItem, Mock {
 		return __value
     }
 
-    open func setMetadata(_ metadata: PlayerMediaMetadata) {
-        addInvocation(.m_setMetadata__metadata(Parameter<PlayerMediaMetadata>.value(`metadata`)))
-		let perform = methodPerformValue(.m_setMetadata__metadata(Parameter<PlayerMediaMetadata>.value(`metadata`))) as? (PlayerMediaMetadata) -> Void
+    open func setMetadata(_ metadata: PlayerMediaMetadata?) {
+        addInvocation(.m_setMetadata__metadata(Parameter<PlayerMediaMetadata?>.value(`metadata`)))
+		let perform = methodPerformValue(.m_setMetadata__metadata(Parameter<PlayerMediaMetadata?>.value(`metadata`))) as? (PlayerMediaMetadata?) -> Void
 		perform?(`metadata`)
     }
 
@@ -1761,7 +1776,7 @@ open class PlayerMediaItemMock: PlayerMediaItem, Mock {
     fileprivate enum MethodType {
         case m_isLive
         case m_getMetadata
-        case m_setMetadata__metadata(Parameter<PlayerMediaMetadata>)
+        case m_setMetadata__metadata(Parameter<PlayerMediaMetadata?>)
         case p_item_get
         case p_url_get
         case p_type_get
@@ -1851,7 +1866,7 @@ open class PlayerMediaItemMock: PlayerMediaItem, Mock {
 
         public static func isLive() -> Verify { return Verify(method: .m_isLive)}
         public static func getMetadata() -> Verify { return Verify(method: .m_getMetadata)}
-        public static func setMetadata(_ metadata: Parameter<PlayerMediaMetadata>) -> Verify { return Verify(method: .m_setMetadata__metadata(`metadata`))}
+        public static func setMetadata(_ metadata: Parameter<PlayerMediaMetadata?>) -> Verify { return Verify(method: .m_setMetadata__metadata(`metadata`))}
         public static var item: Verify { return Verify(method: .p_item_get) }
         public static var url: Verify { return Verify(method: .p_url_get) }
         public static var type: Verify { return Verify(method: .p_type_get) }
@@ -1869,7 +1884,7 @@ open class PlayerMediaItemMock: PlayerMediaItem, Mock {
         public static func getMetadata(perform: @escaping () -> Void) -> Perform {
             return Perform(method: .m_getMetadata, performs: perform)
         }
-        public static func setMetadata(_ metadata: Parameter<PlayerMediaMetadata>, perform: @escaping (PlayerMediaMetadata) -> Void) -> Perform {
+        public static func setMetadata(_ metadata: Parameter<PlayerMediaMetadata?>, perform: @escaping (PlayerMediaMetadata?) -> Void) -> Perform {
             return Perform(method: .m_setMetadata__metadata(`metadata`), performs: perform)
         }
     }

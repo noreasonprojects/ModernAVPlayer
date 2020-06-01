@@ -56,7 +56,7 @@ public class ModernAVPlayerMedia: PlayerMedia {
         return metadata
     }
 
-    public func setMetadata(_ metadata: PlayerMediaMetadata) {
+    public func setMetadata(_ metadata: PlayerMediaMetadata?) {
         self.metadata = metadata as? ModernAVPlayerMediaMetadata
     }
 }

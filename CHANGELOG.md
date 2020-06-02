@@ -4,9 +4,10 @@ All notable changes to this project will be documented in this file.
 ---
 ## [X.X.X]
 * Feature:
-	* Accept optional metadata when updating
+	* Accept optional metadata to update
 * Fix:
 	* Duration value when update metadata manually
+	* Missing player context unit tests
 
 ## [1.5.2]
 * Fix:

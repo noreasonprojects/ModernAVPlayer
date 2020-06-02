@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 
 ---
-## [X.X.X]
+## [1.6.0]
 * Feature:
 	* Accept optional metadata to update
 * Fix:

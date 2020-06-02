@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 
 ---
+## [X.X.X]
+* SPM:
+	* Update swift tools version -> 5.2
+
 ## [1.6.0]
 * Feature:
 	* Accept optional metadata to update

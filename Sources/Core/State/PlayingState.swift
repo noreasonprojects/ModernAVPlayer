@@ -189,9 +189,10 @@ final class PlayingState: PlayerState {
     }
 
     private func removeTimeObserver() {
-        if let timerObserver = optTimerObserver {
-            context.player.removeTimeObserver(timerObserver)
-        }
+        guard let timerObserver = optTimerObserver else { return }
+
+        context.player.removeTimeObserver(timerObserver)
+        optTimerObserver = nil
     }
     
     private func routeAudioChanged(reason: AVAudioSession.RouteChangeReason) {

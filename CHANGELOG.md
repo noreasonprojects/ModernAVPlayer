@@ -3,8 +3,14 @@ All notable changes to this project will be documented in this file.
 
 ---
 ## [X.X.X]
+* Fix:
+	* [#173] Remove no sense remote command factory
 * SPM:
 	* Update swift tools version -> 5.2
+* Breaking change:
+	* Prev, Next, Shuffle and Repeat command factory are not available anynmore
+* Non-breaking change:
+	* Default remote command factory list
 
 ## [1.6.0]
 * Feature:

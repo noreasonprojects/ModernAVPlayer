@@ -147,7 +147,9 @@ final class ViewController: UIViewController {
     // MARK: - Private Setup
 
     private func setupRemoteCustomRemoteCommand() {
-        let commands = RemoteCommandFactoryExample(player: player).defaultCommands
+        var commands = RemoteCommandFactoryExample(player: player).defaultCommands
+        commands.append(ModernAVPlayerRemoteCommandFactory(player: player).skipBackwardCommand())
+        commands.append(ModernAVPlayerRemoteCommandFactory(player: player).skipForwardCommand())
         player.remoteCommands = commands
     }
 

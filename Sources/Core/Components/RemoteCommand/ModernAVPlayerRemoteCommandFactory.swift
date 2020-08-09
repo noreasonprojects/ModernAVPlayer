@@ -34,9 +34,7 @@ public class ModernAVPlayerRemoteCommandFactory {
     /// Return all factory commands
     ///
     public var defaultCommands: [ModernAVPlayerRemoteCommand] {
-        return [playCommand, pauseCommand, stopCommand, togglePlayPauseCommand,
-                prevTrackCommand, nextTrackCommand, repeatModeCommand, changePositionCommand,
-                shuffleModeCommand, skipBackwardCommand(), skipForwardCommand()]
+        [playCommand, pauseCommand, stopCommand, togglePlayPauseCommand, changePositionCommand]
     }
     
     // MARK: - Inputs
@@ -139,48 +137,16 @@ public class ModernAVPlayerRemoteCommandFactory {
     // MARK: - Navigating between tracks
     
     /// Previous Track Command
-    /// Not enabled yet
-    ///
-    public lazy var prevTrackCommand: ModernAVPlayerRemoteCommand = {
-        let command = commandCenter.previousTrackCommand
-        let isEnabled: (MediaType) -> Bool = { _ in false }
-        return ModernAVPlayerRemoteCommand(reference: command,
-                                           debugDescription: "Prev track",
-                                           isEnabled: isEnabled)
-    }()
+    /// This is an example, you have to provide your own logic in isEnabled block
+    /// Apply same thing  for next track, shuffle mode and repeat mode
     
-    /// Next Track Command
-    /// Not enabled yet
-    ///
-    public lazy var nextTrackCommand: ModernAVPlayerRemoteCommand = {
-        let command = commandCenter.nextTrackCommand
-        let isEnabled: (MediaType) -> Bool = { _ in false }
-        return ModernAVPlayerRemoteCommand(reference: command,
-                                           debugDescription: "Next track",
-                                           isEnabled: isEnabled)
-    }()
-    
-    /// Change Repeat Mode Command
-    /// Not enabled yet
-    ///
-    public lazy var repeatModeCommand: ModernAVPlayerRemoteCommand = {
-        let command = commandCenter.changeRepeatModeCommand
-        let isEnabled: (MediaType) -> Bool = { _ in false }
-        return ModernAVPlayerRemoteCommand(reference: command,
-                                           debugDescription: "Repeat mode",
-                                           isEnabled: isEnabled)
-    }()
-    
-    /// Change Shuffle Mode Command
-    /// Not enabled yet
-    ///
-    public lazy var shuffleModeCommand: ModernAVPlayerRemoteCommand = {
-        let command = commandCenter.changeShuffleModeCommand
-        let isEnabled: (MediaType) -> Bool = { _ in false }
-        return ModernAVPlayerRemoteCommand(reference: command,
-                                           debugDescription: "Shuffle mode",
-                                           isEnabled: isEnabled)
-    }()
+//    public lazy var prevTrackCommand: ModernAVPlayerRemoteCommand = {
+//        let command = commandCenter.previousTrackCommand
+//        let isEnabled: (MediaType) -> Bool = { _ in true }
+//        return ModernAVPlayerRemoteCommand(reference: command,
+//                                           debugDescription: "Prev track",
+//                                           isEnabled: isEnabled)
+//    }()
     
     // MARK: - Navigating a track's contents
     

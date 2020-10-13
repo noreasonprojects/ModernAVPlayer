@@ -3,7 +3,7 @@ import PackageDescription
 
 let package = Package(
     name: "ModernAVPlayer",
-	platforms: [SupportedPlatform.iOS("10.0")],
+	platforms: [.iOS(.v10)],
     products: [
         .library(name: "ModernAVPlayer", targets: ["ModernAVPlayer"]),
         .library(name: "RxModernAVPlayer", targets: ["RxModernAVPlayer"])
@@ -18,7 +18,11 @@ let package = Package(
 		),
         .target(
 			name: "RxModernAVPlayer",
-			dependencies: ["ModernAVPlayer", "RxSwift", "RxCocoa"],
+			dependencies: [
+				.target(name: "ModernAVPlayer"),
+				.product(name: "RxSwift", package: "RxSwift"),
+				.product(name: "RxCocoa", package: "RxSwift")
+			],
 			path: "Sources/RxModernAVPlayer"
 		)
     ]

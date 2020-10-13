@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 
 ---
-## [X.X.X]
+## [1.7.0]
 * Fix:
 	* [#173] Remove no sense remote command factory
 * SPM:

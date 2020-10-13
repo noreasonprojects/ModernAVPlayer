@@ -5,6 +5,7 @@
 
 ##Custom
 .DS_Store
+vendor/
 
 ## Build generated
 build/

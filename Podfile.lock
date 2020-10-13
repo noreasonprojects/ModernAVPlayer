@@ -1,6 +1,6 @@
 PODS:
-  - ModernAVPlayer/Core (1.6.0)
-  - ModernAVPlayer/RxSwift (1.6.0):
+  - ModernAVPlayer/Core (1.7.0)
+  - ModernAVPlayer/RxSwift (1.7.0):
     - ModernAVPlayer/Core
     - RxCocoa (~> 5.0)
     - RxSwift (~> 5.0)
@@ -27,10 +27,9 @@ DEPENDENCIES:
   - SwiftyMocky (= 3.5.0)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  trunk:
     - Nimble
     - Quick
-  trunk:
     - RxCocoa
     - RxRelay
     - RxSwift
@@ -43,7 +42,7 @@ EXTERNAL SOURCES:
     :path: "."
 
 SPEC CHECKSUMS:
-  ModernAVPlayer: a75a89e6b34316612d81d1be40730c8f1ecf228a
+  ModernAVPlayer: 9dd795ccf5e3dd91390cca4f32735b09efdc40e2
   Nimble: 18d5360282923225d62b09d781f63abc1a0111fc
   Quick: 7fb19e13be07b5dfb3b90d4f9824c855a11af40e
   RxCocoa: e741b9749968e8a143e2b787f1dfbff2b63d0a5c
@@ -55,4 +54,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 56811f68aa97345ee3c5a4f1c98a0aa332e2b289
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.9.3

@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 
 ---
+## [1.7.2]
+* Feature:
+	* tvOS support
+
 ## [1.7.1]
 * Fix:
 	* Spm install
@@ -51,7 +55,7 @@ All notable changes to this project will be documented in this file.
 	* Define custom item loaded asset keys
 * Fix:
 	* Fix not expected value on periodicTimeObserver
-	* Remove some WaitingForNetworkState dead code
+* Remove some WaitingForNetworkState dead code
 * Improvement:
 	* Create service to deliver AVPlayerItem
 * Breaking changes:

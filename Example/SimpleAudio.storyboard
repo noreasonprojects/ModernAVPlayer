@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8pj-Db-dz9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8pj-Db-dz9">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -17,13 +18,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mlj-CQ-jPS">
-                                <rect key="frame" x="20" y="94" width="374" height="120"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="120" id="xxI-QW-kVv"/>
-                                </constraints>
+                                <rect key="frame" x="20" y="44" width="374" height="216"/>
                             </pickerView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="jiY-A4-u4S" userLabel="Labels">
-                                <rect key="frame" x="20" y="325" width="374" height="48"/>
+                                <rect key="frame" x="20" y="280" width="374" height="48"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="State" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g4s-cd-v6c">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="24"/>
@@ -40,23 +38,23 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="M5n-bk-XEc" userLabel="CommandPlay">
-                                <rect key="frame" x="20" y="433" width="374" height="30"/>
+                                <rect key="frame" x="20" y="388" width="374" height="30"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tve-2U-5od" userLabel="Play">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tve-2U-5od" userLabel="Play">
                                         <rect key="frame" x="0.0" y="0.0" width="118" height="30"/>
                                         <state key="normal" title="Play"/>
                                         <connections>
                                             <action selector="play:" destination="8pj-Db-dz9" eventType="touchUpInside" id="0SU-Sw-IgP"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Le-l2-zjG" userLabel="Pause">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Le-l2-zjG" userLabel="Pause">
                                         <rect key="frame" x="128" y="0.0" width="118" height="30"/>
                                         <state key="normal" title="Pause"/>
                                         <connections>
                                             <action selector="pause:" destination="8pj-Db-dz9" eventType="touchUpInside" id="Bre-mK-P25"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xM1-OK-RZC" userLabel="Stop">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xM1-OK-RZC" userLabel="Stop">
                                         <rect key="frame" x="256" y="0.0" width="118" height="30"/>
                                         <state key="normal" title="Stop"/>
                                         <connections>
@@ -66,23 +64,23 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="2He-N3-ZbS" userLabel="Seek">
-                                <rect key="frame" x="20" y="483" width="374" height="30"/>
+                                <rect key="frame" x="20" y="438" width="374" height="30"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gEb-Xp-rKx">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gEb-Xp-rKx">
                                         <rect key="frame" x="0.0" y="0.0" width="118" height="30"/>
                                         <state key="normal" title="-15"/>
                                         <connections>
                                             <action selector="prevSeek:" destination="8pj-Db-dz9" eventType="touchUpInside" id="Osk-vd-KpK"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0aQ-af-lJp" userLabel="Loop">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0aQ-af-lJp" userLabel="Loop">
                                         <rect key="frame" x="128" y="0.0" width="118" height="30"/>
                                         <state key="normal" title="Loop"/>
                                         <connections>
                                             <action selector="loop:" destination="8pj-Db-dz9" eventType="touchUpInside" id="BWy-u0-hX8"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4A3-od-PmX">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4A3-od-PmX">
                                         <rect key="frame" x="256" y="0.0" width="118" height="30"/>
                                         <state key="normal" title="+15"/>
                                         <connections>
@@ -92,23 +90,23 @@
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="b1a-d4-7Nh"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="b1a-d4-7Nh" firstAttribute="trailing" secondItem="M5n-bk-XEc" secondAttribute="trailing" constant="20" id="0ZF-GR-bUA"/>
                             <constraint firstItem="M5n-bk-XEc" firstAttribute="top" secondItem="jiY-A4-u4S" secondAttribute="bottom" constant="60" id="2Cl-yH-zP1"/>
                             <constraint firstItem="2He-N3-ZbS" firstAttribute="trailing" secondItem="M5n-bk-XEc" secondAttribute="trailing" id="6Mk-jE-0UF"/>
-                            <constraint firstItem="M5n-bk-XEc" firstAttribute="centerY" secondItem="6e0-Xg-z86" secondAttribute="centerY" id="BQM-Mi-rcr"/>
                             <constraint firstItem="2He-N3-ZbS" firstAttribute="leading" secondItem="M5n-bk-XEc" secondAttribute="leading" id="GAO-7W-Tqe"/>
                             <constraint firstItem="jiY-A4-u4S" firstAttribute="trailing" secondItem="M5n-bk-XEc" secondAttribute="trailing" id="H56-on-Zaf"/>
+                            <constraint firstItem="jiY-A4-u4S" firstAttribute="top" secondItem="mlj-CQ-jPS" secondAttribute="bottom" constant="20" id="PQp-Ud-gBb"/>
                             <constraint firstItem="jiY-A4-u4S" firstAttribute="leading" secondItem="mlj-CQ-jPS" secondAttribute="leading" id="Pqg-RY-TXZ"/>
                             <constraint firstItem="jiY-A4-u4S" firstAttribute="trailing" secondItem="mlj-CQ-jPS" secondAttribute="trailing" id="QW0-oI-b4C"/>
-                            <constraint firstItem="mlj-CQ-jPS" firstAttribute="top" secondItem="b1a-d4-7Nh" secondAttribute="top" constant="50" id="b5A-4v-E6A"/>
+                            <constraint firstItem="mlj-CQ-jPS" firstAttribute="top" secondItem="b1a-d4-7Nh" secondAttribute="top" id="b5A-4v-E6A"/>
                             <constraint firstItem="2He-N3-ZbS" firstAttribute="top" secondItem="M5n-bk-XEc" secondAttribute="bottom" constant="20" id="epg-Gg-1dd"/>
                             <constraint firstItem="jiY-A4-u4S" firstAttribute="leading" secondItem="M5n-bk-XEc" secondAttribute="leading" id="f9U-lr-Dg7"/>
                             <constraint firstItem="M5n-bk-XEc" firstAttribute="centerX" secondItem="6e0-Xg-z86" secondAttribute="centerX" id="lGS-1m-oHn"/>
                             <constraint firstItem="M5n-bk-XEc" firstAttribute="leading" secondItem="b1a-d4-7Nh" secondAttribute="leading" constant="20" id="vMM-eJ-nvV"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="b1a-d4-7Nh"/>
                     </view>
                     <connections>
                         <outlet property="mediaPicker" destination="mlj-CQ-jPS" id="BJP-pk-Fhl"/>
@@ -121,4 +119,9 @@
             <point key="canvasLocation" x="-41" y="98"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

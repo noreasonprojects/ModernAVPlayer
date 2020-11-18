@@ -10,6 +10,8 @@ All notable changes to this project will be documented in this file.
 	* Demo target readability
 * Fix:
 	* Simple audio demo layout for small screen
+* Dependency:
+	* [gem] Fastlane -> 2.167.0
 
 ## [1.7.1]
 * Fix:

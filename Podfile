@@ -1,7 +1,7 @@
-platform :ios, '10.0'
 use_frameworks!
 
 target 'ModernAVPlayer_Example' do
+  platform :ios, '10.0'
   pod 'ModernAVPlayer/RxSwift', :path => '.'
   pod 'SwiftLint', '0.38.2'
 
@@ -13,4 +13,9 @@ target 'ModernAVPlayer_Example' do
 	pod 'SwiftyMocky', '3.5.0'
 
   end
+end
+
+target 'ModernAVPlayer_Example_tvOS' do
+  platform :tvos, '10.0'
+  pod 'ModernAVPlayer/RxSwift', :path => '.'
 end

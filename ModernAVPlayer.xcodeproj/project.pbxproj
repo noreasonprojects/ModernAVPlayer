@@ -7,14 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04FD95BC256511D3003AD795 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD95BB256511D3003AD795 /* AppDelegate.swift */; };
+		04FD95BE256511D3003AD795 /* SimpleVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD95BD256511D3003AD795 /* SimpleVideo.swift */; };
+		04FD95C1256511D3003AD795 /* SimpleVideo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04FD95BF256511D3003AD795 /* SimpleVideo.storyboard */; };
+		04FD95C3256511D6003AD795 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04FD95C2256511D6003AD795 /* Assets.xcassets */; };
+		04FD95C6256511D6003AD795 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04FD95C4256511D6003AD795 /* LaunchScreen.storyboard */; };
+		04FD95DE25652517003AD795 /* AVPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CE54A8236BBCE0009A5236 /* AVPlayerView.swift */; };
+		04FD95FE25652878003AD795 /* PlayerConfigurationExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10B20E621C9557E00924E1D /* PlayerConfigurationExample.swift */; };
+		04FD960225652895003AD795 /* MediaResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E191052E23527A3100E440C7 /* MediaResource.swift */; };
 		45494C7B209378B3005C3DE2 /* ItemPlaybackObservingServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45494C7A209378B2005C3DE2 /* ItemPlaybackObservingServiceTests.swift */; };
 		45D49A5F2093656100F63ACF /* MockObservingRateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D49A5E2093656100F63ACF /* MockObservingRateService.swift */; };
 		45D49A6320936CC100F63ACF /* MockItemPlaybackObservingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D49A6220936CC100F63ACF /* MockItemPlaybackObservingService.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
-		7AF3322DE411E465CD4638A2 /* Pods_ModernAVPlayer_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C29EE3AE856D902F8DD65C /* Pods_ModernAVPlayer_Tests.framework */; };
-		BAF863D3FDB89A73BD58C6F3 /* Pods_ModernAVPlayer_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2C5C079F7F9B4BC96241584 /* Pods_ModernAVPlayer_Example.framework */; };
 		E1050F76207A44B100A7F540 /* PlayerContextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1050F75207A44B100A7F540 /* PlayerContextTests.swift */; };
 		E10B20E521C94F7400924E1D /* RemoteCommandExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10B20E421C94F7400924E1D /* RemoteCommandExample.swift */; };
 		E10B20E721C9557E00924E1D /* PlayerConfigurationExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10B20E621C9557E00924E1D /* PlayerConfigurationExample.swift */; };
@@ -92,8 +98,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		05C29EE3AE856D902F8DD65C /* Pods_ModernAVPlayer_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ModernAVPlayer_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		28D8BFE828C5572A0312B9F9 /* Pods-ModernAVPlayer_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ModernAVPlayer_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ModernAVPlayer_Tests/Pods-ModernAVPlayer_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		04FD95B9256511D3003AD795 /* ModernAVPlayer_Example_tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ModernAVPlayer_Example_tvOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		04FD95BB256511D3003AD795 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		04FD95BD256511D3003AD795 /* SimpleVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleVideo.swift; sourceTree = "<group>"; };
+		04FD95C0256511D3003AD795 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SimpleVideo.storyboard; sourceTree = "<group>"; };
+		04FD95C2256511D6003AD795 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		04FD95C5256511D6003AD795 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		04FD95C7256511D6003AD795 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45494C7A209378B2005C3DE2 /* ItemPlaybackObservingServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemPlaybackObservingServiceTests.swift; sourceTree = "<group>"; };
 		45D49A5E2093656100F63ACF /* MockObservingRateService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockObservingRateService.swift; sourceTree = "<group>"; };
 		45D49A6220936CC100F63ACF /* MockItemPlaybackObservingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockItemPlaybackObservingService.swift; sourceTree = "<group>"; };
@@ -104,9 +115,6 @@
 		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		607FACE51AFB9204008FA782 /* ModernAVPlayer_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ModernAVPlayer_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		742975906FE82E40E7334051 /* Pods-ModernAVPlayer_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ModernAVPlayer_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ModernAVPlayer_Example/Pods-ModernAVPlayer_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		C2C5C079F7F9B4BC96241584 /* Pods_ModernAVPlayer_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ModernAVPlayer_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		CEF5F3BD9AEBC47C69872757 /* Pods-ModernAVPlayer_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ModernAVPlayer_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-ModernAVPlayer_Example/Pods-ModernAVPlayer_Example.release.xcconfig"; sourceTree = "<group>"; };
 		E1050F75207A44B100A7F540 /* PlayerContextTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerContextTests.swift; sourceTree = "<group>"; };
 		E10B20E421C94F7400924E1D /* RemoteCommandExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteCommandExample.swift; sourceTree = "<group>"; };
 		E10B20E621C9557E00924E1D /* PlayerConfigurationExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerConfigurationExample.swift; sourceTree = "<group>"; };
@@ -171,15 +179,20 @@
 		E1FB26A7235789AD00277B40 /* SimpleAudio.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SimpleAudio.storyboard; sourceTree = "<group>"; };
 		E1FD71B0236B81DE0021B999 /* SimpleVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleVideo.swift; sourceTree = "<group>"; };
 		E1FD71B2236B828F0021B999 /* SimpleVideo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SimpleVideo.storyboard; sourceTree = "<group>"; };
-		FB1C104CD10D29DEB562AF28 /* Pods-ModernAVPlayer_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ModernAVPlayer_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ModernAVPlayer_Tests/Pods-ModernAVPlayer_Tests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		04FD95B6256511D3003AD795 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		607FACCD1AFB9204008FA782 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BAF863D3FDB89A73BD58C6F3 /* Pods_ModernAVPlayer_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,13 +200,49 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7AF3322DE411E465CD4638A2 /* Pods_ModernAVPlayer_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04FD95BA256511D3003AD795 /* Example for ModernAVPlayer tvOS */ = {
+			isa = PBXGroup;
+			children = (
+				04FD95D4256513ED003AD795 /* Domains */,
+				04FD95BB256511D3003AD795 /* AppDelegate.swift */,
+				04FD95C2256511D6003AD795 /* Assets.xcassets */,
+				04FD95C4256511D6003AD795 /* LaunchScreen.storyboard */,
+			);
+			path = "Example for ModernAVPlayer tvOS";
+			sourceTree = "<group>";
+		};
+		04FD95D4256513ED003AD795 /* Domains */ = {
+			isa = PBXGroup;
+			children = (
+				04FD95DA2565141E003AD795 /* Supporting Files */,
+				04FD95D6256513FD003AD795 /* SimpleVideo */,
+			);
+			path = Domains;
+			sourceTree = "<group>";
+		};
+		04FD95D6256513FD003AD795 /* SimpleVideo */ = {
+			isa = PBXGroup;
+			children = (
+				04FD95BD256511D3003AD795 /* SimpleVideo.swift */,
+				04FD95BF256511D3003AD795 /* SimpleVideo.storyboard */,
+			);
+			path = SimpleVideo;
+			sourceTree = "<group>";
+		};
+		04FD95DA2565141E003AD795 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				04FD95C7256511D6003AD795 /* Info.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		45494C7720937892005C3DE2 /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -211,10 +260,9 @@
 			isa = PBXGroup;
 			children = (
 				607FACD21AFB9204008FA782 /* Example for ModernAVPlayer */,
+				04FD95BA256511D3003AD795 /* Example for ModernAVPlayer tvOS */,
 				607FACE81AFB9204008FA782 /* Tests */,
 				607FACD11AFB9204008FA782 /* Products */,
-				DD1D84649B8B8EDAF37D68C9 /* Pods */,
-				E070D85792C1B230E7D9FDA5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -223,6 +271,7 @@
 			children = (
 				607FACD01AFB9204008FA782 /* ModernAVPlayer_Example.app */,
 				607FACE51AFB9204008FA782 /* ModernAVPlayer_Tests.xctest */,
+				04FD95B9256511D3003AD795 /* ModernAVPlayer_Example_tvOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -273,26 +322,6 @@
 				607FACEA1AFB9204008FA782 /* Info.plist */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		DD1D84649B8B8EDAF37D68C9 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				742975906FE82E40E7334051 /* Pods-ModernAVPlayer_Example.debug.xcconfig */,
-				CEF5F3BD9AEBC47C69872757 /* Pods-ModernAVPlayer_Example.release.xcconfig */,
-				28D8BFE828C5572A0312B9F9 /* Pods-ModernAVPlayer_Tests.debug.xcconfig */,
-				FB1C104CD10D29DEB562AF28 /* Pods-ModernAVPlayer_Tests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		E070D85792C1B230E7D9FDA5 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				C2C5C079F7F9B4BC96241584 /* Pods_ModernAVPlayer_Example.framework */,
-				05C29EE3AE856D902F8DD65C /* Pods_ModernAVPlayer_Tests.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		E112DB462079364900DB69E8 /* Resources */ = {
@@ -460,15 +489,30 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		04FD95B8256511D3003AD795 /* ModernAVPlayer_Example_tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 04FD95CA256511D6003AD795 /* Build configuration list for PBXNativeTarget "ModernAVPlayer_Example_tvOS" */;
+			buildPhases = (
+				04FD95B5256511D3003AD795 /* Sources */,
+				04FD95B6256511D3003AD795 /* Frameworks */,
+				04FD95B7256511D3003AD795 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ModernAVPlayer_Example_tvOS;
+			productName = "Example for ModernAVPlayer tvOS";
+			productReference = 04FD95B9256511D3003AD795 /* ModernAVPlayer_Example_tvOS.app */;
+			productType = "com.apple.product-type.application";
+		};
 		607FACCF1AFB9204008FA782 /* ModernAVPlayer_Example */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "ModernAVPlayer_Example" */;
 			buildPhases = (
-				8A8AD8ED6850E535248D8646 /* [CP] Check Pods Manifest.lock */,
 				607FACCC1AFB9204008FA782 /* Sources */,
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
-				C70881C3F1705EDD12CD4BD9 /* [CP] Embed Pods Frameworks */,
 				E1459933207922F6001479E2 /* SwiftLint */,
 			);
 			buildRules = (
@@ -484,12 +528,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 607FACF21AFB9204008FA782 /* Build configuration list for PBXNativeTarget "ModernAVPlayer_Tests" */;
 			buildPhases = (
-				15644DB022723493B622D2B4 /* [CP] Check Pods Manifest.lock */,
 				E1E419E224773FC900D84E54 /* Generate Mocks */,
 				607FACE11AFB9204008FA782 /* Sources */,
 				607FACE21AFB9204008FA782 /* Frameworks */,
 				607FACE31AFB9204008FA782 /* Resources */,
-				2FE3D090A8A8EDFC0093797A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -507,10 +549,14 @@
 		607FACC81AFB9204008FA782 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0830;
+				LastSwiftUpdateCheck = 1200;
 				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = CocoaPods;
 				TargetAttributes = {
+					04FD95B8256511D3003AD795 = {
+						CreatedOnToolsVersion = 12.0;
+						ProvisioningStyle = Automatic;
+					};
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
 						DevelopmentTeam = UNDCF9JXB2;
@@ -546,11 +592,22 @@
 			targets = (
 				607FACCF1AFB9204008FA782 /* ModernAVPlayer_Example */,
 				607FACE41AFB9204008FA782 /* ModernAVPlayer_Tests */,
+				04FD95B8256511D3003AD795 /* ModernAVPlayer_Example_tvOS */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		04FD95B7256511D3003AD795 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04FD95C6256511D6003AD795 /* LaunchScreen.storyboard in Resources */,
+				04FD95C3256511D6003AD795 /* Assets.xcassets in Resources */,
+				04FD95C1256511D3003AD795 /* SimpleVideo.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		607FACCE1AFB9204008FA782 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -580,88 +637,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		15644DB022723493B622D2B4 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ModernAVPlayer_Tests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		2FE3D090A8A8EDFC0093797A /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ModernAVPlayer_Tests/Pods-ModernAVPlayer_Tests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
-				"${BUILT_PRODUCTS_DIR}/Quick/Quick.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyMocky/SwiftyMocky.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Quick.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyMocky.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ModernAVPlayer_Tests/Pods-ModernAVPlayer_Tests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8A8AD8ED6850E535248D8646 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ModernAVPlayer_Example-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C70881C3F1705EDD12CD4BD9 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ModernAVPlayer_Example/Pods-ModernAVPlayer_Example-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/ModernAVPlayer/ModernAVPlayer.framework",
-				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
-				"${BUILT_PRODUCTS_DIR}/RxRelay/RxRelay.framework",
-				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ModernAVPlayer.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxRelay.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ModernAVPlayer_Example/Pods-ModernAVPlayer_Example-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		E1459933207922F6001479E2 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -697,6 +672,18 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		04FD95B5256511D3003AD795 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04FD95FE25652878003AD795 /* PlayerConfigurationExample.swift in Sources */,
+				04FD95DE25652517003AD795 /* AVPlayerView.swift in Sources */,
+				04FD960225652895003AD795 /* MediaResource.swift in Sources */,
+				04FD95BE256511D3003AD795 /* SimpleVideo.swift in Sources */,
+				04FD95BC256511D3003AD795 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		607FACCC1AFB9204008FA782 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -780,6 +767,22 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		04FD95BF256511D3003AD795 /* SimpleVideo.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				04FD95C0256511D3003AD795 /* Base */,
+			);
+			name = SimpleVideo.storyboard;
+			sourceTree = "<group>";
+		};
+		04FD95C4256511D6003AD795 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				04FD95C5256511D6003AD795 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
 		607FACDE1AFB9204008FA782 /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -791,6 +794,61 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		04FD95C8256511D6003AD795 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "$(SRCROOT)/Example for ModernAVPlayer tvOS/Domains/Supporting Files/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dce.Example-for-ModernAVPlayer-tvOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+		04FD95C9256511D6003AD795 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "$(SRCROOT)/Example for ModernAVPlayer tvOS/Domains/Supporting Files/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dce.Example-for-ModernAVPlayer-tvOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
 		607FACED1AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -898,7 +956,6 @@
 		};
 		607FACF01AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 742975906FE82E40E7334051 /* Pods-ModernAVPlayer_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -922,7 +979,6 @@
 		};
 		607FACF11AFB9204008FA782 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CEF5F3BD9AEBC47C69872757 /* Pods-ModernAVPlayer_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Manual;
@@ -945,7 +1001,6 @@
 		};
 		607FACF31AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 28D8BFE828C5572A0312B9F9 /* Pods-ModernAVPlayer_Tests.debug.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Manual;
@@ -968,7 +1023,6 @@
 		};
 		607FACF41AFB9204008FA782 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FB1C104CD10D29DEB562AF28 /* Pods-ModernAVPlayer_Tests.release.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Manual;
@@ -988,6 +1042,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		04FD95CA256511D6003AD795 /* Build configuration list for PBXNativeTarget "ModernAVPlayer_Example_tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04FD95C8256511D6003AD795 /* Debug */,
+				04FD95C9256511D6003AD795 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
 		607FACCB1AFB9204008FA782 /* Build configuration list for PBXProject "ModernAVPlayer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

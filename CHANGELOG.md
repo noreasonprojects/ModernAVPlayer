@@ -8,6 +8,8 @@ All notable changes to this project will be documented in this file.
 * Improvements:
 	* Improve round times in `hasReallyReachedEndTime` func at `PlaybackObservingService.swift` [@Ikloo]
 	* Demo target readability
+* Fix:
+	* Simple audio demo layout for small screen
 
 ## [1.7.1]
 * Fix:

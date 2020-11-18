@@ -221,7 +221,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		04FD95BA256511D3003AD795 /* Example for ModernAVPlayer tvOS */ = {
+		04FD95BA256511D3003AD795 /* tvOS Example */ = {
 			isa = PBXGroup;
 			children = (
 				04FD95D4256513ED003AD795 /* Domains */,
@@ -229,7 +229,7 @@
 				04FD95C2256511D6003AD795 /* Assets.xcassets */,
 				04FD95C4256511D6003AD795 /* LaunchScreen.storyboard */,
 			);
-			path = "Example for ModernAVPlayer tvOS";
+			path = "tvOS Example";
 			sourceTree = "<group>";
 		};
 		04FD95D4256513ED003AD795 /* Domains */ = {
@@ -284,8 +284,8 @@
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
-				607FACD21AFB9204008FA782 /* Example for ModernAVPlayer */,
-				04FD95BA256511D3003AD795 /* Example for ModernAVPlayer tvOS */,
+				607FACD21AFB9204008FA782 /* iOS Example */,
+				04FD95BA256511D3003AD795 /* tvOS Example */,
 				607FACE81AFB9204008FA782 /* Tests */,
 				607FACD11AFB9204008FA782 /* Products */,
 				957C475E8F1CE464C6ED8359 /* Pods */,
@@ -303,7 +303,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		607FACD21AFB9204008FA782 /* Example for ModernAVPlayer */ = {
+		607FACD21AFB9204008FA782 /* iOS Example */ = {
 			isa = PBXGroup;
 			children = (
 				E112DB462079364900DB69E8 /* Resources */,
@@ -315,7 +315,7 @@
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
 			);
-			name = "Example for ModernAVPlayer";
+			name = "iOS Example";
 			path = Example;
 			sourceTree = "<group>";
 		};
@@ -361,7 +361,6 @@
 				2C203F42C9A7F42D1451B19A /* Pods-ModernAVPlayer_Tests.debug.xcconfig */,
 				F136F2B325E74716C2E6D45B /* Pods-ModernAVPlayer_Tests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -993,7 +992,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "$(SRCROOT)/Example for ModernAVPlayer tvOS/Domains/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/tvOS Example/Domains/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -1022,7 +1021,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_STYLE = Automatic;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "$(SRCROOT)/Example for ModernAVPlayer tvOS/Domains/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/tvOS Example/Domains/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.dce.Example-for-ModernAVPlayer-tvOS";

@@ -80,7 +80,7 @@ All notable changes to this project will be documented in this file.
 ## [1.3.3]
 * Feature:
 	* Seek media with a given offset
-	* Seek position is bounded between 0 and current media end time
+	* Seek position is bounded between 0 and current media end time 
 * Demo:
 	* New simple video example
 * Breaking change:
@@ -179,7 +179,7 @@ All notable changes to this project will be documented in this file.
 ## [1.0.0]
 * Breaking changes:
 	* `load(media:autostart:position:)` replaces `loadMedia(media:autostart:position:)`
-	* iOS 10.0+ requirement
+	* iOS 10.0+ requirement 
 * Feature:
 	* Update to swift 4.2
 * Improvement:
@@ -221,10 +221,10 @@ All notable changes to this project will be documented in this file.
 
 ## [0.13.0]
 * Feature:
-	* Enable/Disable loop mode on current media
+	* Enable/Disable loop mode on current media 
 * Fix:
 	* Update NowPlayingInfo time at the right moment when item play reach end time
-	* Update init media documentation
+	* Update init media documentation 
 
 ## [0.12.0]
 * Features:

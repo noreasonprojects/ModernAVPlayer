@@ -1,0 +1,6 @@
+framework module ModernAVPlayer {
+  umbrella header "ModernAVPlayer-iOS-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -11,6 +11,8 @@ All notable changes to this project will be documented in this file.
 * Fix:
 	* Simple audio demo layout for small screen
 * Dependency:
+* Dependencies:
+	* [gem] Cocoapods -> 1.10.0
 	* [gem] Fastlane -> 2.167.0
 
 ## [1.7.1]

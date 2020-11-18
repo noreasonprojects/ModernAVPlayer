@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 
 ---
+## [X.X.X]
+* Improvement:
+	* Improve round times in `hasReallyReachedEndTime` func at `PlaybackObservingService.swift`
+
 ## [1.7.1]
 * Fix:
 	* Spm install

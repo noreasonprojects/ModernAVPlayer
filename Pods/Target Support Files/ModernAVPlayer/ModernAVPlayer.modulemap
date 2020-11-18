@@ -1,6 +1,0 @@
-framework module ModernAVPlayer {
-  umbrella header "ModernAVPlayer-umbrella.h"
-
-  export *
-  module * { export * }
-}

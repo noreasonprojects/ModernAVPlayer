@@ -3,8 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ---
 ## [X.X.X]
+* Feature:
+	* tvOS support [@yaroslavlvov]
 * Improvement:
-	* Improve round times in `hasReallyReachedEndTime` func at `PlaybackObservingService.swift`
+	* Improve round times in `hasReallyReachedEndTime` func at `PlaybackObservingService.swift` [@Ikloo]
 
 ## [1.7.1]
 * Fix:

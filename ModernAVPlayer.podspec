@@ -12,6 +12,7 @@ ModernAVPlayer is an ongoing project that aims to create a more usable audio vid
   s.default_subspec  = 'Core'
 
   s.ios.deployment_target = '10.0'
+  s.tvos.deployment_target = '10.0'
   s.swift_version = '5.0'
 
   s.subspec 'Core' do |core|

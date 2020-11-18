@@ -1,0 +1,6 @@
+framework module ModernAVPlayer {
+  umbrella header "ModernAVPlayer-tvOS-umbrella.h"
+
+  export *
+  module * { export * }
+}

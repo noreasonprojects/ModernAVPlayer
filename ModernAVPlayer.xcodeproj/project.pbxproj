@@ -284,7 +284,7 @@
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
-				607FACD21AFB9204008FA782 /* Example for ModernAVPlayer */,
+				607FACD21AFB9204008FA782 /* iOS Example */,
 				04FD95BA256511D3003AD795 /* tvOS Example */,
 				607FACE81AFB9204008FA782 /* Tests */,
 				607FACD11AFB9204008FA782 /* Products */,
@@ -303,7 +303,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		607FACD21AFB9204008FA782 /* Example for ModernAVPlayer */ = {
+		607FACD21AFB9204008FA782 /* iOS Example */ = {
 			isa = PBXGroup;
 			children = (
 				E112DB462079364900DB69E8 /* Resources */,
@@ -315,7 +315,7 @@
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
 			);
-			name = "Example for ModernAVPlayer";
+			name = "iOS Example";
 			path = Example;
 			sourceTree = "<group>";
 		};

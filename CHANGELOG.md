@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 
 ---
-## [1.7.2]
+## [X.X.X]
 * Improvement:
 	* Improve round times in `hasReallyReachedEndTime` func at `PlaybackObservingService.swift`
 

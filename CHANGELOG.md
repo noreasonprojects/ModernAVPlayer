@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 
 ---
-## [X.X.X]
+## [1.7.2]
 * Feature:
 	* tvOS support [@yaroslavlvov]
 * Improvements:
@@ -10,7 +10,6 @@ All notable changes to this project will be documented in this file.
 	* Demo target readability
 * Fix:
 	* Simple audio demo layout for small screen
-* Dependency:
 * Dependencies:
 	* [gem] Cocoapods -> 1.10.0
 	* [gem] Fastlane -> 2.167.0

@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 
 ---
-## [X.X.X]
+## [1.7.3]
 * Fix:
 	* Resume audio on device background mode
 * Breaking change:

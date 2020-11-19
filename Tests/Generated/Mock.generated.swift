@@ -60,23 +60,24 @@ open class AudioSessionServiceMock: AudioSessionService, Mock {
 		perform?()
     }
 
-    open func setCategory(_ category: AVAudioSession.Category) {
-        addInvocation(.m_setCategory__category(Parameter<AVAudioSession.Category>.value(`category`)))
-		let perform = methodPerformValue(.m_setCategory__category(Parameter<AVAudioSession.Category>.value(`category`))) as? (AVAudioSession.Category) -> Void
-		perform?(`category`)
+    open func setCategory(_ category: AVAudioSession.Category, options: AVAudioSession.CategoryOptions) {
+        addInvocation(.m_setCategory__categoryoptions_options(Parameter<AVAudioSession.Category>.value(`category`), Parameter<AVAudioSession.CategoryOptions>.value(`options`)))
+		let perform = methodPerformValue(.m_setCategory__categoryoptions_options(Parameter<AVAudioSession.Category>.value(`category`), Parameter<AVAudioSession.CategoryOptions>.value(`options`))) as? (AVAudioSession.Category, AVAudioSession.CategoryOptions) -> Void
+		perform?(`category`, `options`)
     }
 
 
     fileprivate enum MethodType {
         case m_activate
-        case m_setCategory__category(Parameter<AVAudioSession.Category>)
+        case m_setCategory__categoryoptions_options(Parameter<AVAudioSession.Category>, Parameter<AVAudioSession.CategoryOptions>)
 
         static func compareParameters(lhs: MethodType, rhs: MethodType, matcher: Matcher) -> Bool {
             switch (lhs, rhs) {
             case (.m_activate, .m_activate):
                 return true 
-            case (.m_setCategory__category(let lhsCategory), .m_setCategory__category(let rhsCategory)):
+            case (.m_setCategory__categoryoptions_options(let lhsCategory, let lhsOptions), .m_setCategory__categoryoptions_options(let rhsCategory, let rhsOptions)):
                 guard Parameter.compare(lhs: lhsCategory, rhs: rhsCategory, with: matcher) else { return false } 
+                guard Parameter.compare(lhs: lhsOptions, rhs: rhsOptions, with: matcher) else { return false } 
                 return true 
             default: return false
             }
@@ -85,7 +86,7 @@ open class AudioSessionServiceMock: AudioSessionService, Mock {
         func intValue() -> Int {
             switch self {
             case .m_activate: return 0
-            case let .m_setCategory__category(p0): return p0.intValue
+            case let .m_setCategory__categoryoptions_options(p0, p1): return p0.intValue + p1.intValue
             }
         }
     }
@@ -105,7 +106,7 @@ open class AudioSessionServiceMock: AudioSessionService, Mock {
         fileprivate var method: MethodType
 
         public static func activate() -> Verify { return Verify(method: .m_activate)}
-        public static func setCategory(_ category: Parameter<AVAudioSession.Category>) -> Verify { return Verify(method: .m_setCategory__category(`category`))}
+        public static func setCategory(_ category: Parameter<AVAudioSession.Category>, options: Parameter<AVAudioSession.CategoryOptions>) -> Verify { return Verify(method: .m_setCategory__categoryoptions_options(`category`, `options`))}
     }
 
     public struct Perform {
@@ -115,8 +116,8 @@ open class AudioSessionServiceMock: AudioSessionService, Mock {
         public static func activate(perform: @escaping () -> Void) -> Perform {
             return Perform(method: .m_activate, performs: perform)
         }
-        public static func setCategory(_ category: Parameter<AVAudioSession.Category>, perform: @escaping (AVAudioSession.Category) -> Void) -> Perform {
-            return Perform(method: .m_setCategory__category(`category`), performs: perform)
+        public static func setCategory(_ category: Parameter<AVAudioSession.Category>, options: Parameter<AVAudioSession.CategoryOptions>, perform: @escaping (AVAudioSession.Category, AVAudioSession.CategoryOptions) -> Void) -> Perform {
+            return Perform(method: .m_setCategory__categoryoptions_options(`category`, `options`), performs: perform)
         }
     }
 

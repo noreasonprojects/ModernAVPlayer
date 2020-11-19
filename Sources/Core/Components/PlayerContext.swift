@@ -129,7 +129,7 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
     }
 
     private func setAudioSessionCategory() {
-        audioSession.setCategory(config.audioSessionCategory)
+        audioSession.setCategory(config.audioSessionCategory, options: config.audioSessionCategoryOptions)
     }
     
     private func setAllowsExternalPlayback() {

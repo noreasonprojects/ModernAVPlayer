@@ -23,6 +23,7 @@ struct PlayerConfigurationExample: PlayerConfiguration {
     let preferredTimescale = CMTimeScale(NSEC_PER_SEC)
     let periodicPlayingTime: CMTime
     let audioSessionCategory = AVAudioSession.Category.playback
+    let audioSessionCategoryOptions = AVAudioSession.CategoryOptions.mixWithOthers
 
     // Reachability Service
     let reachabilityURLSessionTimeout: TimeInterval = 3

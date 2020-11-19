@@ -16,6 +16,12 @@
 - Log available by domain
 ***
 
+### Known issue
+- Audio is not stopped by other audio sources, `AVAudiosession.CategoryOptions` is set to mixWithOther but can be changed: 
+[reference](https://github.com/noreasonprojects/ModernAVPlayer/issues/174)
+
+***
+
 ## Menu
 - [Requirements](#requirements)
 - [Installation](#installation)
@@ -31,8 +37,6 @@
 
 - iOS 10.0+
 - tvOS 10.0+
-- Xcode 11.0+
-- Swift 5.0+
 
 > In order to support background mode, append the following to your ``Info.plist``:
 ```

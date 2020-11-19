@@ -127,7 +127,8 @@ final class PlayerContextTests: XCTestCase {
 
     func testSetCategoryOnInit() {
         // ASSERT
-        Verify(self.audioSession, 1, .setCategory(.value(self.context.config.audioSessionCategory)))
+        Verify(self.audioSession, 1, .setCategory(.value(self.context.config.audioSessionCategory),
+                                                  options: .value(self.context.config.audioSessionCategoryOptions)))
     }
 
     func testSetExternalPlayback() {

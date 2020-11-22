@@ -51,10 +51,11 @@ struct LoadedState: PlayerState {
     }
 
     func contextUpdated() {
-        guard let media = context.currentMedia else { assertionFailure(); return }
+        guard let media = context.currentMedia, let item = context.currentItem
+            else { assertionFailure("Media and Item should exists when loaded"); return }
         
         context.delegate?.playerContext(didItemDurationChange: context.itemDuration)
-        context.plugins.forEach { $0.didLoad(media: media, duration: context.itemDuration) }
+        context.plugins.forEach { $0.didLoad(media: media, playerItem: item, duration: context.itemDuration) }
     }
 
     // MARK: - Shared actions

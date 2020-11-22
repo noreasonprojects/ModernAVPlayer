@@ -122,7 +122,7 @@ public extension PlayerPlugin {
     func willStartLoading(media: PlayerMedia) { }
     func didStartLoading(media: PlayerMedia) { }
     func didStartBuffering(media: PlayerMedia) { }
-    func didLoad(media: PlayerMedia, duration: Double?) { }
+    func didLoad(media: PlayerMedia, playerItem: AVPlayerItem, duration: Double?) { }
     func didMediaChanged(_ media: PlayerMedia, previousMedia: PlayerMedia?) { }
     func willStartPlaying(media: PlayerMedia, position: Double) { }
     func didStartPlaying(media: PlayerMedia) { }

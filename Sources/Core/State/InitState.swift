@@ -64,7 +64,7 @@ struct InitState: PlayerState {
         context.delegate?.playerContext(unavailableActionReason: .loadMediaFirst)
     }
     
-    func seek(position: Double) {
+    func seek(position: Double, isAccurate: Bool) {
         let debug = "Load item before seeking"
         ModernAVPlayerLogger.instance.log(message: debug, domain: .unavailableCommand)
         context.delegate?.playerContext(unavailableActionReason: .loadMediaFirst)

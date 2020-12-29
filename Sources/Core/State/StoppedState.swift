@@ -34,7 +34,7 @@ final class StoppedState: PausedState {
     init(context: PlayerContext) {
         super.init(context: context, type: .stopped)
 
-        seek(position: 0)
+        seek(position: 0, isAccurate: false)
     }
 
     override func contextUpdated() {

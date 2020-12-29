@@ -30,6 +30,6 @@ public protocol PlayerCommand {
     func load(media: PlayerMedia, autostart: Bool, position: Double?)
     func pause()
     func play()
-    func seek(position: Double)
+    func seek(position: Double, isAccurate: Bool)
     func stop()
 }

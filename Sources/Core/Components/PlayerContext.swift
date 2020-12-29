@@ -146,14 +146,14 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
         state.pause()
     }
 
-    func seek(position: Double) {
+    func seek(position: Double, isAccurate: Bool) {
         guard let item = currentItem
             else { unaivalableCommand(reason: .loadMediaFirst); return }
 
         let seekService = ModernAVPlayerSeekService(preferredTimescale: config.preferredTimescale)
         let seekPosition = seekService.boundedPosition(position, item: item)
         if let boundedPosition = seekPosition.value {
-            state.seek(position: boundedPosition)
+            state.seek(position: boundedPosition, isAccurate: isAccurate)
         } else if let reason = seekPosition.reason {
             unaivalableCommand(reason: reason)
         } else {
@@ -161,9 +161,9 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
         }
     }
 
-    func seek(offset: Double) {
+    func seek(offset: Double, isAccurate: Bool) {
         let position = currentTime + offset
-        seek(position: position)
+        seek(position: position, isAccurate: isAccurate)
     }
 
     func stop() {

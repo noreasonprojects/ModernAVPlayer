@@ -80,7 +80,7 @@ final class FailedState: PlayerState {
         context.changeState(state: state)
     }
 
-    func seek(position: Double) {
+    func seek(position: Double, isAccurate: Bool) {
         let debug = "Unable to seek, load a media first"
         ModernAVPlayerLogger.instance.log(message: debug, domain: .unavailableCommand)
         context.delegate?.playerContext(unavailableActionReason: .loadMediaFirst)

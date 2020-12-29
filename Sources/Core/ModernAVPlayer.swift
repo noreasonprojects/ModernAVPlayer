@@ -102,21 +102,45 @@ public final class ModernAVPlayer: NSObject, ModernAVPlayerExposable {
     ///
     /// Sets the media current time to the specified position
     ///
-    /// - Note: position is bounded between 0 and end time or available ranges
+    /// - Note: position is bounded between 0 and end time or available ranges, resulting seek position may differ slightly for efficiency
     /// - parameter position: time to seek
     ///
     public func seek(position: Double) {
-        context.seek(position: position)
+        context.seek(position: position, isAccurate: false)
+    }
+    
+    ///
+    /// Sets the media current time to the specified position
+    ///
+    /// - Note: position is bounded between 0 and end time or available ranges
+    /// - parameter position: time to seek
+    /// - parameter isAccurate: pass true if you desire presice seeking, may incur additional decoding delay
+    /// which can impact seeking performance, default is false
+    ///
+    public func seek(position: Double, isAccurate: Bool = false) {
+        context.seek(position: position, isAccurate: isAccurate)
     }
 
     ///
     /// Apply offset to the media current time
     ///
-    /// - Note: this method compute position then call then seek(position:)
+    /// - Note: this method compute position then call then seek(position:), resulting seek position may differ slightly for efficiency
     /// - parameter offset: offset to apply
     ///
     public func seek(offset: Double) {
-        context.seek(offset: offset)
+        context.seek(offset: offset, isAccurate: false)
+    }
+    
+    ///
+    /// Apply offset to the media current time
+    ///
+    /// - Note: this method compute position then call then seek(position:), resulting seek position may differ slightly for efficiency
+    /// - parameter offset: offset to apply
+    /// - parameter isAccurate: pass true if you desire presice seeking,
+    /// may incur additional decoding delay which can impact seeking performance, default is false
+    ///
+    public func seek(offset: Double, isAccurate: Bool = false) {
+        context.seek(offset: offset, isAccurate: isAccurate)
     }
     
     /// Stops playback of the current item then seek to 0

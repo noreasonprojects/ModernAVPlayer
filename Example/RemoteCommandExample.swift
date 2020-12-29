@@ -126,7 +126,7 @@ public struct RemoteCommandFactoryExample {
             guard let e = event as? MPChangePlaybackPositionCommandEvent
                 else { return .commandFailed }
             let position = e.positionTime
-            self.player.seek(position: position)
+            self.player.seek(position: position, isAccurate: false)
             return .success
         }
         command.addTarget(handler: handler)
@@ -145,7 +145,7 @@ public struct RemoteCommandFactoryExample {
                 else { return .commandFailed }
 
             let position = max(self.player.currentTime - skipTime, 0)
-            self.player.seek(position: position)
+            self.player.seek(position: position, isAccurate: false)
             return .success
         }
         command.addTarget(handler: handler)
@@ -164,7 +164,7 @@ public struct RemoteCommandFactoryExample {
                 else { return .commandFailed }
 
             let position = self.player.currentTime + skipTime
-            self.player.seek(position: position)
+            self.player.seek(position: position, isAccurate: false)
             return .success
         }
         command.addTarget(handler: handler)

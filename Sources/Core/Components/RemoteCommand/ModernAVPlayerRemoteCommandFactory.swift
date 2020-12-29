@@ -165,7 +165,7 @@ public class ModernAVPlayerRemoteCommandFactory {
             
             let position = e.positionTime
             ModernAVPlayerLogger.instance.log(message: "Remote command: seek to \(position)", domain: .service)
-            self.player.seek(position: position)
+            self.player.seek(position: position, isAccurate: false)
             return .success
         }
         command.addTarget(handler: handler)
@@ -191,7 +191,7 @@ public class ModernAVPlayerRemoteCommandFactory {
             
             ModernAVPlayerLogger.instance.log(message: "Remote command: skipBackward", domain: .service)
             let position = max(self.player.currentTime - skipTime, 0)
-            self.player.seek(position: position)
+            self.player.seek(position: position, isAccurate: false)
             return .success
         }
         command.addTarget(handler: handler)
@@ -217,7 +217,7 @@ public class ModernAVPlayerRemoteCommandFactory {
             
             ModernAVPlayerLogger.instance.log(message: "Remote command: skipForward", domain: .service)
             let position = self.player.currentTime + skipTime
-            self.player.seek(position: position)
+            self.player.seek(position: position, isAccurate: false)
             return .success
         }
         command.addTarget(handler: handler)

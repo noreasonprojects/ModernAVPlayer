@@ -113,10 +113,10 @@ final class PlayingState: PlayerState {
         context.delegate?.playerContext(unavailableActionReason: .alreadyPlaying)
     }
 
-    func seek(position: Double) {
+    func seek(position: Double, isAccurate: Bool) {
         let state = BufferingState(context: context)
         changeState(state: state)
-        state.seekCommand(position: position)
+        state.seekCommand(position: position, isAccurate: isAccurate)
     }
 
     func stop() {
@@ -142,7 +142,7 @@ final class PlayingState: PlayerState {
                 $0.didItemPlayToEndTime(media: media, endTime: strongSelf.context.currentTime)
             }
             if strongSelf.context.loopMode {
-                strongSelf.seek(position: 0)
+                strongSelf.seek(position: 0, isAccurate: false)
             } else {
                 strongSelf.stop()
             }

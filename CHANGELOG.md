@@ -3,8 +3,9 @@ All notable changes to this project will be documented in this file.
 
 ---
 ## [X.X.X]
-* Dependency:
+* Dependencies:
 	* [gem] Cocoapods -> 1.10.1
+	* [gem] Fastlane -> 2.171.0
 
 ## [1.7.3]
 * Fix:

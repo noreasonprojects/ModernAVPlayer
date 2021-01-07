@@ -40,7 +40,7 @@ public struct ModernAVPlayerConfiguration: PlayerConfiguration {
     public let preferredTimescale = CMTimeScale(NSEC_PER_SEC)
     public let periodicPlayingTime: CMTime
     public let audioSessionCategory = AVAudioSession.Category.playback
-    public let audioSessionCategoryOptions = AVAudioSession.CategoryOptions.mixWithOthers
+    public let audioSessionCategoryOptions: AVAudioSession.CategoryOptions? = nil
 
     // Reachability Service
     public let reachabilityURLSessionTimeout: TimeInterval = 3

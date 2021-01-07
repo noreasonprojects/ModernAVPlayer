@@ -29,7 +29,7 @@ import AVFoundation
 //sourcery: AutoMockable
 protocol AudioSessionService {
     func activate()
-    func setCategory(_ category: AVAudioSession.Category, options: AVAudioSession.CategoryOptions)
+    func setCategory(_ category: AVAudioSession.Category, options: AVAudioSession.CategoryOptions?)
 }
 
 struct ModernAVPlayerAudioSessionService: AudioSessionService {
@@ -51,9 +51,9 @@ struct ModernAVPlayerAudioSessionService: AudioSessionService {
         }
     }
 
-    func setCategory(_ category: AVAudioSession.Category, options: AVAudioSession.CategoryOptions) {
+    func setCategory(_ category: AVAudioSession.Category, options: AVAudioSession.CategoryOptions?) {
         do {
-            try audioSession.setCategory(category, mode: .default, options: options)
+            try audioSession.setCategory(category, mode: .default, options: options ?? [])
             ModernAVPlayerLogger.instance.log(message: "Set audio session category to: \(category)", domain: .service)
         } catch let error {
             ModernAVPlayerLogger.instance.log(message: "Set \(category) category: \(error.localizedDescription)", domain: .error)

@@ -8,7 +8,7 @@
 
 #### ++ Cool features ++
 - Get 9 nice and relevant player states (playing, buffering, loading, loaded...)
-- Persistence player to resume playback after bad network connection even in background mode
+- Persistence player to resume playback after bad network connection ~~even in background mode~~  (bug from version 1.5.1)
 - Manage headphone interactions, call & siri interruptions, now playing informations
 - Add your own plug-in to manage tracking, events...
 - RxSwift compatible
@@ -17,9 +17,9 @@
 ***
 
 ### Known issue
-- Audio is not stopped by other audio sources, `AVAudiosession.CategoryOptions` is set to mixWithOther but can be changed: 
-[reference](https://github.com/noreasonprojects/ModernAVPlayer/issues/174)
+From version 1.5.1, resume playback from background mode failed. If you have any suggestion, please help. 
 
+``Use of  mixWithOther AVAudiosession CategoryOptions is not a solution.``
 ***
 
 ## Menu

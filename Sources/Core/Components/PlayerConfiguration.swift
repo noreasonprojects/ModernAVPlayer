@@ -41,7 +41,7 @@ public protocol PlayerConfiguration {
     var preferredTimescale: CMTimeScale { get }
     var periodicPlayingTime: CMTime { get }
     var audioSessionCategory: AVAudioSession.Category { get }
-    var audioSessionCategoryOptions: AVAudioSession.CategoryOptions { get }
+    var audioSessionCategoryOptions: AVAudioSession.CategoryOptions? { get }
 
     /// Reachability Service
     /// When buffering or playing and playback stop unexpectedly, a timer is set to check connectivity via URLSession

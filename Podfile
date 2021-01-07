@@ -1,4 +1,5 @@
 use_frameworks!
+inhibit_all_warnings!
 
 target 'ModernAVPlayer_Example' do
   platform :ios, '10.0'

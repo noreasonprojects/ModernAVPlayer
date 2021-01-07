@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 
 ---
+## [X.X.X]
+* Dependency:
+	* [gem] Cocoapods -> 1.10.1
+
 ## [1.7.3]
 * Fix:
 	* Resume audio on device background mode

@@ -3,6 +3,8 @@ All notable changes to this project will be documented in this file.
 
 ---
 ## [X.X.X]
+* Feature:
+	* Accept optional avaudio session catergory option
 * Dependencies:
 	* [gem] Cocoapods -> 1.10.1
 	* [gem] Fastlane -> 2.171.0

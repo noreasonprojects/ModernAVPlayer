@@ -2,12 +2,10 @@
 All notable changes to this project will be documented in this file.
 
 ---
-## [1.7.3]
-* Fix:
-	* Resume audio on device background mode
-* Breaking change:
-	* `PlayerConfiguration` has a new `AVAudioSessionCategoryOptions` attribute
-
+## [X.X.X]
+* Feature:
+	* Accurate seek api
+    
 ## [1.7.2]
 * Feature:
 	* tvOS support [@yaroslavlvov]

@@ -105,6 +105,7 @@ public final class ModernAVPlayer: NSObject, ModernAVPlayerExposable {
     /// - Note: position is bounded between 0 and end time or available ranges, resulting seek position may differ slightly for efficiency
     /// - parameter position: time to seek
     ///
+    @available(*, deprecated, message: "use func seek(position: Double, isAccurate: Bool = false) instead")
     public func seek(position: Double) {
         context.seek(position: position, isAccurate: false)
     }
@@ -127,6 +128,7 @@ public final class ModernAVPlayer: NSObject, ModernAVPlayerExposable {
     /// - Note: this method compute position then call then seek(position:), resulting seek position may differ slightly for efficiency
     /// - parameter offset: offset to apply
     ///
+    @available(*, deprecated, message: "use func seek(offset: Double, isAccurate: Bool = false) instead")
     public func seek(offset: Double) {
         context.seek(offset: offset, isAccurate: false)
     }

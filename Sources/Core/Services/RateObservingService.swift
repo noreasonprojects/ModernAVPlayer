@@ -39,6 +39,7 @@ final class ModernAVPlayerRateObservingService: RateObservingService {
     // MARK: - Inputs
     
     private let item: AVPlayerItem
+    private let player: AVPlayer
     private let timeInterval: TimeInterval
     private let timeout: TimeInterval
     private let timerFactory: TimerFactory
@@ -55,12 +56,13 @@ final class ModernAVPlayerRateObservingService: RateObservingService {
 
     // MARK: - Lifecycle
     
-    init(config: PlayerConfiguration, item: AVPlayerItem, timerFactory: TimerFactory = ModernAVPlayerTimerFactory()) {
+    init(config: PlayerConfiguration, item: AVPlayerItem, timerFactory: TimerFactory = ModernAVPlayerTimerFactory(), player: AVPlayer) {
         ModernAVPlayerLogger.instance.log(message: "Init", domain: .lifecycleService)
         timeInterval = config.rateObservingTickTime
         timeout = config.rateObservingTimeout
         self.timerFactory = timerFactory
         self.item = item
+        self.player = player
     }
     
     deinit {
@@ -102,6 +104,8 @@ final class ModernAVPlayerRateObservingService: RateObservingService {
             timer?.invalidate()
             onTimeout?()
         } else {
+            //try to force play if playback stalled
+            player.play()
             ModernAVPlayerLogger.instance.log(message: "Remaining time: \(remainingTime)", domain: .service)
         }
     }

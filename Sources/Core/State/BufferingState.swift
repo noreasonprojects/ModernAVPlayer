@@ -49,7 +49,7 @@ final class BufferingState: NSObject, PlayerState {
         guard let item = context.currentItem else { fatalError("item should exist") }
         
         self.context = context
-        self.rateObservingService = rateObservingService ?? ModernAVPlayerRateObservingService(config: context.config, item: item)
+        self.rateObservingService = rateObservingService ?? ModernAVPlayerRateObservingService(config: context.config, item: item, player: context.player)
         self.interruptionAudioService = interruptionAudioService
         
         super.init()

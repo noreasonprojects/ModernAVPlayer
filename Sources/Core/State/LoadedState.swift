@@ -76,9 +76,8 @@ struct LoadedState: PlayerState {
 
     func seek(position: Double, isAccurate: Bool) {
         let time = CMTime(seconds: position, preferredTimescale: context.config.preferredTimescale)
-        let toleranceBefore: CMTime = isAccurate ? .zero : .positiveInfinity
-        let toleranceAfter: CMTime = isAccurate ? .zero : .positiveInfinity
-        context.player.seek(to: time, toleranceBefore: toleranceBefore, toleranceAfter: toleranceAfter) { [context] completed in
+        let tolerance: CMTime = isAccurate ? .zero : .positiveInfinity
+        context.player.seek(to: time, toleranceBefore: tolerance, toleranceAfter: tolerance) { [context] completed in
             guard completed else { return }
             context.delegate?.playerContext(didCurrentTimeChange: context.currentTime)
             context.nowPlaying.overrideInfoCenter(for: MPNowPlayingInfoPropertyElapsedPlaybackTime,

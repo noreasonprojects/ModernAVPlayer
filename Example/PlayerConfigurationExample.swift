@@ -39,6 +39,8 @@ struct PlayerConfigurationExample: PlayerConfiguration {
 
     // AVPlayerItem Init Service
     let itemLoadedAssetKeys = ["playable", "duration"]
+    
+    let automaticallyWaitsToMinimizeStalling = false
 
     init() {
         periodicPlayingTime = CMTime(seconds: 0.1, preferredTimescale: preferredTimescale)

@@ -173,7 +173,7 @@ final class LoadingMediaStateTests: XCTestCase {
 
     func testSeekCall() {
         // ACT
-        state.seek(position: 42)
+        state.seek(position: 42, isAccurate: false)
 
         // ASSERT
         Verify(contextDelegate, .once, .playerContext(unavailableActionReason: .value(.waitLoadedMedia)))

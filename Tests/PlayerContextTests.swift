@@ -190,7 +190,7 @@ final class PlayerContextTests: XCTestCase {
         context.changeState(state: state)
 
         // ACT
-        context.seek(position: 0)
+        context.seek(position: 0, isAccurate: false)
 
         // ASSERT
         Verify(delegate, 1, .playerContext(unavailableActionReason: .value(.loadMediaFirst)))
@@ -204,7 +204,7 @@ final class PlayerContextTests: XCTestCase {
                                                     duration: duration, status: nil)
 
         // ACT
-        context.seek(position: seekPosition)
+        context.seek(position: seekPosition, isAccurate: false)
 
         // ASSERT
         Verify(delegate, 1, .playerContext(unavailableActionReason: .value(.seekOverstepPosition)))
@@ -219,10 +219,10 @@ final class PlayerContextTests: XCTestCase {
         context.changeState(state: state)
 
         // ACT
-        context.seek(position: seekPosition)
+        context.seek(position: seekPosition, isAccurate: false)
 
         // ASSERT
-        Verify(state, 1, .seek(position: .value(seekPosition)))
+        Verify(state, 1, .seek(position: .value(seekPosition), isAccurate: false))
     }
 
     func testValidSeekOffset() {
@@ -236,11 +236,11 @@ final class PlayerContextTests: XCTestCase {
         context.changeState(state: state)
 
         // ACT
-        context.seek(offset: offset)
+        context.seek(offset: offset, isAccurate: false)
 
         // ASSERT
         let expected = seekPosition.seconds + offset
-        Verify(state, 1, .seek(position: .value(expected)))
+        Verify(state, 1, .seek(position: .value(expected), isAccurate: false))
     }
 
     func testLoadMedia() {

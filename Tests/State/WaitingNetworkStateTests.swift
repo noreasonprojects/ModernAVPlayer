@@ -82,7 +82,7 @@ final class WaitingNetworkStateTest: XCTestCase {
 
     func testSeek() {
         // ACT
-        state.seek(position: 0)
+        state.seek(position: 0, isAccurate: false)
 
         // ASSERT
         Verify(contextDelegate, 1, .playerContext(unavailableActionReason: .value(.waitEstablishedNetwork)))

@@ -118,7 +118,7 @@ final class LoadedStateSpecs: QuickSpec {
                 self.mockPlayer.seekCompletionHandlerReturn = true
                 
                 // ACT
-                self.loadedState.seek(position: 42)
+                self.loadedState.seek(position: 42, isAccurate: false)
             }
             
             it("should call seek on player") {
@@ -140,7 +140,7 @@ final class LoadedStateSpecs: QuickSpec {
                 self.mockPlayer.seekCompletionHandlerReturn = false
                 
                 // ACT
-                self.loadedState.seek(position: 42)
+                self.loadedState.seek(position: 42, isAccurate: false)
             }
             
             it("should call seek on player") {

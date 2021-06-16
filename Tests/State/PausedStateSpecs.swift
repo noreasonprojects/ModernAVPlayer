@@ -170,7 +170,7 @@ final class PausedStateSpecs: QuickSpec {
                 self.mockPlayer.seekCompletionHandlerReturn = true
                 
                 // ACT
-                self.tested.seek(position: self.position.seconds)
+                self.tested.seek(position: self.position.seconds, isAccurate: false)
             }
             
             it("should call player seek") {
@@ -203,7 +203,7 @@ final class PausedStateSpecs: QuickSpec {
                 self.mockPlayer.seekCompletionHandlerReturn = false
                 
                 // ACT
-                self.tested.seek(position: self.position.seconds)
+                self.tested.seek(position: self.position.seconds, isAccurate: false)
             }
             
             it("should call player seek") {

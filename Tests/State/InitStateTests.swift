@@ -98,7 +98,7 @@ final class InitStateTests: XCTestCase {
     
     func testSeekCall() {
         // ACT
-        state.seek(position: 42)
+        state.seek(position: 42, isAccurate: false)
         
         // ASSERT
         Verify(contextDelegate, 1, .playerContext(unavailableActionReason: .value(.loadMediaFirst)))

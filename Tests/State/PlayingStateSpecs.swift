@@ -121,7 +121,7 @@ final class PlayingStateSpecs: QuickSpec {
                 let position: Double = 42
 
                 // ACT
-                self.playingState.seek(position: position)
+                self.playingState.seek(position: position, isAccurate: false)
 
                 // ASSERT
                 expect(self.tested.state).to(beAnInstanceOf(BufferingState.self))

@@ -145,7 +145,7 @@ final class BufferingStateSpecs: QuickSpec {
                 self.mockPlayer.seekCompletionHandlerReturn = true
                 
                 // ACT
-                self.bufferingState.seekCommand(position: 42)
+                self.bufferingState.seekCommand(position: 42, isAccurate: false)
             }
             
             it("should call didCurrentTimeChange delegate method") {
@@ -168,7 +168,7 @@ final class BufferingStateSpecs: QuickSpec {
                 self.mockPlayer.seekCompletionHandlerReturn = false
                 
                 // ACT
-                self.bufferingState.seekCommand(position: 42)
+                self.bufferingState.seekCommand(position: 42, isAccurate: false)
             }
             
             it("should not call didCurrentTimeChange delegate method") {
@@ -246,7 +246,7 @@ final class BufferingStateSpecs: QuickSpec {
             it("should cancel pending seek") {
                 
                 // ACT
-                self.bufferingState.seek(position: CMTime.zero.seconds)
+                self.bufferingState.seek(position: CMTime.zero.seconds, isAccurate: false)
                 
                 // ASSERT
                 expect(self.item.cancelPendingSeeksCallCount).to(equal(1))
@@ -255,7 +255,7 @@ final class BufferingStateSpecs: QuickSpec {
             it("should call player seek command") {
                 
                 // ACT
-                self.bufferingState.seek(position: CMTime.zero.seconds)
+                self.bufferingState.seek(position: CMTime.zero.seconds, isAccurate: false)
                 
                 // ASSERT
                 expect(self.mockPlayer.seekCompletionCallCount).to(equal(1))

@@ -44,7 +44,7 @@ struct InitState: PlayerState {
     }
     
     func contextUpdated() {
-        context.player.automaticallyWaitsToMinimizeStalling = false
+        context.player.automaticallyWaitsToMinimizeStalling = context.config.automaticallyWaitsToMinimizeStalling
     }
     
     // MARK: - Shared actions

@@ -63,4 +63,7 @@ public protocol PlayerConfiguration {
 
     /// Use to feed `automaticallyLoadedAssetKeys` on `AVPlayerItem` initialization
     var itemLoadedAssetKeys: [String] { get }
+    
+    /// Use to feed `automaticallyWaitsToMinimizeStalling` for `AVPlayer`
+    var automaticallyWaitsToMinimizeStalling: Bool { get }
 }

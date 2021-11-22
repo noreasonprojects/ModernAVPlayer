@@ -48,6 +48,7 @@ struct LoadedState: PlayerState {
         context.nowPlaying.update(metadata: media.getMetadata(),
                                   duration: context.currentItem?.duration.seconds,
                                   isLive: media.isLive())
+        stopBgTask(context: context)
     }
 
     func contextUpdated() {
@@ -55,6 +56,16 @@ struct LoadedState: PlayerState {
         
         context.delegate?.playerContext(didItemDurationChange: context.itemDuration)
         context.plugins.forEach { $0.didLoad(media: media, duration: context.itemDuration) }
+    }
+    
+    // MARK: - Background task
+
+    private func stopBgTask(context: PlayerContext) {
+        guard let token = context.bgToken else { return }
+
+        ModernAVPlayerLogger.instance.log(message: "StopBgTask: \(token)", domain: .service)
+        UIApplication.shared.endBackgroundTask(token)
+        context.bgToken = nil
     }
 
     // MARK: - Shared actions

@@ -118,6 +118,12 @@ final class LoadingMediaState: PlayerState {
         ModernAVPlayerLogger.instance.log(message: debug, domain: .unavailableCommand)
         context.delegate?.playerContext(unavailableActionReason: .waitLoadedMedia)
     }
+    
+    func seek(position: Double, toleranceBefore: CMTime, toleranceAfter: CMTime) {
+        let debug = "Wait media to be loaded before seeking"
+        ModernAVPlayerLogger.instance.log(message: debug, domain: .unavailableCommand)
+        context.delegate?.playerContext(unavailableActionReason: .waitLoadedMedia)
+    }
 
     func stop() {
         cancelMediaLoading()

@@ -160,12 +160,32 @@ final class ModernAVPlayerContext: NSObject, PlayerContext {
             assertionFailure("boundedPosition should return at least value or reason")
         }
     }
+    
+    func seek(position: Double, toleranceBefore: CMTime, toleranceAfter: CMTime) {
+        guard let item = currentItem
+            else { unaivalableCommand(reason: .loadMediaFirst); return }
+
+        let seekService = ModernAVPlayerSeekService(preferredTimescale: config.preferredTimescale)
+        let seekPosition = seekService.boundedPosition(position, item: item)
+        if let boundedPosition = seekPosition.value {
+            state.seek(position: boundedPosition, toleranceBefore: toleranceBefore, toleranceAfter: toleranceAfter)
+        } else if let reason = seekPosition.reason {
+            unaivalableCommand(reason: reason)
+        } else {
+            assertionFailure("boundedPosition should return at least value or reason")
+        }
+    }
 
     func seek(offset: Double) {
         let position = currentTime + offset
         seek(position: position)
     }
 
+    func seek(offset: Double, toleranceBefore: CMTime, toleranceAfter: CMTime) {
+        let position = currentTime + offset
+        seek(position: position, toleranceBefore: toleranceBefore, toleranceAfter: toleranceAfter)
+    }
+    
     func stop() {
         state.stop()
     }

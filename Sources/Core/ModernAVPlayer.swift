@@ -110,6 +110,18 @@ public final class ModernAVPlayer: NSObject, ModernAVPlayerExposable {
     }
 
     ///
+    /// Sets the media current time to the specified position
+    ///
+    /// - Note: position is bounded between 0 and end time or available ranges
+    /// - parameter position: time to seek
+    /// - patameter toleranceBefore: CMTime for toleranceBefore
+    /// - patameter toleranceAfter: CMTime for toleranceAfter
+    ///
+    public func seek(position: Double, toleranceBefore: CMTime, toleranceAfter: CMTime) {
+        context.seek(position: position, toleranceBefore: toleranceBefore, toleranceAfter: toleranceAfter)
+    }
+    
+    ///
     /// Apply offset to the media current time
     ///
     /// - Note: this method compute position then call then seek(position:)

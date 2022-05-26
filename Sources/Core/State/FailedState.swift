@@ -85,6 +85,12 @@ final class FailedState: PlayerState {
         ModernAVPlayerLogger.instance.log(message: debug, domain: .unavailableCommand)
         context.delegate?.playerContext(unavailableActionReason: .loadMediaFirst)
     }
+    
+    func seek(position: Double, toleranceBefore: CMTime, toleranceAfter: CMTime) {
+        let debug = "Unable to seek, load a media first"
+        ModernAVPlayerLogger.instance.log(message: debug, domain: .unavailableCommand)
+        context.delegate?.playerContext(unavailableActionReason: .loadMediaFirst)
+    }
 
     func stop() {
         let debug = "Unable to stop, load a media first"

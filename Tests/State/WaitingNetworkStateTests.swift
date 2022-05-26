@@ -87,6 +87,13 @@ final class WaitingNetworkStateTest: XCTestCase {
         // ASSERT
         Verify(contextDelegate, 1, .playerContext(unavailableActionReason: .value(.waitEstablishedNetwork)))
     }
+    
+    func testSeekTolerance() {
+        // ACT
+        state.seek(position: 0, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
+        // ASSERT
+        Verify(contextDelegate, 1, .playerContext(unavailableActionReason: .value(.waitEstablishedNetwork)))
+    }
 
     func testPause() {
         // ACT

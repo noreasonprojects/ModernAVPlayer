@@ -103,6 +103,16 @@ class PausedState: PlayerState {
                                                   value: context.currentTime)
         }
     }
+    
+    func seek(position: Double, toleranceBefore: CMTime, toleranceAfter: CMTime) {
+        let time = CMTime(seconds: position, preferredTimescale: context.config.preferredTimescale)
+        context.player.seek(to: time, toleranceBefore: toleranceBefore, toleranceAfter: toleranceAfter) { [weak self] completed in
+            guard completed, let context = self?.context else { return }
+            context.delegate?.playerContext(didCurrentTimeChange: context.currentTime)
+            context.nowPlaying.overrideInfoCenter(for: MPNowPlayingInfoPropertyElapsedPlaybackTime,
+                                                  value: context.currentTime)
+        }
+    }
 
     func stop() {
         context.changeState(state: StoppedState(context: context))

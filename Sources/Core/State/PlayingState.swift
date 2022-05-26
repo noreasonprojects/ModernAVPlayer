@@ -119,6 +119,12 @@ final class PlayingState: PlayerState {
         state.seekCommand(position: position)
     }
 
+    func seek(position: Double, toleranceBefore: CMTime, toleranceAfter: CMTime) {
+        let state = BufferingState(context: context)
+        changeState(state: state)
+        state.seekCommand(position: position, toleranceBefore: toleranceBefore, toleranceAfter: toleranceAfter)
+    }
+    
     func stop() {
         let state = StoppedState(context: context)
         changeState(state: state)

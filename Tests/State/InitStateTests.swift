@@ -103,4 +103,12 @@ final class InitStateTests: XCTestCase {
         // ASSERT
         Verify(contextDelegate, 1, .playerContext(unavailableActionReason: .value(.loadMediaFirst)))
     }
+    
+    func testSeekToleranceCall() {
+        // ACT
+        state.seek(position: 42, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
+        
+        // ASSERT
+        Verify(contextDelegate, 1, .playerContext(unavailableActionReason: .value(.loadMediaFirst)))
+    }
 }

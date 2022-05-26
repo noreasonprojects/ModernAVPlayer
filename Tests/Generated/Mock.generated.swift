@@ -889,6 +889,12 @@ open class PlayerContextMock: PlayerContext, Mock {
 		let perform = methodPerformValue(.m_seek__position_position(Parameter<Double>.value(`position`))) as? (Double) -> Void
 		perform?(`position`)
     }
+    
+    public func seek(position: Double, toleranceBefore: CMTime, toleranceAfter: CMTime) {
+        addInvocation(.m_seek__position_position(Parameter<Double>.value(`position`)))
+        let perform = methodPerformValue(.m_seek__position_position(Parameter<Double>.value(`position`))) as? (Double) -> Void
+        perform?(`position`)
+    }
 
     open func stop() {
         addInvocation(.m_stop)
@@ -2365,6 +2371,12 @@ open class PlayerStateMock: PlayerState, Mock {
         addInvocation(.m_seek__position_position(Parameter<Double>.value(`position`)))
 		let perform = methodPerformValue(.m_seek__position_position(Parameter<Double>.value(`position`))) as? (Double) -> Void
 		perform?(`position`)
+    }
+    
+    public func seek(position: Double, toleranceBefore: CMTime, toleranceAfter: CMTime) {
+        addInvocation(.m_seek__position_position(Parameter<Double>.value(`position`)))
+        let perform = methodPerformValue(.m_seek__position_position(Parameter<Double>.value(`position`))) as? (Double) -> Void
+        perform?(`position`)
     }
 
     open func stop() {

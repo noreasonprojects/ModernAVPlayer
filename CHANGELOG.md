@@ -9,6 +9,10 @@ All notable changes to this project will be documented in this file.
 	* [gem] Cocoapods -> 1.10.1
 	* [gem] Fastlane -> 2.171.0
 
+## [1.7.4]
+* Improvements:
+    * Support seek tolerance API
+
 ## [1.7.3]
 * Fix:
 	* Resume audio on device background mode

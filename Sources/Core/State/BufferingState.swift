@@ -112,6 +112,16 @@ final class BufferingState: NSObject, PlayerState {
             strongSelf.playCommand()
         }
     }
+    
+    func seekCommand(position: Double, toleranceBefore: CMTime, toleranceAfter: CMTime) {
+        context.currentItem?.cancelPendingSeeks()
+        let time = CMTime(seconds: position, preferredTimescale: context.config.preferredTimescale)
+        context.player.seek(to: time, toleranceBefore: toleranceBefore, toleranceAfter: toleranceAfter) { [weak self] completed in
+            guard completed, let strongSelf = self else { return }
+            strongSelf.context.delegate?.playerContext(didCurrentTimeChange: strongSelf.context.currentTime)
+            strongSelf.playCommand()
+        }
+    }
 
     // MARK: - Shared actions
 
@@ -132,6 +142,10 @@ final class BufferingState: NSObject, PlayerState {
 
     func seek(position: Double) {
         seekCommand(position: position)
+    }
+    
+    func seek(position: Double, toleranceBefore: CMTime, toleranceAfter: CMTime) {
+        seekCommand(position: position, toleranceBefore: toleranceBefore, toleranceAfter: toleranceAfter)
     }
 
     func stop() {

@@ -95,6 +95,14 @@ final class FailedStateTests: XCTestCase {
         // ASSERT
         Verify(contextDelegate, 1, .playerContext(unavailableActionReason: .value(.loadMediaFirst)))
     }
+    
+    func testSeekTolerance() {
+        // ACT
+        state.seek(position: 0, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
+
+        // ASSERT
+        Verify(contextDelegate, 1, .playerContext(unavailableActionReason: .value(.loadMediaFirst)))
+    }
 
     func testFailedUsedAVPlayerItem() {
         // ACT

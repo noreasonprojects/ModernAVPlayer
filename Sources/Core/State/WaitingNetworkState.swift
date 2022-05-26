@@ -116,6 +116,12 @@ final class WaitingNetworkState: PlayerState {
         context.delegate?.playerContext(unavailableActionReason: .waitEstablishedNetwork)
     }
     
+    func seek(position: Double, toleranceBefore: CMTime, toleranceAfter: CMTime) {
+        let debug = "Reload a media first before seeking"
+        ModernAVPlayerLogger.instance.log(message: debug, domain: .unavailableCommand)
+        context.delegate?.playerContext(unavailableActionReason: .waitEstablishedNetwork)
+    }
+    
     func stop() {
         context.changeState(state: StoppedState(context: context))
     }

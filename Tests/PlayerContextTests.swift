@@ -195,6 +195,17 @@ final class PlayerContextTests: XCTestCase {
         // ASSERT
         Verify(delegate, 1, .playerContext(unavailableActionReason: .value(.loadMediaFirst)))
     }
+    
+    func testSeekToleranceWithNoCurrentItem() {
+        // ARRANGE
+        context.changeState(state: state)
+
+        // ACT
+        context.seek(position: 0, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
+
+        // ASSERT
+        Verify(delegate, 1, .playerContext(unavailableActionReason: .value(.loadMediaFirst)))
+    }
 
     func testOverstepSeekPosition() {
         // ARRANGE
@@ -206,6 +217,19 @@ final class PlayerContextTests: XCTestCase {
         // ACT
         context.seek(position: seekPosition)
 
+        // ASSERT
+        Verify(delegate, 1, .playerContext(unavailableActionReason: .value(.seekOverstepPosition)))
+    }
+    
+    func testOverstepSeekTolerancePosition() {
+        // ARRANGE
+        let seekPosition: Double = 43
+        let duration = CMTime(seconds: 42, preferredTimescale: config.preferredTimescale)
+        player.overrideCurrentItem = MockPlayerItem(url: URL(fileURLWithPath: ""),
+                                                    duration: duration, status: nil)
+
+        // ACT
+        context.seek(position: seekPosition, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
         // ASSERT
         Verify(delegate, 1, .playerContext(unavailableActionReason: .value(.seekOverstepPosition)))
     }
@@ -224,6 +248,21 @@ final class PlayerContextTests: XCTestCase {
         // ASSERT
         Verify(state, 1, .seek(position: .value(seekPosition)))
     }
+    
+    func testValidSeekTolerancePosition() {
+        // ARRANGE
+        let seekPosition: Double = 21
+        let duration = CMTime(seconds: 42, preferredTimescale: config.preferredTimescale)
+        player.overrideCurrentItem = MockPlayerItem(url: URL(fileURLWithPath: ""),
+                                                    duration: duration, status: nil)
+        context.changeState(state: state)
+
+        // ACT
+        context.seek(position: seekPosition, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
+        // ASSERT
+        Verify(state, 1, .seek(position: .value(seekPosition)))
+        
+    }
 
     func testValidSeekOffset() {
         // ARRANGE
@@ -238,6 +277,23 @@ final class PlayerContextTests: XCTestCase {
         // ACT
         context.seek(offset: offset)
 
+        // ASSERT
+        let expected = seekPosition.seconds + offset
+        Verify(state, 1, .seek(position: .value(expected)))
+    }
+    
+    func testValidSeekToleranceOffset() {
+        // ARRANGE
+        let seekPosition = CMTime(seconds: 21, preferredTimescale: config.preferredTimescale)
+        let duration = CMTime(seconds: 42, preferredTimescale: config.preferredTimescale)
+        let offset: Double = 10
+        player.overrideCurrentTime = seekPosition
+        player.overrideCurrentItem = MockPlayerItem(url: URL(fileURLWithPath: ""),
+                                                    duration: duration, status: nil)
+        context.changeState(state: state)
+
+        // ACT
+        context.seek(offset: offset, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
         // ASSERT
         let expected = seekPosition.seconds + offset
         Verify(state, 1, .seek(position: .value(expected)))

@@ -126,7 +126,7 @@ public struct RemoteCommandFactoryExample {
             guard let e = event as? MPChangePlaybackPositionCommandEvent
                 else { return .commandFailed }
             let position = e.positionTime
-            self.player.seek(position: position) //
+            self.player.seek(position: position)
             return .success
         }
         command.addTarget(handler: handler)
